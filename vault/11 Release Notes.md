@@ -2,6 +2,14 @@
 
 What changed in each vault release, newest first. Open questions about these changes are in [[06 Addenda]].
 
+> [!note]- 2026-11-14c · Ask on video, Student questions (Student Layout 1.8)
+> - **Ask on video:** camera button, **Video** in the word graph, **Ask on video instead** in Ask the group, or right-click a note. Records up to 45 seconds with the front camera (about 9 MB), shows a countdown, and stops by itself. Play it back, record again if needed.
+> - **Permissions:** first name, plus two tick boxes: public question library, and promo videos. Both go in the message so the teacher knows what the student agreed to.
+> - **Share to GroupMe:** the share menu opens with the video attached and the message filled in (the message is also copied, in case GroupMe drops it). On a computer the video is downloaded instead. On a phone that can't attach files, it is saved to My Work/Video questions.
+> - **No in-app camera?** "Use phone camera" records with the camera app instead; clips over 45 seconds or 50 MB are refused, so they fit GroupMe.
+> - **Student questions:** answered questions appear at the end of the matching word note, newest first. Question rolls straight into the answer. They stream from the online library, so they take no space on the device.
+> - **12 Student Questions:** a searchable list of every question, and a link to the [online library](https://gtkd321.github.io/greekquent-questions/).
+
 > [!note]- 2026-11-14b · Look up a word, Ask the group (Student Layout 1.7)
 > - **Look up a word:** magnifying-glass button. Type English or Greek. Searches the 1,500 first, accent-free, including the verb forms in the conjugation tables (θέλαμε finds θέλω). Tap **Word graph** to open the word.
 > - **Guess first:** a tick box that hides the answer until the student says a guess and taps Reveal.

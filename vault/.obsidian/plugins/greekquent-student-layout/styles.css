@@ -58,3 +58,18 @@ body.greekquent-student .gq-graph > .view-header { display: none !important; }
 .gq-hit-sub, .gq-hint { font-size: 13px; color: var(--text-muted); }
 .gq-bonus .gq-hit-sub { flex: 1; }
 .gq-hint { padding: 8px 4px; }
+
+/* Ask on video and Student questions */
+.gq-video-modal .gq-video-stage { position: relative; background: #0d1626; border-radius: 10px; overflow: hidden; margin: 8px 0; }
+.gq-video-modal video { display: block; width: 100%; max-height: 50vh; object-fit: contain; background: #0d1626; }
+.gq-video-timer { position: absolute; top: 8px; left: 8px; font-size: 14px; font-weight: 600; color: #fff; }
+.gq-video-timer.is-rec { background: rgba(200, 30, 30, 0.85); padding: 3px 10px; border-radius: 999px; }
+.gq-check { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; margin: 6px 0; line-height: 1.35; }
+.gq-check input { margin-top: 2px; flex: 0 0 auto; }
+.gq-questions { margin-top: 24px; padding-top: 12px; border-top: 1px solid var(--background-modifier-border); }
+.gq-questions-all { border-top: 0; margin-top: 0; }
+.gq-questions .gq-input { width: 100%; font-size: 16px; padding: 8px 10px; flex: 1 1 220px; }
+.gq-qcard { border: 1px solid var(--background-modifier-border); border-radius: 12px; padding: 10px 12px; margin: 12px 0; max-width: 520px; }
+.gq-qhead { font-weight: 600; margin-bottom: 4px; }
+.gq-qtext { margin-bottom: 8px; }
+.gq-qcard video { display: block; width: 100%; max-height: 60vh; background: #0d1626; border-radius: 8px; object-fit: contain; }

@@ -1,5 +1,5 @@
 {
-"release": "2026-11-14b",
+"release": "2026-11-14c",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,16 +14,16 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "542bd2edb65e503bd63a4b0c339e8fdd5c7d1e02969b8da00fda090a725ff121",
-"size": 42966
+"sha256": "6bf9da2867ba876a4653fd2d7f042b21df11f835bcda27102cbcf4569069e1b1",
+"size": 59502
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "9be113ac6a142f4c7b1f0b99c36d57619b5df57950bfe9263d1eb6eae768e271",
+"sha256": "10444e6b31deafa22dc5ac58134e634412ea16268a64acaf670ae29ca2a3f9dd",
 "size": 373
 },
 ".obsidian/plugins/greekquent-student-layout/styles.css": {
-"sha256": "932015e995f51b75752ac2e0287b9d739191882f1b50e8d996ec1671b5ef1bec",
-"size": 3852
+"sha256": "8aed7f72b5bcc49a9b0cedd61880a26ca27cc3a481fb8ce908e6bbaf8ab2259d",
+"size": 5137
 },
 ".obsidian/plugins/meld-encrypt/main.js": {
 "sha256": "bf08d81ee9cc0e32a5726020197803c60eb5e73c9b114d80768081f051e66108",
@@ -54,8 +54,8 @@
 "size": 20632
 },
 "00 Greekquent Index.md": {
-"sha256": "308b8f949c7482f912e4d39d5b61cd57c33f7b38c6d6f5826352c31d2a3cf0fa",
-"size": 7154
+"sha256": "4110f0aa273c9adaac5f6552ee1e0b37240ded92249f7c3682ca3fbdbf027cf4",
+"size": 7386
 },
 "02 Verb Tables.md": {
 "sha256": "0e3902924a1e17e00f36c7be8af40bcd2b8c2c1b44e66b04fea8ede68fdd94af",
@@ -98,8 +98,12 @@
 "size": 5981
 },
 "11 Release Notes.md": {
-"sha256": "58b6f23caa30497d3e1e105ab49ca423ea4b474dc0a528212cbfaaa8cffb5162",
-"size": 6404
+"sha256": "dc6eab2dd9f0117fd6aeb5ddff467293fd097ae669a5d8514b071ce61db4e11c",
+"size": 7719
+},
+"12 Student Questions.md": {
+"sha256": "29c0bcb5ed4cd61343d14cbd44d93fb24d5a13061c354c16439d4dc01575dd21",
+"size": 1337
 },
 "Fluent in a Year/FY01 Whats in your bag.md": {
 "sha256": "a6b4d41db266b5c86d0a908875cb80d5c4a32afc99795cf58e2128720a493bfa",

@@ -1,7 +1,7 @@
 # Build a GitHub-ready update tree: manifest.json + vault/<files>
 import hashlib, json, os, shutil, sys
 src, out, release = sys.argv[1], sys.argv[2], sys.argv[3]
-SKIP = lambda p: p.startswith('My Work/') or p in ('.obsidian/workspace.json', '.obsidian/workspace-mobile.json', '.obsidian/greekquent-release.json') or p.startswith('.trash/')
+SKIP = lambda p: p.startswith('My Work/') or p in ('.obsidian/workspace.json', '.obsidian/workspace-mobile.json', '.obsidian/greekquent-release.json') or p.startswith('.trash/') or p == '.obsidian/plugins/greekquent-student-layout/data.json'
 if os.path.exists(os.path.join(out, 'vault')): shutil.rmtree(os.path.join(out, 'vault'))
 files = {}
 for root, _, fs in os.walk(src):

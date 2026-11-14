@@ -7,12 +7,15 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-14h';
+const VAULT_RELEASE = '2026-11-14i';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
 // Never touched by updates: the student's own work and their window layout.
-const KEEP_LOCAL = p => p.startsWith(MY_WORK) || /^\.obsidian\/workspace(-mobile)?\.json$/.test(p) || p.startsWith('.trash/');
+const KEEP_LOCAL = p => p.startsWith(MY_WORK) || /^\.obsidian\/workspace(-mobile)?\.json$/.test(p) || p.startsWith('.trash/') || /\/data\.json$/.test(p) && p.startsWith('.obsidian/plugins/greekquent-student-layout/');
+// Teacher copy: updates come from a private repo, read with a read-only key the teacher pastes in (stored only on this device).
+const TEACHER_API = 'https://api.github.com/repos/gtkd321/greekquent-teacher-vault/contents/';
+const TOKEN_URL = 'https://github.com/settings/personal-access-tokens/new?name=Greekquent+teacher+updates&description=Read+the+private+teacher+vault&expires_in=366&contents=read';
 const INSTALLED = '.obsidian/greekquent-release.json';
 // Ask the group: links point at the note on GitHub so anyone in GroupMe can open it, on any phone.
 const NOTE_URL = 'https://github.com/gtkd321/greekquent-vault/blob/main/vault/';
@@ -279,6 +282,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }));
     this.app.workspace.onLayoutReady(async () => {
       this.pruneEmpty(['Scripts/Kid variants/x', 'Scripts/Student/x']);
+      this.isTeacher = await this.app.vault.adapter.exists(TEACHER_MARK);
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
       this.hideRibbon();
       // Startup: tidy the sidebars quietly. Obsidian's default layout (fresh vault, new device) puts Search and
@@ -549,15 +553,45 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     window.open(smsLink(`Greekquent homework (${f.basename}):\n${body}`));
   }
   async sha(buf) { const h = await crypto.subtle.digest('SHA-256', buf); return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join(''); }
+  async teacherKey() { try { const d = await this.loadData(); return (d && d.teacherKey) || ''; } catch (e) { return ''; } }
+  async channel() {
+    const ad = this.app.vault.adapter;
+    if (!(await ad.exists(TEACHER_MARK))) return { teacher: false, man: () => ({ url: UPDATE_BASE + 'manifest.json?t=' + Date.now() }), file: (p, sha) => ({ url: UPDATE_BASE + 'vault/' + p.split('/').map(encodeURIComponent).join('/') + '?v=' + sha.slice(0, 12) }) };
+    const key = await this.teacherKey(); if (!key) return { teacher: true, missing: true };
+    const headers = { Authorization: 'Bearer ' + key, Accept: 'application/vnd.github.raw', 'X-GitHub-Api-Version': '2022-11-28' };
+    return { teacher: true, man: () => ({ url: TEACHER_API + 'manifest.json?ref=main&t=' + Date.now(), headers }), file: p => ({ url: TEACHER_API + 'vault/' + p.split('/').map(encodeURIComponent).join('/') + '?ref=main', headers }) };
+  }
+  keyModal() {
+    const plugin = this, m = new Modal(this.app);
+    m.titleEl.setText('Teacher update key');
+    const c = m.contentEl;
+    c.createEl('p', { text: 'Your teacher vault updates from a private GitHub repo. Paste a read-only GitHub key here once. It stays on this device and is never part of an update or a zip.' });
+    const ol = c.createEl('ol');
+    const li1 = ol.createEl('li'); li1.appendText('Open '); const a = li1.createEl('a', { text: 'this GitHub page', href: TOKEN_URL }); a.onclick = e => { e.preventDefault(); window.open(TOKEN_URL); }; li1.appendText(' (it is filled in for you).');
+    ol.createEl('li', { text: 'Under Repository access choose Only select repositories, then greekquent-teacher-vault.' });
+    ol.createEl('li', { text: 'Check that Contents says Read-only, then tap Generate token and copy it.' });
+    ol.createEl('li', { text: 'Paste it below and tap Save. Do this once on each device.' });
+    const inp = c.createEl('input', { type: 'password', attr: { placeholder: 'github_pat_...', autocomplete: 'off', style: 'width:100%;margin:8px 0' } });
+    const row = c.createDiv({ attr: { style: 'display:flex;gap:8px;flex-wrap:wrap' } });
+    const save = row.createEl('button', { text: 'Save', cls: 'mod-cta' });
+    const clear = row.createEl('button', { text: 'Remove key' });
+    save.onclick = async () => { const v = inp.value.trim(); if (!v) { new Notice('Paste the key first.'); return; } const d = (await this.loadData()) || {}; d.teacherKey = v; await this.saveData(d); m.close(); new Notice('Key saved. Checking for a teacher update...'); this.updateVault(false); };
+    clear.onclick = async () => { const d = (await this.loadData()) || {}; delete d.teacherKey; await this.saveData(d); m.close(); new Notice('Teacher update key removed from this device.'); };
+    m.open();
+  }
   async updateVault(quiet) {
     if (this.updating) return; this.updating = true;
     const ad = this.app.vault.adapter;
     try {
       if (UPDATE_BASE.includes('OWNER/REPO')) { if (!quiet) new Notice('Updates are not set up yet.'); return; }
-      if (await ad.exists(TEACHER_MARK)) { if (!quiet) new Notice('This is the teacher copy, so Update vault is off here (it would replace teacher notes with student versions). Use the new teacher zip instead.', 12000); return; }
+      const ch = await this.channel();
+      if (ch.missing) { if (!quiet) { new Notice('This is the teacher copy. Add your teacher update key first.'); this.keyModal(); } return; }
       let man;
-      try { man = (await requestUrl({ url: UPDATE_BASE + 'manifest.json?t=' + Date.now() })).json; }
-      catch (e) { if (!quiet) new Notice('Could not reach the update server. Check your internet connection and try again.'); return; }
+      try { man = (await requestUrl(ch.man())).json; }
+      catch (e) {
+        if (ch.teacher && e && (e.status === 401 || e.status === 403 || e.status === 404)) { if (!quiet) { new Notice('GitHub did not accept the teacher update key (it may have expired). Make a new one and paste it in.', 12000); this.keyModal(); } return; }
+        if (!quiet) new Notice('Could not reach the update server. Check your internet connection and try again.'); return; }
+      if (!man || !man.files) { if (!quiet) new Notice('The update server sent something unexpected. Try again later.'); return; }
       let mine = {}; try { mine = JSON.parse(await ad.read(INSTALLED)); } catch (e) {}
       if (mine.release === man.release) { if (!quiet) new Notice(`Already up to date (release ${man.release}).`); return; }
       if (quiet) { const n = new Notice(`A Greekquent update (${man.release}) is ready. Tap here to install it.`, 0); n.noticeEl.onclick = () => { n.hide(); this.updateVault(false); }; return; }
@@ -569,7 +603,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         let same = false;
         if (await ad.exists(p)) { try { same = (await this.sha(await ad.readBinary(p))) === meta.sha256; } catch (e) {} }
         if (same) continue;
-        let r; try { r = await requestUrl({ url: UPDATE_BASE + 'vault/' + p.split('/').map(encodeURIComponent).join('/') + '?v=' + meta.sha256.slice(0, 12) }); } catch (e) { stale++; continue; }
+        let r; try { r = await requestUrl(ch.file(p, meta.sha256)); } catch (e) { stale++; continue; }
         // GitHub can serve a cached old copy for a few minutes after a publish. Only write files that match the manifest.
         if ((await this.sha(r.arrayBuffer)) !== meta.sha256) { stale++; continue; }
         const dir = p.split('/').slice(0, -1).join('/');
@@ -603,6 +637,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
     m.addItem(i => i.setTitle('Setting up').setIcon('help-circle').onClick(() => this.openNote(SETUP)));
     m.addItem(i => i.setTitle('Update vault').setIcon('refresh-cw').onClick(() => this.updateVault(false)));
+    if (this.isTeacher) m.addItem(i => i.setTitle('Teacher update key').setIcon('key').onClick(() => this.keyModal()));
     if (evt && evt.clientX !== undefined) m.showAtMouseEvent(evt); else m.showAtPosition({ x: 60, y: 200 });
   }
   async openNote(path) {

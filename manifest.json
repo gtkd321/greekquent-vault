@@ -1,5 +1,5 @@
 {
-"release": "2026-11-14c",
+"release": "2026-11-14d",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,16 +14,16 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "d9a57691a44a066d758130802732ed63f36d9c31da2972c0791964530ac22c2f",
-"size": 43422
+"sha256": "7ebf03c735a5ef4c0ff81ba3b9cc8cb6a2d994c67aefd7586e60dc5adfba95e2",
+"size": 59958
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "10444e6b31deafa22dc5ac58134e634412ea16268a64acaf670ae29ca2a3f9dd",
+"sha256": "25e3196ebec60fe2ee886da88941f84802cc6b6c7ac1655db8d303d32cb03b5d",
 "size": 373
 },
 ".obsidian/plugins/greekquent-student-layout/styles.css": {
-"sha256": "932015e995f51b75752ac2e0287b9d739191882f1b50e8d996ec1671b5ef1bec",
-"size": 3852
+"sha256": "8aed7f72b5bcc49a9b0cedd61880a26ca27cc3a481fb8ce908e6bbaf8ab2259d",
+"size": 5137
 },
 ".obsidian/plugins/meld-encrypt/main.js": {
 "sha256": "bf08d81ee9cc0e32a5726020197803c60eb5e73c9b114d80768081f051e66108",
@@ -54,8 +54,8 @@
 "size": 20632
 },
 "00 Greekquent Index.md": {
-"sha256": "8cb9a60c85e6e24d0bf2221b61befa7fe7fd8c1a0dba85af1de3262ce1fd302d",
-"size": 7986
+"sha256": "978c99007eb288d88cad7227e3cb34a3099d24806355396d3e9b9738fb8622e0",
+"size": 8218
 },
 "02 Verb Tables.md": {
 "sha256": "0e3902924a1e17e00f36c7be8af40bcd2b8c2c1b44e66b04fea8ede68fdd94af",
@@ -74,7 +74,7 @@
 "size": 15607
 },
 "06 Addenda.md": {
-"sha256": "9b1d446748362db6918101ce9a2a37d9209b6ba630d7246428aaf77f5b16bf34",
+"sha256": "25e6dbf3b832142d9d4997daf33dc5c2ab5609952fdb3c9cce05d2abfe0e8bf2",
 "size": 15435
 },
 "07 Fluent in a Year.md": {
@@ -98,8 +98,12 @@
 "size": 5981
 },
 "11 Release Notes.md": {
-"sha256": "15bb9d747dc2a3cebbf0b3949bd67bbc447186f4c00025d051062e52e5b9156e",
-"size": 7069
+"sha256": "0e02512256d6e820d500d4218cffb9b6e6afd77e4dff37323d95974da730410c",
+"size": 8384
+},
+"12 Student Questions.md": {
+"sha256": "29c0bcb5ed4cd61343d14cbd44d93fb24d5a13061c354c16439d4dc01575dd21",
+"size": 1337
 },
 "Fluent in a Year/FY01 Whats in your bag.md": {
 "sha256": "a6b4d41db266b5c86d0a908875cb80d5c4a32afc99795cf58e2128720a493bfa",

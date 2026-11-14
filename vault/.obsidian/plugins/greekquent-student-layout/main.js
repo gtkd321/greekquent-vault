@@ -4,10 +4,10 @@ const { Plugin, ItemView, Notice, requestUrl, MarkdownView, Modal } = require('o
 const MOVE = ['search', 'tag', 'bookmarks', 'backlink', 'outgoing-link', 'outline', 'localgraph'];
 const BLOCK = ['graph', 'all-properties'];   // the whole-vault graph and the properties list
 const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command palette'];
-const KEEP_RIBBON = ['greekquent-student-layout:Open word graph', 'greekquent-student-layout:Share feedback', 'greekquent-student-layout:Send homework', 'greekquent-student-layout:Update vault', 'greekquent-student-layout:Look up a word', 'greekquent-student-layout:Ask the group'];
+const KEEP_RIBBON = ['greekquent-student-layout:Open word graph', 'greekquent-student-layout:Share feedback', 'greekquent-student-layout:Send homework', 'greekquent-student-layout:Update vault', 'greekquent-student-layout:Look up a word', 'greekquent-student-layout:Ask the group', 'greekquent-student-layout:Ask on video'];
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-14c';
+const VAULT_RELEASE = '2026-11-14d';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -18,6 +18,11 @@ const INSTALLED = '.obsidian/greekquent-release.json';
 const NOTE_URL = 'https://github.com/gtkd321/greekquent-vault/blob/main/vault/';
 // Paste the class GroupMe share link here (looks like https://groupme.com/join_group/...). Empty = no Join button.
 const GROUPME_JOIN = '';
+// Video questions: the public question library (GitHub Pages). Only the teacher adds clips, with the student's OK.
+const QUESTIONS_URL = 'https://gtkd321.github.io/greekquent-questions/';
+const VIDEO_MAX_S = 45;
+const VIDEO_MAX_MB = 48;   // GroupMe takes videos up to about 50 MB
+const NAME_KEY = 'greekquent-first-name';
 const LOOKUPS = MY_WORK + 'Words I looked up.md';
 const isGreek = t => /[\u0370-\u03ff\u1f00-\u1fff]/.test(t);
 const fold = t => (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').trim();
@@ -274,11 +279,118 @@ class AskModal extends Modal {
     const row = c.createDiv('gq-row');
     const send = row.createEl('button', { text: 'Share to GroupMe', cls: 'mod-cta' });
     send.onclick = async () => { await this.plugin.shareQuestion(head + '\n' + this.box.value.trim() + '\n' + this.plugin.noteUrl(this.file)); this.close(); };
+    const vid = row.createEl('button', { text: 'Ask on video instead' });
+    vid.onclick = () => { const t = this.box.value.trim(); this.close(); new VideoAskModal(this.app, this.plugin, this.file, t).open(); };
     if (GROUPME_JOIN) { const j = row.createEl('button', { text: 'Join the class group' }); j.onclick = () => window.open(GROUPME_JOIN); }
     c.createDiv({ cls: 'gq-hint', text: 'Pick GroupMe in the share menu. On a computer the message is copied: paste it into the class group.' });
     setTimeout(() => this.box.focus(), 50);
   }
   onClose() { this.contentEl.empty(); }
+}
+
+// ---------- Ask on video: record up to 45 seconds, then share the clip to the class GroupMe ----------
+const pickMime = () => {
+  if (typeof MediaRecorder === 'undefined') return null;
+  for (const m of ['video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4', 'video/webm;codecs=vp8,opus', 'video/webm']) { try { if (MediaRecorder.isTypeSupported(m)) return m; } catch (e) {} }
+  return '';
+};
+class VideoAskModal extends Modal {
+  constructor(app, plugin, file, text) { super(app); this.plugin = plugin; this.file = file; this.text = text || ''; this.stream = null; this.rec = null; this.clip = null; this.url = null; this.tick = null; }
+  onOpen() {
+    const c = this.contentEl; c.addClass('gq-modal'); c.addClass('gq-video-modal'); this.titleEl.setText('Ask on video');
+    this.head = this.plugin.askHeader(this.file).replace(/^Question about/, 'Video question about');
+    c.createDiv({ cls: 'gq-hit-main', text: this.head });
+    const stage = c.createDiv('gq-video-stage');
+    this.vid = stage.createEl('video'); this.vid.setAttr('playsinline', ''); this.vid.muted = true; this.vid.autoplay = true;
+    this.timer = stage.createDiv({ cls: 'gq-video-timer' });
+    const row = c.createDiv('gq-row');
+    this.recBtn = row.createEl('button', { text: `Record (${VIDEO_MAX_S} s)`, cls: 'mod-cta' });
+    this.again = row.createEl('button', { text: 'Record again' }); this.again.hide();
+    this.camBtn = row.createEl('button', { text: 'Use phone camera' });
+    this.fileIn = c.createEl('input', { attr: { type: 'file', accept: 'video/*', capture: 'user' } }); this.fileIn.style.display = 'none';
+    this.status = c.createDiv({ cls: 'gq-hint', text: 'Starting the camera…' });
+    this.box = c.createEl('textarea', { attr: { rows: 2, placeholder: 'Type your question too (optional, helps classmates find it later)' } }); this.box.addClass('gq-input'); this.box.value = this.text;
+    this.name = c.createEl('input', { attr: { type: 'text', placeholder: 'Your first name (shown on screen)', autocomplete: 'given-name' } }); this.name.addClass('gq-input');
+    try { this.name.value = localStorage.getItem(NAME_KEY) || ''; } catch (e) {}
+    const ok = (label) => { const l = c.createEl('label', { cls: 'gq-check' }); const b = l.createEl('input', { attr: { type: 'checkbox' } }); l.appendText(' ' + label); return b; };
+    this.pub = ok('Add my video and first name to the public Greekquent question library (anyone online can watch it)');
+    this.promo = ok('Use my clip in Greekquent promo videos');
+    const send = c.createDiv('gq-row');
+    this.sendBtn = send.createEl('button', { text: 'Share to GroupMe', cls: 'mod-cta' }); this.sendBtn.disabled = true;
+    c.createDiv({ cls: 'gq-hint', text: 'Your video goes to the class GroupMe so everyone learns from it. Your teacher answers there and, if you say yes above, adds both to the question library. You can change your mind any time: just tell your teacher.' });
+    this.recBtn.onclick = () => this.rec && this.rec.state === 'recording' ? this.stop() : this.start();
+    this.again.onclick = () => this.reset();
+    this.camBtn.onclick = () => this.fileIn.click();
+    this.fileIn.onchange = () => { const f = this.fileIn.files && this.fileIn.files[0]; if (f) this.useFile(f); this.fileIn.value = ''; };
+    this.sendBtn.onclick = () => this.send();
+    this.camera();
+  }
+  async camera() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || pickMime() === null) { this.noCamera(); return; }
+    try {
+      this.stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 30, max: 30 } }, audio: { echoCancellation: true, noiseSuppression: true } });
+      this.vid.srcObject = this.stream; this.vid.muted = true; this.vid.controls = false;
+      this.status.setText(`Look at the camera, say the word, and ask your question. It stops by itself at ${VIDEO_MAX_S} seconds.`);
+    } catch (e) { this.noCamera(); }
+  }
+  noCamera() { this.recBtn.hide(); this.camBtn.addClass('mod-cta'); this.status.setText(`Tap "Use phone camera" to record with your camera app. Keep it under ${VIDEO_MAX_S} seconds.`); }
+  start() {
+    if (!this.stream) { this.fileIn.click(); return; }
+    const mime = pickMime(); this.chunks = [];
+    try { this.rec = new MediaRecorder(this.stream, Object.assign({ videoBitsPerSecond: 1500000, audioBitsPerSecond: 96000 }, mime ? { mimeType: mime } : {})); }
+    catch (e) { this.noCamera(); return; }
+    this.rec.ondataavailable = ev => { if (ev.data && ev.data.size) this.chunks.push(ev.data); };
+    this.rec.onstop = () => { const type = (this.rec.mimeType || mime || 'video/mp4').split(';')[0]; this.show(new Blob(this.chunks, { type }), this.secs); };
+    this.rec.start(1000); this.t0 = Date.now(); this.secs = 0;
+    this.recBtn.setText('Stop'); this.camBtn.hide(); this.timer.addClass('is-rec');
+    const upd = () => { this.secs = Math.min(VIDEO_MAX_S, (Date.now() - this.t0) / 1000); this.timer.setText(`● ${Math.ceil(VIDEO_MAX_S - this.secs)} s left`); if (this.secs >= VIDEO_MAX_S) this.stop(); };
+    upd(); this.tick = window.setInterval(upd, 250);
+  }
+  stop() { if (this.tick) { window.clearInterval(this.tick); this.tick = null; } this.timer.removeClass('is-rec'); this.timer.setText(''); if (this.rec && this.rec.state !== 'inactive') this.rec.stop(); }
+  useFile(f) {
+    const probe = document.createElement('video'); probe.preload = 'metadata'; const u = URL.createObjectURL(f);
+    probe.onloadedmetadata = () => { const d = probe.duration; URL.revokeObjectURL(u);
+      if (isFinite(d) && d > VIDEO_MAX_S + 2) { this.status.setText(`That video is ${Math.round(d)} seconds. Keep it to ${VIDEO_MAX_S} seconds and record again.`); return; }
+      this.show(f, d); };
+    probe.onerror = () => { URL.revokeObjectURL(u); this.show(f, 0); };
+    probe.src = u;
+  }
+  show(blob, secs) {
+    this.clip = blob; if (this.url) URL.revokeObjectURL(this.url); this.url = URL.createObjectURL(blob);
+    this.vid.srcObject = null; this.vid.src = this.url; this.vid.muted = false; this.vid.autoplay = false; this.vid.controls = true;
+    const mb = blob.size / 1e6;
+    this.recBtn.hide(); this.camBtn.hide(); this.again.show();
+    if (mb > VIDEO_MAX_MB) { this.sendBtn.disabled = true; this.status.setText(`This video is ${mb.toFixed(0)} MB, and GroupMe takes up to about 50 MB. Record a shorter one.`); return; }
+    this.sendBtn.disabled = false;
+    this.status.setText(`${secs ? Math.round(secs) + ' s · ' : ''}${mb.toFixed(1)} MB. Play it back, then share it.`);
+  }
+  reset() {
+    this.clip = null; if (this.url) { URL.revokeObjectURL(this.url); this.url = null; }
+    this.vid.removeAttribute('src'); this.vid.controls = false; this.vid.muted = true; this.vid.autoplay = true; this.sendBtn.disabled = true; this.again.hide();
+    if (this.stream) { this.vid.srcObject = this.stream; this.recBtn.setText(`Record (${VIDEO_MAX_S} s)`); this.recBtn.show(); this.camBtn.show(); this.status.setText('Ready when you are.'); }
+    else { this.camBtn.show(); this.fileIn.click(); }
+  }
+  async send() {
+    if (!this.clip) return;
+    const name = this.name.value.trim();
+    if (this.pub.checked && !name) { new Notice('Type your first name, so it can be shown with your video.'); this.name.focus(); return; }
+    try { if (name) localStorage.setItem(NAME_KEY, name); } catch (e) {}
+    const yn = b => b ? 'yes' : 'no';
+    const q = this.box.value.trim();
+    const text = [this.head, q, `${name || 'A student'} · public library: ${yn(this.pub.checked)} · promo: ${yn(this.promo.checked)}`, this.plugin.noteUrl(this.file)].filter(Boolean).join('\n');
+    const type = this.clip.type || 'video/mp4';
+    const ext = /webm/.test(type) ? 'webm' : /quicktime/.test(type) ? 'mov' : 'mp4';
+    const stamp = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');
+    const file = new File([this.clip], `greekquent-question-${stamp}.${ext}`, { type });
+    if (await this.plugin.shareVideo(file, text)) this.close();
+  }
+  onClose() {
+    if (this.tick) window.clearInterval(this.tick);
+    try { if (this.rec && this.rec.state !== 'inactive') { this.rec.onstop = null; this.rec.stop(); } } catch (e) {}
+    if (this.stream) this.stream.getTracks().forEach(t => t.stop());
+    if (this.url) URL.revokeObjectURL(this.url);
+    this.contentEl.empty();
+  }
 }
 
 module.exports = class GreekquentStudentLayout extends Plugin {
@@ -303,6 +415,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Ask the group: question about the open note, shared to GroupMe with a link to the note.
     this.addRibbonIcon('users', 'Ask the group', () => this.ask());
     this.addCommand({ id: 'ask-group', name: 'Ask the group about this note', callback: () => this.ask() });
+    // Ask on video: record a question (up to 45 s) and share it to the class GroupMe.
+    this.addRibbonIcon('video', 'Ask on video', () => this.askVideo());
+    this.addCommand({ id: 'ask-video', name: 'Ask on video about this note', callback: () => this.askVideo() });
+    // Student questions: video questions and answers from the public library, shown at the end of the matching note.
+    this.registerMarkdownPostProcessor((el, ctx) => this.questionsBox(el, ctx));
+    this.registerMarkdownCodeBlockProcessor('greekquent-questions', (src, el) => this.questionsIndex(el));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) this.words = null; }));
     // My Work notes open ready to type in.
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path.startsWith(MY_WORK)) setTimeout(() => this.editMode(f), 50); }));
@@ -311,6 +429,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerEvent(this.app.workspace.on('file-menu', (menu, file) => {
       if (file && file.path && file.path.startsWith('Words/')) menu.addItem(i => i.setTitle('Open word graph').setIcon('git-fork').onClick(() => this.openGraph(file.path)));
       if (file && file.extension === 'md' && !file.path.startsWith(MY_WORK)) menu.addItem(i => i.setTitle('Ask the group').setIcon('users').onClick(() => this.ask(file)));
+      if (file && file.extension === 'md' && !file.path.startsWith(MY_WORK)) menu.addItem(i => i.setTitle('Ask on video').setIcon('video').onClick(() => this.askVideo(file)));
     }));
     this.app.workspace.onLayoutReady(async () => {
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
@@ -398,6 +517,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const open = bar.createEl('button', { text: 'Open note', attr: { 'aria-label': 'Open the word note' } });
       const askb = bar.createEl('button', { text: 'Ask', attr: { 'aria-label': 'Ask the group about this word' } });
       askb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.ask(f); };
+      const vidb = bar.createEl('button', { text: 'Video', attr: { 'aria-label': 'Ask on video about this word' } });
+      vidb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.askVideo(f); };
       st.trail = wrap.createDiv('gq-web-trail'); st.bar = wrap;
       st.back.onclick = () => this.graphStep(leaf, -1); st.fwd.onclick = () => this.graphStep(leaf, 1);
       open.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.app.workspace.getLeaf('tab').openFile(f); };
@@ -469,6 +590,91 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (today.split('\n').some(l => l.trim() === line.trim())) return;
     if (!(await ad.exists(MY_WORK.slice(0, -1)))) await ad.mkdir(MY_WORK.slice(0, -1));
     await ad.write(LOOKUPS, txt.replace(/\s*$/, '\n') + line + '\n');
+  }
+  // ---------- Ask on video helpers ----------
+  askVideo(file) {
+    const f = file || this.app.workspace.getActiveFile();
+    if (!f || f.extension !== 'md') { new Notice('Open a word or lesson note first, then tap Ask on video.'); return; }
+    if (f.path.startsWith(MY_WORK)) { new Notice('My Work notes are private. Open a word or lesson note instead.'); return; }
+    new VideoAskModal(this.app, this, f).open();
+  }
+  async shareVideo(file, text) {
+    const mobile = document.body.classList.contains('is-mobile') || /Android|iPhone|iPad/.test(navigator.userAgent);
+    // Copy the message first: some apps drop the text when a video is attached, so it can be pasted as a caption.
+    try { navigator.clipboard.writeText(text); } catch (e) {}
+    if (mobile && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], text }); new Notice('If the message is missing in GroupMe, paste it: it is copied.', 8000); return true; }
+      catch (e) { if (e && e.name === 'AbortError') return false; }
+    }
+    if (mobile) {
+      // Phone without file sharing: save into My Work, which the Files app (iPhone) or file manager (Android) can open.
+      const dir = MY_WORK + 'Video questions';
+      try { if (!this.app.vault.getAbstractFileByPath(dir)) await this.app.vault.createFolder(dir);
+        await this.app.vault.createBinary(`${dir}/${file.name}`, await file.arrayBuffer());
+        new Notice(`Saved to ${dir}/${file.name} and copied the message. In GroupMe, attach the video from Files and paste the message.`, 15000); return true; }
+      catch (e) { new Notice('Could not save the video. Record it with the camera app and send it in GroupMe instead.', 10000); return false; }
+    }
+    // Computer: download the video and copy the message.
+    const a = document.createElement('a'); a.href = URL.createObjectURL(file); a.download = file.name; document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+    new Notice(`Saved ${file.name} and copied the message. In GroupMe, attach the video and paste the message.`, 12000);
+    return true;
+  }
+  async questions() {
+    if (this.qs && Date.now() - this.qsAt < 30 * 60 * 1000) return this.qs;
+    if (this.qsLoading) return this.qsLoading;
+    this.qsLoading = (async () => {
+      try { const r = await requestUrl({ url: QUESTIONS_URL + 'questions.json?t=' + Date.now() }); this.qs = Array.isArray(r.json) ? r.json : []; this.qsAt = Date.now(); try { localStorage.setItem('greekquent-questions', JSON.stringify(this.qs)); } catch (e) {} }
+      catch (e) { if (!this.qs) { try { this.qs = JSON.parse(localStorage.getItem('greekquent-questions') || '[]'); } catch (_) { this.qs = []; } this.qsAt = Date.now() - 25 * 60 * 1000; } }
+      this.qsLoading = null; return this.qs;
+    })();
+    return this.qsLoading;
+  }
+  questionsFor(path, qs) { const base = path.split('/').pop().replace(/\.md$/, ''); return qs.filter(q => q.note === path || (path.startsWith('Words/') && q.word === base)); }
+  questionCard(parent, q) {
+    const card = parent.createDiv('gq-qcard');
+    card.createDiv({ cls: 'gq-qhead', text: `${q.name || 'A student'} asks about ${q.word || (q.note || '').replace(/\.md$/, '')}${q.lesson ? ' · Lesson ' + q.lesson : ''}` });
+    if (q.question_text) card.createDiv({ cls: 'gq-qtext', text: q.question_text });
+    const v = card.createEl('video'); v.controls = true; v.preload = 'none'; v.setAttr('playsinline', ''); v.src = QUESTIONS_URL + q.question; if (q.thumb) v.poster = QUESTIONS_URL + q.thumb;
+    const row = card.createDiv('gq-row');
+    const bq = row.createEl('button', { text: 'Question' }); bq.addClass('mod-cta');
+    const ba = row.createEl('button', { text: q.answer ? 'Answer' : 'Answer coming soon' }); ba.disabled = !q.answer;
+    let onAnswer = false;
+    const show = ans => { onAnswer = ans; v.src = QUESTIONS_URL + (ans ? q.answer : q.question); v.poster = (ans ? q.answer_thumb : q.thumb) ? QUESTIONS_URL + (ans ? q.answer_thumb : q.thumb) : '';
+      bq.toggleClass('mod-cta', !ans); ba.toggleClass('mod-cta', ans); v.play().catch(() => {}); };
+    bq.onclick = () => show(false); ba.onclick = () => show(true);
+    v.addEventListener('ended', () => { if (!onAnswer && q.answer) show(true); });   // question rolls into the answer
+  }
+  questionsBox(el, ctx) {
+    if (!ctx || !ctx.sourcePath || ctx.sourcePath.startsWith(MY_WORK)) return;
+    const info = ctx.getSectionInfo && ctx.getSectionInfo(el); if (!info) return;
+    const lines = info.text.split('\n'); let last = lines.length - 1; while (last > 0 && !lines[last].trim()) last--;
+    if (info.lineEnd < last) return;   // only after the note's last section
+    const box = el.createDiv('gq-questions'); box.hide();
+    this.questions().then(qs => {
+      const list = this.questionsFor(ctx.sourcePath, qs || []); if (!list.length) return;
+      box.show(); box.createEl('h3', { text: `Student questions (${list.length})` });
+      list.slice().reverse().forEach(q => this.questionCard(box, q));
+    });
+  }
+  questionsIndex(el) {
+    const wrap = el.createDiv('gq-questions gq-questions-all');
+    const top = wrap.createDiv('gq-row');
+    const s = top.createEl('input', { attr: { type: 'search', placeholder: 'Search the questions: νερό, water, past tense…' } }); s.addClass('gq-input');
+    const web = top.createEl('button', { text: 'Open the library in a browser' }); web.onclick = () => window.open(QUESTIONS_URL);
+    const list = wrap.createDiv(); list.createDiv({ cls: 'gq-hint', text: 'Loading questions…' });
+    this.questions().then(qs => {
+      const all = (qs || []).slice().sort((a, b) => (b.added || '').localeCompare(a.added || '') || (b.id || '').localeCompare(a.id || ''));
+      const draw = () => {
+        list.empty(); const t = fold(s.value);
+        const hits = all.filter(q => !t || fold([q.word, q.english, q.question_text, q.name, q.lesson ? 'lesson ' + q.lesson : ''].join(' ')).includes(t));
+        if (!all.length) { list.createDiv({ cls: 'gq-hint', text: 'No video questions yet. Be the first: open a word and tap Ask on video (camera button).' }); return; }
+        if (!hits.length) { list.createDiv({ cls: 'gq-hint', text: 'No questions match. Try the Greek word without accents, or the English meaning.' }); return; }
+        list.createDiv({ cls: 'gq-hint', text: `${hits.length} of ${all.length} questions, newest first` });
+        hits.forEach(q => this.questionCard(list, q));
+      };
+      s.oninput = draw; draw();
+    });
   }
   // ---------- Ask the group helpers ----------
   ask(file) {

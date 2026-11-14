@@ -8,6 +8,7 @@
 > - **Send homework** (paper-plane button) texts the newest dated section of your homework note to the teacher.
 > - **Look up a word** (magnifying-glass button) searches the 1,500 in English or Greek, including verb forms like θέλαμε. Tick **Guess first** to try before you see the answer. Words outside the list open in Google Translate as bonus words. Every look-up is saved in [[My Work/Words I looked up|Words I looked up]].
 > - **Ask the group** (two-people button, or **Ask** in the word graph) writes "Question about <word>" with a link to the note, ready to share in the class GroupMe.
+> - **Ask on video** (camera button, or **Video** in the word graph) records a question of up to 45 seconds and shares it to the class GroupMe. Answered questions appear at the end of each word note and in [[12 Student Questions]].
 > - **Update vault** (circular-arrows button) downloads the week's changes. Only changed files are downloaded, and your My Work folder is left alone. Obsidian also tells you when an update is ready.
 
 

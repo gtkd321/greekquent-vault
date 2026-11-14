@@ -1,5 +1,5 @@
 {
-"release": "2026-11-14m",
+"release": "2026-11-14n",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,7 +14,7 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "01ff94402029a45696a2ac7d43b49d6b51436f957b655749eb82d030cd6c08ae",
+"sha256": "f64c438438555ce91540a4580e0ef54d1257c274d1003e4088230a0dcf3bbe59",
 "size": 82339
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
@@ -313,7 +313,7 @@
 "sha256": "497560414d03d97001f32de5dfba1fd6e44139718e04e3fa7beca54351472cb4",
 "size": 81710
 },
-"Handouts/Greekquent Year One Textbook - Print (lessons and weekly planners).pdf": {
+"Handouts/Greekquent Year One Textbook - Print (lessons plus Fluent in a Year).pdf": {
 "sha256": "7029cbe363f8ed00dce3e19d0ec4f5cc7727930b6950ec15f09bd8183dfb34b0",
 "size": 715367
 },
@@ -646,8 +646,8 @@
 "size": 24
 },
 "What's New.md": {
-"sha256": "7d9ce3f69fb0ca404501d695f9f50354960b6f453feec4e3ee54142b36070a4d",
-"size": 1942
+"sha256": "41bb60daeaaf980d4ae5d71f5683881b9ba62d7a226eb4dc92e388564c20fd04",
+"size": 1944
 },
 "Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

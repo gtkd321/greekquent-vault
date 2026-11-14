@@ -1,19 +1,26 @@
-const { Plugin, ItemView, Notice, requestUrl, MarkdownView } = require('obsidian');
+const { Plugin, ItemView, Notice, requestUrl, MarkdownView, Modal } = require('obsidian');
 // Greekquent Student Layout: keeps the student view simple.
 // Turn this plugin off (Settings > Community plugins) to get the full Obsidian interface back.
 const MOVE = ['search', 'tag', 'bookmarks', 'backlink', 'outgoing-link', 'outline', 'localgraph'];
 const BLOCK = ['graph', 'all-properties'];   // the whole-vault graph and the properties list
 const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command palette'];
-const KEEP_RIBBON = ['greekquent-student-layout:Open word graph', 'greekquent-student-layout:Share feedback', 'greekquent-student-layout:Send homework', 'greekquent-student-layout:Update vault'];
+const KEEP_RIBBON = ['greekquent-student-layout:Open word graph', 'greekquent-student-layout:Share feedback', 'greekquent-student-layout:Send homework', 'greekquent-student-layout:Update vault', 'greekquent-student-layout:Look up a word', 'greekquent-student-layout:Ask the group'];
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-14';
+const VAULT_RELEASE = '2026-11-14b';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
 // Never touched by updates: the student's own work and their window layout.
 const KEEP_LOCAL = p => p.startsWith(MY_WORK) || /^\.obsidian\/workspace(-mobile)?\.json$/.test(p) || p.startsWith('.trash/');
 const INSTALLED = '.obsidian/greekquent-release.json';
+// Ask the group: links point at the note on GitHub so anyone in GroupMe can open it, on any phone.
+const NOTE_URL = 'https://github.com/gtkd321/greekquent-vault/blob/main/vault/';
+// Paste the class GroupMe share link here (looks like https://groupme.com/join_group/...). Empty = no Join button.
+const GROUPME_JOIN = '';
+const LOOKUPS = MY_WORK + 'Words I looked up.md';
+const isGreek = t => /[\u0370-\u03ff\u1f00-\u1fff]/.test(t);
+const fold = t => (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').trim();
 const smsLink = body => `sms:${FEEDBACK_SMS}?&body=${encodeURIComponent(body)}`;
 
 const HIDE_RIBBON_PREFIX = ['meld-encrypt:'];
@@ -205,6 +212,74 @@ class WordWebView extends ItemView {
   }
 }
 
+// ---------- Look up a word: the 1,500 first, then a free translator for bonus words ----------
+class LookupModal extends Modal {
+  constructor(app, plugin) { super(app); this.plugin = plugin; }
+  onOpen() {
+    const c = this.contentEl; c.addClass('gq-modal'); this.titleEl.setText('Look up a word');
+    this.input = c.createEl('input', { type: 'text', attr: { placeholder: 'Type English or Greek', autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false' } });
+    this.input.addClass('gq-input');
+    const row = c.createDiv('gq-row');
+    const lab = row.createEl('label'); this.guess = lab.createEl('input', { type: 'checkbox' }); lab.appendText(' Guess first (hide the answer until I try)');
+    this.guess.checked = !!this.plugin.guessFirst;
+    this.guess.onchange = () => { this.plugin.guessFirst = this.guess.checked; this.render(); };
+    this.list = c.createDiv('gq-results');
+    this.input.oninput = () => this.render();
+    this.input.onkeydown = e => { if (e.key === 'Enter') { const b = this.list.querySelector('.gq-hit button, .gq-bonus button'); b && b.click(); } };
+    this.plugin.wordIndex().then(() => this.render());
+    setTimeout(() => this.input.focus(), 50);
+  }
+  render() {
+    const q = this.input.value.trim(), L = this.list; L.empty();
+    if (!q) { L.createDiv({ cls: 'gq-hint', text: 'Words from the 1,500 open in the word graph. Anything else is a bonus word.' }); return; }
+    const hits = this.plugin.findWords(q);
+    const hide = this.guess.checked;
+    for (const w of hits) {
+      const row = L.createDiv('gq-hit');
+      const t = row.createDiv('gq-hit-text');
+      const greekQuery = isGreek(q);
+      if (hide) {
+        // Guessing first (pretesting) helps the answer stick, even when the guess is wrong.
+        t.createDiv({ cls: 'gq-hit-main', text: greekQuery ? `${w.word} = ?` : `${w.english} = ?` });
+        t.createDiv({ cls: 'gq-hit-sub', text: `#${w.rank}  Say your guess out loud, then reveal.` });
+        const r = row.createEl('button', { text: 'Reveal' });
+        r.onclick = () => { this.plugin.logLookup(q, w); row.empty(); this.fill(row, w); };
+      } else this.fill(row, w, q);
+    }
+    if (!hits.length) L.createDiv({ cls: 'gq-hint', text: 'Not in the 1,500.' });
+    const b = L.createDiv('gq-bonus');
+    b.createDiv({ cls: 'gq-hit-sub', text: hits.length ? 'Want a different word?' : 'Bonus word: look it up for free and add it to your notes if you like it.' });
+    const tb = b.createEl('button', { text: `Translate "${q}"` });
+    tb.onclick = () => { this.plugin.logLookup(q, null); window.open(this.plugin.translateUrl(q)); };
+  }
+  fill(row, w, q) {
+    const t = row.createDiv('gq-hit-text');
+    t.createDiv({ cls: 'gq-hit-main', text: `${w.word}  ·  ${w.english}` });
+    t.createDiv({ cls: 'gq-hit-sub', text: `${w.pron ? 'say it: ' + w.pron + '  ·  ' : ''}#${w.rank} of 1,500${w.form ? '  ·  form: ' + w.form : ''}` });
+    const g = row.createEl('button', { text: 'Word graph' });
+    g.onclick = () => { if (q) this.plugin.logLookup(q, w); this.close(); this.plugin.openGraph(w.path); };
+  }
+  onClose() { this.contentEl.empty(); }
+}
+
+// ---------- Ask the group: a question about the note you are on, ready to paste into GroupMe ----------
+class AskModal extends Modal {
+  constructor(app, plugin, file) { super(app); this.plugin = plugin; this.file = file; }
+  onOpen() {
+    const c = this.contentEl; c.addClass('gq-modal'); this.titleEl.setText('Ask the group');
+    const head = this.plugin.askHeader(this.file);
+    c.createDiv({ cls: 'gq-hit-main', text: head });
+    this.box = c.createEl('textarea', { attr: { rows: 4, placeholder: 'Your question (English or Greek)' } }); this.box.addClass('gq-input');
+    const row = c.createDiv('gq-row');
+    const send = row.createEl('button', { text: 'Share to GroupMe', cls: 'mod-cta' });
+    send.onclick = async () => { await this.plugin.shareQuestion(head + '\n' + this.box.value.trim() + '\n' + this.plugin.noteUrl(this.file)); this.close(); };
+    if (GROUPME_JOIN) { const j = row.createEl('button', { text: 'Join the class group' }); j.onclick = () => window.open(GROUPME_JOIN); }
+    c.createDiv({ cls: 'gq-hint', text: 'Pick GroupMe in the share menu. On a computer the message is copied: paste it into the class group.' });
+    setTimeout(() => this.box.focus(), 50);
+  }
+  onClose() { this.contentEl.empty(); }
+}
+
 module.exports = class GreekquentStudentLayout extends Plugin {
   onload() {
     this.busy = false;
@@ -221,12 +296,20 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Update vault: downloads only the files that changed. My Work is never touched.
     this.addRibbonIcon('refresh-cw', 'Update vault', () => this.updateVault(false));
     this.addCommand({ id: 'update-vault', name: 'Update vault', callback: () => this.updateVault(false) });
+    // Look up a word: searches the 1,500 (and their verb forms) first; other words go to a free translator as bonus words.
+    this.addRibbonIcon('search', 'Look up a word', () => new LookupModal(this.app, this).open());
+    this.addCommand({ id: 'look-up-word', name: 'Look up a word', callback: () => new LookupModal(this.app, this).open() });
+    // Ask the group: question about the open note, shared to GroupMe with a link to the note.
+    this.addRibbonIcon('users', 'Ask the group', () => this.ask());
+    this.addCommand({ id: 'ask-group', name: 'Ask the group about this note', callback: () => this.ask() });
+    this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) this.words = null; }));
     // My Work notes open ready to type in.
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path.startsWith(MY_WORK)) setTimeout(() => this.editMode(f), 50); }));
     this.addCommand({ id: 'open-word-graph', name: 'Open word graph', callback: () => this.openGraph() });
     this.addCommand({ id: 'open-word-web', name: 'Open word web (custom view)', callback: () => this.openWeb() });
     this.registerEvent(this.app.workspace.on('file-menu', (menu, file) => {
       if (file && file.path && file.path.startsWith('Words/')) menu.addItem(i => i.setTitle('Open word graph').setIcon('git-fork').onClick(() => this.openGraph(file.path)));
+      if (file && file.extension === 'md' && !file.path.startsWith(MY_WORK)) menu.addItem(i => i.setTitle('Ask the group').setIcon('users').onClick(() => this.ask(file)));
     }));
     this.app.workspace.onLayoutReady(async () => {
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
@@ -276,6 +359,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       // Same graph, new center: the native physics carries the words over to their new places.
       v.file = f; v.update(); this.app.workspace.setActiveLeaf(leaf, { focus: true }); this.app.workspace.requestSaveLayout();
     } else await leaf.setViewState({ type: 'localgraph', active: true, state: { file: path, options: LOCAL_OPTIONS } });
+    // A brand-new graph tab can come up centered on whatever note was open; put it on the chosen word.
+    if (f && leaf.view && leaf.view.getViewType() === 'localgraph' && leaf.view.file !== f) { leaf.view.file = f; leaf.view.update(); this.app.workspace.requestSaveLayout(); }
     this.dressGraph(leaf);
     this.followCenter(leaf, path);
   }
@@ -310,6 +395,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       st.title = bar.createDiv('gq-web-title');
       const say = bar.createEl('button', { text: 'Hear it', attr: { 'aria-label': 'Say the word' } });
       const open = bar.createEl('button', { text: 'Open note', attr: { 'aria-label': 'Open the word note' } });
+      const askb = bar.createEl('button', { text: 'Ask', attr: { 'aria-label': 'Ask the group about this word' } });
+      askb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.ask(f); };
       st.trail = wrap.createDiv('gq-web-trail'); st.bar = wrap;
       st.back.onclick = () => this.graphStep(leaf, -1); st.fwd.onclick = () => this.graphStep(leaf, 1);
       open.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.app.workspace.getLeaf('tab').openFile(f); };
@@ -331,6 +418,74 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     st.back.disabled = st.pos <= 0; st.fwd.disabled = st.pos >= st.hist.length - 1;
     st.trail.setText(st.hist.slice(Math.max(0, st.pos - 6), st.pos + 1).map(h => h.replace(/^Words\//, '').replace(/\.md$/, '')).join('  ›  '));
     box.focus();
+  }
+  // ---------- Look up helpers ----------
+  async wordIndex() {
+    if (this.words) return this.words;
+    if (this.indexing) return this.indexing;
+    this.indexing = (async () => {
+      const out = [];
+      for (const f of this.app.vault.getMarkdownFiles()) {
+        if (!f.path.startsWith('Words/')) continue;
+        const fm = (this.app.metadataCache.getFileCache(f) || {}).frontmatter || {};
+        if (!fm.rank) continue;
+        const w = { path: f.path, word: f.basename, english: String(fm.english || ''), pron: fm.pronunciation || '', rank: +fm.rank, lessons: fm.lessons || [], forms: [] };
+        // Verb forms from the conjugation table (bold cells), so "θέλουμε" finds θέλω.
+        try { const txt = await this.app.vault.cachedRead(f); const m = txt.split('## Conjugation')[1]; if (m) for (const b of m.split('\n## ')[0].matchAll(/\*\*([^*]+)\*\*/g)) b[1].split(/\s+/).forEach(x => { if (isGreek(x) && x !== 'θα') w.forms.push(x); }); } catch (e) {}
+        w.k = fold(w.word); w.e = fold(w.english.replace(/[()"]/g, ' ')); w.fk = [...new Set(w.forms.map(fold))];
+        out.push(w);
+      }
+      out.sort((a, b) => a.rank - b.rank);
+      this.words = out; this.indexing = null; return out;
+    })();
+    return this.indexing;
+  }
+  findWords(q) {
+    if (!this.words) return [];
+    const k = fold(q), res = [];
+    for (const w of this.words) {
+      let score = 0, form = '';
+      if (isGreek(q)) {
+        if (w.k === k) score = 100; else if (w.fk.includes(k)) { score = 90; form = w.forms.find(x => fold(x) === k); } else if (k.length >= 2 && w.k.startsWith(k)) score = 50; else if (k.length >= 3 && w.fk.some(x => x.startsWith(k))) score = 30;
+      } else {
+        const words = w.e.split(/[^a-z']+/).filter(Boolean);
+        const bare = w.e.replace(/^(i|to|the|a|an) /, '');
+        if (w.e === k || bare === k) score = 100; else if (words.includes(k)) score = 80; else if (k.length >= 3 && words.some(x => x.startsWith(k))) score = 40; else if (k.includes(' ') && w.e.includes(k)) score = 60;
+      }
+      if (score) res.push({ ...w, score: score - w.rank / 10000, form });
+    }
+    return res.sort((a, b) => b.score - a.score).slice(0, 8);
+  }
+  translateUrl(q) { const gr = isGreek(q); return `https://translate.google.com/?sl=${gr ? 'el' : 'en'}&tl=${gr ? 'en' : 'el'}&text=${encodeURIComponent(q)}&op=translate`; }
+  async logLookup(q, w) {
+    // Every look-up is saved in My Work, so it can come back as review (and the teacher can see what students reach for).
+    const ad = this.app.vault.adapter, day = window.moment ? window.moment().format('YYYY-MM-DD') : new Date().toISOString().slice(0, 10);
+    let txt = ''; try { txt = await ad.read(LOOKUPS); } catch (e) { txt = '# Words I looked up\n\nEvery word you look up lands here. Words from the 1,500 link to their notes. Bonus words are yours to keep: add the Greek next to them.\n'; }
+    if (!txt.includes('\n## ' + day)) txt = txt.replace(/\s*$/, '\n\n## ' + day + '\n');
+    const line = w ? `- ${q} → [[${w.word}]] (${w.english}, #${w.rank})` : `- ${q} → bonus word: `;
+    const today = txt.slice(txt.lastIndexOf('\n## '));
+    if (today.split('\n').some(l => l.trim() === line.trim())) return;
+    if (!(await ad.exists(MY_WORK.slice(0, -1)))) await ad.mkdir(MY_WORK.slice(0, -1));
+    await ad.write(LOOKUPS, txt.replace(/\s*$/, '\n') + line + '\n');
+  }
+  // ---------- Ask the group helpers ----------
+  ask(file) {
+    const f = file || this.app.workspace.getActiveFile();
+    if (!f || f.extension !== 'md') { new Notice('Open a word or lesson note first, then tap Ask the group.'); return; }
+    if (f.path.startsWith(MY_WORK)) { new Notice('My Work notes are private, so they cannot be linked. Open a word or lesson note instead.'); return; }
+    new AskModal(this.app, this, f).open();
+  }
+  askHeader(f) {
+    const fm = (this.app.metadataCache.getFileCache(f) || {}).frontmatter || {};
+    const les = Array.isArray(fm.lessons) && fm.lessons.length ? `, first seen in Lesson ${fm.lessons[0]}` : '';
+    return fm.english ? `Question about ${f.basename} (${fm.english}${les}):` : `Question about "${f.basename}":`;
+  }
+  noteUrl(f) { return NOTE_URL + f.path.split('/').map(encodeURIComponent).join('/'); }
+  async shareQuestion(text) {
+    const mobile = document.body.classList.contains('is-mobile') || /Android|iPhone|iPad/.test(navigator.userAgent);
+    if (mobile && navigator.share) { try { await navigator.share({ text }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    try { await navigator.clipboard.writeText(text); new Notice('Copied. Open GroupMe and paste it into the class group.', 8000); }
+    catch (e) { new Notice('Could not copy. Select the text and copy it by hand.'); }
   }
   async feedback() {
     let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}

@@ -1,5 +1,5 @@
 {
-"release": "2026-11-14",
+"release": "2026-11-14b",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,16 +14,16 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "114bfe60182bfa15663685d0890b4161a75cd44cae31e267deb21e41c0df8220",
-"size": 31762
+"sha256": "542bd2edb65e503bd63a4b0c339e8fdd5c7d1e02969b8da00fda090a725ff121",
+"size": 42966
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "b0872eabb64cbd9f3174249f2995b464b2c4a06aad6b6663c7e54ee7b801328e",
+"sha256": "9be113ac6a142f4c7b1f0b99c36d57619b5df57950bfe9263d1eb6eae768e271",
 "size": 373
 },
 ".obsidian/plugins/greekquent-student-layout/styles.css": {
-"sha256": "6a2c42989f143e3e34b16271089ce55d989a4092e319f70568f317fce390482e",
-"size": 3109
+"sha256": "932015e995f51b75752ac2e0287b9d739191882f1b50e8d996ec1671b5ef1bec",
+"size": 3852
 },
 ".obsidian/plugins/meld-encrypt/main.js": {
 "sha256": "bf08d81ee9cc0e32a5726020197803c60eb5e73c9b114d80768081f051e66108",
@@ -54,8 +54,8 @@
 "size": 20632
 },
 "00 Greekquent Index.md": {
-"sha256": "bfe092e77c8ffb2a262ca1e8151f8c8b3c6935b0443a553a828b58a190195b94",
-"size": 6666
+"sha256": "308b8f949c7482f912e4d39d5b61cd57c33f7b38c6d6f5826352c31d2a3cf0fa",
+"size": 7154
 },
 "02 Verb Tables.md": {
 "sha256": "0e3902924a1e17e00f36c7be8af40bcd2b8c2c1b44e66b04fea8ede68fdd94af",
@@ -74,8 +74,8 @@
 "size": 15607
 },
 "06 Addenda.md": {
-"sha256": "fb50075caa310053df2caf7206f8df04eb27e504d96e03e4e2f3a25f4ebb3d77",
-"size": 11158
+"sha256": "fa09179e3c5ab1c0e5f2288057383fef496d249ab27a1709666778d32f775c2b",
+"size": 14001
 },
 "07 Fluent in a Year.md": {
 "sha256": "c535b0ccd1bc1ad79ceb93a28873b6f831aabc804e8d4ae4c6c3ce9948678771",
@@ -98,8 +98,8 @@
 "size": 5981
 },
 "11 Release Notes.md": {
-"sha256": "65d020fe4794bd223c68277cdc88b50a3cdc7d5718a440b54b3b748586509f2a",
-"size": 5320
+"sha256": "58b6f23caa30497d3e1e105ab49ca423ea4b474dc0a528212cbfaaa8cffb5162",
+"size": 6404
 },
 "Fluent in a Year/FY01 Whats in your bag.md": {
 "sha256": "a6b4d41db266b5c86d0a908875cb80d5c4a32afc99795cf58e2128720a493bfa",

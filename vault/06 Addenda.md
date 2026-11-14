@@ -127,3 +127,31 @@ Questions to settle with real students before the course is final. Each item say
 > - Does anyone feel queasy, and with which version?
 > - Do they explore longer in the lively graph or the calm web?
 > - Do they open the word notes from the graph, or just browse?
+
+> [!question]- A11 · Look up a word: does it help or distract? (testing: Student Layout 1.7)
+> **Added:** 2026-11-14b · **Where:** [[11 Release Notes]], [[04 How Memory Works]]
+>
+> Goal: let students reach for words they want (creative and free) without drifting away from the 1,500. The search checks the 1,500 first, so most look-ups lead back to a word note and its graph. Words outside the list open in Google Translate as bonus words and are logged in My Work.
+>
+> **Why it should help:** looking a word up because you need it for something you want to say adds "need" and "search", two of the three parts of the involvement load hypothesis, and higher involvement tends to mean better retention ([Studies in Second Language Acquisition](https://www.cambridge.org/core/journals/studies-in-second-language-acquisition/article/involvement-load-hypothesis-plus/5C5984B326F37FBF3A3DDA3C0EB2996C)). Guessing before seeing the answer (pretesting) improves later recall even when the guess is wrong ([Kornell and Vaughn](https://sites.williams.edu/nk2/files/2011/08/Kornell.Vaughn.inpress.pdf)); a meta-analysis found a moderate effect, g = 0.54 ([Psychonomic Bulletin and Review](https://rd.springer.com/content/pdf/10.3758/s13423-023-02353-8.pdf)).
+>
+> **Caveat:** for beginners, looking words up isn't automatically better than being given them ([IJLLS](https://ijlls.org/index.php/ijlls/article/download/2757/1237)). The look-up only pays off if the word gets used again.
+>
+> **Watch for in class:**
+> - Read a few students' "Words I looked up" notes. What share are from the 1,500 vs bonus words?
+> - Do bonus words cluster on a theme? Those could become a scene or a band-2 word swap.
+> - Does anyone use Guess first without being told?
+> - Bring 2 or 3 looked-up words back as review the next week.
+
+> [!question]- A12 · Ask the group in GroupMe (testing: Student Layout 1.7)
+> **Added:** 2026-11-14b · **Where:** [[11 Release Notes]]
+>
+> GroupMe has no free way for an app to drop a message straight into a group. Its bot API posts as a bot and needs a secret token, which can't sit in a public vault. So the button builds the message and hands it to the phone's share menu, where the student picks GroupMe and the class group. The link points to the note on GitHub, which opens in any browser.
+>
+> **To add a "Join the class group" button:** in GroupMe, open the group, then Settings, then Share group, and copy the link ([GroupMe help](https://support.microsoft.com/en-us/groupme/how-do-i-create-a-share-link-in-groupme)). Paste it into GROUPME_JOIN at the top of the Student Layout plugin's main.js and publish.
+>
+> **Watch for in class:**
+> - Does GroupMe show up in the share menu on iPhone and Android?
+> - Does the GitHub link preview cleanly in GroupMe?
+> - Do questions get answered by classmates, or only by the teacher?
+

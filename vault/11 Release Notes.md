@@ -2,6 +2,14 @@
 
 What changed in each vault release, newest first. Open questions about these changes are in [[06 Addenda]].
 
+> [!note]- 2026-11-14b · Look up a word, Ask the group (Student Layout 1.7)
+> - **Look up a word:** magnifying-glass button. Type English or Greek. Searches the 1,500 first, accent-free, including the verb forms in the conjugation tables (θέλαμε finds θέλω). Tap **Word graph** to open the word.
+> - **Guess first:** a tick box that hides the answer until the student says a guess and taps Reveal.
+> - **Bonus words:** anything outside the 1,500 opens in Google Translate (free, no account).
+> - **Words I looked up:** every look-up is saved by date in My Work, linked to the word note, so it can come back as review.
+> - **Ask the group:** two-people button, the **Ask** button in the word graph, or right-click a note. Writes "Question about νερό (water, first seen in Lesson 1):", the student's question, and a link to the note on GitHub that opens on any phone. On a phone it opens the share menu (pick GroupMe); on a computer it copies the message to paste in.
+> - **Fix:** a new word graph tab could open centered on the current note instead of the chosen word.
+
 > [!note]- 2026-11-14 · My Work, Send homework, Update vault (Student Layout 1.6)
 > - **My Work folder:** Homework and My Notes. Students can type here; the rest of the vault stays read-only. Updates never change this folder.
 > - **Send homework:** paper-plane button. Texts the newest "## " section of the homework note to the teacher. Works on iPhone and Android.

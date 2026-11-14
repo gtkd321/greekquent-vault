@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 const KEEP_RIBBON = ['greekquent-student-layout:Open word graph', 'greekquent-student-layout:Share feedback', 'greekquent-student-layout:Send homework', 'greekquent-student-layout:Update vault', 'greekquent-student-layout:Look up a word', 'greekquent-student-layout:Ask the group', 'greekquent-student-layout:Ask on video'];
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-14e';
+const VAULT_RELEASE = '2026-11-14f';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';

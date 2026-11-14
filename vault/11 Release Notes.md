@@ -2,6 +2,9 @@
 
 What changed in each vault release, newest first. Open questions about these changes are in [[06 Addenda]].
 
+> [!note]- 2026-11-14f · Public link for Greekquent Cousins
+> - **Greekquent Cousins** now has a public address for students: [greekquent-cousins.pplx.app](https://greekquent-cousins.pplx.app). The link in [[09 Class Games and App Ideas]] points there.
+
 > [!note]- 2026-11-14e · English cognates, Greekquent Cousins game (Student Layout 1.9)
 > - **English cognates:** 533 word notes now show English cousins in the info line, for example χρόνος: chronic, chronology, synchronize. They are memory hooks, not translations. See the note in [[00 Greekquent Index]].
 > - **Look up by cousin:** typing an English cousin in Look up a word finds the Greek word, marked "(you typed a cousin: chronic)". Real meanings still come first, so "hospital" shows νοσοκομείο before σπίτι.

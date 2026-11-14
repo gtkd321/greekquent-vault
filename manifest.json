@@ -1,5 +1,5 @@
 {
-"release": "2026-11-14e",
+"release": "2026-11-14f",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,7 +14,7 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "7f5e07a98f04227108b64090d92c68dd1d7909cec4098db18dabc83163cce284",
+"sha256": "42ac8be04d0c32ecf9de859abc4dfd15374138b9d665552cfb0c3ff2a335d9aa",
 "size": 60502
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
@@ -86,8 +86,8 @@
 "size": 3821
 },
 "09 Class Games and App Ideas.md": {
-"sha256": "8ab023d9f12f86df5b481b049bb0305740987d594d8b1cb18d259b26e5027f4c",
-"size": 3423
+"sha256": "920847d9979b4c28ccce5053c78f6a84f8a7da73fc79b93cea98d8b9f90cbc32",
+"size": 3380
 },
 "10 Greekquent Groups-student.md": {
 "sha256": "a8add3c67d6ee4045f8e730aea4f6af6265038e1378d68a1a464faa688fe2a70",
@@ -98,8 +98,8 @@
 "size": 5981
 },
 "11 Release Notes.md": {
-"sha256": "8b4fe1794438e427eb71e3cee59599f87e97c80cb1f451ec88902dfefa1cd7fa",
-"size": 8686
+"sha256": "32e3537e876d62d9d487d4428faa25a2166a840e06066f1ef2851383b9c40f83",
+"size": 8941
 },
 "12 Student Questions.md": {
 "sha256": "29c0bcb5ed4cd61343d14cbd44d93fb24d5a13061c354c16439d4dc01575dd21",

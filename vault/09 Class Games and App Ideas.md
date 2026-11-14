@@ -13,7 +13,7 @@ Links: [[00 Greekquent Index]] · [[07 Fluent in a Year]] · [[08 Online Course 
 > - Free, with no accounts and nothing saved. Turn off auto-lock and silent mode before class.
 
 > [!summary]- Greekquent Cousins (spot the English cousin)
-> [Open Greekquent Cousins](https://www.perplexity.ai/computer/a/greekquent-cousins-AIV14fGFRhWlVIeJv5OlCA)
+> [Open Greekquent Cousins](https://greekquent-cousins.pplx.app)
 > - The same face-to-face split screen as the Buzzer, plus **Solo practice** for remote students. Works in any phone browser, iPhone or Android.
 > - **Find the cousin:** a Greek word and two English words. Pick the cousin (χρόνος: chronology or chocolate).
 > - **Guess the meaning:** a Greek word and its cousin. Pick what the Greek word means (φόβος, cousin phobia: fear or star).

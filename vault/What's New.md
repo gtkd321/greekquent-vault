@@ -2,8 +2,9 @@
 
 Back to [[Today]].
 
-> [!info]- November 14, night: Textbook covers
-> - The color cover is now the first page of both textbook files in Handouts. The separate cover file is gone.
+> [!info]- November 14, night: Textbook files
+> - The two textbook files in Handouts have the same lessons. Use Screen (color, lessons only) on your phone or tablet. Print (lessons and weekly planners) is the one to print, and it adds the Fluent in a Year planners.
+> - The color cover is now the first page of both. The separate cover file is gone.
 
 > [!info]- November 14, evening: Pair it
 > - **Pair it with** on word notes: what to say with each word. Verbs show who, what, and how or when. Nouns show the verbs and describing words that go with them.

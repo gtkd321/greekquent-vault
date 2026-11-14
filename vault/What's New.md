@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!info]- November 14, night: Textbook covers
+> - The color cover is now the first page of both textbook files in Handouts. The separate cover file is gone.
+
 > [!info]- November 14, evening: Pair it
 > - **Pair it with** on word notes: what to say with each word. Verbs show who, what, and how or when. Nouns show the verbs and describing words that go with them.
 > - **Build a sentence:** tap one choice from each row and the app builds a correct Greek sentence. Hear it, then save it to My pairs.

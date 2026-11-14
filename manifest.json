@@ -1,5 +1,5 @@
 {
-"release": "2026-11-14k",
+"release": "2026-11-14l",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,7 +14,7 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "9fdbc350c75e275695bbe8d41a38f31dcef60496f0c8c54c25b741efb2270e50",
+"sha256": "f7639c71d03924f972cc0f6e7a7f55aec1622c182f15045805c1f0d73a18610e",
 "size": 82339
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
@@ -313,17 +313,13 @@
 "sha256": "497560414d03d97001f32de5dfba1fd6e44139718e04e3fa7beca54351472cb4",
 "size": 81710
 },
-"Handouts/Greekquent Year One Textbook - Cover.pdf": {
-"sha256": "9281e4e0ae56ed7e942ee00d83f2ed74e58034959032b657cde93ddd83d94d03",
-"size": 45109
-},
 "Handouts/Greekquent Year One Textbook - Draft.pdf": {
-"sha256": "f7d7530cf2e96b27b6b22a05a6026de18ae2650c65f4529bf67a3c67a64f0866",
-"size": 485057
+"sha256": "a7c88f42ac4480fa98e3bd8e2216d5a840b2e41202fb2e75572aced821a64b13",
+"size": 528620
 },
 "Handouts/Greekquent Year One Textbook - Print Edition.pdf": {
-"sha256": "b1c8c6400eb5dfd07e8bd3f1e57dc300211d9be22bdac97ca6a6bc5d9ecb4918",
-"size": 671852
+"sha256": "7029cbe363f8ed00dce3e19d0ec4f5cc7727930b6950ec15f09bd8183dfb34b0",
+"size": 715367
 },
 "Scripts/01 Lesson Scripts.md": {
 "sha256": "c79431549c842969a5cdbe19776af7b3b98c0934263ee23a034af3531fc8f257",
@@ -650,8 +646,8 @@
 "size": 24
 },
 "What's New.md": {
-"sha256": "eaa26110ebe35b1d25633d05a3decb812832e7f2d666eef1f2ba9c5c73fd5a28",
-"size": 1591
+"sha256": "d06b5104cef0dce50938d258d21a91c90795bbd461802e100086de3da7f7df80",
+"size": 1750
 },
 "Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

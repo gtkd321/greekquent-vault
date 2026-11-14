@@ -2,10 +2,11 @@
 
 What changed in each vault release, newest first. Open questions about these changes are in [[06 Addenda]].
 
-> [!note]- 2026-11-14d · English cognates, Greekquent Cousins game (Student Layout 1.9)
+> [!note]- 2026-11-14e · English cognates, Greekquent Cousins game (Student Layout 1.9)
 > - **English cognates:** 533 word notes now show English cousins in the info line, for example χρόνος: chronic, chronology, synchronize. They are memory hooks, not translations. See the note in [[00 Greekquent Index]].
 > - **Look up by cousin:** typing an English cousin in Look up a word finds the Greek word, marked "(you typed a cousin: chronic)". Real meanings still come first, so "hospital" shows νοσοκομείο before σπίτι.
 > - **Greekquent Cousins:** a new two-player or solo game for spotting cognates, linked in [[09 Class Games and App Ideas]].
+> - **Safer updates:** every downloaded file is checked against its fingerprint. Right after a publish, GitHub can still hand out old copies for about 5 minutes; those files are skipped and the student is told to tap Update vault again shortly. A missing file no longer stops the update with an error.
 
 > [!note]- 2026-11-14c · Ask on video, Student questions (Student Layout 1.8)
 > - **Ask on video:** camera button, **Video** in the word graph, **Ask on video instead** in Ask the group, or right-click a note. Records up to 45 seconds with the front camera (about 9 MB), shows a countdown, and stops by itself. Play it back, record again if needed.

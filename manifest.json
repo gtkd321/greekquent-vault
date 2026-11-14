@@ -1,5 +1,5 @@
 {
-"release": "2026-11-14d",
+"release": "2026-11-14e",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,8 +14,8 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "7ebf03c735a5ef4c0ff81ba3b9cc8cb6a2d994c67aefd7586e60dc5adfba95e2",
-"size": 59958
+"sha256": "7f5e07a98f04227108b64090d92c68dd1d7909cec4098db18dabc83163cce284",
+"size": 60502
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
 "sha256": "25e3196ebec60fe2ee886da88941f84802cc6b6c7ac1655db8d303d32cb03b5d",
@@ -74,7 +74,7 @@
 "size": 15607
 },
 "06 Addenda.md": {
-"sha256": "25e6dbf3b832142d9d4997daf33dc5c2ab5609952fdb3c9cce05d2abfe0e8bf2",
+"sha256": "50099c6648aaa3a16cbe113ab284dcd3c1cfec93e8f2aa23ed9a772266cfbd58",
 "size": 15435
 },
 "07 Fluent in a Year.md": {
@@ -98,8 +98,8 @@
 "size": 5981
 },
 "11 Release Notes.md": {
-"sha256": "0e02512256d6e820d500d4218cffb9b6e6afd77e4dff37323d95974da730410c",
-"size": 8384
+"sha256": "8b4fe1794438e427eb71e3cee59599f87e97c80cb1f451ec88902dfefa1cd7fa",
+"size": 8686
 },
 "12 Student Questions.md": {
 "sha256": "29c0bcb5ed4cd61343d14cbd44d93fb24d5a13061c354c16439d4dc01575dd21",

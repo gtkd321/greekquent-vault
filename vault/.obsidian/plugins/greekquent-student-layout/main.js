@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 const KEEP_RIBBON = ['greekquent-student-layout:Open word graph', 'greekquent-student-layout:Share feedback', 'greekquent-student-layout:Send homework', 'greekquent-student-layout:Update vault', 'greekquent-student-layout:Look up a word', 'greekquent-student-layout:Ask the group', 'greekquent-student-layout:Ask on video'];
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-14d';
+const VAULT_RELEASE = '2026-11-14e';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -728,17 +728,24 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (quiet) { const n = new Notice(`A Greekquent update (${man.release}) is ready. Tap here to install it.`, 0); n.noticeEl.onclick = () => { n.hide(); this.updateVault(false); }; return; }
       const note = new Notice('Updating Greekquent...', 0);
       const want = Object.entries(man.files).filter(([p]) => !KEEP_LOCAL(p));
-      let changed = 0, removed = 0, config = false;
+      let changed = 0, removed = 0, config = false, stale = 0;
       for (let i = 0; i < want.length; i++) {
         const [p, meta] = want[i];
         let same = false;
         if (await ad.exists(p)) { try { same = (await this.sha(await ad.readBinary(p))) === meta.sha256; } catch (e) {} }
         if (same) continue;
-        const r = await requestUrl({ url: UPDATE_BASE + 'vault/' + p.split('/').map(encodeURIComponent).join('/') + '?v=' + meta.sha256.slice(0, 12) });
+        let r; try { r = await requestUrl({ url: UPDATE_BASE + 'vault/' + p.split('/').map(encodeURIComponent).join('/') + '?v=' + meta.sha256.slice(0, 12) }); } catch (e) { stale++; continue; }
+        // GitHub can serve a cached old copy for a few minutes after a publish. Only write files that match the manifest.
+        if ((await this.sha(r.arrayBuffer)) !== meta.sha256) { stale++; continue; }
         const dir = p.split('/').slice(0, -1).join('/');
         if (dir && !(await ad.exists(dir))) await ad.mkdir(dir);
         await ad.writeBinary(p, r.arrayBuffer); changed++; if (p.startsWith('.obsidian/plugins/')) config = true;
         note.setMessage(`Updating Greekquent... ${changed} file${changed === 1 ? '' : 's'}`);
+      }
+      if (stale) {
+        note.hide();
+        new Notice(`Greekquent update: ${changed} file${changed === 1 ? '' : 's'} updated, ${stale} still on the way from GitHub. Tap Update vault again in about 5 minutes. Your My Work folder was not touched.`, 15000);
+        return;
       }
       // Files the teacher removed since the last update (only files that came from an update, never My Work).
       for (const p of Object.keys(mine.files || {})) if (!man.files[p] && !KEEP_LOCAL(p) && await ad.exists(p)) { await ad.remove(p); removed++; }

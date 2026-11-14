@@ -156,7 +156,7 @@ Questions to settle with real students before the course is final. Each item say
 > - Do questions get answered by classmates, or only by the teacher?
 
 > [!question]- A13 · English cognates and the Cousins game (testing: Student Layout 1.9)
-> **Added:** 2026-11-14d · **Where:** [[11 Release Notes]], [[09 Class Games and App Ideas]]
+> **Added:** 2026-11-14e · **Where:** [[11 Release Notes]], [[09 Class Games and App Ideas]]
 >
 > **What the research says:** just telling students that cognates exist has small or no effects in classroom studies ([Language Learning](https://onlinelibrary.wiley.com/doi/full/10.1111/lang.12390); [review in European Journal of Psychology of Education](https://dspace.library.uu.nl/bitstream/handle/1874/427184/s10212_021_00586_6.pdf?sequence=1)). Teaching a few systematic spelling correspondences did help learners recognize and learn cognates ([Language Teaching Research](https://journals.sagepub.com/doi/10.1177/13621688211047353)). So the game drills letter rules (χ → ch, φ → ph) and using a cousin to infer a meaning, not "cognates are useful".
 >

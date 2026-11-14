@@ -1,0 +1,36 @@
+---
+lesson: 15
+variant: kid
+audience: student
+tags: [greek-student, kid-variant]
+---
+# Puppet who only speaks Greek
+
+**The game:** A sock puppet doesn't speak English, so the kid has to slow it down, ask it to repeat, and teach it words.
+
+## Say it
+
+- Grown-up (puppet): **Γεια! Μιλάς αγγλικά;** — Hi! Do you speak English?
+- You: **Ναι! Μιλάς ελληνικά;** — Yes! Do you speak Greek?
+- You: **Πιο σιγά, παρακαλώ!** — Slower, please!
+- You: **Ξανά, παρακαλώ!** — Again, please!
+- You: **Δεν καταλαβαίνω!** — I don't understand!
+- Grown-up (puppet): **Δεν ξέρω αγγλικά…** — I don't know English…
+
+## Make it
+
+Making the puppet: a sock, buttons, yarn hair.
+
+## Do the moves
+
+Do the move every time you say it.
+
+- **Μιλάτε αγγλικά;**: Open and close your hand by your mouth like a talking puppet, eyebrows up.
+- **Πιο σιγά, παρακαλώ.**: Press both palms down slowly.
+- **Δεν καταλαβαίνω.**: Scratch your head, frowning.
+- **Μπορείτε να το πείτε ξανά;**: Circle a finger backward ("again").
+- **Θέλω να μάθω ελληνικά.**: Mime opening a book, then point at the Greek flag.
+- **Μιλάω λίγα ελληνικά.**: Talking-puppet hand, then pinch fingers for "a little".
+
+---
+← [[K14 Τι ώρα είναι κύριε Λύκε-student|K14 Τι ώρα είναι κύριε Λύκε]] · [[K16 Treasure hunt review-student|K16 Treasure hunt review]] →

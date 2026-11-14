@@ -1,0 +1,75 @@
+---
+fiay_week: 13
+week_of: "Jan 18"
+lesson: 10
+total: 330
+tags: [greek-fiay]
+---
+# Fluent in a Year · week 13: My day
+
+**Week of** Jan 18 to Jan 24 · **Class:** [[L10 My day-teacher|L10 My day]] ([[L10 My day-student|student page]]) · **Running total:** 330 of 1,500
+
+## This week's words
+
+Five a day. The words are the next most frequent on the list, pulled toward the [[L10 My day-teacher|L10 My day]] scene where they fit. Lesson words you meet in class come first.
+
+> [!todo]- Mon · day 61 of 300
+> - [[διαβάζω]] **I read, I study** (#488): Διαβάζω το βιβλίο σου. (I read your book.)
+> - [[τηλεόραση|η τηλεόραση]] **television** (#599): Θα δω τηλεόραση. (I'll watch television.)
+> - [[πίνω]] **I drink** (#670): Η Μίλι δεν πίνει νερό. (Millie isn't drinking water.)
+> - [[διάλειμμα|το διάλειμμα]] **break, pause** (#1126): Ας κάνουμε διάλειμμα για τσάι. (Let's take a tea break.)
+> - [[μάλλον]] **probably, rather** (#187): Μάλλον σε κάποια αρέσει ο Τομ. (I guess someone must like Tom.)
+
+> [!todo]- Tue · day 62 of 300
+> - [[ήδη]] **already** (#188): Είναι ήδη έξι. (It's six o'clock already.)
+> - [[προς]] **towards** (#193): Προς το παρόν, πάμε καλά. (For now, we're doing well.)
+> - [[οποίος]] **who, which (relative)** (#197): Το σπίτι στο οποίο έμενε κατεδαφίστηκε. (The house in which we lived was torn down.)
+> - [[Τρίτη|η Τρίτη]] **Tuesday** (#1389): Σήμερα είναι Τρίτη, 17 Δεκεμβρίου. (Today is Tuesday, December 17th.)
+> - [[εκτός]] **except, outside** (#199): Εκτός αυτού έχει μία όμορφη γάτα. (Besides, she has a beautiful cat.)
+
+> [!todo]- Wed · day 63 of 300
+> - [[δρόμος|ο δρόμος]] **road, street** (#203): Δεν είναι στο δρόμο μου. (It's not on my way.)
+> - [[Τετάρτη|η Τετάρτη]] **Wednesday** (#1390): Σήμερα είναι Τετάρτη.
+> - [[πρόκειται]] **it is about to; it concerns** (#209): Τι πρόκειται να κάνεις τώρα; (What are you going to do now?)
+> - [[Πέμπτη|η Πέμπτη]] **Thursday** (#1391): Χτες ήταν Πέμπτη.
+> - [[γραφείο|το γραφείο]] **office, desk** (#251): Βάλε το βιβλίο στο γραφείο. (Put the book on the desk.)
+
+> [!todo]- Thu · day 64 of 300
+> - [[κακό|το κακό]] **evil, harm** (#265): Έσκασα από το κακό μου. (I was green with envy.)
+> - [[αμάξι|το αμάξι]] **car** (#272): Σου αρέσει αυτό τ' αμάξι; (Do you like this car?)
+> - [[ξεκινάω]] **I start** (#274): Θα ξεκινήσουμε.
+> - [[παίζω]] **I play** (#283): Μου αρέσει να παίζω πόκερ. (I like to play poker.)
+> - [[νιώθω]] **I feel** (#285): Δεν νιώθω ασφαλής εδώ πια. (I don't feel safe here anymore.)
+
+> [!todo]- Fri · day 65 of 300
+> - [[ζητάω]] **I ask for** (#294): Δε ζητάω λεφτά.
+> - [[τρέχω]] **I run** (#295): Τον είδα να τρέχει. (I saw him running.)
+> - [[περνάω]] **I pass, I spend (time)** (#298): Αυτό περνάει τα όρια!
+> - [[όμορφος]] **beautiful** (#299): Τα μάτια της είναι όμορφα. (Her eyes are beautiful.)
+> - [[συνεχίζω]] **I continue** (#311): Πρέπει να συνεχίσω. (I must continue.)
+
+> [!todo]- Sat · day 66 of 300
+> - [[μοιάζω]] **I look like** (#314): Το σχολείο μοιάζει με φυλακή. (The school looks like a prison.)
+> - [[βάζω]] **I put** (#324): Βάζω στοίχημα ότι δε λέει την αλήθεια. (I bet he isn't telling the truth.)
+> - [[υποθέτω]] **I suppose** (#329): Υποθέτω πως δε θέλετε να φύγω. (I assume you don't want me to leave.)
+> - [[σκέφτομαι]] **I think** (#342): Σκέφτομαι να πουλήσω το αυτοκίνητό μου. (I'm thinking of selling my car.)
+> - [[λείπω]] **I am absent, I am missing** (#388): Δε μας λείπει τίποτα. (We lack nothing.)
+
+> [!check]- Sun · review
+> 1. Anki: study the `fiay::w13` cards until each is right once.
+> 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
+> 3. **Scene task:** write a 4-line dialogue for the [[L10 My day-teacher|L10 My day]] scene using at least 5 of this week's words. Bring it to the group meet.
+
+## Group meet prompt
+
+**My day**
+
+- **Τι κάνεις το πρωί;** (What do you do in the morning?)
+- **Τι θέλεις να κάνεις σήμερα;** (What do you want to do today?)
+
+**Bridge:** Compare days: Εγώ πίνω καφέ το πρωί. Εσύ;
+
+**Use at least 5 of this week's words:** [[διαβάζω]] · [[τηλεόραση|η τηλεόραση]] · [[πίνω]] · [[διάλειμμα|το διάλειμμα]] · [[μάλλον]] · [[ήδη]] · [[προς]] · [[οποίος]] · [[Τρίτη|η Τρίτη]] · [[εκτός]] · [[δρόμος|ο δρόμος]] · [[Τετάρτη|η Τετάρτη]] · [[πρόκειται]] · [[Πέμπτη|η Πέμπτη]] · [[γραφείο|το γραφείο]] · [[κακό|το κακό]] · [[αμάξι|το αμάξι]] · [[ξεκινάω]] · [[παίζω]] · [[νιώθω]] · [[ζητάω]] · [[τρέχω]] · [[περνάω]] · [[όμορφος]] · [[συνεχίζω]] · [[μοιάζω]] · [[βάζω]] · [[υποθέτω]] · [[σκέφτομαι]] · [[λείπω]]
+
+---
+← [[FY12 My family|FY12 My family]] · [[07 Fluent in a Year|All weeks]] · [[FY14 Going places|FY14 Going places]] →

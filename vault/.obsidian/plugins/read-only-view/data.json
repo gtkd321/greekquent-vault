@@ -1,0 +1,1 @@
+{"enabled":true,"forceAllMarkdownReadOnly":true,"dismissedWelcomeVersion":1,"useGlobPatterns":true,"excludeRules":["My Work/**"],"excludeRuleEnabled":[true],"excludeRuleEntries":[{"sourceKind":"vault-path","sourceValue":"My Work/**","resolvedPath":"My Work/**","enabled":true}]}

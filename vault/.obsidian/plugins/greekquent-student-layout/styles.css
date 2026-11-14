@@ -1,0 +1,48 @@
+/* Greekquent student view. Turn the plugin off to show everything again. */
+body.greekquent-student .side-dock-ribbon-action[aria-label*="ncrypt"],
+body.greekquent-student .side-dock-ribbon-action[aria-label*="Decrypt"],
+body.greekquent-student .side-dock-ribbon-action[aria-label*="Lock and close"],
+body.greekquent-student .side-dock-ribbon-action[aria-label="Open graph view"],
+body.greekquent-student .side-dock-ribbon-action[aria-label="Open command palette"],
+body.greekquent-student .nav-files-container ~ .nav-header,
+body.greekquent-student .workspace-leaf-content[data-type="file-explorer"] .nav-header,
+body.greekquent-student .metadata-add-button,
+body.greekquent-student .view-header .view-action[aria-label*="Click to edit"],
+body.greekquent-student .view-header .view-action[aria-label*="Current view"],
+body.greekquent-student .workspace-tab-header-new-tab,
+body.greekquent-student .status-bar { display: none !important; }
+
+/* Word web */
+.gq-web { display: flex; flex-direction: column; height: 100%; padding: 0 !important; outline: none; }
+.gq-web-bar { display: flex; gap: 8px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--background-modifier-border); }
+.gq-web-bar button { font-size: 15px; padding: 4px 12px; }
+.gq-web-title { flex: 1; font-size: 17px; font-weight: 600; text-align: center; }
+.gq-web-trail { padding: 6px 14px; font-size: 13px; color: var(--text-muted); min-height: 1.6em; }
+.gq-web-svg { flex: 1; width: 100%; min-height: 0; }
+.gq-node { cursor: pointer; touch-action: none; }
+.gq-web-svg { touch-action: none; cursor: grab; user-select: none; }
+.gq-web-svg:active { cursor: grabbing; }
+.gq-node circle { stroke: var(--background-primary); stroke-width: 3; }
+.gq-node:hover circle { stroke: var(--interactive-accent); stroke-width: 5; }
+.gq-node text { text-anchor: middle; fill: var(--text-normal); pointer-events: none; }
+.gq-ring0 .gq-gr { font-size: 30px; font-weight: 700; }
+.gq-ring0 .gq-en { font-size: 18px; fill: var(--text-muted); }
+.gq-ring1 .gq-gr { font-size: 22px; font-weight: 600; }
+.gq-ring1 .gq-en { font-size: 15px; fill: var(--text-muted); }
+.gq-ring2 .gq-gr { font-size: 15px; fill: var(--text-muted); }
+.gq-ring2 circle { opacity: 0.7; }
+.gq-edge { stroke: var(--text-faint); stroke-width: 2; }
+
+.gq-node circle { transition: stroke-width 200ms ease, filter 200ms ease; }
+.gq-edge { transition: stroke 200ms ease; }
+.gq-web-svg.gq-focus .gq-node:not(.gq-lit) { filter: opacity(0.45); }
+.gq-web-svg.gq-focus .gq-edge:not(.gq-lit) { stroke: var(--background-modifier-border); }
+.gq-edge.gq-lit { stroke: var(--interactive-accent); stroke-width: 3; }
+@media (prefers-reduced-motion: reduce) { .gq-node circle, .gq-edge { transition: none; } }
+
+/* Word graph: native local graph, full tab, no settings panel, Word web controls on top */
+body.greekquent-student .gq-graph .graph-controls,
+body.greekquent-student .gq-graph > .view-header { display: none !important; }
+.gq-graph { display: flex; flex-direction: column; outline: none; }
+.gq-graph > .view-content { flex: 1; min-height: 0; }
+.gq-graph-top { flex: 0 0 auto; }

@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-14i';
+const VAULT_RELEASE = '2026-11-14j';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -553,10 +553,23 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     window.open(smsLink(`Greekquent homework (${f.basename}):\n${body}`));
   }
   async sha(buf) { const h = await crypto.subtle.digest('SHA-256', buf); return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join(''); }
+  // Fallback for devices where the key box is awkward: a note "My Work/Teacher key.md" holding the key is moved into settings and deleted.
+  async importKeyNote() {
+    const ad = this.app.vault.adapter, p = MY_WORK + 'Teacher key.md';
+    try {
+      if (!(await ad.exists(p))) return;
+      const m = (await ad.read(p)).match(/(github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{20,})/);
+      if (!m) { new Notice('My Work/Teacher key has no GitHub key in it yet. Paste the key into that note, then try again.', 10000); return; }
+      const d = (await this.loadData()) || {}; d.teacherKey = m[1]; await this.saveData(d);
+      const f = this.app.vault.getAbstractFileByPath(p); if (f) await this.app.vault.delete(f, true); else await ad.remove(p);
+      new Notice('Teacher update key saved. The Teacher key note was deleted.', 8000);
+    } catch (e) {}
+  }
   async teacherKey() { try { const d = await this.loadData(); return (d && d.teacherKey) || ''; } catch (e) { return ''; } }
   async channel() {
     const ad = this.app.vault.adapter;
     if (!(await ad.exists(TEACHER_MARK))) return { teacher: false, man: () => ({ url: UPDATE_BASE + 'manifest.json?t=' + Date.now() }), file: (p, sha) => ({ url: UPDATE_BASE + 'vault/' + p.split('/').map(encodeURIComponent).join('/') + '?v=' + sha.slice(0, 12) }) };
+    await this.importKeyNote();
     const key = await this.teacherKey(); if (!key) return { teacher: true, missing: true };
     const headers = { Authorization: 'Bearer ' + key, Accept: 'application/vnd.github.raw', 'X-GitHub-Api-Version': '2022-11-28' };
     return { teacher: true, man: () => ({ url: TEACHER_API + 'manifest.json?ref=main&t=' + Date.now(), headers }), file: p => ({ url: TEACHER_API + 'vault/' + p.split('/').map(encodeURIComponent).join('/') + '?ref=main', headers }) };
@@ -570,14 +583,18 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const li1 = ol.createEl('li'); li1.appendText('Open '); const a = li1.createEl('a', { text: 'this GitHub page', href: TOKEN_URL }); a.onclick = e => { e.preventDefault(); window.open(TOKEN_URL); }; li1.appendText(' (it is filled in for you).');
     ol.createEl('li', { text: 'Under Repository access choose Only select repositories, then greekquent-teacher-vault.' });
     ol.createEl('li', { text: 'Check that Contents says Read-only, then tap Generate token and copy it.' });
-    ol.createEl('li', { text: 'Paste it below and tap Save. Do this once on each device.' });
-    const inp = c.createEl('input', { type: 'password', attr: { placeholder: 'github_pat_...', autocomplete: 'off', style: 'width:100%;margin:8px 0' } });
+    ol.createEl('li', { text: 'Come back here (if this window closed, tap More, Teacher update key again). Tap Paste key, or paste into the box, then tap Save. Do this once on each device.' });
+    const inp = c.createEl('input', { type: 'text', attr: { placeholder: 'github_pat_...', autocomplete: 'off', autocorrect: 'off', autocapitalize: 'off', spellcheck: 'false', style: 'width:100%;margin:8px 0;font-family:var(--font-monospace)' } });
     const row = c.createDiv({ attr: { style: 'display:flex;gap:8px;flex-wrap:wrap' } });
+    const paste = row.createEl('button', { text: 'Paste key' });
+    paste.onclick = async () => { try { const t = (await navigator.clipboard.readText()).trim(); if (!t) { new Notice('The clipboard is empty. Copy the key on GitHub first.'); return; } inp.value = t; } catch (e) { new Notice('Could not read the clipboard. Long-press the box and choose Paste instead.'); } };
     const save = row.createEl('button', { text: 'Save', cls: 'mod-cta' });
     const clear = row.createEl('button', { text: 'Remove key' });
     save.onclick = async () => { const v = inp.value.trim(); if (!v) { new Notice('Paste the key first.'); return; } const d = (await this.loadData()) || {}; d.teacherKey = v; await this.saveData(d); m.close(); new Notice('Key saved. Checking for a teacher update...'); this.updateVault(false); };
+    c.createEl('p', { text: 'Other way: make a note in My Work named Teacher key, paste the key into it, then tap More, Update vault. The key is saved and that note is deleted.', attr: { style: 'font-size:var(--font-ui-small);color:var(--text-muted)' } });
+    this.teacherKey().then(k => { if (k) c.createEl('p', { text: 'A key is saved on this device (ends in ' + k.slice(-4) + ').', attr: { style: 'font-size:var(--font-ui-small)' } }); });
     clear.onclick = async () => { const d = (await this.loadData()) || {}; delete d.teacherKey; await this.saveData(d); m.close(); new Notice('Teacher update key removed from this device.'); };
-    m.open();
+    m.open(); setTimeout(() => inp.focus(), 50);
   }
   async updateVault(quiet) {
     if (this.updating) return; this.updating = true;

@@ -1,8 +1,8 @@
 ---
 lesson: 24
-variant: kid
+level: kid
 audience: student
-tags: [greek-student, kid-variant]
+tags: [greek-student, kid]
 ---
 # Red eggs and candles
 

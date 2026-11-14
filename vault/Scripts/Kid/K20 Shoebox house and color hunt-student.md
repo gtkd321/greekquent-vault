@@ -1,8 +1,8 @@
 ---
 lesson: 20
-variant: kid
+level: kid
 audience: student
-tags: [greek-student, kid-variant]
+tags: [greek-student, kid]
 ---
 # Shoebox house and color hunt
 

@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 14, later: clearer names
+> - **Lesson pages:** "Student" is now **Beginner**, and "Kid variant" is now **Kid**. Your lesson pages are in Scripts/Beginner, and the kid lessons in Scripts/Kid.
+> - **Setting up** now explains where the four tool buttons are on a computer and on a phone.
+
 > [!info]- November 14: Today page and word colors
 > - **Today** opens first: your 5 words for today, this week's lesson, and a short review list.
 > - **Color your words** right on each word note: Don't have it, Kind of, Have it. Look up shows the color too.

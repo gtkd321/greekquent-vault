@@ -1,8 +1,8 @@
 ---
 lesson: 14
-variant: kid
+level: kid
 audience: student
-tags: [greek-student, kid-variant]
+tags: [greek-student, kid]
 ---
 # Τι ώρα είναι, κύριε Λύκε;
 

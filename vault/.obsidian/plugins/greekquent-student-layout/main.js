@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-14g';
+const VAULT_RELEASE = '2026-11-14h';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -278,6 +278,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (file && file.path && file.path.startsWith('Words/')) menu.addItem(i => i.setTitle('Open word graph').setIcon('git-fork').onClick(() => this.openGraph(file.path)));
     }));
     this.app.workspace.onLayoutReady(async () => {
+      this.pruneEmpty(['Scripts/Kid variants/x', 'Scripts/Student/x']);
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
       this.hideRibbon();
       // Startup: tidy the sidebars quietly. Obsidian's default layout (fresh vault, new device) puts Search and
@@ -582,7 +583,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         return;
       }
       // Files the teacher removed since the last update (only files that came from an update, never My Work).
-      for (const p of Object.keys(mine.files || {})) if (!man.files[p] && !KEEP_LOCAL(p) && await ad.exists(p)) { await ad.remove(p); removed++; }
+      const gone = [];
+      for (const p of Object.keys(mine.files || {})) if (!man.files[p] && !KEEP_LOCAL(p) && await ad.exists(p)) { await ad.remove(p); removed++; gone.push(p); }
+      await this.pruneEmpty(gone);
       await ad.write(INSTALLED, JSON.stringify({ release: man.release, files: man.files }));
       note.hide();
       const done = new Notice(`Greekquent updated to ${man.release}: ${changed} changed, ${removed} removed. Your My Work folder was not touched.` + (config ? ' Close and reopen Obsidian to finish.' : '') + ' Tap here to see what\'s new.', 15000);
@@ -698,7 +701,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }
     return days;
   }
-  lessonPage(n) { const nn = String(n).padStart(2, '0'); return this.app.vault.getMarkdownFiles().find(f => f.path.startsWith('Scripts/Student/') && f.basename.startsWith('L' + nn + ' ')); }
+  // Remove folders left empty by an update (never My Work, .obsidian, or the vault root).
+  async pruneEmpty(paths) {
+    const ad = this.app.vault.adapter, dirs = new Set();
+    for (const p of paths) { let d = p.split('/').slice(0, -1).join('/'); while (d) { dirs.add(d); d = d.split('/').slice(0, -1).join('/'); } }
+    for (const d of [...dirs].sort((a, b) => b.length - a.length)) {
+      if (!d || d.startsWith('.') || d === MY_WORK.replace(/\/$/, '') || d.startsWith(MY_WORK)) continue;
+      try { if (!(await ad.exists(d))) continue; const l = await ad.list(d); if (!l.files.length && !l.folders.length) await ad.rmdir(d, true); } catch (e) {}
+    }
+  }
+  lessonPage(n) { const nn = String(n).padStart(2, '0'); return this.app.vault.getMarkdownFiles().find(f => /^Scripts\/(Beginner|Student)\//.test(f.path) && f.basename.startsWith('L' + nn + ' ')); }
   gameUrl(base, words) { return base + '#w=' + encodeURIComponent(words.join(',')); }
   wordList(parent, words) {
     const ul = parent.createEl('ul', { cls: 'gq-tlist' });

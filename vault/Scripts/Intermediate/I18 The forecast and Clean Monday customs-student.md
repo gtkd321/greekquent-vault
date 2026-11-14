@@ -1,6 +1,6 @@
 ---
 lesson: 18
-variant: intermediate
+level: intermediate
 audience: student
 tags: [greek-student, intermediate]
 ---

@@ -1,8 +1,8 @@
 ---
 lesson: 6
-variant: kid
+level: kid
 audience: student
-tags: [greek-student, kid-variant]
+tags: [greek-student, kid]
 ---
 # Traffic-light verb dice
 

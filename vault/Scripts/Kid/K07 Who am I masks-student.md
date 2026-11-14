@@ -1,8 +1,8 @@
 ---
 lesson: 7
-variant: kid
+level: kid
 audience: student
-tags: [greek-student, kid-variant]
+tags: [greek-student, kid]
 ---
 # Who am I? masks
 

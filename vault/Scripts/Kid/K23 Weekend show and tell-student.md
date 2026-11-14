@@ -1,8 +1,8 @@
 ---
 lesson: 23
-variant: kid
+level: kid
 audience: student
-tags: [greek-student, kid-variant]
+tags: [greek-student, kid]
 ---
 # Weekend show and tell
 

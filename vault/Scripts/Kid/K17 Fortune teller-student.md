@@ -1,8 +1,8 @@
 ---
 lesson: 17
-variant: kid
+level: kid
 audience: student
-tags: [greek-student, kid-variant]
+tags: [greek-student, kid]
 ---
 # Fortune teller
 

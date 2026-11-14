@@ -1,8 +1,8 @@
 ---
 lesson: 21
-variant: kid
+level: kid
 audience: student
-tags: [greek-student, kid-variant]
+tags: [greek-student, kid]
 ---
 # Thumbs up, thumbs down
 

@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 11: Who has the coin
 
-**Week of** Jan 4 to Jan 10 · **Class:** [[L08 Vasilopita - who has the coin-teacher|L08 Vasilopita - who has the coin]] ([[L08 Vasilopita - who has the coin-student|student page]]) · **Running total:** 270 of 1,500
+**Week of** Jan 4 to Jan 10 · **Class:** [[L08 Vasilopita - who has the coin-student|L08 Vasilopita - who has the coin]] ([[L08 Vasilopita - who has the coin-student|student page]]) · **Running total:** 270 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L08 Vasilopita - who has the coin-teacher|L08 Vasilopita - who has the coin]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L08 Vasilopita - who has the coin-student|L08 Vasilopita - who has the coin]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 49 of 300
 > - [[τρία]] **three** (#174): Το ήξερα πριν από τρεις ώρες. (I knew this three hours ago.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w11` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L08 Vasilopita - who has the coin-teacher|L08 Vasilopita - who has the coin]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L08 Vasilopita - who has the coin-student|L08 Vasilopita - who has the coin]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

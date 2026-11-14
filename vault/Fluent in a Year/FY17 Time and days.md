@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 17: Time and days
 
-**Week of** Feb 15 to Feb 21 · **Class:** [[L14 Time and days-teacher|L14 Time and days]] ([[L14 Time and days-student|student page]]) · **Running total:** 450 of 1,500
+**Week of** Feb 15 to Feb 21 · **Class:** [[L14 Time and days-student|L14 Time and days]] ([[L14 Time and days-student|student page]]) · **Running total:** 450 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L14 Time and days-teacher|L14 Time and days]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L14 Time and days-student|L14 Time and days]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 85 of 300
 > - [[μισός]] **half** (#376): Φεύγουμε σε μισή ώρα. (We leave in half an hour.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w17` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L14 Time and days-teacher|L14 Time and days]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L14 Time and days-student|L14 Time and days]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

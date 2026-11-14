@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 3: Making plans
 
-**Week of** Nov 9 to Nov 15 · **Class:** [[L03 Making plans-teacher|L03 Making plans]] ([[L03 Making plans-student|student page]]) · **Running total:** 90 of 1,500
+**Week of** Nov 9 to Nov 15 · **Class:** [[L03 Making plans-student|L03 Making plans]] ([[L03 Making plans-student|student page]]) · **Running total:** 90 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L03 Making plans-teacher|L03 Making plans]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L03 Making plans-student|L03 Making plans]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 13 of 300
 > - [[εμείς]] **we** (#30): Εμείς είμαστε το πρόβλημα. (We're the problem.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w03` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L03 Making plans-teacher|L03 Making plans]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L03 Making plans-student|L03 Making plans]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

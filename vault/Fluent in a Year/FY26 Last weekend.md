@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 26: Last weekend
 
-**Week of** Apr 19 to Apr 25 · **Class:** [[L23 Last weekend-teacher|L23 Last weekend]] ([[L23 Last weekend-student|student page]]) · **Running total:** 720 of 1,500
+**Week of** Apr 19 to Apr 25 · **Class:** [[L23 Last weekend-student|L23 Last weekend]] ([[L23 Last weekend-student|student page]]) · **Running total:** 720 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L23 Last weekend-teacher|L23 Last weekend]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L23 Last weekend-student|L23 Last weekend]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 139 of 300
 > - [[κοινός]] **common, shared** (#554): Έχουν ένα κοινό χόμπι.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w26` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L23 Last weekend-teacher|L23 Last weekend]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L23 Last weekend-student|L23 Last weekend]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

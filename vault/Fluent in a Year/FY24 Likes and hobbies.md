@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 24: Likes and hobbies
 
-**Week of** Apr 5 to Apr 11 · **Class:** [[L21 Likes and hobbies-teacher|L21 Likes and hobbies]] ([[L21 Likes and hobbies-student|student page]]) · **Running total:** 660 of 1,500
+**Week of** Apr 5 to Apr 11 · **Class:** [[L21 Likes and hobbies-student|L21 Likes and hobbies]] ([[L21 Likes and hobbies-student|student page]]) · **Running total:** 660 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L21 Likes and hobbies-teacher|L21 Likes and hobbies]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L21 Likes and hobbies-student|L21 Likes and hobbies]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 127 of 300
 > - [[τραγούδι|το τραγούδι]] **song** (#613): Σου αρέσει αυτό το τραγούδι; (Do you like this song?)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w24` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L21 Likes and hobbies-teacher|L21 Likes and hobbies]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L21 Likes and hobbies-student|L21 Likes and hobbies]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

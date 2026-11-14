@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 18: Do you speak Greek
 
-**Week of** Feb 22 to Feb 28 · **Class:** [[L15 Do you speak Greek-teacher|L15 Do you speak Greek]] ([[L15 Do you speak Greek-student|student page]]) · **Running total:** 480 of 1,500
+**Week of** Feb 22 to Feb 28 · **Class:** [[L15 Do you speak Greek-student|L15 Do you speak Greek]] ([[L15 Do you speak Greek-student|student page]]) · **Running total:** 480 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L15 Do you speak Greek-teacher|L15 Do you speak Greek]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L15 Do you speak Greek-student|L15 Do you speak Greek]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 91 of 300
 > - [[μαθαίνω]] **I learn** (#406): Θα 'θελα να μάθω Γαλλικά. (I'd like to learn French.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w18` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L15 Do you speak Greek-teacher|L15 Do you speak Greek]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L15 Do you speak Greek-student|L15 Do you speak Greek]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 20: Weekend plans
 
-**Week of** Mar 8 to Mar 14 · **Class:** [[L17 Weekend plans-teacher|L17 Weekend plans]] ([[L17 Weekend plans-student|student page]]) · **Running total:** 540 of 1,500
+**Week of** Mar 8 to Mar 14 · **Class:** [[L17 Weekend plans-student|L17 Weekend plans]] ([[L17 Weekend plans-student|student page]]) · **Running total:** 540 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L17 Weekend plans-teacher|L17 Weekend plans]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L17 Weekend plans-student|L17 Weekend plans]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 103 of 300
 > - [[βόλτα|η βόλτα]] **walk, stroll** (#635): Θέλετε να πάτε μια βόλτα; (Would you like to go for a walk?)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w20` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L17 Weekend plans-teacher|L17 Weekend plans]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L17 Weekend plans-student|L17 Weekend plans]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

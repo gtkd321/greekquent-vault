@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 25: When I was little
 
-**Week of** Apr 12 to Apr 18 · **Class:** [[L22 Yesterday I wanted-teacher|L22 Yesterday I wanted]] ([[L22 Yesterday I wanted-student|student page]]) · **Running total:** 690 of 1,500
+**Week of** Apr 12 to Apr 18 · **Class:** [[L22 Yesterday I wanted-student|L22 Yesterday I wanted]] ([[L22 Yesterday I wanted-student|student page]]) · **Running total:** 690 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L22 Yesterday I wanted-teacher|L22 Yesterday I wanted]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L22 Yesterday I wanted-student|L22 Yesterday I wanted]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 133 of 300
 > - [[κουρασμένος]] **tired** (#846): Είμαι λίγο κουρασμένος. (I'm a little tired.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w25` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L22 Yesterday I wanted-teacher|L22 Yesterday I wanted]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L22 Yesterday I wanted-student|L22 Yesterday I wanted]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

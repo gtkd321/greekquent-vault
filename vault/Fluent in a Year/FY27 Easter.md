@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 27: Easter
 
-**Week of** Apr 26 to May 2 · **Class:** [[L24 Holy Week-teacher|L24 Holy Week]] ([[L24 Holy Week-student|student page]]) · **Running total:** 750 of 1,500
+**Week of** Apr 26 to May 2 · **Class:** [[L24 Holy Week-student|L24 Holy Week]] ([[L24 Holy Week-student|student page]]) · **Running total:** 750 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L24 Holy Week-teacher|L24 Holy Week]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L24 Holy Week-student|L24 Holy Week]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 145 of 300
 > - [[αυγό|το αυγό]] **egg** (#1283): Πόσο κοστίζει ένα αυγό; (How much does an egg cost?)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w27` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L24 Holy Week-teacher|L24 Holy Week]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L24 Holy Week-student|L24 Holy Week]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

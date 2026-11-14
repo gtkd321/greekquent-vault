@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 8: Who are you
 
-**Week of** Dec 14 to Dec 20 · **Class:** [[L07 Introductions and Christmas-teacher|L07 Introductions and Christmas]] ([[L07 Introductions and Christmas-student|student page]]) · **Running total:** 240 of 1,500
+**Week of** Dec 14 to Dec 20 · **Class:** [[L07 Introductions and Christmas-student|L07 Introductions and Christmas]] ([[L07 Introductions and Christmas-student|student page]]) · **Running total:** 240 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L07 Introductions and Christmas-teacher|L07 Introductions and Christmas]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L07 Introductions and Christmas-student|L07 Introductions and Christmas]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 43 of 300
 > - [[Ελλάδα|η Ελλάδα]] **Greece** (#250): Η Ελλάδα έχει πολλά νησιά. (Greece has many islands.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w08` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L07 Introductions and Christmas-teacher|L07 Introductions and Christmas]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L07 Introductions and Christmas-student|L07 Introductions and Christmas]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

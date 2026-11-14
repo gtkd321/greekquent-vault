@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 14: Going places
 
-**Week of** Jan 25 to Jan 31 · **Class:** [[L11 Going places-teacher|L11 Going places]] ([[L11 Going places-student|student page]]) · **Running total:** 360 of 1,500
+**Week of** Jan 25 to Jan 31 · **Class:** [[L11 Going places-student|L11 Going places]] ([[L11 Going places-student|student page]]) · **Running total:** 360 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L11 Going places-teacher|L11 Going places]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L11 Going places-student|L11 Going places]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 67 of 300
 > - [[χωριό|το χωριό]] **village** (#760): Το σπίτι είναι στο χωριό. (The house is in the village.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w14` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L11 Going places-teacher|L11 Going places]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L11 Going places-student|L11 Going places]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

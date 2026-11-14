@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 4: Postcards
 
-**Week of** Nov 16 to Nov 22 · **Class:** [[L04 Postcards and the cafe-teacher|L04 Postcards and the cafe]] ([[L04 Postcards and the cafe-student|student page]]) · **Running total:** 120 of 1,500
+**Week of** Nov 16 to Nov 22 · **Class:** [[L04 Postcards and the cafe-student|L04 Postcards and the cafe]] ([[L04 Postcards and the cafe-student|student page]]) · **Running total:** 120 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L04 Postcards and the cafe-teacher|L04 Postcards and the cafe]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L04 Postcards and the cafe-student|L04 Postcards and the cafe]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 19 of 300
 > - [[τώρα]] **now** (#37): Ας πάμε όλοι σπίτι τώρα. (Let's all go home now.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w04` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L04 Postcards and the cafe-teacher|L04 Postcards and the cafe]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L04 Postcards and the cafe-student|L04 Postcards and the cafe]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

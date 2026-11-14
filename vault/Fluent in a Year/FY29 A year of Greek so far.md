@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 29: A year of Greek so far
 
-**Week of** May 10 to May 16 · **Class:** [[L26 Capstone and celebration-teacher|L26 Capstone and celebration]] ([[L26 Capstone and celebration-student|student page]]) · **Running total:** 810 of 1,500
+**Week of** May 10 to May 16 · **Class:** [[L26 Capstone and celebration-student|L26 Capstone and celebration]] ([[L26 Capstone and celebration-student|student page]]) · **Running total:** 810 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L26 Capstone and celebration-teacher|L26 Capstone and celebration]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L26 Capstone and celebration-student|L26 Capstone and celebration]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 157 of 300
 > - [[μάθημα|το μάθημα]] **lesson, class** (#724): Το πρώτο μάθημα είναι εύκολο. (The first lesson is easy.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w29` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L26 Capstone and celebration-teacher|L26 Capstone and celebration]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L26 Capstone and celebration-student|L26 Capstone and celebration]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

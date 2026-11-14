@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 23: My house
 
-**Week of** Mar 29 to Apr 4 · **Class:** [[L20 My house-teacher|L20 My house]] ([[L20 My house-student|student page]]) · **Running total:** 630 of 1,500
+**Week of** Mar 29 to Apr 4 · **Class:** [[L20 My house-student|L20 My house]] ([[L20 My house-student|student page]]) · **Running total:** 630 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L20 My house-teacher|L20 My house]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L20 My house-student|L20 My house]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 121 of 300
 > - [[καινούργιος]] **new** (#536): Το βιβλίο είναι καινούργιο. (The book is new.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w23` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L20 My house-teacher|L20 My house]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L20 My house-student|L20 My house]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

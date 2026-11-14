@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 2: Guest at home
 
-**Week of** Nov 2 to Nov 8 · **Class:** [[L02 Guest at a Greek home-teacher|L02 Guest at a Greek home]] ([[L02 Guest at a Greek home-student|student page]]) · **Running total:** 60 of 1,500
+**Week of** Nov 2 to Nov 8 · **Class:** [[L02 Guest at a Greek home-student|L02 Guest at a Greek home]] ([[L02 Guest at a Greek home-student|student page]]) · **Running total:** 60 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L02 Guest at a Greek home-teacher|L02 Guest at a Greek home]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L02 Guest at a Greek home-student|L02 Guest at a Greek home]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 7 of 300
 > - [[ο, η, το]] **the** (#1): Άφησε με να το κάνω. (Let me do it.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w02` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L02 Guest at a Greek home-teacher|L02 Guest at a Greek home]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L02 Guest at a Greek home-student|L02 Guest at a Greek home]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

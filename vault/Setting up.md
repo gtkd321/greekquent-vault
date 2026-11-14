@@ -1,0 +1,23 @@
+# Setting up
+
+Two minutes, once. Back to [[Today]].
+
+> [!tip]- 1. Turn on the Greekquent tools
+> The first time you open the vault, Obsidian asks whether you trust it. Tap **Trust author and enable plugins**. If you missed it: Settings, Community plugins, **Turn on community plugins**.
+
+> [!tip]- 2. The four buttons on the left
+> - **Today** (house): your 5 words for today, this week's lesson, and words to review.
+> - **Look up** (magnifying glass): any word in English or Greek. Tick Guess first to try before you see the answer.
+> - **Ask** (two people): a question about the note you are on, ready to share in the class GroupMe. You can also ask on video from there.
+> - **More** (three dots): Word graph, Send homework, Share feedback, What's new, Update vault.
+>
+> On a phone, the buttons are in the menu at the bottom left.
+
+> [!tip]- 3. Color your words
+> Every word note has three buttons under the meaning: **Don't have it** (red), **Kind of** (yellow), **Have it** (green). Tap one after you try to say the word from memory. Tap it again to clear it. Red words come back on the Today page.
+
+> [!tip]- 4. Your own notes
+> Type in the **My Work** folder: Homework, My Notes, and anything you add. Updates never change My Work. Other notes open read-only so they can't change by accident.
+
+> [!tip]- 5. Weekly updates
+> When Obsidian says an update is ready, tap the message. Or tap More, then Update vault. Only changed files download.

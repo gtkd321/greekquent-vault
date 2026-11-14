@@ -3,7 +3,7 @@ tags: [greek-teaching, method, research]
 ---
 # 04 How Memory Works
 
-Back to [[00 Greekquent Index]] · [[03 Class Flow and Spaced Repetition]] · [[01 Lesson Scripts]]
+Back to [[00 Greekquent Index]] · [[01 Lesson Scripts]]
 
 The lesson notes stay short. This note explains why they're built the way they are. Each move below already sits inside every lesson, at the step where it happens.
 
@@ -83,4 +83,4 @@ That's roughly 20 minutes of study, 10 of input, 15 of output, and 15 of fluency
 ## At home
 
 - **Anki:** say the answer out loud before flipping the card, and press Again until each card is right once that day. Anki then spaces the next review itself.
-- **Paper packet:** the red, yellow, and green markers already work as a spaced schedule. See [[03 Class Flow and Spaced Repetition]].
+- **Paper packet:** the red, yellow, and green markers already work as a spaced schedule. Review red words every day, yellow every few days, green now and then.

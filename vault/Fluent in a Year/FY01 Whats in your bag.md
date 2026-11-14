@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 1: What's in your bag
 
-**Week of** Oct 26 to Nov 1 · **Class:** [[L01 What's in your bag-teacher|L01 What's in your bag]] ([[L01 What's in your bag-student|student page]]) · **Running total:** 30 of 1,500
+**Week of** Oct 26 to Nov 1 · **Class:** [[L01 What's in your bag-student|L01 What's in your bag]] ([[L01 What's in your bag-student|student page]]) · **Running total:** 30 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L01 What's in your bag-teacher|L01 What's in your bag]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L01 What's in your bag-student|L01 What's in your bag]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 1 of 300
 > - [[και]] **and** (#2): Αυτή κι εγώ είμαστε ξαδέρφια. (She and I are cousins.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w01` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L01 What's in your bag-teacher|L01 What's in your bag]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L01 What's in your bag-student|L01 What's in your bag]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

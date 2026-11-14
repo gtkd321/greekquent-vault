@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 7: Coffee plans
 
-**Week of** Dec 7 to Dec 13 · **Class:** [[L06 Coffee plans at the kafeneio-teacher|L06 Coffee plans at the kafeneio]] ([[L06 Coffee plans at the kafeneio-student|student page]]) · **Running total:** 210 of 1,500
+**Week of** Dec 7 to Dec 13 · **Class:** [[L06 Coffee plans at the kafeneio-student|L06 Coffee plans at the kafeneio]] ([[L06 Coffee plans at the kafeneio-student|student page]]) · **Running total:** 210 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L06 Coffee plans at the kafeneio-teacher|L06 Coffee plans at the kafeneio]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L06 Coffee plans at the kafeneio-student|L06 Coffee plans at the kafeneio]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 37 of 300
 > - [[κανένας]] **nobody, no one** (#61): Δεν το είπα σε κανέναν. (I didn't tell anyone.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w07` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L06 Coffee plans at the kafeneio-teacher|L06 Coffee plans at the kafeneio]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L06 Coffee plans at the kafeneio-student|L06 Coffee plans at the kafeneio]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

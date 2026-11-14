@@ -1,6 +1,6 @@
 # 12 Student Questions
 
-Video questions from Greekquent students, each with the teacher's answer. Tap **Question** to watch; it rolls straight into the **Answer**. Links: [[00 Greekquent Index]] · [[11 Release Notes]]
+Video questions from Greekquent students, each with the teacher's answer. Tap **Question** to watch; it rolls straight into the **Answer**. Links: [[00 Greekquent Index]] · [[What's New]]
 
 ```greekquent-questions
 ```

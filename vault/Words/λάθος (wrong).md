@@ -8,19 +8,19 @@ lessons: []
 ---
 # λάθος
 
-**wrong** · say it: láthos · rank **#1478** of 1,500 · group [[Words 1351-1500]]
+**wrong** · say it: láthos · rank **#1478** of 1,500
 
 > Τι έκανα λάθος;
 
 ## Often appears with
-- [[λάθος|το λάθος]] — mistake (555×)
-- [[σωστός]] — correct, right (8×)
-- [[τεράστιος]] — huge (8×)
-- [[παρελθόν|το παρελθόν]] — past (6×)
-- [[συχνά]] — often (6×)
-- [[επαναλαμβάνω]] — I repeat (4×)
-- [[πολύς]] — much, many (24×)
-- [[ίδιος]] — same (18×)
+- [[λάθος|το λάθος]] — mistake
+- [[σωστός]] — correct, right
+- [[τεράστιος]] — huge
+- [[παρελθόν|το παρελθόν]] — past
+- [[συχνά]] — often
+- [[επαναλαμβάνω]] — I repeat
+- [[πολύς]] — much, many
+- [[ίδιος]] — same
 
 ## Chunks
 

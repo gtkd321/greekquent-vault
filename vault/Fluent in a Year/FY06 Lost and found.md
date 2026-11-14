@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 6: Lost and found
 
-**Week of** Nov 30 to Dec 6 · **Class:** [[L05 Lost items and the shop-teacher|L05 Lost items and the shop]] ([[L05 Lost items and the shop-student|student page]]) · **Running total:** 180 of 1,500
+**Week of** Nov 30 to Dec 6 · **Class:** [[L05 Lost items and the shop-student|L05 Lost items and the shop]] ([[L05 Lost items and the shop-student|student page]]) · **Running total:** 180 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L05 Lost items and the shop-teacher|L05 Lost items and the shop]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L05 Lost items and the shop-student|L05 Lost items and the shop]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 31 of 300
 > - [[πού]] **where** (#87): Πού να το ξέρω εγώ! (How should I know!)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w06` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L05 Lost items and the shop-teacher|L05 Lost items and the shop]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L05 Lost items and the shop-student|L05 Lost items and the shop]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

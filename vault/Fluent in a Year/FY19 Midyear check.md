@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 19: Mid-year check
 
-**Week of** Mar 1 to Mar 7 · **Class:** [[L16 Mid-year review-teacher|L16 Mid-year review]] ([[L16 Mid-year review-student|student page]]) · **Running total:** 510 of 1,500
+**Week of** Mar 1 to Mar 7 · **Class:** [[L16 Mid-year review-student|L16 Mid-year review]] ([[L16 Mid-year review-student|student page]]) · **Running total:** 510 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L16 Mid-year review-teacher|L16 Mid-year review]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L16 Mid-year review-student|L16 Mid-year review]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 97 of 300
 > - [[μαγειρεύω]] **I cook** (#1451): Του αρέσει να μαγειρεύει. (He likes to cook.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w19` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L16 Mid-year review-teacher|L16 Mid-year review]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L16 Mid-year review-student|L16 Mid-year review]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

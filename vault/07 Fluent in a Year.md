@@ -24,35 +24,35 @@ An optional homework tier for students who want the whole 1,500-word list in one
 
 | Week | Dates | Class | Theme and prompt | Words to date |
 |---|---|---|---|---|
-| [[FY01 Whats in your bag\|1]] | Oct 26 | [[L01 What's in your bag-teacher\|L1]] | What's in your bag | 30 |
-| [[FY02 Guest at home\|2]] | Nov 2 | [[L02 Guest at a Greek home-teacher\|L2]] | Guest at home | 60 |
-| [[FY03 Making plans\|3]] | Nov 9 | [[L03 Making plans-teacher\|L3]] | Making plans | 90 |
-| [[FY04 Postcards\|4]] | Nov 16 | [[L04 Postcards and the cafe-teacher\|L4]] | Postcards | 120 |
+| [[FY01 Whats in your bag\|1]] | Oct 26 | [[L01 What's in your bag-student\|L1]] | What's in your bag | 30 |
+| [[FY02 Guest at home\|2]] | Nov 2 | [[L02 Guest at a Greek home-student\|L2]] | Guest at home | 60 |
+| [[FY03 Making plans\|3]] | Nov 9 | [[L03 Making plans-student\|L3]] | Making plans | 90 |
+| [[FY04 Postcards\|4]] | Nov 16 | [[L04 Postcards and the cafe-student\|L4]] | Postcards | 120 |
 | [[FY05 A thankful table no class this week\|5]] | Nov 23 | — | A thankful table (no class this week) | 150 |
-| [[FY06 Lost and found\|6]] | Nov 30 | [[L05 Lost items and the shop-teacher\|L5]] | Lost and found | 180 |
-| [[FY07 Coffee plans\|7]] | Dec 7 | [[L06 Coffee plans at the kafeneio-teacher\|L6]] | Coffee plans | 210 |
-| [[FY08 Who are you\|8]] | Dec 14 | [[L07 Introductions and Christmas-teacher\|L7]] | Who are you | 240 |
+| [[FY06 Lost and found\|6]] | Nov 30 | [[L05 Lost items and the shop-student\|L5]] | Lost and found | 180 |
+| [[FY07 Coffee plans\|7]] | Dec 7 | [[L06 Coffee plans at the kafeneio-student\|L6]] | Coffee plans | 210 |
+| [[FY08 Who are you\|8]] | Dec 14 | [[L07 Introductions and Christmas-student\|L7]] | Who are you | 240 |
 | [[FY09 Rest week Christmas\|9]] | Dec 21 | — | Rest week: Christmas | 240 |
 | [[FY10 Rest week New Year\|10]] | Dec 28 | — | Rest week: New Year | 240 |
-| [[FY11 Who has the coin\|11]] | Jan 4 | [[L08 Vasilopita - who has the coin-teacher\|L8]] | Who has the coin | 270 |
-| [[FY12 My family\|12]] | Jan 11 | [[L09 My family-teacher\|L9]] | My family | 300 |
-| [[FY13 My day\|13]] | Jan 18 | [[L10 My day-teacher\|L10]] | My day | 330 |
-| [[FY14 Going places\|14]] | Jan 25 | [[L11 Going places-teacher\|L11]] | Going places | 360 |
-| [[FY15 At the laiki\|15]] | Feb 1 | [[L12 Laiki street market-teacher\|L12]] | At the laiki | 390 |
-| [[FY16 At the taverna\|16]] | Feb 8 | [[L13 At the taverna-teacher\|L13]] | At the taverna | 420 |
-| [[FY17 Time and days\|17]] | Feb 15 | [[L14 Time and days-teacher\|L14]] | Time and days | 450 |
-| [[FY18 Do you speak Greek\|18]] | Feb 22 | [[L15 Do you speak Greek-teacher\|L15]] | Do you speak Greek | 480 |
-| [[FY19 Midyear check\|19]] | Mar 1 | [[L16 Mid-year review-teacher\|L16]] | Mid-year check | 510 |
-| [[FY20 Weekend plans\|20]] | Mar 8 | [[L17 Weekend plans-teacher\|L17]] | Weekend plans | 540 |
-| [[FY21 Weather\|21]] | Mar 15 | [[L18 Clean Monday kites and weather-teacher\|L18]] | Weather | 570 |
-| [[FY22 Directions\|22]] | Mar 22 | [[L19 March 25th and directions-teacher\|L19]] | Directions | 600 |
-| [[FY23 My house\|23]] | Mar 29 | [[L20 My house-teacher\|L20]] | My house | 630 |
-| [[FY24 Likes and hobbies\|24]] | Apr 5 | [[L21 Likes and hobbies-teacher\|L21]] | Likes and hobbies | 660 |
-| [[FY25 When I was little\|25]] | Apr 12 | [[L22 Yesterday I wanted-teacher\|L22]] | When I was little | 690 |
-| [[FY26 Last weekend\|26]] | Apr 19 | [[L23 Last weekend-teacher\|L23]] | Last weekend | 720 |
-| [[FY27 Easter\|27]] | Apr 26 | [[L24 Holy Week-teacher\|L24]] | Easter | 750 |
-| [[FY28 At the pharmacy\|28]] | May 3 | [[L25 Christ is risen and the pharmacy-teacher\|L25]] | At the pharmacy | 780 |
-| [[FY29 A year of Greek so far\|29]] | May 10 | [[L26 Capstone and celebration-teacher\|L26]] | A year of Greek so far | 810 |
+| [[FY11 Who has the coin\|11]] | Jan 4 | [[L08 Vasilopita - who has the coin-student\|L8]] | Who has the coin | 270 |
+| [[FY12 My family\|12]] | Jan 11 | [[L09 My family-student\|L9]] | My family | 300 |
+| [[FY13 My day\|13]] | Jan 18 | [[L10 My day-student\|L10]] | My day | 330 |
+| [[FY14 Going places\|14]] | Jan 25 | [[L11 Going places-student\|L11]] | Going places | 360 |
+| [[FY15 At the laiki\|15]] | Feb 1 | [[L12 Laiki street market-student\|L12]] | At the laiki | 390 |
+| [[FY16 At the taverna\|16]] | Feb 8 | [[L13 At the taverna-student\|L13]] | At the taverna | 420 |
+| [[FY17 Time and days\|17]] | Feb 15 | [[L14 Time and days-student\|L14]] | Time and days | 450 |
+| [[FY18 Do you speak Greek\|18]] | Feb 22 | [[L15 Do you speak Greek-student\|L15]] | Do you speak Greek | 480 |
+| [[FY19 Midyear check\|19]] | Mar 1 | [[L16 Mid-year review-student\|L16]] | Mid-year check | 510 |
+| [[FY20 Weekend plans\|20]] | Mar 8 | [[L17 Weekend plans-student\|L17]] | Weekend plans | 540 |
+| [[FY21 Weather\|21]] | Mar 15 | [[L18 Clean Monday kites and weather-student\|L18]] | Weather | 570 |
+| [[FY22 Directions\|22]] | Mar 22 | [[L19 March 25th and directions-student\|L19]] | Directions | 600 |
+| [[FY23 My house\|23]] | Mar 29 | [[L20 My house-student\|L20]] | My house | 630 |
+| [[FY24 Likes and hobbies\|24]] | Apr 5 | [[L21 Likes and hobbies-student\|L21]] | Likes and hobbies | 660 |
+| [[FY25 When I was little\|25]] | Apr 12 | [[L22 Yesterday I wanted-student\|L22]] | When I was little | 690 |
+| [[FY26 Last weekend\|26]] | Apr 19 | [[L23 Last weekend-student\|L23]] | Last weekend | 720 |
+| [[FY27 Easter\|27]] | Apr 26 | [[L24 Holy Week-student\|L24]] | Easter | 750 |
+| [[FY28 At the pharmacy\|28]] | May 3 | [[L25 Christ is risen and the pharmacy-student\|L25]] | At the pharmacy | 780 |
+| [[FY29 A year of Greek so far\|29]] | May 10 | [[L26 Capstone and celebration-student\|L26]] | A year of Greek so far | 810 |
 | [[FY30 Summer plans\|30]] | May 17 | — | Summer plans | 840 |
 | [[FY31 At the beach\|31]] | May 24 | — | At the beach | 870 |
 | [[FY32 Ferry tickets\|32]] | May 31 | — | Ferry tickets | 900 |

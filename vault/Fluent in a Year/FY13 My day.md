@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 13: My day
 
-**Week of** Jan 18 to Jan 24 · **Class:** [[L10 My day-teacher|L10 My day]] ([[L10 My day-student|student page]]) · **Running total:** 330 of 1,500
+**Week of** Jan 18 to Jan 24 · **Class:** [[L10 My day-student|L10 My day]] ([[L10 My day-student|student page]]) · **Running total:** 330 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L10 My day-teacher|L10 My day]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L10 My day-student|L10 My day]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 61 of 300
 > - [[διαβάζω]] **I read, I study** (#488): Διαβάζω το βιβλίο σου. (I read your book.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w13` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L10 My day-teacher|L10 My day]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L10 My day-student|L10 My day]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

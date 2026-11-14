@@ -7,11 +7,11 @@ tags: [greek-fiay]
 ---
 # Fluent in a Year · week 15: At the laiki
 
-**Week of** Feb 1 to Feb 7 · **Class:** [[L12 Laiki street market-teacher|L12 Laiki street market]] ([[L12 Laiki street market-student|student page]]) · **Running total:** 390 of 1,500
+**Week of** Feb 1 to Feb 7 · **Class:** [[L12 Laiki street market-student|L12 Laiki street market]] ([[L12 Laiki street market-student|student page]]) · **Running total:** 390 of 1,500
 
 ## This week's words
 
-Five a day. The words are the next most frequent on the list, pulled toward the [[L12 Laiki street market-teacher|L12 Laiki street market]] scene where they fit. Lesson words you meet in class come first.
+Five a day. The words are the next most frequent on the list, pulled toward the [[L12 Laiki street market-student|L12 Laiki street market]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 73 of 300
 > - [[επίσης]] **also** (#243): Είναι επίσης μια όμορφη γυναίκα. (She is also a beautiful woman.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > [!check]- Sun · review
 > 1. Anki: study the `fiay::w15` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
-> 3. **Scene task:** write a 4-line dialogue for the [[L12 Laiki street market-teacher|L12 Laiki street market]] scene using at least 5 of this week's words. Bring it to the group meet.
+> 3. **Scene task:** write a 4-line dialogue for the [[L12 Laiki street market-student|L12 Laiki street market]] scene using at least 5 of this week's words. Bring it to the group meet.
 
 ## Group meet prompt
 

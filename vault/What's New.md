@@ -3,6 +3,8 @@
 Back to [[Today]].
 
 > [!info]- November 14, night: Textbook files
+> - New note in Handouts: **00 Which file is which**. One page that says what every file is for.
+> - The Fluent in a Year Anki deck (all 1,500 words) is now in Handouts.
 > - The two textbook files in Handouts have the same lessons. Use Screen (color, lessons only) on your phone or tablet. Print (lessons plus Fluent in a Year) is the one to print, and it adds the Fluent in a Year planners.
 > - The color cover is now the first page of both. The separate cover file is gone.
 

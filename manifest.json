@@ -1,5 +1,5 @@
 {
-"release": "2026-11-14n",
+"release": "2026-11-14o",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,7 +14,7 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "f64c438438555ce91540a4580e0ef54d1257c274d1003e4088230a0dcf3bbe59",
+"sha256": "b0205de4a6b87a323ce41281e9c57b0783335191f15ddf8c42c0d953692c1252",
 "size": 82339
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
@@ -58,8 +58,8 @@
 "size": 20632
 },
 "00 Greekquent Index.md": {
-"sha256": "bc306f351cc335a561df6e9e66591100a00c8aea9b74ba25346014b7d6209ae8",
-"size": 2436
+"sha256": "6e69033d55c735a9b90146dcf9a8b7573c1cd2b4c0acf3bc981db6fc40fadf48",
+"size": 2525
 },
 "02 Verb Tables.md": {
 "sha256": "0e3902924a1e17e00f36c7be8af40bcd2b8c2c1b44e66b04fea8ede68fdd94af",
@@ -74,8 +74,8 @@
 "size": 15607
 },
 "07 Fluent in a Year.md": {
-"sha256": "dad52fa9facb60f9821fdf218bb3941dc98392f5ecee86bb7af697b1581d5500",
-"size": 6498
+"sha256": "5bb3c5b310ab29926d7aee46062defa7ec243252c01d8508dcb8ee3f9e99321d",
+"size": 6512
 },
 "09 Games.md": {
 "sha256": "a90a5d87064ed087f6f5ea9868aeb5dbd064e91d48701c95b5b1a4e7ff0a7475",
@@ -296,6 +296,14 @@
 "Fluent in a Year/FY52 A year in Greek.md": {
 "sha256": "fee39fad2939dda8accfb3706c8a742ddcb80395ae96a919ef53f2468a7244d5",
 "size": 5764
+},
+"Handouts/00 Which file is which-student.md": {
+"sha256": "bc17ea6a0fb42afd82b5f22298f84156a7ea7b85363d2cc366b4d58ccc2b0fb4",
+"size": 852
+},
+"Handouts/Greekquent Fluent in a Year Anki Deck.csv": {
+"sha256": "f64c920bff0fa77197a6b39f74f1cb72b3549e1707bdea1eb822be32739e821d",
+"size": 170232
 },
 "Handouts/Greekquent Verb Sheet Year One.pdf": {
 "sha256": "a82a35c0123393ecfead20948a34f77840c6226ead8ccf16121b0d70f4335d09",
@@ -646,8 +654,8 @@
 "size": 24
 },
 "What's New.md": {
-"sha256": "41bb60daeaaf980d4ae5d71f5683881b9ba62d7a226eb4dc92e388564c20fd04",
-"size": 1944
+"sha256": "83400c14bdb2212fd0bceabb15d2d4b5fe67c3567e0abdf715b08500078aabe3",
+"size": 2114
 },
 "Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

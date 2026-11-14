@@ -10,7 +10,7 @@ An optional homework tier for students who want the whole 1,500-word list in one
 > - **Order:** that week's lesson words come first. The rest are the next most frequent words on the list, chosen to fit the week's lesson scene or theme where they can. The learner essentials at the end of the list (days, colours, school things) are spread through the year instead of waiting for the last weeks.
 > - **Real scenes, not rote lists:** every word has a real example sentence, every week ends with a scene task (a 4-line dialogue using 5 of the week's words), and the group meet prompt uses them out loud.
 > - **Markers:** black-mark each word the day it starts; re-mark red, yellow, or green on Sunday.
-> - **Anki:** import `Greekquent_Fluent_in_a_Year_Anki.csv`. Cards are tagged `fiay::w01`… by week and `fiay::d001`… by day, so students can unsuspend one day at a time.
+> - **Anki:** import `Handouts/Greekquent Fluent in a Year Anki Deck.csv`. Cards are tagged `fiay::w01`… by week and `fiay::d001`… by day, so students can unsuspend one day at a time.
 > - **After class ends (May):** weeks 30–52 keep going over the summer and into the fall with themed weeks (beach, ferry, hotel, work, news, olive harvest). The group meet carries the speaking.
 
 > [!tip]- Group meet (once a week, about 30 minutes)

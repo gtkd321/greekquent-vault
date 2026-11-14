@@ -5,7 +5,7 @@
 **Start here:** [[Today]] · [[Setting up]] · [[What's New]]
 
 > [!summary]- Lessons
-> - Your lesson pages are in **Scripts/Beginner**, one per class. The whole year is also in Handouts as one workbook.
+> - Your lesson pages are in **Scripts/Beginner**, one per class. The whole year is also in Handouts as one workbook. Not sure which file to open? See [[00 Which file is which-student|Which file is which]].
 > - Verbs: [[02 Verb Tables]].
 > - Five words a day for a year: [[07 Fluent in a Year]].
 

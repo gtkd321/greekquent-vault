@@ -12,6 +12,15 @@ Links: [[00 Greekquent Index]] · [[07 Fluent in a Year]] · [[08 Online Course 
 > - The end screen shows each player's hit rate. Aim for about 85% right over a few games ([[06 Addenda]], A5).
 > - Free, with no accounts and nothing saved. Turn off auto-lock and silent mode before class.
 
+> [!summary]- Greekquent Cousins (spot the English cousin)
+> [Open Greekquent Cousins](https://www.perplexity.ai/computer/a/greekquent-cousins-AIV14fGFRhWlVIeJv5OlCA)
+> - The same face-to-face split screen as the Buzzer, plus **Solo practice** for remote students. Works in any phone browser, iPhone or Android.
+> - **Find the cousin:** a Greek word and two English words. Pick the cousin (χρόνος: chronology or chocolate).
+> - **Guess the meaning:** a Greek word and its cousin. Pick what the Greek word means (φόβος, cousin phobia: fear or star).
+> - **Levels:** Twins (ιδέα, idea), Cousins (καρδιά, cardiac), Hidden cousins (σπίτι, hospital; γεια, hygiene). 157 pairs, all from the 1,500.
+> - **Letter rules:** the setup screen lists them (χ → ch, φ → ph, θ → th, ψ → ps, ξ → x, υ → y, κ → c, initial vowel → h), and you can play only the words for one rule. Every answer shows the rule and a one-line bridge, for example "Strategy was first the art of leading an army."
+> - 85% hit-rate check and a missed list at the end, like the Buzzer ([[06 Addenda]], A13).
+
 > [!summary]- Run it in class
 > 1. Pick the current lesson, play to 5.
 > 2. Winner stays, the next student challenges.

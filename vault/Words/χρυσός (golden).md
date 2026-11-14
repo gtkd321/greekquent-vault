@@ -3,12 +3,13 @@ aliases: ["χρυσός"]
 rank: 1331
 english: "golden"
 pronunciation: "hrisós"
+cognates: "chrysanthemum"
 tags: [greek-1500, band/1201-1350, other]
 lessons: []
 ---
 # χρυσός
 
-**golden** · say it: hrisós · rank **#1331** of 1,500 · group [[Words 1201-1350]]
+**golden** · say it: hrisós · rank **#1331** of 1,500 · group [[Words 1201-1350]] · English cognates: chrysanthemum
 
 > Η σιωπή είναι χρυσός.
 

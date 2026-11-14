@@ -155,3 +155,16 @@ Questions to settle with real students before the course is final. Each item say
 > - Does the GitHub link preview cleanly in GroupMe?
 > - Do questions get answered by classmates, or only by the teacher?
 
+> [!question]- A13 · English cognates and the Cousins game (testing: Student Layout 1.8)
+> **Added:** 2026-11-14c · **Where:** [[11 Release Notes]], [[09 Class Games and App Ideas]]
+>
+> **What the research says:** just telling students that cognates exist has small or no effects in classroom studies ([Language Learning](https://onlinelibrary.wiley.com/doi/full/10.1111/lang.12390); [review in European Journal of Psychology of Education](https://dspace.library.uu.nl/bitstream/handle/1874/427184/s10212_021_00586_6.pdf?sequence=1)). Teaching a few systematic spelling correspondences did help learners recognize and learn cognates ([Language Teaching Research](https://journals.sagepub.com/doi/10.1177/13621688211047353)). So the game drills letter rules (χ → ch, φ → ph) and using a cousin to infer a meaning, not "cognates are useful".
+>
+> **Caveat:** many cousins drifted in meaning (σπίτι, house; hospital). The bridge line on each answer is there so the cousin points to the Greek meaning, not to the English one.
+>
+> **Watch for in class:**
+> - Hit rate in Find the cousin on Twins vs Hidden cousins. Move up when a level is above 90%.
+> - After a few games, show a new word with a clear cousin (θερμός, thermos). Can students guess the meaning cold?
+> - Do students start saying cousins out loud during lessons without being asked?
+> - Any false friends that cause mistakes? Add them to the bridge lines.
+

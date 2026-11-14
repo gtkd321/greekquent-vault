@@ -213,8 +213,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Main graph: Obsidian's own local graph with calm forces, full tab. Word web stays as a backup command.
     this.addRibbonIcon('git-fork', 'Open word graph', () => this.openGraph());
     // Share feedback: opens Messages with the teacher's number filled in. The student types and taps Send.
-    this.addRibbonIcon('message-square', 'Share feedback', () => window.open(smsLink(`Greekquent feedback (vault of ${VAULT_RELEASE}): `)));
-    this.addCommand({ id: 'share-feedback', name: 'Share feedback', callback: () => window.open(smsLink(`Greekquent feedback (vault of ${VAULT_RELEASE}): `)) });
+    this.addRibbonIcon('message-square', 'Share feedback', () => this.feedback());
+    this.addCommand({ id: 'share-feedback', name: 'Share feedback', callback: () => this.feedback() });
     // Send homework: texts the newest "## " section of My Work/Homework.md (or of the open My Work note).
     this.addRibbonIcon('send', 'Send homework', () => this.sendHomework());
     this.addCommand({ id: 'send-homework', name: 'Send homework', callback: () => this.sendHomework() });
@@ -331,6 +331,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     st.back.disabled = st.pos <= 0; st.fwd.disabled = st.pos >= st.hist.length - 1;
     st.trail.setText(st.hist.slice(Math.max(0, st.pos - 6), st.pos + 1).map(h => h.replace(/^Words\//, '').replace(/\.md$/, '')).join('  ›  '));
     box.focus();
+  }
+  async feedback() {
+    let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}
+    window.open(smsLink(`Greekquent feedback (vault of ${rel}): `));
   }
   editMode(f) {
     const v = this.app.workspace.getActiveViewOfType(MarkdownView);

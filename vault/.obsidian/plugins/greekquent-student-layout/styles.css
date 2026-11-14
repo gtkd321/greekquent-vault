@@ -81,3 +81,22 @@ body.greekquent-student .gq-graph > .view-header { display: none !important; }
 .gq-today button { min-height: 40px; }
 .gq-tbar { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: var(--background-modifier-border); margin: 6px 0; }
 .gq-seg.gq-green { background: #1a9850; } .gq-seg.gq-yellow { background: #e6b400; } .gq-seg.gq-red { background: #d73027; } .gq-seg.gq-new { background: transparent; }
+
+/* Pair it */
+.gq-pair .gq-prow { margin: 8px 0; }
+.gq-pair .gq-plabel { font-weight: 600; margin-bottom: 4px; }
+.gq-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.gq-chip { min-height: 36px; padding: 4px 10px; border-radius: 18px; }
+.gq-chip.is-on { background: var(--interactive-accent); color: var(--text-on-accent); font-weight: 600; }
+.gq-pout { border: 1px solid var(--background-modifier-border); border-radius: 10px; padding: 10px 12px; margin: 10px 0 6px; background: var(--background-secondary); }
+.gq-pgr { font-size: 1.3em; font-weight: 600; }
+.gq-pen { color: var(--text-muted); margin-top: 2px; }
+.gq-pair .gq-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.gq-pair button { min-height: 40px; }
+.gq-pown { margin-top: 14px; border-top: 1px solid var(--background-modifier-border); padding-top: 8px; }
+.gq-pown textarea { width: 100%; font-size: 1.1em; }
+.gq-seg.gq-pairseg { background: #2b6cb0; }
+.gq-web-key { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 0.85em; color: var(--text-muted); padding: 2px 8px 4px; }
+.gq-key { display: inline-flex; align-items: center; gap: 4px; }
+.gq-kdot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.gq-kv { background: #2b6cb0; } .gq-kn { background: #8e44ad; } .gq-ka { background: #e67e22; } .gq-kd { background: #16a085; } .gq-ko { background: var(--graph-node, #888); }

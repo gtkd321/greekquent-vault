@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-14j';
+const VAULT_RELEASE = '2026-11-14k';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -50,11 +50,13 @@ const HIDE_RIBBON_PREFIX = ['meld-encrypt:'];
 const HIDE_COMMANDS = ['graph:open', 'graph:animate', 'canvas:new-file', 'file-explorer:new-file', 'file-explorer:new-file-in-new-pane', 'workspace:new-tab'];
 const BANDS = ['0001-0150','0151-0300','0301-0450','0451-0600','0601-0750','0751-0900','0901-1050','1051-1200','1201-1350','1351-1500'];
 const BAND_RGB = [0x1a9850,0x66bd63,0xa6d96a,0xd9ef8b,0xfee08b,0xfdae61,0xf46d43,0xd73027,0xa50026,0x7f0020];
+const TYPE_COLORS = [['tag:#verb', 0x2b6cb0], ['tag:#noun-m', 0x8e44ad], ['tag:#noun-f', 0x8e44ad], ['tag:#noun-n', 0x8e44ad], ['tag:#noun-pl', 0x8e44ad], ['tag:#adjective', 0xe67e22], ['tag:#adverb', 0x16a085]];
 const LOCAL_OPTIONS = {
-  // Word web: only the words a note links to (its "Often appears with" list), not the hundreds of notes linking back.
+  // Word web: only the words a note links to (its "Pair it with" and "Often appears with" lists), not the hundreds of notes linking back.
   'collapse-filter': true, search: 'path:"Words/"', localJumps: 1, localBacklinks: false, localForelinks: true, localInterlinks: true,
   showTags: false, showAttachments: false, hideUnresolved: true, showOrphans: false,
-  colorGroups: BANDS.map((b, i) => ({ query: 'tag:#band/' + b, color: { a: 1, rgb: BAND_RGB[i] } })),
+  // Colored by word type, so a verb's partners stand out: nouns to do it to, describing words, how/when/where words.
+  colorGroups: TYPE_COLORS.map(([q, rgb]) => ({ query: q, color: { a: 1, rgb } })),
   'collapse-color-groups': true, 'collapse-display': true, 'collapse-forces': true, showArrow: false, textFadeMultiplier: 0, nodeSizeMultiplier: 1, lineSizeMultiplier: 1,
   // Calm forces (Obsidian defaults: center 0.52, repel 10, link 1, distance 250).
   // Low repel + strong center = less push after a touch, so the graph settles sooner. It still breathes a little.
@@ -248,6 +250,130 @@ class VideoAskModal extends Modal {
   }
 }
 
+// ---------- Pair it: build a sentence from a word's partners (all from the 1,500) ----------
+const PAIRS_NOTE = MY_WORK + 'My pairs.md';
+const PAIR_GOAL = 5;   // sentences a week
+const WHO = [['εγώ', 'I', 0], ['εσύ', 'you', 1], ['αυτός', 'he', 2], ['αυτή', 'she', 2], ['εμείς', 'we', 3], ['εσείς', 'you all', 4], ['αυτοί', 'they', 5],
+  ['η μαμά μου', 'my mom', 2], ['ο φίλος μου', 'my friend', 2], ['τα παιδιά', 'the kids', 5]];
+const s3 = w => ({ have: 'has', do: 'does', go: 'goes' })[w] || (/(s|sh|ch|x|z|o)$/.test(w) ? w + 'es' : /[^aeiou]y$/.test(w) ? w.slice(0, -1) + 'ies' : w + 's');
+function enVerb(pred, p, neg) {
+  const ws = pred.split(' '), w = ws[0], rest = ws.slice(1).join(' ');
+  let f;
+  if (w === 'am') f = (p === 0 ? 'am' : p === 2 ? 'is' : 'are') + (neg ? ' not' : '');
+  else if (w === 'can') f = neg ? "can't" : 'can';
+  else if (w === "can't") f = neg ? 'can' : "can't";
+  else if (neg) f = (p === 2 ? "doesn't " : "don't ") + w;
+  else f = p === 2 ? s3(w) : w;
+  return (f + ' ' + rest).trim();
+}
+const DEGREE = ['πολύ', 'πάρα πολύ', 'λίγο', 'πραγματικά', 'πάντα', 'ακόμα', 'σίγουρα', 'μάλλον', 'ειλικρινά', 'σοβαρά', 'επιτέλους'];
+const cap1 = t => t ? t[0].toUpperCase() + t.slice(1) : t;
+class PairModal extends Modal {
+  constructor(app, plugin, word, pre) { super(app); this.plugin = plugin; this.word = word; this.pre = pre || null; }
+  async onOpen() {
+    this.contentEl.addClass('gq-modal', 'gq-pair');
+    this.data = await this.plugin.pairData();
+    this.render();
+  }
+  render() {
+    const c = this.contentEl; c.empty();
+    const v = this.data && this.data.v[this.word];
+    if (v) this.verbView(c, v); else this.wordView(c);
+    this.ownBox(c);
+  }
+  chips(parent, label, items, sel, pick) {
+    const row = parent.createDiv('gq-prow'); row.createDiv({ cls: 'gq-plabel', text: label });
+    const box = row.createDiv('gq-chips');
+    items.forEach((it, i) => { const b = box.createEl('button', { text: it, cls: 'gq-chip' + (i === sel ? ' is-on' : '') }); b.setAttr('aria-pressed', String(i === sel)); b.onclick = () => pick(i === sel && i !== 0 ? 0 : i); });
+  }
+  verbView(c, v) {
+    this.titleEl.setText('Build a sentence with ' + this.word);
+    if (!this.st) {
+      this.st = { who: 0, w: 0, h: 0, neg: false };
+      if (this.pre && this.pre[0] === 'w') this.st.w = this.pre[1] + 1;
+      if (this.pre && this.pre[0] === 'h') this.st.h = this.pre[1] + 1;
+    }
+    const st = this.st, who = v.imp ? WHO.slice(0, 7) : WHO;
+    c.createDiv({ cls: 'gq-hint', text: 'Tap one from each row. Every word here is from the 1,500.' });
+    this.chips(c, 'Who', who.map(x => x[0]), st.who, i => { st.who = i; this.render(); });
+    this.chips(c, 'What', ['(nothing)'].concat(v.w.map(x => x[0])), st.w, i => { st.w = i; this.render(); });
+    this.chips(c, 'How, when, where', ['(nothing)'].concat(v.h.map(x => x[0])), st.h, i => { st.h = i; if (i && v.h[i - 1][3]) st.neg = true; this.render(); });
+    const nr = c.createDiv('gq-prow'); const lab = nr.createEl('label'); const cb = lab.createEl('input', { type: 'checkbox' }); cb.checked = st.neg; lab.appendText(' Not (δεν)');
+    cb.onchange = () => { st.neg = cb.checked; this.render(); };
+    const [gw, ew, p] = who[st.who], it = st.w ? v.w[st.w - 1] : null, a = st.h ? v.h[st.h - 1] : null;
+    const pron = st.who < 7;   // pronouns are usually dropped in Greek; people stay
+    // Describing words agree with who: κουρασμένος, κουρασμένη, κουρασμένοι, κουρασμένα.
+    const agree = g => { const st0 = g.slice(0, -2), vow = /[ιεί]$/.test(st0), w0 = who[st.who][0];
+      if (w0 === 'αυτή' || w0 === 'η μαμά μου') return st0 + (vow ? 'α' : 'η');
+      if (w0 === 'τα παιδιά') return st0 + 'α';
+      if (p >= 3) return st0 + 'οι';
+      return g; };
+    const obj = it ? (it[3] ? 'να ' + it[3][p] : (it[4] ? agree(it[0]) : it[0])) : '';
+    // Words like πολύ go right after the verb when a να or ότι part follows: Θέλω πολύ να πάω.
+    const early = a && it && (it[3] || /^(ότι|πως|αν|τι|γιατί|που) /.test(it[0])) && DEGREE.includes(a[0]);
+    const gr = cap1([pron ? '' : gw, st.neg ? 'δεν' : '', v.f[p]].concat(early ? [a[0], obj] : [obj, a ? a[0] : '']).filter(Boolean).join(' ')) + '.';
+    let pred = it && it[1].startsWith('!') ? it[1].slice(1) : (v.en + (it ? ' ' + it[1] : ''));
+    if (/^can to /.test(pred)) pred = pred.replace(' to ', ' ');
+    const really = early && a[0] === 'πολύ';
+    const en = cap1(`${ew} ${really ? 'really ' : ''}${enVerb(pred, p, st.neg)}${a && !really ? ' ' + a[1] : ''}`) + '.';
+    const out = c.createDiv('gq-pout'); out.createDiv({ cls: 'gq-pgr', text: gr }); out.createDiv({ cls: 'gq-pen', text: en + '  (word by word, roughly)' });
+    if (pron) out.createDiv({ cls: 'gq-hint', text: `Greek usually leaves out ${gw}: the verb ending already says who.` });
+    const row = c.createDiv('gq-row');
+    const h = row.createEl('button', { text: 'Hear it' }); h.onclick = () => say(gr);
+    const sh = row.createEl('button', { text: 'Surprise me' }); sh.onclick = () => { st.who = Math.floor(Math.random() * who.length); st.w = v.w.length ? 1 + Math.floor(Math.random() * v.w.length) : 0; st.h = v.h.length ? 1 + Math.floor(Math.random() * v.h.length) : 0; st.neg = !!(st.h && v.h[st.h - 1][3]); this.render(); };
+    const sv = row.createEl('button', { text: 'Save to My pairs', cls: 'mod-cta' }); sv.onclick = () => this.plugin.savePair(gr, en, [this.word, it && it[2], a && a[2]].filter(Boolean), false);
+  }
+  wordView(c) {
+    this.titleEl.setText('Pair ' + this.word);
+    const x = this.data && this.data.x[this.word];
+    if (!x) { c.createDiv({ cls: 'gq-hint', text: 'No ready-made pairs for this word yet. Write your own below.' }); return; }
+    if (x.l.length) {
+      c.createDiv({ cls: 'gq-hint', text: 'Pick a verb to build with:' });
+      const box = c.createDiv('gq-chips');
+      for (const [verb, k, i] of x.l) {
+        const vv = this.data.v[verb]; if (!vv) continue;
+        const part = k === 'w' ? vv.w[i][0] : vv.h[i][0];
+        const b = box.createEl('button', { text: `${verb} ${part}`, cls: 'gq-chip' });
+        b.onclick = () => { this.word = verb; this.pre = [k, i]; this.st = null; this.render(); };
+      }
+    }
+    if (x.c.length) {
+      c.createDiv({ cls: 'gq-hint', text: 'Chunks: tap to hear, then save the ones you can say.' });
+      const box = c.createDiv('gq-chips');
+      for (const [g, e] of x.c) {
+        const b = box.createEl('button', { text: g, cls: 'gq-chip', attr: { 'aria-label': e } });
+        b.onclick = () => { say(g); this.picked = [g, e]; this.render(); };
+      }
+      if (this.picked) {
+        const out = c.createDiv('gq-pout'); out.createDiv({ cls: 'gq-pgr', text: this.picked[0] }); out.createDiv({ cls: 'gq-pen', text: this.picked[1] });
+        const sv = c.createDiv('gq-row').createEl('button', { text: 'Save to My pairs', cls: 'mod-cta' }); sv.onclick = () => this.plugin.savePair(this.picked[0], this.picked[1], [this.word], false);
+      }
+    }
+  }
+  ownBox(c) {
+    const box = c.createDiv('gq-pown');
+    box.createDiv({ cls: 'gq-tsub', text: 'Your own pair (counts double)' });
+    box.createDiv({ cls: 'gq-hint', text: `Pair ${this.word} with a word we did not list, or build a longer sentence.` });
+    const ta = box.createEl('textarea', { attr: { rows: '2', placeholder: 'Γράψε εδώ...', autocapitalize: 'sentences', spellcheck: 'false' } }); ta.addClass('gq-input');
+    if (this.ownText) ta.value = this.ownText;
+    const res = box.createDiv('gq-hint');
+    const check = () => {
+      this.ownText = ta.value; res.empty();
+      const toks = ta.value.split(/[^\u0370-\u03ff\u1f00-\u1fffA-Za-z]+/).filter(t => isGreek(t));
+      const inList = [], bonus = [];
+      const ART = /^(ο|η|το|οι|τα|τον|την|τη|του|της|των|τους|τις|στο|στη|στην|στον|στα|στις|στους|στου|στης|σ)$/; for (const t of toks) { if (ART.test(t.toLowerCase())) continue; const hit = this.plugin.findWords(t)[0]; if (hit && hit.score >= 89) { if (!inList.includes(hit.word)) inList.push(hit.word); } else if (!bonus.includes(t)) bonus.push(t); }
+      if (inList.length) res.appendText('In the 1,500: ' + inList.join(', ') + '. ');
+      if (bonus.length) res.appendText('Bonus words: ' + bonus.join(', ') + '.');
+      return inList;
+    };
+    ta.oninput = check; this.plugin.wordIndex().then(check);
+    const row = box.createDiv('gq-row');
+    const h = row.createEl('button', { text: 'Hear it' }); h.onclick = () => ta.value.trim() && say(ta.value.trim());
+    const sv = row.createEl('button', { text: 'Save my pair' }); sv.onclick = () => { const t = ta.value.trim(); if (!t) { new Notice('Write a sentence first.'); return; } const ws = check(); this.plugin.savePair(t, '', [this.word].concat(ws.filter(w => w !== this.word)), true); ta.value = ''; this.ownText = ''; check(); };
+  }
+  onClose() { this.contentEl.empty(); }
+}
+
 module.exports = class GreekquentStudentLayout extends Plugin {
   onload() {
     this.busy = false; this.todayEls = new Set(); this.bars = new Set();
@@ -296,6 +422,33 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       await this.openToday(true);
       setTimeout(() => this.updateVault(true), 4000);   // quiet check at startup
     });
+  }
+  // ---------- Pair it ----------
+  async pairData() {
+    if (this.pairs) return this.pairs;
+    try { this.pairs = JSON.parse(await this.app.vault.adapter.read(this.manifest.dir + '/pairs.json')); } catch (e) { this.pairs = { v: {}, x: {} }; }
+    return this.pairs;
+  }
+  openPair(word, pre) { new PairModal(this.app, this, word, pre).open(); }
+  async savePair(gr, en, words, own) {
+    const ad = this.app.vault.adapter, day = ymd(new Date());
+    let txt = ''; try { txt = await ad.read(PAIRS_NOTE); } catch (e) { txt = '# My pairs\n\nSentences you built with the Pair it tool. Your own sentences count double on the Today page. Send them with Send homework while this note is open.\n'; }
+    if (!txt.includes('\n## ' + day)) txt = txt.replace(/\s*$/, '\n\n## ' + day + '\n');
+    if (!(await ad.exists(MY_WORK.slice(0, -1)))) await ad.mkdir(MY_WORK.slice(0, -1));
+    const links = [...new Set(words)].map(w => `[[${w}]]`).join(' ');
+    await ad.write(PAIRS_NOTE, txt.replace(/\s*$/, '\n') + `- ${own ? 'Own: ' : ''}${gr.replace(/\n+/g, ' ')}${en ? ' (' + en + ')' : ''} · ${links}\n`);
+    const n = await this.pairCount();
+    new Notice(`Saved. ${n.points} pair point${n.points === 1 ? '' : 's'} this week.`);
+    this.refreshToday();
+  }
+  async pairCount() {
+    let txt = ''; try { txt = await this.app.vault.adapter.read(PAIRS_NOTE); } catch (e) { return { n: 0, own: 0, points: 0, words: 0 }; }
+    const cut = ymd(new Date(Date.now() - 6 * 864e5)); let n = 0, own = 0; const words = new Set();
+    for (const sec of txt.split(/\n(?=## )/)) {
+      const m = sec.match(/^## (\d{4}-\d{2}-\d{2})/); if (!m || m[1] < cut) continue;
+      for (const line of sec.split('\n')) { if (!line.startsWith('- ')) continue; n++; if (line.startsWith('- Own: ')) own++; for (const x of line.matchAll(/\[\[([^\]|#]+)/g)) words.add(x[1]); }
+    }
+    return { n, own, points: n + own, words: words.size };
   }
   // ---------- Word graph: Obsidian's own local graph (native motion), dressed with the Word web's controls ----------
   wordPath(p) { if (p && p.startsWith('Words/')) return p; const f = this.app.vault.getAbstractFileByPath('Words/θέλω.md'); return f ? f.path : this.app.vault.getMarkdownFiles().find(f => f.path.startsWith('Words/')).path; }
@@ -355,9 +508,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       st.title = bar.createDiv('gq-web-title');
       const say = bar.createEl('button', { text: 'Hear it', attr: { 'aria-label': 'Say the word' } });
       const open = bar.createEl('button', { text: 'Open note', attr: { 'aria-label': 'Open the word note' } });
+      const pairb = bar.createEl('button', { text: 'Build a sentence', attr: { 'aria-label': 'Build a sentence with this word' } });
+      pairb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.openPair(f.basename); };
       const askb = bar.createEl('button', { text: 'Ask', attr: { 'aria-label': 'Ask the group about this word' } });
       askb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.ask(f); };
       st.trail = wrap.createDiv('gq-web-trail'); st.bar = wrap;
+      const key = wrap.createDiv('gq-web-key');
+      for (const [cls, t] of [['v', 'verbs (doing)'], ['n', 'nouns (things, people)'], ['a', 'describing words'], ['d', 'how, when, where'], ['o', 'little words']]) { const s = key.createSpan('gq-key'); s.createSpan('gq-kdot gq-k' + cls); s.appendText(t); }
       st.back.onclick = () => this.graphStep(leaf, -1); st.fwd.onclick = () => this.graphStep(leaf, 1);
       open.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.app.workspace.getLeaf('tab').openFile(f); };
       say.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) say(f.basename); };
@@ -700,6 +857,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const bar = createDiv('gq-wordbar'); p.after(bar);
     const hear = bar.createEl('button', { text: 'Hear it', attr: { 'aria-label': 'Say the word' } }); hear.onclick = () => say(word);
     const g = bar.createEl('button', { text: 'Word graph' }); g.onclick = () => this.openGraph(ctx.sourcePath);
+    const pb = bar.createEl('button', { text: 'Build a sentence' }); pb.onclick = () => this.openPair(word);
     const grp = bar.createDiv({ cls: 'gq-colors', attr: { role: 'group', 'aria-label': 'How well do you know it?' } });
     const btns = COLORS.map(([k, label]) => { const b = grp.createEl('button', { text: label, cls: 'gq-c gq-' + k }); b.onclick = () => this.setColor(word, this.colorOf(word) === k ? '' : k); return [k, b]; });
     const rec = { word, btns, el: bar }; this.bars.add(rec); this.paintBar(rec);
@@ -827,6 +985,17 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       rc.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `Review (${rev.length})` });
       if (!rev.length) rc.createDiv({ cls: 'gq-hint', text: 'Nothing to review yet. Words you mark red, miss in a game, or look up show up here for two weeks.' });
       else { this.wordList(rc, rev.slice(0, 20)); this.playRow(rc, rev.slice(0, 40)); }
+      // Pair it: sentences built this week (own sentences count double)
+      const pc = await this.pairCount(), pk = box.createDiv('gq-tcard');
+      pk.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `Pair it · ${pc.points} point${pc.points === 1 ? '' : 's'} this week` });
+      const pbar = pk.createDiv('gq-tbar'); const done = pk.createDiv(); pbar.createDiv('gq-seg gq-pairseg').style.flexGrow = String(Math.min(pc.n, PAIR_GOAL)); pbar.createDiv('gq-seg gq-new').style.flexGrow = String(Math.max(0, PAIR_GOAL - pc.n)); done.remove();
+      pk.createDiv({ cls: 'gq-hint', text: pc.n ? `${pc.n} sentence${pc.n === 1 ? '' : 's'} (${pc.own} your own) using ${pc.words} words. Goal: ${PAIR_GOAL} a week. Your own sentences count double.` : `Build ${PAIR_GOAL} sentences this week: pick a word, then pair it with who, what, and how or when. Your own sentences count double.` });
+      const prow = pk.createDiv('gq-row');
+      const todayWords = (wk && Object.values(await this.weekDays(wk.file)).flatMap(d => d.words).map(w => w.word)) || [];
+      const pd = await this.pairData();
+      const pickWord = () => { const pool = todayWords.filter(w => pd.v[w] || pd.x[w]); const all = Object.keys(pd.v); const p = pool.length ? pool : all; return p[Math.floor(Math.random() * p.length)] || 'θέλω'; };
+      const pb1 = prow.createEl('button', { text: todayWords.length ? 'Pair a word from this week' : 'Pair a word' }); pb1.onclick = () => this.openPair(pickWord());
+      const pb2 = prow.createEl('button', { text: 'My pairs' }); pb2.onclick = async () => { if (!(await this.app.vault.adapter.exists(PAIRS_NOTE))) { new Notice('Save a sentence first.'); return; } this.openNote(PAIRS_NOTE); };
       // Colors
       const cc = box.createDiv('gq-tcard');
       const n = { green: col.green.length, yellow: col.yellow.length, red: col.red.length }; const total = words.length || 1500;

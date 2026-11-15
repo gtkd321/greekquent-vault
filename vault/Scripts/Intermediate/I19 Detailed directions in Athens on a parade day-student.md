@@ -42,6 +42,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Give someone directions in Greek from your front door to the kitchen, or to a store. Draw the route by hand and label each turn.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 5 Πού είναι η Ακρόπολη;** (directions, page 70).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[με συγχωρείτε]] · [[ψάχνω]] · [[είμαι]] · [[μακριά]] · [[από]] · [[εδώ]] · [[όχι]] · [[πολύ]] · [[περίπου]] · [[δέκα]] · [[λεπτό|το λεπτό]] · [[με]] · [[πόδι|το πόδι]] · [[βλέπω]] · [[εκείνος]] · [[φαρμακείο|το φαρμακείο]] · [[σε]] · [[γωνία|η γωνία]] · [[ναι]] · [[αριστερά]] · [[εκεί]] · [[και]] · [[ευθεία]] · [[μέχρι]] · [[δεύτερος]] · [[μετά]] · [[απέναντι]] · [[δεξιά]] · [[σας]] · [[μπορώ]] · [[να]] · [[πάω]] · [[μέτρο|το μέτρο]] · [[σταθμός|ο σταθμός]] · [[ακριβώς]] · [[δίπλα]] · [[αλλά]] · [[σήμερα]] · [[έχω]] · [[για]] · [[πολύς]] · [[δρόμος|ο δρόμος]] · [[αυτός]] · [[τόσος]] · [[χρόνια πολλά]] · [[ευχαριστώ]] · [[βοήθεια|η βοήθεια]] · [[πώς]] · [[σπίτι|το σπίτι]] · [[σου]] · [[δουλειά|η δουλειά]] · [[τι]] · [[κάνω]] · [[Έλληνας|ο Έλληνας]] · [[Αμερική|η Αμερική]] · [[ποιο]] · [[μέρος|το μέρος]] · [[πόλη|η πόλη]] · [[τουρίστας|ο τουρίστας]]
 

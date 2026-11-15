@@ -44,6 +44,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Learn the Easter greeting by heart and use it with a Greek speaker if you meet one: Χριστός ανέστη! — Αληθώς ανέστη! Write a get-well card in Greek: Περαστικά!
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 10 Είχα ένα τρομερό πονοκέφαλο!** (feelings, the doctor, jobs, sports, page 160).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[καλημέρα]] · [[σας]] · [[πώς]] · [[μπορώ]] · [[να]] · [[από]] · [[χθες]] · [[βράδυ|το βράδυ]] · [[έχω]] · [[και]] · [[λίγο]] · [[πόσο]] · [[τριάντα]] · [[κυρίως]] · [[κάποιος]] · [[φάρμακο|το φάρμακο]] · [[όχι]] · [[τίποτα]] · [[είμαι]] · [[μόνο]] · [[σε]] · [[εντάξει]] · [[δίνω]] · [[για]] · [[λαιμός|ο λαιμός]] · [[κάθε]] · [[έξι]] · [[ώρα|η ώρα]] · [[πάνω]] · [[τέσσερις]] · [[χρειάζομαι]] · [[αυτός]] · [[αν]] · [[όμως]] · [[ή]] · [[δεν]] · [[καλά]] · [[τρία]] · [[μέρα|η μέρα]] · [[πρέπει]] · [[βλέπω]] · [[γιατρός|ο γιατρός]] · [[ξέρω]] · [[εδώ]] · [[κοντά]] · [[που]] · [[μιλάω]] · [[αγγλικός]] · [[κύριος|ο κύριος]] · [[επάνω]] · [[όροφος|ο όροφος]] · [[πολύ]] · [[ευχαριστώ]] · [[τι]] · [[κάνω]] · [[όταν]] · [[άρρωστος]] · [[πότε]] · [[πάω]] · [[τελευταίος]] · [[φορά|η φορά]] · [[γιαγιά|η γιαγιά]] · [[σου]]
 

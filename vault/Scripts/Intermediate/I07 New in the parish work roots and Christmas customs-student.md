@@ -44,6 +44,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Find a Greek Orthodox church, Greek festival, or Greek club near you and look up when it meets. If you can, go and say Καλά Χριστούγεννα or Γεια σας to one person.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 10 Είχα ένα τρομερό πονοκέφαλο!** (feelings, the doctor, jobs, sports, page 160).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[καλησπέρα]] · [[είμαι]] · [[σε]] · [[καλώς ήρθες]] · [[εγώ]] · [[από]] · [[πού]] · [[αλλά]] · [[γονείς|οι γονείς]] · [[μου]] · [[και]] · [[τι]] · [[δουλειά|η δουλειά]] · [[κάνω]] · [[εσύ]] · [[δάσκαλος|ο δάσκαλος]] · [[εδώ]] · [[αλήθεια|η αλήθεια]] · [[ωραία]] · [[γιατί]] · [[ελληνικά|τα ελληνικά]] · [[θέλω]] · [[να]] · [[μιλάω]] · [[με]] · [[γιαγιά|η γιαγιά]] · [[χωρίς]] · [[πολύ]] · [[ωραίος]] · [[λόγος|ο λόγος]] · [[οικογένεια|η οικογένεια]] · [[σου]] · [[Χριστούγεννα|τα Χριστούγεννα]] · [[τρώω]] · [[παιδί|το παιδί]] · [[λέω]] · [[ίδιος]] · [[εμείς]] · [[καλά]] · [[χρόνια πολλά]] · [[ποιο]] · [[αγαπημένος]]
 

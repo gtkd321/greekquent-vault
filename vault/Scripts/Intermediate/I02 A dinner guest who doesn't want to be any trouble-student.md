@@ -43,6 +43,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Offer someone at home a drink in Greek (Θέλεις λίγο νερό;) and let them answer in English. Write the Greek letters you know on a sticky note by the kettle or coffee maker.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 3 Έλα να πιούμε ένα ουζάκι!** (ordering drinks and appetizers, page 32).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[μου]] · [[παλτό|το παλτό]] · [[σας]] · [[ευχαριστώ]] · [[πολύ]] · [[ωραίος]] · [[σπίτι|το σπίτι]] · [[να]] · [[κάτι]] · [[έχω]] · [[καφές|ο καφές]] · [[τσάι|το τσάι]] · [[ποτήρι|το ποτήρι]] · [[νερό|το νερό]] · [[αν]] · [[δεν]] · [[είμαι]] · [[κόπος|ο κόπος]] · [[κανένας]] · [[και]] · [[γλυκός]] · [[από]] · [[μητέρα|η μητέρα]] · [[μην]] · [[κάνω]] · [[αλήθεια|η αλήθεια]] · [[έλα]] · [[τώρα]] · [[τίποτα]] · [[θέλω]] · [[ή]] · [[τότε]] · [[άντρας|ο άντρας]] · [[γνωρίζω]] · [[γεια]] · [[άλλος]] · [[κρασί|το κρασί]] · [[όχι]] · [[οδηγώ]] · [[αλλά]] · [[λίγο]] · [[ψωμί|το ψωμί]] · [[με]] · [[φαγητό|το φαγητό]] · [[βέβαια]] · [[ορίστε]] · [[τι]] · [[όταν]] · [[έρχομαι]] · [[κάποιος]] · [[σε]] · [[σου]] · [[Ελλάδα|η Ελλάδα]] · [[λέω]] · [[πρώτος]] · [[φορά|η φορά]] · [[εσύ]] · [[πάντα]] · [[επισκέπτης|ο επισκέπτης]]
 

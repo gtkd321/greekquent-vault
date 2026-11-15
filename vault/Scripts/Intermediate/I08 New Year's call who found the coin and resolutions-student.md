@@ -40,6 +40,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Bake or buy any round cake, hide a coin in it, and cut it the Greek way for your family. Count the pieces out loud in Greek.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 9 Έλα! ποιος είναι;** (phone calls and meeting up, page 144).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[χρόνια πολλά]] · [[και]] · [[καλός]] · [[χρονιά|η χρονιά]] · [[πώς]] · [[χθες]] · [[βράδυ|το βράδυ]] · [[πολύ]] · [[ωραία]] · [[σε]] · [[δώδεκα]] · [[ποιος]] · [[βρίσκω]] · [[μικρός]] · [[μου]] · [[είμαι]] · [[κομμάτι|το κομμάτι]] · [[εσείς]] · [[εμείς]] · [[κόβω]] · [[σήμερα]] · [[με]] · [[όλος]] · [[οικογένεια|η οικογένεια]] · [[μεγάλος]] · [[έχω]] · [[κάποιος]] · [[απόφαση|η απόφαση]] · [[για]] · [[νέος]] · [[θέλω]] · [[να]] · [[τρέχω]] · [[τρία]] · [[φορά|η φορά]] · [[εβδομάδα|η εβδομάδα]] · [[μιλάω]] · [[μόνο]] · [[ελληνικά|τα ελληνικά]] · [[γιαγιά|η γιαγιά]] · [[δύσκολος]] · [[εγώ]] · [[διαβάζω]] · [[βιβλίο|το βιβλίο]] · [[μήνας|ο μήνας]] · [[επιτυχία|η επιτυχία]] · [[δύο]] · [[μας]] · [[τι]] · [[κάνω]] · [[σου]] · [[Πρωτοχρονιά|η Πρωτοχρονιά]] · [[άτομο|το άτομο]] · [[τραπέζι|το τραπέζι]]
 

@@ -44,6 +44,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Pack a real bag with five things you can name in Greek. Tonight, take each one out and say Έχω ένα… out loud. Write a label by hand for one of them and stick it on.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 1 Γεια σου!** (personal information, introductions, page 2) and **Unit 2 Τι κάνεις;** (small talk, page 18).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[καλησπέρα]] · [[είμαι]] · [[καινούργιος]] · [[εδώ]] · [[ναι]] · [[πρώτος]] · [[μου]] · [[φορά|η φορά]] · [[εγώ]] · [[λέω]] · [[χάρηκα]] · [[πολύ]] · [[από]] · [[πού]] · [[αλλά]] · [[οικογένεια|η οικογένεια]] · [[ωραία]] · [[έχω]] · [[ακόμα]] · [[σπίτι|το σπίτι]] · [[εκεί]] · [[θείος|ο θείος]] · [[σε]] · [[χωριό|το χωριό]] · [[δεν]] · [[παιδί|το παιδί]] · [[δύο]] · [[αγόρι|το αγόρι]] · [[και]] · [[κορίτσι|το κορίτσι]] · [[εσείς]] · [[όχι]] · [[τρία]] · [[τι]] · [[αυτός]] · [[τσάντα|η τσάντα]] · [[μεγάλος]] · [[για]] · [[μάθημα|το μάθημα]] · [[τετράδιο|το τετράδιο]] · [[νερό|το νερό]] · [[όλος]] · [[τέλεια]] · [[καφές|ο καφές]] · [[δυστυχώς]] · [[κυρία|η κυρία]] · [[ευχαριστώ]] · [[μετά]] · [[πάντα]] · [[σου]] · [[Ελλάδα|η Ελλάδα]] · [[θέλω]]
 

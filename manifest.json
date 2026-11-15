@@ -1,5 +1,5 @@
 {
-"release": "2026-11-14o",
+"release": "2026-11-14p",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,7 +14,7 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "b0205de4a6b87a323ce41281e9c57b0783335191f15ddf8c42c0d953692c1252",
+"sha256": "cc00ba1294be037d0ef332749b99c768173e37ed436e1c2a3eb7c54894ea1648",
 "size": 82339
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
@@ -70,8 +70,8 @@
 "size": 8514
 },
 "05 Listening and News.md": {
-"sha256": "5c39dd24ba31ac43fd3f54c828508355ec5b56694074258b4c76335182e7ba80",
-"size": 15607
+"sha256": "0efc57a7685d675f481fa1d07e1da9c642c1dfd66bc6ee225934cdd0ec76895a",
+"size": 16262
 },
 "07 Fluent in a Year.md": {
 "sha256": "5bb3c5b310ab29926d7aee46062defa7ec243252c01d8508dcb8ee3f9e99321d",
@@ -298,8 +298,8 @@
 "size": 5764
 },
 "Handouts/00 Which file is which-student.md": {
-"sha256": "bc17ea6a0fb42afd82b5f22298f84156a7ea7b85363d2cc366b4d58ccc2b0fb4",
-"size": 852
+"sha256": "333e65965066ca3f2ab48bff49aafea79835637f72e86519a8ed1501e46c9737",
+"size": 1085
 },
 "Handouts/Greekquent Fluent in a Year Anki Deck.csv": {
 "sha256": "f64c920bff0fa77197a6b39f74f1cb72b3549e1707bdea1eb822be32739e821d",
@@ -438,108 +438,108 @@
 "size": 13114
 },
 "Scripts/Intermediate/I01 Getting to know someone at a community event-student.md": {
-"sha256": "db2bb148761bcb5111567f573dcd638d69a57cbede8eae2469c8168fd67e9114",
-"size": 4473
+"sha256": "07de0706d97ce112dcffbd88c06a245c1ed284f90813837ac3adede2a0eed361",
+"size": 5026
 },
 "Scripts/Intermediate/I02 A dinner guest who doesn't want to be any trouble-student.md": {
-"sha256": "f2607b1718b08b4fc836a26e04f6911dd0593bf73bb0c5f538c3b4a74825db88",
-"size": 4899
+"sha256": "dda82ee0daa48b4d6c4a3b5264b8e67e52c1ae4eb75b46a092e6852afbefa66a",
+"size": 5421
 },
 "Scripts/Intermediate/I03 Rescheduling plans with friends-student.md": {
-"sha256": "6f449b85b28b23a79196d80004a02ff4e698df379b03f5bd483dca8e27e277ac",
-"size": 4371
+"sha256": "2edeae6bfb7526299cc60624e84bf2e32aa3658d393b7aefcddf939923ccaccf",
+"size": 4875
 },
 "Scripts/Intermediate/I04 Trip photos and a real café order-student.md": {
-"sha256": "cb598bbbfc6e4c92494682e1edc314b08f1c37d5c83321a4be9ac53b35e0f5d4",
-"size": 4839
+"sha256": "831bc7a8be9c7bc6c0bef413d226ad9c5d6b1341fad1e7fbbec5d6488c2960b0",
+"size": 5361
 },
 "Scripts/Intermediate/I05 A lost wallet at the hotel and paying without cash-student.md": {
-"sha256": "a5c94a0895f08a7bdf2f8f635b2ea8167a79efcc7f215e46d7a12eecec48b985",
-"size": 4593
+"sha256": "211178d5bc0f1b0806bb1847002e53d472c26e806de7445ca23b95d1f31b742a",
+"size": 5083
 },
 "Scripts/Intermediate/I06 Chatting with an older man at the village kafeneio-student.md": {
-"sha256": "47ea77f66910b628ca5e2ee4e94150d02348a27b7af134ff07ed13f0c31cae67",
-"size": 4970
+"sha256": "fdbd8964686ee691aafac8ff79e5cedeee04337b0de9ccf2882e39dd7f9e86c2",
+"size": 5445
 },
 "Scripts/Intermediate/I07 New in the parish work roots and Christmas customs-student.md": {
-"sha256": "02e4b60ba9907f9047115c5e8f500215ef96891f85cacc25fbe89d6470301b0f",
-"size": 4518
+"sha256": "dbeb202f41130421e7973bd85f6e328dc1454aa19f80558ea29ccaee802704c1",
+"size": 5053
 },
 "Scripts/Intermediate/I08 New Year's call who found the coin and resolutions-student.md": {
-"sha256": "36494c79f4ea81528a4539b205b0fa38974d284914a47b485e7ef089ad85d8f4",
-"size": 4499
+"sha256": "89d8605eaaf0adbed2178ab2317e98f9b8fdd483d6bc7c4e0bc5af80ff24377b",
+"size": 5003
 },
 "Scripts/Intermediate/I09 The extended family who lives where-student.md": {
-"sha256": "5ed59bcbeb90e989d652632f562c7e604e71dafaafd1f6bb1b1df4d6812cb25f",
-"size": 4466
+"sha256": "efbe2f74b01eb379868ec6807ce93a38ef91556d51e16b1d6ed2d1c423348ccd",
+"size": 4963
 },
 "Scripts/Intermediate/I10 A normal day weekdays and weekends-student.md": {
-"sha256": "91c654b48afc4fcf0bb5a15b8eb420ed228f1f376bfcc92d37130761367dffff",
-"size": 4887
+"sha256": "35020089bbf4b8f93819142f8b10e1fccd9bb7caa810c82322a2a3c6b9cbc8ba",
+"size": 5389
 },
 "Scripts/Intermediate/I11 Planning a road trip in the Peloponnese-student.md": {
-"sha256": "d44258d63ebfb2a2035228ede4f52a035e867911c96efac373883a12481f8170",
-"size": 4356
+"sha256": "f48d4a190fb0392794c3c1df1c013533cb558230a79595c2ebc141aed0828be3",
+"size": 4858
 },
 "Scripts/Intermediate/I12 Buying for a recipe and getting a better price-student.md": {
-"sha256": "c134d4a80db07c576ccf18596bb4cb275a21908b9e00dc83656daec016679a1a",
-"size": 4277
+"sha256": "4f4c44fe8ac0e7e6bf2676b3a12301de869ae2f7e6c64bb7fe0c7001cac8de75",
+"size": 4776
 },
 "Scripts/Intermediate/I13 A taverna with a vegetarian friend-student.md": {
-"sha256": "a38d50f46ff6fbf96c2d1f934d0185c26cfd377e16e54dc632b829f1dc3cc805",
-"size": 4758
+"sha256": "011f4b85ca10244528fe2f00b0b358b11f3659b38a395d75f631cd9ee98da0b8",
+"size": 5254
 },
 "Scripts/Intermediate/I14 Booking a doctor's appointment by phone-student.md": {
-"sha256": "d6044b9aab17b0e5bcda93d554e70d05672f38df2df232d46c9aa88b822c2c1f",
-"size": 4725
+"sha256": "c2f6e87285d16ad0d4733becc6063b5f1d3371fecf079a665f626c2cf7aa01da",
+"size": 5345
 },
 "Scripts/Intermediate/I15 Talking about learning Greek-student.md": {
-"sha256": "5063d9ed20f7a2ac05e1a452333dd26458228f1b8999a0c7cd821e2ca98777b2",
-"size": 5143
+"sha256": "5392b9f851915b7adb095f04e1019b80324bc00a698382b27e5bd63313811999",
+"size": 5618
 },
 "Scripts/Intermediate/I16 Mid-year oral check interview and story-student.md": {
-"sha256": "a55c78d4f017e6bbf3b01ad812a89e75fa094561e88ded5ee44615c72f9c2e8d",
-"size": 5168
+"sha256": "fe934a656fafa918b4779e2f2933222cb3f0d3276cc26b6d476dafb6c9adfe88",
+"size": 5439
 },
 "Scripts/Intermediate/I17 Summer plans a month in Greece-student.md": {
-"sha256": "d03a67b25a05b3be73ddcd1eb3c595861260653e1a0839c05c61cf50208aea18",
-"size": 4604
+"sha256": "f2d9770df514436e65dab4f5c3fc6f3351ffbdb6c60427e737416675dac45de2",
+"size": 5177
 },
 "Scripts/Intermediate/I18 The forecast and Clean Monday customs-student.md": {
-"sha256": "49a42724359492a161ff1489f63afd46026d3a4153033d30e635821e1dde609e",
-"size": 4774
+"sha256": "1533c903b69780792fd71995a1a05dd1b12f09cd842b2aace09fe3a95bc3dfb6",
+"size": 5283
 },
 "Scripts/Intermediate/I19 Detailed directions in Athens on a parade day-student.md": {
-"sha256": "f230dd2bc7ef6851340230a4caf8f3660bfeecd628385b3f5911c3bac5dd688f",
-"size": 4913
+"sha256": "9ec75cf2838ee66a12003bdc306e18ebcf1e298a7ad5834201216321b351f22c",
+"size": 5408
 },
 "Scripts/Intermediate/I20 Renting a village house for the summer-student.md": {
-"sha256": "2cfc2df6a944ef3c74f201bbc6c044b3e14603e6b53237e8d27a0bfa4848291a",
-"size": 4855
+"sha256": "b8750905b969d6934e7a89ae8cc13e3491fd56784dfe94c45402cd5be8d52675",
+"size": 5345
 },
 "Scripts/Intermediate/I21 Hobbies in depth-student.md": {
-"sha256": "c186d514ec8237f3e58ef0254ad17ba7afc6ec4607999711a232f275a640f745",
-"size": 4378
+"sha256": "fce7d11d4c2005362dc3e8addd93ca11e72b1162301fa3d9869ad26fb952a03d",
+"size": 4913
 },
 "Scripts/Intermediate/I22 Childhood summers-student.md": {
-"sha256": "f6da40e6e60df533db9a110b87e347fc74437b50e8ed3fb7a088dc715c4efbb2",
-"size": 4402
+"sha256": "8ba0a78953343d5455e9650a5f5e68e4175883a8c229987e13c61e7da76ce023",
+"size": 5016
 },
 "Scripts/Intermediate/I23 A travel story that went wrong-student.md": {
-"sha256": "9284f5dada8268f71053c666e5138d1d366b869502cd33947a283349cb77fc94",
-"size": 4551
+"sha256": "7be9646ea36958cbc1252d87fb94be35f4e274042f03e299522a41bcd41beec2",
+"size": 5158
 },
 "Scripts/Intermediate/I24 Holy Week day by day-student.md": {
-"sha256": "8710dd85edd24907269bf7931e4e8ccbee5945b5a194b9d691bb3d775db549ea",
-"size": 4522
+"sha256": "7f18ba7227cf5238cc19cd714f6e87845e70fe0df09a9ccdd2656d0159957442",
+"size": 5046
 },
 "Scripts/Intermediate/I25 Pharmacy visit with real symptoms-student.md": {
-"sha256": "3ce259ac5e3ccf054a25aaa48cfcb5a52908ddaf706b56f817664b94abd44945",
-"size": 5065
+"sha256": "b98d84e70c1291f813af068804e1ad3d338e1a20533444725096004089701f49",
+"size": 5600
 },
 "Scripts/Intermediate/I26 Capstone my Greek year-student.md": {
-"sha256": "aa233af68975d0adb4ceb1761740a8aa6c90c9aaab11cd0d28618b12d144b035",
-"size": 4087
+"sha256": "96cc0ac219a84dab677e169da85387c91bea9589f7652d455369987e081dd91b",
+"size": 4312
 },
 "Scripts/Kid/K01 Mystery bag-student.md": {
 "sha256": "275b16efdf830d914907794d19585632575021a2f7b5ddf09d4bbd0a739cff23",
@@ -654,8 +654,8 @@
 "size": 24
 },
 "What's New.md": {
-"sha256": "83400c14bdb2212fd0bceabb15d2d4b5fe67c3567e0abdf715b08500078aabe3",
-"size": 2114
+"sha256": "2d8bf29a2589452350ce2bdff00b3306a4d21d7d7b123551ccf97a696290e82a",
+"size": 2428
 },
 "Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

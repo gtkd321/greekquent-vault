@@ -13,3 +13,6 @@
 > - **Verb Sheet:** the core verbs on one fold-out.
 > - **Sentence Tiles:** print on card stock and cut out.
 > - **Anki decks:** free flashcards. Year One has the class words. Fluent in a Year has all 1,500.
+
+> [!info]- Complete Greek (only if you have the book)
+> Intermediate lessons have an optional box that names the matching unit of Teach Yourself Complete Greek. The audio is free in the Teach Yourself Library app. No book? Skip it.

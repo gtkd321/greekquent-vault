@@ -41,6 +41,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Draw your family tree by hand and label every person in Greek: η μητέρα μου, ο αδελφός μου… Show it to someone and say two sentences about it.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 1 Γεια σου!** (personal information, introductions, page 2).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[πόσο]] · [[μεγάλος]] · [[είμαι]] · [[οικογένεια|η οικογένεια]] · [[σου]] · [[αρκετά]] · [[γονείς|οι γονείς]] · [[μου]] · [[έχω]] · [[τέσσερα]] · [[παιδί|το παιδί]] · [[και]] · [[εγώ]] · [[όλος]] · [[κοντά]] · [[όχι]] · [[αδερφός|ο αδερφός]] · [[μένω]] · [[σε]] · [[Αθήνα|η Αθήνα]] · [[με]] · [[γυναίκα|η γυναίκα]] · [[του]] · [[άλλος]] · [[εδώ]] · [[πέντε]] · [[θέλω]] · [[να]] · [[Αμερική|η Αμερική]] · [[αλλά]] · [[δεν]] · [[μπορώ]] · [[ακόμα]] · [[πολύ]] · [[ακριβός]] · [[ταξίδι|το ταξίδι]] · [[καταλαβαίνω]] · [[εμείς]] · [[νέος]] · [[βλέπω]] · [[μόνο]] · [[Πάσχα|το Πάσχα]] · [[ζω]] · [[γιαγιά|η γιαγιά]] · [[μαγειρεύω]] · [[κάθε]] · [[Κυριακή|η Κυριακή]] · [[ποιος]] · [[μοιάζω]] · [[πού]] · [[τι]] · [[κάνω]] · [[μαζί]]
 

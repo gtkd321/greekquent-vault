@@ -39,6 +39,9 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Plan a real outing in Greek for the summer: a Greek festival, a Greek restaurant, or a trip. Write the plan by hand, and keep your word list. It shows how far you've come.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Year-end check: do **Revision test 3** (units 9–12, page 200). Check with the answer key on page 220. Circle the questions you missed and bring them to class.
+
 > [!abstract]- Word links
 > [[φέτος]] · [[μάθημα|το μάθημα]] · [[ελληνικός]] · [[σε]] · [[αρχή|η αρχή]] · [[δεν]] · [[μπορώ]] · [[να]] · [[διαβάζω]] · [[ούτε]] · [[λέξη|η λέξη]] · [[αλλά]] · [[τώρα]] · [[μικρός]] · [[ιστορία|η ιστορία]] · [[μου]] · [[μου αρέσει]] · [[πολύ]] · [[για]] · [[ταβέρνα|η ταβέρνα]] · [[και]] · [[γιατί]] · [[είμαι]] · [[σαν]] · [[πραγματικός]] · [[ζωή|η ζωή]] · [[πιο]] · [[δύσκολος]] · [[εγώ]] · [[παρελθόν|το παρελθόν]] · [[καλοκαίρι|το καλοκαίρι]] · [[θα]] · [[πάω]] · [[Ελλάδα|η Ελλάδα]] · [[θέλω]] · [[μιλάω]] · [[μόνο]] · [[ελληνικά|τα ελληνικά]] · [[χρόνος|ο χρόνος]] · [[συνεχίζω]] · [[καταλαβαίνω]] · [[γιαγιά|η γιαγιά]] · [[χωρίς]] · [[βοήθεια|η βοήθεια]] · [[σου]] · [[τι]] · [[κάνω]] · [[πρώτα]] · [[όταν]] · [[μαθαίνω]] · [[ποιο]]
 

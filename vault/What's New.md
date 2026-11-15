@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 14, late: Complete Greek
+> - If you have the book Teach Yourself Complete Greek, each intermediate lesson now names the unit that goes with it. The audio is free in the Teach Yourself Library app.
+> - Lessons 16 and 26 point to the book's revision tests.
+> - No book? Nothing changes for you.
+
 > [!info]- November 14, night: Textbook files
 > - New note in Handouts: **00 Which file is which**. One page that says what every file is for.
 > - The Fluent in a Year Anki deck (all 1,500 words) is now in Handouts.

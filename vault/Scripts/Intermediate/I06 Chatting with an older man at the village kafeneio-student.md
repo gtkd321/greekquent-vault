@@ -43,6 +43,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Visit a café and say your order to yourself in Greek before you order in English. If there's a Greek café or bakery nearby, order in Greek.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 2 Τι κάνεις;** (small talk, page 18).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[καλημέρα]] · [[παιδί|το παιδί]] · [[φορά|η φορά]] · [[εδώ]] · [[ναι]] · [[μπορώ]] · [[να]] · [[βέβαια]] · [[από]] · [[πού]] · [[είμαι]] · [[Αμερική|η Αμερική]] · [[ελληνικά|τα ελληνικά]] · [[μπράβο]] · [[και]] · [[τι]] · [[θέλω]] · [[καφές|ο καφές]] · [[καλύτερος]] · [[σε]] · [[χωριό|το χωριό]] · [[ελληνικός]] · [[εσύ]] · [[δεν]] · [[πίνω]] · [[απόγευμα|το απόγευμα]] · [[γιατί]] · [[μετά]] · [[τσάι|το τσάι]] · [[σωστά]] · [[βλέπω]] · [[εκείνος]] · [[βουνό|το βουνό]] · [[εκεί]] · [[αλήθεια|η αλήθεια]] · [[πάμε]] · [[με]] · [[πόδι|το πόδι]] · [[αλλά]] · [[μακριά]] · [[δύο]] · [[ώρα|η ώρα]] · [[έχω]] · [[καλά]] · [[παπούτσι|το παπούτσι]] · [[όχι]] · [[ακόμα]] · [[ίσως]] · [[επόμενος]] · [[έρχομαι]] · [[όποτε]] · [[εγώ]] · [[κάθε]] · [[μέρα|η μέρα]] · [[αγαπημένος]] · [[ή]] · [[κάνω]] · [[αυτός]] · [[Σαββατοκύριακο|το Σαββατοκύριακο]] · [[όταν]] · [[σου]] · [[πρωί|το πρωί]]
 

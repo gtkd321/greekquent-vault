@@ -41,6 +41,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Make a Μου αρέσει / Δεν μου αρέσει list by hand with five things each. Ask one person at home about three of them in Greek.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 10 Είχα ένα τρομερό πονοκέφαλο!** (feelings, the doctor, jobs, sports, page 160).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[τι]] · [[κάνω]] · [[σε]] · [[ελεύθερος]] · [[χρόνος|ο χρόνος]] · [[σου]] · [[τελευταίος]] · [[μου αρέσει]] · [[πολύ]] · [[έχω]] · [[ντομάτα|η ντομάτα]] · [[και]] · [[ωραίος]] · [[από]] · [[πότε]] · [[θέλω]] · [[κάτι]] · [[να]] · [[έξω]] · [[εσύ]] · [[τρέχω]] · [[αλλά]] · [[δεν]] · [[μόνος]] · [[είμαι]] · [[ομάδα|η ομάδα]] · [[που]] · [[κάθε]] · [[Σάββατο|το Σάββατο]] · [[πρωί|το πρωί]] · [[χιλιόμετρο|το χιλιόμετρο]] · [[συνήθως]] · [[πέντε]] · [[Αθήνα|η Αθήνα]] · [[κάποιος]] · [[μέρα|η μέρα]] · [[ακόμα]] · [[μπορώ]] · [[ούτε]] · [[δέκα]] · [[θα]] · [[μου]] · [[ταξίδι|το ταξίδι]] · [[αεροδρόμιο|το αεροδρόμιο]] · [[κανένας]] · [[Σαββατοκύριακο|το Σαββατοκύριακο]] · [[καθόλου]] · [[ποιο]]
 

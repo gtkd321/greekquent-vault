@@ -45,6 +45,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Put a paper weekly planner on the fridge and write the days and one time for each day in Greek. Say the time in Greek each time you check a clock.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 9 Έλα! ποιος είναι;** (phone calls and meeting up, page 144) and **Unit 10 Είχα ένα τρομερό πονοκέφαλο!** (feelings, the doctor, jobs, sports, page 160).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[καλημέρα]] · [[σας]] · [[θα]] · [[θέλω]] · [[να]] · [[κλείνω]] · [[ραντεβού|το ραντεβού]] · [[με]] · [[γιατρός|ο γιατρός]] · [[βεβαίως]] · [[είμαι]] · [[επείγων]] · [[όχι]] · [[για]] · [[γενικός]] · [[έλεγχος|ο έλεγχος]] · [[έχω]] · [[Πέμπτη|η Πέμπτη]] · [[σε]] · [[δέκα]] · [[και]] · [[τέταρτο|το τέταρτο]] · [[δουλεύω]] · [[μέχρι]] · [[δύο]] · [[κάτι]] · [[πιο]] · [[αργά]] · [[μετά]] · [[τρία]] · [[Παρασκευή|η Παρασκευή]] · [[τέσσερις]] · [[παρά]] · [[είκοσι]] · [[ναι]] · [[αυτός]] · [[μου]] · [[κάνω]] · [[όνομα|το όνομα]] · [[τηλέφωνο|το τηλέφωνο]] · [[έξι]] · [[εννιά]] · [[τέσσερα]] · [[πέντε]] · [[ωραία]] · [[παρακαλώ]] · [[λεπτό|το λεπτό]] · [[νωρίς]] · [[εντάξει]] · [[ευχαριστώ]] · [[πολύ]] · [[καλός]] · [[μέρα|η μέρα]] · [[τι]] · [[ώρα|η ώρα]] · [[Σαββατοκύριακο|το Σαββατοκύριακο]] · [[εβδομάδα|η εβδομάδα]] · [[σου]] · [[μου αρέσει]] · [[γιατί]] · [[πάντα]]
 

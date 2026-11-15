@@ -43,6 +43,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Make one real plan this week (coffee, a walk, a call) and ask for it in Greek first: Μπορείς αύριο; Write the plan on a paper calendar in Greek.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 9 Έλα! ποιος είναι;** (phone calls and meeting up, page 144).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[γεια]] · [[σου]] · [[μπορώ]] · [[να]] · [[λίγο]] · [[ναι]] · [[λέω]] · [[μου]] · [[θέλω]] · [[πάμε]] · [[για]] · [[φαγητό|το φαγητό]] · [[Σάββατο|το Σάββατο]] · [[έρχομαι]] · [[πολύ]] · [[αλλά]] · [[δεν]] · [[έχω]] · [[γενέθλια|τα γενέθλια]] · [[Κυριακή|η Κυριακή]] · [[πρωί|το πρωί]] · [[πάω]] · [[σε]] · [[εκκλησία|η εκκλησία]] · [[απόγευμα|το απόγευμα]] · [[ωραία]] · [[και]] · [[βέβαια]] · [[οδηγώ]] · [[εγώ]] · [[αυτοκίνητο|το αυτοκίνητο]] · [[αυτός]] · [[εβδομάδα|η εβδομάδα]] · [[εσύ]] · [[πέντε]] · [[τέλεια]] · [[μήνυμα|το μήνυμα]] · [[με]] · [[διεύθυνση|η διεύθυνση]] · [[τι]] · [[κάνω]] · [[καλά]] · [[ακόμα]] · [[ελληνικά|τα ελληνικά]] · [[πότε]] · [[βλέπω]] · [[φίλος|ο φίλος]]
 

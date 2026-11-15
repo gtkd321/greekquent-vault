@@ -42,6 +42,11 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** For one day, write a short paper log of your day in Greek: Το πρωί… Το μεσημέρι… Το βράδυ… Read it aloud before bed.
 
+> [!note]- Complete Greek (optional, if you have the book)
+> - Same theme as this lesson: **Unit 6 Καλό ταξίδι!** (travel, tickets, telling the time, page 88).
+> - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
+> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+
 > [!abstract]- Word links
 > [[πώς]] · [[είμαι]] · [[συνηθίζω]] · [[μέρα|η μέρα]] · [[για]] · [[εσύ]] · [[ξυπνάω]] · [[σε]] · [[έξι]] · [[πίνω]] · [[καφές|ο καφές]] · [[μου]] · [[και]] · [[μετά]] · [[τόσο]] · [[νωρίς]] · [[εγώ]] · [[δεν]] · [[μπορώ]] · [[να]] · [[πριν]] · [[από]] · [[οκτώ]] · [[δουλεύω]] · [[σπίτι|το σπίτι]] · [[μέχρι]] · [[τρία]] · [[απόγευμα|το απόγευμα]] · [[συνήθως]] · [[πάω]] · [[ή]] · [[κάνω]] · [[βόλτα|η βόλτα]] · [[θέλω]] · [[τρέχω]] · [[πέντε]] · [[χιλιόμετρο|το χιλιόμετρο]] · [[καλοκαίρι|το καλοκαίρι]] · [[μπράβο]] · [[πολύς]] · [[αλλά]] · [[βράδυ|το βράδυ]] · [[πάντα]] · [[κουρασμένος]] · [[τι]] · [[μαγειρεύω]] · [[τρώω]] · [[με]] · [[παιδί|το παιδί]] · [[βλέπω]] · [[ταινία|η ταινία]] · [[Σαββατοκύριακο|το Σαββατοκύριακο]] · [[Σάββατο|το Σάββατο]] · [[τίποτα]] · [[Κυριακή|η Κυριακή]] · [[πάμε]] · [[εκκλησία|η εκκλησία]] · [[γιαγιά|η γιαγιά]] · [[κάθε]] · [[πρωί|το πρωί]] · [[σου]] · [[χωρίς]]
 

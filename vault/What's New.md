@@ -2,6 +2,13 @@
 
 Back to [[Today]].
 
+> [!info]- November 16, late night: Three layouts
+> - **A calmer start.** At the top of every page there is a small switch: **Simple**, **Intermediate**, **Advanced**. Everyone starts on Simple.
+> - **Simple:** Today and this week's lesson stay bright. The rest of the file list is grayed out but still opens if you tap it. Tools: Look up, Send homework, My homework.
+> - **Intermediate:** adds games, the word graph, your colors, past lessons, and your own word cards.
+> - **Advanced:** everything, including Build a sentence, Pair it points, and Ask.
+> - When you have marked enough words, Today suggests the next layout. Switch any time, in either direction. Nothing is deleted, and your choice is saved in My Work.
+
 > [!info]- November 16, night: Smoother word graph
 > - Tap a word in the word graph and its note now fades in gently instead of flashing in.
 > - If your phone is set to reduce motion, it opens instantly as before.

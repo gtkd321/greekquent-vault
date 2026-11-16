@@ -110,3 +110,15 @@ body.greekquent-student .gq-graph > .view-header { display: none !important; }
 @keyframes gq-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 .gq-fade .view-content { animation: gq-fade-in 180ms ease-out; }
 @media (prefers-reduced-motion: reduce) { .gq-fade .view-content { animation: none; } }
+/* Layouts: Simple / Intermediate / Advanced. Items are hidden by layout, never removed. */
+body.gq-l-simple .gq-lv-int, body:not(.gq-l-advanced) .gq-lv-adv { display: none !important; }
+body:not(.gq-l-simple) .gq-lv-only-simple, body:not(.gq-l-intermediate) .gq-lv-only-intermediate { display: none !important; }
+.gq-has-switch { position: relative; }
+.gq-switch { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); z-index: 20; display: flex; gap: 2px; padding: 2px; border-radius: 999px; background: var(--background-secondary); border: 1px solid var(--background-modifier-border); box-shadow: 0 1px 4px rgba(0,0,0,0.08); white-space: nowrap; }
+.gq-switch button { border: none; height: 26px; min-height: 26px; padding: 0 12px; border-radius: 999px; font-size: 12px; background: transparent; box-shadow: none; color: var(--text-muted); position: relative; }
+.gq-switch button.is-on { background: var(--interactive-accent); color: var(--text-on-accent); font-weight: 600; }
+.gq-switch button.gq-ready::after { content: ''; position: absolute; top: 4px; right: 4px; width: 6px; height: 6px; border-radius: 50%; background: var(--interactive-accent); }
+.gq-has-switch > .markdown-reading-view > .markdown-preview-view, .gq-has-switch .cm-scroller { padding-top: 44px; }
+.gq-has-switch > .empty-state { padding-top: 44px; }
+.gq-tnext a { cursor: pointer; }
+.gq-tnext.gq-tcard button { margin: 6px 8px 0 0; }

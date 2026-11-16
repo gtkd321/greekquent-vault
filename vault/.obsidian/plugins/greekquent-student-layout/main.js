@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-16d';
+const VAULT_RELEASE = '2026-11-16e';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -40,6 +40,18 @@ const COURSE_START = [2026, 9, 26];
 const COUSINS_URL = 'https://greekquent-cousins.pplx.app/';
 const BUZZER_URL = 'https://www.perplexity.ai/computer/a/greekquent-buzzer-f3uOHxBFS6Ko8YnCc99fzw';
 const COLORS = [['red', "Don't have it"], ['yellow', 'Kind of'], ['green', 'Have it']];
+// Layouts: Simple (default) shows Today and the newest lesson; Intermediate adds tools; Advanced opens everything.
+// Nothing is ever locked or removed: grayed items still open, and the choice lives in My progress.
+const LEVELS = ['simple', 'intermediate', 'advanced'];
+const LEVEL_NAME = { simple: 'Simple', intermediate: 'Intermediate', advanced: 'Advanced' };
+const LEVEL_NOTE = {
+  simple: 'Simple: Today and this week\'s lesson. Everything else is still there, just quieter.',
+  intermediate: 'Intermediate: adds games, the word graph, your colors, past lessons, and your own word cards.',
+  advanced: 'Advanced: everything is open, including Build a sentence, Pair it points, and Ask.'
+};
+const LEVEL_ADDS = { intermediate: 'games, the word graph, your colors, past lessons, and your own word cards', advanced: 'Build a sentence, Pair it points, Ask, and every note at full brightness' };
+const LEVEL_READY = { intermediate: 15, advanced: 60 };   // marked words before the next layout is suggested
+const MID_PATHS = ['Words', 'Word lists', 'Fluent in a Year', 'My Work', '02 Verb Tables.md', '07 Fluent in a Year.md', '09 Games.md', "What's New.md", 'Setting up.md'];
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const say = w => { if (!window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(w); u.lang = 'el-GR'; speechSynthesis.cancel(); speechSynthesis.speak(u); };
@@ -462,7 +474,7 @@ class PairModal extends Modal {
 module.exports = class GreekquentStudentLayout extends Plugin {
   onload() {
     this.busy = false; this.todayEls = new Set(); this.bars = new Set(); this.cardBoxes = new Set();
-    document.body.classList.add('greekquent-student');
+    document.body.classList.add('greekquent-student', 'gq-l-simple');
     this.registerView(WEB, leaf => new OldWebView(leaf, this));
     // Left toolbar: four buttons. Today is the start screen; More holds the rest.
     this.addRibbonIcon('house', 'Today', () => this.openToday());
@@ -509,6 +521,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       this.isTeacher = await this.app.vault.adapter.exists(TEACHER_MARK);
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
       this.hideRibbon();
+      this.applyLevel();
+      this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === PROGRESS) { const was = this.lvl; this.lvl = null; if (this.level() !== was) this.applyLevel(); else this.paintSwitches(); } }));
+      this.registerEvent(this.app.workspace.on('layout-change', () => this.mountSwitches()));
+      this.registerEvent(this.app.workspace.on('active-leaf-change', () => this.mountSwitches()));
+      this.registerEvent(this.app.vault.on('create', () => this.dimLater()));
+      this.registerEvent(this.app.vault.on('rename', () => this.dimLater()));
       // Startup: tidy the sidebars quietly. Obsidian's default layout (fresh vault, new device) puts Search and
       // Bookmarks on the left; moving them used to pop the right sidebar open on Bookmarks.
       const wasCollapsed = this.app.workspace.rightSplit ? this.app.workspace.rightSplit.collapsed : true;
@@ -607,9 +625,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       st.title = bar.createDiv('gq-web-title');
       const say = bar.createEl('button', { text: 'Hear it', attr: { 'aria-label': 'Say the word' } });
       const open = bar.createEl('button', { text: 'Open note', attr: { 'aria-label': 'Open the word note' } });
-      const pairb = bar.createEl('button', { text: 'Build a sentence', attr: { 'aria-label': 'Build a sentence with this word' } });
+      const pairb = bar.createEl('button', { text: 'Build a sentence', cls: 'gq-lv-adv', attr: { 'aria-label': 'Build a sentence with this word' } });
       pairb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.openPair(f.basename); };
-      const askb = bar.createEl('button', { text: 'Ask', attr: { 'aria-label': 'Ask the group about this word' } });
+      const askb = bar.createEl('button', { text: 'Ask', cls: 'gq-lv-adv', attr: { 'aria-label': 'Ask the group about this word' } });
       askb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.ask(f); };
       st.trail = wrap.createDiv('gq-web-trail'); st.bar = wrap;
       const key = wrap.createDiv('gq-web-key');
@@ -953,9 +971,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // ---------- More menu (left toolbar) ----------
   moreMenu(evt) {
     const m = new Menu();
-    m.addItem(i => i.setTitle('Word graph').setIcon('git-fork').onClick(() => this.openGraph()));
+    const l = this.level();
+    if (l !== 'simple') m.addItem(i => i.setTitle('Word graph').setIcon('git-fork').onClick(() => this.openGraph()));
     m.addItem(i => i.setTitle('Send homework').setIcon('send').onClick(() => this.sendHomework()));
-    m.addItem(i => i.setTitle('Ask on video').setIcon('video').onClick(() => this.askVideo()));
+    if (l === 'advanced') m.addItem(i => i.setTitle('Ask on video').setIcon('video').onClick(() => this.askVideo()));
     m.addSeparator();
     m.addItem(i => i.setTitle('Share feedback').setIcon('message-square').onClick(() => this.feedback()));
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
@@ -981,7 +1000,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, layout: String(fm.layout || ''), hint_off: String(fm.hint_off || '') };
   }
   colorOf(word) { const c = this.colors(); return COLORS.map(x => x[0]).find(k => c[k].includes(word)) || ''; }
   async progressFile() {
@@ -1043,7 +1062,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!ctx || !ctx.sourcePath || !ctx.sourcePath.startsWith('Words/')) return;
     const h = [...el.querySelectorAll('h2')].find(x => x.textContent.trim() === 'Chunks'); if (!h || el.querySelector('.gq-cards')) return;
     const word = ctx.sourcePath.slice(6).replace(/\.md$/, '');
-    const box = createDiv('gq-cards'); h.after(box);
+    const box = createDiv('gq-cards gq-lv-int'); h.after(box);
     const rec = { word, box }; this.cardBoxes.add(rec); this.paintCards(rec);
   }
   async paintCards(rec) {
@@ -1070,8 +1089,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const word = ctx.sourcePath.slice(6).replace(/\.md$/, '');
     const bar = createDiv('gq-wordbar'); p.after(bar);
     const hear = bar.createEl('button', { text: 'Hear it', attr: { 'aria-label': 'Say the word' } }); hear.onclick = () => say(word);
-    const g = bar.createEl('button', { text: 'Word graph' }); g.onclick = () => this.openGraph(ctx.sourcePath);
-    const pb = bar.createEl('button', { text: 'Build a sentence' }); pb.onclick = () => this.openPair(word);
+    const g = bar.createEl('button', { text: 'Word graph', cls: 'gq-lv-int' }); g.onclick = () => this.openGraph(ctx.sourcePath);
+    const pb = bar.createEl('button', { text: 'Build a sentence', cls: 'gq-lv-adv' }); pb.onclick = () => this.openPair(word);
     const grp = bar.createDiv({ cls: 'gq-colors', attr: { role: 'group', 'aria-label': 'How well do you know it?' } });
     const btns = COLORS.map(([k, label]) => { const b = grp.createEl('button', { text: label, cls: 'gq-c gq-' + k }); b.onclick = () => this.setColor(word, this.colorOf(word) === k ? '' : k); return [k, b]; });
     const rec = { word, btns, el: bar }; this.bars.add(rec); this.paintBar(rec);
@@ -1146,7 +1165,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }
   }
   playRow(parent, words) {
-    const row = parent.createDiv('gq-row'); const list = words.map(w => w.word);
+    const row = parent.createDiv('gq-row gq-lv-int'); const list = words.map(w => w.word);
     const b = row.createEl('button', { text: 'Play Buzzer with these' }); b.onclick = () => window.open(this.gameUrl(BUZZER_URL, list));
     const c = row.createEl('button', { text: 'Play Cousins with these' }); c.onclick = () => window.open(this.gameUrl(COUSINS_URL, list));
   }
@@ -1200,7 +1219,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (!rev.length) rc.createDiv({ cls: 'gq-hint', text: 'Nothing to review yet. Words you mark red, miss in a game, or look up show up here for two weeks.' });
       else { this.wordList(rc, rev.slice(0, 20)); this.playRow(rc, rev.slice(0, 40)); }
       // Pair it: sentences built this week (own sentences count double)
-      const pc = await this.pairCount(), pk = box.createDiv('gq-tcard');
+      const pc = await this.pairCount(), pk = box.createDiv('gq-tcard gq-lv-adv');
       pk.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `Pair it · ${pc.points} point${pc.points === 1 ? '' : 's'} this week` });
       const pbar = pk.createDiv('gq-tbar'); const done = pk.createDiv(); pbar.createDiv('gq-seg gq-pairseg').style.flexGrow = String(Math.min(pc.n, PAIR_GOAL)); pbar.createDiv('gq-seg gq-new').style.flexGrow = String(Math.max(0, PAIR_GOAL - pc.n)); done.remove();
       pk.createDiv({ cls: 'gq-hint', text: pc.n ? `${pc.n} sentence${pc.n === 1 ? '' : 's'} (${pc.own} your own) using ${pc.words} words. Goal: ${PAIR_GOAL} a week. Your own sentences count double.` : `Build ${PAIR_GOAL} sentences this week: pick a word, then pair it with who, what, and how or when. Your own sentences count double.` });
@@ -1211,7 +1230,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const pb1 = prow.createEl('button', { text: todayWords.length ? 'Pair a word from this week' : 'Pair a word' }); pb1.onclick = () => this.openPair(pickWord());
       const pb2 = prow.createEl('button', { text: 'My pairs' }); pb2.onclick = async () => { if (!(await this.app.vault.adapter.exists(PAIRS_NOTE))) { new Notice('Save a sentence first.'); return; } this.openNote(PAIRS_NOTE); };
       // Colors
-      const cc = box.createDiv('gq-tcard');
+      const cc = box.createDiv('gq-tcard gq-lv-int');
       const n = { green: col.green.length, yellow: col.yellow.length, red: col.red.length }; const total = words.length || 1500;
       n.new = Math.max(0, total - n.green - n.yellow - n.red);
       cc.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'My colors' });
@@ -1220,12 +1239,21 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       cc.createDiv({ cls: 'gq-hint', text: `Have it ${n.green} · Kind of ${n.yellow} · Don't have it ${n.red} · Not marked ${n.new}. Mark words with the color buttons on each word note.` });
       // Tools
       const tc = box.createDiv('gq-tcard gq-row');
-      const tool = (t, fn) => { const b = tc.createEl('button', { text: t }); b.onclick = fn; };
+      const tool = (t, fn, cls) => { const b = tc.createEl('button', { text: t, cls: cls || '' }); b.onclick = fn; };
       tool('Look up a word', () => new LookupModal(this.app, this).open());
-      tool('Word graph', () => this.openGraph());
-      tool('Games', () => this.openNote('09 Games.md'));
+      tool('Word graph', () => this.openGraph(), 'gq-lv-int');
+      tool('Games', () => this.openNote('09 Games.md'), 'gq-lv-int');
       tool('Send homework', () => this.sendHomework());
       tool('My homework', () => this.openNote(MY_WORK + 'Homework.md'));
+      // What the next layout adds. Once enough words are marked, it says so (until dismissed).
+      const marked = col.green.length + col.yellow.length + col.red.length;
+      for (const [cur, next] of [['simple', 'intermediate'], ['intermediate', 'advanced']]) {
+        const ready = marked >= LEVEL_READY[next] && col.hint_off !== next;
+        const nx = box.createDiv({ cls: 'gq-lv-only-' + cur + (ready ? ' gq-tcard gq-tnext' : ' gq-hint gq-tnext') });
+        nx.appendText((ready ? `You have marked ${marked} words. Ready for more? ` : 'More opens in ') + `${LEVEL_NAME[next]}: ${LEVEL_ADDS[next]}. `);
+        const go = ready ? nx.createEl('button', { text: `Try ${LEVEL_NAME[next]}` }) : nx.createEl('a', { text: `Try ${LEVEL_NAME[next]}`, href: '#' }); go.onclick = e => { e.preventDefault(); this.setLevel(next); };
+        if (ready) { const x = nx.createEl('button', { text: 'Not yet' }); x.onclick = async () => { const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.hint_off = next; }); setTimeout(() => this.refreshToday(), 300); }; }
+      }
       let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}
       const foot = box.createDiv('gq-hint');
       const wn = foot.createEl('a', { text: "What's new", href: '#' }); wn.onclick = e => { e.preventDefault(); this.openNote(WHATS_NEW); };
@@ -1234,7 +1262,80 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (tok === el.gqTok) { el.empty(); el.appendChild(box); }
     }
   }
-  onunload() { document.body.classList.remove('greekquent-student'); }
+  // ---------- Layouts ----------
+  level() {
+    if (this.lvl) return this.lvl;
+    const l = this.colors().layout;
+    return this.lvl = LEVELS.includes(l) ? l : (this.isTeacher ? 'advanced' : 'simple');
+  }
+  async setLevel(l) {
+    if (!LEVELS.includes(l)) return;
+    this.lvl = l; this.applyLevel(); new Notice(LEVEL_NOTE[l], 6000);
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.layout = l; });
+  }
+  applyLevel() {
+    const l = this.level();
+    for (const x of LEVELS) document.body.classList.toggle('gq-l-' + x, x === l);
+    this.levelRibbon(l); this.mountSwitches(); this.paintSwitches(); this.dimSidebar();
+  }
+  levelRibbon(l) {
+    const r = this.app.workspace.leftRibbon; if (!r || !r.items) return;
+    const it = r.items.find(x => x.id === this.manifest.id + ':Ask'); if (!it) return;
+    const hide = l === 'simple'; if (!!it.hidden === hide) return;
+    it.hidden = hide; try { r.load(r.serialize()); } catch (e) {} try { r.onChange(true); } catch (e) {}
+  }
+  // The newest lesson so far: this week's, or the last week that had class.
+  async currentLesson() {
+    const now = new Date(); now.setHours(0, 0, 0, 0);
+    const dd = Math.floor((now - new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2])) / 864e5);
+    for (let w = dd < 0 ? 1 : Math.floor(dd / 7) + 1; w >= 1; w--) { const wk = await this.weekNote(w); if (wk && +wk.fm.lesson) return +wk.fm.lesson; }
+    return 1;
+  }
+  dimLater() { clearTimeout(this.dimT); this.dimT = setTimeout(() => this.dimSidebar(), 800); }
+  // Gray (never hide) file-list items the layout doesn't use yet. CSS on data-path, so it survives folder opens and redraws.
+  async dimSidebar() {
+    const l = this.level(); let st = document.getElementById('gq-layout-dim');
+    if (l === 'advanced') { if (st) st.remove(); return; }
+    const n = await this.currentLesson(), on = new Set([TODAY]), pre = new Set();
+    for (const f of this.app.vault.getMarkdownFiles()) {
+      if (!f.path.startsWith('Scripts/')) continue;
+      const m = f.basename.match(/^[LKI](\d+) /); if (!m) continue;
+      if (l === 'simple' ? +m[1] === n : +m[1] <= n) on.add(f.path);
+    }
+    if (l === 'intermediate') for (const p of MID_PATHS) { if (p.endsWith('.md')) on.add(p); else { on.add(p); pre.add(p + '/'); } }
+    for (const p of [...on]) { const parts = p.split('/'); for (let i = 1; i < parts.length; i++) on.add(parts.slice(0, i).join('/')); }
+    const q = s => '"' + s.replace(/\\/g, '\\\\').replace(/"/g, '\\"') + '"', sel = '.nav-files-container .tree-item-self';
+    const bright = [...[...on].map(p => `${sel}[data-path=${q(p)}]`), ...[...pre].map(p => `${sel}[data-path^=${q(p)}]`)];
+    if (!st) { st = document.createElement('style'); st.id = 'gq-layout-dim'; document.head.appendChild(st); }
+    st.textContent = `${sel}[data-path] { opacity: 0.38; }\n${sel}[data-path]:hover { opacity: 0.75; }\n${bright.join(',\n')} { opacity: 1; }\n`;
+  }
+  // Switcher: a small Simple / Intermediate / Advanced control, centered at the top of every main pane.
+  mountSwitches() {
+    const ws = this.app.workspace; if (!ws.iterateRootLeaves) return;
+    ws.iterateRootLeaves(leaf => {
+      const vc = leaf.view && leaf.view.containerEl && leaf.view.containerEl.querySelector(':scope > .view-content'); if (!vc || vc.querySelector(':scope > .gq-switch')) return;
+      vc.addClass('gq-has-switch');
+      const sw = vc.createDiv({ cls: 'gq-switch', attr: { role: 'radiogroup', 'aria-label': 'Layout' } });
+      for (const l of LEVELS) { const b = sw.createEl('button', { text: LEVEL_NAME[l], attr: { role: 'radio', 'data-level': l } }); b.onclick = () => { if (this.level() !== l) this.setLevel(l); }; }
+    });
+    this.paintSwitches();
+  }
+  paintSwitches() {
+    const l = this.level(), col = this.colors(), marked = col.green.length + col.yellow.length + col.red.length;
+    const next = { simple: 'intermediate', intermediate: 'advanced' }[l];
+    for (const b of document.querySelectorAll('.gq-switch button')) {
+      const k = b.getAttribute('data-level'), on = k === l;
+      b.classList.toggle('is-on', on); b.setAttribute('aria-checked', String(on));
+      const ready = k === next && marked >= LEVEL_READY[next] && col.hint_off !== next;
+      b.classList.toggle('gq-ready', ready); b.setAttribute('aria-label', ready ? `${LEVEL_NAME[k]} (ready when you are)` : LEVEL_NAME[k]);
+    }
+  }
+  onunload() {
+    document.body.classList.remove('greekquent-student', ...LEVELS.map(x => 'gq-l-' + x));
+    const st = document.getElementById('gq-layout-dim'); if (st) st.remove();
+    for (const sw of document.querySelectorAll('.gq-switch')) { if (sw.parentElement) sw.parentElement.classList.remove('gq-has-switch'); sw.remove(); }
+  }
   hideRibbon() {
     // Same as right-click > hide on the ribbon, so it also applies to the mobile ribbon menu.
     const r = this.app.workspace.leftRibbon;

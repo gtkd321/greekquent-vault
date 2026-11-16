@@ -170,7 +170,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I11 Planning a road trip in the Peloponnese-student|Intermediate scene]] · [[K11 Pillow islands-student|Kid page]]
+Want more? [[I11 Planning a road trip in the Peloponnese-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[πάω]] (I go) · [[σε]] (in, at, to) · [[δουλειά|η δουλειά]] (work, job) · [[εκκλησία|η εκκλησία]] (church) · [[θάλασσα|η θάλασσα]] (sea) · [[χωριό|το χωριό]] (village) · [[πάμε]] (let's go) · [[ο, η, το]] (the) · [[φούρνος|ο φούρνος]] (bakery, oven) · [[πού]] (where) · [[θέλω]] (I want) · [[να]] (to (verb particle)) · [[μπορώ]] (I can) · [[ναι]] (yes) · [[δεν]] (not) · [[έχω]] (I have) · [[εσύ]] (you (singular)) · [[μετά]] (after) · [[μαζί]] (together) · [[Κυριακή|η Κυριακή]] (Sunday) · [[γεια]] (hi, bye) · [[σπίτι|το σπίτι]] (house, home) · [[Σάββατο|το Σάββατο]] (Saturday) · [[έρχομαι]] (I come) · [[και]] (and) · [[τι]] (what) · [[ωραία]] (nice(ly), great) · [[σου]] (you, your) · [[καλοκαίρι|το καλοκαίρι]] (summer)

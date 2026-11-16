@@ -176,7 +176,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I23 A travel story that went wrong-student|Intermediate scene]] · [[K23 Weekend show and tell-student|Kid page]]
+Want more? [[I23 A travel story that went wrong-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[πάω]] (I go) · [[κάνω]] (I do, I make) · [[βλέπω]] (I see) · [[λέω]] (I say, I tell) · [[τρώω]] (I eat) · [[πίνω]] (I drink) · [[τηλεόραση|η τηλεόραση]] (television) · [[και]] (and) · [[ο, η, το]] (the) · [[σε]] (in, at, to) · [[Σάββατο|το Σάββατο]] (Saturday) · [[θάλασσα|η θάλασσα]] (sea) · [[ψάρι|το ψάρι]] (fish) · [[ένας, μία, ένα]] (a, one) · [[μπίρα|η μπίρα]] (beer) · [[τι]] (what) · [[καλημέρα]] (good morning) · [[Σαββατοκύριακο|το Σαββατοκύριακο]] (weekend) · [[εκεί]] (there) · [[αλήθεια|η αλήθεια]] (truth) · [[γεια]] (hi, bye) · [[σου]] (you, your) · [[μετά]] (after) · [[καφές|ο καφές]] (coffee) · [[ωραία]] (nice(ly), great) · [[εγώ]] (I) · [[έχω]] (I have) · [[πολύς]] (much, many) · [[δουλειά|η δουλειά]] (work, job) · [[με]] (with) · [[σας]] (you, your (pl./formal)) · [[εσύ]] (you (singular)) · [[Κυριακή|η Κυριακή]] (Sunday) · [[εκκλησία|η εκκλησία]] (church) · [[γιαγιά|η γιαγιά]] (grandmother) · [[μου]] (me, my) · [[πώς]] (how) · [[είμαι]] (I am) · [[καλά]] (well, fine) · [[ότι]] (that (conj.)) · [[θέλω]] (I want) · [[να]] (to (verb particle))

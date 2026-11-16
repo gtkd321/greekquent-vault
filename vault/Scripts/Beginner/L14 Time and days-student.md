@@ -155,7 +155,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I14 Booking a doctor's appointment by phone-student|Intermediate scene]] · [[K14 Τι ώρα είναι κύριε Λύκε-student|Kid page]]
+Want more? [[I14 Booking a doctor's appointment by phone-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[Δευτέρα|η Δευτέρα]] (Monday) · [[Τρίτη|η Τρίτη]] (Tuesday) · [[Τετάρτη|η Τετάρτη]] (Wednesday) · [[Πέμπτη|η Πέμπτη]] (Thursday) · [[Παρασκευή|η Παρασκευή]] (Friday) · [[Σάββατο|το Σάββατο]] (Saturday) · [[Κυριακή|η Κυριακή]] (Sunday) · [[τι]] (what) · [[ώρα|η ώρα]] (hour, time) · [[είμαι]] (I am) · [[πέντε]] (five) · [[και]] (and) · [[μισός]] (half) · [[τέταρτο|το τέταρτο]] (quarter) · [[έξι]] (six) · [[παρά]] (despite; to (time)) · [[ο, η, το]] (the) · [[σε]] (in, at, to) · [[ένας, μία, ένα]] (a, one) · [[δύο]] (two) · [[τρία]] (three) · [[δέκα]] (ten) · [[μπορώ]] (I can) · [[δεν]] (not) · [[νωρίς]] (early) · [[αργά]] (slowly, late) · [[έχω]] (I have) · [[δουλειά|η δουλειά]] (work, job) · [[λίγο]] (a little) · [[εντάξει]] (okay) · [[λέω]] (I say, I tell) · [[γιατί]] (why, because) · [[θέλω]] (I want) · [[να]] (to (verb particle)) · [[πάμε]] (let's go) · [[για]] (for, about) · [[καφές|ο καφές]] (coffee) · [[εγώ]] (I) · [[τέλεια]] (perfect(ly))

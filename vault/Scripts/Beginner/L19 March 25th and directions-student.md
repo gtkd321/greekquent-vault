@@ -163,7 +163,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I19 Detailed directions in Athens on a parade day-student|Intermediate scene]] · [[K19 Robot directions-student|Kid page]]
+Want more? [[I19 Detailed directions in Athens on a parade day-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[ευθεία]] (straight ahead) · [[δεξιά]] (right (direction)) · [[αριστερά]] (left) · [[κοντά]] (near) · [[μακριά]] (far) · [[εδώ]] (here) · [[εκεί]] (there) · [[πού]] (where) · [[είμαι]] (I am) · [[ο, η, το]] (the) · [[πλατεία|η πλατεία]] (square (town)) · [[δίπλα]] (next to) · [[σε]] (in, at, to) · [[εκκλησία|η εκκλησία]] (church) · [[φούρνος|ο φούρνος]] (bakery, oven) · [[πίσω]] (back, behind) · [[από]] (from, by) · [[να]] (to (verb particle)) · [[μου]] (me, my) · [[λέω]] (I say, I tell) · [[μπορώ]] (I can) · [[μπλε]] (blue) · [[και]] (and) · [[συγγνώμη]] (sorry, excuse me) · [[ναι]] (yes) · [[πάω]] (I go) · [[μετά]] (after) · [[όχι]] (no) · [[βλέπω]] (I see) · [[δεν]] (not) · [[ευχαριστώ]] (thank you) · [[χρόνια πολλά]] (happy birthday, best wishes) · [[βέβαια]] (of course) · [[πέντε]] (five) · [[λεπτό|το λεπτό]] (minute) · [[για]] (for, about) · [[σήμερα]] (today) · [[πολύ]] (very, a lot)

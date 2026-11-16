@@ -161,7 +161,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I12 Buying for a recipe and getting a better price-student|Intermediate scene]] · [[K12 Toy market-student|Kid page]]
+Want more? [[I12 Buying for a recipe and getting a better price-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[έντεκα]] (eleven) · [[δώδεκα]] (twelve) · [[είκοσι]] (twenty) · [[τριάντα]] (thirty) · [[πενήντα]] (fifty) · [[εκατό]] (hundred) · [[πέντε]] (five) · [[δύο]] (two) · [[πόσο]] (how much) · [[κάνω]] (I do, I make) · [[ευρώ|το ευρώ]] (euro) · [[ο, η, το]] (the) · [[ντομάτα|η ντομάτα]] (tomato) · [[κιλό|το κιλό]] (kilo) · [[ελιά|η ελιά]] (olive, olive tree) · [[έχω]] (I have) · [[ναι]] (yes) · [[όχι]] (no) · [[δεν]] (not) · [[έρχομαι]] (I come) · [[καλημέρα]] (good morning) · [[ένας, μία, ένα]] (a, one) · [[παρακαλώ]] (please; you're welcome) · [[θέλω]] (I want) · [[μισό]] (half) · [[τέσσερα]] (four) · [[και]] (and) · [[ορίστε]] (here you are; pardon?) · [[τίποτα]] (nothing) · [[άλλος]] (other) · [[πατάτα|η πατάτα]] (potato) · [[είμαι]] (I am) · [[πολύ]] (very, a lot) · [[καλός]] (good) · [[ευχαριστώ]] (thank you) · [[όλος]] (all, whole) · [[λεπτό|το λεπτό]] (minute) · [[σας]] (you, your (pl./formal)) · [[μέρα|η μέρα]] (day) · [[επίσης]] (also)

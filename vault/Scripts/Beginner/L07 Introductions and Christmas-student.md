@@ -168,7 +168,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I07 New in the parish work roots and Christmas customs-student|Intermediate scene]] · [[K07 Who am I masks-student|Kid page]]
+Want more? [[I07 New in the parish work roots and Christmas customs-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[είμαι]] (I am) · [[ο, η, το]] (the) · [[από]] (from, by) · [[Αμερική|η Αμερική]] (America) · [[Ελλάδα|η Ελλάδα]] (Greece) · [[εσύ]] (you (singular)) · [[πού]] (where) · [[εδώ]] (here) · [[δεν]] (not) · [[έχω]] (I have) · [[ένας, μία, ένα]] (a, one) · [[οικογένεια|η οικογένεια]] (family) · [[θέλω]] (I want) · [[να]] (to (verb particle)) · [[βλέπω]] (I see) · [[καλά]] (well, fine) · [[Χριστούγεννα|τα Χριστούγεννα]] (Christmas) · [[χαίρω πολύ]] (pleased to meet you) · [[ορίστε]] (here you are; pardon?) · [[ευχαριστώ]] (thank you) · [[γεια]] (hi, bye) · [[σου]] (you, your) · [[αλλά]] (but) · [[σας]] (you, your (pl./formal)) · [[με]] (with) · [[ναι]] (yes) · [[τι]] (what) · [[ωραία]] (nice(ly), great) · [[μπορώ]] (I can) · [[τώρα]] (now) · [[και]] (and)

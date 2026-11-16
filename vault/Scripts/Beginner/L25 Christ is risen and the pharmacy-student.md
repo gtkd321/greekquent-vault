@@ -159,7 +159,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I25 Pharmacy visit with real symptoms-student|Intermediate scene]] · [[K25 Teddy goes to the doctor-student|Kid page]]
+Want more? [[I25 Pharmacy visit with real symptoms-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[ο, η, το]] (the) · [[κεφάλι|το κεφάλι]] (head) · [[λαιμός|ο λαιμός]] (neck, throat) · [[κοιλιά|η κοιλιά]] (belly) · [[δόντι|το δόντι]] (tooth) · [[χέρι|το χέρι]] (hand, arm) · [[πόδι|το πόδι]] (foot, leg) · [[πλάτη|η πλάτη]] (back (body)) · [[εγώ]] (I) · [[πονάω]] (I hurt, I ache) · [[έχω]] (I have) · [[κάτι]] (something) · [[για]] (for, about) · [[μπορώ]] (I can) · [[να]] (to (verb particle)) · [[μου]] (me, my) · [[δίνω]] (I give) · [[δεν]] (not) · [[ένας, μία, ένα]] (a, one) · [[δύο]] (two) · [[φορά|η φορά]] (time (occasion)) · [[πώς]] (how) · [[ναι]] (yes) · [[όχι]] (no) · [[ορίστε]] (here you are; pardon?) · [[ευχαριστώ]] (thank you) · [[τι]] (what) · [[θέλω]] (I want) · [[βέβαια]] (of course) · [[και]] (and) · [[σας]] (you, your (pl./formal)) · [[είμαι]] (I am) · [[καλά]] (well, fine) · [[αλλά]] (but) · [[ξέρω]] (I know) · [[τρία]] (three) · [[αν]] (if) · [[πάω]] (I go) · [[σε]] (in, at, to) · [[γιατρός|ο γιατρός]] (doctor) · [[πόσο]] (how much) · [[κάνω]] (I do, I make) · [[τέσσερα]] (four) · [[ευρώ|το ευρώ]] (euro)

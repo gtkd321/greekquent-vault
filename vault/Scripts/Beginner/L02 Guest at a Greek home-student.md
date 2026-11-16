@@ -146,7 +146,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I02 A dinner guest who doesn't want to be any trouble-student|Intermediate scene]] · [[K02 Teddy's tea party-student|Kid page]]
+Want more? [[I02 A dinner guest who doesn't want to be any trouble-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[θέλω]] (I want) · [[νερό|το νερό]] (water) · [[τσάι|το τσάι]] (tea) · [[ένας, μία, ένα]] (a, one) · [[λίγο]] (a little) · [[ναι]] (yes) · [[ευχαριστώ]] (thank you) · [[όχι]] (no) · [[ο, η, το]] (the) · [[κρασί|το κρασί]] (wine) · [[έχω]] (I have) · [[ψωμί|το ψωμί]] (bread) · [[αλλά]] (but) · [[λέω]] (I say, I tell) · [[γεια]] (hi, bye) · [[σου]] (you, your) · [[καλώς ήρθες]] (welcome) · [[και]] (and) · [[εσύ]] (you (singular)) · [[καφές|ο καφές]] (coffee) · [[δεν]] (not)

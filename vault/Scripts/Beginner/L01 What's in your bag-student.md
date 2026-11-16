@@ -128,7 +128,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I01 Getting to know someone at a community event-student|Intermediate scene]] · [[K01 Mystery bag-student|Kid page]]
+Want more? [[I01 Getting to know someone at a community event-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[γεια]] (hi, bye) · [[σας]] (you, your (pl./formal)) · [[σου]] (you, your) · [[εγώ]] (I) · [[λέω]] (I say, I tell) · [[πώς]] (how) · [[εσύ]] (you (singular)) · [[ναι]] (yes) · [[όχι]] (no) · [[έχω]] (I have) · [[ένας, μία, ένα]] (a, one) · [[βιβλίο|το βιβλίο]] (book) · [[στυλό|το στυλό]] (pen) · [[κινητό|το κινητό]] (mobile phone) · [[κλειδί|το κλειδί]] (key) · [[νερό|το νερό]] (water) · [[τετράδιο|το τετράδιο]] (notebook) · [[τι]] (what) · [[σε]] (in, at, to) · [[τσάντα|η τσάντα]] (bag) · [[και]] (and) · [[ορίστε]] (here you are; pardon?) · [[ευχαριστώ]] (thank you) · [[παρακαλώ]] (please; you're welcome)

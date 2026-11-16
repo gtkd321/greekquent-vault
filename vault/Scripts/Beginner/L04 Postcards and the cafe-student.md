@@ -152,7 +152,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I04 Trip photos and a real café order-student|Intermediate scene]] · [[K04 Telescope spy-student|Kid page]]
+Want more? [[I04 Trip photos and a real café order-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[βλέπω]] (I see) · [[ο, η, το]] (the) · [[θάλασσα|η θάλασσα]] (sea) · [[ένας, μία, ένα]] (a, one) · [[βουνό|το βουνό]] (mountain) · [[ήλιος|ο ήλιος]] (sun) · [[βάρκα|η βάρκα]] (boat) · [[εκκλησία|η εκκλησία]] (church) · [[τι]] (what) · [[έχω]] (I have) · [[θέλω]] (I want) · [[μπορώ]] (I can) · [[και]] (and) · [[σπίτι|το σπίτι]] (house, home) · [[νερό|το νερό]] (water) · [[κρασί|το κρασί]] (wine) · [[παρακαλώ]] (please; you're welcome) · [[τίποτα]] (nothing) · [[άλλος]] (other) · [[όχι]] (no) · [[ευχαριστώ]] (thank you) · [[βιβλίο|το βιβλίο]] (book) · [[τώρα]] (now) · [[κάνω]] (I do, I make) · [[καλά]] (well, fine) · [[ναι]] (yes) · [[καλημέρα]] (good morning) · [[καφές|ο καφές]] (coffee) · [[τσάι|το τσάι]] (tea) · [[ορίστε]] (here you are; pardon?) · [[εσύ]] (you (singular))

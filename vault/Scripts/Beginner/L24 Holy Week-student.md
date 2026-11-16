@@ -159,7 +159,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I24 Holy Week day by day-student|Intermediate scene]] · [[K24 Red eggs and candles-student|Kid page]]
+Want more? [[I24 Holy Week day by day-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[μεγάλος]] (big, old (age)) · [[Πέμπτη|η Πέμπτη]] (Thursday) · [[κόκκινος]] (red) · [[αυγό|το αυγό]] (egg) · [[Παρασκευή|η Παρασκευή]] (Friday) · [[ο, η, το]] (the) · [[Σάββατο|το Σάββατο]] (Saturday) · [[με]] (with) · [[Κυριακή|η Κυριακή]] (Sunday) · [[Πάσχα|το Πάσχα]] (Easter) · [[και]] (and) · [[καλός]] (good) · [[έχω]] (I have) · [[ένας, μία, ένα]] (a, one) · [[θέλω]] (I want) · [[ναι]] (yes) · [[μου]] (me, my) · [[για]] (for, about) · [[παιδί|το παιδί]] (child) · [[χρώμα|το χρώμα]] (color) · [[από]] (from, by) · [[γιαγιά|η γιαγιά]] (grandmother) · [[είμαι]] (I am) · [[πολύ]] (very, a lot) · [[πού]] (where) · [[θα]] (will (future particle)) · [[εδώ]] (here) · [[σε]] (in, at, to) · [[εκκλησία|η εκκλησία]] (church) · [[εσύ]] (you (singular)) · [[πάω]] (I go) · [[χωριό|το χωριό]] (village)

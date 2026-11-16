@@ -149,7 +149,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I03 Rescheduling plans with friends-student|Intermediate scene]] · [[K03 Μπορείς challenge-student|Kid page]]
+Want more? [[I03 Rescheduling plans with friends-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[μπορώ]] (I can) · [[ναι]] (yes) · [[βέβαια]] (of course) · [[θέλω]] (I want) · [[αλλά]] (but) · [[δεν]] (not) · [[σήμερα]] (today) · [[λυπάμαι]] (I'm sorry) · [[ο, η, το]] (the) · [[βράδυ|το βράδυ]] (evening) · [[αύριο]] (tomorrow) · [[πρωί|το πρωί]] (morning) · [[πόσο]] (how much) · [[πολύς]] (much, many) · [[έχω]] (I have) · [[ώρα|η ώρα]] (hour, time) · [[όχι]] (no) · [[γεια]] (hi, bye) · [[σου]] (you, your) · [[γιατί]] (why, because) · [[καφές|ο καφές]] (coffee) · [[τέλεια]] (perfect(ly)) · [[και]] (and) · [[καλά]] (well, fine) · [[εμείς]] (we) · [[εντάξει]] (okay)

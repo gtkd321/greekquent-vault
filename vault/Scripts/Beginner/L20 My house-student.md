@@ -160,7 +160,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I20 Renting a village house for the summer-student|Intermediate scene]] · [[K20 Shoebox house and color hunt-student|Kid page]]
+Want more? [[I20 Renting a village house for the summer-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[ο, η, το]] (the) · [[μεγάλος]] (big, old (age)) · [[σκύλος|ο σκύλος]] (dog) · [[κουζίνα|η κουζίνα]] (kitchen, cuisine) · [[σπίτι|το σπίτι]] (house, home) · [[μικρός]] (small, young) · [[καινούργιος]] (new) · [[παλιός]] (old (things)) · [[δωμάτιο|το δωμάτιο]] (room) · [[είμαι]] (I am) · [[ή]] (or) · [[άσπρος]] (white) · [[μαύρος]] (black) · [[κόκκινος]] (red) · [[κίτρινος]] (yellow) · [[πράσινος]] (green) · [[μπλε]] (blue) · [[γκρι]] (gray) · [[τι]] (what) · [[χρώμα|το χρώμα]] (color) · [[βιβλίο|το βιβλίο]] (book) · [[τσάντα|η τσάντα]] (bag) · [[μπάνιο|το μπάνιο]] (bath, bathroom; swim) · [[κήπος|ο κήπος]] (garden) · [[έχω]] (I have) · [[ένας, μία, ένα]] (a, one) · [[πού]] (where) · [[μένω]] (I stay, I live) · [[σε]] (in, at, to) · [[διαμέρισμα|το διαμέρισμα]] (apartment) · [[βλέπω]] (I see) · [[κάτι]] (something) · [[ναι]] (yes) · [[αλλά]] (but) · [[και]] (and) · [[πόρτα|η πόρτα]] (door) · [[κοντά]] (near) · [[θάλασσα|η θάλασσα]] (sea) · [[ωραία]] (nice(ly), great) · [[με]] (with) · [[δύο]] (two) · [[τρώω]] (I eat) · [[εσύ]] (you (singular)) · [[από]] (from, by) · [[όχι]] (no) · [[βουνό|το βουνό]] (mountain) · [[αυτός]] (he, this) · [[καλός]] (good)

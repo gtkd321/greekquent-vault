@@ -111,17 +111,6 @@ body.greekquent-student .gq-graph > .view-header { display: none !important; }
 .gq-fade .view-content { animation: gq-fade-in 180ms ease-out; }
 @media (prefers-reduced-motion: reduce) { .gq-fade .view-content { animation: none; } }
 /* Layouts: Simple / Intermediate / Advanced. Items are hidden by layout, never removed. */
-body.gq-l-simple .gq-lv-int, body:not(.gq-l-advanced) .gq-lv-adv { display: none !important; }
-body:not(.gq-l-simple) .gq-lv-only-simple, body:not(.gq-l-intermediate) .gq-lv-only-intermediate { display: none !important; }
-.gq-has-switch { position: relative; }
-.gq-switch { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); z-index: 20; display: flex; gap: 2px; padding: 2px; border-radius: 999px; background: var(--background-secondary); border: 1px solid var(--background-modifier-border); box-shadow: 0 1px 4px rgba(0,0,0,0.08); white-space: nowrap; }
-.gq-switch button { border: none; height: 26px; min-height: 26px; padding: 0 12px; border-radius: 999px; font-size: 12px; background: transparent; box-shadow: none; color: var(--text-muted); position: relative; }
-.gq-switch button.is-on { background: var(--interactive-accent); color: var(--text-on-accent); font-weight: 600; }
-.gq-switch button.gq-ready::after { content: ''; position: absolute; top: 4px; right: 4px; width: 6px; height: 6px; border-radius: 50%; background: var(--interactive-accent); }
-.gq-has-switch > .markdown-reading-view > .markdown-preview-view, .gq-has-switch .cm-scroller { padding-top: 44px; }
-.gq-has-switch > .empty-state { padding-top: 44px; }
-.gq-tnext a { cursor: pointer; }
-.gq-tnext.gq-tcard button { margin: 6px 8px 0 0; }
 /* Background update chip: small, never blocks taps */
 .gq-upd { position: fixed; left: 12px; bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); z-index: 30; pointer-events: none; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--background-secondary); border: 1px solid var(--background-modifier-border); color: var(--text-muted); }
 body.is-mobile .gq-upd { bottom: calc(env(safe-area-inset-bottom, 0px) + 64px); }
@@ -207,7 +196,6 @@ body.gq-onebar .mobile-navbar-action-menu { display: none !important; }
 /* Kids' copy: big, plain, no layout switch */
 .gq-kid .gq-storylist.gq-plain li { color: var(--text-normal); }
 .gq-kidgame { font-size: 1.15em; margin: 6px 0 10px; }
-body.gq-kids .gq-switch { display: none; }
 .gq-kidwords { list-style: none; padding: 0; margin: 8px 0; }
 .gq-kidwords li { margin: 6px 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 10px; }
 .gq-kidwords li .gq-row { margin: 0; }
@@ -269,3 +257,21 @@ body.gq-kids .gq-switch { display: none; }
 .gq-cbyou { margin-top: 0.3em; }
 .gq-pop-ctx { font-size: 1.15em; margin: 0.2em 0; }
 .gq-pop-en .gq-cbwho { display: block; font-size: 0.5em; }
+
+/* Side panel: More on this page. The main page hides what moved there (reading view only). */
+.markdown-reading-view .gq-aside, .markdown-preview-view .gq-aside { display: none; }
+.gq-ltop { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -4px 0 14px; }
+.gq-sw { display: inline-flex; gap: 2px; padding: 2px; border-radius: 999px; background: var(--background-secondary); border: 1px solid var(--background-modifier-border); }
+.gq-sw button { border: none; height: 28px; min-height: 28px; padding: 0 14px; border-radius: 999px; font-size: 13px; background: transparent; box-shadow: none; color: var(--text-muted); }
+.gq-sw button.is-on { background: var(--interactive-accent); color: var(--text-on-accent); font-weight: 600; }
+.gq-today > .gq-sw { margin: 0 0 12px; }
+.gq-tfoot { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.gq-more { padding: 4px 2px 24px; }
+.gq-more-head { font-size: 15px; margin: 4px 0 8px; }
+.gq-more-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.gq-more-sec { border-top: 1px solid var(--background-modifier-border); padding: 6px 0; }
+.gq-more-sec > summary { cursor: pointer; font-weight: 600; padding: 6px 0; min-height: 32px; list-style-position: outside; }
+.gq-more-body { font-size: 14px; padding: 2px 0 6px; }
+.gq-more-body ul { padding-left: 18px; }
+.gq-more-foot { margin-top: 12px; }
+body.gq-kids .gq-ltop button.gq-mini { display: none; }

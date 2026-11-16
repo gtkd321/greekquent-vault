@@ -183,7 +183,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I05 A lost wallet at the hotel and paying without cash-student|Intermediate scene]] · [[K05 Where is Spider-Man-student|Kid page]]
+Want more? [[I05 A lost wallet at the hotel and paying without cash-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[έχω]] (I have) · [[νερό|το νερό]] (water) · [[δεν]] (not) · [[θέλω]] (I want) · [[κρασί|το κρασί]] (wine) · [[αλλά]] (but) · [[μπορώ]] (I can) · [[ο, η, το]] (the) · [[κινητό|το κινητό]] (mobile phone) · [[μου]] (me, my) · [[σου]] (you, your) · [[τσάντα|η τσάντα]] (bag) · [[κλειδί|το κλειδί]] (key) · [[γιατί]] (why, because) · [[δουλειά|η δουλειά]] (work, job) · [[να]] (to (verb particle)) · [[βλέπω]] (I see) · [[πού]] (where) · [[είμαι]] (I am) · [[ξέρω]] (I know) · [[εδώ]] (here) · [[ευχαριστώ]] (thank you) · [[καλημέρα]] (good morning) · [[ναι]] (yes) · [[βέβαια]] (of course) · [[πόσο]] (how much) · [[κάνω]] (I do, I make) · [[δύο]] (two) · [[ευρώ|το ευρώ]] (euro) · [[και]] (and) · [[σε]] (in, at, to) · [[όχι]] (no) · [[μισό]] (half) · [[λεπτό|το λεπτό]] (minute) · [[τέλεια]] (perfect(ly)) · [[τώρα]] (now) · [[καφές|ο καφές]] (coffee) · [[ώρα|η ώρα]] (hour, time) · [[αυτός]] (he, this) · [[πέντε]] (five) · [[βιβλίο|το βιβλίο]] (book) · [[ορίστε]] (here you are; pardon?) · [[καλός]] (good) · [[μέρα|η μέρα]] (day)

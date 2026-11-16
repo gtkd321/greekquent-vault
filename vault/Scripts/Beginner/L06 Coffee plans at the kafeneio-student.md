@@ -158,7 +158,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I06 Chatting with an older man at the village kafeneio-student|Intermediate scene]] · [[K06 Traffic-light verb dice-student|Kid page]]
+Want more? [[I06 Chatting with an older man at the village kafeneio-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[έχω]] (I have) · [[ώρα|η ώρα]] (hour, time) · [[θέλω]] (I want) · [[ένας, μία, ένα]] (a, one) · [[καφές|ο καφές]] (coffee) · [[μπορώ]] (I can) · [[αύριο]] (tomorrow) · [[βλέπω]] (I see) · [[ο, η, το]] (the) · [[ξέρω]] (I know) · [[δεν]] (not) · [[είμαι]] (I am) · [[σε]] (in, at, to) · [[γεια]] (hi, bye) · [[σου]] (you, your) · [[τι]] (what) · [[κάνω]] (I do, I make) · [[καλά]] (well, fine) · [[εσύ]] (you (singular)) · [[αλλά]] (but) · [[σήμερα]] (today) · [[πρωί|το πρωί]] (morning) · [[τέλεια]] (perfect(ly)) · [[λέω]] (I say, I tell) · [[ναι]] (yes) · [[και]] (and) · [[δουλειά|η δουλειά]] (work, job) · [[καλημέρα]] (good morning) · [[τσάι|το τσάι]] (tea) · [[παρακαλώ]] (please; you're welcome) · [[νερό|το νερό]] (water) · [[τίποτα]] (nothing) · [[άλλος]] (other) · [[όχι]] (no) · [[ευχαριστώ]] (thank you) · [[εδώ]] (here) · [[τώρα]] (now)

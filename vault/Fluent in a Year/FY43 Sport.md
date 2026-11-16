@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Η σκάλα στη γειτονιά είναι παλιά. Τεχνολογία στο γυμναστήριο! (The stairs in the neighborhood are old. Technology at the gym!)
-> 2. Η γιορτή της πατρίδας. Μου θυμίζει το χωριό. (The celebration of the homeland. It reminds me of the village.)
-> 3. Ενδιαφέρομαι για την κορυφή. Η επιστροφή, πιο εύκολη! (I'm interested in the summit. The way back is easier!)
-> 4. Βρε! Κόπηκε το ρεύμα, προτού τελειώσει ο αγώνας! (Hey! The power went off before the match ended!)
-> 5. Ετοιμάζω ένα πιάτο μακαρόνια. Εκπληκτικό! (I prepare a plate of pasta. Amazing!)
-> 6. Απαντάω: η μεγαλύτερη ομάδα είναι στην είσοδο. (I answer: the biggest team is at the entrance.)
+> 1. Ήρθα! Η γειτονιά είναι ίδια! — Ανέβα τη σκάλα! (I'm here! The neighborhood is the same! — Come up the stairs!)
+> 2. Η ομορφιά του χωριού! — Σήμερα έχουμε γιορτή! (The beauty of the village! — Today we have a celebration!)
+> 3. Ποδόσφαιρο στο χωριό! Ενδιαφέρεσαι; — Η επιστροφή του Νίκου! (Football in the village! Are you interested? — The return of Nikos!)
+> 4. Βρε Νίκο, γρήγορα! — Έστω ένα γκολ! (Hey Niko, faster! — At least one goal!)
+> 5. Ένα πιάτο με ελιές για τον νικητή! — Εκπληκτικό! (A plate of olives for the winner! — Amazing!)
+> 6. Ένα συμβόλαιο για όλη τη χρονιά! — Απαντάω: ναι! (A contract for the whole year! — I answer: yes!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **sport** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 241 of 300
-> **Today's line:** Η σκάλα στη γειτονιά είναι παλιά. Τεχνολογία στο γυμναστήριο! (The stairs in the neighborhood are old. Technology at the gym!)
+> **Today's line:** Ήρθα! Η γειτονιά είναι ίδια! — Ανέβα τη σκάλα! (I'm here! The neighborhood is the same! — Come up the stairs!)
 > - [[τεχνολογία|η τεχνολογία]] **technology** (#1062): Ποιό είναι το προτέρημα αυτής της τεχνολογίας;
 > - [[χτύπημα|το χτύπημα]] **blow, hit** (#1063): 'Ηταν για μας ένα βαρύ χτύπημα.
 > - [[ουσία|η ουσία]] **substance, essence** (#1064): Χάνεις την ουσία.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γειτονιά|η γειτονιά]] **neighborhood** (#1066): Δε ζει στη γειτονιά μου.
 
 > [!todo]- Tue · day 242 of 300
-> **Today's line:** Η γιορτή της πατρίδας. Μου θυμίζει το χωριό. (The celebration of the homeland. It reminds me of the village.)
+> **Today's line:** Η ομορφιά του χωριού! — Σήμερα έχουμε γιορτή! (The beauty of the village! — Today we have a celebration!)
 > - [[πύλη|η πύλη]] **gate** (#1067): Σταματήσαμε στην πύλη.
 > - [[πατρίδα|η πατρίδα]] **homeland** (#1068): Πατρίδα μου είναι όλη η γη. (My homeland is the whole earth.)
 > - [[ομορφιά|η ομορφιά]] **beauty** (#1069): Τοπίο απερίγραπτης ομορφιάς.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[θυμίζω]] **I remind** (#1071): Μου θυμίζει εσένα. (It reminds me of you.)
 
 > [!todo]- Wed · day 243 of 300
-> **Today's line:** Ενδιαφέρομαι για την κορυφή. Η επιστροφή, πιο εύκολη! (I'm interested in the summit. The way back is easier!)
+> **Today's line:** Ποδόσφαιρο στο χωριό! Ενδιαφέρεσαι; — Η επιστροφή του Νίκου! (Football in the village! Are you interested? — The return of Nikos!)
 > - [[ενδιαφέρομαι]] **I am interested** (#1072): Κανένας δεν ενδιαφέρεται. (No one's interested.)
 > - [[επιστροφή|η επιστροφή]] **return** (#1073): Αγόρασες εισιτήριο επιστροφής;
 > - [[απώλεια|η απώλεια]] **loss** (#1074): Ποιος θα αντισταθμίσει την απώλεια;
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πριγκίπισσα|η πριγκίπισσα]] **princess** (#1077): Η πριγκίπισσα φοράει μια χρυσή τιάρα.
 
 > [!todo]- Thu · day 244 of 300
-> **Today's line:** Βρε! Κόπηκε το ρεύμα, προτού τελειώσει ο αγώνας! (Hey! The power went off before the match ended!)
+> **Today's line:** Βρε Νίκο, γρήγορα! — Έστω ένα γκολ! (Hey Niko, faster! — At least one goal!)
 > - [[έστω]] **even if, at least** (#1079): Έστω και για λίγο θέλω να σε δω.
 > - [[ρεύμα|το ρεύμα]] **electricity, current** (#1080): Κόπηκε το ρεύμα.
 > - [[κατάλληλος]] **suitable** (#1081): Ήρθες στο κατάλληλο μέρος.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[προτού]] **before** (#1083): Μίλα προτού είναι πολύ αργά.
 
 > [!todo]- Fri · day 245 of 300
-> **Today's line:** Ετοιμάζω ένα πιάτο μακαρόνια. Εκπληκτικό! (I prepare a plate of pasta. Amazing!)
+> **Today's line:** Ένα πιάτο με ελιές για τον νικητή! — Εκπληκτικό! (A plate of olives for the winner! — Amazing!)
 > - [[ετοιμάζω]] **I prepare** (#1084): Έχουν ετοιμαστεί όλες.
 > - [[ωστόσο]] **however** (#1085): Ωστόσο, δεν έχω λεφτά.
 > - [[εκπληκτικός]] **amazing** (#1086): Είναι εκπληκτικές.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πιάτο|το πιάτο]] **plate, dish** (#1089): Πόσα πιάτα θέλεις;
 
 > [!todo]- Sat · day 246 of 300
-> **Today's line:** Απαντάω: η μεγαλύτερη ομάδα είναι στην είσοδο. (I answer: the biggest team is at the entrance.)
+> **Today's line:** Ένα συμβόλαιο για όλη τη χρονιά! — Απαντάω: ναι! (A contract for the whole year! — I answer: yes!)
 > - [[απαντάω]] **I answer** (#1090): Δεν ξέρω τι να απαντήσω.
 > - [[μεγαλύτερος]] **bigger, older** (#1091): Είσαι μεγαλύτερος από μένα. (You're older than me.)
 > - [[συμβόλαιο|το συμβόλαιο]] **contract** (#1092): Υπόγραψες το συμβόλαιο;

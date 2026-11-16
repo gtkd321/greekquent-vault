@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Πονάει ο λαιμός και το δόντι μου, μετά το ποδόσφαιρο. (My throat and my tooth hurt, after soccer.)
-> 2. Δοκιμάζω ένα τσάι στο τραπέζι. Με ενδιαφέρει το φαρμακείο, όχι το μπαρ. (I try a tea at the table. The pharmacy interests me, not the bar.)
-> 3. Ξεχνάω τη λευκή κρέμα. Αντί γι' αυτό, πίνω νερό. (I forget the white cream. Instead, I drink water.)
-> 4. Ο γέρος με το σκυλί λέει: «Ύπνος και νερό, όχι ανόητα πράγματα.» (The old man with the dog says: 'Sleep and water, not foolish things.')
-> 5. Τι ηλικία έχετε; Κανένας κίνδυνος, μόνο λίγη ξεκούραση. (How old are you? No danger, just a little rest.)
-> 6. Σύμφωνα με τον φαρμακοποιό, μεταφράζω: ειδικά νερό και ενέργεια! (According to the pharmacist, I translate: especially water and energy!)
+> 1. Ωχ, το δόντι μου! Πονάω! — Πάλι ποδόσφαιρο και πικρή συζήτηση με τον γείτονα; (Ow, my tooth! It hurts! — Football and a bitter argument with the neighbor again?)
+> 2. Πρώτα στην τράπεζα, μετά στο φαρμακείο. — Δοκιμάστε αυτό, παππού. (First to the bank, then to the pharmacy. — Try this, grandpa.)
+> 3. Η κόρη μου είναι δικηγόρος. Μην ξεχάσετε! — Αντί για φάρμακο, μια δικηγόρος! (My daughter is a lawyer. Don't forget! — Instead of medicine, a lawyer!)
+> 4. Ένας γέρος σαν εμένα θέλει ύπνο. — Και το σκυλί κοιμάται μαζί σου! (An old man like me needs sleep. — And the dog sleeps with you!)
+> 5. Σε αυτή την ηλικία, η Ελένη πρέπει να αποφασίσει. — Είμαι σε κίνδυνο; (At this age, Eleni has to decide. — Am I in danger?)
+> 6. Ένα email από την Αμερική! Το μεταφράζω... — «Είμαι η εγγονή της Ελένης. Ειδικά για σένα, μια βιντεοκλήση.» (An email from America! I'm translating it... — "I'm Eleni's granddaughter. Especially for you, a video call.")
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L25 Christ is risen and the pharmacy-student|L25 Christ is risen and the pharmacy]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 151 of 300
-> **Today's line:** Πονάει ο λαιμός και το δόντι μου, μετά το ποδόσφαιρο. (My throat and my tooth hurt, after soccer.)
+> **Today's line:** Ωχ, το δόντι μου! Πονάω! — Πάλι ποδόσφαιρο και πικρή συζήτηση με τον γείτονα; (Ow, my tooth! It hurts! — Football and a bitter argument with the neighbor again?)
 > - [[λαιμός|ο λαιμός]] **neck, throat** (#680): Πρήστηκε ο λαιμός μου.
 > - [[πονάω]] **I hurt, I ache** (#723): Πονάει το κεφάλι μου. (My head hurts.)
 > - [[δόντι|το δόντι]] **tooth** (#848): Βουρτσίζω τα δόντια μου. (I brush my teeth.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ποδόσφαιρο|το ποδόσφαιρο]] **soccer** (#1458): Του αρέσει να παίζει ποδόσφαιρο. (He likes playing soccer.)
 
 > [!todo]- Tue · day 152 of 300
-> **Today's line:** Δοκιμάζω ένα τσάι στο τραπέζι. Με ενδιαφέρει το φαρμακείο, όχι το μπαρ. (I try a tea at the table. The pharmacy interests me, not the bar.)
+> **Today's line:** Πρώτα στην τράπεζα, μετά στο φαρμακείο. — Δοκιμάστε αυτό, παππού. (First to the bank, then to the pharmacy. — Try this, grandpa.)
 > - [[μπαρ|το μπαρ]] **bar** (#614): Πήγαν σε ένα μπαρ. (They went to a bar.)
 > - [[τραπέζι|το τραπέζι]] **table** (#615): Αυτό το τραπέζι είναι εδώ. (This table is here.)
 > - [[τράπεζα|η τράπεζα]] **bank** (#616): Δουλεύει σε μια τράπεζα. (She works in a bank.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[δοκιμάζω]] **I try, I taste** (#618): Θέλω να δοκιμάσω κάτι καινούριο. (I want to try something new.)
 
 > [!todo]- Wed · day 153 of 300
-> **Today's line:** Ξεχνάω τη λευκή κρέμα. Αντί γι' αυτό, πίνω νερό. (I forget the white cream. Instead, I drink water.)
+> **Today's line:** Η κόρη μου είναι δικηγόρος. Μην ξεχάσετε! — Αντί για φάρμακο, μια δικηγόρος! (My daughter is a lawyer. Don't forget! — Instead of medicine, a lawyer!)
 > - [[λευκός]] **white** (#619): Σας αρέσει το λευκό κρασί; (Do you like white wine?)
 > - [[αντί]] **instead of** (#620): Αντί για αυτό, παίρνω εκείνο. (Instead of this, I take that.)
 > - [[εποχή|η εποχή]] **season, era** (#622): Έχει η Αυστραλία τέσσερις εποχές; (Does Australia have four seasons?)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ίχνος|το ίχνος]] **trace** (#624): Αγνοούνται τα ίχνη του εδώ και ένα μήνα.
 
 > [!todo]- Thu · day 154 of 300
-> **Today's line:** Ο γέρος με το σκυλί λέει: «Ύπνος και νερό, όχι ανόητα πράγματα.» (The old man with the dog says: 'Sleep and water, not foolish things.')
+> **Today's line:** Ένας γέρος σαν εμένα θέλει ύπνο. — Και το σκυλί κοιμάται μαζί σου! (An old man like me needs sleep. — And the dog sleeps with you!)
 > - [[ζωγραφική|η ζωγραφική]] **painting (art)** (#1460): Ο Τομ τα καταφέρνει στη ζωγραφική.
 > - [[ανόητος]] **foolish** (#625): Πόσο ανόητοι είμαστε;
 > - [[γέρος|ο γέρος]] **old man** (#626): γράφεις σαν ένας γέρος. (You write like an old person.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σκυλί|το σκυλί]] **dog** (#628): Είδα ένα σκυλί. (I saw a dog.)
 
 > [!todo]- Fri · day 155 of 300
-> **Today's line:** Τι ηλικία έχετε; Κανένας κίνδυνος, μόνο λίγη ξεκούραση. (How old are you? No danger, just a little rest.)
+> **Today's line:** Σε αυτή την ηλικία, η Ελένη πρέπει να αποφασίσει. — Είμαι σε κίνδυνο; (At this age, Eleni has to decide. — Am I in danger?)
 > - [[ηλικία|η ηλικία]] **age** (#629): Τι ηλικία έχει ο αδελφός σου; (How old is your brother?)
 > - [[κίνδυνος|ο κίνδυνος]] **danger** (#630): Αυτός είναι ο κίνδυνος.
 > - [[τέχνη|η τέχνη]] **art** (#1461): Η λογοτεχνία είναι τέχνη; (Is literature an art?)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[δικηγόρος|ο δικηγόρος]] **lawyer** (#634): Δεν είμαι δικηγόρος. (I am not a lawyer.)
 
 > [!todo]- Sat · day 156 of 300
-> **Today's line:** Σύμφωνα με τον φαρμακοποιό, μεταφράζω: ειδικά νερό και ενέργεια! (According to the pharmacist, I translate: especially water and energy!)
+> **Today's line:** Ένα email από την Αμερική! Το μεταφράζω... — «Είμαι η εγγονή της Ελένης. Ειδικά για σένα, μια βιντεοκλήση.» (An email from America! I'm translating it... — "I'm Eleni's granddaughter. Especially for you, a video call.")
 > - [[σύμφωνα με]] **according to** (#636): Σύμφωνα με αυτόν, ναι.
 > - [[μεταφράζω]] **I translate** (#1462): Είναι δύσκολο να μεταφραστεί αυτή η λέξη. (This word is difficult to translate.)
 > - [[ειδικά]] **especially** (#637): Αυτή έιναι καλή σε όλα, ειδικά στα αγγλικά!

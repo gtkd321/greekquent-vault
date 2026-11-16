@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Καλημέρα! Τώρα δεν έχω τίποτα άλλο. Μόνο την εκκλησία. (Good morning! Now I have nothing else. Just the church.)
-> 2. Ο ήλιος, η θάλασσα, μια βάρκα ή το βουνό; (The sun, the sea, a boat or the mountain?)
-> 3. Ο μπαμπάς είναι μεγάλος άνθρωπος, σε ένα μικρό χωριό. (Dad is a big man, in a small village.)
-> 4. Φυσικά! Ο άντρας δίνει το χέρι του σε όλο τον κόσμο. (Of course! The man gives his hand to the whole world.)
-> 5. Ο καιρός; Βρέχει πραγματικά. Το κορίτσι λέει: χιονίζει! (The weather? It's really raining. The girl says: it's snowing!)
-> 6. Ακούω τη θάλασσα. Τι σημαίνει; Σίγουρα βρίσκω τον δρόμο. (I hear the sea. What does it mean? Surely I'll find the way.)
+> 1. Καλημέρα! Κάτι άλλο από τη γιαγιά. — Μια κάρτα! Η εκκλησία του χωριού. Και... τίποτα άλλο. (Good morning! Something else from grandma. — A card! The village church. And... nothing else.)
+> 2. Κοίτα: ο ήλιος, η θάλασσα, μια βάρκα... — Το χωριό είναι στη θάλασσα ή στο βουνό; — Και τα δύο! (Look: the sun, the sea, a boat... — Is the village by the sea or on the mountain? — Both!)
+> 3. Ποιος είναι ο μικρός άνθρωπος στη βάρκα; — Ο μπαμπάς σου! — Ο μπαμπάς; Ναι, σωστά! (Who is the little person in the boat? — Your dad! — Dad? Yes, that's right!)
+> 4. Και ο άντρας με το κλειδί στο χέρι; — Ο παππούς, φυσικά. Δίνει το κλειδί στον μπαμπά. (And the man with the key in his hand? — Grandpa, of course. He's giving the key to dad.)
+> 5. Εδώ χιονίζει... Και στο χωριό, τι καιρό κάνει; — Βρέχει λίγο. Αλλά το χωριό είναι πραγματικά ωραίο, κορίτσι μου. (Here it's snowing... And in the village, what's the weather like? — It's raining a little. But the village is really lovely, my girl.)
+> 6. Βρίσκω κάτι στην κάρτα: «Το σπίτι περιμένει». Τι σημαίνει; — Δεν ξέρω σίγουρα... (I find something on the card: "The house is waiting." What does it mean? — I don't know for sure...)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L04 Postcards and the cafe-student|L04 Postcards and the cafe]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 19 of 300
-> **Today's line:** Καλημέρα! Τώρα δεν έχω τίποτα άλλο. Μόνο την εκκλησία. (Good morning! Now I have nothing else. Just the church.)
+> **Today's line:** Καλημέρα! Κάτι άλλο από τη γιαγιά. — Μια κάρτα! Η εκκλησία του χωριού. Και... τίποτα άλλο. (Good morning! Something else from grandma. — A card! The village church. And... nothing else.)
 > - [[τώρα]] **now** (#37): Ας πάμε όλοι σπίτι τώρα. (Let's all go home now.)
 > - [[άλλος]] **other** (#43): Τι άλλο του 'πατε; (What else did you tell him?)
 > - [[τίποτα]] **nothing** (#63): Δεν έχω τίποτα να πω. (I have nothing to say.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[εκκλησία|η εκκλησία]] **church** (#621): Αυτή η εκκλησία είναι τεράστια. (This church is huge.)
 
 > [!todo]- Tue · day 20 of 300
-> **Today's line:** Ο ήλιος, η θάλασσα, μια βάρκα ή το βουνό; (The sun, the sea, a boat or the mountain?)
+> **Today's line:** Κοίτα: ο ήλιος, η θάλασσα, μια βάρκα... — Το χωριό είναι στη θάλασσα ή στο βουνό; — Και τα δύο! (Look: the sun, the sea, a boat... — Is the village by the sea or on the mountain? — Both!)
 > - [[ήλιος|ο ήλιος]] **sun** (#651): Ο ήλιος είναι κόκκινος. (The sun is red.)
 > - [[θάλασσα|η θάλασσα]] **sea** (#668): Η θάλασσα είναι ακόμα ήρεμη. (The sea is still calm.)
 > - [[βουνό|το βουνό]] **mountain** (#909): Θέλω να πάω στο βουνό. (I want to go to the mountain.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ή]] **or** (#65): Θέλετε τσάι ή καφέ; (Do you want tea or coffee?)
 
 > [!todo]- Wed · day 21 of 300
-> **Today's line:** Ο μπαμπάς είναι μεγάλος άνθρωπος, σε ένα μικρό χωριό. (Dad is a big man, in a small village.)
+> **Today's line:** Ποιος είναι ο μικρός άνθρωπος στη βάρκα; — Ο μπαμπάς σου! — Ο μπαμπάς; Ναι, σωστά! (Who is the little person in the boat? — Your dad! — Dad? Yes, that's right!)
 > - [[άνθρωπος|ο άνθρωπος]] **person, human** (#97): Αυτός φαίνεται καλός άνθρωπος. (He seems like a good person.)
 > - [[μεγάλος]] **big, old (age)** (#99): Θα σκάψω ένα μεγάλο τούνελ. (I'll dig a large tunnel.)
 > - [[σωστά]] **correctly, right** (#121): Την κάνω σωστά;
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μικρός]] **small, young** (#136): Το σπίτι μας είναι μικρό. (Our house is small.)
 
 > [!todo]- Thu · day 22 of 300
-> **Today's line:** Φυσικά! Ο άντρας δίνει το χέρι του σε όλο τον κόσμο. (Of course! The man gives his hand to the whole world.)
+> **Today's line:** Και ο άντρας με το κλειδί στο χέρι; — Ο παππούς, φυσικά. Δίνει το κλειδί στον μπαμπά. (And the man with the key in his hand? — Grandpa, of course. He's giving the key to dad.)
 > - [[άντρας|ο άντρας]] **man, husband** (#142): Ο άντρας είναι ψηλός. (The man is tall.)
 > - [[κόσμος|ο κόσμος]] **world, people** (#149): Όλος ο κόσμος τον αγαπάει. (Everybody loves him.)
 > - [[φυσικά]] **of course** (#153): Φυσικά θα έρθω! (Of course I will come!)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[δίνω]] **I give** (#161): Θα σου δώσω ένα βιβλίο. (I'll give you a book.)
 
 > [!todo]- Fri · day 23 of 300
-> **Today's line:** Ο καιρός; Βρέχει πραγματικά. Το κορίτσι λέει: χιονίζει! (The weather? It's really raining. The girl says: it's snowing!)
+> **Today's line:** Εδώ χιονίζει... Και στο χωριό, τι καιρό κάνει; — Βρέχει λίγο. Αλλά το χωριό είναι πραγματικά ωραίο, κορίτσι μου. (Here it's snowing... And in the village, what's the weather like? — It's raining a little. But the village is really lovely, my girl.)
 > - [[καιρός|ο καιρός]] **weather, time** (#166): Πόσο καιρό θα μείνεις εδώ; (How long will you stay here?)
 > - [[κορίτσι|το κορίτσι]] **girl** (#167): Το κορίτσι είναι όμορφο. (The girl is pretty.)
 > - [[βρέχει]] **it is raining** (#1384): Ξαφνικά άρχισε να βρέχει. (Suddenly, it started to rain.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χιονίζει]] **it is snowing** (#1385): Χιονίζει απόψε.
 
 > [!todo]- Sat · day 24 of 300
-> **Today's line:** Ακούω τη θάλασσα. Τι σημαίνει; Σίγουρα βρίσκω τον δρόμο. (I hear the sea. What does it mean? Surely I'll find the way.)
+> **Today's line:** Βρίσκω κάτι στην κάρτα: «Το σπίτι περιμένει». Τι σημαίνει; — Δεν ξέρω σίγουρα... (I find something on the card: "The house is waiting." What does it mean? — I don't know for sure...)
 > - [[σίγουρα]] **surely** (#176): Θα χάσεις σίγουρα.
 > - [[σημαίνει]] **it means** (#186): Τι σημαίνει αυτή η λέξη; (What does this word mean?)
 > - [[σταματάω]] **I stop** (#206): Ποια σταμάτησε;

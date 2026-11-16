@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ένα απόγευμα με ησυχία. Τα παπούτσια ταιριάζουν! (An afternoon of quiet. The shoes match!)
-> 2. Ένα βήμα τη φορά. Επαναλαμβάνω το νούμερο του διευθυντή. (One step at a time. I repeat the director's number.)
-> 3. Απίστευτο! Τέσσερις μέρες στο νησί! Μιλάω δυνατά. Το εκτιμώ! (Unbelievable! Four days on the island! I speak loudly. I appreciate it!)
-> 4. Χαμένη στο δάσος! Εύκολα; Όχι, αλλά βρίσκω τον δρόμο. (Lost in the forest! Easily? No, but I find the way.)
-> 5. Η μαθήτρια σώζει τη μέρα. Πράγματι, μιλάει τη γλώσσα! (The student saves the day. Indeed, she speaks the language!)
-> 6. Το όνειρό μου: πρωινό στη θάλασσα. Προσφέρω καφέ, δεν ενοχλώ κανέναν. (My dream: breakfast by the sea. I offer coffee, I don't bother anyone.)
+> 1. Το απόγευμα καθαρίζουμε. — Και μετά, ησυχία! (In the afternoon we clean. — And afterwards, quiet!)
+> 2. Βήμα βήμα, το σπίτι γίνεται ωραίο. — [στο τηλέφωνο] Το νούμερο της πτήσης μου: τον Ιούλιο έρχομαι! (Step by step, the house becomes beautiful. — [on the phone] My flight number: I'm coming in July!)
+> 3. Απίστευτο! Ο Νίκος έρχεται! — Μίλα δυνατά, παιδί μου! (Unbelievable! Nikos is coming! — Speak louder, my child!)
+> 4. Πού είναι ο σκύλος; Στο δάσος; — Είναι χαμένος! (Where is the dog? In the forest? — He's lost!)
+> 5. Τον έσωσα! Ήταν πάνω σε μια πέτρα. — Πράγματι, είστε ήρωας! (I saved him! He was on a rock. — Indeed, you're a hero!)
+> 6. Ένα όνειρο: είναι εδώ! — Το πρωινό μου στο χωριό, μετά από τόσα χρόνια... (A dream: they're here! — My breakfast in the village, after so many years...)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **summer plans** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 163 of 300
-> **Today's line:** Ένα απόγευμα με ησυχία. Τα παπούτσια ταιριάζουν! (An afternoon of quiet. The shoes match!)
+> **Today's line:** Το απόγευμα καθαρίζουμε. — Και μετά, ησυχία! (In the afternoon we clean. — And afterwards, quiet!)
 > - [[παπούτσι|το παπούτσι]] **shoe** (#669): Τα παπούτσια σας είναι εδώ. (Your shoes are here.)
 > - [[ησυχία|η ησυχία]] **quiet, peace** (#671): Είπε στους μαθητές να κάνουν ησυχία.
 > - [[απόγευμα|το απόγευμα]] **afternoon** (#672): Θα σου τηλεφωνήσω τ' απόγευμα. (I'll call you in the evening.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ταιριάζω]] **I match, I fit** (#673): Σου ταιριάζει. (That looks good on you.)
 
 > [!todo]- Tue · day 164 of 300
-> **Today's line:** Ένα βήμα τη φορά. Επαναλαμβάνω το νούμερο του διευθυντή. (One step at a time. I repeat the director's number.)
+> **Today's line:** Βήμα βήμα, το σπίτι γίνεται ωραίο. — [στο τηλέφωνο] Το νούμερο της πτήσης μου: τον Ιούλιο έρχομαι! (Step by step, the house becomes beautiful. — [on the phone] My flight number: I'm coming in July!)
 > - [[διευθυντής|ο διευθυντής]] **director, manager** (#674): Ο Θωμάς προάχθηκε σε διευθυντή.
 > - [[προσωπικό|το προσωπικό]] **staff** (#675): Είναι πολύ προσωπικό.
 > - [[νούμερο|το νούμερο]] **number, size** (#676): Τι νούμερο παπούτσι φοράς; (What size shoes do you wear?)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επαναλαμβάνω]] **I repeat** (#1469): Επανέλαβε την ερώτηση.
 
 > [!todo]- Wed · day 165 of 300
-> **Today's line:** Απίστευτο! Τέσσερις μέρες στο νησί! Μιλάω δυνατά. Το εκτιμώ! (Unbelievable! Four days on the island! I speak loudly. I appreciate it!)
+> **Today's line:** Απίστευτο! Ο Νίκος έρχεται! — Μίλα δυνατά, παιδί μου! (Unbelievable! Nikos is coming! — Speak louder, my child!)
 > - [[απίστευτος]] **unbelievable** (#679): Είσαι απίστευτος.
 > - [[δυνατά]] **loudly, strongly** (#681): Παρακαλώ, μιλήστε λίγο πιο δυνατά. (Please, speak a little louder.)
 > - [[εκτιμώ]] **I appreciate, I estimate** (#682): Το εκτιμώ αυτό.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τέσσερις]] **four** (#684): Περπατάω πάνω από τέσσερις ώρες. (I have been walking for over four hours.)
 
 > [!todo]- Thu · day 166 of 300
-> **Today's line:** Χαμένη στο δάσος! Εύκολα; Όχι, αλλά βρίσκω τον δρόμο. (Lost in the forest! Easily? No, but I find the way.)
+> **Today's line:** Πού είναι ο σκύλος; Στο δάσος; — Είναι χαμένος! (Where is the dog? In the forest? — He's lost!)
 > - [[σβήνω]] **I erase, I turn off** (#1470): Μη σβήνετε το φως.
 > - [[εύκολα]] **easily** (#685): Τα Ισπανικά είναι εύκολα. (Spanish is easy.)
 > - [[απόδειξη|η απόδειξη]] **proof, receipt** (#686): Δώσ' μου μια απόδειξη, σε παρακαλώ. (Give me a receipt, please.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χαμένος]] **lost** (#688): Χαμένος κόπος αυτό που κάνεις.
 
 > [!todo]- Fri · day 167 of 300
-> **Today's line:** Η μαθήτρια σώζει τη μέρα. Πράγματι, μιλάει τη γλώσσα! (The student saves the day. Indeed, she speaks the language!)
+> **Today's line:** Τον έσωσα! Ήταν πάνω σε μια πέτρα. — Πράγματι, είστε ήρωας! (I saved him! He was on a rock. — Indeed, you're a hero!)
 > - [[σώζω]] **I save** (#689): Οι γιατροί σώζουν ζωές.
 > - [[μαθήτρια|η μαθήτρια]] **student (female)** (#1471): Είμαι μαθήτρια.
 > - [[διαταγή|η διαταγή]] **order (command)** (#691): Ακολουθώ διαταγές.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πράγματι]] **indeed** (#693): Είναι πράγματι εκπληκτικό! (It's really amazing!)
 
 > [!todo]- Sat · day 168 of 300
-> **Today's line:** Το όνειρό μου: πρωινό στη θάλασσα. Προσφέρω καφέ, δεν ενοχλώ κανέναν. (My dream: breakfast by the sea. I offer coffee, I don't bother anyone.)
+> **Today's line:** Ένα όνειρο: είναι εδώ! — Το πρωινό μου στο χωριό, μετά από τόσα χρόνια... (A dream: they're here! — My breakfast in the village, after so many years...)
 > - [[όνειρο|το όνειρο]] **dream** (#694): Το όνειρό μου είναι να πετάξω. (My dream is to fly.)
 > - [[πρωινό|το πρωινό]] **breakfast** (#695): Έφαγα τοστ για πρωϊνό. (I ate toast for breakfast.)
 > - [[ιατρικός]] **medical** (#696): Τελείωσε την ιατρική σχολή.

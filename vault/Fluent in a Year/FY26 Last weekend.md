@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Η μάνα μου ρωτάει για το προηγούμενο Σάββατο. Η απάντηση; (My mom asks about last Saturday. The answer?)
-> 2. Άντε! Το πρόγραμμα ήταν γεμάτο, σαν το παρελθόν. (Come on! The schedule was full, like the past.)
-> 3. Πήρα το αεροπλάνο. Ένα μέτρο χιόνι, πιο παραπάνω από πέρσι! (I took the plane. A meter of snow, more than last year!)
-> 4. Παρακολουθήσαμε μια ταινία. Ένας νεαρός γιατρός, υπεύθυνος για έναν ασθενή. (We watched a film. A young doctor, responsible for a patient.)
-> 5. Ψήνω ψωμί. Φροντίζω τη γιαγιά. Μοναδική μέρα! (I bake bread. I take care of Grandma. A unique day!)
-> 6. Συχνά φτιάχνω τεράστιο φαγητό, και πλένω πιάτα για ώρες. (I often make a huge meal, and wash dishes for hours.)
+> 1. Το προηγούμενο Σάββατο, στο δέντρο της Ελένης... — Και η απάντηση; (Last Saturday, at Eleni's tree... — And the answer?)
+> 2. Άντε, σκάψε! — Ένα κουτί από το παρελθόν! (Come on, dig! — A box from the past!)
+> 3. Ένα μέτρο κάτω από τη γη... Το πέμπτο τετράδιο! Έτος 1968. (One meter under the ground... The fifth notebook! Year 1968.)
+> 4. Πρέπει να φύγω, Μαρία. Είμαι υπεύθυνος στη δουλειά. — Το ξέρω. Έμεινες τόσο εξαιτίας μου. (I have to leave, Maria. I'm responsible at work. — I know. You stayed so long because of me.)
+> 5. Φρόντιζε το σπίτι. Και τη γιαγιά. — Είσαι μοναδικός, Νίκο. (Take care of the house. And grandma. — You're one of a kind, Niko.)
+> 6. Γράψε μου συχνά! — Θα γυρίσω. Υπάρχει μια πιθανότητα: το Πάσχα! (Write to me often! — I'll come back. There's a chance: Easter!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L23 Last weekend-student|L23 Last weekend]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 139 of 300
-> **Today's line:** Η μάνα μου ρωτάει για το προηγούμενο Σάββατο. Η απάντηση; (My mom asks about last Saturday. The answer?)
+> **Today's line:** Το προηγούμενο Σάββατο, στο δέντρο της Ελένης... — Και η απάντηση; (Last Saturday, at Eleni's tree... — And the answer?)
 > - [[κοινός]] **common, shared** (#554): Έχουν ένα κοινό χόμπι.
 > - [[λειτουργώ]] **I function, I work** (#555): Η τηλεόραση δε λειτουργεί. (The television doesn't work.)
 > - [[απάντηση|η απάντηση]] **answer** (#557): Αυτή είναι η απάντησή μου. (That's my answer.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[προηγούμενος]] **previous** (#559): Διάβασα αυτό το βιβλίο την προηγούμενη βδομάδα. (I read this book last week.)
 
 > [!todo]- Tue · day 140 of 300
-> **Today's line:** Άντε! Το πρόγραμμα ήταν γεμάτο, σαν το παρελθόν. (Come on! The schedule was full, like the past.)
+> **Today's line:** Άντε, σκάψε! — Ένα κουτί από το παρελθόν! (Come on, dig! — A box from the past!)
 > - [[πρόγραμμα|το πρόγραμμα]] **program, schedule** (#560): Αυτό το πρόγραμμα είναι για τους πιγκουίνους. (This programme is about penguins.)
 > - [[σκέψη|η σκέψη]] **thought** (#561): Χωρίς καμία σκέψη!
 > - [[άντε]] **come on, go on** (#562): Άντε παράτα μας!
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πρώην]] **former, ex-** (#564): Ο Τομ είναι ο πρώην μου. (Tom is my ex.)
 
 > [!todo]- Wed · day 141 of 300
-> **Today's line:** Πήρα το αεροπλάνο. Ένα μέτρο χιόνι, πιο παραπάνω από πέρσι! (I took the plane. A meter of snow, more than last year!)
+> **Today's line:** Ένα μέτρο κάτω από τη γη... Το πέμπτο τετράδιο! Έτος 1968. (One meter under the ground... The fifth notebook! Year 1968.)
 > - [[ζεσταίνω]] **I heat** (#1450): Το φαγητό ζεσταίνεται στο φούρνο.
 > - [[παραπάνω]] **more, above** (#565): Προσπάθησε λίγο παραπάνω.
 > - [[μέτρο|το μέτρο]] **meter, measure** (#566): Το εισιτήριο για το μετρό είναι φθηνό. (The ticket for the subway is cheap.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αεροπλάνο|το αεροπλάνο]] **airplane** (#568): Θα πάω με αεροπλάνο εκεί. (I will go there by plane.)
 
 > [!todo]- Thu · day 142 of 300
-> **Today's line:** Παρακολουθήσαμε μια ταινία. Ένας νεαρός γιατρός, υπεύθυνος για έναν ασθενή. (We watched a film. A young doctor, responsible for a patient.)
+> **Today's line:** Πρέπει να φύγω, Μαρία. Είμαι υπεύθυνος στη δουλειά. — Το ξέρω. Έμεινες τόσο εξαιτίας μου. (I have to leave, Maria. I'm responsible at work. — I know. You stayed so long because of me.)
 > - [[υπεύθυνος]] **responsible** (#569): Είμαι υπεύθυνος για αυτό το λάθος. (I'm responsible for this mistake.)
 > - [[εξαιτίας]] **because of** (#570): Υποφέρω εξαιτίας σου.
 > - [[παρακολουθώ]] **I watch, I follow** (#571): Θα σε παρακολουθήσει.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[νεαρός]] **young** (#574): Τι έξυπνη νεαρή γυναίκα! (What an intelligent young woman!)
 
 > [!todo]- Fri · day 143 of 300
-> **Today's line:** Ψήνω ψωμί. Φροντίζω τη γιαγιά. Μοναδική μέρα! (I bake bread. I take care of Grandma. A unique day!)
+> **Today's line:** Φρόντιζε το σπίτι. Και τη γιαγιά. — Είσαι μοναδικός, Νίκο. (Take care of the house. And grandma. — You're one of a kind, Niko.)
 > - [[εχθρός|ο εχθρός]] **enemy** (#575): Δεν έχει εχθρούς. (He has no enemies.)
 > - [[φροντίζω]] **I take care of** (#576): Θα φροντίσω τα πάντα.
 > - [[ψήνω]] **I bake, I grill** (#1452): Αυτή ξέρει να ψήνει πίτες.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ελπίδα|η ελπίδα]] **hope** (#578): Η ελπίδα είναι πράσινη. (Hope is green.)
 
 > [!todo]- Sat · day 144 of 300
-> **Today's line:** Συχνά φτιάχνω τεράστιο φαγητό, και πλένω πιάτα για ώρες. (I often make a huge meal, and wash dishes for hours.)
+> **Today's line:** Γράψε μου συχνά! — Θα γυρίσω. Υπάρχει μια πιθανότητα: το Πάσχα! (Write to me often! — I'll come back. There's a chance: Easter!)
 > - [[συχνά]] **often** (#579): Δεν έρχομαι πολύ συχνά εδώ. (I don't come here very often.)
 > - [[φτιάχνω]] **I make, I fix** (#580): Φτιάχνει μπισκότα.
 > - [[τεράστιος]] **huge** (#582): Κάναμε ένα τεράστιο λάθος. (We made a huge mistake.)

@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Αυτός θα είναι με μας. Είμαι εδώ να βοηθήσω. (He will be with us. I am here to help.)
-> 2. Από μένα για σένα, ένα δώρο που λέει ότι σ' αγαπώ. (From me to you, a gift that says I love you.)
-> 3. Αν πρέπει, όλοι εδώ, πολύ νωρίς! (If we must, everyone here, very early!)
-> 4. Συγγνώμη, μην ξεχνάς: το όνομα στο μέρος σου. Κανένα πρόβλημα. (Sorry, don't forget: your name at your place. No problem.)
-> 5. Η μητέρα έχει μια ιδέα: τον χειμώνα, λεφτά για την κυρία Σοφία. (Mother has an idea: in winter, money for Mrs. Sofia.)
-> 6. Η οικογένεια, η πόλη, το μωρό: αγάπη και χαρά. (The family, the city, the baby: love and joy.)
+> 1. Μαμά, θα πάω στο χωριό με τον Νίκο! — Αυτός; Είναι φίλος σου ή...; (Mom, I'll go to the village with Nikos! — Him? Is he your friend or...?)
+> 2. Νομίζω ότι η γιαγιά θέλει κάτι από σένα. — Για το σπίτι που είναι στην κάρτα; (I think grandma wants something from you. — About the house that's on the card?)
+> 3. Όλοι εδώ, στο τραπέζι! — Μαμά, αν πάω στην Ελλάδα, πρέπει να μάθω πολύ ελληνικά. (Everyone here, at the table! — Mom, if I go to Greece, I have to learn a lot of Greek.)
+> 4. Συγγνώμη! Εδώ είναι το μέρος; — Ναι, Νίκο, έλα! Δεν είναι πρόβλημα. (Sorry! Is this the place? — Yes, Niko, come! It's not a problem.)
+> 5. Κυρία, έχω μια ιδέα: πάμε στο χωριό τον χειμώνα! — Και τα λεφτά; (Ma'am, I have an idea: let's go to the village this winter! — And the money?)
+> 6. Η οικογένεια είναι η χαρά μου. Πήγαινε, μωρό μου, με αγάπη. (Family is my joy. Go, my baby, with love.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **a thankful table (no class this week)** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 25 of 300
-> **Today's line:** Αυτός θα είναι με μας. Είμαι εδώ να βοηθήσω. (He will be with us. I am here to help.)
+> **Today's line:** Μαμά, θα πάω στο χωριό με τον Νίκο! — Αυτός; Είναι φίλος σου ή...; (Mom, I'll go to the village with Nikos! — Him? Is he your friend or...?)
 > - [[να]] **to (verb particle)** (#3): Θέλω να πιώ ένα καφέ. (I want to drink a coffee.)
 > - [[είμαι]] **I am** (#4): Ωραία ημέρα, δεν είναι; (It's a beautiful day, isn't it?)
 > - [[θα]] **will (future particle)** (#7): Θα ήθελα να πάει εκεί. (I'd like him to go there.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[με]] **with** (#11): Δε μ' αρέσει το χιόνι. (I don't like snow.)
 
 > [!todo]- Tue · day 26 of 300
-> **Today's line:** Από μένα για σένα, ένα δώρο που λέει ότι σ' αγαπώ. (From me to you, a gift that says I love you.)
+> **Today's line:** Νομίζω ότι η γιαγιά θέλει κάτι από σένα. — Για το σπίτι που είναι στην κάρτα; (I think grandma wants something from you. — About the house that's on the card?)
 > - [[μου]] **me, my** (#12): Μου αρέσει πολύ η πίτσα. (I like pizza very much.)
 > - [[για]] **for, about** (#13): Άσε κάτι και για μένα. (Leave something for me too.)
 > - [[που]] **that, which, where** (#14): Να αγαπάς αυτό που κάνεις. (Love what you do.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[από]] **from, by** (#20): Ζυγίζει πάνω από 80 κιλά. (He weighs more than 80 kg.)
 
 > [!todo]- Wed · day 27 of 300
-> **Today's line:** Αν πρέπει, όλοι εδώ, πολύ νωρίς! (If we must, everyone here, very early!)
+> **Today's line:** Όλοι εδώ, στο τραπέζι! — Μαμά, αν πάω στην Ελλάδα, πρέπει να μάθω πολύ ελληνικά. (Everyone here, at the table! — Mom, if I go to Greece, I have to learn a lot of Greek.)
 > - [[αν]] **if** (#25): Όπου κι αν είσαι, να προσεύχεσαι. (Wherever you are, may you pray.)
 > - [[πρέπει]] **must, it is necessary** (#26): Δεν θα έπρεπε να ψεύδεστε. (You shouldn't lie.)
 > - [[εδώ]] **here** (#28): Δε θα είμαι εδώ. (I won't be here.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[όλος]] **all, whole** (#32): Μου έμαθε όλα όσα ξέρω. (She taught me everything I know.)
 
 > [!todo]- Thu · day 28 of 300
-> **Today's line:** Συγγνώμη, μην ξεχνάς: το όνομα στο μέρος σου. Κανένα πρόβλημα. (Sorry, don't forget: your name at your place. No problem.)
+> **Today's line:** Συγγνώμη! Εδώ είναι το μέρος; — Ναι, Νίκο, έλα! Δεν είναι πρόβλημα. (Sorry! Is this the place? — Yes, Niko, come! It's not a problem.)
 > - [[μην]] **don't (negation)** (#35): Μη μ' αφήνεις μόνο. (Don't leave me alone.)
 > - [[μέρος|το μέρος]] **place, part** (#128): Μίλησε εκ μέρους μου! (He spoke on my behalf!)
 > - [[πρόβλημα|το πρόβλημα]] **problem** (#138): Πρόκειται να λύσω το πρόβλημα. (I am going to solve the problem.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[συγγνώμη]] **sorry, excuse me** (#148): Συγγνώμη για τα σκληρά λόγια. (Sorry for the harsh words.)
 
 > [!todo]- Fri · day 29 of 300
-> **Today's line:** Η μητέρα έχει μια ιδέα: τον χειμώνα, λεφτά για την κυρία Σοφία. (Mother has an idea: in winter, money for Mrs. Sofia.)
+> **Today's line:** Κυρία, έχω μια ιδέα: πάμε στο χωριό τον χειμώνα! — Και τα λεφτά; (Ma'am, I have an idea: let's go to the village this winter! — And the money?)
 > - [[κυρία|η κυρία]] **Mrs., lady** (#154): Καλωσήρθατε, κυρίες και κύριοι! (Welcome, ladies and gentlemen!)
 > - [[ιδέα|η ιδέα]] **idea** (#168): Ά, δεν έχω ιδέα! (Oh, I have no idea!)
 > - [[μητέρα|η μητέρα]] **mother** (#172): Πώς είναι η μητέρα σου; (How is your mother?)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[λεφτά|τα λεφτά]] **money** (#181): Δεν έχω λεφτά μαζί μου. (I don't have any money on me.)
 
 > [!todo]- Sat · day 30 of 300
-> **Today's line:** Η οικογένεια, η πόλη, το μωρό: αγάπη και χαρά. (The family, the city, the baby: love and joy.)
+> **Today's line:** Η οικογένεια είναι η χαρά μου. Πήγαινε, μωρό μου, με αγάπη. (Family is my joy. Go, my baby, with love.)
 > - [[οικογένεια|η οικογένεια]] **family** (#183): Μου λείπει η οικογένειά μου. (I miss my family.)
 > - [[πόλη|η πόλη]] **city, town** (#192): Δε μ' αρέσει καθόλου αυτή η πόλη. (I don't like this city at all.)
 > - [[αγάπη|η αγάπη]] **love** (#195): Η αγάπη είναι σημαντικό πράγμα. (Love is an important thing.)

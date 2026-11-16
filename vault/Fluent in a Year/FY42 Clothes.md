@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Οκτώ το πρωί. Ένα δαχτυλίδι σε κύκλο. Θυμωμένη; Όχι! (Eight in the morning. A ring in a circle. Angry? No!)
-> 2. Εμπιστεύομαι το ζεστό πουλόβερ. Πετυχαίνω! (I trust the warm sweater. I succeed!)
-> 3. Χρήσιμο: βρίσκομαι στο κατάστημα. Η επιθυμία μου; Ένα παλτό. (Useful: I'm at the store. My wish? A coat.)
-> 4. Σελίδα δύο: η γάτα πίνει το γάλα και ξεφεύγει! (Page two: the cat drinks the milk and escapes!)
-> 5. Απέναντι από την έκθεση, ένα μαγαζί. Σκοπεύω να μπω. (Opposite the exhibition, a shop. I intend to go in.)
-> 6. Η ευχή μου για αυτή την περίοδο: ένα κόκκινο φόρεμα. (My wish for this season: a red dress.)
+> 1. Στο κουτί της Ελένης... ένα δαχτυλίδι! — Ο κύκλος κλείνει. (In Eleni's box... a ring! — The circle closes.)
+> 2. Κάνει ζεστό εδώ! — Εμπιστεύομαι αυτό το σπίτι, μαμά. (It's warm here! — I trust this house, mom.)
+> 3. Είναι χρήσιμο αυτό το μπαλκόνι! — Βρίσκομαι εδώ κάθε πρωί. (This balcony is useful! — I'm here every morning.)
+> 4. Μια σελίδα από το τετράδιο: «Λάδι και γάλα...» (A page from the notebook: "Oil and milk...")
+> 5. Αδύνατον! Τα δέντρα είναι τόσα! — Εργάζομαι εδώ κάθε μέρα. (Impossible! There are so many trees! — I work here every day.)
+> 6. Η γεύση του λαδιού! — Μια ευχή: να είμαστε πάντα μαζί. (The taste of the oil! — A wish: that we always be together.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **clothes** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 235 of 300
-> **Today's line:** Οκτώ το πρωί. Ένα δαχτυλίδι σε κύκλο. Θυμωμένη; Όχι! (Eight in the morning. A ring in a circle. Angry? No!)
+> **Today's line:** Στο κουτί της Ελένης... ένα δαχτυλίδι! — Ο κύκλος κλείνει. (In Eleni's box... a ring! — The circle closes.)
 > - [[οκτώ]] **eight** (#1031): Είναι οκτώ παρά είκοσι πέντε. (It's twenty-five to eight.)
 > - [[παρόλο που]] **even though** (#1033): Κρυώνω παρόλο που είμαι ζεστά ντυμένος.
 > - [[θυμωμένος]] **angry** (#1034): Είστε θυμωμένος μαζί μου; (Are you angry at me?)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κύκλος|ο κύκλος]] **circle, cycle** (#1036): Σχημάτισαν έναν κύκλο.
 
 > [!todo]- Tue · day 236 of 300
-> **Today's line:** Εμπιστεύομαι το ζεστό πουλόβερ. Πετυχαίνω! (I trust the warm sweater. I succeed!)
+> **Today's line:** Κάνει ζεστό εδώ! — Εμπιστεύομαι αυτό το σπίτι, μαμά. (It's warm here! — I trust this house, mom.)
 > - [[εμπιστεύομαι]] **I trust** (#1037): Δεν εμπιστεύομαι αυτό τον οδηγό. (I don't trust this driver.)
 > - [[πετυχαίνω]] **I succeed, I hit** (#1038): Το πείραμα πέτυχε.
 > - [[ζεστός]] **warm, hot** (#1039): Αυτό το δωμάτιο είναι πολύ ζεστό. (This room is very warm.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κατηγορώ]] **I accuse, I blame** (#1041): Δεν κατηγορώ κανέναν.
 
 > [!todo]- Wed · day 237 of 300
-> **Today's line:** Χρήσιμο: βρίσκομαι στο κατάστημα. Η επιθυμία μου; Ένα παλτό. (Useful: I'm at the store. My wish? A coat.)
+> **Today's line:** Είναι χρήσιμο αυτό το μπαλκόνι! — Βρίσκομαι εδώ κάθε πρωί. (This balcony is useful! — I'm here every morning.)
 > - [[επικοινωνία|η επικοινωνία]] **communication** (#1042): Η αγγλική γλώσσα είναι ένα μέσο επικοινωνίας. (The English language is a means of communication.)
 > - [[βρίσκομαι]] **I am located** (#1043): Δε βρίσκω το ψωμί.
 > - [[κοινωνικός]] **social** (#1044): Είμαι κοινωνικός λειτουργός.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επιθυμία|η επιθυμία]] **desire, wish** (#1046): Του εκπλήρωσε την επιθυμία.
 
 > [!todo]- Thu · day 238 of 300
-> **Today's line:** Σελίδα δύο: η γάτα πίνει το γάλα και ξεφεύγει! (Page two: the cat drinks the milk and escapes!)
+> **Today's line:** Μια σελίδα από το τετράδιο: «Λάδι και γάλα...» (A page from the notebook: "Oil and milk...")
 > - [[γάλα|το γάλα]] **milk** (#1047): Η γάτα πίνει γάλα. (The cat drinks milk.)
 > - [[ξεφεύγω]] **I escape** (#1048): Κανείς δεν ξεφεύγει από τη μοίρα του.
 > - [[διοικητής|ο διοικητής]] **commander** (#1049)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σελίδα|η σελίδα]] **page** (#1051): Διάβασα το κείμενο στη σελίδα εννέα. (I read the text on page nine.)
 
 > [!todo]- Fri · day 239 of 300
-> **Today's line:** Απέναντι από την έκθεση, ένα μαγαζί. Σκοπεύω να μπω. (Opposite the exhibition, a shop. I intend to go in.)
+> **Today's line:** Αδύνατον! Τα δέντρα είναι τόσα! — Εργάζομαι εδώ κάθε μέρα. (Impossible! There are so many trees! — I work here every day.)
 > - [[αδύνατον]] **impossible** (#1052): Απλώς του ήταν αδύνατον να κρύψει τη χαρά του.
 > - [[έκθεση|η έκθεση]] **exhibition, report, essay** (#1053): Διάβασα την έκθεση σου.
 > - [[εργάζομαι]] **I work** (#1054): Εργάζεται σκληρά. (She works hard.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[απέναντι]] **opposite, across** (#1056): Το πάρκο είναι απέναντι από το σπίτι μου. (The park is opposite my house.)
 
 > [!todo]- Sat · day 240 of 300
-> **Today's line:** Η ευχή μου για αυτή την περίοδο: ένα κόκκινο φόρεμα. (My wish for this season: a red dress.)
+> **Today's line:** Η γεύση του λαδιού! — Μια ευχή: να είμαστε πάντα μαζί. (The taste of the oil! — A wish: that we always be together.)
 > - [[γεύση|η γεύση]] **taste, flavor** (#1057): Ποιά γεύση θέλεις;
 > - [[ευχή|η ευχή]] **wish** (#1058): Πώς στην ευχή θα γίνει αυτό; (How on earth will this be done?)
 > - [[μορφή|η μορφή]] **form, shape** (#1059): Τα σχέδιά μας παίρνουν μορφή.

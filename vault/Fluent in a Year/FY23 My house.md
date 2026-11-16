@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Καινούργιο διαμέρισμα! Κόκκινη κουζίνα και μεγάλο μπάνιο. (New apartment! Red kitchen and a big bathroom.)
-> 2. Ο κήπος είναι πράσινος. Ο σκύλος είναι μαύρος. Τι χρώμα η πόρτα; (The garden is green. The dog is black. What color is the door?)
-> 3. Ένα γράμμα για μένα! Πάω στο κέντρο, δίπλα στο φαρμακείο. (A letter for me! I go downtown, next to the pharmacy.)
-> 4. Ο στόχος μου για το μέλλον: ένα σπίτι με κήπο. (My goal for the future: a house with a garden.)
-> 5. Είτε στο λιμάνι είτε στο κέντρο; Έξυπνη λίστα, σοβαρή απόφαση! (Either at the port or downtown? A clever list, a serious decision!)
-> 6. Κάποτε ο παππούς είχε ένα καράβι. Τώρα μένω στον τρίτο όροφο. (Once Grandpa had a ship. Now I live on the third floor.)
+> 1. Η κουζίνα είναι παλιά, το μπάνιο... πολύ παλιό! — Μια κόκκινη πόρτα; Καινούργια! (The kitchen is old, the bathroom... very old! — A red door? A new one!)
+> 2. Τι χρώμα για τον κήπο; — Πράσινο! Και ο σκύλος... πάλι εδώ! (What color for the garden? — Green! And the dog... here again!)
+> 3. Στο κέντρο, στο φαρμακείο, ήρθε ένα γράμμα για σένα! (In the center, at the pharmacy, a letter came for you!)
+> 4. «Το σπίτι είναι το μέλλον σου, αν το θέλεις. Έχεις το δικαίωμα.» Ελένη. — Ο στόχος μου: λάδι από τις ελιές μας! ("The house is your future, if you want it. You have the right." Eleni. — My goal: oil from our olives!)
+> 5. Μια λίστα: είτε μένω, είτε φεύγω... — Σοβαρά πράγματα αυτά! (A list: either I stay, or I leave... — These are serious things!)
+> 6. Κάποτε, η Ελένη έφυγε με ένα καράβι... με το τρίτο τετράδιο. (Once, Eleni left on a ship... with the third notebook.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L20 My house-student|L20 My house]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 121 of 300
-> **Today's line:** Καινούργιο διαμέρισμα! Κόκκινη κουζίνα και μεγάλο μπάνιο. (New apartment! Red kitchen and a big bathroom.)
+> **Today's line:** Η κουζίνα είναι παλιά, το μπάνιο... πολύ παλιό! — Μια κόκκινη πόρτα; Καινούργια! (The kitchen is old, the bathroom... very old! — A red door? A new one!)
 > - [[καινούργιος]] **new** (#536): Το βιβλίο είναι καινούργιο. (The book is new.)
 > - [[μπάνιο|το μπάνιο]] **bath, bathroom; swim** (#603): Κάνοντας ένα μπάνιο ηρεμώ. (Taking a bath makes me relax.)
 > - [[διαμέρισμα|το διαμέρισμα]] **apartment** (#711): Έχω ένα διαμέρισμα στο Μπόστον. (I have an apartment in Boston.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κόκκινος]] **red** (#810): Το χρώμα του είναι κόκκινο. (Its color is red.)
 
 > [!todo]- Tue · day 122 of 300
-> **Today's line:** Ο κήπος είναι πράσινος. Ο σκύλος είναι μαύρος. Τι χρώμα η πόρτα; (The garden is green. The dog is black. What color is the door?)
+> **Today's line:** Τι χρώμα για τον κήπο; — Πράσινο! Και ο σκύλος... πάλι εδώ! (What color for the garden? — Green! And the dog... here again!)
 > - [[μαύρος]] **black** (#839): Τ' αγόρασες στη μαύρη αγορά; (Did you buy it on the black market?)
 > - [[χρώμα|το χρώμα]] **color** (#934): Τι χρώμα είναι τα πλακάκια; (What color are the tiles?)
 > - [[κήπος|ο κήπος]] **garden** (#1032): Δεν πήγα στον ζωολογικό κήπο. (I didn't go to the zoo.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πράσινος]] **green** (#1291): Ο Τομ έχει πράσινα μάτια. (Tom has green eyes.)
 
 > [!todo]- Wed · day 123 of 300
-> **Today's line:** Ένα γράμμα για μένα! Πάω στο κέντρο, δίπλα στο φαρμακείο. (A letter for me! I go downtown, next to the pharmacy.)
+> **Today's line:** Στο κέντρο, στο φαρμακείο, ήρθε ένα γράμμα για σένα! (In the center, at the pharmacy, a letter came for you!)
 > - [[κέντρο|το κέντρο]] **center** (#481): Πάω συχνά στο κέντρο τις Δευτέρεις. (I often go downtown on Monday.)
 > - [[φωνή|η φωνή]] **voice** (#482): Ο Τόνι έχει ωραία φωνή. (Tony has a beautiful voice.)
 > - [[υπηρεσία|η υπηρεσία]] **service** (#485): Κάλεσε την πυροσβεστική υπηρεσία.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φαρμακείο|το φαρμακείο]] **pharmacy** (#1437): Εργάζομαι στο φαρμακείο.
 
 > [!todo]- Thu · day 124 of 300
-> **Today's line:** Ο στόχος μου για το μέλλον: ένα σπίτι με κήπο. (My goal for the future: a house with a garden.)
+> **Today's line:** «Το σπίτι είναι το μέλλον σου, αν το θέλεις. Έχεις το δικαίωμα.» Ελένη. — Ο στόχος μου: λάδι από τις ελιές μας! ("The house is your future, if you want it. You have the right." Eleni. — My goal: oil from our olives!)
 > - [[μέλλον|το μέλλον]] **future** (#487): Αγωνίζομαι για το μέλλον μου. (I am fighting for my future.)
 > - [[στρατός|ο στρατός]] **army** (#491): Ήσουν στον στρατό; (Were you in the army?)
 > - [[στόχος|ο στόχος]] **goal, target** (#492): Ποιος είναι ο στόχος μας; (What's our goal?)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[θεωρώ]] **I consider** (#494): Θεωρώ τον Τομ φίλο.
 
 > [!todo]- Fri · day 125 of 300
-> **Today's line:** Είτε στο λιμάνι είτε στο κέντρο; Έξυπνη λίστα, σοβαρή απόφαση! (Either at the port or downtown? A clever list, a serious decision!)
+> **Today's line:** Μια λίστα: είτε μένω, είτε φεύγω... — Σοβαρά πράγματα αυτά! (A list: either I stay, or I leave... — These are serious things!)
 > - [[είτε]] **either, whether** (#495): Λίγο με νοιάζει είτε με πιστεύετε είτε όχι. (I don't care much whether you believe me or not.)
 > - [[λίστα|η λίστα]] **list** (#497): Το όνομά του δεν είναι στη λίστα. (His name is not on the list.)
 > - [[έξυπνος]] **clever, smart** (#498): Ο σκύλος είναι έξυπνος. (The dog is smart.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σοβαρός]] **serious** (#500): Αυτό είναι ένα σοβαρό ζήτημα. (This is a serious matter.)
 
 > [!todo]- Sat · day 126 of 300
-> **Today's line:** Κάποτε ο παππούς είχε ένα καράβι. Τώρα μένω στον τρίτο όροφο. (Once Grandpa had a ship. Now I live on the third floor.)
+> **Today's line:** Κάποτε, η Ελένη έφυγε με ένα καράβι... με το τρίτο τετράδιο. (Once, Eleni left on a ship... with the third notebook.)
 > - [[κάποτε]] **once, sometime** (#501): Ο Τομ ήταν κάποτε μεταφραστής. (Tom was once a translator.)
 > - [[νόμος|ο νόμος]] **law** (#502): Εγώ είμαι ο νόμος.
 > - [[καθώς]] **as, while** (#503): Μαθαίνουμε καθώς κάνουμε.

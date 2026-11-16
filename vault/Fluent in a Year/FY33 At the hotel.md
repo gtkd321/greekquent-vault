@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ο οδηγός λέει: στο χωριό έχει πανηγύρι απόψε. (The driver says: there's a village festival tonight.)
-> 2. Προτιμώ το δωμάτιο με θέα. Η προσφορά είναι σε χαρτί. (I prefer the room with a view. The offer is on paper.)
-> 3. Όποτε πλησιάζω τη θάλασσα, νιώθω μια υπέροχη εμπειρία. (Whenever I approach the sea, I feel a wonderful experience.)
-> 4. Ταυτότητα και διεύθυνση, παρακαλώ. Μυρίζει καφές! (ID and address, please. It smells of coffee!)
-> 5. Αγαπητή κυρία, αρκεί η διαδικασία. Πιθανόν αύριο. (Dear madam, the procedure is enough. Possibly tomorrow.)
-> 6. Φανταστικός ουρανός! Ένα άλογο στην παραλία. (A fantastic sky! A horse on the beach.)
+> 1. Το πανηγύρι είναι απόψε! — Τι επίπεδο μουσικής! (The festival is tonight! — What level of music!)
+> 2. Τι κρύβεις, Νίκο; — Μια προσφορά: ένας χορός; (What are you hiding, Niko? — An offer: a dance?)
+> 3. Η καλύτερη εμπειρία της ζωής μου. — Ο έρωτας είναι στον αέρα! (The best experience of my life. — Love is in the air!)
+> 4. Το τετράδιο είναι ένα γράμμα: «Το έβδομο το έχει ο νονός.» Η μοίρα! — Η διεύθυνση του νονού! (The notebook is a letter: "The godfather has the seventh." Fate! — The godfather's address!)
+> 5. Τον βάφτισα εγώ τον νονό σου! — Αγαπητή θεία, ξέρεις τα πάντα! (I baptized your godfather myself! — Dear auntie, you know everything!)
+> 6. Κοίτα τον ουρανό! — Φανταστικός! Αύριο, στον νονό. (Look at the sky! — Fantastic! Tomorrow, to the godfather.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **at the hotel** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 181 of 300
-> **Today's line:** Ο οδηγός λέει: στο χωριό έχει πανηγύρι απόψε. (The driver says: there's a village festival tonight.)
+> **Today's line:** Το πανηγύρι είναι απόψε! — Τι επίπεδο μουσικής! (The festival is tonight! — What level of music!)
 > - [[τρύπα|η τρύπα]] **hole** (#758): Η τρύπα είναι στενή.
 > - [[οδηγός|ο οδηγός]] **driver, guide** (#759): Ο Τομ είν' ο οδηγός μας.
 > - [[επίπεδο|το επίπεδο]] **level** (#761): Αυτός λέει ανοησίες σε υψηλό επίπεδο.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πανηγύρι|το πανηγύρι]] **village festival** (#1483): Θα ήθελα να δω το πανηγύρι.
 
 > [!todo]- Tue · day 182 of 300
-> **Today's line:** Προτιμώ το δωμάτιο με θέα. Η προσφορά είναι σε χαρτί. (I prefer the room with a view. The offer is on paper.)
+> **Today's line:** Τι κρύβεις, Νίκο; — Μια προσφορά: ένας χορός; (What are you hiding, Niko? — An offer: a dance?)
 > - [[κρύβω]] **I hide** (#763): Η φοβισμένη γάτα κρύβεται κάτω από το αυτοκίνητο. (The scared cat is hiding under the car.)
 > - [[προσφορά|η προσφορά]] **offer** (#764): Θα ήθελα να κάνω μια προσφορά.
 > - [[προτιμώ]] **I prefer** (#765): Προτιμώ να παίξω γκόλφ. (I'd rather be playing golf.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φυσικός]] **natural, physical** (#767): Ο φυσικός δουλεύει πολύ.
 
 > [!todo]- Wed · day 183 of 300
-> **Today's line:** Όποτε πλησιάζω τη θάλασσα, νιώθω μια υπέροχη εμπειρία. (Whenever I approach the sea, I feel a wonderful experience.)
+> **Today's line:** Η καλύτερη εμπειρία της ζωής μου. — Ο έρωτας είναι στον αέρα! (The best experience of my life. — Love is in the air!)
 > - [[έρωτας|ο έρωτας]] **love, passion** (#768): Ο έρωτας είναι τυφλός. (Love is blind.)
 > - [[εμπειρία|η εμπειρία]] **experience** (#769): Χρειάζεστε εμπειρία για να πάρετε τη δουλειά. (You need experience to get the job.)
 > - [[πλησιάζω]] **I approach** (#770): Η κρίση πλησιάζει.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[όποτε]] **whenever** (#772): Όποτε ακούω αυτό το τραγούδι θυμάμαι τον Τομ. (Whenever I hear this song, I think of Tom.)
 
 > [!todo]- Thu · day 184 of 300
-> **Today's line:** Ταυτότητα και διεύθυνση, παρακαλώ. Μυρίζει καφές! (ID and address, please. It smells of coffee!)
+> **Today's line:** Το τετράδιο είναι ένα γράμμα: «Το έβδομο το έχει ο νονός.» Η μοίρα! — Η διεύθυνση του νονού! (The notebook is a letter: "The godfather has the seventh." Fate! — The godfather's address!)
 > - [[ταυτότητα|η ταυτότητα]] **identity, ID card** (#773): Δείξτε μου την ταυτότητά σας.
 > - [[διεύθυνση|η διεύθυνση]] **address, management** (#774): Πείτε μου τη διεύθυνσή σας. (Tell me your address.)
 > - [[Πρωτοχρονιά|η Πρωτοχρονιά]] **New Year's Day** (#1485): Την Πρωτοχρονιά θα είμαι εδώ μαζί σου.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μυρίζω]] **I smell** (#776): Αυτό το αυγό μυρίζει άσχημα. (This egg smells bad.)
 
 > [!todo]- Fri · day 185 of 300
-> **Today's line:** Αγαπητή κυρία, αρκεί η διαδικασία. Πιθανόν αύριο. (Dear madam, the procedure is enough. Possibly tomorrow.)
+> **Today's line:** Τον βάφτισα εγώ τον νονό σου! — Αγαπητή θεία, ξέρεις τα πάντα! (I baptized your godfather myself! — Dear auntie, you know everything!)
 > - [[αγαπητός]] **dear** (#777): Είναι αγαπητός στους φίλους του.
 > - [[διαδικασία|η διαδικασία]] **procedure, process** (#778): Του εξήγησα τη διαδικασία.
 > - [[αρκεί]] **it is enough** (#779): Αρκεί να απαντήσεις την πρώτη ερώτηση. (You only have to answer the first question.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[βαφτίζω]] **I baptize** (#1486)
 
 > [!todo]- Sat · day 186 of 300
-> **Today's line:** Φανταστικός ουρανός! Ένα άλογο στην παραλία. (A fantastic sky! A horse on the beach.)
+> **Today's line:** Κοίτα τον ουρανό! — Φανταστικός! Αύριο, στον νονό. (Look at the sky! — Fantastic! Tomorrow, to the godfather.)
 > - [[άλογο|το άλογο]] **horse** (#781): Τα άλογα είναι ζώα. (Horses are animals.)
 > - [[ουρανός|ο ουρανός]] **sky** (#782): Το πουλί είναι στον ουρανό. (The bird is in the sky.)
 > - [[φανταστικός]] **fantastic, imaginary** (#783): Είναι φανταστικές.

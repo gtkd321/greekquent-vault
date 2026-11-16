@@ -13,7 +13,7 @@ tags: [greek-fiay]
 
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
-[Watch this week's story](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA) as a short cartoon with Greek subtitles, or [play it as a text adventure](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA#play) where the scene only moves when you type the right Greek word.
+[Watch this week's story](obsidian://greekquent?open=story&hash=%23d%3D1) as a short cartoon with Greek subtitles, or [play it as a text adventure](obsidian://greekquent?open=story&hash=%23play%26d%3D1) where the scene only moves when you type the right Greek word.
 
 > [!quote]- The week in six lines
 > 1. Εσύ κι εγώ είμαστε σε ένα μάθημα. (You and I are in a class.)

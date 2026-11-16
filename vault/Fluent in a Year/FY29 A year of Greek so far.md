@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Φέτος, το μάθημα έχει μια διαφορά: χορός! (This year, the lesson has a difference: dance!)
-> 2. Μπαίνω στην τάξη. Γραμματική κάτω από το δέντρο; Ευγενικό! (I enter the class. Grammar under the tree? How kind!)
-> 3. Ελέγχω το ρήμα στον υπολογιστή, με μια εικόνα. (I check the verb on the computer, with a picture.)
-> 4. Λιγάκι έκπληξη: ανοίγω το βιβλίο, και δημιουργώ! (A little surprise: I open the book, and I create!)
-> 5. Πλούσιος βασιλιάς στον σταθμό; Επίθετο: πλούσιος! (A rich king at the station? Adjective: rich!)
-> 6. Η εφημερίδα, η προφορά, ένα δευτερόλεπτο... Έχω κράτηση! (The newspaper, the pronunciation, one second... I have a reservation!)
+> 1. Μαρία; Εγώ είμαι, από το μάθημα! — Κυρία Ελένη;! Τι διαφορά κάνει ένα όνομα! (Maria? It's me, from class! — Mrs. Eleni?! What a difference a name makes!)
+> 2. Η γιαγιά μου η Ελένη είναι καλά. Είναι πολύ ευγενική και θέλει να σε δει. — Και το δέντρο της είναι εδώ! (My grandmother Eleni is well. She's very kind and wants to see you. — And her tree is here!)
+> 3. Στον υπολογιστή, μια εικόνα: το τρίτο τετράδιο! — Η συνταγή για το λάδι! (On the computer, a picture: the third notebook! — The recipe for the oil!)
+> 4. Μια έκπληξη: τον Ιούλιο ερχόμαστε! — Θα ανοίξω το σπίτι για εσάς! (A surprise: in July we're coming! — I'll open the house for you!)
+> 5. Το αεροπλάνο, μετά ο σταθμός, μετά το χωριό. — Σαν βασιλιάς! (The plane, then the station, then the village. — Like a king!)
+> 6. Η κράτηση είναι έτοιμη! — Και η προφορά σου, Μαρία... τέλεια! (The booking is ready! — And your pronunciation, Maria... perfect!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L26 Capstone and celebration-student|L26 Capstone and celebration]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 157 of 300
-> **Today's line:** Φέτος, το μάθημα έχει μια διαφορά: χορός! (This year, the lesson has a difference: dance!)
+> **Today's line:** Μαρία; Εγώ είμαι, από το μάθημα! — Κυρία Ελένη;! Τι διαφορά κάνει ένα όνομα! (Maria? It's me, from class! — Mrs. Eleni?! What a difference a name makes!)
 > - [[μάθημα|το μάθημα]] **lesson, class** (#724): Το πρώτο μάθημα είναι εύκολο. (The first lesson is easy.)
 > - [[φέτος]] **this year** (#1358): Δε λέει φέτος να χιονίζει.
 > - [[διαφορά|η διαφορά]] **difference** (#640): Δεν έχει καμία διαφορά όποιο και να διαλέξεις. (It won't make any difference whichever you choose.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χορός|ο χορός]] **dance** (#642): Με ποιον πήγες στον χορό; (Who did you go to the dance with?)
 
 > [!todo]- Tue · day 158 of 300
-> **Today's line:** Μπαίνω στην τάξη. Γραμματική κάτω από το δέντρο; Ευγενικό! (I enter the class. Grammar under the tree? How kind!)
+> **Today's line:** Η γιαγιά μου η Ελένη είναι καλά. Είναι πολύ ευγενική και θέλει να σε δει. — Και το δέντρο της είναι εδώ! (My grandmother Eleni is well. She's very kind and wants to see you. — And her tree is here!)
 > - [[γραμματική|η γραμματική]] **grammar** (#1463): Η γραμματική είναι πολύ σημαντική. (Grammar is very important.)
 > - [[δέντρο|το δέντρο]] **tree** (#643): Πότισε ένα δέντρο. (She watered a tree.)
 > - [[ευγενικός]] **polite, kind** (#644): Αυτός είναι ευγενικός μαζί μου. (He is polite to me.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μπαίνω]] **I enter** (#647): Φοβάμαι να μπω μέσα εκεί. (I'm afraid to go in there.)
 
 > [!todo]- Wed · day 159 of 300
-> **Today's line:** Ελέγχω το ρήμα στον υπολογιστή, με μια εικόνα. (I check the verb on the computer, with a picture.)
+> **Today's line:** Στον υπολογιστή, μια εικόνα: το τρίτο τετράδιο! — Η συνταγή για το λάδι! (On the computer, a picture: the third notebook! — The recipe for the oil!)
 > - [[ελέγχω]] **I check, I control** (#648): Ελέγχω τα email μου.
 > - [[ρήμα|το ρήμα]] **verb** (#1464): Μπορείς να κλίνεις αυτό το ρήμα;
 > - [[υπολογιστής|ο υπολογιστής]] **computer** (#649): Αυτή αγοράζει τον υπολογιστή. (She is buying the computer.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μαγαζί|το μαγαζί]] **shop** (#652): Τη συνάντησα στο μαγαζί τυχαία. (I met her in the store by accident.)
 
 > [!todo]- Thu · day 160 of 300
-> **Today's line:** Λιγάκι έκπληξη: ανοίγω το βιβλίο, και δημιουργώ! (A little surprise: I open the book, and I create!)
+> **Today's line:** Μια έκπληξη: τον Ιούλιο ερχόμαστε! — Θα ανοίξω το σπίτι για εσάς! (A surprise: in July we're coming! — I'll open the house for you!)
 > - [[λιγάκι]] **a little bit** (#653): Είναι λιγάκι ζηλιάρης. (He's a bit jealous.)
 > - [[ουσιαστικό|το ουσιαστικό]] **noun** (#1465): Η λέξη «επίρρημα» είναι ουσιαστικό.
 > - [[έκπληξη|η έκπληξη]] **surprise** (#655): Αυτό είναι έκπληξη.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ανοίγω]] **I open** (#657): Η πόρτα δεν ήθελε να ανοίξει. (The door would not open.)
 
 > [!todo]- Fri · day 161 of 300
-> **Today's line:** Πλούσιος βασιλιάς στον σταθμό; Επίθετο: πλούσιος! (A rich king at the station? Adjective: rich!)
+> **Today's line:** Το αεροπλάνο, μετά ο σταθμός, μετά το χωριό. — Σαν βασιλιάς! (The plane, then the station, then the village. — Like a king!)
 > - [[δικαστήριο|το δικαστήριο]] **court** (#658): Θα σε δω στο δικαστήριο. (I'll see you in court.)
 > - [[σταθμός|ο σταθμός]] **station** (#660): Αυτή τον είδε στο σταθμό. (She saw him at the station.)
 > - [[επίθετο|το επίθετο]] **adjective; surname** (#1466)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πλούσιος]] **rich** (#662): Είστε πολύ πλούσιος. (You are very rich.)
 
 > [!todo]- Sat · day 162 of 300
-> **Today's line:** Η εφημερίδα, η προφορά, ένα δευτερόλεπτο... Έχω κράτηση! (The newspaper, the pronunciation, one second... I have a reservation!)
+> **Today's line:** Η κράτηση είναι έτοιμη! — Και η προφορά σου, Μαρία... τέλεια! (The booking is ready! — And your pronunciation, Maria... perfect!)
 > - [[εφημερίδα|η εφημερίδα]] **newspaper** (#663): Έριξα μια ματιά στην εφημερίδα. (I took a look at the newspaper.)
 > - [[κράτηση|η κράτηση]] **reservation** (#665): Έχω κάνει κράτηση για δύο. (I have a reservation for two.)
 > - [[έργο|το έργο]] **work, project, film** (#666): Το έργο δε τελείωσε εγκαίρως.

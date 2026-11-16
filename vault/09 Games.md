@@ -22,7 +22,7 @@ Links: [[Today]] · [[00 Greekquent Index]] · [[07 Fluent in a Year]]
 > - 85% hit-rate check and a missed list at the end, like the Buzzer.
 
 > [!summary]- Greekquent Γιαγιά (find the notebooks, don't get fed)
-> [Open Greekquent Γιαγιά](https://www.perplexity.ai/computer/a/greekquent-giagia-T2tsaLMvQiuN84Ng0un.IA)
+> [Open Greekquent Γιαγιά](obsidian://greekquent?open=giagia) (inside the vault, works offline) · [in a browser](https://www.perplexity.ai/computer/a/greekquent-giagia-T2tsaLMvQiuN84Ng0un.IA)
 > - One player, made for kids and remote students. Works in any phone browser, iPhone or Android, and with a keyboard on a computer.
 > - Walk around the house (Κουζίνα, Σαλόνι, Διάδρομος, Υπνοδωμάτιο, Μπάνιο, Μπαλκόνι) and find 7 τετράδια. Each one says a Greek word aloud and gives three English meanings.
 > - Right answer: Γιαγιά stops for 2 seconds ("Μπράβο!"). Wrong answer: she gets a little faster, and the notebook stays so the word comes back.
@@ -31,7 +31,8 @@ Links: [[Today]] · [[00 Greekquent Index]] · [[07 Fluent in a Year]]
 > - The end screen lists missed words with Hear buttons and can send them to Review on Today.
 
 > [!summary]- Greekquent Story Lines (watch it, then play it)
-> [Open Story Lines](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA)
+> [Open Story Lines](obsidian://greekquent?open=story) (inside the vault, works offline) · [in a browser](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA)
+> - **The whole year:** 300 days, one story. Μαρία, Νίκος and the family follow the notebooks of a great-aunt to a house in the village. Pick any week and day.
 > - **Watch:** each day's story line as a short cartoon. The Greek subtitles light up word by word as the characters speak, and things appear when their word is said. Slower and English buttons; Whole week plays Monday to Saturday.
 > - **Text adventure:** the same scene as an 80s-style text game. It only moves on when you type the right Greek word. Greeklish works too (nero = νερό), so no Greek keyboard is needed. HELP gives a clue; after two misses, three word buttons appear.
 > - Works in any phone browser, iPhone or Android. Week 1 is ready now; more weeks are coming.

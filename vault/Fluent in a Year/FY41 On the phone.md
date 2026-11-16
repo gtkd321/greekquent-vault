@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Καθαρά σου λέω: ένας διάσημος ηθοποιός στο τηλέφωνο! (I'm telling you clearly: a famous actor on the phone!)
-> 2. Κατευθείαν στο θέμα. Εξάλλου, ισχύει. (Straight to the point. Besides, it's true.)
-> 3. Το πάρκο είναι ανοιχτό; Ένα τηλεφώνημα στη στάση. (Is the park open? A phone call at the stop.)
-> 4. Δύσκολα σε ακούω! Είμαι σε ξεχωριστή διασκέδαση. (I can barely hear you! I'm at a special party.)
-> 5. Κόβω τη γραμμή. Πάω στο αεροδρόμιο. Είμαι ικανή! (I hang up. I'm going to the airport. I'm capable!)
-> 6. Πρόσφατα, ένα σύντομο μήνυμα: «Συνηθισμένη μέρα.» (Recently, a short message: 'An ordinary day.')
+> 1. Ένας φάκελος από τη δικηγόρο της Ελένης! — Διάβασε καθαρά! (An envelope from Eleni's lawyer! — Read clearly!)
+> 2. «Το σπίτι είναι της Μαρίας.» Ισχύει; — Κατευθείαν από την Ελένη! ("The house is Maria's." Is it true? — Straight from Eleni!)
+> 3. Το τηλεφώνημα στη μαμά: «Έχω σπίτι!» — Έρχομαι! Η πόρτα είναι ανοιχτή; (The phone call to mom: "I have a house!" — I'm coming! Is the door open?)
+> 4. Μια ξεχωριστή επίσκεψη. — Δύσκολα θα με αναγνωρίσεις! (A special visit. — You'll hardly recognize me!)
+> 5. Στο αεροδρόμιο με λουλούδια! — Η παιδική μου φίλη, η μαμά σου! (At the airport with flowers! — My childhood friend, your mom!)
+> 6. Πρόσφατα άλλαξαν πολλά. — Ένα σύντομο ταξίδι για μια μεγάλη αλλαγή! (A lot changed recently. — A short trip for a big change!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **on the phone** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 229 of 300
-> **Today's line:** Καθαρά σου λέω: ένας διάσημος ηθοποιός στο τηλέφωνο! (I'm telling you clearly: a famous actor on the phone!)
+> **Today's line:** Ένας φάκελος από τη δικηγόρο της Ελένης! — Διάβασε καθαρά! (An envelope from Eleni's lawyer! — Read clearly!)
 > - [[φάση|η φάση]] **phase** (#1000): Το έργο απορρίφθηκε κατά τη φάση της δημοσίευσης.
 > - [[καθαρά]] **clearly, cleanly** (#1001): Αυτοί είναι καθαρά εναντίον μας. (They are clearly against us.)
 > - [[διάσημος]] **famous** (#1002): Είναι διάσημος ο Τομ; (Is Tom famous?)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[απαιτώ]] **I demand** (#1004): Απαιτώ αποζημίωση!
 
 > [!todo]- Tue · day 230 of 300
-> **Today's line:** Κατευθείαν στο θέμα. Εξάλλου, ισχύει. (Straight to the point. Besides, it's true.)
+> **Today's line:** «Το σπίτι είναι της Μαρίας.» Ισχύει; — Κατευθείαν από την Ελένη! ("The house is Maria's." Is it true? — Straight from Eleni!)
 > - [[ισχύει]] **it is valid** (#1005): Δεν ισχύει κάτι τέτοιο.
 > - [[εξάλλου]] **besides** (#1006): Νυστάζω, εξάλλου είναι αργά.
 > - [[σύμπαν|το σύμπαν]] **universe** (#1007): Το σύμπαν είναι φτιαγμένο από πληροφορίες.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πεδίο|το πεδίο]] **field** (#1009): Οι μαγνήτες, φυσικά, έχουν ένα μαγνητικό πεδίο γύρω τους.
 
 > [!todo]- Wed · day 231 of 300
-> **Today's line:** Το πάρκο είναι ανοιχτό; Ένα τηλεφώνημα στη στάση. (Is the park open? A phone call at the stop.)
+> **Today's line:** Το τηλεφώνημα στη μαμά: «Έχω σπίτι!» — Έρχομαι! Η πόρτα είναι ανοιχτή; (The phone call to mom: "I have a house!" — I'm coming! Is the door open?)
 > - [[ανοιχτός]] **open** (#1010): Το σούπερ μάρκετ είναι ανοιχτό. (The supermarket is open.)
 > - [[στάση|η στάση]] **stop, stance** (#1012): Θα σε περιμένω στη στάση. (I will wait for you at the bus stop.)
 > - [[κυρίως]] **mainly** (#1013): Οι φώκιες τρώνε κυρίως ψάρια.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τηλεφώνημα|το τηλεφώνημα]] **phone call** (#1015): Θα κάνω ένα τηλεφώνημα.
 
 > [!todo]- Thu · day 232 of 300
-> **Today's line:** Δύσκολα σε ακούω! Είμαι σε ξεχωριστή διασκέδαση. (I can barely hear you! I'm at a special party.)
+> **Today's line:** Μια ξεχωριστή επίσκεψη. — Δύσκολα θα με αναγνωρίσεις! (A special visit. — You'll hardly recognize me!)
 > - [[ξεχωριστός]] **special, separate** (#1016): Καθένας είναι ξεχωριστός.
 > - [[διασκέδαση|η διασκέδαση]] **fun, entertainment** (#1017): Καλή διασκέδαση.
 > - [[αποθήκη|η αποθήκη]] **warehouse, storeroom** (#1018): Η αποθήκη κάηκε ολοσχερώς.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ηθοποιός|ο ηθοποιός]] **actor** (#1020): Η φίλη μου είναι ηθοποιός. (My friend is an actress.)
 
 > [!todo]- Fri · day 233 of 300
-> **Today's line:** Κόβω τη γραμμή. Πάω στο αεροδρόμιο. Είμαι ικανή! (I hang up. I'm going to the airport. I'm capable!)
+> **Today's line:** Στο αεροδρόμιο με λουλούδια! — Η παιδική μου φίλη, η μαμά σου! (At the airport with flowers! — My childhood friend, your mom!)
 > - [[αεροδρόμιο|το αεροδρόμιο]] **airport** (#1021): Η Μέλανι πηγαίνει στο αεροδρόμιο. (Melanie is going to the airport.)
 > - [[κόβω]] **I cut** (#1022): Κάθε μέρα κόβει ξύλα. (He chops wood every day.)
 > - [[προστατεύω]] **I protect** (#1023): Ο Θεός μας αγαπά και μας προστατεύει.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[παιδικός]] **children's** (#1025): Αυτό είναι ένα παιδικό βιβλίο. (This is a children's book.)
 
 > [!todo]- Sat · day 234 of 300
-> **Today's line:** Πρόσφατα, ένα σύντομο μήνυμα: «Συνηθισμένη μέρα.» (Recently, a short message: 'An ordinary day.')
+> **Today's line:** Πρόσφατα άλλαξαν πολλά. — Ένα σύντομο ταξίδι για μια μεγάλη αλλαγή! (A lot changed recently. — A short trip for a big change!)
 > - [[δέρμα|το δέρμα]] **skin, leather** (#1026): Έχει απαλό δέρμα.
 > - [[ζημιά|η ζημιά]] **damage** (#1027): Κατηγόρησε τη ζημιά στον Γιάννη.
 > - [[πρόσφατα]] **recently** (#1028): Μετακόμισα πρόσφατα. (I moved recently.)

@@ -148,3 +148,12 @@ body.gq-onebar .mobile-navbar-action-tabs,
 body.gq-onebar .mobile-navbar-action-quick-switcher,
 body.gq-onebar .mobile-navbar-action-menu { display: none !important; }
 .gq-navbtn { display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; -webkit-touch-callout: none; user-select: none; touch-action: manipulation; }
+
+/* Story Lines and Γιαγιά inside the vault */
+.gq-appview { padding: 0 !important; overflow: hidden !important; }
+.gq-appframe { display: block; width: 100%; height: 100%; border: 0; background: #f6efe2; }
+/* Sparks in the word graph */
+.gq-spark { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 4px 8px; font-size: 13px; }
+.gq-spark-t { font-weight: 600; color: #a87a00; margin-right: 4px; }
+.theme-dark .gq-spark-t { color: #f2c94c; }
+.gq-spark-words { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }

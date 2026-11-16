@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Το Πάσχα: κόκκινα αυγά! Φοβερό! (Easter: red eggs! Terrific!)
-> 2. Ντύνομαι καλά. Αισθάνομαι γιορτή. Όλη η τάξη είναι εδώ. (I dress well. I feel festive. The whole class is here.)
-> 3. Ειλικρινά, το αποτέλεσμα: οι Έλληνες κολυμπάνε, λόγω ζέστης. (Honestly, the result: the Greeks swim, because of the heat.)
-> 4. Ξαφνικά εμφανίζεται ο νονός, ανάμεσα σε χιλιάδες ανθρώπους! (Suddenly the godfather appears, among thousands of people!)
-> 5. Τι παρέα! Τελείως άλλη αλλαγή: σπορ μετά το φαγητό. (What company! A complete change: sports after the meal.)
-> 6. Χάρηκα! Συγχαρητήρια σε καθέναν. Στέλνω φωτογραφίες. (Nice to meet you! Congratulations to each one. I'm sending photos.)
+> 1. Κόκκινα αυγά για το Πάσχα! — Ωχ! Ένα μικρό ατύχημα... (Red eggs for Easter! — Oops! A little accident...)
+> 2. Ντύνομαι για την εκκλησία. Αισθάνομαι Ελληνίδα! (I'm getting dressed for church. I feel Greek!)
+> 3. Χριστός Ανέστη! — Νίκο! Ειλικρινά, δεν το πιστεύω! — Είμαι Έλληνας, Μαρία. Πάσχα στο χωριό! (Christ is risen! — Niko! Honestly, I can't believe it! — I'm Greek, Maria. Easter in the village!)
+> 4. Και ξαφνικά εμφανίζεσαι! — Ανάμεσα σε χιλιάδες κεριά! (And suddenly you appear! — Among thousands of candles!)
+> 5. Το τσούγκρισμα είναι σπορ! — Τι παρέα! Τελείως άλλο Πάσχα. (Egg-cracking is a sport! — What company! A completely different Easter.)
+> 6. Συγχαρητήρια, το αυγό σου κερδίζει! — Και έχω νέα: στέλνω ένα γράμμα στην Ελένη, στην Αμερική! (Congratulations, your egg wins! — And I have news: I'm sending a letter to Eleni, in America!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L24 Holy Week-student|L24 Holy Week]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 145 of 300
-> **Today's line:** Το Πάσχα: κόκκινα αυγά! Φοβερό! (Easter: red eggs! Terrific!)
+> **Today's line:** Κόκκινα αυγά για το Πάσχα! — Ωχ! Ένα μικρό ατύχημα... (Red eggs for Easter! — Oops! A little accident...)
 > - [[αυγό|το αυγό]] **egg** (#1283): Πόσο κοστίζει ένα αυγό; (How much does an egg cost?)
 > - [[Πάσχα|το Πάσχα]] **Easter** (#1484): Το Πάσχα είναι προ των πυλών.
 > - [[φοβερός]] **terrible, awesome** (#584): Δε σου ζήτησα κάτι φοβερό.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πόνος|ο πόνος]] **pain** (#586): Έχω πόνο στο δάχτυλό μου. (I have a pain in my finger.)
 
 > [!todo]- Tue · day 146 of 300
-> **Today's line:** Ντύνομαι καλά. Αισθάνομαι γιορτή. Όλη η τάξη είναι εδώ. (I dress well. I feel festive. The whole class is here.)
+> **Today's line:** Ντύνομαι για την εκκλησία. Αισθάνομαι Ελληνίδα! (I'm getting dressed for church. I feel Greek!)
 > - [[αισθάνομαι]] **I feel** (#587): Με κάνει να αισθάνομαι καλύτερα. (It makes me feel better.)
 > - [[γνωστός]] **known, well-known** (#588): Είστε γνωστοί μ' αυτόν;
 > - [[ντύνομαι]] **I get dressed** (#1454): Ντύνομαι σαν κρεμμύδι.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τάξη|η τάξη]] **class, order** (#590): Υπάρχουν τρία κορίτσια στην τάξη. (There are three girls in the class.)
 
 > [!todo]- Wed · day 147 of 300
-> **Today's line:** Ειλικρινά, το αποτέλεσμα: οι Έλληνες κολυμπάνε, λόγω ζέστης. (Honestly, the result: the Greeks swim, because of the heat.)
+> **Today's line:** Χριστός Ανέστη! — Νίκο! Ειλικρινά, δεν το πιστεύω! — Είμαι Έλληνας, Μαρία. Πάσχα στο χωριό! (Christ is risen! — Niko! Honestly, I can't believe it! — I'm Greek, Maria. Easter in the village!)
 > - [[ειλικρινά]] **honestly** (#591): Ειλικρινά, δε μ' αρέσει.
 > - [[αποτέλεσμα|το αποτέλεσμα]] **result** (#592): Το αποτέλεσμα είναι πολύ καλό. (The result is very good.)
 > - [[Έλληνας|ο Έλληνας]] **Greek (person)** (#593): Οι Έλληνες τρώνε συχνά και ψάρι. (Greeks often eat fish, too.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κολυμπάω]] **I swim** (#1455): Κολυμπάω στον ωκεανό. (I'm swimming in the ocean.)
 
 > [!todo]- Thu · day 148 of 300
-> **Today's line:** Ξαφνικά εμφανίζεται ο νονός, ανάμεσα σε χιλιάδες ανθρώπους! (Suddenly the godfather appears, among thousands of people!)
+> **Today's line:** Και ξαφνικά εμφανίζεσαι! — Ανάμεσα σε χιλιάδες κεριά! (And suddenly you appear! — Among thousands of candles!)
 > - [[ξαφνικά]] **suddenly** (#595): Ξαφνικά άρχισε να βρέχει. (Suddenly it started to rain.)
 > - [[ανάμεσα]] **between, among** (#596): Η γάτα είναι ανάμεσα σε εμένα και εσένα. (The cat is between me and you.)
 > - [[χιλιάδα|η χιλιάδα]] **thousand** (#597): Υπάρχουν δύο χιλιάδες βιβλία. (There are two thousand books.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[εργασία|η εργασία]] **work, assignment** (#600): Κάνω την εργασία μου.
 
 > [!todo]- Fri · day 149 of 300
-> **Today's line:** Τι παρέα! Τελείως άλλη αλλαγή: σπορ μετά το φαγητό. (What company! A complete change: sports after the meal.)
+> **Today's line:** Το τσούγκρισμα είναι σπορ! — Τι παρέα! Τελείως άλλο Πάσχα. (Egg-cracking is a sport! — What company! A completely different Easter.)
 > - [[σπορ|το σπορ]] **sport** (#1456): Κάνω σπορ σχεδόν κάθε μέρα. (I do sports almost every day.)
 > - [[παρέα|η παρέα]] **company (of friends)** (#601): Θα μου κάνεις παρέα για μεσημεριανό γεύμα; (Would you join me for lunch?)
 > - [[τελείως]] **completely** (#602): Το ξέχασα τελείως. (I completely forgot it.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αθλητισμός|ο αθλητισμός]] **sports** (#1457): Θέλω να κάνω αθλητισμό.
 
 > [!todo]- Sat · day 150 of 300
-> **Today's line:** Χάρηκα! Συγχαρητήρια σε καθέναν. Στέλνω φωτογραφίες. (Nice to meet you! Congratulations to each one. I'm sending photos.)
+> **Today's line:** Συγχαρητήρια, το αυγό σου κερδίζει! — Και έχω νέα: στέλνω ένα γράμμα στην Ελένη, στην Αμερική! (Congratulations, your egg wins! — And I have news: I'm sending a letter to Eleni, in America!)
 > - [[καθένας]] **each one, everyone** (#607): Καθένας έχει μια ζωή. (Everyone has a life.)
 > - [[συγχαρητήρια]] **congratulations** (#608): Τα συγχαρητήριά μου!
 > - [[ορκίζομαι]] **I swear** (#609): Στο ορκίζομαι, Τζον.

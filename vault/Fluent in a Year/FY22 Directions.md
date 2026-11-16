@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ευθεία, μετά δεξιά, μετά αριστερά. Η πλατεία με την μπλε πόρτα. (Straight ahead, then right, then left. The square with the blue door.)
-> 2. Είναι μακριά; — Απόλυτα όχι! Δεν υπάρχει ανάγκη για ταξί. (Is it far? — Absolutely not! There's no need for a taxi.)
-> 3. Χάθηκα εντελώς. Άρα, ρωτάω στο μωβ μαγαζί. (I'm completely lost. So, I ask at the purple shop.)
-> 4. Καλώ τον Νίκο. Πουθενά! Μένει επάνω, στη γραμμή του μετρό; (I call Nikos. Nowhere! Does he live upstairs, on the metro line?)
-> 5. Απόφαση: ολόκληρη η ομάδα, συνάντηση στο γήπεδο πριν τον αγώνα. (Decision: the whole team, meeting at the field before the match.)
-> 6. Συμφωνώ! Ακολουθώ τον χάρτη μέχρι το ξενοδοχείο. (I agree! I follow the map to the hotel.)
+> 1. Ευθεία, μετά δεξιά, στην πλατεία. — Το μπλε κτίριο; (Straight ahead, then right, at the square. — The blue building?)
+> 2. Είναι μακριά; — Όχι, πέντε λεπτά. Δεν έχεις ανάγκη αμάξι. (Is it far? — No, five minutes. You don't need a car.)
+> 3. Για επιχείρηση θέλετε άδεια. — Επιχείρηση; Ναι: ελαιόλαδο! (For a business you need a permit. — A business? Yes: olive oil!)
+> 4. Το σπίτι ανήκει... στην Ελένη, όχι στη γιαγιά σας. — Τι;! Θα σας καλέσω αύριο. (The house belongs... to Eleni, not to your grandma. — What?! I'll call you tomorrow.)
+> 5. Ο δήμος έχει συνάντηση την Πέμπτη. — Και η απόφαση; (The town council has a meeting on Thursday. — And the decision?)
+> 6. Το γεγονός είναι: το σπίτι είναι της Ελένης. — Και η Ελένη πού είναι; — Στην Αμερική. Ακολουθώ τα γράμματα. (The fact is: the house is Eleni's. — And where is Eleni? — In America. I'm following the letters.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L19 March 25th and directions-student|L19 March 25th and directions]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 115 of 300
-> **Today's line:** Ευθεία, μετά δεξιά, μετά αριστερά. Η πλατεία με την μπλε πόρτα. (Straight ahead, then right, then left. The square with the blue door.)
+> **Today's line:** Ευθεία, μετά δεξιά, στην πλατεία. — Το μπλε κτίριο; (Straight ahead, then right, at the square. — The blue building?)
 > - [[δεξιά]] **right (direction)** (#659): Στρίψε δεξιά. (Turn right.)
 > - [[αριστερά]] **left** (#745): Η βιβλιοθήκη είναι στα αριστερά. (The library is to the left.)
 > - [[μπλε]] **blue** (#795): Η Αιμιλία έχει μπλε μάτια. (Emily has blue eyes.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ευθεία]] **straight ahead** (#1499): Αυτός σχεδίασε με το μολύβι του μιά ευθεία.
 
 > [!todo]- Tue · day 116 of 300
-> **Today's line:** Είναι μακριά; — Απόλυτα όχι! Δεν υπάρχει ανάγκη για ταξί. (Is it far? — Absolutely not! There's no need for a taxi.)
+> **Today's line:** Είναι μακριά; — Όχι, πέντε λεπτά. Δεν έχεις ανάγκη αμάξι. (Is it far? — No, five minutes. You don't need a car.)
 > - [[μακριά]] **far** (#1500): Ζω πολύ μακριά από εδώ. (I live far away from here.)
 > - [[απόλυτα]] **absolutely** (#452): Με έπεισες απόλυτα.
 > - [[έλεγχος|ο έλεγχος]] **control, check** (#453): Το έχω υπό έλεγχο.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επίθεση|η επίθεση]] **attack** (#455): Η ομάδα μας κάνει επίθεση. (Our team is attacking.)
 
 > [!todo]- Wed · day 117 of 300
-> **Today's line:** Χάθηκα εντελώς. Άρα, ρωτάω στο μωβ μαγαζί. (I'm completely lost. So, I ask at the purple shop.)
+> **Today's line:** Για επιχείρηση θέλετε άδεια. — Επιχείρηση; Ναι: ελαιόλαδο! (For a business you need a permit. — A business? Yes: olive oil!)
 > - [[άδεια|η άδεια]] **permission, leave, license** (#456): Τα τραπέζια είναι άδεια. (The tables are empty.)
 > - [[επιχείρηση|η επιχείρηση]] **business, operation** (#458): Η επιχείρησή μας δεν πληρώνει καλά. (Our company doesn't pay well.)
 > - [[εντελώς]] **completely** (#459): Είμαι εντελώς τυφλός. (I'm completely blind.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μωβ]] **purple** (#1433): Η φούστα της είναι μωβ. (Her skirt is purple.)
 
 > [!todo]- Thu · day 118 of 300
-> **Today's line:** Καλώ τον Νίκο. Πουθενά! Μένει επάνω, στη γραμμή του μετρό; (I call Nikos. Nowhere! Does he live upstairs, on the metro line?)
+> **Today's line:** Το σπίτι ανήκει... στην Ελένη, όχι στη γιαγιά σας. — Τι;! Θα σας καλέσω αύριο. (The house belongs... to Eleni, not to your grandma. — What?! I'll call you tomorrow.)
 > - [[καλώ]] **I call, I invite** (#464): Ο Θωμάς κάλεσε τον γιατρό.
 > - [[πουθενά]] **nowhere, anywhere** (#465): Μην πας πουθενά. (Don't go anywhere.)
 > - [[ανήκω]] **I belong** (#466): Αυτό το ποδήλατο μου ανήκει. (This bicycle is mine.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γραμμή|η γραμμή]] **line** (#468): Τράβα μια γραμμή εδώ. (Draw a line here.)
 
 > [!todo]- Fri · day 119 of 300
-> **Today's line:** Απόφαση: ολόκληρη η ομάδα, συνάντηση στο γήπεδο πριν τον αγώνα. (Decision: the whole team, meeting at the field before the match.)
+> **Today's line:** Ο δήμος έχει συνάντηση την Πέμπτη. — Και η απόφαση; (The town council has a meeting on Thursday. — And the decision?)
 > - [[απόφαση|η απόφαση]] **decision** (#469): Πάρε μια απόφαση! (Make a decision!)
 > - [[αγώνας|ο αγώνας]] **match, struggle** (#471): Δεν θα κερδίσεις αυτόν τον αγώνα. (You won't win this game.)
 > - [[συνάντηση|η συνάντηση]] **meeting** (#474): Ήρθε τρέχοντας στη συνάντηση. (He came running to the meeting.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ολόκληρος]] **whole, entire** (#475): Πατρίδα μου είναι ολόκληρος ο κόσμος. (My homeland is the whole world.)
 
 > [!todo]- Sat · day 120 of 300
-> **Today's line:** Συμφωνώ! Ακολουθώ τον χάρτη μέχρι το ξενοδοχείο. (I agree! I follow the map to the hotel.)
+> **Today's line:** Το γεγονός είναι: το σπίτι είναι της Ελένης. — Και η Ελένη πού είναι; — Στην Αμερική. Ακολουθώ τα γράμματα. (The fact is: the house is Eleni's. — And where is Eleni? — In America. I'm following the letters.)
 > - [[γεγονός|το γεγονός]] **fact, event** (#476): Δε γνωρίζω τα γεγονότα.
 > - [[κίνηση|η κίνηση]] **movement, traffic** (#479): Οι κινήσεις έχουν αποτελέσματα.
 > - [[συμφωνώ]] **I agree** (#480): Δεν συμφωνώ μαζί σου. (I don't agree with you.)

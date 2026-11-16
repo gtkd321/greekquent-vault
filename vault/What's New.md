@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 17: The whole year as one story
+> - **Story Lines for all 300 days.** Every day's line on Today is now part of one story that runs the whole year. Tap **Watch it** or **Play it** under the line. Both open right here in the vault, no browser or internet needed. Γιαγιά opens here too.
+> - **Sparks in the word graph.** Some words keep turning up together, like ζωή, άνθρωπος and χάνω. When you open a word in the graph, Greekquent finds three that all link to each other and lights them up in gold. Tap **One sentence** to use all three in one sentence, then save it to My pairs. **Another** shows the next spark.
+> - **Η and Ο read right.** The voice no longer reads a capital Η or Ο at the start of a sentence as a letter name.
+
 > [!info]- November 16, night: One page at a time
 > - **No more piles of tabs.** Links now open in the same page. Use Back and Forward to move through what you've opened. Any extra tabs from before close on their own (notes save themselves, so nothing is lost).
 > - **A quieter bar on phones.** The bottom bar is now just Back, Forward and one search button. Tap it to find a note. Touch and hold it for Search inside notes, Look up a word, Today and More.

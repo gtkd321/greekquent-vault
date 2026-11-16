@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Η υπόσχεση: ένα μικρό κατάστημα στο γκαράζ, με ροζ πόρτα. (The promise: a little shop in the garage, with a pink door.)
-> 2. Μετακομίζω! Μπερδεμένη, αλλά με χαμόγελο και θέα. (I'm moving! Confused, but with a smile and a view.)
-> 3. Σύμπτωση: το τυρί κοστίζει όσο πέρσι. Λιγότερο άγχος! (Coincidence: the cheese costs as much as last year. Less stress!)
-> 4. Ευγνώμων και θετική. Σέβομαι την άσκηση! (Grateful and positive. I respect the practice!)
-> 5. Ο προπονητής μου λέει: «Όχι αρνητικός!» (My coach tells me: 'Not negative!')
-> 6. Μια παρεξήγηση: η φάρμα δεν είναι στην Αθήνα. Για μένα, καλύτερα! (A misunderstanding: the farm isn't in Athens. For me, all the better!)
+> 1. Ένα κατάστημα στο παλιό γκαράζ! — Είναι ρίσκο... αλλά και υπόσχεση! (A shop in the old garage! — It's a risk... but also a promise!)
+> 2. Μαμά, μετακομίζω στο χωριό. — Το χαμόγελό σου το ακούω! (Mom, I'm moving to the village. — I can hear your smile!)
+> 3. Τι σύμπτωση! Όλα τα χαρτιά είναι έτοιμα. — Κανένα άγχος! (What a coincidence! All the papers are ready. — No stress!)
+> 4. Σέβομαι την απόφασή σου. — Είμαι ευγνώμων. (I respect your decision. — I'm grateful.)
+> 5. Είναι νόμιμο! Το σπίτι, το χωράφι, όλα. — Ο προπονητής μου θα έλεγε: γκολ! (It's legal! The house, the field, everything. — My coach would say: goal!)
+> 6. Από την Αθήνα, ένας μισθός; — Όχι για μένα. Εγώ έχω μια φάρμα. Θα τα πούμε! (From Athens, a salary? — Not for me. I have a farm. See you!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **a year in greek** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 295 of 300
-> **Today's line:** Η υπόσχεση: ένα μικρό κατάστημα στο γκαράζ, με ροζ πόρτα. (The promise: a little shop in the garage, with a pink door.)
+> **Today's line:** Ένα κατάστημα στο παλιό γκαράζ! — Είναι ρίσκο... αλλά και υπόσχεση! (A shop in the old garage! — It's a risk... but also a promise!)
 > - [[κατάστημα|το κατάστημα]] **store** (#1350): Τη συνάντησα στο κατάστημα τυχαία. (I met her in the store by accident.)
 > - [[γκαράζ|το γκαράζ]] **garage** (#1351): Ο πατέρας μου είναι στο γκαράζ. (My father is in the garage.)
 > - [[ροζ]] **pink** (#1352): Το γουρούνι είναι ροζ. (The pig is pink.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[υπόσχεση|η υπόσχεση]] **promise** (#1354): Ο Άιζενχάουερ κράτησε την υπόσχεσή του.
 
 > [!todo]- Tue · day 296 of 300
-> **Today's line:** Μετακομίζω! Μπερδεμένη, αλλά με χαμόγελο και θέα. (I'm moving! Confused, but with a smile and a view.)
+> **Today's line:** Μαμά, μετακομίζω στο χωριό. — Το χαμόγελό σου το ακούω! (Mom, I'm moving to the village. — I can hear your smile!)
 > - [[μετακομίζω]] **I move (house)** (#1355): Ο Τομ μετακόμισε.
 > - [[αδυναμία|η αδυναμία]] **weakness** (#1356)
 > - [[θέα|η θέα]] **view** (#1357): Μου αρέσει η θέα.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χαμόγελο|το χαμόγελο]] **smile** (#1360): Ο Τομ είχε ωραίο χαμόγελο.
 
 > [!todo]- Wed · day 297 of 300
-> **Today's line:** Σύμπτωση: το τυρί κοστίζει όσο πέρσι. Λιγότερο άγχος! (Coincidence: the cheese costs as much as last year. Less stress!)
+> **Today's line:** Τι σύμπτωση! Όλα τα χαρτιά είναι έτοιμα. — Κανένα άγχος! (What a coincidence! All the papers are ready. — No stress!)
 > - [[σύμπτωση|η σύμπτωση]] **coincidence** (#1361)
 > - [[άγχος|το άγχος]] **stress, anxiety** (#1362): Είχατε άγχος με τα μαθήματα;
 > - [[κοστίζω]] **I cost** (#1363): Πόσο κοστίζουν τ' αυγά; (How much do eggs cost?)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σενάριο|το σενάριο]] **script, scenario** (#1365): Γράφει σενάρια με προβλέψιμες πλοκές.
 
 > [!todo]- Thu · day 298 of 300
-> **Today's line:** Ευγνώμων και θετική. Σέβομαι την άσκηση! (Grateful and positive. I respect the practice!)
+> **Today's line:** Σέβομαι την απόφασή σου. — Είμαι ευγνώμων. (I respect your decision. — I'm grateful.)
 > - [[σέβομαι]] **I respect** (#1366): Αυτή δε σέβεται κανέναν. (She has no respect for anyone.)
 > - [[άσκηση|η άσκηση]] **exercise** (#1367): Υπάρχουν δέκα ασκήσεις στο βιβλίο.
 > - [[θετικός]] **positive** (#1368): Κάντε κάτι θετικό.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ευγνώμων]] **grateful** (#1370): Θα 'πρεπε να 'σαι ευγνώμων.
 
 > [!todo]- Fri · day 299 of 300
-> **Today's line:** Ο προπονητής μου λέει: «Όχι αρνητικός!» (My coach tells me: 'Not negative!')
+> **Today's line:** Είναι νόμιμο! Το σπίτι, το χωράφι, όλα. — Ο προπονητής μου θα έλεγε: γκολ! (It's legal! The house, the field, everything. — My coach would say: goal!)
 > - [[αποτελώ]] **I constitute** (#1371): Όλοι οι άνθρωποι αποτελούν έναν λαό.
 > - [[προπονητής|ο προπονητής]] **coach** (#1372): Είμαι ο προπονητής.
 > - [[νόμιμος]] **legal** (#1373): Είναι νόμιμα τα πυροτεχνήματα στην Αυστραλία;
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χειρουργείο|το χειρουργείο]] **operating room** (#1375): Απαγορεύεται η είσοδος στο χειρουργείο. (Entry to the operating room is prohibited.)
 
 > [!todo]- Sat · day 300 of 300
-> **Today's line:** Μια παρεξήγηση: η φάρμα δεν είναι στην Αθήνα. Για μένα, καλύτερα! (A misunderstanding: the farm isn't in Athens. For me, all the better!)
+> **Today's line:** Από την Αθήνα, ένας μισθός; — Όχι για μένα. Εγώ έχω μια φάρμα. Θα τα πούμε! (From Athens, a salary? — Not for me. I have a farm. See you!)
 > - [[παρεξήγηση|η παρεξήγηση]] **misunderstanding** (#1376): Προφανώς έχει γίνει κάποια παρεξήγηση.
 > - [[φάρμα|η φάρμα]] **farm** (#1377): Δούλεψα σε μία φάρμα.
 > - [[μισθός|ο μισθός]] **salary** (#1378): Αυτοί μείωσαν τον μισθό του. (They reduced his salary.)

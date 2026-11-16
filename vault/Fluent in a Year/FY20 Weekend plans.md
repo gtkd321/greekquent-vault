@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Το Σαββατοκύριακο: βόλτα με την εγγονή μου και μετά πάρτι! (The weekend: a walk with my granddaughter and then a party!)
-> 2. Πλέον μιλάω ελληνικά. Διαφορετικό! Δείχνω με το δάχτυλο λιγότερο. (Now I speak Greek. Different! I point with my finger less.)
-> 3. Μια ερώτηση: ποια είναι η τιμή; — Η σειρά σου! (One question: what is the price? — Your turn!)
-> 4. Η φίλη μου τρώει οτιδήποτε. Πονάει η κοιλιά της! (My friend eats anything. Her belly hurts!)
-> 5. Ένα τέλειο ταξίδι! Τα αγαπημένα μου ρούχα, κι είμαι ευτυχισμένη. (A perfect trip! My favorite clothes, and I'm happy.)
-> 6. Το δείπνο ήταν υπέροχα! Όλοι χαρούμενοι. Μισώ να φεύγω. (Dinner was wonderful! Everyone happy. I hate to leave.)
+> 1. Το Σαββατοκύριακο έχουμε πάρτι! Για τον Κώστα. — Και μια βόλτα στη θάλασσα! (This weekend we're having a party! For Kostas. — And a walk by the sea!)
+> 2. Το δεύτερο τετράδιο είναι διαφορετικό. — Ναι. Πλέον είναι έρευνα! (The second notebook is different. — Yes. Now it's research!)
+> 3. Έχω μια ερώτηση. Στην πίσω πλευρά, ένας χάρτης; — Η σειρά σου να διαβάσεις! (I have a question. On the back, a map? — Your turn to read!)
+> 4. Η φίλη μου, η Σοφία. Ξέρει οτιδήποτε για το χωριό. — Σχετικά! (My friend, Sofia. She knows anything about the village. — Sort of!)
+> 5. Είμαι ευτυχισμένος! Η τέλεια μέρα! — Το αγαπημένο μου πάρτι! (I'm happy! The perfect day! — My favorite party!)
+> 6. Μαρία... πού είναι το τετράδιο; — Στο τραπέζι, στο δείπνο... Όχι! Εξαφανίστηκε! (Maria... where's the notebook? — On the table, at dinner... No! It's disappeared!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L17 Weekend plans-student|L17 Weekend plans]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 103 of 300
-> **Today's line:** Το Σαββατοκύριακο: βόλτα με την εγγονή μου και μετά πάρτι! (The weekend: a walk with my granddaughter and then a party!)
+> **Today's line:** Το Σαββατοκύριακο έχουμε πάρτι! Για τον Κώστα. — Και μια βόλτα στη θάλασσα! (This weekend we're having a party! For Kostas. — And a walk by the sea!)
 > - [[βόλτα|η βόλτα]] **walk, stroll** (#635): Θέλετε να πάτε μια βόλτα; (Would you like to go for a walk?)
 > - [[Σαββατοκύριακο|το Σαββατοκύριακο]] **weekend** (#1075): Πως πήγε το Σαββατοκύριακο;
 > - [[πάρτι|το πάρτι]] **party** (#392): Πρέπει να πάω στο πάρτι; (Should I go to the party?)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[εγγονή|η εγγονή]] **granddaughter** (#1422): Αυτή είναι η Νίνα, η εγγονή σου.
 
 > [!todo]- Tue · day 104 of 300
-> **Today's line:** Πλέον μιλάω ελληνικά. Διαφορετικό! Δείχνω με το δάχτυλο λιγότερο. (Now I speak Greek. Different! I point with my finger less.)
+> **Today's line:** Το δεύτερο τετράδιο είναι διαφορετικό. — Ναι. Πλέον είναι έρευνα! (The second notebook is different. — Yes. Now it's research!)
 > - [[ελληνικός]] **Greek (adj.)** (#398): Η Κρήτη είναι ένα μεγάλο ελληνικό νησί. (Crete is a big Greek island.)
 > - [[έρευνα|η έρευνα]] **research, search** (#399): Έκανα λίγη έρευνα.
 > - [[πλέον]] **now, any more** (#404): Δεν χρειάζεται πλέον να μετράτε. (No need to count anymore.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[δάχτυλο|το δάχτυλο]] **finger** (#1424): Έχω πόνο στο δάχτυλό μου. (I have a pain in my finger.)
 
 > [!todo]- Wed · day 105 of 300
-> **Today's line:** Μια ερώτηση: ποια είναι η τιμή; — Η σειρά σου! (One question: what is the price? — Your turn!)
+> **Today's line:** Έχω μια ερώτηση. Στην πίσω πλευρά, ένας χάρτης; — Η σειρά σου να διαβάσεις! (I have a question. On the back, a map? — Your turn to read!)
 > - [[πλευρά|η πλευρά]] **side** (#411): Είναι ξάδερφός μου από την πλευρά του πατέρα. (He is my cousin on the father's side.)
 > - [[ερώτηση|η ερώτηση]] **question** (#412): Καθηγητά, έχω μια ερώτηση. (Professor, I have a question.)
 > - [[σειρά|η σειρά]] **turn, series, order** (#414): Δική σου σειρά είναι απόψε. (It's your turn tonight.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τιμή|η τιμή]] **price, honor** (#415): Οι τιμές ανέβηκαν.
 
 > [!todo]- Thu · day 106 of 300
-> **Today's line:** Η φίλη μου τρώει οτιδήποτε. Πονάει η κοιλιά της! (My friend eats anything. Her belly hurts!)
+> **Today's line:** Η φίλη μου, η Σοφία. Ξέρει οτιδήποτε για το χωριό. — Σχετικά! (My friend, Sofia. She knows anything about the village. — Sort of!)
 > - [[σχετικά]] **relatively, about** (#416): Είμαι αρκετά αυστηρός σχετικά με αυτό. (I'm pretty strict about it.)
 > - [[φίλη|η φίλη]] **friend (female)** (#418): Πού είναι η φίλη σου; (Where's your girlfriend?)
 > - [[οτιδήποτε]] **anything** (#419): Υπάρχει οτιδήποτε φτηνό εδώ μέσα;
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κοιλιά|η κοιλιά]] **belly** (#1426): Πονάει η κοιλιά μου.
 
 > [!todo]- Fri · day 107 of 300
-> **Today's line:** Ένα τέλειο ταξίδι! Τα αγαπημένα μου ρούχα, κι είμαι ευτυχισμένη. (A perfect trip! My favorite clothes, and I'm happy.)
+> **Today's line:** Είμαι ευτυχισμένος! Η τέλεια μέρα! — Το αγαπημένο μου πάρτι! (I'm happy! The perfect day! — My favorite party!)
 > - [[τέλειος]] **perfect** (#422): Το σλόγκαν τους είναι τέλειο. (Their slogan is perfect.)
 > - [[ταξίδι|το ταξίδι]] **trip, journey** (#436): Πηγαίνω σε ένα ταξίδι. (I'm going on a trip.)
 > - [[ρούχα|τα ρούχα]] **clothes** (#451): Σου αρέσουν τα ρούχα μου; (Do you like my clothes?)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ευτυχισμένος]] **happy** (#470): Είναι ευτυχισμένος. (He is happy.)
 
 > [!todo]- Sat · day 108 of 300
-> **Today's line:** Το δείπνο ήταν υπέροχα! Όλοι χαρούμενοι. Μισώ να φεύγω. (Dinner was wonderful! Everyone happy. I hate to leave.)
+> **Today's line:** Μαρία... πού είναι το τετράδιο; — Στο τραπέζι, στο δείπνο... Όχι! Εξαφανίστηκε! (Maria... where's the notebook? — On the table, at dinner... No! It's disappeared!)
 > - [[δείπνο|το δείπνο]] **dinner** (#472): Το δείπνο είναι το βράδυ. (Dinner is in the evening.)
 > - [[υπέροχα]] **wonderfully** (#473): Πέρασα υπέροχα.
 > - [[χαρούμενος]] **happy, cheerful** (#478): Ο Τόνι ήταν χαρούμενος. (Tony was happy.)

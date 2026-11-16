@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Χαίρω πολύ! Είμαι από την Αμερική, αλλά πριν τα Χριστούγεννα πάω στην Ελλάδα. (Pleased to meet you! I'm from America, but before Christmas I go to Greece.)
-> 2. Πάντα όπως πριν. Ας πάμε πίσω στο ίδιο μέρος. (Always as before. Let's go back to the same place.)
-> 3. Είμαι νέος εδώ. Μένω έξω, μέχρι εκείνο το σπίτι, επειδή είναι φτηνό. (I'm new here. I'm staying out, as far as that house, because it's cheap.)
-> 4. Ο πατέρας μου μένει μόνος, πάνω στο βουνό. Ούτε την άνοιξη κατεβαίνει. (My father lives alone, up on the mountain. He doesn't come down even in spring.)
-> 5. Ο γιος μου έχει μια ιστορία: το φθινόπωρο, θέση στην ομάδα. (My son has a story: in autumn, a place on the team.)
-> 6. Το αγόρι και η κόρη μου έχουν μια ευκαιρία. Δύσκολο; Πεθαίνω να δω! (The boy and my daughter have a chance. Hard? I'm dying to see!)
+> 1. Μαρία μου! Καλώς ήρθες στην Ελλάδα! — Γιαγιά! Δύο μέρες πριν τα Χριστούγεννα! (My Maria! Welcome to Greece! — Grandma! Two days before Christmas!)
+> 2. Είσαι ίδια η μαμά σου, όπως πάντα! — Ας δούμε το σπίτι! (You look just like your mom, as always! — Let's see the house!)
+> 3. Ποια είναι εκείνη έξω; — Η Μαρία μας, από την Αμερική! — Τόσο νέα! (Who is that girl outside? — Our Maria, from America! — So young!)
+> 4. Χαίρω πολύ! Είμαι ο πατέρας του μπαμπά σου. — Παππού! Μένεις μόνος εδώ πάνω; — Όχι, με τη γιαγιά! (Pleased to meet you! I'm your dad's father. — Grandpa! Do you live alone up here? — No, with grandma!)
+> 5. Ο γιος μου, ο μπαμπάς σου, έφυγε ένα φθινόπωρο. Μεγάλη ιστορία. (My son, your dad, left one autumn. A long story.)
+> 6. Ένα αγόρι στην πόρτα! — Νίκο; Εδώ; — Ήταν δύσκολο, αλλά να 'μαι! (A boy at the door! — Niko? Here? — It was hard, but here I am!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L07 Introductions and Christmas-student|L07 Introductions and Christmas]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 43 of 300
-> **Today's line:** Χαίρω πολύ! Είμαι από την Αμερική, αλλά πριν τα Χριστούγεννα πάω στην Ελλάδα. (Pleased to meet you! I'm from America, but before Christmas I go to Greece.)
+> **Today's line:** Μαρία μου! Καλώς ήρθες στην Ελλάδα! — Γιαγιά! Δύο μέρες πριν τα Χριστούγεννα! (My Maria! Welcome to Greece! — Grandma! Two days before Christmas!)
 > - [[Ελλάδα|η Ελλάδα]] **Greece** (#250): Η Ελλάδα έχει πολλά νησιά. (Greece has many islands.)
 > - [[Χριστούγεννα|τα Χριστούγεννα]] **Christmas** (#690): Καλά Χριστούγεννα αγάπη μου! (Merry Christmas, my love!)
 > - [[χαίρω πολύ]] **pleased to meet you** (#1416): Χαίρω πολύ για τη γνωριμία.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πριν]] **before** (#91): Τρώμε πριν από το μάθημα. (We eat before the lesson.)
 
 > [!todo]- Tue · day 44 of 300
-> **Today's line:** Πάντα όπως πριν. Ας πάμε πίσω στο ίδιο μέρος. (Always as before. Let's go back to the same place.)
+> **Today's line:** Είσαι ίδια η μαμά σου, όπως πάντα! — Ας δούμε το σπίτι! (You look just like your mom, as always! — Let's see the house!)
 > - [[πάντα]] **always** (#92): Η άγνοια είναι πάντα επικίνδυνη. (Ignorance is always dangerous.)
 > - [[πίσω]] **back, behind** (#95): Βάλτο πίσω στο τραπέζι. (Put it back on the table.)
 > - [[όπως]] **as, like** (#98): Σ' αγαπώ έτσι όπως είσαι. (I love you just as you are.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ίδιος]] **same** (#107): Μου είναι το ίδιο. (It's all the same to me.)
 
 > [!todo]- Wed · day 45 of 300
-> **Today's line:** Είμαι νέος εδώ. Μένω έξω, μέχρι εκείνο το σπίτι, επειδή είναι φτηνό. (I'm new here. I'm staying out, as far as that house, because it's cheap.)
+> **Today's line:** Ποια είναι εκείνη έξω; — Η Μαρία μας, από την Αμερική! — Τόσο νέα! (Who is that girl outside? — Our Maria, from America! — So young!)
 > - [[έξω]] **out, outside** (#110): Ίσως μείνω έξω από αυτό. (I might sit this one out.)
 > - [[εκείνος]] **that (one)** (#111): Δωσ' μου εκείνο το κουτί. (Give me that box.)
 > - [[επειδή]] **because** (#113): Μένω σπίτι επειδή βρέχει. (I am staying home because it is raining.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μέχρι]] **until** (#116): Θα φτάσω μέχρι το τέλος. (I'll get to the bottom of it.)
 
 > [!todo]- Thu · day 46 of 300
-> **Today's line:** Ο πατέρας μου μένει μόνος, πάνω στο βουνό. Ούτε την άνοιξη κατεβαίνει. (My father lives alone, up on the mountain. He doesn't come down even in spring.)
+> **Today's line:** Χαίρω πολύ! Είμαι ο πατέρας του μπαμπά σου. — Παππού! Μένεις μόνος εδώ πάνω; — Όχι, με τη γιαγιά! (Pleased to meet you! I'm your dad's father. — Grandpa! Do you live alone up here? — No, with grandma!)
 > - [[πάνω]] **on, up, above** (#118): Ζυγίζει πάνω από 80 κιλά. (He weighs more than 80 kg.)
 > - [[μόνος]] **alone** (#119): Είναι η μόνη σας ελπίδα. (It's your only hope.)
 > - [[ούτε]] **neither, nor** (#120): Ούτε καν το ήξερα. (I didn't even know about it.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πατέρας|ο πατέρας]] **father** (#190): Πού είναι ο πατέρας σας; (Where is your father?)
 
 > [!todo]- Fri · day 47 of 300
-> **Today's line:** Ο γιος μου έχει μια ιστορία: το φθινόπωρο, θέση στην ομάδα. (My son has a story: in autumn, a place on the team.)
+> **Today's line:** Ο γιος μου, ο μπαμπάς σου, έφυγε ένα φθινόπωρο. Μεγάλη ιστορία. (My son, your dad, left one autumn. A long story.)
 > - [[θέση|η θέση]] **position, seat** (#191): Απλώς μείνε στη θέση σου. (Just stay put.)
 > - [[φθινόπωρο|το φθινόπωρο]] **autumn** (#1388): Έρχεται το φθινόπωρο.
 > - [[ιστορία|η ιστορία]] **story, history** (#208): Θα σου διηγηθώ μια ιστορία. (I'll tell you a story.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γιος|ο γιος]] **son** (#218): Ο γιος μου είναι χήρος. (My son is a widower.)
 
 > [!todo]- Sat · day 48 of 300
-> **Today's line:** Το αγόρι και η κόρη μου έχουν μια ευκαιρία. Δύσκολο; Πεθαίνω να δω! (The boy and my daughter have a chance. Hard? I'm dying to see!)
+> **Today's line:** Ένα αγόρι στην πόρτα! — Νίκο; Εδώ; — Ήταν δύσκολο, αλλά να 'μαι! (A boy at the door! — Niko? Here? — It was hard, but here I am!)
 > - [[αγόρι|το αγόρι]] **boy** (#223): Πού είναι το αγόρι; (Where is the boy?)
 > - [[δύσκολος]] **difficult** (#228): Τα Εβραϊκά είναι δύσκολη γλώσσα. (Hebrew is a difficult language.)
 > - [[ευκαιρία|η ευκαιρία]] **opportunity** (#254): Δώσ' μου ακόμα μία ευκαιρία. (Give me one more chance.)

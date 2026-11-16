@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Η γνώμη μου: η μουσική είναι ζωή. Επιτέλους, το τραγούδι μου! (My opinion: music is life. At last, my song!)
-> 2. Παντού αμπέλια! Μακάρι να μείνω εδώ. (Vineyards everywhere! I wish I could stay here.)
-> 3. Συνήθως φωτογραφίζω ζώα με την κάμερα. Υπόσχομαι, μια φωτογραφία! (I usually photograph animals with my camera. I promise, one photo!)
-> 4. Ενδιαφέρον χωράφι! Ο κανόνας: όχι ποδόσφαιρο εδώ. (An interesting field! The rule: no soccer here.)
-> 5. Ο αγρότης ανάβει το φως. Όντως, είμαστε ασφαλείς. (The farmer turns on the light. Indeed, we're safe.)
-> 6. Αγοράζω ένα δώρο για τον αρχηγό της ομάδας. Τι σκηνή! (I buy a gift for the team leader. What a scene!)
+> 1. Ένα τραγούδι για τις ελιές! — Επιτέλους, λίγη μουσική! (A song for the olives! — At last, a little music!)
+> 2. Ελιές παντού! Και ένα αμπέλι! — Μακάρι να είναι δικά σου. (Olives everywhere! And a vineyard! — I wish they were yours.)
+> 3. Συνήθως βγάζω φωτογραφίες με την κάμερα... — Μόνο ελιές, όχι τα μαλλιά μου! (I usually take photos with the camera... — Only olives, not my hair!)
+> 4. Αυτό είναι το χωράφι σας. — Πολύ ενδιαφέρον! (This is your field. — Very interesting!)
+> 5. Είμαι αγρότης πενήντα χρόνια. — Όντως; — Το φως εδώ είναι καλό για ελιές. (I've been a farmer for fifty years. — Really? — The light here is good for olives.)
+> 6. Ένα δώρο από μένα: αυτό το τετράδιο. Ήταν της Ελένης. — Το τέταρτο! Ούτε το αγόρασα, ούτε το έψαξα! (A gift from me: this notebook. It was Eleni's. — The fourth! I didn't buy it or look for it!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L21 Likes and hobbies-student|L21 Likes and hobbies]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 127 of 300
-> **Today's line:** Η γνώμη μου: η μουσική είναι ζωή. Επιτέλους, το τραγούδι μου! (My opinion: music is life. At last, my song!)
+> **Today's line:** Ένα τραγούδι για τις ελιές! — Επιτέλους, λίγη μουσική! (A song for the olives! — At last, a little music!)
 > - [[τραγούδι|το τραγούδι]] **song** (#613): Σου αρέσει αυτό το τραγούδι; (Do you like this song?)
 > - [[χιλιόμετρο|το χιλιόμετρο]] **kilometer** (#1146): Τρέχω 10 χιλιόμετρα κάθε μέρα.
 > - [[μουσική|η μουσική]] **music** (#1459): Σου αρέσει η μουσική; (Do you like music?)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επιτέλους]] **at last** (#506): Επιτέλους Παρασκευή.
 
 > [!todo]- Tue · day 128 of 300
-> **Today's line:** Παντού αμπέλια! Μακάρι να μείνω εδώ. (Vineyards everywhere! I wish I could stay here.)
+> **Today's line:** Ελιές παντού! Και ένα αμπέλι! — Μακάρι να είναι δικά σου. (Olives everywhere! And a vineyard! — I wish they were yours.)
 > - [[παντού]] **everywhere** (#507): Το σκυλί του τον ακολουθεί παντού. (His dog follows him everywhere.)
 > - [[εναντίον]] **against** (#508): Κατέθεσε εναντίον του.
 > - [[μακάρι]] **I wish, if only** (#509): Μακάρι να μην ήμουν Καναδέζος. (I wish I weren't Canadian.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αμπέλι|το αμπέλι]] **vineyard** (#1441): Ξαφνικά είδε μπροστά της ένα αμπέλι γεμάτο σταφύλια.
 
 > [!todo]- Wed · day 129 of 300
-> **Today's line:** Συνήθως φωτογραφίζω ζώα με την κάμερα. Υπόσχομαι, μια φωτογραφία! (I usually photograph animals with my camera. I promise, one photo!)
+> **Today's line:** Συνήθως βγάζω φωτογραφίες με την κάμερα... — Μόνο ελιές, όχι τα μαλλιά μου! (I usually take photos with the camera... — Only olives, not my hair!)
 > - [[ζώο|το ζώο]] **animal** (#511): Τα άλογα είναι ζώα. (Horses are animals.)
 > - [[κάμερα|η κάμερα]] **camera** (#512): Παρακαλώ δείξτε μου αυτή την κάμερα. (Please show me this camera.)
 > - [[υπόσχομαι]] **I promise** (#513): Υπόσχομαι ότι θα τους βοηθήσω.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μαλλιά|τα μαλλιά]] **hair** (#515): Τα μαλλιά σας είναι τέλεια. (Your hair is perfect.)
 
 > [!todo]- Thu · day 130 of 300
-> **Today's line:** Ενδιαφέρον χωράφι! Ο κανόνας: όχι ποδόσφαιρο εδώ. (An interesting field! The rule: no soccer here.)
+> **Today's line:** Αυτό είναι το χωράφι σας. — Πολύ ενδιαφέρον! (This is your field. — Very interesting!)
 > - [[ενδιαφέρον]] **interesting; interest** (#516): Μάλλον δεν είναι ενδιαφέρον. (Maybe it's not interesting.)
 > - [[χωράφι|το χωράφι]] **field** (#1442): Χόρευα στο χωράφι.
 > - [[κανόνας|ο κανόνας]] **rule** (#517): Δεν μπορώ να σας εξηγήσω τον κανόνα. (I can't explain the rule to you.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μάχη|η μάχη]] **battle** (#519): Κερδίσαμε τη μάχη.
 
 > [!todo]- Fri · day 131 of 300
-> **Today's line:** Ο αγρότης ανάβει το φως. Όντως, είμαστε ασφαλείς. (The farmer turns on the light. Indeed, we're safe.)
+> **Today's line:** Είμαι αγρότης πενήντα χρόνια. — Όντως; — Το φως εδώ είναι καλό για ελιές. (I've been a farmer for fifty years. — Really? — The light here is good for olives.)
 > - [[άσχημος]] **ugly, bad** (#520): Ο Τομ είναι άσχημος. (Tom is ugly.)
 > - [[όντως]] **indeed** (#521): Όντως, είχες δίκιο.
 > - [[ασφαλής]] **safe** (#522): Θα είσαι ασφαλής εδώ. (You'll be safe there.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φως|το φως]] **light** (#523): Ξέχασε να σβήσει το φως. (He forgot to turn off the light.)
 
 > [!todo]- Sat · day 132 of 300
-> **Today's line:** Αγοράζω ένα δώρο για τον αρχηγό της ομάδας. Τι σκηνή! (I buy a gift for the team leader. What a scene!)
+> **Today's line:** Ένα δώρο από μένα: αυτό το τετράδιο. Ήταν της Ελένης. — Το τέταρτο! Ούτε το αγόρασα, ούτε το έψαξα! (A gift from me: this notebook. It was Eleni's. — The fourth! I didn't buy it or look for it!)
 > - [[σκηνή|η σκηνή]] **scene, stage** (#524): Αυτός έπαιξε Άμλετ στη σκηνή. (He played Hamlet on stage.)
 > - [[δώρο|το δώρο]] **gift** (#525): Έλαβα το δώρο σας. (I received your gift.)
 > - [[αρχηγός|ο αρχηγός]] **leader, chief** (#526): Ο πρωθυπουργός είναι ο αρχηγός της κυβέρνησης. (The prime minister is the head of the government.)

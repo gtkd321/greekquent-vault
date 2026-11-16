@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Στη φωτογραφία: ο αδερφός μου, η αδερφή μου και ο γλυκός παππούς. (In the photo: my brother, my sister and sweet Grandpa.)
-> 2. Θεέ μου, πάμε όλοι; Γιατί όχι! Όσο είμαστε μαζί. (My God, are we all going? Why not! As long as we're together.)
-> 3. Ο παππούς ακόμη τρέχει γρήγορα. Πάλι! Όλο τρέχει! (Grandpa still runs fast. Again! He's always running!)
-> 4. Αρκετά για τον εαυτό μου. Η σχέση μας είναι το πιο σημαντικό. (Enough about myself. Our relationship is what matters most.)
-> 5. Η γιαγιά, πενήντα χρόνια σε αυτό το δωμάτιο. Θέλει βοήθεια, όχι χρήματα. (Grandma, fifty years in this room. She wants help, not money.)
-> 6. Οι γονείς μου: ο ένας γιατρός, η άλλη στο σχολείο. Τα αδέρφια μου γελάνε. (My parents: one a doctor, the other at the school. My siblings laugh.)
+> 1. Μια φωτογραφία! Ο παππούς, η γιαγιά... και ένα κορίτσι. — Η αδερφή μου, η Ελένη. Γλυκό κορίτσι. (A photo! Grandpa, grandma... and a girl. — My sister, Eleni. A sweet girl.)
+> 2. Κι αυτός ο τύπος με το μουστάκι; Εγώ! — Θεέ μου, παππού! Οπότε ήσουν ωραίος! (And this guy with the mustache? Me! — My God, grandpa! So you were handsome!)
+> 3. Η Ελένη έφυγε γρήγορα για την Αμερική. Δεν ήρθε πάλι. — Ζει ακόμη; — Ναι! Όλο γράφει γράμματα. (Eleni left quickly for America. She never came again. — Is she still alive? — Yes! She's always writing letters.)
+> 4. Ποια σχέση έχει η Ελένη με το κλειδί; — Αρκετά για σήμερα, παιδιά. (What does Eleni have to do with the key? — Enough for today, kids.)
+> 5. Ένα μικρό δωμάτιο... και πενήντα παλιά γράμματα! — Θέλεις βοήθεια; (A small room... and fifty old letters! — Do you want help?)
+> 6. Ένα γράμμα: «Μια κοπέλα από το σχολείο ξέρει το μυστικό.» (A letter: "A girl from the school knows the secret.")
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L09 My family-student|L09 My family]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 55 of 300
-> **Today's line:** Στη φωτογραφία: ο αδερφός μου, η αδερφή μου και ο γλυκός παππούς. (In the photo: my brother, my sister and sweet Grandpa.)
+> **Today's line:** Μια φωτογραφία! Ο παππούς, η γιαγιά... και ένα κορίτσι. — Η αδερφή μου, η Ελένη. Γλυκό κορίτσι. (A photo! Grandpa, grandma... and a girl. — My sister, Eleni. A sweet girl.)
 > - [[φωτογραφία|η φωτογραφία]] **photograph** (#292): Μ' αρέσει η φωτογραφία του. (I like his picture.)
 > - [[γλυκός]] **sweet** (#373): Μου αρέσουν τα γλυκά. (I like confectionery.)
 > - [[αδερφή|η αδερφή]] **sister** (#397): Αυτή είναι η αδερφή μου. (This is my sister.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[παππούς|ο παππούς]] **grandfather** (#894): Ο παππούς μου ζει ακόμα.
 
 > [!todo]- Tue · day 56 of 300
-> **Today's line:** Θεέ μου, πάμε όλοι; Γιατί όχι! Όσο είμαστε μαζί. (My God, are we all going? Why not! As long as we're together.)
+> **Today's line:** Κι αυτός ο τύπος με το μουστάκι; Εγώ! — Θεέ μου, παππού! Οπότε ήσουν ωραίος! (And this guy with the mustache? Me! — My God, grandpa! So you were handsome!)
 > - [[θεός|ο θεός]] **God, god** (#152): Δόξα τω Θεώ, είσαι καλά. (Thank God, you are okay.)
 > - [[γιατί όχι]] **why not** (#1382): Γιατί όχι μαζί;
 > - [[όσο]] **as much as** (#157): Κανείς δε σ' αγαπάει όσο εγώ. (No one loves you as much as I do.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[οπότε]] **so, therefore** (#162): Χτες ήταν Κυριακή, οπότε κοιμήθηκα όλη μέρα.
 
 > [!todo]- Wed · day 57 of 300
-> **Today's line:** Ο παππούς ακόμη τρέχει γρήγορα. Πάλι! Όλο τρέχει! (Grandpa still runs fast. Again! He's always running!)
+> **Today's line:** Η Ελένη έφυγε γρήγορα για την Αμερική. Δεν ήρθε πάλι. — Ζει ακόμη; — Ναι! Όλο γράφει γράμματα. (Eleni left quickly for America. She never came again. — Is she still alive? — Yes! She's always writing letters.)
 > - [[ακόμη]] **still, yet** (#1383): Ακόμη δεν έχω βρει δουλειά. (I still haven't found work.)
 > - [[ως]] **as** (#163): Έχω φτάσει ως εδώ! (I've had it up to here.)
 > - [[πάλι]] **again** (#170): Ελάτε πάλι αύριο.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γρήγορα]] **quickly** (#175): Ο καιρός περνάει πολύ γρήγορα. (Time flies.)
 
 > [!todo]- Thu · day 58 of 300
-> **Today's line:** Αρκετά για τον εαυτό μου. Η σχέση μας είναι το πιο σημαντικό. (Enough about myself. Our relationship is what matters most.)
+> **Today's line:** Ποια σχέση έχει η Ελένη με το κλειδί; — Αρκετά για σήμερα, παιδιά. (What does Eleni have to do with the key? — Enough for today, kids.)
 > - [[όπλο|το όπλο]] **weapon, gun** (#178): Το χαμόγελο είναι το καλύτερο όπλο. (A smile is the best weapon.)
 > - [[αρκετά]] **enough, quite** (#179): Μιλάω αρκετά καλά γαλλικά. (I speak French pretty well.)
 > - [[νεκρός]] **dead** (#182): Τα λατινικά είναι νεκρή γλώσσα. (Latin is a dead language.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σχέση|η σχέση]] **relationship** (#229): Αυτό δεν έχει καμία σχέση μαζί σου. (That has nothing to do with you.)
 
 > [!todo]- Fri · day 59 of 300
-> **Today's line:** Η γιαγιά, πενήντα χρόνια σε αυτό το δωμάτιο. Θέλει βοήθεια, όχι χρήματα. (Grandma, fifty years in this room. She wants help, not money.)
+> **Today's line:** Ένα μικρό δωμάτιο... και πενήντα παλιά γράμματα! — Θέλεις βοήθεια; (A small room... and fifty old letters! — Do you want help?)
 > - [[πενήντα]] **fifty** (#1396): Η φίλη μας η Eli είναι πενήντα ετών.
 > - [[αστυνομία|η αστυνομία]] **police** (#241): Γιατί δε δοκιμάζεις να μιλήσεις στην αστυνομία; (Why not try talking to the police?)
 > - [[βοήθεια|η βοήθεια]] **help** (#244): Εκτιμώ πολύ τη βοήθειά σας. (I appreciate your help very much.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[δωμάτιο|το δωμάτιο]] **room** (#260): Το έβαλα στο δωμάτιό σου. (I put it in your room.)
 
 > [!todo]- Sat · day 60 of 300
-> **Today's line:** Οι γονείς μου: ο ένας γιατρός, η άλλη στο σχολείο. Τα αδέρφια μου γελάνε. (My parents: one a doctor, the other at the school. My siblings laugh.)
+> **Today's line:** Ένα γράμμα: «Μια κοπέλα από το σχολείο ξέρει το μυστικό.» (A letter: "A girl from the school knows the secret.")
 > - [[γιατρός|ο γιατρός]] **doctor** (#278): Μακάρι να γίνω γιατρός. (I wish I would become a doctor.)
 > - [[σχολείο|το σχολείο]] **school** (#312): Δεν ήρθες στο σχολείο χθες. (You did not come to school yesterday.)
 > - [[κοπέλα|η κοπέλα]] **girl, girlfriend** (#335): Η κοπέλα είναι όμορφη. (The girl is pretty.)

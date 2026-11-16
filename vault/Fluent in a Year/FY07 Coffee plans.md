@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ο κύριος Γιώργος δεν πίνει ποτέ τόσο καφέ. Κανένας δεν πίνει! (Mr. Giorgos never drinks so much coffee. Nobody does!)
-> 2. Λοιπόν, αυτοί είναι μέσα. Τότε πάμε κι εμείς μαζί τους. (So, they're inside. Then we'll go with them too.)
-> 3. Ίσως μετά. Ο λόγος; Ο δικός μου καφές είναι πιο καλός. (Maybe after. The reason? My own coffee is better.)
-> 4. Ποιο είναι το λάθος; Σιγά σιγά, αργά. Είμαι έτοιμος. (Which is the mistake? Bit by bit, slowly. I'm ready.)
-> 5. Είμαι σίγουρος: έχεις δίκιο. Τα μάτια σου είναι ωραία. (I'm sure: you're right. Your eyes are beautiful.)
-> 6. Θυμάμαι τι εννοείς. Ψάχνω, δε σ' αφήνω. Με νοιάζει. (I remember what you mean. I'm looking, I won't leave you. I care.)
+> 1. Τι θα πάρετε, κύριε; — Δύο καφέδες. — Δύο; Ποτέ δεν πίνω τόσο καφέ! (What will you have, sir? — Two coffees. — Two? I never drink so much coffee!)
+> 2. Λοιπόν; Πας στο χωριό; — Ναι. Τότε θα δω τη γιαγιά, το σπίτι και τι έχει μέσα. (So? Are you going to the village? — Yes. Then I'll see grandma, the house, and what's inside.)
+> 3. Ίσως έρθω κι εγώ, μετά. — Ποιος είναι ο λόγος; — Η γιαγιά η δική μου μένει δύο χωριά πιο πέρα! (Maybe I'll come too, later. — What's the reason? — My own grandma lives two villages further on!)
+> 4. Ποιο χωριό; Μίλα αργά! — Το Καστράκι. Είσαι έτοιμη; (Which village? Speak slowly! — Kastraki. Are you ready?)
+> 5. Είσαι σίγουρος; — Σίγουρος! Αγαπάω το χωριό μου. — Έχεις δίκιο. Είναι ωραίο. (Are you sure? — Sure! I love my village. — You're right. It's beautiful.)
+> 6. Θυμάμαι μια ιστορία: κάποιος ψάχνει κάτι στο σπίτι σου. — Τι εννοείς; (I remember a story: someone is looking for something in your house. — What do you mean?)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L06 Coffee plans at the kafeneio-student|L06 Coffee plans at the kafeneio]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 37 of 300
-> **Today's line:** Ο κύριος Γιώργος δεν πίνει ποτέ τόσο καφέ. Κανένας δεν πίνει! (Mr. Giorgos never drinks so much coffee. Nobody does!)
+> **Today's line:** Τι θα πάρετε, κύριε; — Δύο καφέδες. — Δύο; Ποτέ δεν πίνω τόσο καφέ! (What will you have, sir? — Two coffees. — Two? I never drink so much coffee!)
 > - [[κανένας]] **nobody, no one** (#61): Δεν το είπα σε κανέναν. (I didn't tell anyone.)
 > - [[της]] **her, hers** (#62): Έχω κάτι να της πω. (I have something to tell her.)
 > - [[κύριος|ο κύριος]] **Mr., sir, gentleman** (#64): Καλωσήρθατε, κυρίες και κύριοι! (Welcome, ladies and gentlemen!)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ποτέ]] **never** (#69): Δεν έπαψα ποτέ να σε αγαπώ. (I never stopped loving you.)
 
 > [!todo]- Tue · day 38 of 300
-> **Today's line:** Λοιπόν, αυτοί είναι μέσα. Τότε πάμε κι εμείς μαζί τους. (So, they're inside. Then we'll go with them too.)
+> **Today's line:** Λοιπόν; Πας στο χωριό; — Ναι. Τότε θα δω τη γιαγιά, το σπίτι και τι έχει μέσα. (So? Are you going to the village? — Yes. Then I'll see grandma, the house, and what's inside.)
 > - [[τους]] **them, their** (#70): Έχω κάτι να τους πω. (I have something to tell them.)
 > - [[λοιπόν]] **so, well** (#74): Λοιπόν, σου άρεσε;
 > - [[μέσα]] **inside** (#76): Απαγορεύεται να καπνίζετε εδώ μέσα. (Smoking is forbidden in here.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τότε]] **then** (#81): Δεν έχουμε μιλήσει από τότε. (We haven't talked since.)
 
 > [!todo]- Wed · day 39 of 300
-> **Today's line:** Ίσως μετά. Ο λόγος; Ο δικός μου καφές είναι πιο καλός. (Maybe after. The reason? My own coffee is better.)
+> **Today's line:** Ίσως έρθω κι εγώ, μετά. — Ποιος είναι ο λόγος; — Η γιαγιά η δική μου μένει δύο χωριά πιο πέρα! (Maybe I'll come too, later. — What's the reason? — My own grandma lives two villages further on!)
 > - [[ίσως]] **maybe** (#82): Ίσως να είναι και αλήθεια. (Perhaps it is true.)
 > - [[πιο]] **more** (#86): Είμαι πιο ψηλός. (I am taller.)
 > - [[δικός μου]] **my own, mine** (#88): Είναι δικό σας;
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[λόγος|ο λόγος]] **reason, speech** (#144): Σου δίνω τον λόγο μου. (I give you my word.)
 
 > [!todo]- Thu · day 40 of 300
-> **Today's line:** Ποιο είναι το λάθος; Σιγά σιγά, αργά. Είμαι έτοιμος. (Which is the mistake? Bit by bit, slowly. I'm ready.)
+> **Today's line:** Ποιο χωριό; Μίλα αργά! — Το Καστράκι. Είσαι έτοιμη; (Which village? Speak slowly! — Kastraki. Are you ready?)
 > - [[τρόπος|ο τρόπος]] **way, manner** (#146): Μ' αρέσει ο τρόπος που σκέφτεσαι. (I like how you think.)
 > - [[ποιο]] **which (one)** (#1381): Ποιό είναι το όνομά σου; (What is your name?)
 > - [[λάθος|το λάθος]] **mistake** (#151): Έχουμε κάνει πολλά λάθη. (We have made many mistakes.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[έτοιμος]] **ready** (#202): Εγώ είμαι έτοιμος, εσύ; (I'm ready, and you?)
 
 > [!todo]- Fri · day 41 of 300
-> **Today's line:** Είμαι σίγουρος: έχεις δίκιο. Τα μάτια σου είναι ωραία. (I'm sure: you're right. Your eyes are beautiful.)
+> **Today's line:** Είσαι σίγουρος; — Σίγουρος! Αγαπάω το χωριό μου. — Έχεις δίκιο. Είναι ωραίο. (Are you sure? — Sure! I love my village. — You're right. It's beautiful.)
 > - [[μάτι|το μάτι]] **eye** (#212): Τι έγινε με τα μάτια σου; (What happened to your eyes?)
 > - [[δίκιο|το δίκιο]] **right (being right)** (#213): Έχω δίκιο. (I'm right.)
 > - [[σίγουρος]] **sure** (#236): Είστε σίγουρος ότι δε θυμάστε; (Are you sure you don't remember?)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ωραίος]] **beautiful, nice** (#245): Αυτό το κάστρο είναι ωραίο. (This castle is nice.)
 
 > [!todo]- Sat · day 42 of 300
-> **Today's line:** Θυμάμαι τι εννοείς. Ψάχνω, δε σ' αφήνω. Με νοιάζει. (I remember what you mean. I'm looking, I won't leave you. I care.)
+> **Today's line:** Θυμάμαι μια ιστορία: κάποιος ψάχνει κάτι στο σπίτι σου. — Τι εννοείς; (I remember a story: someone is looking for something in your house. — What do you mean?)
 > - [[εννοώ]] **I mean** (#246): Είμαι σίγουρος ότι καταλαβαίνεις τι εννοώ. (I'm sure you know what I mean.)
 > - [[αφήνω]] **I leave, I let** (#258): Μη μ' αφήνετε μόνο. (Don't leave me alone.)
 > - [[θυμάμαι]] **I remember** (#269): Δεν το θυμάμαι αυτό. (I don't remember that.)

@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ένα πουλί στο βίντεο! Λάθος, είναι γλάρος. Ειλικρινά! (A bird in the video! Wrong, it's a seagull. Honestly!)
-> 2. Καταπληκτικό! Οποιοσδήποτε παίζει μπάλα στο λιμάνι. (Amazing! Anyone plays ball at the port.)
-> 3. Η λύση: ένα φάρμακο για τη θάλασσα. Πού είναι η τουαλέτα; (The solution: a medicine for the sea. Where is the toilet?)
-> 4. Μέσω της Πάρου; Πιθανόν. Ο καθηγητής λέει ναι. (Via Paros? Possibly. The professor says yes.)
-> 5. Συμβουλή: ρώτα έναν ξένο. Η πρόταση; Στοίχημα, το πλοίο αργεί! (Advice: ask a stranger. The proposal? I bet the ship is late!)
-> 6. Ο φόβος φεύγει. Φωνάζω: «Το πλοίο!» Καλή προσπάθεια! (The fear goes away. I shout: 'The ship!' Good effort!)
+> 1. Ένα πουλί μας ακολουθεί! — Κάνω ένα βίντεο! (A bird is following us! — I'm making a video!)
+> 2. Η θάλασσα είναι καταπληκτική! — Εγώ... όχι και τόσο. Θέλω οποιοδήποτε φάρμακο! (The sea is amazing! — Me... not so much. I want any medicine!)
+> 3. Η λύση: κοίτα τον ορίζοντα. — Και η τουαλέτα; Γρήγορα! (The solution: look at the horizon. — And the toilet? Quick!)
+> 4. Ο καθηγητής μου έλεγε: μέσω της θάλασσας, βρίσκεις τον εαυτό σου. (My teacher used to say: through the sea, you find yourself.)
+> 5. Μια συμβουλή: ρώτα την κοινότητα του νησιού. (A piece of advice: ask the island community.)
+> 6. Με φόβο, ανεβαίνω στο παράθυρο... — Το έκτο τετράδιο! — Φωνάζω: το βρήκαμε! (With fear, I climb up to the window... — The sixth notebook! — I shout: we found it!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **ferry tickets** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 175 of 300
-> **Today's line:** Ένα πουλί στο βίντεο! Λάθος, είναι γλάρος. Ειλικρινά! (A bird in the video! Wrong, it's a seagull. Honestly!)
+> **Today's line:** Ένα πουλί μας ακολουθεί! — Κάνω ένα βίντεο! (A bird is following us! — I'm making a video!)
 > - [[πουλί|το πουλί]] **bird** (#730): Όλα τα πουλιά έχουν φτερά. (All birds have wings.)
 > - [[ειλικρινής]] **honest** (#731): Είμαι ειλικρινής. (I'm sincere.)
 > - [[λάθος (wrong)|λάθος]] **wrong** (#1478): Τι έκανα λάθος;
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[βίντεο|το βίντεο]] **video** (#734): Τώρα βλέπω βίντεο.
 
 > [!todo]- Tue · day 176 of 300
-> **Today's line:** Καταπληκτικό! Οποιοσδήποτε παίζει μπάλα στο λιμάνι. (Amazing! Anyone plays ball at the port.)
+> **Today's line:** Η θάλασσα είναι καταπληκτική! — Εγώ... όχι και τόσο. Θέλω οποιοδήποτε φάρμακο! (The sea is amazing! — Me... not so much. I want any medicine!)
 > - [[καταπληκτικός]] **amazing** (#735): Είναι καταπληκτικές.
 > - [[ανθρώπινος]] **human** (#736): Όλα τα ανθρώπινα όντα είναι θνητά. (All human beings are mortal.)
 > - [[οποιοσδήποτε]] **anyone, any** (#737): Οποιοσδήποτε γιατρός θα σας πει να μην καπνίζετε.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[οικονομία|η οικονομία]] **economy** (#1479): Το εμπόριο βοηθά την οικονομία μας.
 
 > [!todo]- Wed · day 177 of 300
-> **Today's line:** Η λύση: ένα φάρμακο για τη θάλασσα. Πού είναι η τουαλέτα; (The solution: a medicine for the sea. Where is the toilet?)
+> **Today's line:** Η λύση: κοίτα τον ορίζοντα. — Και η τουαλέτα; Γρήγορα! (The solution: look at the horizon. — And the toilet? Quick!)
 > - [[λύση|η λύση]] **solution** (#739): Ποια λύση είναι η καλύτερη; (Which solution is the best?)
 > - [[φάρμακο|το φάρμακο]] **medicine** (#740): Ποιος ανακάλυψε αυτό το φάρμακο; (Who discovered this medicine?)
 > - [[τουαλέτα|η τουαλέτα]] **toilet** (#741): Πού 'ν' η τουαλέτα;
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μονάδα|η μονάδα]] **unit** (#743): Το γραμμάριο και το κιλό είναι μονάδες βάρους.
 
 > [!todo]- Thu · day 178 of 300
-> **Today's line:** Μέσω της Πάρου; Πιθανόν. Ο καθηγητής λέει ναι. (Via Paros? Possibly. The professor says yes.)
+> **Today's line:** Ο καθηγητής μου έλεγε: μέσω της θάλασσας, βρίσκεις τον εαυτό σου. (My teacher used to say: through the sea, you find yourself.)
 > - [[μέσω]] **via, through** (#744): Είμαι εν μέσω κρίσης.
 > - [[κράτος|το κράτος]] **state** (#1480): Κάθε κράτος έχει κυβέρνηση.
 > - [[προσωπικός]] **personal** (#746): Απαγορεύεται η πώληση προσωπικών πληροφοριών εδώ.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[καθηγητής|ο καθηγητής]] **professor, teacher** (#748): Εγώ είμαι καθηγητής.
 
 > [!todo]- Fri · day 179 of 300
-> **Today's line:** Συμβουλή: ρώτα έναν ξένο. Η πρόταση; Στοίχημα, το πλοίο αργεί! (Advice: ask a stranger. The proposal? I bet the ship is late!)
+> **Today's line:** Μια συμβουλή: ρώτα την κοινότητα του νησιού. (A piece of advice: ask the island community.)
 > - [[συμβουλή|η συμβουλή]] **advice** (#749): Είμαι καλή στις συμβουλές.
 > - [[ξένος]] **foreign; stranger** (#750): Οι ξένες γλώσσες μου αρέσουν. (I like foreign languages.)
 > - [[κοινότητα|η κοινότητα]] **community** (#1481): Ζω σε μία αγροτική κοινότητα.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[στοίχημα|το στοίχημα]] **bet** (#752): Πάω στοίχημα ότι ξέρεις Γαλλικά. (I bet you know French.)
 
 > [!todo]- Sat · day 180 of 300
-> **Today's line:** Ο φόβος φεύγει. Φωνάζω: «Το πλοίο!» Καλή προσπάθεια! (The fear goes away. I shout: 'The ship!' Good effort!)
+> **Today's line:** Με φόβο, ανεβαίνω στο παράθυρο... — Το έκτο τετράδιο! — Φωνάζω: το βρήκαμε! (With fear, I climb up to the window... — The sixth notebook! — I shout: we found it!)
 > - [[φόβος|ο φόβος]] **fear** (#753): Χλώμιασε απ'τον φόβο.
 > - [[προσπάθεια|η προσπάθεια]] **effort** (#755): Αξίζει μια προσπάθεια. (It's worth a try.)
 > - [[πράξη|η πράξη]] **act, action** (#756): Απαιτούμε πράξεις, όχι λόγια.

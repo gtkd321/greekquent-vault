@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-16h';
+const VAULT_RELEASE = '2026-11-17a';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -40,7 +40,7 @@ const COURSE_START = [2026, 9, 26];
 const COUSINS_URL = 'https://greekquent-cousins.pplx.app/';
 // Animated scenes and the text adventure exist for these days so far.
 const STORY_URL = 'https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA';
-const SCENE_DAYS = 6;
+const SCENE_DAYS = 300;
 const GIAGIA_URL = 'https://www.perplexity.ai/computer/a/greekquent-giagia-T2tsaLMvQiuN84Ng0un.IA';
 const BUZZER_URL = 'https://www.perplexity.ai/computer/a/greekquent-buzzer-f3uOHxBFS6Ko8YnCc99fzw';
 const COLORS = [['red', "Don't have it"], ['yellow', 'Kind of'], ['green', 'Have it']];
@@ -58,7 +58,9 @@ const LEVEL_READY = { intermediate: 15, advanced: 60 };   // marked words before
 const MID_PATHS = ['Words', 'Word lists', 'Fluent in a Year', 'My Work', '02 Verb Tables.md', '07 Fluent in a Year.md', '09 Games.md', "What's New.md", 'Setting up.md'];
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-const say = w => { if (!window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(w); u.lang = 'el-GR'; speechSynthesis.cancel(); speechSynthesis.speak(u); };
+// Voices read a capital Η or Ο standing alone as a letter name ("ita", "omikron"). It is always the article, so lowercase it for the voice only.
+const ttsFix = t => String(t).replace(/(^|[^\p{L}])([ΗΟ])(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase());
+const say = w => { if (!window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(ttsFix(w)); u.lang = 'el-GR'; speechSynthesis.cancel(); speechSynthesis.speak(u); };
 const isGreek = t => /[\u0370-\u03ff\u1f00-\u1fff]/.test(t);
 const fold = t => (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').trim();
 const smsLink = body => `sms:${FEEDBACK_SMS}?&body=${encodeURIComponent(body)}`;
@@ -89,6 +91,53 @@ class OldWebView extends ItemView {
   getIcon() { return 'git-fork'; }
   async setState(st, res) { if (st && st.path) this.path = st.path; return super.setState(st, res); }
   async onOpen() { setTimeout(() => this.plugin.graphGo(this.leaf, this.plugin.wordPath(this.path)), 50); }
+}
+
+// ---------- Story Lines and Γιαγιά live inside the vault and open here, offline, in the same page ----------
+const APPV = 'greekquent-app';
+const APPS = { story: { file: 'storylines.html', title: 'Story Lines', icon: 'clapperboard' }, giagia: { file: 'giagia.html', title: 'Γιαγιά', icon: 'gamepad-2' } };
+class AppView extends ItemView {
+  constructor(leaf, plugin) { super(leaf); this.plugin = plugin; this.which = 'story'; this.hash = ''; this.shown = ''; }
+  getViewType() { return APPV; }
+  getDisplayText() { return (APPS[this.which] || APPS.story).title; }
+  getIcon() { return (APPS[this.which] || APPS.story).icon; }
+  getState() { return { app: this.which, hash: this.hash }; }
+  async setState(st, res) { if (st && st.app) { this.which = st.app; this.hash = st.hash || ''; } await super.setState(st, res); await this.render(); }
+  async onOpen() { await this.render(); }
+  async render() {
+    const key = this.which + this.hash; if (key === this.shown) return; this.shown = key;
+    const c = this.contentEl; c.empty(); c.addClass('gq-appview');
+    const a = APPS[this.which] || APPS.story;
+    let html = '';
+    try { html = await this.app.vault.adapter.read(this.plugin.manifest.dir + '/apps/' + a.file); }
+    catch (e) { c.createDiv({ cls: 'gq-hint', text: 'This one is still on its way. Tap More, then Update vault.' }); this.shown = ''; return; }
+    html = html.replace('<!--GQ_START-->', '<script>window.GQ_HASH=' + JSON.stringify(this.hash) + ';</script>');
+    const f = c.createEl('iframe', { cls: 'gq-appframe', attr: { title: a.title } });
+    f.srcdoc = html;
+  }
+}
+
+// ---------- Sparks: three words that keep turning up together ----------
+class SparkModal extends Modal {
+  constructor(app, plugin, words) { super(app); this.plugin = plugin; this.words = words; }
+  onOpen() {
+    const c = this.contentEl; c.addClass('gq-modal', 'gq-pair'); this.titleEl.setText('One sentence, three words');
+    const names = this.words.map(p => p.replace(/^Words\//, '').replace(/\.md$/, ''));
+    const meta = names.map((n, i) => { const f = this.app.vault.getAbstractFileByPath(this.words[i]); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return fm.english || ''; });
+    const list = c.createDiv('gq-spark-words');
+    names.forEach((n, i) => { const b = list.createEl('button', { text: n + (meta[i] ? ' · ' + meta[i] : ''), cls: 'gq-mini' }); b.onclick = () => say(n); });
+    c.createDiv({ cls: 'gq-hint', text: 'These three keep turning up together in real Greek. Say one sentence that uses all three, then write it down. Any word form counts.' });
+    const ta = c.createEl('textarea', { attr: { rows: '2', placeholder: 'Γράψε εδώ...', autocapitalize: 'sentences', spellcheck: 'false' } }); ta.addClass('gq-input');
+    const res = c.createDiv('gq-hint');
+    const stem = t => fold(t).replace(/^(ο|η|το) /, '').split(/[ ,]/)[0].slice(0, Math.max(3, Math.min(5, fold(t).length - 2)));
+    const check = () => { res.empty(); const t = fold(ta.value); const got = names.map(n => t.includes(stem(n))); res.setText(names.map((n, i) => (got[i] ? '✓ ' : '· ') + n).join('   ')); return got; };
+    ta.oninput = check; check();
+    const row = c.createDiv('gq-row');
+    const h = row.createEl('button', { text: 'Hear it' }); h.onclick = () => ta.value.trim() && say(ta.value.trim());
+    const sv = row.createEl('button', { text: 'Save to My pairs', cls: 'mod-cta' });
+    sv.onclick = () => { const t = ta.value.trim(); if (!t) { new Notice('Write a sentence first.'); return; } this.plugin.savePair(t, '', names, true); this.close(); };
+  }
+  onClose() { this.contentEl.empty(); }
 }
 
 // ---------- Look up a word: the 1,500 first, then a free translator for bonus words, right here in Obsidian ----------
@@ -480,6 +529,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.busy = false; this.todayEls = new Set(); this.bars = new Set(); this.cardBoxes = new Set();
     document.body.classList.add('greekquent-student', 'gq-l-simple');
     this.registerView(WEB, leaf => new OldWebView(leaf, this));
+    this.registerView(APPV, leaf => new AppView(leaf, this));
+    // The in-vault games send results here instead of through an obsidian:// link.
+    this.registerDomEvent(window, 'message', e => {
+      const d = e.data; if (!d || d.gq !== 'obsidian' || typeof d.url !== 'string') return;
+      try { const u = new URL(d.url); const p = {}; u.searchParams.forEach((v, k) => { p[k] = v; }); this.fromGame(p); } catch (err) {}
+    });
     // Left toolbar: four buttons. Today is the start screen; More holds the rest.
     this.addRibbonIcon('house', 'Today', () => this.openToday());
     this.addRibbonIcon('search', 'Look up a word', () => new LookupModal(this.app, this).open());
@@ -497,7 +552,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerMarkdownPostProcessor((el, ctx) => this.wordBar(el, ctx));
     this.registerMarkdownPostProcessor((el, ctx) => this.cardBox(el, ctx));
     this.addCommand({ id: 'add-to-card', name: 'Add a chunk or sentence to this word', callback: () => { const f = this.app.workspace.getActiveFile(); if (!f || !f.path.startsWith('Words/')) { new Notice('Open a word note first.'); return; } new CardModal(this.app, this, f.basename).open(); } });
-    this.registerObsidianProtocolHandler('greekquent', p => this.fromGame(p));
+    this.registerObsidianProtocolHandler('greekquent', p => p.open ? this.openApp(p.open, p.hash || '') : this.fromGame(p));
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path === TODAY) this.refreshToday(); }));
     // Student questions: video questions and answers from the public library, shown at the end of the matching note.
     this.registerMarkdownPostProcessor((el, ctx) => this.questionsBox(el, ctx));
@@ -551,6 +606,60 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     return this.pairs;
   }
   openPair(word, pre) { new PairModal(this.app, this, word, pre).open(); }
+  async openApp(which, hash) {
+    const ws = this.app.workspace, leaf = ws.getLeaf(false);
+    await leaf.setViewState({ type: APPV, active: true, state: { app: which, hash: hash || '' } });
+    ws.revealLeaf(leaf);
+  }
+  // "Often appears with" links of a word note, as note paths. Read once, then remembered.
+  async coList(path) {
+    if (!this.coCache) this.coCache = new Map();
+    if (this.coCache.has(path)) return this.coCache.get(path);
+    const f = this.app.vault.getAbstractFileByPath(path); let out = [];
+    if (f) { const t = await this.app.vault.cachedRead(f); const m = t.match(/## Often appears with\n([\s\S]*?)(?:\n\n|\n#|$)/); if (m) out = [...m[1].matchAll(/\[\[([^\]|#]+)/g)].map(x => 'Words/' + x[1] + '.md'); }
+    this.coCache.set(path, out); return out;
+  }
+  // A spark: the center word plus two of its partners that also link to each other. A closed triangle in the graph.
+  async sparks(path) {
+    const co = await this.coList(path), sets = new Map(), res = [];
+    for (const a of co) sets.set(a, new Set(await this.coList(a)));
+    for (let i = 0; i < co.length; i++) for (let j = i + 1; j < co.length; j++) {
+      const a = co[i], b = co[j], ab = sets.get(a).has(b), ba = sets.get(b).has(a); if (!ab && !ba) continue;
+      const back = (sets.get(a).has(path) ? 1 : 0) + (sets.get(b).has(path) ? 1 : 0);
+      res.push({ words: [path, a, b], score: (ab && ba ? 2 : 1) + back - (i + j) * 0.05 });
+    }
+    return res.sort((x, y) => y.score - x.score).slice(0, 6);
+  }
+  lightSpark(leaf, words) {
+    const v = leaf.view; if (!v || v.getViewType() !== 'localgraph') return;
+    try {
+      const st = v.getState(), opts = { ...LOCAL_OPTIONS, ...(st.options || {}) };
+      const base = TYPE_COLORS.map(([q, rgb]) => ({ query: q, color: { a: 1, rgb } }));
+      opts.colorGroups = words ? [{ query: words.map(w => `path:"${w}"`).join(' OR '), color: { a: 1, rgb: 0xf2b705 } }, ...base] : base;
+      v.setState({ ...st, options: opts }, { history: false });
+    } catch (e) { /* the graph still works without the glow */ }
+  }
+  async paintSpark(leaf, path) {
+    const st = this.graphState(leaf); if (!st.spark) return;
+    const box = st.spark; box.empty(); box.hide();
+    if (st.sparkT) clearTimeout(st.sparkT);
+    const list = await this.sparks(path).catch(() => []);
+    if (st.hist[st.pos] !== path) return;
+    if (st.lit) { this.lightSpark(leaf, null); st.lit = false; }
+    if (!list.length) return;
+    let i = 0;
+    const draw = () => {
+      box.empty(); box.show();
+      const sp = list[i], names = sp.words.map(p => p.replace(/^Words\//, '').replace(/\.md$/, ''));
+      box.createSpan({ cls: 'gq-spark-t', text: 'Spark: ' + names.join(' · ') });
+      const hb = box.createEl('button', { text: 'Hear', cls: 'gq-mini' }); hb.onclick = () => say(names.join(', '));
+      const mk = box.createEl('button', { text: 'One sentence', cls: 'gq-mini' }); mk.onclick = () => new SparkModal(this.app, this, sp.words).open();
+      if (list.length > 1) { const nx = box.createEl('button', { text: 'Another', cls: 'gq-mini' }); nx.onclick = () => { i = (i + 1) % list.length; draw(); this.lightSpark(leaf, list[i].words); st.lit = true; }; }
+    };
+    draw();
+    // Let the words settle first, then light up the three so the triangle pops out of the graph.
+    st.sparkT = setTimeout(() => { if (st.hist[st.pos] === path) { this.lightSpark(leaf, list[i].words); st.lit = true; } }, 1400);
+  }
   async savePair(gr, en, words, own) {
     const ad = this.app.vault.adapter, day = ymd(new Date());
     let txt = ''; try { txt = await ad.read(PAIRS_NOTE); } catch (e) { txt = '# My pairs\n\nSentences you built with the Pair it tool. Your own sentences count double on the Today page. Send them with Send homework while this note is open.\n'; }
@@ -598,6 +707,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (f && leaf.view && leaf.view.getViewType() === 'localgraph' && leaf.view.file !== f) { leaf.view.file = f; leaf.view.update(); this.app.workspace.requestSaveLayout(); }
     this.dressGraph(leaf);
     this.followCenter(leaf, path);
+    this.paintSpark(leaf, path);
   }
   followCenter(leaf, path) {
     // The camera eases onto the center word while the native physics settles, so the word you picked ends up in the middle.
@@ -634,7 +744,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       pairb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.openPair(f.basename); };
       const askb = bar.createEl('button', { text: 'Ask', cls: 'gq-lv-adv', attr: { 'aria-label': 'Ask the group about this word' } });
       askb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.ask(f); };
-      st.trail = wrap.createDiv('gq-web-trail'); st.bar = wrap;
+      st.trail = wrap.createDiv('gq-web-trail'); st.spark = wrap.createDiv('gq-spark'); st.spark.hide(); st.bar = wrap;
       const key = wrap.createDiv('gq-web-key');
       for (const [cls, t] of [['v', 'verbs (doing)'], ['n', 'nouns (things, people)'], ['a', 'describing words'], ['d', 'how, when, where'], ['o', 'little words']]) { const s = key.createSpan('gq-key'); s.createSpan('gq-kdot gq-k' + cls); s.appendText(t); }
       st.back.onclick = () => this.graphStep(leaf, -1); st.fwd.onclick = () => this.graphStep(leaf, 1);
@@ -1244,7 +1354,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const row = parent.createDiv('gq-row gq-lv-int'); const list = words.map(w => w.word);
     const b = row.createEl('button', { text: 'Play Buzzer with these' }); b.onclick = () => window.open(this.gameUrl(BUZZER_URL, list));
     const c = row.createEl('button', { text: 'Play Cousins with these' }); c.onclick = () => window.open(this.gameUrl(COUSINS_URL, list));
-    const y = row.createEl('button', { text: 'Play Γιαγιά with these' }); y.onclick = () => window.open(this.gameUrl(GIAGIA_URL, list));
+    const y = row.createEl('button', { text: 'Play Γιαγιά with these' }); y.onclick = () => this.openApp('giagia', '#w=' + encodeURIComponent(list.join(',')));
   }
   // ---------- Daily story: one line a day, same people all week ----------
   // Every word day (1 to 300) has one line. last_beat in My progress is the last line the student said.
@@ -1318,12 +1428,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.sceneRow(card, n);
     return b;
   }
-  // Watch the line as a short cartoon, or play it as a text adventure. Opens in the browser.
+  // Watch the line as a short cartoon, or play it as a text adventure. Opens inside the vault, offline.
   sceneRow(card, n, week) {
     if (n > SCENE_DAYS) return;
     const r = card.createDiv('gq-row');
-    const w = r.createEl('button', { text: week ? 'Watch the week' : 'Watch it', cls: 'gq-mini' }); w.onclick = () => window.open(STORY_URL + '#d=' + n);
-    const a = r.createEl('button', { text: 'Play it as a text adventure', cls: 'gq-mini' }); a.onclick = () => window.open(STORY_URL + '#play&d=' + n);
+    const w = r.createEl('button', { text: week ? 'Watch the week' : 'Watch it', cls: 'gq-mini' }); w.onclick = () => this.openApp('story', '#d=' + n);
+    const a = r.createEl('button', { text: 'Play it as a text adventure', cls: 'gq-mini' }); a.onclick = () => this.openApp('story', '#play&d=' + n);
   }
   // Comebacks: lines said 1, 3 and 7 lines ago return as a quick quiz. English first, then the Greek.
   comebackCard(box, beats, col, cal) {
@@ -1360,7 +1470,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }
     card.createDiv({ cls: 'gq-hint', text: 'Then swap: the kid is the teacher and asks the questions. The grown-up gets one wrong on purpose.' });
     const row2 = card.createDiv('gq-row'); const ob = row2.createEl('button', { text: 'Open the kid lesson', cls: 'gq-mini' }); ob.onclick = () => this.openNote(f.path);
-    const gy = row2.createEl('button', { text: 'Play Γιαγιά', cls: 'gq-mini' }); gy.onclick = () => window.open(GIAGIA_URL + '#k=' + (lesson || 1));
+    const gy = row2.createEl('button', { text: 'Play Γιαγιά', cls: 'gq-mini' }); gy.onclick = () => this.openApp('giagia', '#k=' + (lesson || 1));
   }
   async renderToday(el) {
     // Each render builds off-screen and swaps in at the end; only the newest render for a container wins.

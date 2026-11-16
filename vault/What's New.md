@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, night: Instructions that match the buttons
+> - **Today is back to the list of cards**, top to bottom. The slides will return later, only for a few moments where one big card helps.
+> - Word notes no longer tell you to tap a button your layout hides. "Pair it with" now says: take one word from each line and say it out loud.
+> - Video questions: the steps now point to Ask, then Ask on video instead.
+> - Kids have their own vault, **Greekquent Kids**: this week's game, one line a day, the swap, this week's words and the moves, with no grown-up tools. The Kid track here still works.
+
 > [!info]- November 17, evening: One card at a time
 > - **Today is now a set of slides.** One big card at a time: today's line, comebacks, today's words, review and the rest. Swipe left or right on a phone, or use the arrows. The dots show where you are.
 > - Today remembers your card when it updates (after you mark a color or say a line), and starts again at the first card each morning.

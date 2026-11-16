@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17c';
+const VAULT_RELEASE = '2026-11-17d';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -35,6 +35,10 @@ const WHATS_NEW = "What's New.md";
 const SETUP = 'Setting up.md';
 // Only the teacher's copy has this file. It turns Update vault off there, so teacher notes are never touched.
 const TEACHER_MARK = '.obsidian/greekquent-teacher.json';
+// Only the kids' copy has this file. It switches on the kid Today, hides the grown-up tools, and points updates at the kids repo.
+// It also holds the week-to-lesson schedule: {"schedule": [[week, lesson], ...]}.
+const KIDS_MARK = '.obsidian/greekquent-kids.json';
+const KIDS_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-kids-vault/main/';
 // Fluent in a Year: week 1 starts Monday, Oct 26, 2026. Mon to Sat are word days, Sunday is review.
 const COURSE_START = [2026, 9, 26];
 const COUSINS_URL = 'https://greekquent-cousins.pplx.app/';
@@ -606,6 +610,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       this.pruneEmpty(['Scripts/Kid variants/x', 'Scripts/Student/x']);
       setTimeout(() => this.fillBlankLookups().catch(() => {}), 4000);
       this.isTeacher = await this.app.vault.adapter.exists(TEACHER_MARK);
+      this.isKids = !!(await this.kidsInfo()); document.body.classList.toggle('gq-kids', this.isKids);
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
       this.hideRibbon();
       this.applyLevel();
@@ -890,7 +895,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (!f.path.startsWith('Words/')) continue;
         const fm = (this.app.metadataCache.getFileCache(f) || {}).frontmatter || {};
         if (!fm.rank) continue;
-        const w = { path: f.path, word: f.basename, english: String(fm.english || ''), pron: fm.pronunciation || '', rank: +fm.rank, lessons: fm.lessons || [], forms: [], cognates: String(fm.cognates || '') };
+        const w = { path: f.path, word: f.basename, english: String(fm.english || ''), pron: fm.pronunciation || '', rank: +fm.rank, lessons: fm.lessons || [], kid: fm.kid_lessons || [], forms: [], cognates: String(fm.cognates || '') };
         // Verb forms from the conjugation table (bold cells), so "θέλουμε" finds θέλω.
         try { const txt = await this.app.vault.cachedRead(f); const m = txt.split('## Conjugation')[1]; if (m) for (const b of m.split('\n## ')[0].matchAll(/\*\*([^*]+)\*\*/g)) b[1].split(/\s+/).forEach(x => { if (isGreek(x) && x !== 'θα') w.forms.push(x); }); } catch (e) {}
         w.k = fold(w.word); w.e = fold(w.english.replace(/[()"]/g, ' ')); w.c = w.cognates.toLowerCase().split(/,\s*/).map(x => x.replace(/-$/, '')).filter(Boolean); w.fk = [...new Set(w.forms.map(fold))];
@@ -1059,7 +1064,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const draw = () => {
         list.empty(); const t = fold(s.value);
         const hits = all.filter(q => !t || fold([q.word, q.english, q.question_text, q.name, q.lesson ? 'lesson ' + q.lesson : ''].join(' ')).includes(t));
-        if (!all.length) { list.createDiv({ cls: 'gq-hint', text: 'No video questions yet. Be the first: open a word and tap Ask on video (camera button).' }); return; }
+        if (!all.length) { list.createDiv({ cls: 'gq-hint', text: 'No video questions yet. Be the first: open a word, tap Ask, then Ask on video instead.' }); return; }
         if (!hits.length) { list.createDiv({ cls: 'gq-hint', text: 'No questions match. Try the Greek word without accents, or the English meaning.' }); return; }
         list.createDiv({ cls: 'gq-hint', text: `${hits.length} of ${all.length} questions, newest first` });
         hits.forEach(q => this.questionCard(list, q));
@@ -1121,7 +1126,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async teacherKey() { try { const d = await this.loadData(); return (d && d.teacherKey) || ''; } catch (e) { return ''; } }
   async channel() {
     const ad = this.app.vault.adapter;
-    if (!(await ad.exists(TEACHER_MARK))) return { teacher: false, man: () => ({ url: UPDATE_BASE + 'manifest.json?t=' + Date.now() }), file: (p, sha) => ({ url: UPDATE_BASE + 'vault/' + p.split('/').map(encodeURIComponent).join('/') + '?v=' + sha.slice(0, 12) }) };
+    const BASE = (await ad.exists(KIDS_MARK)) ? KIDS_BASE : UPDATE_BASE;
+    if (!(await ad.exists(TEACHER_MARK))) return { teacher: false, man: () => ({ url: BASE + 'manifest.json?t=' + Date.now() }), file: (p, sha) => ({ url: BASE + 'vault/' + p.split('/').map(encodeURIComponent).join('/') + '?v=' + sha.slice(0, 12) }) };
     await this.importKeyNote();
     const key = await this.teacherKey(); if (!key) return { teacher: true, missing: true };
     const headers = { Authorization: 'Bearer ' + key, Accept: 'application/vnd.github.raw', 'X-GitHub-Api-Version': '2022-11-28' };
@@ -1270,7 +1276,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (l !== 'simple') m.addItem(i => i.setTitle('Word graph').setIcon('git-fork').onClick(() => this.openGraph()));
     m.addItem(i => i.setTitle('Send homework').setIcon('send').onClick(() => this.sendHomework()));
     if (l === 'advanced') m.addItem(i => i.setTitle('Ask on video').setIcon('video').onClick(() => this.askVideo()));
-    m.addItem(i => i.setTitle(this.colors().track === 'kid' ? 'Kid track: turn off' : 'Kid track').setIcon('baby').onClick(() => this.setTrack(this.colors().track === 'kid' ? '' : 'kid')));
+    if (!this.isKids) m.addItem(i => i.setTitle(this.colors().track === 'kid' ? 'Kid track: turn off' : 'Kid track').setIcon('baby').onClick(() => this.setTrack(this.colors().track === 'kid' ? '' : 'kid')));
     m.addSeparator();
     m.addItem(i => i.setTitle('Share feedback').setIcon('message-square').onClick(() => this.feedback()));
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
@@ -1588,6 +1594,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async renderToday(el) {
     // Each render builds off-screen and swaps in at the end; only the newest render for a container wins.
     const tok = el.gqTok = (el.gqTok || 0) + 1;
+    const kids = await this.kidsInfo(); if (kids) return this.renderKidsToday(el, tok, kids);
     {
       const words = await this.wordIndex(); const byWord = new Map(words.map(w => [w.word, w]));
       const col = this.colors();
@@ -1684,11 +1691,111 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
       const kt = foot.createEl('a', { text: col.track === 'kid' ? 'Kid track: on' : 'Kid track', href: '#' }); kt.onclick = e => { e.preventDefault(); this.setTrack(col.track === 'kid' ? '' : 'kid'); }; foot.appendText(' · ');
       const ix = foot.createEl('a', { text: 'Index', href: '#' }); ix.onclick = e => { e.preventDefault(); this.openNote('00 Greekquent Index.md'); };
-      this.deckify(box);
+      // Slides are parked (deckify below) until they come back for specific moments, not all of Today.
       if (tok === el.gqTok) { el.empty(); el.appendChild(box); }
     }
   }
-  // ---------- Today as slides: one big card at a time, fading in, with Back and Next ----------
+  // ---------- Kids' copy ----------
+  async kidsInfo() {
+    if (this.kidsP === undefined) this.kidsP = (async () => { const ad = this.app.vault.adapter; if (!(await ad.exists(KIDS_MARK))) return null; try { return JSON.parse(await ad.read(KIDS_MARK)) || {}; } catch (e) { return {}; } })();
+    return this.kidsP;
+  }
+  kidFile(n) {
+    const nn = 'K' + String(n).padStart(2, '0') + ' ';
+    return this.app.vault.getMarkdownFiles().find(x => x.path.startsWith('Scripts/Kid/') && x.basename.startsWith(nn));
+  }
+  // One lesson a week, on the same weeks as class. Weeks with no class keep last week's game.
+  kidWeek(info) {
+    const now = new Date(); now.setHours(0, 0, 0, 0);
+    const dd = Math.floor((now - new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2])) / 864e5);
+    const week = dd < 0 ? 1 : Math.floor(dd / 7) + 1, sch = (info && info.schedule) || [];
+    let lesson = 1, fresh = dd < 0 || !sch.length;
+    for (const [w, l] of sch) { if (w <= week) { lesson = l; fresh = w === week; } }
+    return { week, lesson, fresh, dow: dd < 0 ? 1 : now.getDay(), before: dd < 0 };
+  }
+  kidSection(txt, name) { const s = txt.split(/\n## /).find(x => x.startsWith(name)); return s ? s.slice(name.length) : ''; }
+  kidLines(sec) { return [...sec.matchAll(/^- ([^:*]+):\s*\*\*(.+?)\*\*\s*(?:—\s*(.+))?$/gm)].map(m => ({ who: m[1].trim(), gr: m[2].trim(), en: (m[3] || '').trim() })); }
+  async renderKidsToday(el, tok, info) {
+    const box = createDiv('gq-today gq-kids-today'), col = this.colors(), wk = this.kidWeek(info);
+    const f = this.kidFile(wk.lesson);
+    const now = new Date();
+    box.createEl('h2', { text: `Today · ${now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}` });
+    if (!col.setup_seen) {
+      const s = box.createDiv('gq-tcard gq-tnew'); s.createSpan({ text: 'Grown-ups: ' });
+      const a = s.createEl('a', { text: 'read Setting up', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); };
+      s.createSpan({ text: ' first (2 minutes). ' }); const x = s.createEl('button', { text: 'Got it' }); x.onclick = () => this.setupSeen();
+    }
+    if (!f) { box.createDiv({ cls: 'gq-tcard', text: 'This lesson is not in the vault yet. Tap More, then Update vault.' }); if (tok === el.gqTok) { el.empty(); el.appendChild(box); } return; }
+    const txt = await this.app.vault.cachedRead(f), title = f.basename.replace(/^K\d+\s*/, '').replace(/-student$/, '');
+    // 1. The game
+    const g = box.createDiv('gq-tcard gq-kid'), gh = g.createDiv('gq-thead');
+    gh.createEl('strong', { text: `This week's game: ${title}` });
+    gh.createSpan({ cls: 'gq-hint', text: `  · lesson ${wk.lesson}` + (wk.before ? ' · class starts Oct 26' : '') });
+    const game = (txt.match(/\*\*The game:\*\*\s*(.+)/) || [])[1]; if (game) g.createDiv({ cls: 'gq-kidgame', text: game });
+    if (!wk.fresh && !wk.before) g.createDiv({ cls: 'gq-hint', text: 'No class this week. Play last week\'s game again: it is easier the second time.' });
+    const r1 = g.createDiv('gq-row'); const ob = r1.createEl('button', { text: 'Open the lesson', cls: 'mod-cta' }); ob.onclick = () => this.openNote(f.path);
+    // 2. Say it: one more line each day of the week (Sunday shows them all)
+    const lines = this.kidLines(this.kidSection(txt, 'Say it'));
+    if (lines.length) {
+      const c = box.createDiv('gq-tcard gq-kid'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Say it together' });
+      const k = wk.dow === 0 ? lines.length - 1 : (Math.max(1, wk.dow) - 1) % lines.length;
+      c.createDiv({ cls: 'gq-hint', text: wk.dow === 0 ? 'Sunday: say the whole game, top to bottom.' : 'One new line today. Say the ones before it too.' });
+      const ol = c.createEl('ol', { cls: 'gq-storylist' });
+      lines.slice(0, k + 1).forEach((l, i) => { const li = ol.createEl('li', { cls: i === k ? 'gq-now' : '' }); li.createSpan({ cls: 'gq-hint', text: l.who + ': ' }); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); if (l.en) li.createDiv({ cls: 'gq-hint', text: l.en }); });
+      const r = c.createDiv('gq-row'); this.hearBtn(r, lines[k].gr); this.hearBtn(r, lines.slice(0, k + 1).map(l => l.gr).join(' '), 'Hear them all');
+    }
+    // 3. Swap: the kid is the teacher
+    const sw = this.kidLines(this.kidSection(txt, 'You are the teacher'));
+    if (sw.length) {
+      const c = box.createDiv('gq-tcard gq-kid'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Now you are the teacher' });
+      c.createDiv({ cls: 'gq-hint', text: 'Swap. The kid asks the questions. The grown-up gets one wrong on purpose. Catch it.' });
+      const ol = c.createEl('ol', { cls: 'gq-storylist gq-plain' });
+      for (const l of sw) { const li = ol.createEl('li'); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); if (l.en) li.createDiv({ cls: 'gq-hint', text: l.en }); }
+    }
+    // 4. This week's words, nouns first, with the colors
+    const words = (await this.wordIndex()).filter(w => (w.kid || []).includes(wk.lesson));
+    if (words.length) {
+      const c = box.createDiv('gq-tcard gq-kid'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `This week's words (${words.length})` });
+      c.createDiv({ cls: 'gq-hint', text: 'Hear it, say it, then pick a color: red is not yet, yellow is kind of, green is got it.' });
+      const ul = c.createEl('ul', { cls: 'gq-kidwords' });
+      words.forEach((w, i) => {
+        const li = ul.createEl('li'), top = li.createDiv('gq-kidword');
+        const a = top.createEl('a', { text: w.word, cls: 'internal-link', href: '#', attr: { lang: 'el' } }); a.onclick = e => { e.preventDefault(); this.openNote(w.path); };
+        top.createSpan({ cls: 'gq-hint', text: '  ' + w.english });
+        const r = li.createDiv('gq-row'); this.hearBtn(r, w.word, 'Hear');
+        const btns = COLORS.map(([k, label]) => { const b = r.createEl('button', { cls: 'gq-c gq-mini gq-' + k, text: { red: 'Not yet', yellow: 'Kind of', green: 'Got it' }[k], attr: { 'aria-label': label } }); return [k, b]; });
+        let cur = this.colorOf(w.word);
+        const paint = () => { for (const [k, b] of btns) b.toggleClass('is-on', cur === k); };
+        for (const [k, b] of btns) b.onclick = () => { cur = cur === k ? '' : k; paint(); this.setColor(w.word, cur); };
+        paint(); if (i >= 6) li.style.display = 'none';
+      });
+      if (words.length > 6) { const r = c.createDiv('gq-row'), m = r.createEl('button', { text: `Show all ${words.length}`, cls: 'gq-mini' }); m.onclick = () => { for (const li of ul.children) li.style.display = ''; r.remove(); }; }
+    }
+    // 5. Moves
+    const mv = [...this.kidSection(txt, 'Do the moves').matchAll(/^- \*\*(.+?)\*\*:\s*(.+)$/gm)];
+    if (mv.length) {
+      const c = box.createDiv('gq-tcard gq-kid'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Do the moves' });
+      c.createDiv({ cls: 'gq-hint', text: 'Do the move every time you say it.' });
+      const ul = c.createEl('ul', { cls: 'gq-storylist gq-plain' });
+      if (mv.length > 8) c.createDiv({ cls: 'gq-hint', text: `The first 8 of ${mv.length}. The rest are on the lesson page.` });
+      for (const m of mv.slice(0, 8)) { const li = ul.createEl('li'); li.createSpan({ text: m[1], attr: { lang: 'el' } }); li.createDiv({ cls: 'gq-hint', text: m[2] }); }
+    }
+    // Small buttons under the cards
+    const tc = box.createDiv('gq-tcard gq-row gq-ttools');
+    const tool = (t, fn, cls) => { const b = tc.createEl('button', { text: t, cls: cls || '' }); b.onclick = fn; };
+    tool('Play Γιαγιά', () => this.openApp('giagia', '#k=' + wk.lesson), 'mod-cta');
+    tool('All lessons', () => this.openNote('Lessons.md'));
+    tool('Look up a word', () => new LookupModal(this.app, this).open());
+    let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}
+    const foot = box.createDiv('gq-hint');
+    const wn = foot.createEl('a', { text: "What's new", href: '#' }); wn.onclick = e => { e.preventDefault(); this.openNote(WHATS_NEW); };
+    foot.appendText(` · vault ${rel} · `);
+    if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
+    const gu = foot.createEl('a', { text: 'For grown-ups', href: '#' }); gu.onclick = e => { e.preventDefault(); this.openNote(SETUP); };
+    // Slides parked here too: the kids Today is a plain list of cards.
+    if (tok === el.gqTok) { el.empty(); el.appendChild(box); }
+  }
+  // ---------- Slides (parked): one big card at a time, fading in, with Back and Next. Not used on Today since 2026-11-17d. ----------
   // The cards are the same as before; only the frame changes. The tool buttons and footer stay small underneath.
   deckify(box) {
     const slides = [];
@@ -1766,6 +1873,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // ---------- Layouts ----------
   level() {
     if (this.lvl) return this.lvl;
+    if (this.isKids) return this.lvl = 'simple';
     const l = this.colors().layout;
     return this.lvl = LEVELS.includes(l) ? l : (this.isTeacher ? 'advanced' : 'simple');
   }
@@ -1797,7 +1905,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // Gray (never hide) file-list items the layout doesn't use yet. CSS on data-path, so it survives folder opens and redraws.
   async dimSidebar() {
     const l = this.level(); let st = document.getElementById('gq-layout-dim');
-    if (l === 'advanced') { if (st) st.remove(); return; }
+    if (l === 'advanced' || this.isKids) { if (st) st.remove(); return; }
     const n = await this.currentLesson(), on = new Set([TODAY]), pre = new Set();
     for (const f of this.app.vault.getMarkdownFiles()) {
       if (!f.path.startsWith('Scripts/')) continue;
@@ -1813,7 +1921,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   // Switcher: a small Simple / Intermediate / Advanced control, centered at the top of every main pane.
   mountSwitches() {
-    const ws = this.app.workspace; if (!ws.iterateRootLeaves) return;
+    const ws = this.app.workspace; if (!ws.iterateRootLeaves || this.isKids) return;
     ws.iterateRootLeaves(leaf => {
       const vc = leaf.view && leaf.view.containerEl && leaf.view.containerEl.querySelector(':scope > .view-content'); if (!vc || vc.querySelector(':scope > .gq-switch')) return;
       vc.addClass('gq-has-switch');

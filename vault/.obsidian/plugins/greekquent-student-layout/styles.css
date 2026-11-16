@@ -203,3 +203,17 @@ body.gq-onebar .mobile-navbar-action-menu { display: none !important; }
 .gq-deck-one .gq-deck-nav, .gq-deck-one .gq-deck-dots { display: none; }
 .gq-today .gq-ttools { border: 0; padding: 0; background: none; }
 @media (prefers-reduced-motion: reduce) { .gq-slide.gq-from-right, .gq-slide.gq-from-left, .gq-slide.gq-to-left, .gq-slide.gq-to-right { animation: none; } .gq-deck-stage { transition: none; } }
+
+/* Kids' copy: big, plain, no layout switch */
+.gq-kid .gq-storylist.gq-plain li { color: var(--text-normal); }
+.gq-kidgame { font-size: 1.15em; margin: 6px 0 10px; }
+body.gq-kids .gq-switch { display: none; }
+.gq-kidwords { list-style: none; padding: 0; margin: 8px 0; }
+.gq-kidwords li { margin: 6px 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 10px; }
+.gq-kidwords li .gq-row { margin: 0; }
+.gq-kidword a { font-size: 1.2em; }
+.gq-kidwords .gq-c { border: 2px solid transparent; }
+.gq-kidwords .gq-c.gq-red { border-color: #d73027; } .gq-kidwords .gq-c.gq-yellow { border-color: #e6b400; } .gq-kidwords .gq-c.gq-green { border-color: #1a9850; }
+.gq-kidwords .gq-c.is-on { color: #fff; font-weight: 600; }
+.gq-kidwords .gq-c.gq-red.is-on { background: #d73027; } .gq-kidwords .gq-c.gq-yellow.is-on { background: #b38b00; } .gq-kidwords .gq-c.gq-green.is-on { background: #1a9850; }
+.gq-kidwords .gq-c.is-on::before { content: "\2713  "; }

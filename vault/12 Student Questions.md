@@ -6,7 +6,7 @@ Video questions from Greekquent students, each with the teacher's answer. Tap **
 ```
 
 > [!tip]- Ask your own
-> 1. Open a word or lesson note and tap the **camera button** (Ask on video) in the left toolbar. You can also tap **Video** in the word graph, or right-click a note.
+> 1. Open a word or lesson note and tap **Ask** in the left toolbar (Intermediate and up), then **Ask on video instead**.
 > 2. Record up to **45 seconds**: say the word, then ask your question.
 > 3. Type your first name, and tick the boxes you are happy with:
 >    - **Public library:** your video and first name go into this list and the [online question library](https://gtkd321.github.io/greekquent-questions/), which anyone can watch.

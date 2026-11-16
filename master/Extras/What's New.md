@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, midday: Word graph and the Story Lines game
+> - **Word graph** opens full size in the main pane again, even when you start it from the side panel.
+> - **Story Lines, Play mode:** your prompt is now the big line in a box marked "Your turn", with the English underneath. "Last time" is a small recap at the top, and earlier prompts fade once you answer them. A day no longer prints its first prompt twice.
+
 > [!info]- November 17, morning: Simpler pages, an Extras folder, and a side panel
 > - The Simple, Intermediate and Advanced switch is gone. Every tool is always there, and the pages themselves are shorter.
 > - **Extras folder:** the index, verb tables, games, Classroom Greek, handouts, word lists, Setting up and this page now live in **Extras** in the sidebar. Today, Scripts, Words, Fluent in a Year and My Work stay on top.

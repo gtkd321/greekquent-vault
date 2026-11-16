@@ -68,6 +68,16 @@ html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: '
 .out .you { color: #c8ffc8; opacity: .8; }
 .out .bad { color: #ff9a8a; text-shadow: none; }
 .out .title { color: #fff; font-weight: 700; }
+.out .recap { font-size: 13px; line-height: 1.4; color: #7fbf7f; opacity: .75; text-shadow: none; border-left: 2px solid #2f5f2f; padding: 2px 0 2px 8px; margin: 0 0 10px; }
+.out .look { color: #8dff8d; opacity: .85; margin-bottom: 6px; }
+.out .gr { font-size: 16px; font-weight: 600; }
+.out .prompt { margin: 10px 0 4px; padding: 8px 10px; border: 1px solid #3a7a3a; border-radius: 6px; background: rgba(60,140,60,.12); }
+.out .p-label { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #7fbf7f; text-shadow: none; margin-bottom: 2px; }
+.out .p-line { font-size: 20px; line-height: 1.35; font-weight: 700; color: #f4fff4; text-shadow: 0 0 6px rgba(160,255,160,.45); }
+.out .p-hint { font-size: 15px; color: #a8e8a8; margin-top: 2px; }
+.out .prompt.done { opacity: .5; border-color: transparent; background: none; padding: 0; margin: 4px 0; }
+.out .prompt.done .p-label { display: none; }
+.out .prompt.done .p-line { font-size: 16px; }
 #form { display: flex; align-items: center; gap: 8px; margin-top: 10px; border-top: 1px solid #1f3a1f; padding-top: 10px; }
 .pr { font-weight: 700; }
 #cmd { flex: 1; min-height: 44px; background: transparent; border: 0; outline: 0; color: #c8ffc8; font: 700 20px 'Noto Sans Mono', monospace; caret-color: #8dff8d; text-shadow: inherit; }
@@ -479,8 +489,8 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
     const nm = (l) => l.n || GRN[l.w] || '';
     const people = [...new Set(d.lines.map((l) => (l.n ? l.n : NAMES[l.w])))].join(', ');
     const pi = ALL.indexOf(n), prev = pi > 0 ? window.GQ_STORY.days[ALL[pi - 1]] : null;
-    let look = S.DESC[d.bg] + '\nWITH YOU: ' + people + '.';
-    if (prev) look += '\nLAST TIME: ' + prev.lines.map((l) => l.e).join(' ');
+    const look = S.DESC[d.bg] + '\nWith you: ' + people.toLowerCase().replace(/(^|, )(\S)/g, (m, a, b) => a + b.toUpperCase()).replace(/\bMrs\b/i, 'Mrs').replace(/\bEleni\b/i, 'Eleni') + '.';
+    const recap = prev ? prev.lines.map((l) => l.e).join(' ') : '';
     const steps = []; let pre = [];
     d.lines.forEach((l) => {
       if (!l.k.length) { pre.push(nm(l) + ': ' + l.g); return; }
@@ -495,7 +505,7 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
       });
     });
     if (steps.length) steps[steps.length - 1].ok = 'line';
-    return { title: 'DAY ' + n + ' · ' + S.PLACE[d.bg], look, steps, line: d.lines.map((l) => nm(l) + ': ' + l.g).join('\n'), tail: pre.join('\n'),
+    return { title: 'DAY ' + n + ' · ' + S.PLACE[d.bg], look, recap, steps, line: d.lines.map((l) => nm(l) + ': ' + l.g).join('\n'), tail: pre.join('\n'),
       cliff: n === 300 ? 'THE END. Θα τα πούμε.' : last ? 'TO BE CONTINUED NEXT WEEK.' : '' };
   }
   const getDay = (n) => (n <= 6 ? DAYS[n - 1] : genDay(n));
@@ -520,11 +530,22 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
 
   let day = 1, step = 0, misses = 0, busy = false;
   const out = $('out');
-  function add(text, cls) { const d = document.createElement('div'); if (cls) d.className = cls; d.textContent = text; out.appendChild(d); out.scrollTop = out.scrollHeight; return d; }
-  async function type(text, cls) {
-    const d = add('', cls); busy = true;
-    for (let i = 0; i < text.length; i++) { d.textContent += text[i]; if (i % 2 === 0) await new Promise((r) => setTimeout(r, 14)); out.scrollTop = out.scrollHeight; }
-    busy = false;
+  let gen = 0;   // each start() gets a number; older typing stops, so a day never prints twice
+  function add(text, cls, parent) { const d = document.createElement('div'); if (cls) d.className = cls; d.textContent = text; (parent || out).appendChild(d); out.scrollTop = out.scrollHeight; return d; }
+  async function type(text, cls, parent) {
+    const g = gen, d = add('', cls, parent); busy = true;
+    for (let i = 0; i < text.length; i++) { if (g !== gen) return d; d.textContent += text[i]; if (i % 2 === 0) await new Promise((r) => setTimeout(r, 14)); out.scrollTop = out.scrollHeight; }
+    if (g === gen) busy = false;
+    return d;
+  }
+  // The prompt: a small YOUR TURN label, the line with the blank (big), and the English underneath (quiet).
+  async function prompt(see) {
+    out.querySelectorAll('.prompt').forEach((x) => x.classList.add('done'));   // only the newest prompt stands out
+    const box = add('', 'prompt'); add('Your turn', 'p-label', box);
+    const k = see.lastIndexOf('\n(');
+    const main = k > 0 ? see.slice(0, k) : see, hint = k > 0 ? see.slice(k + 1) : '';
+    const m = await type(main, 'p-line', box); if (/[\u0370-\u03ff]/.test(main)) m.lang = 'el';
+    if (hint) await type(hint, 'p-hint', box);
   }
   function speak(t) {
     if (!window.speechSynthesis) return; const v = speechSynthesis.getVoices().find((x) => /^el/i.test(x.lang)); if (!v) return;
@@ -537,10 +558,15 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
     const opts = [...new Set([s.ans[0], ...pool.filter((w) => w !== s.ans[0])])].slice(0, 3).sort(() => Math.random() - 0.5);
     opts.forEach((w) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = w; b.onclick = () => submit(w); box.appendChild(b); });
   }
-  async function ask() { const s = getDay(day).steps[step]; if (s.pre) { const g = add(s.pre, 'gr'); g.lang = 'el'; } await type(s.see); chips(); $('cmd').focus({ preventScroll: true }); }
+  async function ask() { const g0 = gen, s = getDay(day).steps[step]; if (s.pre) { const g = add(s.pre, 'gr'); g.lang = 'el'; } await prompt(s.see); if (g0 !== gen) return; chips(); $('cmd').focus({ preventScroll: true }); }
   async function start(i) {
+    const g = ++gen; busy = false;
     day = i; step = 0; misses = 0; out.innerHTML = ''; $('chips').innerHTML = '';
-    await type(getDay(day).title, 'title'); await type(getDay(day).look); await ask();
+    const d = getDay(day);
+    await type(d.title, 'title'); if (g !== gen) return;
+    if (d.recap) add('Last time: ' + d.recap, 'recap');
+    await type(d.look, 'look'); if (g !== gen) return;
+    await ask();
   }
   async function submit(raw) {
     const v = raw.trim(); if (!v || busy) return; $('cmd').value = '';
@@ -549,7 +575,7 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
     const d = getDay(day);
     if (step >= d.steps.length) { start(nextOf(day)); return; }
     if (['help', 'hint', 'βοηθεια'].includes(cmd)) { await type('CLUE: ' + d.steps[step].help); return; }
-    if (['look', 'l', 'κοιτα'].includes(cmd)) { await type(d.look); await type(d.steps[step].see); return; }
+    if (['look', 'l', 'κοιτα'].includes(cmd)) { await type(d.look, 'look'); await prompt(d.steps[step].see); return; }
     const s = d.steps[step];
     if (s.any || match(v, s.ans)) {
       if (!s.any) speak(s.ans[0]);

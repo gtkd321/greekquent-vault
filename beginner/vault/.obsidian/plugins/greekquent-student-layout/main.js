@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17i';
+const VAULT_RELEASE = '2026-11-17j';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -664,8 +664,17 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     return this.pairs;
   }
   openPair(word, pre) { new PairModal(this.app, this, word, pre).open(); }
+  // A leaf in the main pane. Buttons in the side panel must never open things inside the side panel.
+  mainLeaf(newTab) {
+    const ws = this.app.workspace;
+    const root = ws.getMostRecentLeaf && ws.getMostRecentLeaf(ws.rootSplit);
+    if (root && ws.activeLeaf !== root && ws.activeLeaf && ws.activeLeaf.getRoot && ws.activeLeaf.getRoot() !== ws.rootSplit) ws.setActiveLeaf(root, { focus: false });
+    let leaf = newTab ? ws.getLeaf('tab') : ws.getLeaf(false);
+    if (leaf.getRoot && leaf.getRoot() !== ws.rootSplit) { try { leaf.detach(); } catch (e) {} leaf = root && !newTab ? root : ws.createLeafInParent(ws.rootSplit, 0); }
+    return leaf;
+  }
   async openApp(which, hash) {
-    const ws = this.app.workspace, leaf = ws.getLeaf(false);
+    const ws = this.app.workspace, leaf = this.mainLeaf(false);
     await leaf.setViewState({ type: APPV, active: true, state: { app: which, hash: hash || '' } });
     ws.revealLeaf(leaf);
   }
@@ -828,7 +837,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const a = ws.getActiveFile();
     const file = this.wordPath(path || (a ? a.path : ''));
     let leaf = ws.getLeavesOfType('localgraph').find(l => l.getRoot() === ws.rootSplit);
-    if (!leaf) leaf = ws.getLeaf('tab');
+    if (!leaf) leaf = this.mainLeaf(true);
     ws.revealLeaf(leaf);
     if (ws.leftSplit && !ws.leftSplit.collapsed) ws.leftSplit.collapse();
     if (ws.rightSplit && !ws.rightSplit.collapsed) ws.rightSplit.collapse();
@@ -1316,7 +1325,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!f) { new Notice(`${path.replace(/\.md$/, '')} is not in this vault yet. Tap Update vault.`); return; }
     const ws = this.app.workspace;
     let leaf = ws.getLeavesOfType('markdown').find(l => l.view.file && l.view.file.path === path);
-    if (!leaf) { const a = ws.getMostRecentLeaf && ws.getMostRecentLeaf(ws.rootSplit); leaf = a && a.view && a.view.getViewType() === 'empty' ? a : ws.getLeaf('tab'); await leaf.openFile(f, { state: { mode: 'preview' } }); }
+    if (!leaf) { const a = ws.getMostRecentLeaf && ws.getMostRecentLeaf(ws.rootSplit); leaf = a && a.view && a.view.getViewType() === 'empty' ? a : this.mainLeaf(true); await leaf.openFile(f, { state: { mode: 'preview' } }); }
     ws.setActiveLeaf(leaf, { focus: true }); ws.revealLeaf(leaf);
     return leaf;
   }
@@ -2020,7 +2029,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (m && (m[1] === 'I') !== (v === 'intermediate')) {
       const want = (v === 'intermediate' ? 'I' : 'L') + m[2] + ' ', dir = v === 'intermediate' ? 'Scripts/Intermediate/' : 'Scripts/Beginner/';
       const g = this.app.vault.getMarkdownFiles().find(x => x.path.startsWith(dir) && x.basename.startsWith(want));
-      if (g) { const leaf = this.app.workspace.getLeaf(false); await leaf.openFile(g, { state: { mode: 'preview' } }); }
+      if (g) { const leaf = this.mainLeaf(false); await leaf.openFile(g, { state: { mode: 'preview' } }); }
       else new Notice(`Lesson ${+m[2]} has no ${v} page yet.`);
     }
   }

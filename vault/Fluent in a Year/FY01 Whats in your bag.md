@@ -13,6 +13,8 @@ tags: [greek-fiay]
 
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
+[Watch this week's story](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA) as a short cartoon with Greek subtitles, or [play it as a text adventure](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA#play) where the scene only moves when you type the right Greek word.
+
 > [!quote]- The week in six lines
 > 1. Εσύ κι εγώ είμαστε σε ένα μάθημα. (You and I are in a class.)
 > 2. Τι έχεις; — Έχω το κινητό σου. — Όχι! — Ναι! (What do you have? — I have your phone. — No! — Yes!)

@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 16, evening: Watch it, then play it
+> - **Story Lines.** Week 1's story is now a short cartoon for each day, with Greek subtitles that light up as the characters speak. [Open it](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA), or tap **Watch it** under the day's line on Today.
+> - **Text adventure.** The same scenes as an old-school text game: type the right Greek word to move the story on. Greeklish works, and HELP gives a clue.
+> - More weeks are coming as the year's story is written.
+
 > [!info]- November 16, overnight: A story every day
 > - **Today's line.** Each day now has one short story line that uses that day's words (they are in bold). The same people all week: Μαρία, Νίκος, γιαγιά, παππούς, θεία and the νονός. Say it, tap Hear it, then tap **I said it**.
 > - **The week in six lines.** Each line adds to the one before, so by Saturday you can tell a little story. On Sunday, Today shows the whole story to read aloud. Every week page has it too, under This week's story.

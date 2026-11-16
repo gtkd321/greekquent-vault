@@ -30,6 +30,13 @@ Links: [[Today]] · [[00 Greekquent Index]] · [[07 Fluent in a Year]]
 > - **Words from:** any kid lesson (with earlier lessons mixed in), the top 100, 300 or all 1,500, or today's words from the Today page.
 > - The end screen lists missed words with Hear buttons and can send them to Review on Today.
 
+> [!summary]- Greekquent Story Lines (watch it, then play it)
+> [Open Story Lines](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA)
+> - **Watch:** each day's story line as a short cartoon. The Greek subtitles light up word by word as the characters speak, and things appear when their word is said. Slower and English buttons; Whole week plays Monday to Saturday.
+> - **Text adventure:** the same scene as an 80s-style text game. It only moves on when you type the right Greek word. Greeklish works too (nero = νερό), so no Greek keyboard is needed. HELP gives a clue; after two misses, three word buttons appear.
+> - Works in any phone browser, iPhone or Android. Week 1 is ready now; more weeks are coming.
+> - On Today, tap **Watch it** or **Play it as a text adventure** under the day's line.
+
 > [!summary]- Run it in class
 > 1. Pick the current lesson, play to 5.
 > 2. Winner stays, the next student challenges.

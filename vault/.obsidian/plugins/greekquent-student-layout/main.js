@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-16f';
+const VAULT_RELEASE = '2026-11-16g';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -38,6 +38,9 @@ const TEACHER_MARK = '.obsidian/greekquent-teacher.json';
 // Fluent in a Year: week 1 starts Monday, Oct 26, 2026. Mon to Sat are word days, Sunday is review.
 const COURSE_START = [2026, 9, 26];
 const COUSINS_URL = 'https://greekquent-cousins.pplx.app/';
+// Animated scenes and the text adventure exist for these days so far.
+const STORY_URL = 'https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA';
+const SCENE_DAYS = 6;
 const GIAGIA_URL = 'https://www.perplexity.ai/computer/a/greekquent-giagia-T2tsaLMvQiuN84Ng0un.IA';
 const BUZZER_URL = 'https://www.perplexity.ai/computer/a/greekquent-buzzer-f3uOHxBFS6Ko8YnCc99fzw';
 const COLORS = [['red', "Don't have it"], ['yellow', 'Kind of'], ['green', 'Have it']];
@@ -1225,6 +1228,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const ol = card.createEl('ol', { cls: 'gq-storylist' });
       for (const x of lines) { const li = ol.createEl('li'); this.lineEl(li, x.gr, x.words); li.createDiv({ cls: 'gq-hint', text: x.en }); }
       const row = card.createDiv('gq-row'); this.hearBtn(row, lines.map(x => x.gr).join(' '), 'Hear the whole story');
+      if (lines[0] && lines[0].n <= SCENE_DAYS) this.sceneRow(card, lines[0].n, true);
       if (!behind) return;
     }
     const card = box.createDiv('gq-tcard gq-story');
@@ -1245,7 +1249,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (last >= n) row.createSpan({ cls: 'gq-hint', text: 'Said it. ' + (n >= cal ? 'Next line tomorrow.' : '') });
     else { const ok = row.createEl('button', { text: 'I said it', cls: 'mod-cta gq-mini' }); ok.onclick = () => this.saidBeat(n); }
     if (behind) { const j = row.createEl('a', { text: 'Jump to today', href: '#' }); j.onclick = e => { e.preventDefault(); this.saidBeat(cal - 1); }; }
+    this.sceneRow(card, n);
     return b;
+  }
+  // Watch the line as a short cartoon, or play it as a text adventure. Opens in the browser.
+  sceneRow(card, n, week) {
+    if (n > SCENE_DAYS) return;
+    const r = card.createDiv('gq-row');
+    const w = r.createEl('button', { text: week ? 'Watch the week' : 'Watch it', cls: 'gq-mini' }); w.onclick = () => window.open(STORY_URL + '#d=' + n);
+    const a = r.createEl('button', { text: 'Play it as a text adventure', cls: 'gq-mini' }); a.onclick = () => window.open(STORY_URL + '#play&d=' + n);
   }
   // Comebacks: lines said 1, 3 and 7 lines ago return as a quick quiz. English first, then the Greek.
   comebackCard(box, beats, col, cal) {

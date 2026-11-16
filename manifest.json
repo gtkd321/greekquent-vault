@@ -1,5 +1,5 @@
 {
-"release": "2026-11-16f",
+"release": "2026-11-16g",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,11 +14,11 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "29a7a4fa78399b015dd83059f31ad7e701bd8cb7e9b8cbcd9abb631794c7ccbf",
-"size": 114686
+"sha256": "c52ae746b208c781ae1c932ac79e13c00b77e9b4f32c1e16c529b38bd56d101c",
+"size": 115502
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "1226fe9e4da6c761661449b29b38045b5a3404b988b5f6334360917dc75d5256",
+"sha256": "deed251095402bf908de38559a26ed523b9cc7de90106fe84dbd92afc77db727",
 "size": 373
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -78,8 +78,8 @@
 "size": 6512
 },
 "09 Games.md": {
-"sha256": "64b9dc9b096c6fb9613445c387f21b13bfb0b84bea683c6193eef27b88c3d342",
-"size": 3455
+"sha256": "3853dd9f6421dc3203a7a37ed1d2d63d4b476d435b3afdd3307a10cf12f3af97",
+"size": 4292
 },
 "10 Greekquent Groups-student.md": {
 "sha256": "a8add3c67d6ee4045f8e730aea4f6af6265038e1378d68a1a464faa688fe2a70",
@@ -90,8 +90,8 @@
 "size": 1331
 },
 "Fluent in a Year/FY01 Whats in your bag.md": {
-"sha256": "7d7d7a485826a79bb3db559ddad50cd8a2c83f7147a78e096c6e6bc51b054967",
-"size": 7358
+"sha256": "09d80dc5b4b067fbe069f9eef984759bd9671022e5bb6113fb54cd0bd951c473",
+"size": 7695
 },
 "Fluent in a Year/FY02 Guest at home.md": {
 "sha256": "440735035af7511191b2b1d9dc36f546b8ac8a08ec3215fd847e45f0022e7e0c",
@@ -654,8 +654,8 @@
 "size": 24
 },
 "What's New.md": {
-"sha256": "3acc0a777b6db9161d3f3671fae84419737fb2aab96ff9d9e4e83265bd37bb5a",
-"size": 6768
+"sha256": "a43a7fe024c9a91b8ef48716945ca5ee672c6914818e24fd8ef42fc17108dc03",
+"size": 7318
 },
 "Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

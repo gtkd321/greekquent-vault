@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-16c';
+const VAULT_RELEASE = '2026-11-16d';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -488,6 +488,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerMarkdownCodeBlockProcessor('greekquent-questions', (src, el) => this.questionsIndex(el));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) this.words = null; }));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === CARDS || f.path === PAIRS_NOTE) this.refreshCards(); }));
+    // Word cards opened from the graph fade in (about a fifth of a second) instead of flashing in.
+    this.registerDomEvent(document, 'pointerdown', e => { if (e.target.closest && e.target.closest('.workspace-leaf-content[data-type="localgraph"], .workspace-leaf-content[data-type="graph"]')) this.graphTouch = Date.now(); }, true);
+    this.registerEvent(this.app.workspace.on('file-open', f => {
+      if (!f || !f.path.startsWith('Words/') || Date.now() - (this.graphTouch || 0) > 1500) return;
+      this.graphTouch = 0;
+      const v = this.app.workspace.getActiveViewOfType(MarkdownView); if (!v) return;
+      const el = v.containerEl; el.removeClass('gq-fade'); void el.offsetWidth; el.addClass('gq-fade');
+      setTimeout(() => el.removeClass('gq-fade'), 400);
+    }));
     // My Work notes open ready to type in.
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path.startsWith(MY_WORK)) setTimeout(() => this.editMode(f), 50); }));
     this.addCommand({ id: 'open-word-graph', name: 'Open word graph', callback: () => this.openGraph() });

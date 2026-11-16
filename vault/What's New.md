@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 16, night: Smoother word graph
+> - Tap a word in the word graph and its note now fades in gently instead of flashing in.
+> - If your phone is set to reduce motion, it opens instantly as before.
+
 > [!info]- November 16, evening: Your sentences on the word cards
 > - Sentences you build with **Build a sentence** now show on the word note of every word they use, under Chunks, in **Yours**. That includes the ones you already saved.
 > - Your own chunks and sentences show there too, each with a Hear button.

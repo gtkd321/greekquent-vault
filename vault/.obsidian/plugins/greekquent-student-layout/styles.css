@@ -106,3 +106,7 @@ body.greekquent-student .gq-graph > .view-header { display: none !important; }
 .gq-cards { margin: 4px 0 12px; padding: 8px 12px; border: 1px dashed var(--background-modifier-border); border-radius: 8px; }
 .gq-cards ul { margin: 4px 0 8px; }
 .gq-cards .gq-mini { margin-left: 8px; padding: 0 8px; height: 24px; font-size: 12px; }
+/* Word card fades in when opened from the graph */
+@keyframes gq-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.gq-fade .view-content { animation: gq-fade-in 180ms ease-out; }
+@media (prefers-reduced-motion: reduce) { .gq-fade .view-content { animation: none; } }

@@ -296,12 +296,15 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
   }
   let cardN = 0;
   function popCard(k) {
-    const g = el('cards'); if (!g || g.querySelector(`[data-l="${CSS.escape(k.l)}"]`)) return;
+    // Card text: nouns keep their article (η εκκλησία) so the gender shows. Words that change to agree
+    // (ο/η/το, ένας/μία/ένα, μεγάλος/μεγάλη/μεγάλο) show the form actually said in the line, never just the first one.
+    const changes = /,/.test(k.l) || (/(ος|ός|ής)$/.test(k.l) && !/^(ο|η|το|οι|τα) /.test(k.l));
+    const gr = changes ? k.f.toLowerCase() : k.l.split(',')[0];
+    const g = el('cards'); if (!g || g.querySelector(`[data-l="${CSS.escape(gr)}"]`)) return;
     const i = cardN++, x = 8 + (i % 4) * 97, y = 8 + Math.floor(i / 4) * 44;
-    const o = document.createElementNS(NS, 'g'); o.setAttribute('data-l', k.l); o.setAttribute('transform', `translate(${x},${y})`);
+    const o = document.createElementNS(NS, 'g'); o.setAttribute('data-l', gr); o.setAttribute('transform', `translate(${x},${y})`);
     const c = document.createElementNS(NS, 'g'); c.setAttribute('class', 'card'); o.appendChild(c);
-    const gr = k.l.replace(/^(ο|η|το|οι|τα) /, '').split(',')[0];
-    c.innerHTML = `<rect width="92" height="38" rx="8" fill="#fffaf1" stroke="#d9a43a" stroke-width="2"/><text x="46" y="17" text-anchor="middle" font-family="Comfortaa, sans-serif" font-size="${gr.length > 10 ? 10 : 13}" font-weight="700" fill="#1e1b18">${gr}</text><text x="46" y="31" text-anchor="middle" font-size="9" fill="#6d6458">${(k.e || '').slice(0, 18)}</text>`;
+    c.innerHTML = `<rect width="92" height="38" rx="8" fill="#fffaf1" stroke="#d9a43a" stroke-width="2"/><text x="46" y="17" text-anchor="middle" font-family="Comfortaa, sans-serif" font-size="${gr.length > 14 ? 9 : gr.length > 10 ? 10 : 13}" font-weight="700" fill="#1e1b18">${gr}</text><text x="46" y="31" text-anchor="middle" font-size="9" fill="#6d6458">${(k.e || '').slice(0, 18)}</text>`;
     g.appendChild(o); requestAnimationFrame(() => c.classList.add('in'));
   }
   function resetGen(line) { buildGen(line); cardN = 0; }
@@ -485,7 +488,9 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
         const blank = l.g.replace(new RegExp(esc(k.f)), '___');
         const lem = k.l.replace(/^(ο|η|το|οι|τα) /, '');
         steps.push({ pre: pre.join('\n'), see: nm(l) + ': ' + blank + '\n(' + k.e + ')', help: k.e + ' = ' + k.l + (k.f.toLowerCase() !== lem.toLowerCase() ? '  ·  here: ' + k.f : ''),
-          ans: [k.f, k.l, lem, ...lem.split(',').map((x) => x.trim())], ok: j === l.k.length - 1 ? nm(l) + ': ' + l.g : 'Yes. Keep going.' });
+          // Words that change with gender (το, μία, μεγάλη) only open the scene in the form the line needs.
+          alt: [k.l, lem, ...lem.split(',').map((x) => x.trim())],
+          ans: (/,/.test(k.l) || (/(ος|ός|ής)$/.test(k.l) && !/^(ο|η|το|οι|τα) /.test(k.l))) ? [k.f] : [k.f, k.l, lem, ...lem.split(',').map((x) => x.trim())], ok: j === l.k.length - 1 ? nm(l) + ': ' + l.g : 'Yes. Keep going.' });
         pre = [];
       });
     });
@@ -559,7 +564,9 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
       } else { await type(s.ok); await ask(); }
     } else {
       misses++;
-      const msg = misses === 1 ? 'Nothing happens. The word has no power here.' : 'Still nothing. Type HELP, or pick a word below.';
+      // Right word, wrong gender: say so, so the gender is the lesson, not a mystery.
+      const near = s.alt && match(v, s.alt);
+      const msg = near ? 'Almost. Right word, but it has to agree with the noun. Try another form.' : misses === 1 ? 'Nothing happens. The word has no power here.' : 'Still nothing. Type HELP, or pick a word below.';
       add(msg, 'bad'); chips();
     }
   }

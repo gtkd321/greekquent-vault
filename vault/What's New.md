@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, later: Genders that agree
+> - **The graph follows the noun.** Tap a noun in the word graph and the describing words around it switch to its gender: tap η πόλη and μεγάλος becomes μεγάλη, ο becomes η, ένας becomes μία. Nouns now show their article, so you always see the gender.
+> - **Agrees with strip.** Under the word's name you get ready phrases to tap and hear, like μεγάλη πόλη and αρχαία πόλη. Open a describing word like μεγάλος to see it change with each noun: μεγάλο σπίτι, μεγάλη πόλη, μεγάλος αδερφός.
+> - **Story links in the graph.** Words that meet in this year's story now link to each other (see "Together in the story" on a word note). That makes many more sparks. A story spark shows the scene where the words met.
+> - **Story Lines cards fixed.** A card now shows the form that was said, so το κινητό shows το, not ο. In the text adventure the wrong gender gets "Almost. Right word, but it has to agree with the noun."
+
 > [!info]- November 17: The whole year as one story
 > - **Story Lines for all 300 days.** Every day's line on Today is now part of one story that runs the whole year. Tap **Watch it** or **Play it** under the line. Both open right here in the vault, no browser or internet needed. Γιαγιά opens here too.
 > - **Sparks in the word graph.** Some words keep turning up together, like ζωή, άνθρωπος and χάνω. When you open a word in the graph, Greekquent finds three that all link to each other and lights them up in gold. Tap **One sentence** to use all three in one sentence, then save it to My pairs. **Another** shows the next spark.

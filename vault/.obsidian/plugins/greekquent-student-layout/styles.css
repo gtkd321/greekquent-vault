@@ -157,3 +157,9 @@ body.gq-onebar .mobile-navbar-action-menu { display: none !important; }
 .gq-spark-t { font-weight: 600; color: #a87a00; margin-right: 4px; }
 .theme-dark .gq-spark-t { color: #f2c94c; }
 .gq-spark-words { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+
+/* Gender agreement strip in the word graph */
+.gq-agree { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 4px 8px; font-size: 13px; }
+.gq-agree-t { font-weight: 600; margin-right: 4px; }
+.gq-spark-story { margin: 6px 0 10px; padding: 8px 10px; border-left: 3px solid #f2b705; background: var(--background-secondary); border-radius: 6px; }
+.gq-spark-line { font-size: 1.05em; cursor: pointer; }

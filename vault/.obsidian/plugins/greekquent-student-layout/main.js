@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17a';
+const VAULT_RELEASE = '2026-11-17b';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -63,6 +63,25 @@ const ttsFix = t => String(t).replace(/(^|[^\p{L}])([ΗΟ])(?=[^\p{L}]|$)/gu, (m
 const say = w => { if (!window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(ttsFix(w)); u.lang = 'el-GR'; speechSynthesis.cancel(); speechSynthesis.speak(u); };
 const isGreek = t => /[\u0370-\u03ff\u1f00-\u1fff]/.test(t);
 const fold = t => (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').trim();
+// Gender agreement. The article and describing words take the gender of the noun they go with:
+// ο μεγάλος δρόμος, η μεγάλη πόλη, το μεγάλο σπίτι. agree(lemma, 'm' | 'f' | 'n') gives the matching form, or null if the word never changes.
+const AGREE_SPECIAL = { 'ο, η, το': ['ο', 'η', 'το'], 'ένας, μία, ένα': ['ένας', 'μία', 'ένα'], 'κανένας': ['κανένας', 'καμία', 'κανένα'], 'κανείς': ['κανείς', 'καμία', 'κανένα'], 'καθένας': ['καθένας', 'καθεμία', 'καθένα'], 'πολύς': ['πολύς', 'πολλή', 'πολύ'], 'δικός μου': ['δικός μου', 'δική μου', 'δικό μου'] };
+// Describing words in -ής: ο/η ασφαλής, το ασφαλές. Other words ending in -ης (επίσης, μαθητής) never change.
+const AGREE_ES = new Set(['ασφαλής', 'ειλικρινής', 'πλήρης', 'σαφής']);
+const AGREE_NEVER = new Set(['εκτός', 'εμπρός', 'προς', 'φέτος', 'έγκυος', 'κάθε', 'μπλε', 'δωρεάν']);
+const agree = (lemma, g) => {
+  const i = g === 'm' ? 0 : g === 'f' ? 1 : g === 'n' ? 2 : -1; if (i < 0) return null;
+  if (AGREE_SPECIAL[lemma]) return AGREE_SPECIAL[lemma][i];
+  if (AGREE_NEVER.has(lemma) || /[\s,]/.test(lemma)) return null;
+  let m = AGREE_ES.has(lemma) && lemma.match(/^(.+)(ής|ης)$/);
+  if (m) return i < 2 ? lemma : m[1] + (m[2] === 'ής' ? 'ές' : 'ες');
+  m = lemma.match(/^(.+)(ος|ός)$/); if (!m) return null;
+  const st = m[1], acc = m[2] === 'ός';
+  if (i === 0) return lemma; if (i === 2) return st + (acc ? 'ό' : 'ο');
+  return st + (/[αεηιουωάέήίόύώϊϋ]$/.test(st) ? (acc ? 'ά' : 'α') : (acc ? 'ή' : 'η'));
+};
+// The words that go in front of the article: αυτό το κινητό, όλη η μέρα.
+const AGREE_BEFORE_ARTICLE = new Set(['αυτός', 'εκείνος', 'όλος']);
 const smsLink = body => `sms:${FEEDBACK_SMS}?&body=${encodeURIComponent(body)}`;
 
 const HIDE_RIBBON_PREFIX = ['meld-encrypt:'];
@@ -123,14 +142,20 @@ class SparkModal extends Modal {
   onOpen() {
     const c = this.contentEl; c.addClass('gq-modal', 'gq-pair'); this.titleEl.setText('One sentence, three words');
     const names = this.words.map(p => p.replace(/^Words\//, '').replace(/\.md$/, ''));
+    const labels = this.plugin.sparkLabels(this.words);
     const meta = names.map((n, i) => { const f = this.app.vault.getAbstractFileByPath(this.words[i]); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return fm.english || ''; });
     const list = c.createDiv('gq-spark-words');
-    names.forEach((n, i) => { const b = list.createEl('button', { text: n + (meta[i] ? ' · ' + meta[i] : ''), cls: 'gq-mini' }); b.onclick = () => say(n); });
+    labels.forEach((n, i) => { const b = list.createEl('button', { text: n + (meta[i] ? ' · ' + meta[i] : ''), cls: 'gq-mini' }); b.onclick = () => say(n); });
+    const day = this.plugin.sparkDay(this.words);
+    if (day) {
+      const sb = c.createDiv('gq-spark-story');
+      this.plugin.beatIndex().then(b => { const x = b[day]; if (!x) { sb.remove(); return; } sb.createDiv({ cls: 'gq-hint', text: 'In the story, day ' + day + ':' }); const q = sb.createDiv({ cls: 'gq-spark-line', text: x.gr }); sb.createDiv({ cls: 'gq-hint', text: x.en }); q.onclick = () => say(x.gr); }).catch(() => sb.remove());
+    }
     c.createDiv({ cls: 'gq-hint', text: 'These three keep turning up together in real Greek. Say one sentence that uses all three, then write it down. Any word form counts.' });
     const ta = c.createEl('textarea', { attr: { rows: '2', placeholder: 'Γράψε εδώ...', autocapitalize: 'sentences', spellcheck: 'false' } }); ta.addClass('gq-input');
     const res = c.createDiv('gq-hint');
     const stem = t => fold(t).replace(/^(ο|η|το) /, '').split(/[ ,]/)[0].slice(0, Math.max(3, Math.min(5, fold(t).length - 2)));
-    const check = () => { res.empty(); const t = fold(ta.value); const got = names.map(n => t.includes(stem(n))); res.setText(names.map((n, i) => (got[i] ? '✓ ' : '· ') + n).join('   ')); return got; };
+    const check = () => { res.empty(); const t = fold(ta.value); const got = names.map(n => t.includes(stem(n))); res.setText(labels.map((n, i) => (got[i] ? '✓ ' : '· ') + n).join('   ')); return got; };
     ta.oninput = check; check();
     const row = c.createDiv('gq-row');
     const h = row.createEl('button', { text: 'Hear it' }); h.onclick = () => ta.value.trim() && say(ta.value.trim());
@@ -530,6 +555,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     document.body.classList.add('greekquent-student', 'gq-l-simple');
     this.registerView(WEB, leaf => new OldWebView(leaf, this));
     this.registerView(APPV, leaf => new AppView(leaf, this));
+    // The graph redraws its labels now and then (zoom, new data). Put the agreeing forms back each time.
+    this.registerInterval(window.setInterval(() => this.app.workspace.iterateAllLeaves(l => { if (l.gq && l.view && l.view.getViewType && l.view.getViewType() === 'localgraph') this.applyGraphLabels(l); }), 800));
+    this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) { this.infoCache = null; this.coCache = null; } }));
     // The in-vault games send results here instead of through an obsidian:// link.
     this.registerDomEvent(window, 'message', e => {
       const d = e.data; if (!d || d.gq !== 'obsidian' || typeof d.url !== 'string') return;
@@ -616,8 +644,81 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!this.coCache) this.coCache = new Map();
     if (this.coCache.has(path)) return this.coCache.get(path);
     const f = this.app.vault.getAbstractFileByPath(path); let out = [];
-    if (f) { const t = await this.app.vault.cachedRead(f); const m = t.match(/## Often appears with\n([\s\S]*?)(?:\n\n|\n#|$)/); if (m) out = [...m[1].matchAll(/\[\[([^\]|#]+)/g)].map(x => 'Words/' + x[1] + '.md'); }
+    if (!this.storyDays) this.storyDays = new Map();
+    if (f) {
+      const t = await this.app.vault.cachedRead(f);
+      const m = t.match(/## Often appears with\n([\s\S]*?)(?:\n\n|\n#|$)/); if (m) out = [...m[1].matchAll(/\[\[([^\]|#]+)/g)].map(x => 'Words/' + x[1] + '.md');
+      // Words that turn up together in this year's story. Each line ends with the days, so a spark can show the scene.
+      const s = t.match(/## Together in the story\n([\s\S]*?)(?:\n\n|\n#|$)/);
+      if (s) for (const x of s[1].matchAll(/\[\[([^\]|#]+)[^\n]*?· day ([\d, ]+)/g)) {
+        const q = 'Words/' + x[1] + '.md'; if (!out.includes(q)) out.push(q);
+        const days = x[2].split(',').map(d => +d.trim()).filter(Boolean);
+        this.storyDays.set(path + '\t' + q, days); this.storyDays.set(q + '\t' + path, days);
+      }
+    }
     this.coCache.set(path, out); return out;
+  }
+  // What a word note is: its name, its gender if it's a noun, its form with the article, and whether it changes to agree.
+  wordInfo(path) {
+    if (!this.infoCache) this.infoCache = new Map();
+    if (this.infoCache.has(path)) return this.infoCache.get(path);
+    const f = this.app.vault.getAbstractFileByPath(path);
+    const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+    const name = path.replace(/^Words\//, '').replace(/\.md$/, '');
+    const tags = [].concat(fm.tags || []).join(' '), al = [].concat(fm.aliases || []);
+    const g = (tags.match(/noun-([mfn])\b/) || [])[1] || '';
+    const noun = g ? (al.find(a => /^(ο|η|το) /.test(a)) || ({ m: 'ο ', f: 'η ', n: 'το ' })[g] + name) : '';
+    const changes = !g && !/verb|adverb|noun/.test(tags) && agree(name, 'n') !== null && (agree(name, 'f') !== name || agree(name, 'n') !== name);
+    const info = { path, name, g, noun, changes, english: fm.english || '' };
+    this.infoCache.set(path, info); return info;
+  }
+  // How a word reads next to a noun of gender g: nouns keep their article, describing words take g.
+  agreeLabel(path, g) {
+    const w = this.wordInfo(path);
+    if (w.g) return w.noun;
+    if (w.changes && g) return agree(w.name, g) || w.name;
+    return w.name;
+  }
+  // A short phrase for a describing word with a noun: μεγάλο σπίτι, ένα σπίτι, αυτό το σπίτι, το σπίτι.
+  agreePhrase(adj, noun) {
+    const a = this.wordInfo(adj), n = this.wordInfo(noun); if (!n.g) return '';
+    const form = agree(a.name, n.g); if (!form) return '';
+    const bare = n.noun.replace(/^(ο|η|το) /, '');
+    if (a.name === 'ο, η, το') return n.noun;
+    if (AGREE_BEFORE_ARTICLE.has(a.name)) return form + ' ' + n.noun;
+    if (a.name === 'ποιος') return form + ' ' + bare + ';';
+    return form + ' ' + bare;
+  }
+  // Graph labels follow the center word: tap a noun and the describing words around it switch to its gender.
+  setGraphLabels(leaf, path) {
+    const st = this.graphState(leaf), c = this.wordInfo(path);
+    st.labelG = c.g; st.labels = new Map();
+    this.applyGraphLabels(leaf);
+  }
+  applyGraphLabels(leaf) {
+    const st = leaf.gq, v = leaf.view, r = v && v.renderer; if (!st || !st.labels || !r || !Array.isArray(r.nodes)) return;
+    try {
+      let touched = false;
+      for (const n of r.nodes) {
+        if (!n || typeof n.id !== 'string' || !n.id.startsWith('Words/')) continue;
+        let t = st.labels.get(n.id); if (t === undefined) { t = this.agreeLabel(n.id, st.labelG); st.labels.set(n.id, t); }
+        if (n.gqLabel !== t) { n.gqLabel = t; n.getDisplayText = () => t; touched = true; }
+        if (n.text && n.text.text !== t) { n.text.text = t; touched = true; }
+      }
+      if (touched && r.changed) r.changed();
+    } catch (e) { /* labels are a bonus; the graph still works */ }
+  }
+  // The agreement strip under the graph title.
+  paintAgree(leaf, path) {
+    const st = this.graphState(leaf); if (!st.agree) return;
+    const box = st.agree; box.empty(); box.hide();
+    const c = this.wordInfo(path), links = Object.keys((this.app.metadataCache.resolvedLinks || {})[path] || {}).filter(p => p.startsWith('Words/') && p !== path);
+    let head = '', items = [];
+    if (c.g) { head = 'Agrees with ' + c.noun + ':'; items = links.filter(p => this.wordInfo(p).changes).map(p => this.agreePhrase(p, path)); }
+    else if (c.changes) { head = c.name + ' changes with the noun:'; items = links.filter(p => this.wordInfo(p).g).map(p => this.agreePhrase(path, p)); }
+    items = [...new Set(items.filter(Boolean))].slice(0, 8); if (!items.length) return;
+    box.show(); box.createSpan({ cls: 'gq-agree-t', text: head });
+    for (const t of items) { const b = box.createEl('button', { text: t, cls: 'gq-mini' }); b.onclick = () => say(t); }
   }
   // A spark: the center word plus two of its partners that also link to each other. A closed triangle in the graph.
   async sparks(path) {
@@ -626,9 +727,18 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     for (let i = 0; i < co.length; i++) for (let j = i + 1; j < co.length; j++) {
       const a = co[i], b = co[j], ab = sets.get(a).has(b), ba = sets.get(b).has(a); if (!ab && !ba) continue;
       const back = (sets.get(a).has(path) ? 1 : 0) + (sets.get(b).has(path) ? 1 : 0);
-      res.push({ words: [path, a, b], score: (ab && ba ? 2 : 1) + back - (i + j) * 0.05 });
+      const story = ['\t' + a, '\t' + b].some(x => this.storyDays.has(path + x)) || this.storyDays.has(a + '\t' + b);
+      res.push({ words: [path, a, b], story, score: (ab && ba ? 2 : 1) + back + (story ? 0.5 : 0) - (i + j) * 0.05 });
     }
     return res.sort((x, y) => y.score - x.score).slice(0, 6);
+  }
+  // Three words as they'd sit together: the describing words take the gender of the first noun.
+  sparkLabels(words) { const n = words.map(p => this.wordInfo(p)).find(w => w.g); return words.map(p => this.agreeLabel(p, n ? n.g : '')); }
+  // A story day where at least two of the three words met.
+  sparkDay(words) {
+    const sd = this.storyDays || new Map();
+    for (let i = 0; i < 3; i++) for (let j = i + 1; j < 3; j++) { const d = sd.get(words[i] + '\t' + words[j]); if (d && d.length) return d[0]; }
+    return 0;
   }
   lightSpark(leaf, words) {
     const v = leaf.view; if (!v || v.getViewType() !== 'localgraph') return;
@@ -650,8 +760,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     let i = 0;
     const draw = () => {
       box.empty(); box.show();
-      const sp = list[i], names = sp.words.map(p => p.replace(/^Words\//, '').replace(/\.md$/, ''));
-      box.createSpan({ cls: 'gq-spark-t', text: 'Spark: ' + names.join(' · ') });
+      const sp = list[i], names = this.sparkLabels(sp.words);
+      box.createSpan({ cls: 'gq-spark-t', text: (sp.story ? 'Story spark: ' : 'Spark: ') + names.join(' · ') });
       const hb = box.createEl('button', { text: 'Hear', cls: 'gq-mini' }); hb.onclick = () => say(names.join(', '));
       const mk = box.createEl('button', { text: 'One sentence', cls: 'gq-mini' }); mk.onclick = () => new SparkModal(this.app, this, sp.words).open();
       if (list.length > 1) { const nx = box.createEl('button', { text: 'Another', cls: 'gq-mini' }); nx.onclick = () => { i = (i + 1) % list.length; draw(); this.lightSpark(leaf, list[i].words); st.lit = true; }; }
@@ -707,6 +817,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (f && leaf.view && leaf.view.getViewType() === 'localgraph' && leaf.view.file !== f) { leaf.view.file = f; leaf.view.update(); this.app.workspace.requestSaveLayout(); }
     this.dressGraph(leaf);
     this.followCenter(leaf, path);
+    this.setGraphLabels(leaf, path);
+    this.paintAgree(leaf, path);
     this.paintSpark(leaf, path);
   }
   followCenter(leaf, path) {
@@ -723,6 +835,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const tx = r.width / 2 * dpr - n.x * r.scale, ty = r.height / 2 * dpr - n.y * r.scale;
         r.setPan(r.panX + (tx - r.panX) * a, r.panY + (ty - r.panY) * a); r.changed();
       }
+      this.applyGraphLabels(leaf);
       if (now - t0 < D) st.follow = requestAnimationFrame(tick); else st.follow = null;
     };
     st.follow = requestAnimationFrame(tick);
@@ -744,7 +857,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       pairb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.openPair(f.basename); };
       const askb = bar.createEl('button', { text: 'Ask', cls: 'gq-lv-adv', attr: { 'aria-label': 'Ask the group about this word' } });
       askb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.ask(f); };
-      st.trail = wrap.createDiv('gq-web-trail'); st.spark = wrap.createDiv('gq-spark'); st.spark.hide(); st.bar = wrap;
+      st.trail = wrap.createDiv('gq-web-trail'); st.agree = wrap.createDiv('gq-agree'); st.agree.hide(); st.spark = wrap.createDiv('gq-spark'); st.spark.hide(); st.bar = wrap;
       const key = wrap.createDiv('gq-web-key');
       for (const [cls, t] of [['v', 'verbs (doing)'], ['n', 'nouns (things, people)'], ['a', 'describing words'], ['d', 'how, when, where'], ['o', 'little words']]) { const s = key.createSpan('gq-key'); s.createSpan('gq-kdot gq-k' + cls); s.appendText(t); }
       st.back.onclick = () => this.graphStep(leaf, -1); st.fwd.onclick = () => this.graphStep(leaf, 1);

@@ -154,7 +154,8 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
   const byRank = new Map(ALL.map(x => [x.rank, x]));
   const KIDS = window.GQ_KIDS || [];
   const lemma = g => g.split(',')[0].trim().replace(/^(ο|η|το|οι|τα) /, '');
-  const show = g => g.split(',')[0].trim();
+  // ο, η, το and ένας, μία, ένα show all three genders, not just the first.
+  const show = g => g.split(',').map(x => x.trim()).join(' / ');
   // Words sent from the vault: ...#w=χρόνος,σπίτι
   const MINE = (() => { try { const m = (window.GQ_HASH || location.hash).match(/[#&]w=([^&]*)/); return m ? decodeURIComponent(m[1]).split(',').map(s => s.trim()).filter(Boolean) : []; } catch (e) { return []; } })();
   const MINE_WORDS = ALL.filter(x => MINE.includes(lemma(x.g)));

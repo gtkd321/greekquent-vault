@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ο νονός σου μαγειρεύει! — Με κάθε λεπτομέρεια, νονέ! (Your godfather is cooking! — With every detail, godfather!)
-> 2. Ευτυχώς ήρθατε! Ένα λουλούδι για τη θεία. (Luckily you came! A flower for auntie.)
-> 3. Σε όλη τη διάρκεια της χρονιάς, το τετράδιο ήταν εδώ. — Στάσου... εδώ; (During the whole year, the notebook was here. — Wait... here?)
-> 4. Είναι στο φορτηγό, βαθιά μέσα. (It's in the truck, deep inside.)
-> 5. Βλέπεις το σημάδι στον τοίχο; Εκεί έκρυψα το κλειδί. (See the mark on the wall? I hid the key there.)
-> 6. Το έβδομο τετράδιο! — Προχωράμε! Όλα τα τετράδια παραμένουν μαζί. (The seventh notebook! — We move forward! All the notebooks stay together.)
+> 1. Καλώς τα παιδιά! Σήμερα ο νονός σας μαγειρεύει! — Νονέ, το έβδομο τετράδιο; Πες μου κάθε λεπτομέρεια! — Πρώτα φαγητό. Μετά ιστορίες! (Welcome, kids! Today your godfather is cooking! — Godfather, the seventh notebook? Tell me every detail! — Food first. Then stories!)
+> 2. Ευτυχώς ήρθατε! Το φαγητό είναι έτοιμο. — Ένα λουλούδι για σένα, από το νησί. — Τι ωραίο! Ευχαριστώ, θεία. (Luckily you came! The food is ready. — A flower for you, from the island. — How lovely! Thank you, auntie.)
+> 3. Σε όλη τη διάρκεια της χρονιάς, το τετράδιο ήταν εδώ. — Στάσου... εδώ; Και δεν μου το είπες; — Η Ελένη μου είπε: «Μόνο όταν έρθω.» (All year long, the notebook was here. — Wait... here? And you didn't tell me? — Eleni told me: "Only when I come.")
+> 4. Και πού είναι, νονέ; — Στο φορτηγό, βαθιά μέσα. Σε ένα κουτί με κλειδαριά. (And where is it, godfather? — In the truck, deep inside. In a box with a lock.)
+> 5. Και το κλειδί; — Βλέπεις το σημάδι στον τοίχο; Εκεί το έκρυψα. (And the key? — See the mark on the wall? That's where I hid it.)
+> 6. Το έβδομο τετράδιο! Όλα είναι εδώ! — Τώρα προχωράμε! Και τα τετράδια παραμένουν μαζί, σε αυτό το σπίτι. (The seventh notebook! They're all here! — Now we move forward! And the notebooks stay together, in this house.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **cooking** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 187 of 300
-> **Today's line:** Ο νονός σου μαγειρεύει! — Με κάθε λεπτομέρεια, νονέ! (Your godfather is cooking! — With every detail, godfather!)
+> **Today's line:** Καλώς τα παιδιά! Σήμερα ο νονός σας μαγειρεύει! — Νονέ, το έβδομο τετράδιο; Πες μου κάθε λεπτομέρεια! — Πρώτα φαγητό. Μετά ιστορίες! (Welcome, kids! Today your godfather is cooking! — Godfather, the seventh notebook? Tell me every detail! — Food first. Then stories!)
 > - [[εμπιστοσύνη|η εμπιστοσύνη]] **trust** (#786): Σας ευχαριστώ για την εμπιστοσύνη.
 > - [[νονός|ο νονός]] **godfather** (#1487): Δεν ξέρω αν οι νονοί του γιου μου ζουν ακόμα.
 > - [[τέρας|το τέρας]] **monster** (#787): Είμαι ένα τέρας.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[απαραίτητος]] **necessary** (#789): Αυτό δεν ήταν απαραίτητο. (That wasn't necessary.)
 
 > [!todo]- Tue · day 188 of 300
-> **Today's line:** Ευτυχώς ήρθατε! Ένα λουλούδι για τη θεία. (Luckily you came! A flower for auntie.)
+> **Today's line:** Ευτυχώς ήρθατε! Το φαγητό είναι έτοιμο. — Ένα λουλούδι για σένα, από το νησί. — Τι ωραίο! Ευχαριστώ, θεία. (Luckily you came! The food is ready. — A flower for you, from the island. — How lovely! Thank you, auntie.)
 > - [[λουλούδι|το λουλούδι]] **flower** (#790): Σ' αρέσει αυτό το λουλούδι; (Do you like this flower?)
 > - [[αίθουσα|η αίθουσα]] **hall, room** (#791): Υπήρχαν λίγα παιδιά στην αίθουσα. (There were few children in the classroom.)
 > - [[ευτυχώς]] **fortunately** (#792): Ευτυχώς προλάβαμε.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[διάστημα|το διάστημα]] **space, period** (#793): Ο Τομ θα μένει στη Βοστόνη για ένα διάστημα.
 
 > [!todo]- Wed · day 189 of 300
-> **Today's line:** Σε όλη τη διάρκεια της χρονιάς, το τετράδιο ήταν εδώ. — Στάσου... εδώ; (During the whole year, the notebook was here. — Wait... here?)
+> **Today's line:** Σε όλη τη διάρκεια της χρονιάς, το τετράδιο ήταν εδώ. — Στάσου... εδώ; Και δεν μου το είπες; — Η Ελένη μου είπε: «Μόνο όταν έρθω.» (All year long, the notebook was here. — Wait... here? And you didn't tell me? — Eleni told me: "Only when I come.")
 > - [[διάρκεια|η διάρκεια]] **duration** (#794): Τι τρώτε κατά τη διάρκεια της νηστείας; (What do you eat during fasting?)
 > - [[χαζός]] **silly, dumb** (#796): Δεν είναι χαζός.
 > - [[πίεση|η πίεση]] **pressure** (#797): Η πίεση του αίματος μου είναι χαμηλή.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[στάσου]] **wait, stop** (#799): Στάσου. Θέλω κάτι να σου πω.
 
 > [!todo]- Thu · day 190 of 300
-> **Today's line:** Είναι στο φορτηγό, βαθιά μέσα. (It's in the truck, deep inside.)
+> **Today's line:** Και πού είναι, νονέ; — Στο φορτηγό, βαθιά μέσα. Σε ένα κουτί με κλειδαριά. (And where is it, godfather? — In the truck, deep inside. In a box with a lock.)
 > - [[ιδιαίτερα]] **especially** (#800): Μπορώ να σου μιλήσω ιδιαιτέρως; (Can I speak to you in private?)
 > - [[βαθιά]] **deeply** (#801): Αυτή η λίμνη είναι βαθιά. (This lake is deep.)
 > - [[φορτηγό|το φορτηγό]] **truck** (#802): Έχω ένα φορτηγό.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σεβασμός|ο σεβασμός]] **respect** (#804): Ο μεγαλύτερος σεβασμός οφείλεται στο παιδί.
 
 > [!todo]- Fri · day 191 of 300
-> **Today's line:** Βλέπεις το σημάδι στον τοίχο; Εκεί έκρυψα το κλειδί. (See the mark on the wall? I hid the key there.)
+> **Today's line:** Και το κλειδί; — Βλέπεις το σημάδι στον τοίχο; Εκεί το έκρυψα. (And the key? — See the mark on the wall? That's where I hid it.)
 > - [[σημάδι|το σημάδι]] **mark, sign** (#805): Δεν υπήρχε σημάδι ζωής στο σπίτι.
 > - [[εύχομαι]] **I wish** (#806): Σου εύχομαι χαρούμενα γενέθλια. (I wish you a happy birthday.)
 > - [[επικίνδυνος]] **dangerous** (#807): Αυτός ο δρόμος είναι επικίνδυνος. (This road is dangerous.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τοίχος|ο τοίχος]] **wall** (#809): Ο χάρτης είναι στον τοίχο. (The map is on the wall.)
 
 > [!todo]- Sat · day 192 of 300
-> **Today's line:** Το έβδομο τετράδιο! — Προχωράμε! Όλα τα τετράδια παραμένουν μαζί. (The seventh notebook! — We move forward! All the notebooks stay together.)
+> **Today's line:** Το έβδομο τετράδιο! Όλα είναι εδώ! — Τώρα προχωράμε! Και τα τετράδια παραμένουν μαζί, σε αυτό το σπίτι. (The seventh notebook! They're all here! — Now we move forward! And the notebooks stay together, in this house.)
 > - [[διαβατήριο|το διαβατήριο]] **passport** (#1491): Αυτό το διαβατήριο έληξε.
 > - [[τρένο|το τρένο]] **train** (#811): Το τρένο είναι νωρίς. (The train is early.)
 > - [[συμπεριφορά|η συμπεριφορά]] **behavior** (#812): Τι απαίσια συμπεριφορά!

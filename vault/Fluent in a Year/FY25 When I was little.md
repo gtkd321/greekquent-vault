@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Όταν ήμουν μικρή, η γη ήταν η ψυχή μας. — Γιαγιά, είσαι κουρασμένη; (When I was little, the land was our soul. — Grandma, are you tired?)
-> 2. Η Ελένη ήταν σπουδαία. Ήξερε για κάθε σπόρο. — Θέλω να συζητήσουμε γι' αυτήν. (Eleni was great. She knew about every seed. — I want us to talk about her.)
-> 3. Μια χρονιά, η σοδειά ήταν τρελή! Χίλια κιλά ελιές! (One year, the harvest was crazy! A thousand kilos of olives!)
-> 4. Εξήγησέ μου: γιατί έφυγε η Ελένη; — Ο άντρας της ήταν άρρωστος... (Explain to me: why did Eleni leave? — Her husband was sick...)
-> 5. Ο σύζυγός της χρειαζόταν γιατρό στην Αμερική. Έκλεισαν το σπίτι. — Κι εσύ μάζευες τις ελιές; (Her husband needed a doctor in America. They closed the house. — And you gathered the olives?)
-> 6. Φύτεψα ένα δέντρο για την Ελένη, στην άκρη του χωραφιού. Ψάξε εκεί. (I planted a tree for Eleni, at the edge of the field. Look there.)
+> 1. Όταν ήμουν μικρή, η γη ήταν η ψυχή μας. — Γιαγιά, είσαι κουρασμένη; Κάτσε ήσυχη. — Όχι, κορίτσι μου. Θέλω να σου πω. (When I was little, the land was our soul. — Grandma, are you tired? Sit and rest. — No, my girl. I want to tell you.)
+> 2. Η Ελένη ήταν σπουδαία. Ήξερε για κάθε σπόρο. — Θέλω να συζητήσουμε γι' αυτήν, γιαγιά. Για όλα. (Eleni was remarkable. She knew about every seed. — I want us to talk about her, grandma. About everything.)
+> 3. Μια χρονιά, η σοδειά ήταν τρελή! Χίλια κιλά ελιές! — Χίλια; Και πού πήγαν όλες; — Λάδι για όλο το χωριό! (One year, the harvest was crazy! A thousand kilos of olives! — A thousand? And where did they all go? — Oil for the whole village!)
+> 4. Εξήγησέ μου: γιατί έφυγε η Ελένη; — Ο άντρας της ήταν άρρωστος. (Explain to me: why did Eleni leave? — Her husband was sick.)
+> 5. Ο σύζυγός της χρειαζόταν γιατρό στην Αμερική. Έκλεισαν το σπίτι και έφυγαν. — Κι εσύ μάζευες τις ελιές της; — Κάθε χρόνο. (Her husband needed a doctor in America. They closed up the house and left. — And you harvested her olives? — Every year.)
+> 6. Φύτεψα ένα δέντρο για την Ελένη, στην άκρη του χωραφιού. — Ένα δέντρο; Γιατί; — Ψάξε εκεί, και θα καταλάβεις. (I planted a tree for Eleni, at the edge of the field. — A tree? Why? — Look there, and you'll understand.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L22 Yesterday I wanted-student|L22 Yesterday I wanted]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 133 of 300
-> **Today's line:** Όταν ήμουν μικρή, η γη ήταν η ψυχή μας. — Γιαγιά, είσαι κουρασμένη; (When I was little, the land was our soul. — Grandma, are you tired?)
+> **Today's line:** Όταν ήμουν μικρή, η γη ήταν η ψυχή μας. — Γιαγιά, είσαι κουρασμένη; Κάτσε ήσυχη. — Όχι, κορίτσι μου. Θέλω να σου πω. (When I was little, the land was our soul. — Grandma, are you tired? Sit and rest. — No, my girl. I want to tell you.)
 > - [[κουρασμένος]] **tired** (#846): Είμαι λίγο κουρασμένος. (I'm a little tired.)
 > - [[γη|η γη]] **earth, land** (#1444): Στη Γη υπάρχουν επτά ήπειροι. (There are seven continents on Earth.)
 > - [[αναφορά|η αναφορά]] **report, reference** (#529): Υπάρχει αναφορά για τον Τομ στο βιβλίο.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ήσυχος]] **quiet, calm** (#531): Άσε με ήσυχο! (Leave me alone!)
 
 > [!todo]- Tue · day 134 of 300
-> **Today's line:** Η Ελένη ήταν σπουδαία. Ήξερε για κάθε σπόρο. — Θέλω να συζητήσουμε γι' αυτήν. (Eleni was great. She knew about every seed. — I want us to talk about her.)
+> **Today's line:** Η Ελένη ήταν σπουδαία. Ήξερε για κάθε σπόρο. — Θέλω να συζητήσουμε γι' αυτήν, γιαγιά. Για όλα. (Eleni was remarkable. She knew about every seed. — I want us to talk about her, grandma. About everything.)
 > - [[σπουδαίος]] **great, important** (#532): Δεν είμαι σπουδαίος ρήτορας.
 > - [[επαφή|η επαφή]] **contact** (#533): Πότε άρχισες να χρησιμοποιείς φακούς επαφής; (When did you start using contact lenses?)
 > - [[συζητάω]] **I discuss** (#534): Ας συζητήσουμε.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ειδικός]] **special; expert** (#535): Δεν είμαι ειδικός στον τομέα αυτό. (I'm not an expert in this field.)
 
 > [!todo]- Wed · day 135 of 300
-> **Today's line:** Μια χρονιά, η σοδειά ήταν τρελή! Χίλια κιλά ελιές! (One year, the harvest was crazy! A thousand kilos of olives!)
+> **Today's line:** Μια χρονιά, η σοδειά ήταν τρελή! Χίλια κιλά ελιές! — Χίλια; Και πού πήγαν όλες; — Λάδι για όλο το χωριό! (One year, the harvest was crazy! A thousand kilos of olives! — A thousand? And where did they all go? — Oil for the whole village!)
 > - [[τρελός]] **crazy** (#537): Τον αγαπάω σαν τρελός.
 > - [[μέλος|το μέλος]] **member** (#538): Ο Τομ είναι μέλος. (Tom is a member.)
 > - [[αρχείο|το αρχείο]] **file, archive** (#539): Το αρχείο ήταν σαφώς επισημασμένο.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σοδειά|η σοδειά]] **harvest** (#1446)
 
 > [!todo]- Thu · day 136 of 300
-> **Today's line:** Εξήγησέ μου: γιατί έφυγε η Ελένη; — Ο άντρας της ήταν άρρωστος... (Explain to me: why did Eleni leave? — Her husband was sick...)
+> **Today's line:** Εξήγησέ μου: γιατί έφυγε η Ελένη; — Ο άντρας της ήταν άρρωστος. (Explain to me: why did Eleni leave? — Her husband was sick.)
 > - [[εξηγώ]] **I explain** (#541): Ούτε εγώ μπορώ να το εξηγήσω. (I can't explain it either.)
 > - [[άρρωστος]] **sick** (#542): Πες της ότι είμαι άρρωστη. (Tell her I'm sick.)
 > - [[στόμα|το στόμα]] **mouth** (#543): Βάλε κάτι στο στόμα σου. (Eat something.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[δεσποινίς|η δεσποινίς]] **miss (title)** (#545): Καληνύχτα, δεσποινίς.
 
 > [!todo]- Fri · day 137 of 300
-> **Today's line:** Ο σύζυγός της χρειαζόταν γιατρό στην Αμερική. Έκλεισαν το σπίτι. — Κι εσύ μάζευες τις ελιές; (Her husband needed a doctor in America. They closed the house. — And you gathered the olives?)
+> **Today's line:** Ο σύζυγός της χρειαζόταν γιατρό στην Αμερική. Έκλεισαν το σπίτι και έφυγαν. — Κι εσύ μάζευες τις ελιές της; — Κάθε χρόνο. (Her husband needed a doctor in America. They closed up the house and left. — And you harvested her olives? — Every year.)
 > - [[κλείνω]] **I close** (#546): Θέλω να κλείσω την πόρτα. (I want to close the door.)
 > - [[μαζεύω]] **I gather, I pick** (#1447): Άμα χυθεί το γάλα δε μαζεύεται.
 > - [[ματιά|η ματιά]] **glance** (#547): Δεν έχεις καστανά μάτια. (You don't have brown eyes.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σήμα|το σήμα]] **signal, sign** (#549): Έλα δε σ'ακούω, δεν έχω σήμα.
 
 > [!todo]- Sat · day 138 of 300
-> **Today's line:** Φύτεψα ένα δέντρο για την Ελένη, στην άκρη του χωραφιού. Ψάξε εκεί. (I planted a tree for Eleni, at the edge of the field. Look there.)
+> **Today's line:** Φύτεψα ένα δέντρο για την Ελένη, στην άκρη του χωραφιού. — Ένα δέντρο; Γιατί; — Ψάξε εκεί, και θα καταλάβεις. (I planted a tree for Eleni, at the edge of the field. — A tree? Why? — Look there, and you'll understand.)
 > - [[λατρεύω]] **I adore** (#550): Λατρεύω το ροκ.
 > - [[άκρη|η άκρη]] **edge, end** (#551): Σιγά μη βρω άκρη εκεί.
 > - [[καθαρός]] **clean, clear** (#552): Η μπλούζα είναι καθαρή. (The blouse is clean.)

@@ -1,5 +1,5 @@
 {
-"release": "2026-11-17g",
+"release": "2026-11-17h",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -18,19 +18,19 @@
 "size": 137339
 },
 ".obsidian/plugins/greekquent-student-layout/apps/storylines.html": {
-"sha256": "c649b66f9b08ee259600a65286b88d19b35ccf3378f9a75e2058923d6de90bb1",
-"size": 229350
+"sha256": "1303ac3bfe72ba61b53fe60e7877074b7ba2017025c80c75b4673beb60840d40",
+"size": 267801
 },
 ".obsidian/plugins/greekquent-student-layout/lines.json": {
-"sha256": "2e1617a4ee74b902cfcb6a9b75607b49885fc1b10a9489efbbb2a41df811b5db",
-"size": 63225
+"sha256": "32aa6eac014f88872617e47ed4b98fa6bf5acdb5ed2f14afaa5966fbf51fdd44",
+"size": 95488
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "3ed6a10be20bcb2184c0fc1ffc99f2b025482ddd710eb2c3c3ba30df1ec35ef3",
+"sha256": "d66f5438f2ff3ecdd84d7f6d5bdbf29b7d17b5e64d174e634fad5e4d72581c20",
 "size": 164075
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "0c550f70a2ebf37685c8df88278c9066cde698bda08e5176f16155e28bd88cd8",
+"sha256": "edf4ddac825898d3d278a3069842d189217cc1769889fd3bdeb9a83d6328961d",
 "size": 374
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -110,32 +110,32 @@
 "size": 7625
 },
 "Fluent in a Year/FY02 Guest at home.md": {
-"sha256": "1bdbc66361fb1f7a268e7808849dec6d44f63f5748b4e05de7120f608b5abee2",
-"size": 8586
+"sha256": "b4eb65ded5b4195aa48bc81d85094ed75e002e0b1bbdd4ae2b04915bd58f3368",
+"size": 10302
 },
 "Fluent in a Year/FY03 Making plans.md": {
-"sha256": "945272dbaf1a600325b79b6d04eaf15096aa3d147b454004094073692b4fb51a",
-"size": 8884
+"sha256": "f067fc3b7de7ef79271821b9b74fd6be6f5a121469feaa01e6b6625c12827b60",
+"size": 9570
 },
 "Fluent in a Year/FY04 Postcards.md": {
-"sha256": "d920200830f5936eede6a92d90aa0a1cf1e123813c9e4224bde1f5980144fd0d",
-"size": 9269
+"sha256": "aa2b7a8be9bb67ddeecf8f94cffc3dd80a702c68bd36db9129755c9f5241abc7",
+"size": 10521
 },
 "Fluent in a Year/FY05 A thankful table no class this week.md": {
-"sha256": "325ec37b24b88e1b1c563e425f472800ff1b034a236df774a7d652034a252e0e",
-"size": 8557
+"sha256": "0edecbda45ef17a2a74b01bb30960b9bb0f7fe166bf65627c2710ae7c8d7dab0",
+"size": 10279
 },
 "Fluent in a Year/FY06 Lost and found.md": {
-"sha256": "25271da23dfffdeb4cea3e77fe11f266c49cf4ceeada89ef458e62b4dfaa9b9f",
-"size": 8297
+"sha256": "ad3f0e80b2f06fca5ce1f5597e0071245e25646374b34c556b4915991fc38b0a",
+"size": 9805
 },
 "Fluent in a Year/FY07 Coffee plans.md": {
-"sha256": "d6282a899fe2cc1bbc0fd9f31865bde780a0ff780cc4791a566cde18d02dca43",
-"size": 8718
+"sha256": "72803594fd87413b052cc99b0f22cd03e80294f8e214e891e845885c383ab885",
+"size": 9924
 },
 "Fluent in a Year/FY08 Who are you.md": {
-"sha256": "25b4ad06aef173d70a3f3668be925c904e169e603d89c8f20e3687a4c42ed4be",
-"size": 8719
+"sha256": "4aa1001f0ac10913b8fd3b1c3dc8707f2558ce50b9cd4ddbe51460c32b39459e",
+"size": 10157
 },
 "Fluent in a Year/FY09 Rest week Christmas.md": {
 "sha256": "5a81e79cd583d936fbc187db519191cadf6b4ad45ba2158f84038e2c64d5b89a",
@@ -146,172 +146,172 @@
 "size": 788
 },
 "Fluent in a Year/FY11 Who has the coin.md": {
-"sha256": "8b2fffc61522700bd45adaf3437802196dc34ac02a6fde94d5d6941ff7ed48ce",
-"size": 8421
+"sha256": "cd9cf1e159c60cb441df44a4b83a697d268e62cf553db2e9982e58c465281da7",
+"size": 10257
 },
 "Fluent in a Year/FY12 My family.md": {
-"sha256": "99682f3e33f82bd35a0b56d8c58febca06e5c9fa0d8c08515113c1d4f9637d05",
-"size": 9135
+"sha256": "981d4061589709f2105eda83eb747cd8bfc0e13d7dc3b0e4415a40a433ce3aee",
+"size": 10239
 },
 "Fluent in a Year/FY13 My day.md": {
-"sha256": "0c96ad2cafa673246f78e9e99ce0b328273a4cc911e0dfda9c5b55bdaf2cbaca",
-"size": 8667
+"sha256": "0904632638a19171b498853517601f3ae77e79ddfc6ccc009de30b9ca5742b6f",
+"size": 10897
 },
 "Fluent in a Year/FY14 Going places.md": {
-"sha256": "c10c4edef2f852dadb9f61ab85d4381f023b1dca9a5e5f21ddae95abe3ce273a",
-"size": 8892
+"sha256": "100b10bad3b949e3591ab0d23be6ebe5f0119b31f9cff74503eb10af68480ca7",
+"size": 9952
 },
 "Fluent in a Year/FY15 At the laiki.md": {
-"sha256": "d1f09458a6ec0670278e640d59b76002aad5156d26e9160519b905bc280c4801",
-"size": 8905
+"sha256": "84c48f1679ddcf39ad1fde32683e6ed811cd35c869d168e48867d4b74c222600",
+"size": 9969
 },
 "Fluent in a Year/FY16 At the taverna.md": {
-"sha256": "b4e470a9f6cfee3fe89847d85677f4ffd9f071828eb1e4e68916746e88b02089",
-"size": 8340
+"sha256": "139f19924dc199834747ef3d6ec3e886e6f51afa29923e64b8c3fb36546bf0c1",
+"size": 9520
 },
 "Fluent in a Year/FY17 Time and days.md": {
-"sha256": "a2870f82427616551b66f3a7629cca583075949b1b3229f6f8807b1eb2168443",
-"size": 8744
+"sha256": "b1195d481dc20e18ca1fe9553a1a4634a7f9b7ffaf1b93983513a50eba1f850d",
+"size": 9870
 },
 "Fluent in a Year/FY18 Do you speak Greek.md": {
-"sha256": "afc6f1277bc480144663c099675488e43cc376e976a5bf1b82a074df51999f55",
-"size": 8708
+"sha256": "ca47c3cd0f8ef8f1f2979160fdac34138a4a28a3ca73a89bd347d5280e4a21f0",
+"size": 9968
 },
 "Fluent in a Year/FY19 Midyear check.md": {
-"sha256": "665b3e3eb332eee90c9e5f9ed796558d13a2cee6162fcf0ccab1bc53a2e67475",
-"size": 9408
+"sha256": "ed2c796ce7f453769860e0faecf20ed89cf430f870c92a748ecb8e8e1a914f52",
+"size": 10356
 },
 "Fluent in a Year/FY20 Weekend plans.md": {
-"sha256": "331ec43b7a6c223bf57b59a943377e946d32242f4077d08667ce6df5616f3637",
-"size": 8891
+"sha256": "1a20df24a0308eaff138509012b790355ddaa94b43b7ed1784b65c40ed5c7016",
+"size": 9951
 },
 "Fluent in a Year/FY21 Weather.md": {
-"sha256": "8255fd3e95ff565730a30aa7d3d20b147d1ee6eed6a115e0665fdeca5018c7cf",
-"size": 8476
+"sha256": "fc618adebef462a529a145aa0d43a9d76530991a596be9af79161b7f2cd403e6",
+"size": 9512
 },
 "Fluent in a Year/FY22 Directions.md": {
-"sha256": "5a07cd5e40914b17550ec5ffe9e90833c8cf093f959e86480657cc7e897b3d35",
-"size": 8849
+"sha256": "f0e3497220cc4f87e9cbdd3ee9c3d70b1d8390a0986c9204afb44a54a8ca708e",
+"size": 10227
 },
 "Fluent in a Year/FY23 My house.md": {
-"sha256": "ccb3372bf80e2f12511ca69628bd56d0525d40c4ae835752ae06041c7df37100",
-"size": 9064
+"sha256": "405263139a089973c1a84965cfbb4c28d758e77a8e6210a72dd7dfa10a45586f",
+"size": 10214
 },
 "Fluent in a Year/FY24 Likes and hobbies.md": {
-"sha256": "0f5c00d909cae8627f5b978efd6d684a0aa2450600d33f4b985c07902e283e31",
-"size": 8823
+"sha256": "4586f5977667d5d6e7b751b68ef80f40362b02431939359ad7ecd9fb698e95b2",
+"size": 9663
 },
 "Fluent in a Year/FY25 When I was little.md": {
-"sha256": "3cebc0861b0fc296a5666cfc90955c18e353b260583ec35197b1d571dc7953a1",
-"size": 8878
+"sha256": "fbca2a39fc50231f1e7668727364f283d4a0ac01f7951642e222e6d84e0c233f",
+"size": 10002
 },
 "Fluent in a Year/FY26 Last weekend.md": {
-"sha256": "01831873f1d18668265d2f47b5cc620c6150b163430e71fd129d125960783199",
-"size": 8495
+"sha256": "afe3da9b1ebe7868c0fe2036d48e93e1cc1ba73c93dcb4e50a064f5264c5d80a",
+"size": 9669
 },
 "Fluent in a Year/FY27 Easter.md": {
-"sha256": "2269bca1cd92962f3af9ce616bb862e2dd074f4b90f20314ff5ea240ab1c1ccd",
-"size": 8686
+"sha256": "c9c4e13023702b6158c0d862a8f1825de8dcbdb671727fe0c90fa74f7b885bc5",
+"size": 10036
 },
 "Fluent in a Year/FY28 At the pharmacy.md": {
-"sha256": "6a9d827461ebc896238a8c4d4ccc6a18991165584c643ba6242e1e6d363720a7",
-"size": 9401
+"sha256": "282773e4f88f02f84c4ed9ffeb1e4b093855e50c402a9fd6e288bb38c39dcbfd",
+"size": 10811
 },
 "Fluent in a Year/FY29 A year of Greek so far.md": {
-"sha256": "b9f72f9d3acd67140669058fdaa64c9c8ac0ae30db7d3159621ffaa79492ae0e",
-"size": 9492
+"sha256": "34037896d289284965708cacba309b09c3a970d093069c7dd2febf2857fca97b",
+"size": 10464
 },
 "Fluent in a Year/FY30 Summer plans.md": {
-"sha256": "c5ea598524a664425f009f157e861bc4ce76a8ab208c31d2867f246fb6caecc1",
-"size": 8346
+"sha256": "b6454465cc99cbd3acefe30a19234fe11c6822b6850e8b0292ae853f4e085ee4",
+"size": 9168
 },
 "Fluent in a Year/FY31 At the beach.md": {
-"sha256": "a697f72a28fffe6968685b8be8a03bc14b05fc92fc0af57145edd06eb4c26f01",
-"size": 8792
+"sha256": "2a2971cc1b89b055dd99db2f8a93b7a5a3bd77029da91a57dba0629c3bb3b183",
+"size": 9792
 },
 "Fluent in a Year/FY32 Ferry tickets.md": {
-"sha256": "6d730eb8a88b35d733f0d12837cd9cd2bb3e7c2924a818990518740a753197e9",
-"size": 8489
+"sha256": "8919754e139f6b751524d7711717b03b73c49af023d2f4c85eec2344cd808f48",
+"size": 9639
 },
 "Fluent in a Year/FY33 At the hotel.md": {
-"sha256": "d52b3fabea67557b9e47c07fa98fa27e7892adab0efdda4c32bab6ae6ab7441f",
-"size": 8509
+"sha256": "79c1836cd45f76a6345b50a7bd4ae691151b5120e72c6fb00e70a758c9af8087",
+"size": 9261
 },
 "Fluent in a Year/FY34 Cooking.md": {
-"sha256": "80ea3542f4811a4c69b9a1942327525d1c02a1a5a8fcdaf737cce77165a3699d",
-"size": 8198
+"sha256": "49c17965150e57c606eee06990b01edf6c88d80eb5e2d2bbdb5e4d9656637341",
+"size": 9862
 },
 "Fluent in a Year/FY35 Body and health.md": {
-"sha256": "715f930fe6a92a7988d756abdb6a1c900865749be52bef1c84959c6759364d46",
-"size": 7832
+"sha256": "7a089c933609288eeb57c25dd6badbc27367cc9d3cd2e36f4e21120f15894ffa",
+"size": 9348
 },
 "Fluent in a Year/FY36 Work.md": {
-"sha256": "5c239e0aa994551423d101f8ea11eedff3f4482de17ccc227471fd4b64f0bd74",
-"size": 8285
+"sha256": "f15172feaadf25f5bdd487ed5625a767b99a005d42d0749c79dddc9054fc8189",
+"size": 9941
 },
 "Fluent in a Year/FY37 Learning.md": {
-"sha256": "a29670ebdc6e2fbcedf87fad06e0f5a5c90cafd1838664f52363e7760404d516",
-"size": 8432
+"sha256": "46d025db612a6ca422cb85ce5923898749dccf957ac9510659461f8f8aa7fff9",
+"size": 9492
 },
 "Fluent in a Year/FY38 Feelings.md": {
-"sha256": "c2b0cd8de2fed734b0b27866b97a756933f3c4f1de317242fa091e1ca2370b5d",
-"size": 7911
+"sha256": "bad2944f72582cdaf14858d563d48e1bdbb5b7bdbbce60f0c5689dc4d5b95f06",
+"size": 8933
 },
 "Fluent in a Year/FY39 Town and country.md": {
-"sha256": "d22193f29bf745b49460f741d3f43b38afc232a1c9b6867969522cfa7fac4faf",
-"size": 8346
+"sha256": "b3fbca815ae0844d7ee4ba9a5e9defb408aafa8f1c228aaadeb70257ecd9a14c",
+"size": 9624
 },
 "Fluent in a Year/FY40 Getting around.md": {
-"sha256": "54d78c3e97fbd7e65c476cff7973d35c5c740bf4559b9e1bf7194403a98b2831",
-"size": 8600
+"sha256": "7bb2305b851f470c9678c73e8097fa4f01773eb5360ce7d5c423e3037d23aaa7",
+"size": 9846
 },
 "Fluent in a Year/FY41 On the phone.md": {
-"sha256": "ffc2efee7e4b0329e5aa594b52f71321d1cfac5ea47cd5b609567cd47a497f12",
-"size": 8507
+"sha256": "a727d55e703b815e4ab329ae109459b800e8f236760c47525d3f35b6a5676546",
+"size": 9401
 },
 "Fluent in a Year/FY42 Clothes.md": {
-"sha256": "cb83302e7aa1d911727297367a9e096cc494d8822bbead07aa7dc34f79d42552",
-"size": 8130
+"sha256": "47d516a30cffaf41d933128fb90fac7dfb8e842a8d8ad5d113a580fbd9cf85ad",
+"size": 9568
 },
 "Fluent in a Year/FY43 Sport.md": {
-"sha256": "a45997a77568b6c50c85dcd802f15c97ce285f9e521713dfb184f55e38de82b1",
-"size": 7872
+"sha256": "339df1ffb8905b9c1b55cca9693ff9e66786c59fb547fc8840d8d5adc3be3db7",
+"size": 9086
 },
 "Fluent in a Year/FY44 Films and music.md": {
-"sha256": "a5d46059a0d68a27ab119cb95c65be6f68e1e7d0dcf7e46dd543057cea94e334",
-"size": 8274
+"sha256": "cf9a3265deff29c176e0cc31fb50f74802df46a9014dfda465a5a865eb964171",
+"size": 9598
 },
 "Fluent in a Year/FY45 News.md": {
-"sha256": "b21765d98d8c04739eb58a8f0b285e68599071e8acd874611569a1b436ecad6c",
-"size": 8318
+"sha256": "e5dd7fdc3510f0335c7aa94d35e72598c99fc2fe7129782b37956c5d637a69dc",
+"size": 9546
 },
 "Fluent in a Year/FY46 Money.md": {
-"sha256": "75ce351644f49526a5cb871fd5fd636adde5fb4472da25e9ce48f563f833c97a",
-"size": 8444
+"sha256": "e18fe6cc9d23e556e97ca78349d75cf1695b33aa5e2b7454d0922c64cc6ca4ef",
+"size": 9976
 },
 "Fluent in a Year/FY47 Childhood.md": {
-"sha256": "ea95429b56e7cc14f9d78b8dcb00bf87b69170709414be1cf9d6496857444028",
-"size": 8498
+"sha256": "ff2b5bf7f68ab1dda0c70fdee24242d73fd471986aeb98c70e9d748e22460180",
+"size": 9778
 },
 "Fluent in a Year/FY48 The future.md": {
-"sha256": "c77d4c807bca65843c9041a333037467c4c28b5a6b89abf8962b033bc1641e54",
-"size": 8300
+"sha256": "de0e683e77f29b4a7d5dd43aaf9b80341055238cbb34f7b2cc85756e95ebf591",
+"size": 9692
 },
 "Fluent in a Year/FY49 Opinions.md": {
-"sha256": "8d09c0e8bd79d1cb7510356f224c92ed72da8395f4c1afbd8b5827d89d7cc8a0",
-"size": 7755
+"sha256": "1614e973650de5731c8289bbf0d697ed6f54684dd724b20a5dae0b15b754b5fd",
+"size": 9149
 },
 "Fluent in a Year/FY50 Name days and holidays.md": {
-"sha256": "c288ca7682e50dc9744efdda3417026ac099889c136e68bdca82c0ec96c0ef45",
-"size": 9062
+"sha256": "d92c40c2db3080413623bad69bf6235bdd24264cc9a1832df76dd19683b9c599",
+"size": 10412
 },
 "Fluent in a Year/FY51 Olive harvest.md": {
-"sha256": "a8d5a6e515877410a03e70b67318fa8a75c5380b174a7889e4ba36ca98e964b4",
-"size": 8122
+"sha256": "29b6b3f958cc3adf3e3300535b867392929c4913a36e96c532984fa34e8adbfd",
+"size": 9386
 },
 "Fluent in a Year/FY52 A year in Greek.md": {
-"sha256": "2f9ca7f41df66690c4ba89bab573b2193bf812904cd3fdbe0a3dbb53df324396",
-"size": 8277
+"sha256": "82cb2ea59416cc2526849291c4ae5173f2121d3f2cc364654e202ebbb49a466e",
+"size": 9513
 },
 "Handouts/00 Which file is which-student.md": {
 "sha256": "333e65965066ca3f2ab48bff49aafea79835637f72e86519a8ed1501e46c9737",
@@ -670,8 +670,8 @@
 "size": 24
 },
 "What's New.md": {
-"sha256": "8decb45022ed72b262f512466a9cd91af30b1ef67aeac6c222e60f3221c561ac",
-"size": 12228
+"sha256": "af8bcd4e00f5c09ca389653a74a5a4a60130aeaa42f46d65c1776e8fe51f038f",
+"size": 12705
 },
 "Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

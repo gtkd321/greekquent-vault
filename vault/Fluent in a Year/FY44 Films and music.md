@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ταινία στην πλατεία, για όλη την οικογενειακή παρέα. — Η επιτροπή του χωριού το κανόνισε. (A film in the square, for the whole family group. — The village committee arranged it.)
-> 2. Ο θείος Γιάννης! Πάμε να περπατήσουμε; (Uncle Giannis! Shall we go for a walk?)
-> 3. Το ποτάμι είναι ήσυχο. — Σαν ένας πίνακας! (The river is calm. — Like a painting!)
-> 4. Πεινάω! — Άκου προσεκτικά... (I'm hungry! — Listen carefully...)
-> 5. Μαρία, είμαι ερωτευμένος μαζί σου. — Απόλυτα... κι εγώ. (Maria, I'm in love with you. — Absolutely... me too.)
-> 6. Πυροτεχνήματα! Μια έκρηξη από χρώματα! — Πότε παντρεύεστε; (Fireworks! An explosion of colors! — When are you getting married?)
+> 1. Απόψε έχει ταινία στην πλατεία. Η επιτροπή του χωριού το κανόνισε. — Τέλεια! Μια οικογενειακή βραδιά! (Tonight there's a movie in the square. The village committee arranged it. — Perfect! A family night!)
+> 2. Μαρία! Ο θείος σου ο Γιάννης! Με θυμάσαι; — Θείε! Πάμε να περπατήσουμε μετά την ταινία; (Maria! It's your uncle Giannis! Do you remember me? — Uncle! Shall we go for a walk after the movie?)
+> 3. Άκου... Το ποτάμι είναι τόσο ήσυχο. — Και με το φεγγάρι, είναι σαν πίνακας! (Listen... The river is so calm. — And with the moon, it's like a painting!)
+> 4. Μαρία, θέλω να σου πω κάτι. Άκου προσεκτικά... — Τι; Είσαι καλά; — Ναι... απλώς πεινάω! (Maria, I want to tell you something. Listen carefully... — What? Are you okay? — Yes... I'm just hungry!)
+> 5. Νίκο, σοβαρά τώρα. Τι ήθελες να πεις; — Μαρία, είμαι ερωτευμένος μαζί σου. — Κι εγώ, απόλυτα. (Niko, seriously now. What did you want to say? — Maria, I'm in love with you. — Me too, completely.)
+> 6. Κοίτα! Πυροτεχνήματα! Μια έκρηξη από χρώματα! — Και εσείς οι δύο; Πότε παντρεύεστε; — Γιαγιά! (Look! Fireworks! An explosion of colors! — And you two? When are you getting married? — Grandma!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **films and music** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 247 of 300
-> **Today's line:** Ταινία στην πλατεία, για όλη την οικογενειακή παρέα. — Η επιτροπή του χωριού το κανόνισε. (A film in the square, for the whole family group. — The village committee arranged it.)
+> **Today's line:** Απόψε έχει ταινία στην πλατεία. Η επιτροπή του χωριού το κανόνισε. — Τέλεια! Μια οικογενειακή βραδιά! (Tonight there's a movie in the square. The village committee arranged it. — Perfect! A family night!)
 > - [[όροφος|ο όροφος]] **floor (story)** (#1096): Μένουμε στον τρίτο όροφο. (We live on the third floor.)
 > - [[τάφος|ο τάφος]] **grave** (#1097): Επισκεφτήκαμε τον τάφο του παππού. (We visited grandpa's grave.)
 > - [[στραβά]] **crookedly, wrong** (#1098): Όλα πήγαν στραβά.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[οικογενειακός]] **family (adj.)** (#1100): Τι θαυμάσιο οικογενειακό κειμήλιο!
 
 > [!todo]- Tue · day 248 of 300
-> **Today's line:** Ο θείος Γιάννης! Πάμε να περπατήσουμε; (Uncle Giannis! Shall we go for a walk?)
+> **Today's line:** Μαρία! Ο θείος σου ο Γιάννης! Με θυμάσαι; — Θείε! Πάμε να περπατήσουμε μετά την ταινία; (Maria! It's your uncle Giannis! Do you remember me? — Uncle! Shall we go for a walk after the movie?)
 > - [[νευρικός]] **nervous** (#1101): Είμαι νευρικός.
 > - [[άρθρο|το άρθρο]] **article** (#1102): Γράφω άρθρα τακτικά.
 > - [[περπατάω]] **I walk** (#1103): Θα περπατήσουμε.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[θείος|ο θείος]] **uncle** (#1105): Αυτός είναι ο θείος μου. (He's my uncle.)
 
 > [!todo]- Wed · day 249 of 300
-> **Today's line:** Το ποτάμι είναι ήσυχο. — Σαν ένας πίνακας! (The river is calm. — Like a painting!)
+> **Today's line:** Άκου... Το ποτάμι είναι τόσο ήσυχο. — Και με το φεγγάρι, είναι σαν πίνακας! (Listen... The river is so calm. — And with the moon, it's like a painting!)
 > - [[εξουσία|η εξουσία]] **power, authority** (#1106): Ο χαρακτήρας αλλάζει όταν έρχεσαι στην εξουσία. (Character changes when you come into power.)
 > - [[έγγραφο|το έγγραφο]] **document** (#1107): Δε μπορώ να ανοίξω το έγγραφο.
 > - [[ποτάμι|το ποτάμι]] **river** (#1108): Πήγα στο ποτάμι για ψάρεμα. (I went fishing in the river.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πέμπτος]] **fifth** (#1110): Μένω στον πέμπτο όροφο.
 
 > [!todo]- Thu · day 250 of 300
-> **Today's line:** Πεινάω! — Άκου προσεκτικά... (I'm hungry! — Listen carefully...)
+> **Today's line:** Μαρία, θέλω να σου πω κάτι. Άκου προσεκτικά... — Τι; Είσαι καλά; — Ναι... απλώς πεινάω! (Maria, I want to tell you something. Listen carefully... — What? Are you okay? — Yes... I'm just hungry!)
 > - [[ενημερώνω]] **I inform** (#1111): Ήρθε χωρίς να ενημερώσει.
 > - [[προσεκτικά]] **carefully** (#1112): Ο Τζον άκουσε προσεκτικά. (John listened carefully.)
 > - [[πεινάω]] **I am hungry** (#1113): Δεν πεινάω πολύ αυτή τη στιγμή. (I'm not very hungry right now.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[άνετα]] **comfortably** (#1115): Δεν αισθανόμουν άνετα επειδή δεν μιλούσα γαλλικά.
 
 > [!todo]- Fri · day 251 of 300
-> **Today's line:** Μαρία, είμαι ερωτευμένος μαζί σου. — Απόλυτα... κι εγώ. (Maria, I'm in love with you. — Absolutely... me too.)
+> **Today's line:** Νίκο, σοβαρά τώρα. Τι ήθελες να πεις; — Μαρία, είμαι ερωτευμένος μαζί σου. — Κι εγώ, απόλυτα. (Niko, seriously now. What did you want to say? — Maria, I'm in love with you. — Me too, completely.)
 > - [[δικαιολογία|η δικαιολογία]] **excuse** (#1116): Άσε τις δικαιολογίες!
 > - [[απόλυτος]] **absolute** (#1117): Έχεις απόλυτο δίκαιο!
 > - [[ερωτευμένος]] **in love** (#1118): Είναι ερωτευμένος μέχρι τα μπούνια. (He's head over heels in love.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τριγύρω]] **all around** (#1120)
 
 > [!todo]- Sat · day 252 of 300
-> **Today's line:** Πυροτεχνήματα! Μια έκρηξη από χρώματα! — Πότε παντρεύεστε; (Fireworks! An explosion of colors! — When are you getting married?)
+> **Today's line:** Κοίτα! Πυροτεχνήματα! Μια έκρηξη από χρώματα! — Και εσείς οι δύο; Πότε παντρεύεστε; — Γιαγιά! (Look! Fireworks! An explosion of colors! — And you two? When are you getting married? — Grandma!)
 > - [[έκρηξη|η έκρηξη]] **explosion** (#1121): Ακούσαμε μια δυνατή έκρηξη.
 > - [[περασμένος]] **past, last** (#1122): Πού ήσουν την περασμένη Δευτέρα; (Where were you last Monday?)
 > - [[διασκεδαστικός]] **fun, entertaining** (#1123): Το παιχνίδι είναι διασκεδαστικό. (The game is fun.)

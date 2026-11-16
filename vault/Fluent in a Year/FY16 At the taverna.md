@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Καλησπέρα! Πόσα άτομα; — Δύο. Ένα ψάρι και μια μπίρα. (Good evening! How many people? — Two. A fish and a beer.)
-> 2. Εγώ δεν τρώω κρέας. Ένα ποτήρι κρασί; (I don't eat meat. A glass of wine?)
-> 3. Η σελίδα λέει: «Το λάδι δίνει δύναμη.» Τι είδος συνταγή είναι; (The page says: "Oil gives strength." What kind of recipe is it?)
-> 4. Η Ελένη; Πρώτα φάτε. Μετά, μια παλιά ιστορία. — Δηλαδή την ξέρετε; (Eleni? Eat first. Then, an old story. — You mean you know her?)
-> 5. Σοβαρά. Η Ελένη ήταν δυνατή γυναίκα. Έκρυψε τα τετράδιά της τουλάχιστον σε επτά μέρη. (Seriously. Eleni was a strong woman. She hid her notebooks in at least seven places.)
-> 6. Ένα ποτό από μένα, με μέλι. — Τι περίεργο... στο ποτήρι, ένα μικρό κλειδί! (A drink from me, with honey. — How strange... in the glass, a little key!)
+> 1. Καλησπέρα! Πόσα άτομα; — Δύο, παρακαλώ. Τι έχετε σήμερα; — Φρέσκο ψάρι! Και κρύα μπίρα. (Good evening! How many people? — Two, please. What do you have today? — Fresh fish! And cold beer.)
+> 2. Ένα ψάρι για μένα. Κι εσύ; Κρέας; — Όχι, εγώ δεν τρώω κρέας. Ένα ποτήρι κρασί και μια σαλάτα. (A fish for me. And you? Meat? — No, I don't eat meat. A glass of wine and a salad.)
+> 3. Διάβασε τη σελίδα! — «Το λάδι δίνει δύναμη.» Τι είδος μήνυμα είναι αυτό; — Ίσως μια συνταγή; (Read the page! — "Oil gives strength." What kind of message is that? — Maybe a recipe?)
+> 4. Η σελίδα της Ελένης; Πρώτα φάτε. Μετά, μια παλιά ιστορία. — Δηλαδή την ξέρετε; — Όλοι την ξέρουν! (Eleni's page? Eat first. Then, an old story. — You mean you know her? — Everyone knows her!)
+> 5. Η Ελένη ήταν δυνατή γυναίκα. Έκρυψε τα τετράδιά της σε τουλάχιστον επτά μέρη. — Σοβαρά; Επτά; (Eleni was a strong woman. She hid her notebooks in at least seven places. — Seriously? Seven?)
+> 6. Ένα ποτό από μένα, με μέλι. — Ευχαριστώ! ... Τι περίεργο... Στο ποτήρι, ένα μικρό κλειδί! — Ήταν της Ελένης. Τώρα είναι δικό σου. (A drink on me, with honey. — Thank you! ... How strange... In the glass, a little key! — It was Eleni's. Now it's yours.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L13 At the taverna-student|L13 At the taverna]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 79 of 300
-> **Today's line:** Καλησπέρα! Πόσα άτομα; — Δύο. Ένα ψάρι και μια μπίρα. (Good evening! How many people? — Two. A fish and a beer.)
+> **Today's line:** Καλησπέρα! Πόσα άτομα; — Δύο, παρακαλώ. Τι έχετε σήμερα; — Φρέσκο ψάρι! Και κρύα μπίρα. (Good evening! How many people? — Two, please. What do you have today? — Fresh fish! And cold beer.)
 > - [[άτομο|το άτομο]] **person, individual** (#319): Έχετε ένα τραπέζι για πέντε άτομα; (Do you have a table for five?)
 > - [[λογαριασμός|ο λογαριασμός]] **bill, account** (#572): Ορίστε ο λογαριασμός.
 > - [[μπίρα|η μπίρα]] **beer** (#654): Μια μπίρα, παρακαλώ. (A beer, please.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ψάρι|το ψάρι]] **fish** (#798): Σου αρέσουν τα ψάρια; (Do you like fish?)
 
 > [!todo]- Tue · day 80 of 300
-> **Today's line:** Εγώ δεν τρώω κρέας. Ένα ποτήρι κρασί; (I don't eat meat. A glass of wine?)
+> **Today's line:** Ένα ψάρι για μένα. Κι εσύ; Κρέας; — Όχι, εγώ δεν τρώω κρέας. Ένα ποτήρι κρασί και μια σαλάτα. (A fish for me. And you? Meat? — No, I don't eat meat. A glass of wine and a salad.)
 > - [[τρώω]] **I eat** (#902): Θέλω να φάω λίγο τυρί. (I want to eat some cheese.)
 > - [[ποτήρι|το ποτήρι]] **glass** (#951): Μου ζήτησε ένα ποτήρι νερό. (He asked for a glass of water.)
 > - [[κρέας|το κρέας]] **meat** (#1078): Δεν τρώω κρέας ο ίδιος. (I don't eat meat myself.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σωστός]] **correct, right** (#276): Η απάντησή του είναι σωστή. (His answer is correct.)
 
 > [!todo]- Wed · day 81 of 300
-> **Today's line:** Η σελίδα λέει: «Το λάδι δίνει δύναμη.» Τι είδος συνταγή είναι; (The page says: "Oil gives strength." What kind of recipe is it?)
+> **Today's line:** Διάβασε τη σελίδα! — «Το λάδι δίνει δύναμη.» Τι είδος μήνυμα είναι αυτό; — Ίσως μια συνταγή; (Read the page! — "Oil gives strength." What kind of message is that? — Maybe a recipe?)
 > - [[καν]] **even (not even)** (#277): Ούτε καν το ήξερα. (I didn't even know about it.)
 > - [[είδος|το είδος]] **kind, sort** (#280): Τι είδους πορτοκάλια καλλιεργείτε εδώ; (What kind of oranges do you plant here?)
 > - [[δύναμη|η δύναμη]] **strength, power** (#281): Η γνώση είναι δύναμη. (Knowledge is power.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[όπου]] **where(ver)** (#284): Όπου κι αν είσαι, να προσεύχεσαι. (Wherever you are, may you pray.)
 
 > [!todo]- Thu · day 82 of 300
-> **Today's line:** Η Ελένη; Πρώτα φάτε. Μετά, μια παλιά ιστορία. — Δηλαδή την ξέρετε; (Eleni? Eat first. Then, an old story. — You mean you know her?)
+> **Today's line:** Η σελίδα της Ελένης; Πρώτα φάτε. Μετά, μια παλιά ιστορία. — Δηλαδή την ξέρετε; — Όλοι την ξέρουν! (Eleni's page? Eat first. Then, an old story. — You mean you know her? — Everyone knows her!)
 > - [[πρώτα]] **first(ly)** (#286): Πρώτα οι κυρίες.
 > - [[παλιός]] **old (things)** (#287): Αυτό είν' ένα παλιό γράμμα. (This is an old letter.)
 > - [[ψέμα|το ψέμα]] **lie** (#288): Είμαι σίγουρος ότι αυτό είναι ψέμα. (I am sure this is a lie.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ανησυχώ]] **I worry** (#290): Δεν ανησυχώ για σας. (I'm not worried about you.)
 
 > [!todo]- Fri · day 83 of 300
-> **Today's line:** Σοβαρά. Η Ελένη ήταν δυνατή γυναίκα. Έκρυψε τα τετράδιά της τουλάχιστον σε επτά μέρη. (Seriously. Eleni was a strong woman. She hid her notebooks in at least seven places.)
+> **Today's line:** Η Ελένη ήταν δυνατή γυναίκα. Έκρυψε τα τετράδιά της σε τουλάχιστον επτά μέρη. — Σοβαρά; Επτά; (Eleni was a strong woman. She hid her notebooks in at least seven places. — Seriously? Seven?)
 > - [[σοβαρά]] **seriously** (#291): Σοβαρά μιλάς τώρα;
 > - [[αλλιώς]] **otherwise** (#293): Φύγε, αλλιώς καλώ την αστυνομία!
 > - [[τουλάχιστον]] **at least** (#296): Θα κοστίσει τουλάχιστον πέντε δολάρια. (It'll cost at least five dollars.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αίμα|το αίμα]] **blood** (#318): Το αίμα είναι κόκκινο. (Blood is red.)
 
 > [!todo]- Sat · day 84 of 300
-> **Today's line:** Ένα ποτό από μένα, με μέλι. — Τι περίεργο... στο ποτήρι, ένα μικρό κλειδί! (A drink from me, with honey. — How strange... in the glass, a little key!)
+> **Today's line:** Ένα ποτό από μένα, με μέλι. — Ευχαριστώ! ... Τι περίεργο... Στο ποτήρι, ένα μικρό κλειδί! — Ήταν της Ελένης. Τώρα είναι δικό σου. (A drink on me, with honey. — Thank you! ... How strange... In the glass, a little key! — It was Eleni's. Now it's yours.)
 > - [[μυαλό|το μυαλό]] **mind** (#326): Βγάλ'το από το μυαλό σου! (Get it out of your mind!)
 > - [[μέλι|το μέλι]] **honey** (#1412): Μ' αρέσει το μέλι.
 > - [[περίεργος]] **strange, curious** (#343): Είναι πολύ περίεργη. (She's very curious.)

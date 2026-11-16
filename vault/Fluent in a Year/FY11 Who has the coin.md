@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ένα κομμάτι για το σπίτι, δύο, τρία... — Έξι κομμάτια, όχι δέκα! (One piece for the house, two, three... — Six pieces, not ten!)
-> 2. Γιαγιά, ποιο κομμάτι είναι για μένα; — Το τέσσερα. Καλή χρονιά! — Μα εγώ; (Grandma, which piece is for me? — Number four. Happy New Year! — But what about me?)
-> 3. Εγώ πρώτος! — Όμως χωρίς φλουρί, Νίκο! (Me first! — But without the coin, Niko!)
-> 4. Το τελευταίο κομμάτι... — Το φλουρί! Ακριβώς στο δικό σου! (The last piece... — The coin! Right in yours!)
-> 5. Χίλια μπράβο, Μαρία! — Τώρα, με το κλειδί, πάμε στην παλιά πόρτα. (A thousand bravos, Maria! — Now, with the key, let's go to the old door.)
-> 6. Είναι νύχτα... Και μπροστά μας, το παλιό σπίτι. — Η καρδιά μου! (It's night... And in front of us, the old house. — My heart!)
+> 1. Η βασιλόπιτα! Ένα κομμάτι για το σπίτι, ένα για τον Χριστό... — Πόσα κομμάτια; Δέκα; — Όχι, έξι! Τρία για εμάς, τρία για τους άλλους. (The vasilopita! A piece for the house, one for Christ... — How many pieces? Ten? — No, six! Three for us, three for the others.)
+> 2. Γιαγιά, ποιο κομμάτι είναι για μένα; — Το τέσσερα. Καλή χρονιά, κορίτσι μου! — Μα κι εγώ; Δεν έχω κομμάτι! — Έχεις, Νίκο: το πέντε! (Grandma, which piece is for me? — Number four. Happy New Year, my girl! — But what about me? I don't have a piece! — You do, Niko: number five!)
+> 3. Εγώ πρώτος! ... Τίποτα. Το κομμάτι μου είναι χωρίς φλουρί. — Όμως υπομονή, Νίκο. Κάθε κομμάτι έχει την τύχη του. (Me first! ... Nothing. My piece has no coin. — But be patient, Niko. Every piece has its own luck.)
+> 4. Μόλις δάγκωσα κάτι σκληρό! — Το φλουρί! Ακριβώς στο δικό σου κομμάτι! (I just bit into something hard! — The coin! Right in your piece!)
+> 5. Χίλια μπράβο, Μαρία! Καλή τύχη για όλη τη χρονιά. — Και τώρα, με το κλειδί, πάμε στην παλιά πόρτα; — Τώρα; Είναι έντεκα το βράδυ! — Ε, και; Πάμε! (A thousand bravos, Maria! Good luck for the whole year. — And now, with the key, shall we go to the old door? — Now? It's eleven at night! — So what? Let's go!)
+> 6. Είναι νύχτα... Και μπροστά μας, το παλιό σπίτι. — Η καρδιά μου χτυπάει δυνατά! — Κι η δική μου. Άνοιξε! (It's night... And in front of us, the old house. — My heart is pounding! — Mine too. Open it!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L08 Vasilopita - who has the coin-student|L08 Vasilopita - who has the coin]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 49 of 300
-> **Today's line:** Ένα κομμάτι για το σπίτι, δύο, τρία... — Έξι κομμάτια, όχι δέκα! (One piece for the house, two, three... — Six pieces, not ten!)
+> **Today's line:** Η βασιλόπιτα! Ένα κομμάτι για το σπίτι, ένα για τον Χριστό... — Πόσα κομμάτια; Δέκα; — Όχι, έξι! Τρία για εμάς, τρία για τους άλλους. (The vasilopita! A piece for the house, one for Christ... — How many pieces? Ten? — No, six! Three for us, three for the others.)
 > - [[τρία]] **three** (#174): Το ήξερα πριν από τρεις ώρες. (I knew this three hours ago.)
 > - [[μπράβο]] **well done** (#405): Αυτό που έκανες είναι καταπληκτικό, μπράβο!
 > - [[έξι]] **six** (#410): Ξύπνησα στις έξι η ώρα. (I woke up at six o'clock.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κομμάτι|το κομμάτι]] **piece** (#461): Κάναμε το κομμάτι μας.
 
 > [!todo]- Tue · day 50 of 300
-> **Today's line:** Γιαγιά, ποιο κομμάτι είναι για μένα; — Το τέσσερα. Καλή χρονιά! — Μα εγώ; (Grandma, which piece is for me? — Number four. Happy New Year! — But what about me?)
+> **Today's line:** Γιαγιά, ποιο κομμάτι είναι για μένα; — Το τέσσερα. Καλή χρονιά, κορίτσι μου! — Μα κι εγώ; Δεν έχω κομμάτι! — Έχεις, Νίκο: το πέντε! (Grandma, which piece is for me? — Number four. Happy New Year, my girl! — But what about me? I don't have a piece! — You do, Niko: number five!)
 > - [[γιαγιά|η γιαγιά]] **grandmother** (#606): Η γιαγιά μου έχει μια γάτα. (My grandmother has a cat.)
 > - [[τέσσερα]] **four** (#631): Δύο συν δύο κάνει τέσσερα. (Two plus two makes four.)
 > - [[χρονιά|η χρονιά]] **year** (#989): Εδώ θα κτιστεί νέο ξενοδοχείο την επόμενη χρονιά. (A new hotel will be built here next year.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μα]] **but** (#122): Μα τι κάνετε το Σαββατοκύριακο; (But what are you doing this weekend?)
 
 > [!todo]- Wed · day 51 of 300
-> **Today's line:** Εγώ πρώτος! — Όμως χωρίς φλουρί, Νίκο! (Me first! — But without the coin, Niko!)
+> **Today's line:** Εγώ πρώτος! ... Τίποτα. Το κομμάτι μου είναι χωρίς φλουρί. — Όμως υπομονή, Νίκο. Κάθε κομμάτι έχει την τύχη του. (Me first! ... Nothing. My piece has no coin. — But be patient, Niko. Every piece has its own luck.)
 > - [[όμως]] **however** (#124): Δεν το ξέρω όμως. (However, I don't know it.)
 > - [[κάθε]] **every** (#125): Παίρνω πρωινό κάθε πρωί. (I have breakfast every morning.)
 > - [[πρώτος]] **first** (#127): Ακόμα θυμάμαι την πρώτη φορά. (I still remember the first time.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κάτω]] **down, below** (#130): Είναι κάτω από την καρέκλα. (It is under the chair.)
 
 > [!todo]- Thu · day 52 of 300
-> **Today's line:** Το τελευταίο κομμάτι... — Το φλουρί! Ακριβώς στο δικό σου! (The last piece... — The coin! Right in yours!)
+> **Today's line:** Μόλις δάγκωσα κάτι σκληρό! — Το φλουρί! Ακριβώς στο δικό σου κομμάτι! (I just bit into something hard! — The coin! Right in your piece!)
 > - [[μόλις]] **just, as soon as** (#131): Μόλις είδα μία. (I just saw one.)
 > - [[ακριβώς]] **exactly** (#134): Πού ακριβώς το έβαλες; (Where exactly did you put it?)
 > - [[τέτοιος]] **such** (#143): Μα πού πας τέτοια ώρα; (But where are you going at this hour?)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τέλος|το τέλος]] **end** (#210): Θα φτάσω μέχρι το τέλος. (I'll get to the bottom of it.)
 
 > [!todo]- Fri · day 53 of 300
-> **Today's line:** Χίλια μπράβο, Μαρία! — Τώρα, με το κλειδί, πάμε στην παλιά πόρτα. (A thousand bravos, Maria! — Now, with the key, let's go to the old door.)
+> **Today's line:** Χίλια μπράβο, Μαρία! Καλή τύχη για όλη τη χρονιά. — Και τώρα, με το κλειδί, πάμε στην παλιά πόρτα; — Τώρα; Είναι έντεκα το βράδυ! — Ε, και; Πάμε! (A thousand bravos, Maria! Good luck for the whole year. — And now, with the key, shall we go to the old door? — Now? It's eleven at night! — So what? Let's go!)
 > - [[έντεκα]] **eleven** (#1393): Είναι έντεκα παρά δέκα. (It is ten minutes before eleven.)
 > - [[πόρτα|η πόρτα]] **door** (#225): Ο Τόνι στάθηκε στην πόρτα. (Tony stood at the door.)
 > - [[δώδεκα]] **twelve** (#1394): Ο χρόνος έχει δώδεκα μήνες. (One year has twelve months.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χίλια]] **thousand** (#1397): Σε διαμέρισμα βρέθηκαν χίλια πεντακόσια έργα τέχνης.
 
 > [!todo]- Sat · day 54 of 300
-> **Today's line:** Είναι νύχτα... Και μπροστά μας, το παλιό σπίτι. — Η καρδιά μου! (It's night... And in front of us, the old house. — My heart!)
+> **Today's line:** Είναι νύχτα... Και μπροστά μας, το παλιό σπίτι. — Η καρδιά μου χτυπάει δυνατά! — Κι η δική μου. Άνοιξε! (It's night... And in front of us, the old house. — My heart is pounding! — Mine too. Open it!)
 > - [[κεφάλι|το κεφάλι]] **head** (#257): Πονάει το κεφάλι μου. (My head hurts.)
 > - [[νύχτα|η νύχτα]] **night** (#261): Μιλήσαμε όλη νύχτα. (We talked all night.)
 > - [[μπροστά]] **in front** (#264): Η ζωή είναι μπροστά σου. (Life lies in front of you.)

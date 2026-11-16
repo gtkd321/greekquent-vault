@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Σιγά σιγά, γιαγιά. Μαθαίνω. — Δεν γράφει κανείς έτσι πια. (Slowly, grandma. I'm learning. — Nobody writes like this anymore.)
-> 2. Το τετράδιο λέει: «Η επιλογή είναι δική σου.» — Ποια επιλογή; Τι σημασία έχει; (The notebook says: "The choice is yours." — What choice? What does it mean?)
-> 3. Κάθε λέξη είναι μια συνταγή! — Και τα υπόλοιπα τετράδια; Κάπου γύρω... (Every word is a recipe! — And the rest of the notebooks? Somewhere around...)
-> 4. Το αφεντικό μου... — Μαρία, πότε γυρίζεις; — Βασικά... όχι ακόμα. (My boss... — Maria, when are you coming back? — Basically... not yet.)
-> 5. Εδώ είναι υπέροχα. Δουλεύω καλύτερα. Γράφω κάθε πρωί. (It's wonderful here. I work better. I write every morning.)
-> 6. Επιστρέφεις ή όχι; — Αποφασίζω όταν τελειώνει η χρονιά. (Are you coming back or not? — I'll decide when the year ends.)
+> 1. Τα γράμματα είναι δύσκολα. Διάβασε σιγά, γιαγιά. Μαθαίνω. — Δεν γράφει κανείς έτσι πια. (The handwriting is hard. Read slowly, grandma. I'm learning. — Nobody writes like this anymore.)
+> 2. Εδώ λέει: «Η επιλογή είναι δική σου.» — Ποια επιλογή; Τι σημασία έχει αυτό; — Δεν ξέρω. Διάβασε παρακάτω! (Here it says: "The choice is yours." — What choice? What does that mean? — I don't know. Read on!)
+> 3. Κοίτα! Κάθε σελίδα είναι μια συνταγή. Κάθε λέξη... φαγητό! — Και τα υπόλοιπα τετράδια; Κάπου εδώ γύρω... (Look! Every page is a recipe. Every word... food! — And the rest of the notebooks? Somewhere around here...)
+> 4. Μαρία; Το αφεντικό σου εδώ. Πότε γυρίζεις; — Βασικά... όχι ακόμα. — Δεν είναι αστείο! Σε πληρώνω για να δουλεύεις! (Maria? It's your boss. When are you coming back? — Actually... not yet. — It's not funny! I pay you to work!)
+> 5. Και δουλεύω! Εδώ είναι υπέροχα. Δουλεύω καλύτερα. — Εντάξει. Αλλά πρόσεχε. — Γράφω κάθε πρωί, σας το υπόσχομαι. (And I am working! It's wonderful here. I work better. — Okay. But be careful. — I write every morning, I promise you.)
+> 6. Λοιπόν; Επιστρέφεις ή όχι; — Αποφασίζω όταν τελειώνει η χρονιά. — Καλά, καλά. Θα δούμε. (So? Are you coming back or not? — I'll decide when the year is over. — Fine, fine. We'll see.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L15 Do you speak Greek-student|L15 Do you speak Greek]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 91 of 300
-> **Today's line:** Σιγά σιγά, γιαγιά. Μαθαίνω. — Δεν γράφει κανείς έτσι πια. (Slowly, grandma. I'm learning. — Nobody writes like this anymore.)
+> **Today's line:** Τα γράμματα είναι δύσκολα. Διάβασε σιγά, γιαγιά. Μαθαίνω. — Δεν γράφει κανείς έτσι πια. (The handwriting is hard. Read slowly, grandma. I'm learning. — Nobody writes like this anymore.)
 > - [[μαθαίνω]] **I learn** (#406): Θα 'θελα να μάθω Γαλλικά. (I'd like to learn French.)
 > - [[σιγά]] **slowly, quietly** (#719): Σιγά μη βρεθεί ο κλέφτης. (Fat chance that the thief will be found.)
 > - [[αγγλικός]] **English** (#927): Με συγχωρείτε, μιλάτε αγγλικά; (Excuse me, do you speak English?)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ταινία|η ταινία]] **film, movie** (#333): Η ταινία ήταν ρομαντική. (The movie was romantic.)
 
 > [!todo]- Tue · day 92 of 300
-> **Today's line:** Το τετράδιο λέει: «Η επιλογή είναι δική σου.» — Ποια επιλογή; Τι σημασία έχει; (The notebook says: "The choice is yours." — What choice? What does it mean?)
+> **Today's line:** Εδώ λέει: «Η επιλογή είναι δική σου.» — Ποια επιλογή; Τι σημασία έχει αυτό; — Δεν ξέρω. Διάβασε παρακάτω! (Here it says: "The choice is yours." — What choice? What does that mean? — I don't know. Read on!)
 > - [[επιλογή|η επιλογή]] **choice, option** (#336): Έχουμε μόνο τρεις επιλογές. (We have only three options.)
 > - [[σημασία|η σημασία]] **meaning, importance** (#338): Το μέγεθος δεν έχει σημασία. (Size does not matter.)
 > - [[πρόεδρος|ο πρόεδρος]] **president** (#341): Θα είμαι ο πρόεδρος της ειρήνης.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[στοιχείο|το στοιχείο]] **element, data** (#345): Πόσα χημικά στοιχεία γνωρίζετε; (How many chemical elements do you know?)
 
 > [!todo]- Wed · day 93 of 300
-> **Today's line:** Κάθε λέξη είναι μια συνταγή! — Και τα υπόλοιπα τετράδια; Κάπου γύρω... (Every word is a recipe! — And the rest of the notebooks? Somewhere around...)
+> **Today's line:** Κοίτα! Κάθε σελίδα είναι μια συνταγή. Κάθε λέξη... φαγητό! — Και τα υπόλοιπα τετράδια; Κάπου εδώ γύρω... (Look! Every page is a recipe. Every word... food! — And the rest of the notebooks? Somewhere around here...)
 > - [[λέξη|η λέξη]] **word** (#346): Τι σημαίνει αυτή η λέξη; (What does this word mean?)
 > - [[γύρω]] **around** (#349): Καθίσαμε όλοι γύρω από το τραπέζι. (We all sat around the table.)
 > - [[χάρη|η χάρη]] **favor, grace** (#352): Θα μου κάνεις μια χάρη; (Would you do me a favour?)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[υπόλοιπος]] **remaining, the rest** (#358): Θα πω τα υπόλοιπα αύριο.
 
 > [!todo]- Thu · day 94 of 300
-> **Today's line:** Το αφεντικό μου... — Μαρία, πότε γυρίζεις; — Βασικά... όχι ακόμα. (My boss... — Maria, when are you coming back? — Basically... not yet.)
+> **Today's line:** Μαρία; Το αφεντικό σου εδώ. Πότε γυρίζεις; — Βασικά... όχι ακόμα. — Δεν είναι αστείο! Σε πληρώνω για να δουλεύεις! (Maria? It's your boss. When are you coming back? — Actually... not yet. — It's not funny! I pay you to work!)
 > - [[σώμα|το σώμα]] **body** (#360): Αισθάνεσαι καλά μέσα στο σώμα σου; (Do you feel comfortable in your skin?)
 > - [[βασικά]] **basically** (#363): Βασικά, έχετε απόλυτο δίκιο.
 > - [[αφεντικό|το αφεντικό]] **boss** (#369): Εγώ είμαι τ' αφεντικό τώρα. (I'm the boss now.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πληρώνω]] **I pay** (#378): Ο Τομ θα πληρώσει. (Tom'll pay.)
 
 > [!todo]- Fri · day 95 of 300
-> **Today's line:** Εδώ είναι υπέροχα. Δουλεύω καλύτερα. Γράφω κάθε πρωί. (It's wonderful here. I work better. I write every morning.)
+> **Today's line:** Και δουλεύω! Εδώ είναι υπέροχα. Δουλεύω καλύτερα. — Εντάξει. Αλλά πρόσεχε. — Γράφω κάθε πρωί, σας το υπόσχομαι. (And I am working! It's wonderful here. I work better. — Okay. But be careful. — I write every morning, I promise you.)
 > - [[υπέροχος]] **wonderful** (#379): Έχεις μια υπέροχη φωνή. (You have a wonderful voice.)
 > - [[καλύτερος]] **better, best** (#401): Είσαι ο καλύτερός μου φίλος. (You are my best friend.)
 > - [[προσέχω]] **I pay attention, I take care** (#413): Προσέχω τον παππού μου.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γράφω]] **I write** (#424): Μου αρέσει να γράφω. (I like to write.)
 
 > [!todo]- Sat · day 96 of 300
-> **Today's line:** Επιστρέφεις ή όχι; — Αποφασίζω όταν τελειώνει η χρονιά. (Are you coming back or not? — I'll decide when the year ends.)
+> **Today's line:** Λοιπόν; Επιστρέφεις ή όχι; — Αποφασίζω όταν τελειώνει η χρονιά. — Καλά, καλά. Θα δούμε. (So? Are you coming back or not? — I'll decide when the year is over. — Fine, fine. We'll see.)
 > - [[ηρεμώ]] **I calm down** (#430): Κάνοντας ένα μπάνιο ηρεμώ.
 > - [[επιστρέφω]] **I return** (#434): Θα επιστρέψει σε δέκα λεπτά. (He will be back in ten minutes.)
 > - [[αποφασίζω]] **I decide** (#441): Θέλεις να αποφασίσω εγώ; (Do you want me to decide?)

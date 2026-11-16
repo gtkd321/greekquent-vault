@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Χρόνια πολλά, Νίκο! Του Αγίου Νικολάου! — Ο γείτονας φέρνει μουσική. Τι ρυθμός! (Happy name day, Niko! It's Saint Nicholas! — The neighbor brings music. What a rhythm!)
-> 2. Ένα σημείωμα από τον δήμο: ένας διαγωνισμός για λάδι! (A note from the town hall: an oil competition!)
-> 3. Το μέγεθος του διαγωνισμού! — Το λάδι μας είναι πολύτιμο. (The size of the competition! — Our oil is precious.)
-> 4. Από πού προέρχεται αυτό το λάδι; — Από ένα δέντρο που φύτεψε η γιαγιά μου. Θέλετε και σοκολάτα με λάδι; (Where does this oil come from? — From a tree my grandmother planted. Would you also like chocolate with oil?)
-> 5. Πρώτο βραβείο! Το αποτέλεσμα είναι ξεκάθαρο. — Δεν έχουμε παρόμοιο λάδι! (First prize! The result is clear. — There's no oil like ours!)
-> 6. Η γιαγιά ταξιδεύει ξανά! — Θα ανεβεί στο χωριό; (Grandma is traveling again! — She'll come up to the village?)
+> 1. Χρόνια πολλά, Νίκο! Σήμερα είναι του Αγίου Νικολάου! — Ευχαριστώ, γιαγιά! Και ακούω μουσική! — Για σένα, Νίκο! Τι ρυθμός, ε; (Happy name day, Niko! Today is Saint Nicholas's day! — Thank you, grandma! And I hear music! — For you, Niko! What a rhythm, eh?)
+> 2. Νίκο! Ένα σημείωμα από τον δήμο: ένας διαγωνισμός για λάδι στην Αθήνα! — Το λάδι «Ελένη» πρέπει να πάει! (Niko! A note from the town hall: an oil competition in Athens! — The "Eleni" oil has to go!)
+> 3. Δες το μέγεθος του διαγωνισμού! Τριακόσια λάδια! — Δεν φοβάμαι. Το λάδι μας είναι πολύτιμο. (Look at the size of the competition! Three hundred oils! — I'm not scared. Our oil is precious.)
+> 4. Από πού προέρχεται αυτό το λάδι; — Από ένα χωριό, και από ένα δέντρο που φύτεψε η γιαγιά μου. Θέλετε και σοκολάτα με λάδι; (Where does this oil come from? — From a village, and from a tree my grandmother planted. Would you like some chocolate with oil too?)
+> 5. Πρώτο βραβείο! Το αποτέλεσμα είναι ξεκάθαρο. — Το ήξερα! Δεν υπάρχει παρόμοιο λάδι! (First prize! The result is clear. — I knew it! There's no other oil like it!)
+> 6. Μαρία, συγχαρητήρια! Και νέα: η γιαγιά ταξιδεύει ξανά! — Αλήθεια; Θα ανεβεί στο χωριό; — Για το βραβείο, και για τον γάμο! (Maria, congratulations! And some news: grandma is traveling again! — Really? She'll come up to the village? — For the prize, and for the wedding!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **name days and holidays** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 283 of 300
-> **Today's line:** Χρόνια πολλά, Νίκο! Του Αγίου Νικολάου! — Ο γείτονας φέρνει μουσική. Τι ρυθμός! (Happy name day, Niko! It's Saint Nicholas! — The neighbor brings music. What a rhythm!)
+> **Today's line:** Χρόνια πολλά, Νίκο! Σήμερα είναι του Αγίου Νικολάου! — Ευχαριστώ, γιαγιά! Και ακούω μουσική! — Για σένα, Νίκο! Τι ρυθμός, ε; (Happy name day, Niko! Today is Saint Nicholas's day! — Thank you, grandma! And I hear music! — For you, Niko! What a rhythm, eh?)
 > - [[ρυθμός|ο ρυθμός]] **rhythm, pace** (#1288): Δεν θα συνέλθει ποτέ μ' αυτούς τους ρυθμούς.
 > - [[απαγορεύεται]] **it is forbidden** (#1289): Απαγορεύεται η είσοδος στο χειρουργείο. (Entry to the operating room is prohibited.)
 > - [[γείτονας|ο γείτονας]] **neighbor** (#1290): Οι γείτονες είναι θορυβώδεις. (The neighbors are noisy.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φρουρός|ο φρουρός]] **guard** (#1293): Στέκομαι φρουρός.
 
 > [!todo]- Tue · day 284 of 300
-> **Today's line:** Ένα σημείωμα από τον δήμο: ένας διαγωνισμός για λάδι! (A note from the town hall: an oil competition!)
+> **Today's line:** Νίκο! Ένα σημείωμα από τον δήμο: ένας διαγωνισμός για λάδι στην Αθήνα! — Το λάδι «Ελένη» πρέπει να πάει! (Niko! A note from the town hall: an oil competition in Athens! — The "Eleni" oil has to go!)
 > - [[σημείωμα|το σημείωμα]] **note** (#1294): Της έγραψα ένα σημείωμα ότι θα λείπω.
 > - [[αρχαίος]] **ancient** (#1295): Μιλάω αρχαία ελληνικά. (I speak Classical Greek.)
 > - [[διαγωνισμός|ο διαγωνισμός]] **competition** (#1296): Κερδίσαμε τον διαγωνισμό!
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[διαζύγιο|το διαζύγιο]] **divorce** (#1298): Τελικά πήραμε διαζύγιο.
 
 > [!todo]- Wed · day 285 of 300
-> **Today's line:** Το μέγεθος του διαγωνισμού! — Το λάδι μας είναι πολύτιμο. (The size of the competition! — Our oil is precious.)
+> **Today's line:** Δες το μέγεθος του διαγωνισμού! Τριακόσια λάδια! — Δεν φοβάμαι. Το λάδι μας είναι πολύτιμο. (Look at the size of the competition! Three hundred oils! — I'm not scared. Our oil is precious.)
 > - [[μέγεθος|το μέγεθος]] **size** (#1299): Το μέγεθος δεν έχει σημασία.
 > - [[αστέρι|το αστέρι]] **star** (#1300): Δεν βλέπω το αστέρι.
 > - [[κοτόπουλο|το κοτόπουλο]] **chicken** (#1301): Αγόρασε κοτόπουλο.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τσέπη|η τσέπη]] **pocket** (#1303): Έχει τα δάκρυα στην τσέπη. (She's a crybaby.)
 
 > [!todo]- Thu · day 286 of 300
-> **Today's line:** Από πού προέρχεται αυτό το λάδι; — Από ένα δέντρο που φύτεψε η γιαγιά μου. Θέλετε και σοκολάτα με λάδι; (Where does this oil come from? — From a tree my grandmother planted. Would you also like chocolate with oil?)
+> **Today's line:** Από πού προέρχεται αυτό το λάδι; — Από ένα χωριό, και από ένα δέντρο που φύτεψε η γιαγιά μου. Θέλετε και σοκολάτα με λάδι; (Where does this oil come from? — From a village, and from a tree my grandmother planted. Would you like some chocolate with oil too?)
 > - [[εμφάνιση|η εμφάνιση]] **appearance** (#1304): Μη κρίνετε τον άνθρωπο από την εμφάνισή του.
 > - [[εξέλιξη|η εξέλιξη]] **development** (#1305): Ο Δαρβίνος ανέπτυξε τη θεωρία της εξέλιξης.
 > - [[προέρχομαι]] **I come from** (#1306): Το λάδι προέρχεται από ελιές. (The oil comes from olives.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σοκολάτα|η σοκολάτα]] **chocolate** (#1308): Σου αρέσει η λευκή σοκολάτα; (Do you like white chocolate?)
 
 > [!todo]- Fri · day 287 of 300
-> **Today's line:** Πρώτο βραβείο! Το αποτέλεσμα είναι ξεκάθαρο. — Δεν έχουμε παρόμοιο λάδι! (First prize! The result is clear. — There's no oil like ours!)
+> **Today's line:** Πρώτο βραβείο! Το αποτέλεσμα είναι ξεκάθαρο. — Το ήξερα! Δεν υπάρχει παρόμοιο λάδι! (First prize! The result is clear. — I knew it! There's no other oil like it!)
 > - [[εφόσον]] **provided that** (#1309): Εφόσον έχω άδεια σήμερα, ας πάμε στην παραλία.
 > - [[πύργος|ο πύργος]] **tower** (#1310): Αυτός είν' ένας πύργος.
 > - [[παρόμοιος]] **similar** (#1311): Το ποδήλατό σου είναι παρόμοιο με το δικό μου.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[βιβλιοθήκη|η βιβλιοθήκη]] **library, bookcase** (#1313): Ήταν αυτοί χθες στη βιβλιοθήκη; (Were they in the library yesterday?)
 
 > [!todo]- Sat · day 288 of 300
-> **Today's line:** Η γιαγιά ταξιδεύει ξανά! — Θα ανεβεί στο χωριό; (Grandma is traveling again! — She'll come up to the village?)
+> **Today's line:** Μαρία, συγχαρητήρια! Και νέα: η γιαγιά ταξιδεύει ξανά! — Αλήθεια; Θα ανεβεί στο χωριό; — Για το βραβείο, και για τον γάμο! (Maria, congratulations! And some news: grandma is traveling again! — Really? She'll come up to the village? — For the prize, and for the wedding!)
 > - [[ανεβαίνω]] **I go up** (#1314): Οι τιμές συνέχισαν να ανεβαίνουν.
 > - [[λύκειο|το λύκειο]] **high school** (#1315)
 > - [[ιός|ο ιός]] **virus** (#1316): Ο ιός χάλασε τον υπολογιστή μου.

@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Τι κρύο! Ο αέρας... — Κοίτα ψηλά! Στο δέντρο, χαρτιά! (How cold! The wind... — Look up high! In the tree, papers!)
-> 2. Προφανώς ο αέρας το πήρε. — Ένα εκατομμύριο χαρτιά! (Obviously the wind took it. — A million papers!)
-> 3. Ένα άσπρο χαρτί, δίπλα στην πόρτα... — Κάπως θα τα βρούμε. (A white paper, next to the door... — Somehow we'll find them.)
-> 4. Το κίτρινο τετράδιο! Το έχει ο σκύλος του κυρ Στέλιου! — Ένα σύστημα: εσύ από εδώ, εγώ από εκεί! (The yellow notebook! Mr. Stelios's dog has it! — A system: you from here, me from there!)
-> 5. Αποστολή: ο γκρι σκύλος! (Mission: the gray dog!)
-> 6. Προσοχή! Ένα πορτοκάλι για σένα, σκυλάκο... — Κερδίσαμε! Αλλά λείπουν σελίδες. (Careful! An orange for you, doggy... — We won! But pages are missing.)
+> 1. Τι κρύο! Και τι αέρας! — Κοίτα ψηλά! Στο δέντρο... χαρτιά! (How cold! And what wind! — Look up! In the tree... papers!)
+> 2. Προφανώς ο αέρας πήρε το τετράδιο. — Και τώρα; Υπάρχουν ένα εκατομμύριο χαρτιά! — Ας τα μαζέψουμε, ένα ένα. (Obviously the wind took the notebook. — And now what? There are a million papers! — Let's gather them up, one by one.)
+> 3. Ένα άσπρο χαρτί, δίπλα στην πόρτα... Είναι από το τετράδιο! — Βλέπεις; Κάπως θα τα βρούμε όλα. (A white sheet, next to the door... It's from the notebook! — See? Somehow we'll find them all.)
+> 4. Κοίτα! Το κίτρινο τετράδιο! Το έχει ο σκύλος του κυρ Στέλιου! — Χρειαζόμαστε ένα σύστημα: εσύ από εδώ, εγώ από εκεί! (Look! The yellow notebook! Mr. Stelios's dog has it! — We need a system: you go from here, I'll go from there!)
+> 5. Η αποστολή μας: ο γκρι σκύλος! — Σιγά... Μην τον τρομάξεις! (Our mission: the gray dog! — Gently... Don't scare him!)
+> 6. Έλα, σκυλάκο... Ένα πορτοκάλι για σένα; — Προσοχή! ... Τον πιάσαμε! Κερδίσαμε! — Ναι, αλλά λείπουν σελίδες. (Come on, doggy... An orange for you? — Careful! ... We got him! We won! — Yes, but some pages are missing.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L18 Clean Monday kites and weather-student|L18 Clean Monday kites and weather]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 109 of 300
-> **Today's line:** Τι κρύο! Ο αέρας... — Κοίτα ψηλά! Στο δέντρο, χαρτιά! (How cold! The wind... — Look up high! In the tree, papers!)
+> **Today's line:** Τι κρύο! Και τι αέρας! — Κοίτα ψηλά! Στο δέντρο... χαρτιά! (How cold! And what wind! — Look up! In the tree... papers!)
 > - [[αέρας|ο αέρας]] **air, wind** (#490): Ο αέρας είναι αόρατος. (Air is invisible.)
 > - [[ψηλά]] **high, up** (#581): Ψηλά το κεφάλι!
 > - [[κρύο|το κρύο]] **cold** (#859): Κάνει πολύ κρύο εδώ. (It's very cold here.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[απλός]] **simple** (#423): Μακάρι να ήταν τόσο απλό. (If only it were that simple.)
 
 > [!todo]- Tue · day 110 of 300
-> **Today's line:** Προφανώς ο αέρας το πήρε. — Ένα εκατομμύριο χαρτιά! (Obviously the wind took it. — A million papers!)
+> **Today's line:** Προφανώς ο αέρας πήρε το τετράδιο. — Και τώρα; Υπάρχουν ένα εκατομμύριο χαρτιά! — Ας τα μαζέψουμε, ένα ένα. (Obviously the wind took the notebook. — And now what? There are a million papers! — Let's gather them up, one by one.)
 > - [[προφανώς]] **obviously** (#426): Προφανώς έκανα λάθος.
 > - [[γόνατο|το γόνατο]] **knee** (#1427)
 > - [[αριθμός|ο αριθμός]] **number** (#427): Ξέχασα τον αριθμό σας.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φωτιά|η φωτιά]] **fire** (#429): Δώσε μια φωτιά.
 
 > [!todo]- Wed · day 111 of 300
-> **Today's line:** Ένα άσπρο χαρτί, δίπλα στην πόρτα... — Κάπως θα τα βρούμε. (A white paper, next to the door... — Somehow we'll find them.)
+> **Today's line:** Ένα άσπρο χαρτί, δίπλα στην πόρτα... Είναι από το τετράδιο! — Βλέπεις; Κάπως θα τα βρούμε όλα. (A white sheet, next to the door... It's from the notebook! — See? Somehow we'll find them all.)
 > - [[πραγματικότητα|η πραγματικότητα]] **reality** (#432): Στην πραγματικότητα αυτός δεν εξετάστηκε. (In fact, he didn't take the exam.)
 > - [[άσπρος]] **white** (#1428): Ο γάτος μου είναι άσπρος. (My cat is white.)
 > - [[δίπλα]] **next to** (#433): Υπάρχει ένα σπίτι δίπλα στη θάλασσα. (There is a house next to the sea.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επιτρέπω]] **I allow** (#437): Επιτρέψτε μου να σας συστηθώ. (Let me introduce myself.)
 
 > [!todo]- Thu · day 112 of 300
-> **Today's line:** Το κίτρινο τετράδιο! Το έχει ο σκύλος του κυρ Στέλιου! — Ένα σύστημα: εσύ από εδώ, εγώ από εκεί! (The yellow notebook! Mr. Stelios's dog has it! — A system: you from here, me from there!)
+> **Today's line:** Κοίτα! Το κίτρινο τετράδιο! Το έχει ο σκύλος του κυρ Στέλιου! — Χρειαζόμαστε ένα σύστημα: εσύ από εδώ, εγώ από εκεί! (Look! The yellow notebook! Mr. Stelios's dog has it! — We need a system: you go from here, I'll go from there!)
 > - [[σύστημα|το σύστημα]] **system** (#438): Το σύστημα δουλεύει καλά.
 > - [[κίτρινος]] **yellow** (#1429): Οι κρόκοι είναι κίτρινοι.
 > - [[μέσος]] **average, middle** (#439): Η γλώσσα είναι ένα μέσο συνεννόησης. (Language is a means of communication.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πλοίο|το πλοίο]] **ship** (#442): Πού είναι το πλοίο;
 
 > [!todo]- Fri · day 113 of 300
-> **Today's line:** Αποστολή: ο γκρι σκύλος! (Mission: the gray dog!)
+> **Today's line:** Η αποστολή μας: ο γκρι σκύλος! — Σιγά... Μην τον τρομάξεις! (Our mission: the gray dog! — Gently... Don't scare him!)
 > - [[χώρος|ο χώρος]] **space, area** (#444): Υπάρχει χώρος μέσα. (There's room inside.)
 > - [[τμήμα|το τμήμα]] **department, section** (#446): Πού βρίσκεται το βόρειο τμήμα της πόλης; (Where is the northern part of the city?)
 > - [[σκληρός]] **hard, harsh** (#447): Μην είσαι τόσο σκληρός μαζί της. (Don't be so harsh with her.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γκρι]] **gray** (#1431): Το τσιμέντο είναι γκρι. (The cement is gray.)
 
 > [!todo]- Sat · day 114 of 300
-> **Today's line:** Προσοχή! Ένα πορτοκάλι για σένα, σκυλάκο... — Κερδίσαμε! Αλλά λείπουν σελίδες. (Careful! An orange for you, doggy... — We won! But pages are missing.)
+> **Today's line:** Έλα, σκυλάκο... Ένα πορτοκάλι για σένα; — Προσοχή! ... Τον πιάσαμε! Κερδίσαμε! — Ναι, αλλά λείπουν σελίδες. (Come on, doggy... An orange for you? — Careful! ... We got him! We won! — Yes, but some pages are missing.)
 > - [[πορτοκαλί]] **orange (color)** (#1432): Το πουκάμισό μου είναι πορτοκαλί. (My shirt is orange.)
 > - [[προσοχή|η προσοχή]] **attention, caution** (#457): Προσοχή σκύλος!
 > - [[πορτοκάλι|το πορτοκάλι]] **orange (fruit)** (#1434): Θα ήθελες λίγο χυμό πορτοκάλι; (Would you like some orange juice?)

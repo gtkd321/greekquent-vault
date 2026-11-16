@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Μετράω τα λεφτά. Δεν φτάνουν. — Η ευτυχία δεν είναι λεφτά. (I'm counting the money. It's not enough. — Happiness isn't money.)
-> 2. Δεν είναι ντροπή να ζητήσω βοήθεια. — Χρειάζεται και φαντασία! (It's no shame to ask for help. — It takes imagination too!)
-> 3. Μια αίτηση, παρακαλώ. — Έξω έχει βροχή, μέσα έχει χαρτιά! (An application, please. — Outside it's raining, inside it's paperwork!)
-> 4. Υπομονή. Ένα αντίγραφο της ταυτότητας. (Patience. A copy of your ID.)
-> 5. Η παράδοση του χωριού σας είναι συναρπαστική! (Your village's tradition is fascinating!)
-> 6. Το δάνειο εγκρίθηκε! Είμαι βέβαιη ότι θα πετύχετε. — Σαν βραβείο! (The loan is approved! I'm sure you'll succeed. — Like an award!)
+> 1. Μετράω τα λεφτά για το εργοστάσιο. Δεν φτάνουν. — Η ευτυχία δεν είναι λεφτά, κορίτσι μου. — Το ξέρω. Αλλά τα μπουκάλια θέλουν λεφτά! (I'm counting the money for the factory. It's not enough. — Happiness isn't money, my girl. — I know. But the bottles need money!)
+> 2. Πήγαινε στην τράπεζα. Δεν είναι ντροπή να ζητήσεις βοήθεια. — Και τι θα τους πω; — Την ιστορία σου! Με λίγη φαντασία! (Go to the bank. There's no shame in asking for help. — And what will I tell them? — Your story! With a little imagination!)
+> 3. Καλημέρα. Για δάνειο; Μια αίτηση, παρακαλώ. — Έξω έχει βροχή, μέσα έχει χαρτιά! (Good morning. For a loan? An application, please. — Outside it's raining, inside it's paperwork!)
+> 4. Υπομονή. Και ένα αντίγραφο της ταυτότητας. — Ορίστε. Και ένα μπουκάλι λάδι, για να δοκιμάσετε! (Patience. And a copy of your ID. — Here you go. And a bottle of oil, for you to taste!)
+> 5. Διάβασα το άρθρο για σας! Η παράδοση του χωριού σας είναι συναρπαστική! — Ελάτε να τη δείτε! (I read the article about you! Your village's tradition is fascinating! — Come and see it!)
+> 6. Το δάνειο εγκρίθηκε! Είμαι βέβαιη ότι θα πετύχετε. — Ευχαριστώ! Είναι σαν βραβείο! (The loan is approved! I'm sure you'll succeed. — Thank you! It's like an award!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **money** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 259 of 300
-> **Today's line:** Μετράω τα λεφτά. Δεν φτάνουν. — Η ευτυχία δεν είναι λεφτά. (I'm counting the money. It's not enough. — Happiness isn't money.)
+> **Today's line:** Μετράω τα λεφτά για το εργοστάσιο. Δεν φτάνουν. — Η ευτυχία δεν είναι λεφτά, κορίτσι μου. — Το ξέρω. Αλλά τα μπουκάλια θέλουν λεφτά! (I'm counting the money for the factory. It's not enough. — Happiness isn't money, my girl. — I know. But the bottles need money!)
 > - [[ευτυχία|η ευτυχία]] **happiness** (#1158): Ευτυχία είναι να σ'αγαπούν. (To be happy is to be loved.)
 > - [[μετράω]] **I count, I measure** (#1159): Θα μετρήσω μέχρι το τρια.
 > - [[καρκίνος|ο καρκίνος]] **cancer** (#1160): Ο γιατρός μιλάει για τον καρκίνο. (The doctor is talking about cancer.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χορεύω]] **I dance** (#1162): Μου αρέσει να χορεύω. (I like to dance.)
 
 > [!todo]- Tue · day 260 of 300
-> **Today's line:** Δεν είναι ντροπή να ζητήσω βοήθεια. — Χρειάζεται και φαντασία! (It's no shame to ask for help. — It takes imagination too!)
+> **Today's line:** Πήγαινε στην τράπεζα. Δεν είναι ντροπή να ζητήσεις βοήθεια. — Και τι θα τους πω; — Την ιστορία σου! Με λίγη φαντασία! (Go to the bank. There's no shame in asking for help. — And what will I tell them? — Your story! With a little imagination!)
 > - [[ντροπή|η ντροπή]] **shame** (#1163): Η φτώχεια δεν είναι ντροπή.
 > - [[ρομαντικός]] **romantic** (#1164): Είμαι ρομαντικός;
 > - [[φαντασία|η φαντασία]] **imagination** (#1165): Στερείσαι φαντασίας.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[θόρυβος|ο θόρυβος]] **noise** (#1167): Κάναμε πολύ θόρυβο. (We made a lot of noise.)
 
 > [!todo]- Wed · day 261 of 300
-> **Today's line:** Μια αίτηση, παρακαλώ. — Έξω έχει βροχή, μέσα έχει χαρτιά! (An application, please. — Outside it's raining, inside it's paperwork!)
+> **Today's line:** Καλημέρα. Για δάνειο; Μια αίτηση, παρακαλώ. — Έξω έχει βροχή, μέσα έχει χαρτιά! (Good morning. For a loan? An application, please. — Outside it's raining, inside it's paperwork!)
 > - [[αίτηση|η αίτηση]] **application** (#1168): Αυτή έκανε αίτηση για βίζα. (She applied for a visa.)
 > - [[πολεμάω]] **I fight** (#1169): Οι Αμαζόνες πολεμούν με πολύχρωμα όπλα.
 > - [[ανάσα|η ανάσα]] **breath** (#1170): Αυτό μου κόβει την ανάσα.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[βροχή|η βροχή]] **rain** (#1172): Του αρέσει η βροχή. (He likes the rain.)
 
 > [!todo]- Thu · day 262 of 300
-> **Today's line:** Υπομονή. Ένα αντίγραφο της ταυτότητας. (Patience. A copy of your ID.)
+> **Today's line:** Υπομονή. Και ένα αντίγραφο της ταυτότητας. — Ορίστε. Και ένα μπουκάλι λάδι, για να δοκιμάσετε! (Patience. And a copy of your ID. — Here you go. And a bottle of oil, for you to taste!)
 > - [[συσκευή|η συσκευή]] **device** (#1173): Πώς χρησιμοποιείται αυτή η συσκευή;
 > - [[γύρος|ο γύρος]] **round, tour; gyro** (#1175): Αυτή κάνει τον γύρο του κόσμου ταξιδεύοντας.
 > - [[αντίγραφο|το αντίγραφο]] **copy** (#1176)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[υπομονή|η υπομονή]] **patience** (#1178): Χρειάζεσαι υπομονή.
 
 > [!todo]- Fri · day 263 of 300
-> **Today's line:** Η παράδοση του χωριού σας είναι συναρπαστική! (Your village's tradition is fascinating!)
+> **Today's line:** Διάβασα το άρθρο για σας! Η παράδοση του χωριού σας είναι συναρπαστική! — Ελάτε να τη δείτε! (I read the article about you! Your village's tradition is fascinating! — Come and see it!)
 > - [[μυρωδιά|η μυρωδιά]] **smell** (#1179): Έχει κακή μυρωδιά.
 > - [[ανυπομονώ]] **I can't wait** (#1180): Ανυπομονώ να τον δω. (I'm looking forward to seeing him.)
 > - [[παράδοση|η παράδοση]] **tradition, delivery** (#1181): Αυτή είναι μια οικογενειακή παράδοση.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[συναρπαστικός]] **exciting** (#1184): Το νερό είναι συναρπαστικό.
 
 > [!todo]- Sat · day 264 of 300
-> **Today's line:** Το δάνειο εγκρίθηκε! Είμαι βέβαιη ότι θα πετύχετε. — Σαν βραβείο! (The loan is approved! I'm sure you'll succeed. — Like an award!)
+> **Today's line:** Το δάνειο εγκρίθηκε! Είμαι βέβαιη ότι θα πετύχετε. — Ευχαριστώ! Είναι σαν βραβείο! (The loan is approved! I'm sure you'll succeed. — Thank you! It's like an award!)
 > - [[βραβείο|το βραβείο]] **prize, award** (#1185): Κέρδισα το πρώτο βραβείο. (I won the first prize.)
 > - [[ζήτημα|το ζήτημα]] **issue, matter** (#1186): Δε θέλει να μιλήσω γι' αυτό το ζήτημα. (She doesn't want me to speak about this issue.)
 > - [[βέβαιος]] **certain** (#1187): Δεν είμαι βέβαιος. (I'm not certain.)

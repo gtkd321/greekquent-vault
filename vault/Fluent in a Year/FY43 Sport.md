@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ήρθα! Η γειτονιά είναι ίδια! — Ανέβα τη σκάλα! (I'm here! The neighborhood is the same! — Come up the stairs!)
-> 2. Η ομορφιά του χωριού! — Σήμερα έχουμε γιορτή! (The beauty of the village! — Today we have a celebration!)
-> 3. Ποδόσφαιρο στο χωριό! Ενδιαφέρεσαι; — Η επιστροφή του Νίκου! (Football in the village! Are you interested? — The return of Nikos!)
-> 4. Βρε Νίκο, γρήγορα! — Έστω ένα γκολ! (Hey Niko, faster! — At least one goal!)
-> 5. Ένα πιάτο με ελιές για τον νικητή! — Εκπληκτικό! (A plate of olives for the winner! — Amazing!)
-> 6. Ένα συμβόλαιο για όλη τη χρονιά! — Απαντάω: ναι! (A contract for the whole year! — I answer: yes!)
+> 1. Μαρία! Ήρθα! Η γειτονιά είναι ίδια! — Νίκο! Ανέβα τη σκάλα! Έλα να γνωρίσεις τη μαμά μου! (Maria! I'm here! The neighborhood is the same! — Niko! Come up the stairs! Come meet my mom!)
+> 2. Τι ομορφιά! Τι γίνεται σήμερα; — Σήμερα έχουμε γιορτή στην πλατεία! (How beautiful! What's happening today? — Today there's a celebration in the square!)
+> 3. Και μετά, ποδόσφαιρο! Ενδιαφέρεσαι; — Για ποδόσφαιρο όχι. Για την επιστροφή σου, ναι! (And afterwards, football! Are you interested? — In football, no. In your return, yes!)
+> 4. Βρε Νίκο, πιο γρήγορα! — Παππού, είμαι κουρασμένος! — Έστω ένα γκολ! Για τη Μαρία! (Come on, Niko, faster! — Grandpa, I'm tired! — At least one goal! For Maria!)
+> 5. Ένα πιάτο με ελιές για τον νικητή! — Αλλά δεν κερδίσαμε! — Ε, έβαλες γκολ. Για μένα είναι εκπληκτικό! (A plate of olives for the winner! — But we didn't win! — Well, you scored a goal. To me, that's amazing!)
+> 6. Μαρία, θέλω το λάδι σου όλη τη χρονιά. Ένα συμβόλαιο; — Και απαντάω αμέσως: ναι! (Maria, I want your oil all year round. A contract? — And I'll answer right away: yes!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **sport** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 241 of 300
-> **Today's line:** Ήρθα! Η γειτονιά είναι ίδια! — Ανέβα τη σκάλα! (I'm here! The neighborhood is the same! — Come up the stairs!)
+> **Today's line:** Μαρία! Ήρθα! Η γειτονιά είναι ίδια! — Νίκο! Ανέβα τη σκάλα! Έλα να γνωρίσεις τη μαμά μου! (Maria! I'm here! The neighborhood is the same! — Niko! Come up the stairs! Come meet my mom!)
 > - [[τεχνολογία|η τεχνολογία]] **technology** (#1062): Ποιό είναι το προτέρημα αυτής της τεχνολογίας;
 > - [[χτύπημα|το χτύπημα]] **blow, hit** (#1063): 'Ηταν για μας ένα βαρύ χτύπημα.
 > - [[ουσία|η ουσία]] **substance, essence** (#1064): Χάνεις την ουσία.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γειτονιά|η γειτονιά]] **neighborhood** (#1066): Δε ζει στη γειτονιά μου.
 
 > [!todo]- Tue · day 242 of 300
-> **Today's line:** Η ομορφιά του χωριού! — Σήμερα έχουμε γιορτή! (The beauty of the village! — Today we have a celebration!)
+> **Today's line:** Τι ομορφιά! Τι γίνεται σήμερα; — Σήμερα έχουμε γιορτή στην πλατεία! (How beautiful! What's happening today? — Today there's a celebration in the square!)
 > - [[πύλη|η πύλη]] **gate** (#1067): Σταματήσαμε στην πύλη.
 > - [[πατρίδα|η πατρίδα]] **homeland** (#1068): Πατρίδα μου είναι όλη η γη. (My homeland is the whole earth.)
 > - [[ομορφιά|η ομορφιά]] **beauty** (#1069): Τοπίο απερίγραπτης ομορφιάς.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[θυμίζω]] **I remind** (#1071): Μου θυμίζει εσένα. (It reminds me of you.)
 
 > [!todo]- Wed · day 243 of 300
-> **Today's line:** Ποδόσφαιρο στο χωριό! Ενδιαφέρεσαι; — Η επιστροφή του Νίκου! (Football in the village! Are you interested? — The return of Nikos!)
+> **Today's line:** Και μετά, ποδόσφαιρο! Ενδιαφέρεσαι; — Για ποδόσφαιρο όχι. Για την επιστροφή σου, ναι! (And afterwards, football! Are you interested? — In football, no. In your return, yes!)
 > - [[ενδιαφέρομαι]] **I am interested** (#1072): Κανένας δεν ενδιαφέρεται. (No one's interested.)
 > - [[επιστροφή|η επιστροφή]] **return** (#1073): Αγόρασες εισιτήριο επιστροφής;
 > - [[απώλεια|η απώλεια]] **loss** (#1074): Ποιος θα αντισταθμίσει την απώλεια;
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πριγκίπισσα|η πριγκίπισσα]] **princess** (#1077): Η πριγκίπισσα φοράει μια χρυσή τιάρα.
 
 > [!todo]- Thu · day 244 of 300
-> **Today's line:** Βρε Νίκο, γρήγορα! — Έστω ένα γκολ! (Hey Niko, faster! — At least one goal!)
+> **Today's line:** Βρε Νίκο, πιο γρήγορα! — Παππού, είμαι κουρασμένος! — Έστω ένα γκολ! Για τη Μαρία! (Come on, Niko, faster! — Grandpa, I'm tired! — At least one goal! For Maria!)
 > - [[έστω]] **even if, at least** (#1079): Έστω και για λίγο θέλω να σε δω.
 > - [[ρεύμα|το ρεύμα]] **electricity, current** (#1080): Κόπηκε το ρεύμα.
 > - [[κατάλληλος]] **suitable** (#1081): Ήρθες στο κατάλληλο μέρος.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[προτού]] **before** (#1083): Μίλα προτού είναι πολύ αργά.
 
 > [!todo]- Fri · day 245 of 300
-> **Today's line:** Ένα πιάτο με ελιές για τον νικητή! — Εκπληκτικό! (A plate of olives for the winner! — Amazing!)
+> **Today's line:** Ένα πιάτο με ελιές για τον νικητή! — Αλλά δεν κερδίσαμε! — Ε, έβαλες γκολ. Για μένα είναι εκπληκτικό! (A plate of olives for the winner! — But we didn't win! — Well, you scored a goal. To me, that's amazing!)
 > - [[ετοιμάζω]] **I prepare** (#1084): Έχουν ετοιμαστεί όλες.
 > - [[ωστόσο]] **however** (#1085): Ωστόσο, δεν έχω λεφτά.
 > - [[εκπληκτικός]] **amazing** (#1086): Είναι εκπληκτικές.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πιάτο|το πιάτο]] **plate, dish** (#1089): Πόσα πιάτα θέλεις;
 
 > [!todo]- Sat · day 246 of 300
-> **Today's line:** Ένα συμβόλαιο για όλη τη χρονιά! — Απαντάω: ναι! (A contract for the whole year! — I answer: yes!)
+> **Today's line:** Μαρία, θέλω το λάδι σου όλη τη χρονιά. Ένα συμβόλαιο; — Και απαντάω αμέσως: ναι! (Maria, I want your oil all year round. A contract? — And I'll answer right away: yes!)
 > - [[απαντάω]] **I answer** (#1090): Δεν ξέρω τι να απαντήσω.
 > - [[μεγαλύτερος]] **bigger, older** (#1091): Είσαι μεγαλύτερος από μένα. (You're older than me.)
 > - [[συμβόλαιο|το συμβόλαιο]] **contract** (#1092): Υπόγραψες το συμβόλαιο;

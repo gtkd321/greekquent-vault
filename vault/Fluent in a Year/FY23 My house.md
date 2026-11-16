@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Η κουζίνα είναι παλιά, το μπάνιο... πολύ παλιό! — Μια κόκκινη πόρτα; Καινούργια! (The kitchen is old, the bathroom... very old! — A red door? A new one!)
-> 2. Τι χρώμα για τον κήπο; — Πράσινο! Και ο σκύλος... πάλι εδώ! (What color for the garden? — Green! And the dog... here again!)
-> 3. Στο κέντρο, στο φαρμακείο, ήρθε ένα γράμμα για σένα! (In the center, at the pharmacy, a letter came for you!)
-> 4. «Το σπίτι είναι το μέλλον σου, αν το θέλεις. Έχεις το δικαίωμα.» Ελένη. — Ο στόχος μου: λάδι από τις ελιές μας! ("The house is your future, if you want it. You have the right." Eleni. — My goal: oil from our olives!)
-> 5. Μια λίστα: είτε μένω, είτε φεύγω... — Σοβαρά πράγματα αυτά! (A list: either I stay, or I leave... — These are serious things!)
-> 6. Κάποτε, η Ελένη έφυγε με ένα καράβι... με το τρίτο τετράδιο. (Once, Eleni left on a ship... with the third notebook.)
+> 1. Η κουζίνα είναι παλιά. Το μπάνιο... πολύ παλιό! — Αλλά κοίτα: μια κόκκινη πόρτα, καινούργια! Ποιος την έβαλε; (The kitchen is old. The bathroom... very old! — But look: a red door, a new one! Who put it there?)
+> 2. Τι χρώμα για τον κήπο; — Πράσινο, φυσικά! Και ο σκύλος... πάλι εδώ! (What color for the garden? — Green, of course! And the dog... here again!)
+> 3. Μαρία! Στο φαρμακείο, στο κέντρο, ήρθε ένα γράμμα για σένα! — Για μένα; Από ποιον; — Από την Αμερική! (Maria! A letter came for you, at the pharmacy in the center! — For me? From whom? — From America!)
+> 4. «Το σπίτι είναι το μέλλον σου, αν το θέλεις. Έχεις το δικαίωμα.» Ελένη. — Κι εσύ; Το θέλεις; — Ναι! Ο στόχος μου: λάδι από τις ελιές μας! ("The house is your future, if you want it. You have the right." Eleni. — And you? Do you want it? — Yes! My goal: oil from our olives!)
+> 5. Έγραψα μια λίστα: είτε μένω, είτε φεύγω. — Σοβαρά πράγματα αυτά. Και τι λέει η λίστα; — Ακόμα τίποτα! (I wrote a list: either I stay, or I leave. — That's serious stuff. And what does the list say? — Nothing yet!)
+> 6. Γιαγιά, πώς έφυγε η Ελένη; — Κάποτε, με ένα καράβι, από τον Πειραιά. Και πήρε μαζί της το τρίτο τετράδιο. (Grandma, how did Eleni leave? — Long ago, on a ship, from Piraeus. And she took the third notebook with her.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L20 My house-student|L20 My house]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 121 of 300
-> **Today's line:** Η κουζίνα είναι παλιά, το μπάνιο... πολύ παλιό! — Μια κόκκινη πόρτα; Καινούργια! (The kitchen is old, the bathroom... very old! — A red door? A new one!)
+> **Today's line:** Η κουζίνα είναι παλιά. Το μπάνιο... πολύ παλιό! — Αλλά κοίτα: μια κόκκινη πόρτα, καινούργια! Ποιος την έβαλε; (The kitchen is old. The bathroom... very old! — But look: a red door, a new one! Who put it there?)
 > - [[καινούργιος]] **new** (#536): Το βιβλίο είναι καινούργιο. (The book is new.)
 > - [[μπάνιο|το μπάνιο]] **bath, bathroom; swim** (#603): Κάνοντας ένα μπάνιο ηρεμώ. (Taking a bath makes me relax.)
 > - [[διαμέρισμα|το διαμέρισμα]] **apartment** (#711): Έχω ένα διαμέρισμα στο Μπόστον. (I have an apartment in Boston.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κόκκινος]] **red** (#810): Το χρώμα του είναι κόκκινο. (Its color is red.)
 
 > [!todo]- Tue · day 122 of 300
-> **Today's line:** Τι χρώμα για τον κήπο; — Πράσινο! Και ο σκύλος... πάλι εδώ! (What color for the garden? — Green! And the dog... here again!)
+> **Today's line:** Τι χρώμα για τον κήπο; — Πράσινο, φυσικά! Και ο σκύλος... πάλι εδώ! (What color for the garden? — Green, of course! And the dog... here again!)
 > - [[μαύρος]] **black** (#839): Τ' αγόρασες στη μαύρη αγορά; (Did you buy it on the black market?)
 > - [[χρώμα|το χρώμα]] **color** (#934): Τι χρώμα είναι τα πλακάκια; (What color are the tiles?)
 > - [[κήπος|ο κήπος]] **garden** (#1032): Δεν πήγα στον ζωολογικό κήπο. (I didn't go to the zoo.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πράσινος]] **green** (#1291): Ο Τομ έχει πράσινα μάτια. (Tom has green eyes.)
 
 > [!todo]- Wed · day 123 of 300
-> **Today's line:** Στο κέντρο, στο φαρμακείο, ήρθε ένα γράμμα για σένα! (In the center, at the pharmacy, a letter came for you!)
+> **Today's line:** Μαρία! Στο φαρμακείο, στο κέντρο, ήρθε ένα γράμμα για σένα! — Για μένα; Από ποιον; — Από την Αμερική! (Maria! A letter came for you, at the pharmacy in the center! — For me? From whom? — From America!)
 > - [[κέντρο|το κέντρο]] **center** (#481): Πάω συχνά στο κέντρο τις Δευτέρεις. (I often go downtown on Monday.)
 > - [[φωνή|η φωνή]] **voice** (#482): Ο Τόνι έχει ωραία φωνή. (Tony has a beautiful voice.)
 > - [[υπηρεσία|η υπηρεσία]] **service** (#485): Κάλεσε την πυροσβεστική υπηρεσία.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φαρμακείο|το φαρμακείο]] **pharmacy** (#1437): Εργάζομαι στο φαρμακείο.
 
 > [!todo]- Thu · day 124 of 300
-> **Today's line:** «Το σπίτι είναι το μέλλον σου, αν το θέλεις. Έχεις το δικαίωμα.» Ελένη. — Ο στόχος μου: λάδι από τις ελιές μας! ("The house is your future, if you want it. You have the right." Eleni. — My goal: oil from our olives!)
+> **Today's line:** «Το σπίτι είναι το μέλλον σου, αν το θέλεις. Έχεις το δικαίωμα.» Ελένη. — Κι εσύ; Το θέλεις; — Ναι! Ο στόχος μου: λάδι από τις ελιές μας! ("The house is your future, if you want it. You have the right." Eleni. — And you? Do you want it? — Yes! My goal: oil from our olives!)
 > - [[μέλλον|το μέλλον]] **future** (#487): Αγωνίζομαι για το μέλλον μου. (I am fighting for my future.)
 > - [[στρατός|ο στρατός]] **army** (#491): Ήσουν στον στρατό; (Were you in the army?)
 > - [[στόχος|ο στόχος]] **goal, target** (#492): Ποιος είναι ο στόχος μας; (What's our goal?)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[θεωρώ]] **I consider** (#494): Θεωρώ τον Τομ φίλο.
 
 > [!todo]- Fri · day 125 of 300
-> **Today's line:** Μια λίστα: είτε μένω, είτε φεύγω... — Σοβαρά πράγματα αυτά! (A list: either I stay, or I leave... — These are serious things!)
+> **Today's line:** Έγραψα μια λίστα: είτε μένω, είτε φεύγω. — Σοβαρά πράγματα αυτά. Και τι λέει η λίστα; — Ακόμα τίποτα! (I wrote a list: either I stay, or I leave. — That's serious stuff. And what does the list say? — Nothing yet!)
 > - [[είτε]] **either, whether** (#495): Λίγο με νοιάζει είτε με πιστεύετε είτε όχι. (I don't care much whether you believe me or not.)
 > - [[λίστα|η λίστα]] **list** (#497): Το όνομά του δεν είναι στη λίστα. (His name is not on the list.)
 > - [[έξυπνος]] **clever, smart** (#498): Ο σκύλος είναι έξυπνος. (The dog is smart.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σοβαρός]] **serious** (#500): Αυτό είναι ένα σοβαρό ζήτημα. (This is a serious matter.)
 
 > [!todo]- Sat · day 126 of 300
-> **Today's line:** Κάποτε, η Ελένη έφυγε με ένα καράβι... με το τρίτο τετράδιο. (Once, Eleni left on a ship... with the third notebook.)
+> **Today's line:** Γιαγιά, πώς έφυγε η Ελένη; — Κάποτε, με ένα καράβι, από τον Πειραιά. Και πήρε μαζί της το τρίτο τετράδιο. (Grandma, how did Eleni leave? — Long ago, on a ship, from Piraeus. And she took the third notebook with her.)
 > - [[κάποτε]] **once, sometime** (#501): Ο Τομ ήταν κάποτε μεταφραστής. (Tom was once a translator.)
 > - [[νόμος|ο νόμος]] **law** (#502): Εγώ είμαι ο νόμος.
 > - [[καθώς]] **as, while** (#503): Μαθαίνουμε καθώς κάνουμε.

@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Καλώς ήρθες! — Ορίστε το κινητό σου. — Ευχαριστώ! Θέλεις λίγο νερό; — Όχι, ευχαριστώ. (Welcome! — Here is your phone. — Thank you! Do you want a little water? — No, thank you.)
-> 2. Τι θέλεις; Καφέ; Τσάι; — Τσάι, παρακαλώ. — Εντάξει. Και λίγο ψωμί; (What do you want? Coffee? Tea? — Tea, please. — Okay. And a little bread?)
-> 3. Γεια σου, παιδί μου. Είσαι ο Νίκος; — Ναι. — Καλό παιδί! (Hello, my child. Are you Nikos? — Yes. — Good kid!)
-> 4. Έλα! Το σπίτι μου. — Πόσα πράγματα! — Ναι, πολλά. Πάμε μέσα; (Come in! My house. — So many things! — Yes, lots. Shall we go in?)
-> 5. Πάω στη δουλειά! — Μαμά, ο Νίκος είναι φίλος μου. — Μου αρέσει ο φίλος σου! (I'm going to work! — Mom, Nikos is my friend. — I like your friend!)
-> 6. Κοίτα! Ένα κλειδί. — Ωραίο κλειδί! Μαμά, τι είναι; — Είναι από τη γιαγιά. Λυπάμαι, δεν ξέρω τι ανοίγει. (Look! A key. — A nice key! Mom, what is it? — It's from grandma. I'm sorry, I don't know what it opens.)
+> 1. Καλώς ήρθες, Νίκο! — Ευχαριστώ! Ορίστε το κινητό σου. — Α, το κινητό μου! Θέλεις λίγο νερό; — Νερό δεν θέλω, αλλά καφέ, ναι! (Welcome, Niko! — Thanks! Here's your phone. — Oh, my phone! Would you like a little water? — I don't want water, but coffee, yes!)
+> 2. Ωχ, καφέ δεν έχω. Τσάι; — Εντάξει, τσάι. Και λίγο ψωμί; Πεινάω! — Βέβαια. Και κρασί; — Κρασί; Το πρωί; Όχι! (Oh, I don't have coffee. Tea? — Okay, tea. And a little bread? I'm hungry! — Of course. And wine? — Wine? In the morning? No!)
+> 3. Γεια σου, παιδί μου! Εσύ είσαι ο Νίκος; — Ναι, κυρία. Απλά Νίκος. — Χαίρω πολύ! Η Μαρία λέει ότι είσαι καλό παιδί. — Προσπαθώ! (Hello, dear! Are you Nikos? — Yes, ma'am. Just Nikos. — Nice to meet you! Maria says you're a good kid. — I try!)
+> 4. Έλα μέσα! Αυτό είναι το σπίτι μου. — Πόσα πράγματα! Όλα δικά σου; — Όχι, πολλά είναι από τη γιαγιά. Πάμε να δεις; (Come in! This is my house. — So many things! All yours? — No, a lot of them are from grandma. Shall we go and look?)
+> 5. Παιδιά, χρειάζεστε κάτι; Μετά πάω στη δουλειά. — Όχι, μαμά, ευχαριστώ. — Η μαμά σου είναι πολύ καλή. Μου αρέσει! — Κι εσύ της αρέσεις, φίλε! (Kids, do you need anything? After this I'm going to work. — No, mom, thank you. — Your mom is really nice. I like her! — She likes you too, buddy!)
+> 6. Κοίτα! Ένα κλειδί, κάτω από τα βιβλία. — Ωραίο κλειδί! Μαμά, τι είναι αυτό; — Φαίνεται ότι είναι από τη γιαγιά. Λυπάμαι, δεν ξέρω τι ανοίγει. (Look! A key, under the books. — A nice key! Mom, what is this? — It looks like it's from grandma. I'm sorry, I don't know what it opens.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L02 Guest at a Greek home-student|L02 Guest at a Greek home]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 7 of 300
-> **Today's line:** Καλώς ήρθες! — Ορίστε το κινητό σου. — Ευχαριστώ! Θέλεις λίγο νερό; — Όχι, ευχαριστώ. (Welcome! — Here is your phone. — Thank you! Do you want a little water? — No, thank you.)
+> **Today's line:** Καλώς ήρθες, Νίκο! — Ευχαριστώ! Ορίστε το κινητό σου. — Α, το κινητό μου! Θέλεις λίγο νερό; — Νερό δεν θέλω, αλλά καφέ, ναι! (Welcome, Niko! — Thanks! Here's your phone. — Oh, my phone! Would you like a little water? — I don't want water, but coffee, yes!)
 > - [[ο, η, το]] **the** (#1): Άφησε με να το κάνω. (Let me do it.)
 > - [[δεν]] **not** (#6): Συγνώμη, δεν έχω ψιλά. (I'm sorry, I don't have change.)
 > - [[αλλά]] **but** (#27): Τον ξέρω αλλά δε ξέρω πώς λέγεται. (I know him, however, I don't know his name.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[καλώς ήρθες]] **welcome** (#400): Καλώς ήρθες στη Βοστώνη.
 
 > [!todo]- Tue · day 8 of 300
-> **Today's line:** Τι θέλεις; Καφέ; Τσάι; — Τσάι, παρακαλώ. — Εντάξει. Και λίγο ψωμί; (What do you want? Coffee? Tea? — Tea, please. — Okay. And a little bread?)
+> **Today's line:** Ωχ, καφέ δεν έχω. Τσάι; — Εντάξει, τσάι. Και λίγο ψωμί; Πεινάω! — Βέβαια. Και κρασί; — Κρασί; Το πρωί; Όχι! (Oh, I don't have coffee. Tea? — Okay, tea. And a little bread? I'm hungry! — Of course. And wine? — Wine? In the morning? No!)
 > - [[καφές|ο καφές]] **coffee** (#409): Δεν της αρέσει ο καφές. (She doesn't like coffee.)
 > - [[κρασί|το κρασί]] **wine** (#704): Δε μου αρέσει το κρασί. (I don't like wine.)
 > - [[τσάι|το τσάι]] **tea** (#732): Πίνει τσάι με λίγο γάλα. (She drinks tea with a little milk.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[εντάξει]] **okay** (#40): Είσαι εντάξει, αδερφέ; (Are you OK, bro?)
 
 > [!todo]- Wed · day 9 of 300
-> **Today's line:** Γεια σου, παιδί μου. Είσαι ο Νίκος; — Ναι. — Καλό παιδί! (Hello, my child. Are you Nikos? — Yes. — Good kid!)
+> **Today's line:** Γεια σου, παιδί μου! Εσύ είσαι ο Νίκος; — Ναι, κυρία. Απλά Νίκος. — Χαίρω πολύ! Η Μαρία λέει ότι είσαι καλό παιδί. — Προσπαθώ! (Hello, dear! Are you Nikos? — Yes, ma'am. Just Nikos. — Nice to meet you! Maria says you're a good kid. — I try!)
 > - [[υπάρχω]] **I exist** (#46): Δεν υπάρχει καπνός χωρίς φωτιά. (Where there is smoke, there is fire.)
 > - [[καλός]] **good** (#47): Η ζωή είναι καλή εδώ. (Life is good here.)
 > - [[γίνομαι]] **I become** (#53): Πες μου τι έγινε. (Tell me what happened.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[παιδί|το παιδί]] **child** (#71): Έχω ένα παιδί. (I have one kid.)
 
 > [!todo]- Thu · day 10 of 300
-> **Today's line:** Έλα! Το σπίτι μου. — Πόσα πράγματα! — Ναι, πολλά. Πάμε μέσα; (Come in! My house. — So many things! — Yes, lots. Shall we go in?)
+> **Today's line:** Έλα μέσα! Αυτό είναι το σπίτι μου. — Πόσα πράγματα! Όλα δικά σου; — Όχι, πολλά είναι από τη γιαγιά. Πάμε να δεις; (Come in! This is my house. — So many things! All yours? — No, a lot of them are from grandma. Shall we go and look?)
 > - [[έλα]] **come (on)** (#72): Έλα γρήγορα! (Come quick!)
 > - [[σπίτι|το σπίτι]] **house, home** (#75): Θα 'μαστε στο σπίτι σήμερα. (We will be at home today.)
 > - [[πολύς]] **much, many** (#77): Υπάρχουν πολλά νησιά στην Ελλάδα. (There are many islands in Greece.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πράγμα|το πράγμα]] **thing** (#79): Αυτό το πράγμα είναι ζωντανό. (This thing is alive.)
 
 > [!todo]- Fri · day 11 of 300
-> **Today's line:** Πάω στη δουλειά! — Μαμά, ο Νίκος είναι φίλος μου. — Μου αρέσει ο φίλος σου! (I'm going to work! — Mom, Nikos is my friend. — I like your friend!)
+> **Today's line:** Παιδιά, χρειάζεστε κάτι; Μετά πάω στη δουλειά. — Όχι, μαμά, ευχαριστώ. — Η μαμά σου είναι πολύ καλή. Μου αρέσει! — Κι εσύ της αρέσεις, φίλε! (Kids, do you need anything? After this I'm going to work. — No, mom, thank you. — Your mom is really nice. I like her! — She likes you too, buddy!)
 > - [[χρειάζομαι]] **I need** (#93): Δε χρειάζεται να με πείσεις. (You don't need to convince me.)
 > - [[δουλειά|η δουλειά]] **work, job** (#94): Πρέπει να γυρίσω στη δουλειά. (I've got to get back to work.)
 > - [[πάω]] **I go** (#108): Θα ήθελα να πάει εκεί. (I'd like him to go there.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μου αρέσει]] **I like it** (#114): Μου αρέσουν πολύ τα σκυλιά. (I like dogs very much.)
 
 > [!todo]- Sat · day 12 of 300
-> **Today's line:** Κοίτα! Ένα κλειδί. — Ωραίο κλειδί! Μαμά, τι είναι; — Είναι από τη γιαγιά. Λυπάμαι, δεν ξέρω τι ανοίγει. (Look! A key. — A nice key! Mom, what is it? — It's from grandma. I'm sorry, I don't know what it opens.)
+> **Today's line:** Κοίτα! Ένα κλειδί, κάτω από τα βιβλία. — Ωραίο κλειδί! Μαμά, τι είναι αυτό; — Φαίνεται ότι είναι από τη γιαγιά. Λυπάμαι, δεν ξέρω τι ανοίγει. (Look! A key, under the books. — A nice key! Mom, what is this? — It looks like it's from grandma. I'm sorry, I don't know what it opens.)
 > - [[κοίτα]] **look** (#117): Κοίτα τι μπορώ να κάνω. (Look what I can do.)
 > - [[ωραία]] **nice(ly), great** (#123): Τι ωραία θέα! (What a beautiful view!)
 > - [[μαμά|η μαμά]] **mom** (#132): Καληνύχτα, μαμά.

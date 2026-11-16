@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, overnight: Every story day flows
+> - All the story days, from day 7 to the end of the year, are rewritten so each line answers the one before it. The plot, the people and each day's five words stay the same, and more of the words now appear in the story.
+> - Each day ends on a real reply, so **Comebacks** always gives you something worth answering.
+> - Today's line, the week pages and Story Lines all match. Your progress and My Work are untouched.
+
 > [!info]- November 17, evening: Comebacks you can answer
 > - **Comebacks** now show who is speaking. You hear the line in Greek, then answer it as the next person: "You, as Grandma: Yes, you! Take the key and come."
 > - Five story lines that didn't flow are rewritten, so the exchange makes sense: days 10, 12, 18, 31 and 40. Today's line, the week pages and Story Lines all match.

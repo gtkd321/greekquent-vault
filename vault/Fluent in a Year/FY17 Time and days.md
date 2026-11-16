@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Είναι εφτά παρά τέταρτο. Νωρίς! — Γιαγιά, σήμερα είναι Δευτέρα. Ψάχνουμε! (It's a quarter to seven. Early! — Grandma, today is Monday. We're searching!)
-> 2. Από την αρχή: ένα μεγάλο κλειδί, ένα μικρό κλειδί, μια σελίδα. — Σχεδόν σαν παιχνίδι! (From the beginning: a big key, a little key, a page. — Almost like a game!)
-> 3. Υπάρχει ένα μυστικό ντουλάπι, κάπου μεταξύ κουζίνας και σαλονιού. (There's a secret cupboard, somewhere between the kitchen and the living room.)
-> 4. Είναι αληθινό, γιαγιά; — Πάρα πολύ! Θα το βρεις σύντομα. (Is it real, grandma? — Very much so! You'll find it soon.)
-> 5. Δεν είναι εύκολο... — Έχω το φλουρί! Έχω τύχη! (It's not easy... — I have the coin! I'm lucky!)
-> 6. Το πιάνω! Το πρώτο τετράδιο! — Μπράβο! Τώρα, καληνύχτα. Αύριο ρωτάμε τι λέει. (I've got it! The first notebook! — Well done! Now, good night. Tomorrow we ask what it says.)
+> 1. Μαρία; Είναι εφτά παρά τέταρτο! Πολύ νωρίς! — Γιαγιά, είναι Δευτέρα. Σήμερα ψάχνουμε! (Maria? It's a quarter to seven! Very early! — Grandma, it's Monday. Today we search!)
+> 2. Από την αρχή: ένα μεγάλο κλειδί, ένα μικρό κλειδί, μια σελίδα. — Σχεδόν σαν παιχνίδι! — Ναι, αλλά δεν ξέρουμε τους κανόνες! (From the beginning: a big key, a little key, a page. — Almost like a game! — Yes, but we don't know the rules!)
+> 3. Ακούστε: υπάρχει ένα μυστικό ντουλάπι, κάπου μεταξύ κουζίνας και σαλονιού. — Το ξέρατε και δεν το είπατε χθες; — Το θυμήθηκα τώρα! (Listen: there's a secret cupboard, somewhere between the kitchen and the living room. — You knew and didn't say so yesterday? — I only just remembered!)
+> 4. Είναι αληθινό, γιαγιά; — Πάρα πολύ! Θα το βρεις σύντομα. (Is it real, grandma? — Very real! You'll find it soon.)
+> 5. Δεν είναι εύκολο... Τίποτα εδώ. — Μην ανησυχείς. Έχω το φλουρί: έχω τύχη! (It's not easy... Nothing here. — Don't worry. I have the coin: I'm lucky!)
+> 6. Κάτι... Το πιάνω! Το πρώτο τετράδιο! — Μπράβο, κορίτσι μου! Τώρα, καληνύχτα. — Καληνύχτα; Θέλω να το διαβάσω! — Αύριο το πρωί, με καφέ! (Something... I've got it! The first notebook! — Well done, my girl! Now, good night. — Good night? I want to read it! — Tomorrow morning, with coffee!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L14 Time and days-student|L14 Time and days]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 85 of 300
-> **Today's line:** Είναι εφτά παρά τέταρτο. Νωρίς! — Γιαγιά, σήμερα είναι Δευτέρα. Ψάχνουμε! (It's a quarter to seven. Early! — Grandma, today is Monday. We're searching!)
+> **Today's line:** Μαρία; Είναι εφτά παρά τέταρτο! Πολύ νωρίς! — Γιαγιά, είναι Δευτέρα. Σήμερα ψάχνουμε! (Maria? It's a quarter to seven! Very early! — Grandma, it's Monday. Today we search!)
 > - [[μισός]] **half** (#376): Φεύγουμε σε μισή ώρα. (We leave in half an hour.)
 > - [[παρά]] **despite; to (time)** (#445): Είναι τρεις παρά τέταρτο. (It's a quarter to three.)
 > - [[νωρίς]] **early** (#604): Είναι ακόμα πολύ νωρίς. (It is still too early.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[Δευτέρα|η Δευτέρα]] **Monday** (#1182): Είναι Δευτέρα κι έχει λιακάδα. (It's Monday and it's sunny.)
 
 > [!todo]- Tue · day 86 of 300
-> **Today's line:** Από την αρχή: ένα μεγάλο κλειδί, ένα μικρό κλειδί, μια σελίδα. — Σχεδόν σαν παιχνίδι! (From the beginning: a big key, a little key, a page. — Almost like a game!)
+> **Today's line:** Από την αρχή: ένα μεγάλο κλειδί, ένα μικρό κλειδί, μια σελίδα. — Σχεδόν σαν παιχνίδι! — Ναι, αλλά δεν ξέρουμε τους κανόνες! (From the beginning: a big key, a little key, a page. — Almost like a game! — Yes, but we don't know the rules!)
 > - [[κακός]] **bad** (#302): Η όρασή του είναι κακή. (His eyesight is bad.)
 > - [[αρχή|η αρχή]] **beginning** (#305): Το ήξερε από την αρχή. (He knew it all along.)
 > - [[κατάσταση|η κατάσταση]] **situation** (#307): Η κατάσταση είναι σοβαρή. (The situation is grave.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σχεδόν]] **almost** (#309): Είναι σχεδόν 20 χρονών. (She's at most 20 years old.)
 
 > [!todo]- Wed · day 87 of 300
-> **Today's line:** Υπάρχει ένα μυστικό ντουλάπι, κάπου μεταξύ κουζίνας και σαλονιού. (There's a secret cupboard, somewhere between the kitchen and the living room.)
+> **Today's line:** Ακούστε: υπάρχει ένα μυστικό ντουλάπι, κάπου μεταξύ κουζίνας και σαλονιού. — Το ξέρατε και δεν το είπατε χθες; — Το θυμήθηκα τώρα! (Listen: there's a secret cupboard, somewhere between the kitchen and the living room. — You knew and didn't say so yesterday? — I only just remembered!)
 > - [[πόλεμος|ο πόλεμος]] **war** (#310): Ο παππούς μου μιλάει για τον πόλεμο. (My grandfather talks about the war.)
 > - [[κάπου]] **somewhere** (#315): Έχεις κάπου να πας; (Do you have someplace to go?)
 > - [[μεταξύ]] **between** (#316): Ο ανελκυστήρας κόλλησε μεταξύ δύο ορόφων. (The lift is stuck between two floors.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μυστικός]] **secret** (#321): Αυτό δεν είναι ένα μυστικό. (It isn't a secret.)
 
 > [!todo]- Thu · day 88 of 300
-> **Today's line:** Είναι αληθινό, γιαγιά; — Πάρα πολύ! Θα το βρεις σύντομα. (Is it real, grandma? — Very much so! You'll find it soon.)
+> **Today's line:** Είναι αληθινό, γιαγιά; — Πάρα πολύ! Θα το βρεις σύντομα. (Is it real, grandma? — Very real! You'll find it soon.)
 > - [[φυλακή|η φυλακή]] **prison** (#322): Οι κακοί είναι στη φυλακή. (The bad people are in prison.)
 > - [[ασφάλεια|η ασφάλεια]] **safety, security** (#325): Οδήγα με ασφάλεια. (Drive safely.)
 > - [[πάρα πολύ]] **very much** (#328): Έφαγα πάρα πολύ.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σύντομα]] **soon** (#331): Σύντομα θα 'ναι έτοιμο. (It'll be ready soon.)
 
 > [!todo]- Fri · day 89 of 300
-> **Today's line:** Δεν είναι εύκολο... — Έχω το φλουρί! Έχω τύχη! (It's not easy... — I have the coin! I'm lucky!)
+> **Today's line:** Δεν είναι εύκολο... Τίποτα εδώ. — Μην ανησυχείς. Έχω το φλουρί: έχω τύχη! (It's not easy... Nothing here. — Don't worry. I have the coin: I'm lucky!)
 > - [[πλάκα|η πλάκα]] **joke, fun** (#339): Πλάκα μου κάνεις;
 > - [[συνέχεια|η συνέχεια]] **continuation** (#340): Οι ελιές τοποθετούνται στη συνέχεια σε άλμη. (The olives are subsequently placed in brine.)
 > - [[παιχνίδι|το παιχνίδι]] **game, toy** (#350): Μου αρέσει αυτό το παιχνίδι. (I like this game.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τύχη|η τύχη]] **luck** (#367): Σου εύχομαι καλή τύχη. (I wish you good luck.)
 
 > [!todo]- Sat · day 90 of 300
-> **Today's line:** Το πιάνω! Το πρώτο τετράδιο! — Μπράβο! Τώρα, καληνύχτα. Αύριο ρωτάμε τι λέει. (I've got it! The first notebook! — Well done! Now, good night. Tomorrow we ask what it says.)
+> **Today's line:** Κάτι... Το πιάνω! Το πρώτο τετράδιο! — Μπράβο, κορίτσι μου! Τώρα, καληνύχτα. — Καληνύχτα; Θέλω να το διαβάσω! — Αύριο το πρωί, με καφέ! (Something... I've got it! The first notebook! — Well done, my girl! Now, good night. — Good night? I want to read it! — Tomorrow morning, with coffee!)
 > - [[βδομάδα|η βδομάδα]] **week** (#370): Κολυμπάω μια φορά τη βδομάδα. (I swim once a week.)
 > - [[άσχημα]] **badly** (#375): Μιλάω πολύ άσχημα εσπεράντο. (I speak Esperanto very badly.)
 > - [[πιάνω]] **I catch, I grab** (#396): Ο αετός δεν πιάνει μύγες. (The eagle does not catch flies.)

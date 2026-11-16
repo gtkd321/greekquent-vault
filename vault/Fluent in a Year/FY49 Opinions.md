@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Απόψε στο θέατρο: συζήτηση για το χωριό. — Μια βασική ερώτηση: θα μείνουν οι νέοι; (Tonight at the theater: a discussion about the village. — A basic question: will the young people stay?)
-> 2. Ο δήμαρχος σας λέει: έρχεται καταιγίδα! (Your mayor tells you: a storm is coming!)
-> 3. Ρισκάρω: μαζεύουμε απόψε! — Με πάθος! (I'm taking the risk: we harvest tonight! — With passion!)
-> 4. Μια ουρά από φώτα στο χωράφι! — Όλο το χωριό, και τέταρτη ώρα! (A line of lights in the field! — The whole village, and the fourth hour!)
-> 5. Σάντουιτς για όλους! — Και μια αγκαλιά για τη γιαγιά! (Sandwiches for everyone! — And a hug for grandma!)
-> 6. Ολοκληρώνουμε πριν τη βροχή! — Ασφαλώς! (We finish before the rain! — Of course!)
+> 1. Απόψε στο θέατρο: συζήτηση για το μέλλον του χωριού. — Έχω μια βασική ερώτηση: θα μείνουν οι νέοι; — Αν έχουν δουλειά, ναι. Όπως εσύ! (Tonight at the theater: a discussion about the village's future. — I have a basic question: will young people stay? — If they have work, yes. Like you!)
+> 2. Ως δήμαρχος, σας λέω κάτι ακόμα: αύριο το βράδυ έρχεται καταιγίδα! — Αύριο; Και οι ελιές μας; (As mayor, I'm telling you one more thing: tomorrow night a storm is coming! — Tomorrow? And our olives?)
+> 3. Δεν περιμένουμε. Ρισκάρω: μαζεύουμε απόψε! — Είμαι μαζί σου, με πάθος! (We won't wait. I'm taking the risk: we harvest tonight! — I'm with you, all the way!)
+> 4. Κοίτα! Μια ουρά από φώτα έρχεται στο χωράφι! — Όλο το χωριό ήρθε να βοηθήσει! (Look! A line of lights is coming to the field! — The whole village came to help!)
+> 5. Σάντουιτς για όλους! — Γιαγιά, στις δύο το πρωί; Έλα εδώ, μια αγκαλιά! (Sandwiches for everyone! — Grandma, at two in the morning? Come here, a hug!)
+> 6. Γρήγορα! Πρέπει να ολοκληρώσουμε πριν τη βροχή! — Τα καταφέραμε. Η τελευταία ελιά! — Ασφαλώς! Μαζί τα καταφέρνουμε όλα! (Quick! We have to finish before the rain! — We did it. The last olive! — Of course! Together we can do anything!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **opinions** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 277 of 300
-> **Today's line:** Απόψε στο θέατρο: συζήτηση για το χωριό. — Μια βασική ερώτηση: θα μείνουν οι νέοι; (Tonight at the theater: a discussion about the village. — A basic question: will the young people stay?)
+> **Today's line:** Απόψε στο θέατρο: συζήτηση για το μέλλον του χωριού. — Έχω μια βασική ερώτηση: θα μείνουν οι νέοι; — Αν έχουν δουλειά, ναι. Όπως εσύ! (Tonight at the theater: a discussion about the village's future. — I have a basic question: will young people stay? — If they have work, yes. Like you!)
 > - [[βασικός]] **basic** (#1256): Αυτό είναι βασικό.
 > - [[θέατρο|το θέατρο]] **theater** (#1257): Θα συναντηθούμε στο θέατρο. (We'll meet in the theater.)
 > - [[βολή|η βολή]] **shot** (#1258)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[έθνος|το έθνος]] **nation** (#1260): Το δίκαιο των εθνών αγνοείται.
 
 > [!todo]- Tue · day 278 of 300
-> **Today's line:** Ο δήμαρχος σας λέει: έρχεται καταιγίδα! (Your mayor tells you: a storm is coming!)
+> **Today's line:** Ως δήμαρχος, σας λέω κάτι ακόμα: αύριο το βράδυ έρχεται καταιγίδα! — Αύριο; Και οι ελιές μας; (As mayor, I'm telling you one more thing: tomorrow night a storm is coming! — Tomorrow? And our olives?)
 > - [[πετάω]] **I fly, I throw away** (#1261): Πετάω στον ουρανό.
 > - [[δεκαετία|η δεκαετία]] **decade** (#1262): Ήταν πριν από μια δεκαετία.
 > - [[καταιγίδα|η καταιγίδα]] **storm** (#1263): Έρχεται καταιγίδα.
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κύμα|το κύμα]] **wave** (#1265): Τα κύματα είναι ψηλά.
 
 > [!todo]- Wed · day 279 of 300
-> **Today's line:** Ρισκάρω: μαζεύουμε απόψε! — Με πάθος! (I'm taking the risk: we harvest tonight! — With passion!)
+> **Today's line:** Δεν περιμένουμε. Ρισκάρω: μαζεύουμε απόψε! — Είμαι μαζί σου, με πάθος! (We won't wait. I'm taking the risk: we harvest tonight! — I'm with you, all the way!)
 > - [[μεγαλώνω]] **I grow up** (#1266): Στον κήπο μεγαλώνουν μηλιές.
 > - [[ρισκάρω]] **I risk** (#1267): Δεν μπορώ να το ρισκάρω.
 > - [[σύμφωνος]] **in agreement** (#1268): Είμαι σύμφωνος με την πρόταση. (I am in favor of the proposition.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πάθος|το πάθος]] **passion** (#1271): Μιλάει για τη μουσική με πάθος. (She talks about music with passion.)
 
 > [!todo]- Thu · day 280 of 300
-> **Today's line:** Μια ουρά από φώτα στο χωράφι! — Όλο το χωριό, και τέταρτη ώρα! (A line of lights in the field! — The whole village, and the fourth hour!)
+> **Today's line:** Κοίτα! Μια ουρά από φώτα έρχεται στο χωράφι! — Όλο το χωριό ήρθε να βοηθήσει! (Look! A line of lights is coming to the field! — The whole village came to help!)
 > - [[ουρά|η ουρά]] **tail, queue** (#1272): Μη πατάς την ουρά του σκύλου.
 > - [[τέταρτος]] **fourth** (#1273): Είναι δύο και τέταρτο.
 > - [[υπερβολικός]] **excessive** (#1274): Μην είσαι υπερβολικός. (Don't exaggerate.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χρέος|το χρέος]] **debt** (#1276): Πνίγομαι στα χρέη.
 
 > [!todo]- Fri · day 281 of 300
-> **Today's line:** Σάντουιτς για όλους! — Και μια αγκαλιά για τη γιαγιά! (Sandwiches for everyone! — And a hug for grandma!)
+> **Today's line:** Σάντουιτς για όλους! — Γιαγιά, στις δύο το πρωί; Έλα εδώ, μια αγκαλιά! (Sandwiches for everyone! — Grandma, at two in the morning? Come here, a hug!)
 > - [[σάντουιτς|το σάντουιτς]] **sandwich** (#1277): Πόσα σάντουιτς έμειναν;
 > - [[πίτσα|η πίτσα]] **pizza** (#1278): Μου αρέσει η πίτσα πολύ. (I like pizza a lot.)
 > - [[βάρδια|η βάρδια]] **shift** (#1279)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αγκαλιά|η αγκαλιά]] **hug, arms** (#1281)
 
 > [!todo]- Sat · day 282 of 300
-> **Today's line:** Ολοκληρώνουμε πριν τη βροχή! — Ασφαλώς! (We finish before the rain! — Of course!)
+> **Today's line:** Γρήγορα! Πρέπει να ολοκληρώσουμε πριν τη βροχή! — Τα καταφέραμε. Η τελευταία ελιά! — Ασφαλώς! Μαζί τα καταφέρνουμε όλα! (Quick! We have to finish before the rain! — We did it. The last olive! — Of course! Together we can do anything!)
 > - [[ολοκληρώνω]] **I complete** (#1282): Ολοκλήρωσα την εργασία μου. (I finished my homework.)
 > - [[ασφαλώς]] **certainly** (#1284)
 > - [[σύνδεση|η σύνδεση]] **connection** (#1285): Ο αδερφός μου είναι σε σύνδεση.

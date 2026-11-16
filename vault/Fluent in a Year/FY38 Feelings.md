@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Αυτό το χωράφι είναι μαγικό. — Ποιος φταίει; Εσύ, θεία! (This field is magical. — Who's to blame? You, auntie!)
-> 2. Κανονίζω τις παραγγελίες. — Και πουλάς στην Αμερική; (I'm arranging the orders. — And you're selling in America?)
-> 3. Τα φώτα του χωριού, το χρυσό λάδι... (The village lights, the golden oil...)
-> 4. Είμαι αδύνατη, Μαρία. Πρέπει να γυρίσω. — Κάτσε σε αυτή την καρέκλα, θεία. (I'm weak, Maria. I have to go back. — Sit in this chair, auntie.)
-> 5. Ήταν μια τρομερή χρονιά. Αλλά αξίζει τον κόπο. — Και ζω εδώ χάρη σε σένα. (It was a terrific year. But it's worth the trouble. — And I live here thanks to you.)
-> 6. Μια κούκλα για σένα. Ήταν η δική μου. — Μια μαγεία! (A doll for you. It was mine. — Magic!)
+> 1. Αυτό το χωράφι είναι μαγικό. — Και ποιος φταίει; Εσύ, θεία! (This field is magical. — And whose fault is that? Yours, auntie!)
+> 2. Τώρα κανονίζω τις παραγγελίες. — Και πουλάς και στην Αμερική; — Ναι! Η πρώτη παραγγελία είναι από το μάθημά σας! (Now I'm arranging the orders. — And you're selling in America too? — Yes! The first order is from your class!)
+> 3. Τι ωραίο βράδυ. — Τα φώτα του χωριού, ο ήλιος σαν χρυσός... Δεν θέλω να φύγω ποτέ. (What a beautiful evening. — The village lights, the sun like gold... I never want to leave.)
+> 4. Είμαι αδύνατη, Μαρία. Πρέπει να γυρίσω στην Αμερική. — Κάτσε σε αυτή την καρέκλα, θεία. Ας μιλήσουμε. (I'm weak, Maria. I have to go back to America. — Sit in this chair, auntie. Let's talk.)
+> 5. Ήταν μια τρομερή χρονιά. Αλλά άξιζε τον κόπο. — Και τώρα ζω εδώ, χάρη σε σένα. (It was a tremendous year. But it was worth the trouble. — And now I live here, thanks to you.)
+> 6. Πάρε, μια κούκλα για σένα. Ήταν δική μου, όταν ήμουν μικρή. — Θεία... είναι σαν μαγεία! (Here, a doll for you. It was mine, when I was little. — Auntie... it's like magic!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **feelings** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 211 of 300
-> **Today's line:** Αυτό το χωράφι είναι μαγικό. — Ποιος φταίει; Εσύ, θεία! (This field is magical. — Who's to blame? You, auntie!)
+> **Today's line:** Αυτό το χωράφι είναι μαγικό. — Και ποιος φταίει; Εσύ, θεία! (This field is magical. — And whose fault is that? Yours, auntie!)
 > - [[πανεπιστήμιο|το πανεπιστήμιο]] **university** (#905): Θέλω να σπουδάσω στο πανεπιστήμιο. (I want to study at the university.)
 > - [[μαγικός]] **magic** (#906): Ήταν μια μαγική στιγμή.
 > - [[φταίω]] **I am to blame** (#907)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κωδικός|ο κωδικός]] **code, password** (#910): Έχεις τον κωδικό πηγής; (Do you have the source code?)
 
 > [!todo]- Tue · day 212 of 300
-> **Today's line:** Κανονίζω τις παραγγελίες. — Και πουλάς στην Αμερική; (I'm arranging the orders. — And you're selling in America?)
+> **Today's line:** Τώρα κανονίζω τις παραγγελίες. — Και πουλάς και στην Αμερική; — Ναι! Η πρώτη παραγγελία είναι από το μάθημά σας! (Now I'm arranging the orders. — And you're selling in America too? — Yes! The first order is from your class!)
 > - [[κανονίζω]] **I arrange** (#911)
 > - [[πουλάω]] **I sell** (#912): Πουλάω ομπρέλες.
 > - [[παράσταση|η παράσταση]] **performance, show** (#913): Πότε αρχίζει η παράσταση;
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ικανότητα|η ικανότητα]] **ability** (#915): Εμπιστεύομαι τις ικανότητές του.
 
 > [!todo]- Wed · day 213 of 300
-> **Today's line:** Τα φώτα του χωριού, το χρυσό λάδι... (The village lights, the golden oil...)
+> **Today's line:** Τι ωραίο βράδυ. — Τα φώτα του χωριού, ο ήλιος σαν χρυσός... Δεν θέλω να φύγω ποτέ. (What a beautiful evening. — The village lights, the sun like gold... I never want to leave.)
 > - [[φώτα|τα φώτα]] **lights** (#916): Ο Τομ άναψε τα φώτα.
 > - [[χρυσός|ο χρυσός]] **gold** (#917): Η σιωπή είναι χρυσός.
 > - [[πορεία|η πορεία]] **course, march** (#918): Είναι ξακουστός για τις πορείες διαμαρτυρίας του.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πολιτική|η πολιτική]] **politics, policy** (#920): Συζητήσαμε για πολιτική. (We discussed politics.)
 
 > [!todo]- Thu · day 214 of 300
-> **Today's line:** Είμαι αδύνατη, Μαρία. Πρέπει να γυρίσω. — Κάτσε σε αυτή την καρέκλα, θεία. (I'm weak, Maria. I have to go back. — Sit in this chair, auntie.)
+> **Today's line:** Είμαι αδύνατη, Μαρία. Πρέπει να γυρίσω στην Αμερική. — Κάτσε σε αυτή την καρέκλα, θεία. Ας μιλήσουμε. (I'm weak, Maria. I have to go back to America. — Sit in this chair, auntie. Let's talk.)
 > - [[αδύνατος]] **impossible; thin** (#921): Είναι αδύνατο να γνωρίζουμε τί θα συμβεί αύριο. (It's impossible to know what will happen tomorrow.)
 > - [[καρέκλα|η καρέκλα]] **chair** (#922): Είναι κάτω από την καρέκλα. (It is under the chair.)
 > - [[λογικός]] **logical, reasonable** (#923): Φαίνεται λογικό.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[καταλήγω]] **I end up** (#925): Καταλήγει σε αδιέξοδο.
 
 > [!todo]- Fri · day 215 of 300
-> **Today's line:** Ήταν μια τρομερή χρονιά. Αλλά αξίζει τον κόπο. — Και ζω εδώ χάρη σε σένα. (It was a terrific year. But it's worth the trouble. — And I live here thanks to you.)
+> **Today's line:** Ήταν μια τρομερή χρονιά. Αλλά άξιζε τον κόπο. — Και τώρα ζω εδώ, χάρη σε σένα. (It was a tremendous year. But it was worth the trouble. — And now I live here, thanks to you.)
 > - [[τρομερός]] **terrible, tremendous** (#926): Είχα ένα τρομερό όνειρο.
 > - [[άποψη|η άποψη]] **view, opinion** (#928): Από ποιά άποψη;
 > - [[κόπος|ο κόπος]] **effort, trouble** (#929): Αξίζει το κόπο.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σπάω]] **I break** (#931): Αυτό θα σπάσει.
 
 > [!todo]- Sat · day 216 of 300
-> **Today's line:** Μια κούκλα για σένα. Ήταν η δική μου. — Μια μαγεία! (A doll for you. It was mine. — Magic!)
+> **Today's line:** Πάρε, μια κούκλα για σένα. Ήταν δική μου, όταν ήμουν μικρή. — Θεία... είναι σαν μαγεία! (Here, a doll for you. It was mine, when I was little. — Auntie... it's like magic!)
 > - [[μαγεία|η μαγεία]] **magic** (#932)
 > - [[υγεία|η υγεία]] **health** (#933): Το σκόρδο κάνει καλό στην υγεία. (Garlic is good for one's health.)
 > - [[παραλίγο]] **almost, nearly** (#935): Παραλίγο να πιάσω το ψάρι. (I almost caught the fish.)

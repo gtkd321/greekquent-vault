@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Πού είναι το κλειδί; — Ένα λεπτό... Ψάχνω. — Δύο λεπτά, πέντε λεπτά... μισή ώρα! (Where is the key? — One minute... I'm looking. — Two minutes, five minutes... half an hour!)
-> 2. Νομίζω πως κάποιος το έχει. — Ποιος; Είναι κάτι μικρό... έτσι. (I think someone has it. — Who? It's something small... like this.)
-> 3. Εσείς; Τι θέλετε; — Ένα κλειδί. Μόνο ένα, παλιό. — Ελάτε μαζί μου. (You? What do you want? — A key. Only one, an old one. — Come with me.)
-> 4. Εκεί: ένα κλειδί, σαν το δικό σας; — Όχι. Ακόμα τίποτα. (There: a key, like yours? — No. Still nothing.)
-> 5. Εγώ μένω εδώ. Εσύ πήγαινε σπίτι. — Ευχαριστώ, Νίκο. Ελπίζω... (I'll stay here. You go home. — Thank you, Niko. I hope...)
-> 6. Φτάνω σπίτι... Γυρίζω... Μαμά! Το κλειδί! — Στο παλτό σου! Χαίρομαι! (I get home... I turn around... Mom! The key! — In your coat! I'm so glad!)
+> 1. Πού είναι το κλειδί; Δεν το βρίσκω! — Ένα λεπτό... Ψάχνω. — Δύο λεπτά, πέντε λεπτά... μισή ώρα! Τίποτα! (Where is the key? I can't find it! — One minute... I'm looking. — Two minutes, five minutes... half an hour! Nothing!)
+> 2. Νομίζω πως κάποιος το πήρε. — Ποιος; Είναι κάτι μικρό, έτσι. Δεν αξίζει ούτε ένα ευρώ! — Πάμε στο γραφείο, κάτω. (I think someone took it. — Who? It's something small, like this. It's not even worth one euro! — Let's go to the office downstairs.)
+> 3. Ναι; Τι θέλετε εσείς; — Χάσαμε ένα κλειδί. Μόνο ένα, παλιό. — Ελάτε μαζί μου. (Yes? What can I do for you? — We lost a key. Just one, an old one. — Come with me.)
+> 4. Εκεί, στο κουτί. Είναι σαν το δικό σας; — Όχι... Ακόμα τίποτα. Αρχίζω να φοβάμαι. (There, in the box. Is it like yours? — No... Still nothing. I'm starting to get scared.)
+> 5. Εγώ μένω εδώ και ψάχνω. Εσύ πήγαινε σπίτι. — Ευχαριστώ, Νίκο. Ελπίζω να το βρεις. — Αν το βρω, το φέρνω αμέσως! (I'll stay here and keep looking. You go home. — Thanks, Niko. I hope you find it. — If I find it, I'll bring it right away!)
+> 6. Μαμά, έχασα το κλειδί της γιαγιάς! — Δεν πειράζει. Γύρνα... Τι έχεις στο παλτό; — Το κλειδί! Στην τσέπη μου! Χαίρομαι τόσο! Τώρα φτάνω στο χωριό με το κλειδί! (Mom, I lost grandma's key! — It doesn't matter. Turn around... What's in your coat? — The key! In my pocket! I'm so glad! Now I'll get to the village with the key!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L05 Lost items and the shop-student|L05 Lost items and the shop]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 31 of 300
-> **Today's line:** Πού είναι το κλειδί; — Ένα λεπτό... Ψάχνω. — Δύο λεπτά, πέντε λεπτά... μισή ώρα! (Where is the key? — One minute... I'm looking. — Two minutes, five minutes... half an hour!)
+> **Today's line:** Πού είναι το κλειδί; Δεν το βρίσκω! — Ένα λεπτό... Ψάχνω. — Δύο λεπτά, πέντε λεπτά... μισή ώρα! Τίποτα! (Where is the key? I can't find it! — One minute... I'm looking. — Two minutes, five minutes... half an hour! Nothing!)
 > - [[πού]] **where** (#87): Πού να το ξέρω εγώ! (How should I know!)
 > - [[δύο]] **two** (#104): Το φιλμ κράτησε δύο ώρες. (The film lasted 2 hours.)
 > - [[λεπτό|το λεπτό]] **minute** (#140): Δώστε μου ένα λεπτό. (Give me a minute.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μισό]] **half** (#1398): Μισό λεπτό, παρακαλώ. (Just a moment, please.)
 
 > [!todo]- Tue · day 32 of 300
-> **Today's line:** Νομίζω πως κάποιος το έχει. — Ποιος; Είναι κάτι μικρό... έτσι. (I think someone has it. — Who? It's something small... like this.)
+> **Today's line:** Νομίζω πως κάποιος το πήρε. — Ποιος; Είναι κάτι μικρό, έτσι. Δεν αξίζει ούτε ένα ευρώ! — Πάμε στο γραφείο, κάτω. (I think someone took it. — Who? It's something small, like this. It's not even worth one euro! — Let's go to the office downstairs.)
 > - [[ευρώ|το ευρώ]] **euro** (#1496): Τι σας χρωστάω; - Τέσσερα ευρώ σας παρακαλώ. (How much do I owe you? - Four euros, please.)
 > - [[πως]] **that (conj.)** (#36): Νόμιζα πως ήταν φίλος σου. (I thought he was your friend.)
 > - [[κάτι]] **something** (#41): Έχω κάτι για σένα. (I have something to give you.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[έτσι]] **so, like this** (#44): Αστειεύεσαι, έτσι δεν είναι; (You're kidding, right?)
 
 > [!todo]- Wed · day 33 of 300
-> **Today's line:** Εσείς; Τι θέλετε; — Ένα κλειδί. Μόνο ένα, παλιό. — Ελάτε μαζί μου. (You? What do you want? — A key. Only one, an old one. — Come with me.)
+> **Today's line:** Ναι; Τι θέλετε εσείς; — Χάσαμε ένα κλειδί. Μόνο ένα, παλιό. — Ελάτε μαζί μου. (Yes? What can I do for you? — We lost a key. Just one, an old one. — Come with me.)
 > - [[εσείς]] **you (plural/formal)** (#45): Κι εσείς, πώς είστε; (And you, how are you?)
 > - [[όταν]] **when** (#48): Πίνω νερό όταν διψάω.
 > - [[μόνο]] **only** (#49): Το έκανα μόνο για τα λεφτά. (I only did it for the money.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μαζί]] **together** (#51): Δε σας θέλουμε μαζί μας. (We don't want you with us.)
 
 > [!todo]- Thu · day 34 of 300
-> **Today's line:** Εκεί: ένα κλειδί, σαν το δικό σας; — Όχι. Ακόμα τίποτα. (There: a key, like yours? — No. Still nothing.)
+> **Today's line:** Εκεί, στο κουτί. Είναι σαν το δικό σας; — Όχι... Ακόμα τίποτα. Αρχίζω να φοβάμαι. (There, in the box. Is it like yours? — No... Still nothing. I'm starting to get scared.)
 > - [[εκεί]] **there** (#54): Δε θα 'μαι εκεί. (I won't be there.)
 > - [[σαν]] **like, as** (#57): Τρέχει σαν τον άνεμο. (He runs like the wind.)
 > - [[ακόμα]] **still, yet, even** (#59): Η θάλασσα είναι ακόμα ήρεμη. (The sea is still calm.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αρχίζω]] **I begin** (#194): Είχα αρχίσει να βαριέμαι λίγο. (I was getting a little bored.)
 
 > [!todo]- Fri · day 35 of 300
-> **Today's line:** Εγώ μένω εδώ. Εσύ πήγαινε σπίτι. — Ευχαριστώ, Νίκο. Ελπίζω... (I'll stay here. You go home. — Thank you, Niko. I hope...)
+> **Today's line:** Εγώ μένω εδώ και ψάχνω. Εσύ πήγαινε σπίτι. — Ευχαριστώ, Νίκο. Ελπίζω να το βρεις. — Αν το βρω, το φέρνω αμέσως! (I'll stay here and keep looking. You go home. — Thanks, Niko. I hope you find it. — If I find it, I'll bring it right away!)
 > - [[μένω]] **I stay, I live** (#201): Δεν θα μείνω πολύ εδώ. (I won't stay here long.)
 > - [[γνωρίζω]] **I know, I meet** (#205): Δε γνωρίζω όλη την αλήθεια. (I don't know the whole truth.)
 > - [[χρησιμοποιώ]] **I use** (#226): Μπορώ να χρησιμοποιήσω το τηλέφωνό σας; (May I use your phone?)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φέρνω]] **I bring** (#233): Τα φέρνω βόλτα.
 
 > [!todo]- Sat · day 36 of 300
-> **Today's line:** Φτάνω σπίτι... Γυρίζω... Μαμά! Το κλειδί! — Στο παλτό σου! Χαίρομαι! (I get home... I turn around... Mom! The key! — In your coat! I'm so glad!)
+> **Today's line:** Μαμά, έχασα το κλειδί της γιαγιάς! — Δεν πειράζει. Γύρνα... Τι έχεις στο παλτό; — Το κλειδί! Στην τσέπη μου! Χαίρομαι τόσο! Τώρα φτάνω στο χωριό με το κλειδί! (Mom, I lost grandma's key! — It doesn't matter. Turn around... What's in your coat? — The key! In my pocket! I'm so glad! Now I'll get to the village with the key!)
 > - [[χαίρομαι]] **I am glad** (#235): Χαίρομαι που σας βλέπω. (I'm glad to see you.)
 > - [[γυρίζω]] **I return, I turn** (#237): Θα γυρίσω στις 6:30. (I will return at 6:30.)
 > - [[φτάνω]] **I arrive, I reach** (#238): Η Λίντα δεν έχει φτάσει ακόμα. (Linda hasn't arrived yet.)

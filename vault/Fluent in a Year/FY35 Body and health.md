@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Η πτήση μας είναι σε δύο εβδομάδες. — Ήρεμα, έχουμε χρόνο. (Our flight is in two weeks. — Calmly, we have time.)
-> 2. Δεν θέλω ενοίκιο. Το σπίτι είναι δικό σου. — Το διορθώνω όλο, θεία! (I don't want rent. The house is yours. — I'll fix it all, auntie!)
-> 3. Η φύση εδώ... — Βεβαίως! Τα δέντρα είναι γεμάτα ελιές! (The nature here... — Of course! The trees are full of olives!)
-> 4. Μια γάτα πάνω στα τετράδια! — Είναι η προστασία τους! (A cat on the notebooks! — She's their protection!)
-> 5. Η γιαγιά κοιμάται πολύ. — Ο γιατρός αργεί... (Grandma sleeps a lot. — The doctor is late...)
-> 6. Χρειάζεται ξεκούραση και ένα καλό γεύμα. — Απόψε, μια βραδιά με φαγητό! (She needs rest and a good meal. — Tonight, an evening with food!)
+> 1. Η πτήση μας για την Αμερική είναι σε δύο εβδομάδες. — Μόνο δύο; Έχουμε τόσα να κάνουμε! — Ήρεμα, Μαρία. Έχουμε χρόνο. (Our flight to America is in two weeks. — Only two? We have so much to do! — Easy, Maria. We have time.)
+> 2. Θεία, πόσο ενοίκιο θέλεις για το σπίτι; — Δεν θέλω ενοίκιο. Το σπίτι είναι δικό σου. — Τότε το διορθώνω όλο, για σένα! (Auntie, how much rent do you want for the house? — I don't want rent. The house is yours. — Then I'll fix it all up, for you!)
+> 3. Η φύση εδώ... όπως τη θυμάμαι. — Και κοίτα: τα δέντρα σου είναι γεμάτα ελιές! — Βεβαίως! Τα φρόντιζε η γιαγιά σου. (The nature here... just as I remember it. — And look: your trees are full of olives! — Of course! Your grandmother looked after them.)
+> 4. Ωχ! Μια γάτα πάνω στα τετράδια! — Άφησέ την. Είναι η προστασία τους! (Oh! A cat on top of the notebooks! — Leave her. She's their protector!)
+> 5. Μαρία, η γιαγιά μου κοιμάται πολύ σήμερα. Ανησυχώ. — Πήρα τον γιατρό, αλλά αργεί... (Maria, my grandmother is sleeping a lot today. I'm worried. — I called the doctor, but he's late...)
+> 6. Δεν είναι τίποτα. Χρειάζεται ξεκούραση και ένα καλό γεύμα. — Τότε απόψε, μια βραδιά με φαγητό! Μαγειρεύω εγώ! (It's nothing. She needs rest and a good meal. — Then tonight, an evening of food! I'm cooking!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **body and health** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 193 of 300
-> **Today's line:** Η πτήση μας είναι σε δύο εβδομάδες. — Ήρεμα, έχουμε χρόνο. (Our flight is in two weeks. — Calmly, we have time.)
+> **Today's line:** Η πτήση μας για την Αμερική είναι σε δύο εβδομάδες. — Μόνο δύο; Έχουμε τόσα να κάνουμε! — Ήρεμα, Μαρία. Έχουμε χρόνο. (Our flight to America is in two weeks. — Only two? We have so much to do! — Easy, Maria. We have time.)
 > - [[πτήση|η πτήση]] **flight** (#815): Η πτήση ακυρώθηκε.
 > - [[ήρεμα]] **calmly** (#816): Μίλα ήρεμα, μη γαβγίζεις!
 > - [[νοικιάζω]] **I rent** (#1492): Πρέπει να νοικιάσω ένα σμόκιν για τον χορό.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μαχαίρι|το μαχαίρι]] **knife** (#818): Ένα μαχαίρι λείπει. (One knife is missing.)
 
 > [!todo]- Tue · day 194 of 300
-> **Today's line:** Δεν θέλω ενοίκιο. Το σπίτι είναι δικό σου. — Το διορθώνω όλο, θεία! (I don't want rent. The house is yours. — I'll fix it all, auntie!)
+> **Today's line:** Θεία, πόσο ενοίκιο θέλεις για το σπίτι; — Δεν θέλω ενοίκιο. Το σπίτι είναι δικό σου. — Τότε το διορθώνω όλο, για σένα! (Auntie, how much rent do you want for the house? — I don't want rent. The house is yours. — Then I'll fix it all up, for you!)
 > - [[έγκυος]] **pregnant** (#819): Πόσων μηνών έγκυος είσαι; (How far along are you?)
 > - [[πλήρης]] **full, complete** (#820): Η ζωή είναι πλήρης μυστικών. (Life is full of secrets.)
 > - [[διορθώνω]] **I correct, I fix** (#821)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ενοίκιο|το ενοίκιο]] **rent** (#1493): Το ενοίκιο είναι ακριβό. (The rent is expensive.)
 
 > [!todo]- Wed · day 195 of 300
-> **Today's line:** Η φύση εδώ... — Βεβαίως! Τα δέντρα είναι γεμάτα ελιές! (The nature here... — Of course! The trees are full of olives!)
+> **Today's line:** Η φύση εδώ... όπως τη θυμάμαι. — Και κοίτα: τα δέντρα σου είναι γεμάτα ελιές! — Βεβαίως! Τα φρόντιζε η γιαγιά σου. (The nature here... just as I remember it. — And look: your trees are full of olives! — Of course! Your grandmother looked after them.)
 > - [[φύση|η φύση]] **nature** (#823): Η φύση είναι πράσινη. (Nature is green.)
 > - [[βεβαίως]] **certainly** (#824): Βεβαίως, ευχαρίστως.
 > - [[ζώνη|η ζώνη]] **belt, zone** (#825): Η ζώνη του είναι μαύρη.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πηγή|η πηγή]] **source, spring** (#827): Έχεις τον κωδικό πηγής; (Do you have the source code?)
 
 > [!todo]- Thu · day 196 of 300
-> **Today's line:** Μια γάτα πάνω στα τετράδια! — Είναι η προστασία τους! (A cat on the notebooks! — She's their protection!)
+> **Today's line:** Ωχ! Μια γάτα πάνω στα τετράδια! — Άφησέ την. Είναι η προστασία τους! (Oh! A cat on top of the notebooks! — Leave her. She's their protector!)
 > - [[προστασία|η προστασία]] **protection** (#828): Προστασία των εισοδημάτων τους ζητούν οι ανάπηροι.
 > - [[ακριβός]] **expensive** (#1494): Γιατί είν' ακριβό αυτό το πράγμα; (Why is this thing expensive?)
 > - [[βάρος|το βάρος]] **weight** (#829): Αυτή έχασε βάρος.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γάτα|η γάτα]] **cat** (#831): Η γάτα είναι μαύρη. (The cat is black.)
 
 > [!todo]- Fri · day 197 of 300
-> **Today's line:** Η γιαγιά κοιμάται πολύ. — Ο γιατρός αργεί... (Grandma sleeps a lot. — The doctor is late...)
+> **Today's line:** Μαρία, η γιαγιά μου κοιμάται πολύ σήμερα. Ανησυχώ. — Πήρα τον γιατρό, αλλά αργεί... (Maria, my grandmother is sleeping a lot today. I'm worried. — I called the doctor, but he's late...)
 > - [[πρόσβαση|η πρόσβαση]] **access** (#832): Κωδικός πρόσβασης;
 > - [[αργώ]] **I am late** (#833): Πες της να μην αργήσει. (Tell her not to be late.)
 > - [[κοιμάμαι]] **I sleep** (#834): Μ' αρέσει να κοιμάμαι. (I like sleeping.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[λεωφορείο|το λεωφορείο]] **bus** (#835): Το λεωφορείο είναι αργό. (The bus is slow.)
 
 > [!todo]- Sat · day 198 of 300
-> **Today's line:** Χρειάζεται ξεκούραση και ένα καλό γεύμα. — Απόψε, μια βραδιά με φαγητό! (She needs rest and a good meal. — Tonight, an evening with food!)
+> **Today's line:** Δεν είναι τίποτα. Χρειάζεται ξεκούραση και ένα καλό γεύμα. — Τότε απόψε, μια βραδιά με φαγητό! Μαγειρεύω εγώ! (It's nothing. She needs rest and a good meal. — Then tonight, an evening of food! I'm cooking!)
 > - [[βραδιά|η βραδιά]] **evening, night** (#836): Μείναμε τρεις βραδιές στη Βοστώνη.
 > - [[βία|η βία]] **violence; hurry** (#837): Τι σημαίνει βία;
 > - [[δημόσιος]] **public** (#838): Αυτή μακιγιάρεται σε δημόσια θέα.

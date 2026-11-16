@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Το λάδι μας θέλει ένα όνομα. Το ονομάζω «Ελένη». — Ένα ζευγάρι δάκρυα... (Our oil needs a name. I name it "Eleni". — A couple of tears...)
-> 2. Η αίσθηση στη μύτη: φρέσκο χορτάρι! — Σαν διακοπές! (The feeling in the nose: fresh grass! — Like a vacation!)
-> 3. Επτά μπουκάλια, παρακαλώ! — Ο πρώτος πελάτης! Είναι δίκαιο! (Seven bottles, please! — The first customer! It's only fair!)
-> 4. Στο εστιατόριο μου, μόνο «Ελένη». — Τι κουβέντα! (In my restaurant, only "Eleni". — What a conversation!)
-> 5. Μια επιτυχία! — Είναι ρόλος όλου του χωριού. (A success! — It's the whole village's part.)
-> 6. Το εισιτήριο μου είναι για την Κυριακή. — Τόσο επείγον; (My ticket is for Sunday. — So urgent?)
+> 1. Το λάδι μας θέλει ένα όνομα. Το ονομάζω «Ελένη». — «Ελένη»; Παιδί μου... — Γιαγιά, κλαις; — Ένα ζευγάρι δάκρυα μόνο. Από χαρά. (Our oil needs a name. I'm naming it "Eleni." — "Eleni"? My child... — Grandma, are you crying? — Just a couple of tears. From joy.)
+> 2. Δοκίμασε, θεία. Τι νιώθεις; — Η αίσθηση στη μύτη: φρέσκο χορτάρι! — Σαν διακοπές στο στόμα! (Taste it, auntie. What do you feel? — The feeling in my nose: fresh grass! — Like a vacation in your mouth!)
+> 3. Το λάδι «Ελένη»; Επτά μπουκάλια, παρακαλώ! — Ο πρώτος μας πελάτης! Και είναι δίκαιο: εσείς μου δώσατε το κλειδί! (The "Eleni" oil? Seven bottles, please! — Our first customer! And that's fair: you gave me the key!)
+> 4. Από σήμερα, στο εστιατόριο μου μόνο «Ελένη». — Όλο το χωριό το λέει! — Ε, ναι! Είναι η κουβέντα της χρονιάς! (From today on, in my restaurant only "Eleni." — The whole village is talking about it! — Well, yes! It's the talk of the year!)
+> 5. Μαρία, είναι μια μεγάλη επιτυχία! — Δεν είναι μόνο δική μου. Όλο το χωριό έπαιξε ρόλο. (Maria, it's a big success! — It's not just mine. The whole village played a part.)
+> 6. Μαρία... το εισιτήριό μου είναι για την Κυριακή. — Ήδη; Τόσο επείγον; — Η δουλειά, δυστυχώς. (Maria... my ticket is for Sunday. — Already? Is it that urgent? — Work, unfortunately.)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **work** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 199 of 300
-> **Today's line:** Το λάδι μας θέλει ένα όνομα. Το ονομάζω «Ελένη». — Ένα ζευγάρι δάκρυα... (Our oil needs a name. I name it "Eleni". — A couple of tears...)
+> **Today's line:** Το λάδι μας θέλει ένα όνομα. Το ονομάζω «Ελένη». — «Ελένη»; Παιδί μου... — Γιαγιά, κλαις; — Ένα ζευγάρι δάκρυα μόνο. Από χαρά. (Our oil needs a name. I'm naming it "Eleni." — "Eleni"? My child... — Grandma, are you crying? — Just a couple of tears. From joy.)
 > - [[ψεύτικος]] **fake** (#842): Έβγαλε το ψεύτικο δόντι της.
 > - [[όρος|ο όρος]] **term, condition** (#843): Αυτοί είναι οι όροι μου.
 > - [[ζευγάρι|το ζευγάρι]] **couple, pair** (#844): Αυτοί οι δύο δεν είναι ζευγάρι. (These two are not a couple.)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αριστερός]] **left** (#1497): Σήκωσε το αριστερό χέρι.
 
 > [!todo]- Tue · day 200 of 300
-> **Today's line:** Η αίσθηση στη μύτη: φρέσκο χορτάρι! — Σαν διακοπές! (The feeling in the nose: fresh grass! — Like a vacation!)
+> **Today's line:** Δοκίμασε, θεία. Τι νιώθεις; — Η αίσθηση στη μύτη: φρέσκο χορτάρι! — Σαν διακοπές στο στόμα! (Taste it, auntie. What do you feel? — The feeling in my nose: fresh grass! — Like a vacation in your mouth!)
 > - [[χαλαρώνω]] **I relax** (#847): Χαλαρώνω ακούγοντας κλασική μουσική.
 > - [[ήρωας|ο ήρωας]] **hero** (#849): Αυτός είναι ήρωας. (He is a hero.)
 > - [[διακοπές|οι διακοπές]] **vacation, holidays** (#850): Άφησε γένι όσο ήταν στις διακοπές. (He grew a beard while he was on holiday.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μύτη|η μύτη]] **nose** (#852): Παρακαλώ αναπνεύστε από τη μύτη σας. (Please breathe through your nose.)
 
 > [!todo]- Wed · day 201 of 300
-> **Today's line:** Επτά μπουκάλια, παρακαλώ! — Ο πρώτος πελάτης! Είναι δίκαιο! (Seven bottles, please! — The first customer! It's only fair!)
+> **Today's line:** Το λάδι «Ελένη»; Επτά μπουκάλια, παρακαλώ! — Ο πρώτος μας πελάτης! Και είναι δίκαιο: εσείς μου δώσατε το κλειδί! (The "Eleni" oil? Seven bottles, please! — Our first customer! And that's fair: you gave me the key!)
 > - [[δεξιός]] **right** (#1498)
 > - [[σκοτεινός]] **dark** (#853): Ο δρόμος ήταν σκοτεινός.
 > - [[αθώος]] **innocent** (#854): Πες του ότι είμαι αθώα. (Tell him I'm innocent.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επτά]] **seven** (#856): Είμαι είκοσι επτά ετών. (I'm twenty-seven years old.)
 
 > [!todo]- Thu · day 202 of 300
-> **Today's line:** Στο εστιατόριο μου, μόνο «Ελένη». — Τι κουβέντα! (In my restaurant, only "Eleni". — What a conversation!)
+> **Today's line:** Από σήμερα, στο εστιατόριο μου μόνο «Ελένη». — Όλο το χωριό το λέει! — Ε, ναι! Είναι η κουβέντα της χρονιάς! (From today on, in my restaurant only "Eleni." — The whole village is talking about it! — Well, yes! It's the talk of the year!)
 > - [[συμβούλιο|το συμβούλιο]] **council** (#857): Επιδοκιμάζουμε την απόφαση του συμβουλίου.
 > - [[κουβέντα|η κουβέντα]] **chat, conversation** (#858): Δεν έβγαλε κουβέντα.
 > - [[εστιατόριο|το εστιατόριο]] **restaurant** (#860): Μου αρέσει αυτό το εστιατόριο. (I love this restaurant.)
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[απαίσιος]] **awful** (#862): Είναι απαίσιο .
 
 > [!todo]- Fri · day 203 of 300
-> **Today's line:** Μια επιτυχία! — Είναι ρόλος όλου του χωριού. (A success! — It's the whole village's part.)
+> **Today's line:** Μαρία, είναι μια μεγάλη επιτυχία! — Δεν είναι μόνο δική μου. Όλο το χωριό έπαιξε ρόλο. (Maria, it's a big success! — It's not just mine. The whole village played a part.)
 > - [[γέφυρα|η γέφυρα]] **bridge** (#863): Αυτή η γέφυρα είναι πέτρινη. (This bridge is made of stone.)
 > - [[έδαφος|το έδαφος]] **ground, soil** (#864): Κοιμήθηκα στο έδαφος. (I slept on the ground.)
 > - [[λαός|ο λαός]] **people, nation** (#865): Τι θέλει ο λαός;
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ρόλος|ο ρόλος]] **role** (#867): Ο υπολογιστής παίζει σημαντικό ρόλο στη γνώση. (The computer plays an important role in gaining knowledge.)
 
 > [!todo]- Sat · day 204 of 300
-> **Today's line:** Το εισιτήριο μου είναι για την Κυριακή. — Τόσο επείγον; (My ticket is for Sunday. — So urgent?)
+> **Today's line:** Μαρία... το εισιτήριό μου είναι για την Κυριακή. — Ήδη; Τόσο επείγον; — Η δουλειά, δυστυχώς. (Maria... my ticket is for Sunday. — Already? Is it that urgent? — Work, unfortunately.)
 > - [[αναγνωρίζω]] **I recognize** (#868): Εγώ αναγνωρίζω το λάθος μου.
 > - [[επείγων]] **urgent** (#869): Πες της πως είν' επείγον. (Tell her it's urgent.)
 > - [[ελευθερία|η ελευθερία]] **freedom** (#870): Η ελευθερία είναι άχρηστη αν δεν την ασκείτε. (Freedom is useless unless you use it.)

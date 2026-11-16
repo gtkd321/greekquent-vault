@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Πεντακόσια μπουκάλια! Και επιπλέον... — Τι ανοησία! Πού είναι τα μπουκάλια; (Five hundred bottles! And on top of that... — What nonsense! Where are the bottles?)
-> 2. Το εργοστάσιο είναι κλειστό! — Και ποια είναι η αιτία; (The factory is closed! — And what's the reason?)
-> 3. Βρήκα μπουκάλια! Στην αποθήκη του φίλου μου. — Σε συμπαθώ πολύ, νονέ! (I found bottles! In my friend's storeroom. — I like you so much, godfather!)
-> 4. Σχεδιάζω την ετικέτα: μια ελιά και ένα κλειδί. — [στο τηλέφωνο] Κανονικά έρχομαι για τη σοδειά! (I'm designing the label: an olive and a key. — [on the phone] I'm definitely coming for the harvest!)
-> 5. Κλέβω λίγο χρόνο για τον Νίκο. — Είναι το παρόν, κορίτσι μου! (I steal a little time for Nikos. — It's the present, my girl!)
-> 6. Κάθε δέντρο έχει χαρακτήρα. — Χωρίς αμφιβολία! (Every tree has character. — Without a doubt!)
+> 1. Νονέ! Πεντακόσια μπουκάλια! Και επιπλέον... ένα συμβόλαιο! — Τι ανοησία! Πού θα βρεις τόσα μπουκάλια; (Godfather! Five hundred bottles! And on top of that... a contract! — That's crazy! Where will you find so many bottles?)
+> 2. Πάμε στο εργοστάσιο! ... Ωχ, είναι κλειστό! — Και ποια είναι η αιτία; — «Διακοπές μέχρι τον Σεπτέμβριο.» (Let's go to the factory! ... Oh no, it's closed! — And what's the reason? — "On vacation until September.")
+> 3. Μην ανησυχείς! Βρήκα μπουκάλια! Στην αποθήκη του φίλου μου. — Σε συμπαθώ πολύ, νονέ! (Don't worry! I found bottles! In my friend's storeroom. — I'm so fond of you, godfather!)
+> 4. Σχεδιάζω την ετικέτα: μια ελιά και ένα κλειδί. — [στο τηλέφωνο] Ωραία! Και κανονικά έρχομαι για τη σοδειά! (I'm designing the label: an olive and a key. — [on the phone] Nice! And I'm definitely coming for the harvest!)
+> 5. Πάλι στο τηλέφωνο με τον Νίκο; — Κλέβω λίγο χρόνο για εκείνον, γιαγιά. — Καλά κάνεις. Ζήσε το παρόν, κορίτσι μου! (On the phone with Nikos again? — I'm stealing a little time for him, grandma. — Good for you. Live in the present, my girl!)
+> 6. Ξέρεις; Κάθε δέντρο έχει χαρακτήρα, σαν άνθρωπος. — Χωρίς αμφιβολία! Το δέντρο της Ελένης είναι πεισματάρικο! (You know? Every tree has character, like a person. — No doubt about it! Eleni's tree is stubborn!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **getting around** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 223 of 300
-> **Today's line:** Πεντακόσια μπουκάλια! Και επιπλέον... — Τι ανοησία! Πού είναι τα μπουκάλια; (Five hundred bottles! And on top of that... — What nonsense! Where are the bottles?)
+> **Today's line:** Νονέ! Πεντακόσια μπουκάλια! Και επιπλέον... ένα συμβόλαιο! — Τι ανοησία! Πού θα βρεις τόσα μπουκάλια; (Godfather! Five hundred bottles! And on top of that... a contract! — That's crazy! Where will you find so many bottles?)
 > - [[οδός|η οδός]] **street** (#969): Αγόρασαν σπίτι στην οδό Παρκ. (They bought a house on Park Street.)
 > - [[πολιτικός]] **political; politician** (#970): Ήταν ένας ευφυής πολιτικός.
 > - [[ανοησία|η ανοησία]] **nonsense** (#971): Αυτά είναι ανοησίες.
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επιπλέον]] **additionally** (#973): Έχετε επιπλέον χρήματα;
 
 > [!todo]- Tue · day 224 of 300
-> **Today's line:** Το εργοστάσιο είναι κλειστό! — Και ποια είναι η αιτία; (The factory is closed! — And what's the reason?)
+> **Today's line:** Πάμε στο εργοστάσιο! ... Ωχ, είναι κλειστό! — Και ποια είναι η αιτία; — «Διακοπές μέχρι τον Σεπτέμβριο.» (Let's go to the factory! ... Oh no, it's closed! — And what's the reason? — "On vacation until September.")
 > - [[ένοχος]] **guilty** (#974): Παραδέχτηκε ότι ήταν ένοχος. (He admitted that he was guilty.)
 > - [[σχολή|η σχολή]] **school, faculty** (#975): Τελείωσε την ιατρική σχολή.
 > - [[κλειστός]] **closed** (#976): Φαίνεται ότι το μαγαζί είναι κλειστό. (It looks like the shop is closed.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αιτία|η αιτία]] **cause** (#978): Δε γνωρίζω την αιτία.
 
 > [!todo]- Wed · day 225 of 300
-> **Today's line:** Βρήκα μπουκάλια! Στην αποθήκη του φίλου μου. — Σε συμπαθώ πολύ, νονέ! (I found bottles! In my friend's storeroom. — I like you so much, godfather!)
+> **Today's line:** Μην ανησυχείς! Βρήκα μπουκάλια! Στην αποθήκη του φίλου μου. — Σε συμπαθώ πολύ, νονέ! (Don't worry! I found bottles! In my friend's storeroom. — I'm so fond of you, godfather!)
 > - [[μπουκάλι|το μπουκάλι]] **bottle** (#979): Δώσ' μου εκείνο το μπουκάλι. (Give me that bottle.)
 > - [[αντικείμενο|το αντικείμενο]] **object** (#980): Τα αντικείμενα αυτά πωλούνται στο κέντρο της πόλης.
 > - [[συμπαθώ]] **I like (a person)** (#981): Δεν τη συμπαθώ.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[εξέταση|η εξέταση]] **exam, examination** (#983): Πώς πήγε η εξέταση;
 
 > [!todo]- Thu · day 226 of 300
-> **Today's line:** Σχεδιάζω την ετικέτα: μια ελιά και ένα κλειδί. — [στο τηλέφωνο] Κανονικά έρχομαι για τη σοδειά! (I'm designing the label: an olive and a key. — [on the phone] I'm definitely coming for the harvest!)
+> **Today's line:** Σχεδιάζω την ετικέτα: μια ελιά και ένα κλειδί. — [στο τηλέφωνο] Ωραία! Και κανονικά έρχομαι για τη σοδειά! (I'm designing the label: an olive and a key. — [on the phone] Nice! And I'm definitely coming for the harvest!)
 > - [[φυσιολογικός]] **normal** (#984): Να κάνεις λάθη - είναι φυσιολογικό. (Making mistakes is normal.)
 > - [[σχεδιάζω]] **I design, I plan** (#985): Αμφότεροι σχεδιάζουμε να είμαστε στο πάρτι σας. (Both of us plan to be at your party.)
 > - [[κυνηγάω]] **I chase, I hunt** (#986): Κυνηγάω τον Τομ.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κανονικός]] **normal, regular** (#988): Όχι, εκείνο δεν είναι κανονικό.
 
 > [!todo]- Fri · day 227 of 300
-> **Today's line:** Κλέβω λίγο χρόνο για τον Νίκο. — Είναι το παρόν, κορίτσι μου! (I steal a little time for Nikos. — It's the present, my girl!)
+> **Today's line:** Πάλι στο τηλέφωνο με τον Νίκο; — Κλέβω λίγο χρόνο για εκείνον, γιαγιά. — Καλά κάνεις. Ζήσε το παρόν, κορίτσι μου! (On the phone with Nikos again? — I'm stealing a little time for him, grandma. — Good for you. Live in the present, my girl!)
 > - [[ενάντια]] **against** (#990): Κολυμπάμε ενάντια στο κύμα. (We swim against the wave.)
 > - [[κλέβω]] **I steal** (#991): Ο Θωμάς κλέβει.
 > - [[δράση|η δράση]] **action** (#992): Τώρα είναι ώρα για δράση.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[παρόν|το παρόν]] **present** (#994): Προς το παρόν, πάμε καλά. (For now, we're doing well.)
 
 > [!todo]- Sat · day 228 of 300
-> **Today's line:** Κάθε δέντρο έχει χαρακτήρα. — Χωρίς αμφιβολία! (Every tree has character. — Without a doubt!)
+> **Today's line:** Ξέρεις; Κάθε δέντρο έχει χαρακτήρα, σαν άνθρωπος. — Χωρίς αμφιβολία! Το δέντρο της Ελένης είναι πεισματάρικο! (You know? Every tree has character, like a person. — No doubt about it! Eleni's tree is stubborn!)
 > - [[λίμνη|η λίμνη]] **lake** (#995): Η λίμνη είναι πολύ βαθιά. (The lake is very deep.)
 > - [[αμφιβολία|η αμφιβολία]] **doubt** (#996): Χωρίς αμφιβολία. (Without a doubt!)
 > - [[αποκαλώ]] **I call (name)** (#997): Αυτός με αποκαλεί Πιτ.

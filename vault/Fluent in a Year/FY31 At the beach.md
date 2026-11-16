@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Το σπίτι μου! Το κτίριο είναι ίδιο. — Το καταφέραμε, θεία! (My house! The building is the same. — We made it, auntie!)
-> 2. Αναρωτιέμαι... είναι ακόμα εδώ το μικρό κουτί; (I wonder... is the little box still here?)
-> 3. Μη με λες κυρία. Λέγε με θεία! — Προσοχή, θεία, μην πέσεις! (Don't call me ma'am. Call me auntie! — Careful, auntie, don't fall!)
-> 4. Το έκτο τετράδιο; Το έκρυψα σε ένα νησί. Το γράφει σε αυτό το λεξικό. — Αναλαμβάνω εγώ! Πήρα την κάρτα για το πλοίο! (The sixth notebook? I hid it on an island. It's written in this dictionary. — I'll take it on! I got the card for the boat!)
-> 5. Το νησί είναι θαυμάσιο! — Πάντως, κάνει ζέστη! (The island is wonderful! — Anyway, it's hot!)
-> 6. Στο παράθυρο της εκκλησίας, στο νησί. Εκεί είναι. — Είμαι τυχερή! (At the church window, on the island. That's where it is. — I'm lucky!)
+> 1. Το σπίτι μου! Το κτίριο είναι ίδιο. — Το καταφέραμε! Είστε εδώ! (My house! The building is the same. — We made it! You're here!)
+> 2. Αναρωτιέμαι... είναι ακόμα εδώ το μικρό κουτί; — Το κουτί κάτω από το δέντρο; Το βρήκαμε! (I wonder... is the little box still here? — The box under the tree? We found it!)
+> 3. Κυρία Ελένη, προσέξτε το σκαλί. — Μη με λες κυρία. Λέγε με θεία! — Εντάξει, θεία. Μην πέσεις! (Mrs. Eleni, watch the step. — Don't call me ma'am. Call me auntie! — Okay, auntie. Don't fall!)
+> 4. Θεία, πού είναι το έκτο τετράδιο; — Το έκρυψα σε ένα νησί. Το γράφει σε αυτό το λεξικό. — Αναλαμβάνω εγώ! Έχω ήδη την κάρτα για το πλοίο! (Auntie, where is the sixth notebook? — I hid it on an island. It's written in this dictionary. — I'll take care of it! I already have the boat pass!)
+> 5. Το νησί είναι θαυμάσιο! — Πάντως, κάνει ζέστη! — Σε λίγο, μπάνιο στη θάλασσα! (The island is wonderful! — Still, it's hot! — Soon, a swim in the sea!)
+> 6. Θεία, πού ακριβώς είναι το τετράδιο; — Στο παράθυρο της εκκλησίας, πάνω στον λόφο. — Τι τυχερή που είστε μαζί μας! (Auntie, where exactly is the notebook? — At the church window, up on the hill. — How lucky that you're with us!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **at the beach** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 169 of 300
-> **Today's line:** Το σπίτι μου! Το κτίριο είναι ίδιο. — Το καταφέραμε, θεία! (My house! The building is the same. — We made it, auntie!)
+> **Today's line:** Το σπίτι μου! Το κτίριο είναι ίδιο. — Το καταφέραμε! Είστε εδώ! (My house! The building is the same. — We made it! You're here!)
 > - [[καταφέρνω]] **I manage, I succeed** (#699): Κατάφεραν να δραπετεύσουν από το παράθυρο. (They managed to escape through the window.)
 > - [[χτυπάω]] **I hit, I knock** (#700): Χτυπάει το τηλέφωνο.
 > - [[κτίριο|το κτίριο]] **building** (#701): Τι είναι αυτό το κτίριο εκεί πέρα; (What's that building over there?)
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μολύβι|το μολύβι]] **pencil** (#1473): Μπορώ να δανειστώ ένα μολύβι; (Can I borrow a pen?)
 
 > [!todo]- Tue · day 170 of 300
-> **Today's line:** Αναρωτιέμαι... είναι ακόμα εδώ το μικρό κουτί; (I wonder... is the little box still here?)
+> **Today's line:** Αναρωτιέμαι... είναι ακόμα εδώ το μικρό κουτί; — Το κουτί κάτω από το δέντρο; Το βρήκαμε! (I wonder... is the little box still here? — The box under the tree? We found it!)
 > - [[αναρωτιέμαι]] **I wonder** (#703): Αναρωτιέμαι γιατί είναι τόσο θυμωμένος. (I wonder why he is so angry.)
 > - [[φαντάζομαι]] **I imagine** (#705): Φαντάζομαι πολλά όμορφα πράγματα.
 > - [[κουτί|το κουτί]] **box** (#706): Το κουτί είναι πολύ βαρύ. (The box is very heavy.)
@@ -42,7 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αλλού]] **elsewhere** (#708): Αλλού να τα πουλάς αυτά!
 
 > [!todo]- Wed · day 171 of 300
-> **Today's line:** Μη με λες κυρία. Λέγε με θεία! — Προσοχή, θεία, μην πέσεις! (Don't call me ma'am. Call me auntie! — Careful, auntie, don't fall!)
+> **Today's line:** Κυρία Ελένη, προσέξτε το σκαλί. — Μη με λες κυρία. Λέγε με θεία! — Εντάξει, θεία. Μην πέσεις! (Mrs. Eleni, watch the step. — Don't call me ma'am. Call me auntie! — Okay, auntie. Don't fall!)
 > - [[θεία|η θεία]] **aunt** (#709): Η θεία μου έχει τρία παιδιά. (My aunt has three children.)
 > - [[θεραπεία|η θεραπεία]] **therapy, cure** (#710): Υπάρχει θεραπεία.
 > - [[πέφτω]] **I fall** (#712): Τον άκουσα να πέφτει. (I hear him falling.)
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[βασίλισσα|η βασίλισσα]] **queen** (#714): Η βασίλισσα μένει σε ένα κάστρο. (The queen lives in a castle.)
 
 > [!todo]- Thu · day 172 of 300
-> **Today's line:** Το έκτο τετράδιο; Το έκρυψα σε ένα νησί. Το γράφει σε αυτό το λεξικό. — Αναλαμβάνω εγώ! Πήρα την κάρτα για το πλοίο! (The sixth notebook? I hid it on an island. It's written in this dictionary. — I'll take it on! I got the card for the boat!)
+> **Today's line:** Θεία, πού είναι το έκτο τετράδιο; — Το έκρυψα σε ένα νησί. Το γράφει σε αυτό το λεξικό. — Αναλαμβάνω εγώ! Έχω ήδη την κάρτα για το πλοίο! (Auntie, where is the sixth notebook? — I hid it on an island. It's written in this dictionary. — I'll take care of it! I already have the boat pass!)
 > - [[λεξικό|το λεξικό]] **dictionary** (#1475): Έχεις ένα λεξικό; (Do you have a dictionary?)
 > - [[λαμβάνω]] **I receive** (#715): Αυτός έλαβε βεβαίωση ωριμότητας.
 > - [[αναλαμβάνω]] **I take on** (#716): Θα αναλάβει την ευθύνη.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επεισόδιο|το επεισόδιο]] **episode, incident** (#718): Μείνε συντονισμένος για νέο επεισόδιο.
 
 > [!todo]- Fri · day 173 of 300
-> **Today's line:** Το νησί είναι θαυμάσιο! — Πάντως, κάνει ζέστη! (The island is wonderful! — Anyway, it's hot!)
+> **Today's line:** Το νησί είναι θαυμάσιο! — Πάντως, κάνει ζέστη! — Σε λίγο, μπάνιο στη θάλασσα! (The island is wonderful! — Still, it's hot! — Soon, a swim in the sea!)
 > - [[χειρότερος]] **worse, worst** (#720): Είσαι ο χειρότερος ψεύτης στον κόσμο.
 > - [[διαγώνισμα|το διαγώνισμα]] **test, quiz** (#1476): Τι ώρα αρχίζει το διαγώνισμα;
 > - [[πάντως]] **anyway, however** (#721): Έλα αν μπορέσεις πάντως.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[θαυμάσιος]] **wonderful** (#725): Αυτό το μαγιώ σου πάει θαυμάσια.
 
 > [!todo]- Sat · day 174 of 300
-> **Today's line:** Στο παράθυρο της εκκλησίας, στο νησί. Εκεί είναι. — Είμαι τυχερή! (At the church window, on the island. That's where it is. — I'm lucky!)
+> **Today's line:** Θεία, πού ακριβώς είναι το τετράδιο; — Στο παράθυρο της εκκλησίας, πάνω στον λόφο. — Τι τυχερή που είστε μαζί μας! (Auntie, where exactly is the notebook? — At the church window, up on the hill. — How lucky that you're with us!)
 > - [[παράθυρο|το παράθυρο]] **window** (#726): Κοιτούσε από το παράθυρο. (He was looking out the window.)
 > - [[σωστό]] **correct** (#1477): Δεν είναι σωστό να κλέβεις. (It is not right to steal.)
 > - [[φοράω]] **I wear** (#727): Το χειμώνα φοράω χοντρά καλσόν. (In winter, I wear thick pantyhose.)

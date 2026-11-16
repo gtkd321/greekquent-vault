@@ -14,19 +14,19 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Ένα πουλί μας ακολουθεί! — Κάνω ένα βίντεο! (A bird is following us! — I'm making a video!)
-> 2. Η θάλασσα είναι καταπληκτική! — Εγώ... όχι και τόσο. Θέλω οποιοδήποτε φάρμακο! (The sea is amazing! — Me... not so much. I want any medicine!)
+> 1. Κοίτα! Ένα πουλί μας ακολουθεί! — Περίμενε, κάνω ένα βίντεο! (Look! A bird is following us! — Wait, I'm making a video!)
+> 2. Η θάλασσα είναι καταπληκτική! — Για μένα... όχι και τόσο. Θέλω οποιοδήποτε φάρμακο! (The sea is amazing! — For me... not so much. I want any medicine!)
 > 3. Η λύση: κοίτα τον ορίζοντα. — Και η τουαλέτα; Γρήγορα! (The solution: look at the horizon. — And the toilet? Quick!)
-> 4. Ο καθηγητής μου έλεγε: μέσω της θάλασσας, βρίσκεις τον εαυτό σου. (My teacher used to say: through the sea, you find yourself.)
-> 5. Μια συμβουλή: ρώτα την κοινότητα του νησιού. (A piece of advice: ask the island community.)
-> 6. Με φόβο, ανεβαίνω στο παράθυρο... — Το έκτο τετράδιο! — Φωνάζω: το βρήκαμε! (With fear, I climb up to the window... — The sixth notebook! — I shout: we found it!)
+> 4. Καλύτερα τώρα, κόρη μου; — Λίγο. Γιατί ταξιδεύουν όλοι με πλοίο; — Ο καθηγητής μου έλεγε: μέσω της θάλασσας, βρίσκεις τον εαυτό σου. (Better now, my daughter? — A little. Why does everyone travel by boat? — My teacher used to say: through the sea, you find yourself.)
+> 5. Πάτερ, ψάχνουμε την εκκλησία με το παλιό παράθυρο. — Μια συμβουλή: ρώτα την κοινότητα του νησιού. Όλοι την ξέρουν. (Father, we're looking for the church with the old window. — A piece of advice: ask the island community. Everyone knows it.)
+> 6. Με φόβο, ανεβαίνω στο παράθυρο... — Τι βλέπεις; — Το έκτο τετράδιο! Το βρήκαμε! — Μη φωνάζεις, είμαστε σε εκκλησία! (Nervously, I climb up to the window... — What do you see? — The sixth notebook! We found it! — Don't shout, we're in a church!)
 
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **ferry tickets** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 175 of 300
-> **Today's line:** Ένα πουλί μας ακολουθεί! — Κάνω ένα βίντεο! (A bird is following us! — I'm making a video!)
+> **Today's line:** Κοίτα! Ένα πουλί μας ακολουθεί! — Περίμενε, κάνω ένα βίντεο! (Look! A bird is following us! — Wait, I'm making a video!)
 > - [[πουλί|το πουλί]] **bird** (#730): Όλα τα πουλιά έχουν φτερά. (All birds have wings.)
 > - [[ειλικρινής]] **honest** (#731): Είμαι ειλικρινής. (I'm sincere.)
 > - [[λάθος (wrong)|λάθος]] **wrong** (#1478): Τι έκανα λάθος;
@@ -34,7 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[βίντεο|το βίντεο]] **video** (#734): Τώρα βλέπω βίντεο.
 
 > [!todo]- Tue · day 176 of 300
-> **Today's line:** Η θάλασσα είναι καταπληκτική! — Εγώ... όχι και τόσο. Θέλω οποιοδήποτε φάρμακο! (The sea is amazing! — Me... not so much. I want any medicine!)
+> **Today's line:** Η θάλασσα είναι καταπληκτική! — Για μένα... όχι και τόσο. Θέλω οποιοδήποτε φάρμακο! (The sea is amazing! — For me... not so much. I want any medicine!)
 > - [[καταπληκτικός]] **amazing** (#735): Είναι καταπληκτικές.
 > - [[ανθρώπινος]] **human** (#736): Όλα τα ανθρώπινα όντα είναι θνητά. (All human beings are mortal.)
 > - [[οποιοσδήποτε]] **anyone, any** (#737): Οποιοσδήποτε γιατρός θα σας πει να μην καπνίζετε.
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μονάδα|η μονάδα]] **unit** (#743): Το γραμμάριο και το κιλό είναι μονάδες βάρους.
 
 > [!todo]- Thu · day 178 of 300
-> **Today's line:** Ο καθηγητής μου έλεγε: μέσω της θάλασσας, βρίσκεις τον εαυτό σου. (My teacher used to say: through the sea, you find yourself.)
+> **Today's line:** Καλύτερα τώρα, κόρη μου; — Λίγο. Γιατί ταξιδεύουν όλοι με πλοίο; — Ο καθηγητής μου έλεγε: μέσω της θάλασσας, βρίσκεις τον εαυτό σου. (Better now, my daughter? — A little. Why does everyone travel by boat? — My teacher used to say: through the sea, you find yourself.)
 > - [[μέσω]] **via, through** (#744): Είμαι εν μέσω κρίσης.
 > - [[κράτος|το κράτος]] **state** (#1480): Κάθε κράτος έχει κυβέρνηση.
 > - [[προσωπικός]] **personal** (#746): Απαγορεύεται η πώληση προσωπικών πληροφοριών εδώ.
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[καθηγητής|ο καθηγητής]] **professor, teacher** (#748): Εγώ είμαι καθηγητής.
 
 > [!todo]- Fri · day 179 of 300
-> **Today's line:** Μια συμβουλή: ρώτα την κοινότητα του νησιού. (A piece of advice: ask the island community.)
+> **Today's line:** Πάτερ, ψάχνουμε την εκκλησία με το παλιό παράθυρο. — Μια συμβουλή: ρώτα την κοινότητα του νησιού. Όλοι την ξέρουν. (Father, we're looking for the church with the old window. — A piece of advice: ask the island community. Everyone knows it.)
 > - [[συμβουλή|η συμβουλή]] **advice** (#749): Είμαι καλή στις συμβουλές.
 > - [[ξένος]] **foreign; stranger** (#750): Οι ξένες γλώσσες μου αρέσουν. (I like foreign languages.)
 > - [[κοινότητα|η κοινότητα]] **community** (#1481): Ζω σε μία αγροτική κοινότητα.
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[στοίχημα|το στοίχημα]] **bet** (#752): Πάω στοίχημα ότι ξέρεις Γαλλικά. (I bet you know French.)
 
 > [!todo]- Sat · day 180 of 300
-> **Today's line:** Με φόβο, ανεβαίνω στο παράθυρο... — Το έκτο τετράδιο! — Φωνάζω: το βρήκαμε! (With fear, I climb up to the window... — The sixth notebook! — I shout: we found it!)
+> **Today's line:** Με φόβο, ανεβαίνω στο παράθυρο... — Τι βλέπεις; — Το έκτο τετράδιο! Το βρήκαμε! — Μη φωνάζεις, είμαστε σε εκκλησία! (Nervously, I climb up to the window... — What do you see? — The sixth notebook! We found it! — Don't shout, we're in a church!)
 > - [[φόβος|ο φόβος]] **fear** (#753): Χλώμιασε απ'τον φόβο.
 > - [[προσπάθεια|η προσπάθεια]] **effort** (#755): Αξίζει μια προσπάθεια. (It's worth a try.)
 > - [[πράξη|η πράξη]] **act, action** (#756): Απαιτούμε πράξεις, όχι λόγια.

@@ -141,3 +141,10 @@ body.is-mobile .gq-upd { bottom: calc(env(safe-area-inset-bottom, 0px) + 64px); 
 .gq-comeback .gq-cbrow:first-of-type { border-top: 0; }
 .gq-cbgr { font-size: 1.15em; margin-top: 4px; }
 .gq-today .gq-mini { min-height: 32px; }
+
+/* Phone bar: Back, Forward and one Find button (touch and hold for more). No new-tab or tab-count buttons. */
+body.gq-onebar .mobile-navbar-action-new-tab,
+body.gq-onebar .mobile-navbar-action-tabs,
+body.gq-onebar .mobile-navbar-action-quick-switcher,
+body.gq-onebar .mobile-navbar-action-menu { display: none !important; }
+.gq-navbtn { display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; -webkit-touch-callout: none; user-select: none; touch-action: manipulation; }

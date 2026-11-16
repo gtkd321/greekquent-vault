@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 16, night: One page at a time
+> - **No more piles of tabs.** Links now open in the same page. Use Back and Forward to move through what you've opened. Any extra tabs from before close on their own (notes save themselves, so nothing is lost).
+> - **A quieter bar on phones.** The bottom bar is now just Back, Forward and one search button. Tap it to find a note. Touch and hold it for Search inside notes, Look up a word, Today and More.
+> - Want tabs back? On the Advanced layout, More > Allow tabs.
+
 > [!info]- November 16, evening: Watch it, then play it
 > - **Story Lines.** Week 1's story is now a short cartoon for each day, with Greek subtitles that light up as the characters speak. [Open it](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA), or tap **Watch it** under the day's line on Today.
 > - **Text adventure.** The same scenes as an old-school text game: type the right Greek word to move the story on. Greeklish works, and HELP gives a clue.

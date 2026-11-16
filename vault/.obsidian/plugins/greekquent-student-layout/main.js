@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-16g';
+const VAULT_RELEASE = '2026-11-16h';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -526,6 +526,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
       this.hideRibbon();
       this.applyLevel();
+      this.oneTab(); this.oneButton();
       this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === PROGRESS) { const was = this.lvl; this.lvl = null; if (this.level() !== was) this.applyLevel(); else this.paintSwitches(); } }));
       this.registerEvent(this.app.workspace.on('layout-change', () => this.mountSwitches()));
       this.registerEvent(this.app.workspace.on('active-leaf-change', () => this.mountSwitches()));
@@ -975,6 +976,70 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     } finally { this.updating = false; const c = document.querySelector('.gq-upd'); if (c) c.remove(); }
   }
   chip(t) { let c = document.querySelector('.gq-upd'); if (!c) c = document.body.createDiv({ cls: 'gq-upd', attr: { role: 'status', 'aria-live': 'polite' } }); c.setText(t); return c; }
+  // ---------- One page at a time: links open in the same tab, Back and Forward move through them ----------
+  oneTab() {
+    const ws = this.app.workspace, orig = ws.getLeaf;
+    if (!orig || ws.gqOrigGetLeaf) return;
+    ws.gqOrigGetLeaf = orig;
+    ws.getLeaf = (newLeaf, dir) => {
+      if ((newLeaf === true || newLeaf === 'tab') && this.colors().tabs !== 'on') return orig.call(ws, false);
+      return orig.call(ws, newLeaf, dir);
+    };
+    this.register(() => { if (ws.gqOrigGetLeaf) { ws.getLeaf = ws.gqOrigGetLeaf; delete ws.gqOrigGetLeaf; } });
+    this.registerEvent(ws.on('layout-change', () => { clearTimeout(this.tabT); this.tabT = setTimeout(() => this.closeExtraTabs(), 400); }));
+    this.closeExtraTabs();
+  }
+  // Tabs left over from before (or opened some other way) close. Notes save on their own, so nothing is lost.
+  closeExtraTabs() {
+    if (this.colors().tabs === 'on' || this.busy) return;
+    const ws = this.app.workspace, leaves = [];
+    ws.iterateRootLeaves(l => leaves.push(l));
+    if (leaves.length < 2) return;
+    const keep = (ws.getMostRecentLeaf && ws.getMostRecentLeaf(ws.rootSplit)) || leaves[0];
+    for (const l of leaves) if (l !== keep && !(l.getViewState && l.getViewState().pinned)) l.detach();
+  }
+  async setTabs(on) {
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { if (on) fm.tabs = 'on'; else delete fm.tabs; });
+    new Notice(on ? 'Tabs allowed. Long-press a link to open it in a new tab.' : 'One page at a time: links open in the same tab. Use Back and Forward.', 5000);
+    if (!on) setTimeout(() => this.closeExtraTabs(), 300);
+  }
+  // Phone bar: Back, Forward and one button. Tap it to find a note; touch and hold for the rest.
+  oneButton() {
+    if (!document.body.classList.contains('is-mobile')) return;
+    let tries = 0;
+    const mount = () => {
+      const back = document.querySelector('.mobile-navbar-action-back');
+      if (!back || !back.parentElement) { if (++tries < 20) setTimeout(mount, 500); return; }
+      if (back.parentElement.querySelector('.gq-navbtn')) return;
+      const b = back.parentElement.createDiv({ cls: 'mobile-navbar-action gq-navbtn clickable-icon', attr: { 'aria-label': 'Find a note. Touch and hold for more.', role: 'button', tabindex: '0' } });
+      try { require('obsidian').setIcon(b, 'search'); } catch (e) { b.setText('Find'); }
+      let t = 0, held = false;
+      const down = () => { held = false; clearTimeout(t); t = setTimeout(() => { held = true; if (navigator.vibrate) navigator.vibrate(15); this.navMenu(b); }, 450); };
+      const up = e => { clearTimeout(t); if (held) { e.preventDefault(); return; } this.cmd('switcher:open'); };
+      b.addEventListener('pointerdown', down);
+      b.addEventListener('pointerup', up);
+      b.addEventListener('pointercancel', () => clearTimeout(t));
+      b.addEventListener('contextmenu', e => e.preventDefault());
+      // Only hide Obsidian's buttons once ours is in place, so a renamed bar is left alone.
+      document.body.classList.add('gq-onebar');
+      this.register(() => { b.remove(); document.body.classList.remove('gq-onebar'); });
+    };
+    mount();
+  }
+  cmd(id) { try { this.app.commands.executeCommandById(id); } catch (e) {} }
+  navMenu(anchor) {
+    const m = new Menu(), l = this.level();
+    m.addItem(i => i.setTitle('Find a note').setIcon('search').onClick(() => this.cmd('switcher:open')));
+    m.addItem(i => i.setTitle('Search inside notes').setIcon('text-search').onClick(() => this.cmd('global-search:open')));
+    m.addItem(i => i.setTitle('Look up a word').setIcon('book-open').onClick(() => new LookupModal(this.app, this).open()));
+    m.addItem(i => i.setTitle('Today').setIcon('house').onClick(() => this.openToday()));
+    if (l !== 'simple') m.addItem(i => i.setTitle('Ask').setIcon('users').onClick(() => this.ask()));
+    m.addSeparator();
+    m.addItem(i => i.setTitle('More').setIcon('more-horizontal').onClick(() => this.moreMenu()));
+    const r = anchor.getBoundingClientRect();
+    m.showAtPosition({ x: r.left, y: r.top });
+  }
   // ---------- More menu (left toolbar) ----------
   moreMenu(evt) {
     const m = new Menu();
@@ -988,6 +1053,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
     m.addItem(i => i.setTitle('Setting up').setIcon('help-circle').onClick(() => this.openNote(SETUP)));
     m.addItem(i => i.setTitle('Update vault').setIcon('refresh-cw').onClick(() => this.updateVault(false)));
+    if (l === 'advanced') m.addItem(i => i.setTitle(this.colors().tabs === 'on' ? 'Tabs: turn off' : 'Allow tabs').setIcon('copy').onClick(() => this.setTabs(this.colors().tabs !== 'on')));
     if (this.isTeacher) m.addItem(i => i.setTitle('Teacher update key').setIcon('key').onClick(() => this.keyModal()));
     if (evt && evt.clientX !== undefined) m.showAtMouseEvent(evt); else m.showAtPosition({ x: 60, y: 200 });
   }
@@ -1008,7 +1074,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, layout: String(fm.layout || ''), hint_off: String(fm.hint_off || ''), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), track: String(fm.track || '') };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, layout: String(fm.layout || ''), hint_off: String(fm.hint_off || ''), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), track: String(fm.track || ''), tabs: String(fm.tabs || '') };
   }
   colorOf(word) { const c = this.colors(); return COLORS.map(x => x[0]).find(k => c[k].includes(word)) || ''; }
   async progressFile() {

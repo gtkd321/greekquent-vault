@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17d';
+const VAULT_RELEASE = '2026-11-17e';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1523,6 +1523,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const ol = card.createEl('ol', { cls: 'gq-storylist' });
       for (const x of lines) { const li = ol.createEl('li'); this.lineEl(li, x.gr, x.words); li.createDiv({ cls: 'gq-hint', text: x.en }); }
       const row = card.createDiv('gq-row'); this.hearBtn(row, lines.map(x => x.gr).join(' '), 'Hear the whole story');
+      this.popBtn(row, 'Read it line by line', () => this.popLines(`This week's story · week ${b.week}`, lines, 'Say each line with the voice.'));
       if (lines[0] && lines[0].n <= SCENE_DAYS) this.sceneRow(card, lines[0].n, true);
       if (!behind) return;
     }
@@ -1544,6 +1545,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (last >= n) row.createSpan({ cls: 'gq-hint', text: 'Said it. ' + (n >= cal ? 'Next line tomorrow.' : '') });
     else { const ok = row.createEl('button', { text: 'I said it', cls: 'mod-cta gq-mini' }); ok.onclick = () => this.saidBeat(n); }
     if (behind) { const j = row.createEl('a', { text: 'Jump to today', href: '#' }); j.onclick = e => { e.preventDefault(); this.saidBeat(cal - 1); }; }
+    const pr = card.createDiv('gq-row'); this.popBtn(pr, 'Practice it', () => this.popLine(b, n, last >= n));
     this.sceneRow(card, n);
     return b;
   }
@@ -1569,6 +1571,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const row = r.createDiv('gq-row'); const s = row.createEl('button', { text: 'Show Greek', cls: 'gq-mini' }); s.onclick = () => { g.style.display = ''; s.remove(); say(b.gr); };
       this.hearBtn(row, b.gr, 'Hear');
     }
+    const qr = card.createDiv('gq-row'); this.popBtn(qr, due.length > 1 ? `Quiz me (${due.length})` : 'Quiz me', () => this.popComebacks(due));
   }
   // Kid track: the kid lesson for this week (or the latest one), one line a day, plus the kid-teacher swap.
   async kidCard(box, lesson, dow) {
@@ -1743,6 +1746,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const ol = c.createEl('ol', { cls: 'gq-storylist' });
       lines.slice(0, k + 1).forEach((l, i) => { const li = ol.createEl('li', { cls: i === k ? 'gq-now' : '' }); li.createSpan({ cls: 'gq-hint', text: l.who + ': ' }); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); if (l.en) li.createDiv({ cls: 'gq-hint', text: l.en }); });
       const r = c.createDiv('gq-row'); this.hearBtn(r, lines[k].gr); this.hearBtn(r, lines.slice(0, k + 1).map(l => l.gr).join(' '), 'Hear them all');
+      this.popBtn(r, 'One line at a time', () => this.popLines('Say it together', lines.slice(0, k + 1)));
     }
     // 3. Swap: the kid is the teacher
     const sw = this.kidLines(this.kidSection(txt, 'You are the teacher'));
@@ -1794,6 +1798,84 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const gu = foot.createEl('a', { text: 'For grown-ups', href: '#' }); gu.onclick = e => { e.preventDefault(); this.openNote(SETUP); };
     // Slides parked here too: the kids Today is a plain list of cards.
     if (tok === el.gqTok) { el.empty(); el.appendChild(box); }
+  }
+  // ---------- Pop-out card: one big card in front of the page, for a few focused moments ----------
+  // Used for today's line, comebacks, the Sunday read-through and the kid lines. Everything else stays in the list.
+  // steps: [{ label, build(el, api) }]. api.next(), api.close(). Esc, arrows, swipe, tap outside to close.
+  pop(title, steps, onClose) {
+    if (!steps.length) return;
+    const old = document.querySelector('.gq-pop'); if (old) old.remove();
+    const ov = document.body.createDiv({ cls: 'gq-pop', attr: { role: 'dialog', 'aria-modal': 'true', 'aria-label': title } });
+    const card = ov.createDiv('gq-pop-card');
+    const top = card.createDiv('gq-pop-top'); top.createSpan({ cls: 'gq-pop-title', text: title });
+    const x = top.createEl('button', { text: '×', cls: 'gq-pop-x', attr: { 'aria-label': 'Close' } });
+    const body = card.createDiv('gq-pop-body');
+    const nav = card.createDiv('gq-pop-nav');
+    const prev = nav.createEl('button', { text: '‹', cls: 'gq-pop-arrow', attr: { 'aria-label': 'Back' } });
+    const count = nav.createDiv('gq-pop-count');
+    const next = nav.createEl('button', { text: '›', cls: 'gq-pop-arrow', attr: { 'aria-label': 'Next' } });
+    let i = 0;
+    const close = () => { document.removeEventListener('keydown', key, true); ov.addClass('gq-pop-out'); setTimeout(() => ov.remove(), 200); if (onClose) onClose(); };
+    const api = { next: () => go(i + 1, 1), close };
+    const go = (k, dir) => {
+      if (k < 0 || k >= steps.length) return;
+      i = k; body.empty(); body.removeClass('gq-pop-l', 'gq-pop-r'); void body.offsetWidth; body.addClass(dir < 0 ? 'gq-pop-l' : 'gq-pop-r');
+      steps[i].build(body.createDiv('gq-pop-step'), api);
+      count.setText(steps.length > 1 ? `${steps[i].label || ''}${steps[i].label ? ' · ' : ''}${i + 1} of ${steps.length}` : (steps[i].label || ''));
+      prev.disabled = i === 0; next.disabled = i === steps.length - 1;
+      nav.toggleClass('gq-pop-one', steps.length < 2);
+    };
+    const key = e => {
+      if (e.key === 'Escape') { close(); e.preventDefault(); e.stopPropagation(); }
+      else if (e.key === 'ArrowRight') { go(i + 1, 1); e.preventDefault(); } else if (e.key === 'ArrowLeft') { go(i - 1, -1); e.preventDefault(); }
+    };
+    document.addEventListener('keydown', key, true);
+    prev.onclick = () => go(i - 1, -1); next.onclick = () => go(i + 1, 1); x.onclick = close;
+    ov.addEventListener('click', e => { if (e.target === ov) close(); });
+    let sx = 0, sy = 0;
+    card.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    card.addEventListener('touchend', e => { const t = e.changedTouches[0] || {}, dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) { e.stopPropagation(); go(i + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); } });
+    go(0, 1); setTimeout(() => x.focus(), 50);
+    return api;
+  }
+  popBtn(row, text, fn) { const b = row.createEl('button', { text, cls: 'gq-mini gq-popbtn' }); b.onclick = fn; return b; }
+  // Today's line: listen, say it from memory, then mark it said.
+  popLine(b, n, done) {
+    const big = (el, t) => this.lineEl(el.createDiv('gq-pop-big'), t, b.words);
+    this.pop(`Today's line · week ${b.week}`, [
+      { label: 'Listen', build: (el, api) => { el.createDiv({ cls: 'gq-hint', text: 'Hear it, then say it out loud with the voice.' }); big(el, b.gr); const r = el.createDiv('gq-row'); this.hearBtn(r, b.gr); say(b.gr); const nx = r.createEl('button', { text: 'Ready', cls: 'mod-cta' }); nx.onclick = api.next; } },
+      { label: 'From memory', build: (el, api) => { el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek without looking, then check.' }); el.createDiv({ cls: 'gq-pop-big gq-pop-en', text: b.en }); const g = el.createDiv('gq-pop-big gq-pop-hide'); this.lineEl(g, b.gr, b.words); const r = el.createDiv('gq-row'); const c = r.createEl('button', { text: 'Check', cls: 'mod-cta' }); c.onclick = () => { g.removeClass('gq-pop-hide'); say(b.gr); c.remove(); const nx = r.createEl('button', { text: 'Next', cls: 'mod-cta' }); nx.onclick = api.next; }; } },
+      { label: 'Done', build: (el, api) => { big(el, b.gr); el.createDiv({ cls: 'gq-hint', text: b.en });
+        const r = el.createDiv('gq-row');
+        if (done) r.createSpan({ cls: 'gq-hint', text: 'Already marked as said.' }); else { const ok = r.createEl('button', { text: 'I said it', cls: 'mod-cta' }); ok.onclick = () => { this.saidBeat(n); api.close(); }; }
+        if (n <= SCENE_DAYS) { const w = r.createEl('button', { text: 'Watch it' }); w.onclick = () => { api.close(); this.openApp('story', '#d=' + n); }; } } }
+    ]);
+  }
+  // Comebacks: English first, say it, then reveal the Greek. One at a time.
+  popComebacks(due) {
+    const steps = due.map((b, k) => ({ label: 'Comeback', build: (el, api) => {
+      el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek first.' }); el.createDiv({ cls: 'gq-pop-big gq-pop-en', text: b.en });
+      const g = el.createDiv({ cls: 'gq-pop-big gq-pop-hide', text: b.gr, attr: { lang: 'el' } });
+      const r = el.createDiv('gq-row'); const s = r.createEl('button', { text: 'Show Greek', cls: 'mod-cta' });
+      s.onclick = () => { g.removeClass('gq-pop-hide'); say(b.gr); s.remove(); this.hearBtn(r, b.gr, 'Hear again'); const nx = r.createEl('button', { text: k === due.length - 1 ? 'Done' : 'Next', cls: 'mod-cta' }); nx.onclick = k === due.length - 1 ? api.close : api.next; };
+    } }));
+    this.pop('Comebacks', steps);
+  }
+  // A list of lines, one per card, then the whole thing. Sunday read-through and the kid lines.
+  popLines(title, lines, hint) {
+    const steps = lines.map(l => ({ label: l.who || 'Line', build: el => {
+      if (hint) el.createDiv({ cls: 'gq-hint', text: hint });
+      if (l.who) el.createDiv({ cls: 'gq-hint', text: l.who + ':' });
+      const g = el.createDiv('gq-pop-big'); if (l.words) this.lineEl(g, l.gr, l.words); else g.createSpan({ text: l.gr, attr: { lang: 'el' } });
+      if (l.en) el.createDiv({ cls: 'gq-hint', text: l.en });
+      this.hearBtn(el.createDiv('gq-row'), l.gr); say(l.gr);
+    } }));
+    steps.push({ label: 'All together', build: (el, api) => {
+      el.createDiv({ cls: 'gq-hint', text: 'Now the whole thing, top to bottom.' });
+      const ol = el.createEl('ol', { cls: 'gq-storylist gq-pop-list' }); for (const l of lines) ol.createEl('li', { text: l.gr, attr: { lang: 'el' } });
+      const r = el.createDiv('gq-row'); this.hearBtn(r, lines.map(l => l.gr).join(' '), 'Hear it all'); const d = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); d.onclick = api.close;
+    } });
+    this.pop(title, steps);
   }
   // ---------- Slides (parked): one big card at a time, fading in, with Back and Next. Not used on Today since 2026-11-17d. ----------
   // The cards are the same as before; only the frame changes. The tool buttons and footer stay small underneath.
@@ -1943,6 +2025,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   onunload() {
     document.body.classList.remove('greekquent-student', ...LEVELS.map(x => 'gq-l-' + x));
     const st = document.getElementById('gq-layout-dim'); if (st) st.remove();
+    const pp = document.querySelector('.gq-pop'); if (pp) pp.remove();
     for (const sw of document.querySelectorAll('.gq-switch')) { if (sw.parentElement) sw.parentElement.classList.remove('gq-has-switch'); sw.remove(); }
   }
   hideRibbon() {

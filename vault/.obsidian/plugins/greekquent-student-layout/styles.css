@@ -217,3 +217,38 @@ body.gq-kids .gq-switch { display: none; }
 .gq-kidwords .gq-c.is-on { color: #fff; font-weight: 600; }
 .gq-kidwords .gq-c.gq-red.is-on { background: #d73027; } .gq-kidwords .gq-c.gq-yellow.is-on { background: #b38b00; } .gq-kidwords .gq-c.gq-green.is-on { background: #1a9850; }
 .gq-kidwords .gq-c.is-on::before { content: "\2713  "; }
+
+/* ---------- Pop-out card: big glass card in front of the page, only for focused practice ---------- */
+.gq-pop { position: fixed; inset: 0; z-index: var(--layer-modal, 50); display: flex; align-items: center; justify-content: center; padding: 16px;
+  padding-top: max(16px, env(safe-area-inset-top)); padding-bottom: max(16px, env(safe-area-inset-bottom));
+  background: rgba(20, 24, 32, .28); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: gqFade .22s ease both; }
+.gq-pop.gq-pop-out { animation: gqFadeOut .2s ease both; }
+.gq-pop::before { content: ''; position: absolute; inset: 15% 10%; pointer-events: none; filter: blur(40px); opacity: .9;
+  background: radial-gradient(50% 50% at 25% 35%, rgba(46, 110, 170, .35), transparent 70%), radial-gradient(45% 45% at 80% 70%, rgba(120, 150, 60, .32), transparent 70%), radial-gradient(35% 35% at 60% 15%, rgba(242, 183, 5, .25), transparent 70%); }
+.gq-pop-card { position: relative; width: min(640px, 100%); max-height: 100%; overflow: auto; box-sizing: border-box; padding: 18px 22px 14px; border-radius: 24px;
+  background: var(--background-primary); background: color-mix(in srgb, var(--background-primary) 72%, transparent);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2); backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid color-mix(in srgb, var(--text-normal) 12%, transparent); box-shadow: 0 24px 64px rgba(0, 0, 0, .22);
+  animation: gqPopIn .28s ease both; }
+.gq-pop-top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.gq-pop-title { flex: 1; font-weight: 700; }
+.gq-pop .gq-pop-x { min-width: 40px; min-height: 40px; border-radius: 50%; font-size: 22px; line-height: 1; padding: 0; box-shadow: none; background: transparent; }
+.gq-pop-body { min-height: min(40vh, 320px); display: flex; flex-direction: column; justify-content: center; }
+.gq-pop-body.gq-pop-r { animation: gqIn .3s ease both; --gq-x: 24px; }
+.gq-pop-body.gq-pop-l { animation: gqIn .3s ease both; --gq-x: -24px; }
+.gq-pop-step > * { margin: 10px 0; }
+.gq-pop-big { font-size: 1.7em; line-height: 1.4; font-weight: 500; }
+.gq-pop-en { font-size: 1.35em; color: var(--text-normal); }
+.gq-pop-hide { visibility: hidden; }
+.gq-pop .gq-row button { min-height: 44px; padding: 0 16px; }
+.gq-pop-list li { font-size: 1.15em; margin: 6px 0; color: var(--text-normal); }
+.gq-pop-nav { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.gq-pop-nav.gq-pop-one .gq-pop-arrow { visibility: hidden; }
+.gq-pop-count { flex: 1; text-align: center; font-size: .85em; color: var(--text-muted); }
+.gq-pop .gq-pop-arrow { min-width: 48px; min-height: 48px; border-radius: 50%; font-size: 26px; line-height: 1; padding: 0 0 3px; box-shadow: none; }
+.gq-pop-arrow:disabled { opacity: .3; }
+.gq-popbtn { font-weight: 600; }
+@keyframes gqFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes gqFadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes gqPopIn { from { opacity: 0; transform: translateY(12px) scale(.97); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .gq-pop, .gq-pop-card, .gq-pop-body { animation: none !important; } }

@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, late: A big card, only when it helps
+> - **Practice it** on today's line opens one big card in front of the page: listen, say it from memory, then check. Mark it said from there.
+> - **Quiz me** on Comebacks shows one line at a time: English first, say it, then reveal the Greek.
+> - Sunday: **Read it line by line** walks through the week's story one line per card, then all together.
+> - Close it with ×, Esc, or a tap outside. Swipe or use the arrows to move. Everything else on Today stays a plain list.
+
 > [!info]- November 17, night: Instructions that match the buttons
 > - **Today is back to the list of cards**, top to bottom. The slides will return later, only for a few moments where one big card helps.
 > - Word notes no longer tell you to tap a button your layout hides. "Pair it with" now says: take one word from each line and say it out loud.

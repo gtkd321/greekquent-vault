@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 16: Look up stays in Obsidian
+> - **Bonus words are translated right here.** Type a word that is not in the 1,500 and the Greek shows up in the Look up box, with how to say it and a Hear it button. No more jumping to the browser.
+> - **Words I looked up now saves the Greek** next to every bonus word.
+> - Older look-ups that only had the English get their Greek filled in the next time you open Obsidian online. Anything you typed there yourself stays as it is.
+
 > [!info]- November 14, late: Complete Greek
 > - If you have the book Teach Yourself Complete Greek, each intermediate lesson now names the unit that goes with it. The audio is free in the Teach Yourself Library app.
 > - Lessons 16 and 26 point to the book's revision tests.

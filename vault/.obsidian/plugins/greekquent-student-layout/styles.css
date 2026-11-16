@@ -100,3 +100,6 @@ body.greekquent-student .gq-graph > .view-header { display: none !important; }
 .gq-key { display: inline-flex; align-items: center; gap: 4px; }
 .gq-kdot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .gq-kv { background: #2b6cb0; } .gq-kn { background: #8e44ad; } .gq-ka { background: #e67e22; } .gq-kd { background: #16a085; } .gq-ko { background: var(--graph-node, #888); }
+.gq-bonus { flex-wrap: wrap; }
+.gq-bonus .gq-hit-text .gq-hit-sub { flex: none; }
+.gq-btns { display: flex; gap: 8px; flex-wrap: wrap; }

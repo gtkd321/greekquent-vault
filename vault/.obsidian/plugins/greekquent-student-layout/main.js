@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-14q';
+const VAULT_RELEASE = '2026-11-16a';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -74,9 +74,9 @@ class OldWebView extends ItemView {
   async onOpen() { setTimeout(() => this.plugin.graphGo(this.leaf, this.plugin.wordPath(this.path)), 50); }
 }
 
-// ---------- Look up a word: the 1,500 first, then a free translator for bonus words ----------
+// ---------- Look up a word: the 1,500 first, then a free translator for bonus words, right here in Obsidian ----------
 class LookupModal extends Modal {
-  constructor(app, plugin) { super(app); this.plugin = plugin; }
+  constructor(app, plugin) { super(app); this.plugin = plugin; this.tr = null; this.timer = 0; }
   onOpen() {
     const c = this.contentEl; c.addClass('gq-modal'); this.titleEl.setText('Look up a word');
     this.input = c.createEl('input', { type: 'text', attr: { placeholder: 'Type English or Greek', autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false' } });
@@ -87,13 +87,17 @@ class LookupModal extends Modal {
     this.guess.onchange = () => { this.plugin.guessFirst = this.guess.checked; this.render(); };
     this.list = c.createDiv('gq-results');
     this.input.oninput = () => this.render();
-    this.input.onkeydown = e => { if (e.key === 'Enter') { const b = this.list.querySelector('.gq-hit button, .gq-bonus button'); b && b.click(); } };
+    this.input.onkeydown = e => {
+      if (e.key !== 'Enter') return;
+      const b = this.list.querySelector('.gq-hit button'); if (b) { b.click(); return; }
+      clearTimeout(this.timer); this.translate(true);
+    };
     this.plugin.wordIndex().then(() => this.render());
     setTimeout(() => this.input.focus(), 50);
   }
   render() {
-    const q = this.input.value.trim(), L = this.list; L.empty();
-    if (!q) { L.createDiv({ cls: 'gq-hint', text: 'Words from the 1,500 open in the word graph. Anything else is a bonus word.' }); return; }
+    const q = this.input.value.trim(), L = this.list; L.empty(); clearTimeout(this.timer);
+    if (!q) { L.createDiv({ cls: 'gq-hint', text: 'Words from the 1,500 open in the word graph. Anything else is a bonus word, translated right here.' }); return; }
     const hits = this.plugin.findWords(q);
     const hide = this.guess.checked;
     for (const w of hits) {
@@ -109,10 +113,39 @@ class LookupModal extends Modal {
       } else this.fill(row, w, q);
     }
     if (!hits.length) L.createDiv({ cls: 'gq-hint', text: 'Not in the 1,500.' });
-    const b = L.createDiv('gq-bonus');
-    b.createDiv({ cls: 'gq-hit-sub', text: hits.length ? 'Want a different word?' : 'Bonus word: look it up for free and add it to your notes if you like it.' });
-    const tb = b.createEl('button', { text: `Translate "${q}"` });
-    tb.onclick = () => { this.plugin.logLookup(q, null); window.open(this.plugin.translateUrl(q)); };
+    this.bonus = L.createDiv('gq-bonus');
+    if (hits.length) {
+      this.bonus.createDiv({ cls: 'gq-hit-sub', text: 'Want a different word?' });
+      const tb = this.bonus.createEl('button', { text: `Translate "${q}"` });
+      tb.onclick = () => this.translate(true);
+    } else {
+      // No match in the 1,500: translate on its own once the student stops typing.
+      this.bonus.createDiv({ cls: 'gq-hit-sub', text: 'Bonus word: translating...' });
+      this.timer = setTimeout(() => this.translate(false), 700);
+    }
+  }
+  async translate(save) {
+    const q = this.input.value.trim(); if (!q || !this.bonus) return;
+    const box = this.bonus; box.empty(); box.createDiv({ cls: 'gq-hit-sub', text: 'Translating...' });
+    const tr = await this.plugin.translate(q);
+    if (q !== this.input.value.trim() || box !== this.bonus) return;   // the student kept typing
+    box.empty(); this.tr = tr;
+    if (!tr) {
+      box.createDiv({ cls: 'gq-hit-sub', text: 'Could not translate right now (are you online?). Press Enter to save it to Words I looked up. The Greek is added the next time you open Obsidian online.' });
+      if (save) this.plugin.logLookup(q, null, null);
+      return;
+    }
+    const t = box.createDiv('gq-hit-text');
+    const gr = tr.greek;
+    t.createDiv({ cls: 'gq-hit-main', text: tr.fromGreek ? `${q}  ·  ${tr.text}` : `${tr.text}  ·  ${q}` });
+    if (tr.say) t.createDiv({ cls: 'gq-hit-sub', text: 'say it: ' + tr.say });
+    for (const a of tr.alts.slice(0, 3)) t.createDiv({ cls: 'gq-hit-sub', text: `${a.pos}: ${a.terms.slice(0, 4).join(', ')}` });
+    const inList = this.plugin.findWords(gr).find(w => fold(w.word) === fold(gr));
+    t.createDiv({ cls: 'gq-hit-sub', text: inList ? `It is #${inList.rank} of the 1,500.` : 'Bonus word, saved to Words I looked up.' });
+    const btns = box.createDiv('gq-btns');
+    const h = btns.createEl('button', { text: 'Hear it' }); h.onclick = () => say(gr);
+    if (inList) { const g = btns.createEl('button', { text: 'Word graph' }); g.onclick = () => { this.plugin.logLookup(q, inList); this.close(); this.plugin.openGraph(inList.path); }; }
+    if (save) this.plugin.logLookup(q, inList || null, inList ? null : tr);
   }
   fill(row, w, q) {
     const t = row.createDiv('gq-hit-text');
@@ -122,7 +155,16 @@ class LookupModal extends Modal {
     const g = row.createEl('button', { text: 'Word graph' });
     g.onclick = () => { if (q) this.plugin.logLookup(q, w); this.close(); this.plugin.openGraph(w.path); };
   }
-  onClose() { this.contentEl.empty(); }
+  onClose() {
+    clearTimeout(this.timer);
+    // The translation on screen when the student closes is the one they meant, so it is saved (half-typed words are not).
+    const q = this.input && this.input.value.trim(), tr = this.tr;
+    if (q && tr && tr.q === q) {
+      const w = this.plugin.findWords(tr.greek).find(x => fold(x.word) === fold(tr.greek));
+      this.plugin.logLookup(q, w || null, w ? null : tr);
+    }
+    this.contentEl.empty();
+  }
 }
 
 // ---------- Ask the group: a question about the note you are on, ready to paste into GroupMe ----------
@@ -408,6 +450,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }));
     this.app.workspace.onLayoutReady(async () => {
       this.pruneEmpty(['Scripts/Kid variants/x', 'Scripts/Student/x']);
+      setTimeout(() => this.fillBlankLookups().catch(() => {}), 4000);
       this.isTeacher = await this.app.vault.adapter.exists(TEACHER_MARK);
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
       this.hideRibbon();
@@ -574,17 +617,68 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }
     return res.sort((a, b) => b.score - a.score).slice(0, 8);
   }
-  translateUrl(q) { const gr = isGreek(q); return `https://translate.google.com/?sl=${gr ? 'el' : 'en'}&tl=${gr ? 'en' : 'el'}&text=${encodeURIComponent(q)}&op=translate`; }
-  async logLookup(q, w) {
+  async translate(q) {
+    // Free, no account or key. Google's web translator first, MyMemory if that fails. Works on Android, iPhone and computers.
+    this.trCache = this.trCache || new Map();
+    if (this.trCache.has(q)) return this.trCache.get(q);
+    const fromGreek = isGreek(q), sl = fromGreek ? 'el' : 'en', tl = fromGreek ? 'en' : 'el';
+    let out = null;
+    try {
+      const r = await requestUrl({ url: `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&dt=bd&dt=rm&q=${encodeURIComponent(q)}`, throw: false });
+      const d = r.status === 200 ? r.json : null;
+      if (d && d[0]) {
+        const text = d[0].filter(x => x && x[0]).map(x => x[0]).join('').trim();
+        const rm = d[0].find(x => x && (x[2] || x[3])) || [];
+        const alts = (d[1] || []).map(x => ({ pos: x[0], terms: x[1] || [] })).filter(a => a.terms.length);
+        if (text) out = { q, text, fromGreek, greek: fromGreek ? q : text, say: (fromGreek ? rm[3] : rm[2]) || '', alts };
+      }
+    } catch (e) {}
+    if (!out) {
+      try {
+        const r = await requestUrl({ url: `https://api.mymemory.translated.net/get?langpair=${sl}|${tl}&q=${encodeURIComponent(q)}`, throw: false });
+        const text = r.status === 200 && r.json && r.json.responseData && r.json.responseData.translatedText;
+        if (text) out = { q, text: String(text).trim(), fromGreek, greek: fromGreek ? q : String(text).trim(), say: '', alts: [] };
+      } catch (e) {}
+    }
+    if (out) this.trCache.set(q, out);
+    return out;
+  }
+  bonusLine(q, tr) {
+    if (!tr) return `- ${q} → bonus word: `;
+    const say = tr.say ? ` · say it: ${tr.say}` : '';
+    return tr.fromGreek ? `- ${q} → bonus word: ${q} · ${tr.text}${say}` : `- ${q} → bonus word: ${tr.text}${say}`;
+  }
+  async logLookup(q, w, tr) {
     // Every look-up is saved in My Work, so it can come back as review (and the teacher can see what students reach for).
     const ad = this.app.vault.adapter, day = window.moment ? window.moment().format('YYYY-MM-DD') : new Date().toISOString().slice(0, 10);
-    let txt = ''; try { txt = await ad.read(LOOKUPS); } catch (e) { txt = '# Words I looked up\n\nEvery word you look up lands here. Words from the 1,500 link to their notes. Bonus words are yours to keep: add the Greek next to them.\n'; }
+    let txt = ''; try { txt = await ad.read(LOOKUPS); } catch (e) { txt = '# Words I looked up\n\nEvery word you look up lands here, with the Greek. Words from the 1,500 link to their notes. Bonus words are yours to keep.\n'; }
     if (!txt.includes('\n## ' + day)) txt = txt.replace(/\s*$/, '\n\n## ' + day + '\n');
-    const line = w ? `- ${q} → [[${w.word}]] (${w.english}, #${w.rank})` : `- ${q} → bonus word: `;
-    const today = txt.slice(txt.lastIndexOf('\n## '));
-    if (today.split('\n').some(l => l.trim() === line.trim())) return;
+    const line = w ? `- ${q} → [[${w.word}]] (${w.english}, #${w.rank})` : this.bonusLine(q, tr);
+    const today = txt.slice(txt.lastIndexOf('\n## ')).split('\n');
+    if (today.some(l => l.trim() === line.trim())) return;
+    // A bonus word saved earlier today without its Greek gets the Greek added, not a second line.
+    const blank = `- ${q} → bonus word:`;
+    if (tr && today.some(l => l.trim() === blank)) {
+      const at = txt.lastIndexOf('\n## '), head = txt.slice(0, at), tail = txt.slice(at).split('\n').map(l => l.trim() === blank ? line : l).join('\n');
+      await ad.write(LOOKUPS, head + tail); return;
+    }
+    if (!w && !tr && today.some(l => l.startsWith(`- ${q} → bonus word: `) && l.trim() !== blank)) return;
     if (!(await ad.exists(MY_WORK.slice(0, -1)))) await ad.mkdir(MY_WORK.slice(0, -1));
     await ad.write(LOOKUPS, txt.replace(/\s*$/, '\n') + line + '\n');
+  }
+  async fillBlankLookups() {
+    // Older look-ups saved only the English. Add the Greek to those lines; nothing else in the note changes.
+    const f = this.app.vault.getAbstractFileByPath(LOOKUPS); if (!f || !f.extension) return;
+    const txt = await this.app.vault.read(f);
+    const todo = [...new Set(txt.split('\n').map(l => l.match(/^- (.+?) → bonus word:\s*$/)).filter(Boolean).map(m => m[1].trim()))].slice(0, 40);
+    if (!todo.length) return;
+    const found = new Map();
+    for (const q of todo) { const tr = await this.translate(q); if (tr) found.set(q, tr); }
+    if (!found.size) return;
+    await this.app.vault.process(f, cur => cur.split('\n').map(l => {
+      const m = l.match(/^- (.+?) → bonus word:\s*$/); const tr = m && found.get(m[1].trim());
+      return tr ? this.bonusLine(m[1].trim(), tr) : l;
+    }).join('\n'));
   }
   // ---------- Ask on video helpers ----------
   askVideo(file) {
@@ -887,7 +981,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (const line of sec.split('\n').slice(1)) {
         const links = [...line.matchAll(/\[\[([^\]|#]+)/g)].map(x => x[1].trim());
         if (links.length) links.forEach(w => out.push(w));
-        else { const g = line.match(/^- [^:]+: (.+)$/); if (g) g[1].split(',').forEach(w => out.push(w.trim())); }
+        else { const g = line.match(/^- [^:]+: (.+)$/); if (g) g[1].split(' · ')[0].split(',').forEach(w => out.push(w.trim())); }
       }
     }
     return out;

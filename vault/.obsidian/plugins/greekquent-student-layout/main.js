@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17b';
+const VAULT_RELEASE = '2026-11-17c';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1661,7 +1661,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (const k of ['green', 'yellow', 'red', 'new']) { const seg = bar.createDiv('gq-seg gq-' + k); seg.style.flexGrow = String(n[k]); }
       cc.createDiv({ cls: 'gq-hint', text: `Have it ${n.green} · Kind of ${n.yellow} · Don't have it ${n.red} · Not marked ${n.new}. Mark words with the color buttons on each word note.` });
       // Tools
-      const tc = box.createDiv('gq-tcard gq-row');
+      const tc = box.createDiv('gq-tcard gq-row gq-ttools');
       const tool = (t, fn, cls) => { const b = tc.createEl('button', { text: t, cls: cls || '' }); b.onclick = fn; };
       tool('Look up a word', () => new LookupModal(this.app, this).open());
       tool('Word graph', () => this.openGraph(), 'gq-lv-int');
@@ -1684,8 +1684,84 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
       const kt = foot.createEl('a', { text: col.track === 'kid' ? 'Kid track: on' : 'Kid track', href: '#' }); kt.onclick = e => { e.preventDefault(); this.setTrack(col.track === 'kid' ? '' : 'kid'); }; foot.appendText(' · ');
       const ix = foot.createEl('a', { text: 'Index', href: '#' }); ix.onclick = e => { e.preventDefault(); this.openNote('00 Greekquent Index.md'); };
+      this.deckify(box);
       if (tok === el.gqTok) { el.empty(); el.appendChild(box); }
     }
+  }
+  // ---------- Today as slides: one big card at a time, fading in, with Back and Next ----------
+  // The cards are the same as before; only the frame changes. The tool buttons and footer stay small underneath.
+  deckify(box) {
+    const slides = [];
+    const take = c => {
+      if (!c.classList || !c.classList.contains('gq-tcard') || c.classList.contains('gq-ttools') || c.classList.contains('gq-tnew')) return;
+      const strong = c.querySelector('.gq-thead strong');
+      let label = strong ? strong.textContent : c.classList.contains('gq-tnext') ? 'Ready for more' : 'Today';
+      if (/^Week \d+/.test(label)) label = "Today's words";
+      label = label.replace(/\s*[(·].*$/, '').trim();
+      c.dataset.slide = label; c.addClass('gq-slide'); slides.push(c);
+    };
+    for (const ch of [...box.children]) {
+      if (ch.tagName === 'DIV' && !ch.className) { [...ch.children].forEach(take); if (!ch.children.length) ch.remove(); continue; }
+      take(ch);
+    }
+    if (slides.length < 2) return;
+    const deck = createDiv('gq-deck'); deck.tabIndex = 0;
+    const nav = deck.createDiv('gq-deck-nav');
+    const prev = nav.createEl('button', { text: '‹', cls: 'gq-deck-arrow', attr: { 'aria-label': 'Previous card' } });
+    const dots = nav.createDiv('gq-deck-dots');
+    const next = nav.createEl('button', { text: '›', cls: 'gq-deck-arrow', attr: { 'aria-label': 'Next card' } });
+    const stage = createDiv('gq-deck-stage'); deck.insertBefore(stage, nav);
+    const first = slides[0]; first.parentElement.insertBefore(deck, first);
+    for (const c of slides) stage.appendChild(c);
+    // Cards hidden by the layout level (Simple, Intermediate) are skipped.
+    const lv = this.level();
+    const shown = c => !((c.hasClass('gq-lv-int') && lv === 'simple') || (c.hasClass('gq-lv-adv') && lv !== 'advanced') || [...c.classList].some(k => k.startsWith('gq-lv-only-') && k !== 'gq-lv-only-' + lv));
+    const list = slides.filter(shown);
+    if (list.length < 2) { deck.addClass('gq-deck-one'); }
+    // Stay on the same card when Today redraws (after marking a color, saying a line). Start fresh each day.
+    const today = ymd(new Date());
+    if (this.deckDay !== today) { this.deckDay = today; this.deckKey = ''; }
+    let i = Math.max(0, list.findIndex(c => c.dataset.slide === this.deckKey));
+    const dotEls = list.map((c, k) => { const d = dots.createEl('button', { cls: 'gq-deck-dot', attr: { 'aria-label': c.dataset.slide } }); d.onclick = () => go(k); return d; });
+    const paint = () => {
+      dots.setAttr('aria-label', `${list[i].dataset.slide}, ${i + 1} of ${list.length}`);
+      prev.disabled = i === 0; next.disabled = i === list.length - 1;
+      dotEls.forEach((d, k) => d.toggleClass('is-on', k === i));
+    };
+    for (const c of slides) c.addClass('gq-off');
+    list[i].removeClass('gq-off'); list[i].addClass('gq-on'); paint();
+    const go = (k, dir) => {
+      if (k < 0 || k >= list.length || k === i) return;
+      dir = dir || (k > i ? 1 : -1);
+      const out = list[i], inn = list[k], h0 = stage.offsetHeight;
+      out.removeClass('gq-on'); out.style.transform = ''; out.style.opacity = '';
+      out.addClass('gq-leaving', dir > 0 ? 'gq-to-left' : 'gq-to-right');
+      inn.removeClass('gq-off', 'gq-from-left', 'gq-from-right'); inn.addClass('gq-on', dir > 0 ? 'gq-from-right' : 'gq-from-left');
+      i = k; this.deckKey = inn.dataset.slide; paint();
+      // Ease the height between cards of different sizes.
+      const h1 = inn.offsetHeight; stage.style.height = h0 + 'px'; void stage.offsetHeight; stage.style.height = h1 + 'px';
+      setTimeout(() => { out.removeClass('gq-leaving', 'gq-to-left', 'gq-to-right'); out.addClass('gq-off'); inn.removeClass('gq-from-left', 'gq-from-right'); stage.style.height = ''; }, 380);
+    };
+    prev.onclick = () => go(i - 1); next.onclick = () => go(i + 1);
+    deck.addEventListener('keydown', e => {
+      if (e.target.closest && e.target.closest('input, textarea, select')) return;
+      if (e.key === 'ArrowRight') { go(i + 1); e.preventDefault(); } if (e.key === 'ArrowLeft') { go(i - 1); e.preventDefault(); }
+    });
+    // Swipe on phones (Android and iPhone). The card follows the finger a little; Obsidian's sidebar swipe is kept out of it.
+    let sx = 0, sy = 0, horiz = null;
+    stage.addEventListener('touchstart', e => { const t = e.touches[0]; sx = t.clientX; sy = t.clientY; horiz = null; }, { passive: true });
+    stage.addEventListener('touchmove', e => {
+      const t = e.touches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+      if (horiz === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) horiz = Math.abs(dx) > Math.abs(dy) * 1.3;
+      if (!horiz) return; e.stopPropagation();
+      const c = list[i]; c.style.transition = 'none'; c.style.transform = `translateX(${dx * 0.35}px)`; c.style.opacity = String(1 - Math.min(0.35, Math.abs(dx) / 600));
+    }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      const c = list[i]; c.style.transition = ''; c.style.transform = ''; c.style.opacity = '';
+      if (!horiz) return; e.stopPropagation();
+      const dx = (e.changedTouches[0] || {}).clientX - sx;
+      if (dx < -50) go(i + 1, 1); else if (dx > 50) go(i - 1, -1);
+    });
   }
   // ---------- Layouts ----------
   level() {
@@ -1695,7 +1771,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   async setLevel(l) {
     if (!LEVELS.includes(l)) return;
-    this.lvl = l; this.applyLevel(); new Notice(LEVEL_NOTE[l], 6000);
+    this.lvl = l; this.applyLevel(); this.refreshToday(); new Notice(LEVEL_NOTE[l], 6000);
     const f = await this.progressFile();
     await this.app.fileManager.processFrontMatter(f, fm => { fm.layout = l; });
   }

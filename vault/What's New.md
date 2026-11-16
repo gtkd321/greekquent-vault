@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, evening: One card at a time
+> - **Today is now a set of slides.** One big card at a time: today's line, comebacks, today's words, review and the rest. Swipe left or right on a phone, or use the arrows. The dots show where you are.
+> - Today remembers your card when it updates (after you mark a color or say a line), and starts again at the first card each morning.
+> - The tool buttons (Look up a word, Send homework) stay underneath, always one tap away.
+
 > [!info]- November 17, later: Genders that agree
 > - **The graph follows the noun.** Tap a noun in the word graph and the describing words around it switch to its gender: tap η πόλη and μεγάλος becomes μεγάλη, ο becomes η, ένας becomes μία. Nouns now show their article, so you always see the gender.
 > - **Agrees with strip.** Under the word's name you get ready phrases to tap and hear, like μεγάλη πόλη and αρχαία πόλη. Open a describing word like μεγάλος to see it change with each noun: μεγάλο σπίτι, μεγάλη πόλη, μεγάλος αδερφός.

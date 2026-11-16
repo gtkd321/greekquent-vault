@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-16b';
+const VAULT_RELEASE = '2026-11-16c';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -487,7 +487,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerMarkdownPostProcessor((el, ctx) => this.questionsBox(el, ctx));
     this.registerMarkdownCodeBlockProcessor('greekquent-questions', (src, el) => this.questionsIndex(el));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) this.words = null; }));
-    this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === CARDS) this.refreshCards(); }));
+    this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === CARDS || f.path === PAIRS_NOTE) this.refreshCards(); }));
     // My Work notes open ready to type in.
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path.startsWith(MY_WORK)) setTimeout(() => this.editMode(f), 50); }));
     this.addCommand({ id: 'open-word-graph', name: 'Open word graph', callback: () => this.openGraph() });
@@ -529,6 +529,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const n = await this.pairCount();
     new Notice(`Saved. ${n.points} pair point${n.points === 1 ? '' : 's'} this week.`);
     this.refreshToday();
+    this.refreshCards();
   }
   async pairCount() {
     let txt = ''; try { txt = await this.app.vault.adapter.read(PAIRS_NOTE); } catch (e) { return { n: 0, own: 0, points: 0, words: 0 }; }
@@ -993,7 +994,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // ---------- My word cards: chunks and sentences added to word notes ----------
   cardLine(kind, gr, en) { const clean = t => t.replace(/\s+/g, ' ').replace(/\*\*/g, '').trim(); return `- ${kind === 'sentence' ? 'Sentence: ' : ''}**${clean(gr)}**${en ? ' — ' + clean(en) : ''}`; }
   async myCards(word) {
-    let txt = ''; try { txt = await this.app.vault.adapter.read(CARDS); } catch (e) { return []; }
+    let txt = ''; try { txt = await this.app.vault.adapter.read(CARDS); } catch (e) {}
     const out = [];
     for (const sec of txt.split(/\n(?=## )/)) {
       const m = sec.match(/^## (.+)/); if (!m || fold(m[1]) !== fold(word)) continue;
@@ -1001,6 +1002,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const x = l.match(/^- (Sentence: )?(?:\*\*)?(.+?)(?:\*\*)?(?: — (.*))?$/); if (!x || !x[2].trim()) continue;
         out.push({ kind: x[1] ? 'sentence' : 'chunk', gr: x[2].replace(/\*\*/g, '').trim(), en: (x[3] || '').trim() });
       }
+    }
+    // Sentences built with Build a sentence (My pairs) show on every word they use.
+    let pt = ''; try { pt = await this.app.vault.adapter.read(PAIRS_NOTE); } catch (e) {}
+    const seen = new Set(out.map(o => fold(o.gr)));
+    for (const l of pt.split('\n')) {
+      const x = l.match(/^- (Own: )?(.+?)(?: \((.*)\))? · (.*\[\[.*)$/); if (!x) continue;
+      const links = [...x[4].matchAll(/\[\[([^\]|#]+)/g)].map(m => fold(m[1]));
+      if (!links.includes(fold(word)) || seen.has(fold(x[2]))) continue;
+      seen.add(fold(x[2])); out.push({ kind: x[1] ? 'own' : 'built', gr: x[2].trim(), en: (x[3] || '').trim() });
     }
     return out;
   }
@@ -1034,14 +1044,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const ul = box.createEl('ul');
       for (const it of list) {
         const li = ul.createEl('li');
-        if (it.kind === 'sentence') li.appendText('Sentence: ');
+        const tag = { sentence: 'Sentence: ', built: 'Built: ', own: 'Built (my own): ' }[it.kind]; if (tag) li.appendText(tag);
         li.createEl('strong', { text: it.gr }); if (it.en) li.appendText(' — ' + it.en);
         const hb = li.createEl('button', { text: 'Hear', cls: 'gq-mini', attr: { 'aria-label': 'Say it' } }); hb.onclick = () => say(it.gr);
       }
     }
     const row = box.createDiv('gq-btns');
     const add = row.createEl('button', { text: 'Add a chunk or sentence' }); add.onclick = () => new CardModal(this.app, this, rec.word).open();
-    if (list.length) { const o = row.createEl('button', { text: 'Edit mine' }); o.onclick = () => this.openNote(CARDS); }
+    if (list.some(x => x.kind === 'chunk' || x.kind === 'sentence')) { const o = row.createEl('button', { text: 'Edit mine' }); o.onclick = () => this.openNote(CARDS); }
+    if (list.some(x => x.kind === 'built' || x.kind === 'own')) { const o = row.createEl('button', { text: 'My pairs' }); o.onclick = () => this.openNote(PAIRS_NOTE); }
   }
   refreshCards(word) { for (const r of [...this.cardBoxes]) { if (!r.box.isConnected) { this.cardBoxes.delete(r); continue; } if (!word || r.word === word) this.paintCards(r); } }
   wordBar(el, ctx) {

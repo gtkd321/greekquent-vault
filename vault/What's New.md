@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 16, evening: Your sentences on the word cards
+> - Sentences you build with **Build a sentence** now show on the word note of every word they use, under Chunks, in **Yours**. That includes the ones you already saved.
+> - Your own chunks and sentences show there too, each with a Hear button.
+> - Nothing moved: they are still saved in My Work (My pairs and My word cards), so updates never erase them.
+
 > [!info]- November 16, later: Your own chunks and Spider-Man
 > - **Add to a word card:** on any word note, under Chunks, tap **Add a chunk or sentence**. Type the Greek, tap Translate for the English, hear it, and save. It shows on that word's note under **Yours**.
 > - Everything you add is saved in My Work, in **My word cards**, so updates never erase it. Fix or delete lines there any time.

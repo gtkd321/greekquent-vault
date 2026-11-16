@@ -262,3 +262,10 @@ body.gq-kids .gq-switch { display: none; }
 .gq-say-g { margin-top: 0.15em; padding-left: 0.2em; }
 .gq-rally-ans { margin-top: 0.6em; }
 .gq-pop-ans { font-size: 1.25em; color: var(--text-accent); margin: 0.15em 0; }
+
+/* Comebacks: the line before yours, then your answer */
+.gq-cbctx { color: var(--text-muted); margin: 0.1em 0; }
+.gq-cbwho { font-size: 0.85em; font-weight: 600; color: var(--text-faint); }
+.gq-cbyou { margin-top: 0.3em; }
+.gq-pop-ctx { font-size: 1.15em; margin: 0.2em 0; }
+.gq-pop-en .gq-cbwho { display: block; font-size: 0.5em; }

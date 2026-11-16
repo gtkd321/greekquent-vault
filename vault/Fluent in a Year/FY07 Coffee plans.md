@@ -17,7 +17,7 @@ One line a day, same people, one scene. Read it from the top each day, then add 
 > 1. Τι θα πάρετε, κύριε; — Δύο καφέδες. — Δύο; Ποτέ δεν πίνω τόσο καφέ! (What will you have, sir? — Two coffees. — Two? I never drink so much coffee!)
 > 2. Λοιπόν; Πας στο χωριό; — Ναι. Τότε θα δω τη γιαγιά, το σπίτι και τι έχει μέσα. (So? Are you going to the village? — Yes. Then I'll see grandma, the house, and what's inside.)
 > 3. Ίσως έρθω κι εγώ, μετά. — Ποιος είναι ο λόγος; — Η γιαγιά η δική μου μένει δύο χωριά πιο πέρα! (Maybe I'll come too, later. — What's the reason? — My own grandma lives two villages further on!)
-> 4. Ποιο χωριό; Μίλα αργά! — Το Καστράκι. Είσαι έτοιμη; (Which village? Speak slowly! — Kastraki. Are you ready?)
+> 4. Ποιο χωριό; Μίλα αργά! — Κα-στρά-κι. Είσαι έτοιμη για ταξίδι; (Which village? Speak slowly! — Kas-tra-ki. Are you ready for a trip?)
 > 5. Είσαι σίγουρος; — Σίγουρος! Αγαπάω το χωριό μου. — Έχεις δίκιο. Είναι ωραίο. (Are you sure? — Sure! I love my village. — You're right. It's beautiful.)
 > 6. Θυμάμαι μια ιστορία: κάποιος ψάχνει κάτι στο σπίτι σου. — Τι εννοείς; (I remember a story: someone is looking for something in your house. — What do you mean?)
 
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[λόγος|ο λόγος]] **reason, speech** (#144): Σου δίνω τον λόγο μου. (I give you my word.)
 
 > [!todo]- Thu · day 40 of 300
-> **Today's line:** Ποιο χωριό; Μίλα αργά! — Το Καστράκι. Είσαι έτοιμη; (Which village? Speak slowly! — Kastraki. Are you ready?)
+> **Today's line:** Ποιο χωριό; Μίλα αργά! — Κα-στρά-κι. Είσαι έτοιμη για ταξίδι; (Which village? Speak slowly! — Kas-tra-ki. Are you ready for a trip?)
 > - [[τρόπος|ο τρόπος]] **way, manner** (#146): Μ' αρέσει ο τρόπος που σκέφτεσαι. (I like how you think.)
 > - [[ποιο]] **which (one)** (#1381): Ποιό είναι το όνομά σου; (What is your name?)
 > - [[λάθος|το λάθος]] **mistake** (#151): Έχουμε κάνει πολλά λάθη. (We have made many mistakes.)

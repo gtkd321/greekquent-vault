@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17f';
+const VAULT_RELEASE = '2026-11-17g';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1559,21 +1559,39 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const a = r.createEl('button', { text: 'Play it as a text adventure', cls: 'gq-mini' }); a.onclick = () => this.openApp('story', '#play&d=' + n);
   }
   // Comebacks: lines said 1, 3 and 7 lines ago return as a quick quiz. English first, then the Greek.
-  comebackCard(box, beats, col, cal) {
+  // Who says what in each story line (lines.json, built with the Story Lines app). Missing or out of date: plain line.
+  async storyTurns() { if (!this.turnsP) this.turnsP = this.app.vault.adapter.read(this.manifest.dir + '/lines.json').then(JSON.parse).catch(() => ({})); return this.turnsP; }
+  // A comeback is one exchange: hear the lines before yours in Greek, then say the last one from its English.
+  comebackTurns(b, T) {
+    const t = (T || {})[b.n];
+    if (!t || !t.length || t.map(x => x[1]).join(' — ') !== b.gr) return { ctx: [], who: '', gr: b.gr, en: b.en };
+    const last = t[t.length - 1];
+    return { ctx: t.slice(0, -1).map(x => ({ who: x[0], g: x[1], e: x[2] })), who: last[0], gr: last[1], en: last[2] };
+  }
+  cbPrompt(el, c, big) {
+    for (const x of c.ctx) { const d = el.createDiv(big ? 'gq-cbctx gq-pop-ctx' : 'gq-cbctx'); d.createSpan({ cls: 'gq-cbwho', text: x.who + ': ' }); d.createSpan({ text: x.g, attr: { lang: 'el', title: x.e } }); }
+    const y = el.createDiv(big ? 'gq-pop-big gq-pop-en' : 'gq-cbyou');
+    if (c.who) y.createSpan({ cls: 'gq-cbwho', text: (c.ctx.length ? 'You, as ' + c.who : c.who) + ': ' });
+    y.appendText(c.en);
+  }
+  async comebackCard(box, beats, col, cal) {
     const last = Math.min(col.last_beat, (cal || 1e9) - 1); if (last < 1) return;
     const due = [last, last - 2, last - 6].filter(k => k >= 1 && beats[k]).map(k => beats[k]);
     if (!due.length) return;
+    const T = await this.storyTurns(), cbs = due.map(b => this.comebackTurns(b, T));
     const card = box.createDiv('gq-tcard gq-comeback');
     card.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Comebacks' });
-    card.createDiv({ cls: 'gq-hint', text: 'Say it in Greek first, then tap to check.' });
-    const lv = this.level(), shown = lv === 'simple' ? due.slice(0, 1) : due;
-    for (const b of shown) {
-      const r = card.createDiv('gq-cbrow'); r.createDiv({ text: b.en });
-      const g = r.createDiv({ cls: 'gq-line gq-cbgr', text: b.gr, attr: { lang: 'el' } }); g.style.display = 'none';
-      const row = r.createDiv('gq-row'); const s = row.createEl('button', { text: 'Show Greek', cls: 'gq-mini' }); s.onclick = () => { g.style.display = ''; s.remove(); say(b.gr); };
-      this.hearBtn(row, b.gr, 'Hear');
+    card.createDiv({ cls: 'gq-hint', text: cbs.some(c => c.ctx.length) ? 'Read or hear the line, then answer it in Greek. Tap to check.' : 'Say it in Greek first, then tap to check.' });
+    const lv = this.level(), shown = lv === 'simple' ? cbs.slice(0, 1) : cbs;
+    for (const c of shown) {
+      const r = card.createDiv('gq-cbrow'); this.cbPrompt(r, c, false);
+      const g = r.createDiv({ cls: 'gq-line gq-cbgr', text: c.gr, attr: { lang: 'el' } }); g.style.display = 'none';
+      const row = r.createDiv('gq-row');
+      if (c.ctx.length) this.hearBtn(row, c.ctx.map(x => x.g).join(' '), 'Hear the line');
+      const s = row.createEl('button', { text: 'Show my answer', cls: 'gq-mini' }); s.onclick = () => { g.style.display = ''; s.remove(); say(c.gr); };
+      if (!c.ctx.length) { s.setText('Show Greek'); this.hearBtn(row, c.gr, 'Hear'); }
     }
-    const qr = card.createDiv('gq-row'); this.popBtn(qr, due.length > 1 ? `Quiz me (${due.length})` : 'Quiz me', () => this.popComebacks(due));
+    const qr = card.createDiv('gq-row'); this.popBtn(qr, cbs.length > 1 ? `Quiz me (${cbs.length})` : 'Quiz me', () => this.popComebacks(cbs));
   }
   // Kid track: the kid lesson for this week (or the latest one), one line a day, plus the kid-teacher swap.
   async kidCard(box, lesson, dow) {
@@ -1633,7 +1651,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const sp = box.createDiv(); box.insertBefore(sp, card);
         if (col.track === 'kid') await this.kidCard(sp, wk.fm.lesson || await this.currentLesson(), dd < 0 ? 1 : dow);
         else if (cal) await this.storyCard(sp, beats, cal, dd >= 0 && dow === 0, col);
-        this.comebackCard(sp, beats, col, cal);
+        await this.comebackCard(sp, beats, col, cal);
         if (col.track !== 'kid') await this.rallyCard(sp, Number(wk.fm.lesson) || Number(((await this.weekNote(week + 1)) || { fm: {} }).fm.lesson));  // no-class weeks show next week's rally
         if (col.track === 'kid') for (const d of Object.values(days)) d.words.sort((a, b) => (/^(ο|η|το) /.test(b.label) ? 1 : 0) - (/^(ο|η|το) /.test(a.label) ? 1 : 0));
         if (dd >= 0 && dow === 0) {
@@ -1908,11 +1926,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   // Comebacks: English first, say it, then reveal the Greek. One at a time.
   popComebacks(due) {
-    const steps = due.map((b, k) => ({ label: 'Comeback', build: (el, api) => {
-      el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek first.' }); el.createDiv({ cls: 'gq-pop-big gq-pop-en', text: b.en });
-      const g = el.createDiv({ cls: 'gq-pop-big gq-pop-hide', text: b.gr, attr: { lang: 'el' } });
-      const r = el.createDiv('gq-row'); const s = r.createEl('button', { text: 'Show Greek', cls: 'mod-cta' });
-      s.onclick = () => { g.removeClass('gq-pop-hide'); say(b.gr); s.remove(); this.hearBtn(r, b.gr, 'Hear again'); const nx = r.createEl('button', { text: k === due.length - 1 ? 'Done' : 'Next', cls: 'mod-cta' }); nx.onclick = k === due.length - 1 ? api.close : api.next; };
+    const steps = due.map((c, k) => ({ label: 'Comeback', build: (el, api) => {
+      el.createDiv({ cls: 'gq-hint', text: c.ctx.length ? 'Listen, then answer in Greek.' : 'Say it in Greek first.' });
+      this.cbPrompt(el, c, true); if (c.ctx.length) say(c.ctx.map(x => x.g).join(' '));
+      const g = el.createDiv({ cls: 'gq-pop-big gq-pop-hide', text: c.gr, attr: { lang: 'el' } });
+      const r = el.createDiv('gq-row'); if (c.ctx.length) this.hearBtn(r, c.ctx.map(x => x.g).join(' '), 'Hear the line');
+      const s = r.createEl('button', { text: c.ctx.length ? 'Show my answer' : 'Show Greek', cls: 'mod-cta' });
+      s.onclick = () => { g.removeClass('gq-pop-hide'); say(c.gr); s.remove(); this.hearBtn(r, c.gr, 'Hear again'); const nx = r.createEl('button', { text: k === due.length - 1 ? 'Done' : 'Next', cls: 'mod-cta' }); nx.onclick = k === due.length - 1 ? api.close : api.next; };
     } }));
     this.pop('Comebacks', steps);
   }

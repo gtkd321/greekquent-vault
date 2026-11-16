@@ -1,5 +1,5 @@
 {
-"release": "2026-11-17f",
+"release": "2026-11-17g",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -18,15 +18,19 @@
 "size": 137339
 },
 ".obsidian/plugins/greekquent-student-layout/apps/storylines.html": {
-"sha256": "6467ff108b4f45810012e68403767b1f8346771dd11bddc708f083834e5374f7",
-"size": 229002
+"sha256": "c649b66f9b08ee259600a65286b88d19b35ccf3378f9a75e2058923d6de90bb1",
+"size": 229350
+},
+".obsidian/plugins/greekquent-student-layout/lines.json": {
+"sha256": "2e1617a4ee74b902cfcb6a9b75607b49885fc1b10a9489efbbb2a41df811b5db",
+"size": 63225
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "81e981a3cb721483ae6b1b496e84a83bf47aaaaf07233f64bddd3083d1414f82",
-"size": 162350
+"sha256": "3ed6a10be20bcb2184c0fc1ffc99f2b025482ddd710eb2c3c3ba30df1ec35ef3",
+"size": 164075
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "47e4629520dea194fd6a8bfa029d518f67a0c707a321d55362a52e225cb6fa40",
+"sha256": "0c550f70a2ebf37685c8df88278c9066cde698bda08e5176f16155e28bd88cd8",
 "size": 374
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -34,8 +38,8 @@
 "size": 272119
 },
 ".obsidian/plugins/greekquent-student-layout/styles.css": {
-"sha256": "27b301f32951364c9d48b9fd53706ddd9fbb83c4d333f9e3bd9d548d2c6d38e8",
-"size": 20732
+"sha256": "79cfea6ad5bd523dfc67e11af2f416f66a46f82c16b2c88291fba892b118ab6b",
+"size": 21068
 },
 ".obsidian/plugins/meld-encrypt/main.js": {
 "sha256": "bf08d81ee9cc0e32a5726020197803c60eb5e73c9b114d80768081f051e66108",
@@ -106,12 +110,12 @@
 "size": 7625
 },
 "Fluent in a Year/FY02 Guest at home.md": {
-"sha256": "968936f52d3a8a1306ba25dda57bd0f492edc3de6aad0b5fd200009717edd637",
-"size": 8432
+"sha256": "1bdbc66361fb1f7a268e7808849dec6d44f63f5748b4e05de7120f608b5abee2",
+"size": 8586
 },
 "Fluent in a Year/FY03 Making plans.md": {
-"sha256": "4b9aac73e94a931d24379367111f624f2df705418882a4b7e0139c6b7f14c157",
-"size": 8656
+"sha256": "945272dbaf1a600325b79b6d04eaf15096aa3d147b454004094073692b4fb51a",
+"size": 8884
 },
 "Fluent in a Year/FY04 Postcards.md": {
 "sha256": "d920200830f5936eede6a92d90aa0a1cf1e123813c9e4224bde1f5980144fd0d",
@@ -122,12 +126,12 @@
 "size": 8557
 },
 "Fluent in a Year/FY06 Lost and found.md": {
-"sha256": "a5779cf1b3436e5ed1f2124db6f8f2344ce4d25a054db5a7864c6e29f7516218",
-"size": 8179
+"sha256": "25271da23dfffdeb4cea3e77fe11f266c49cf4ceeada89ef458e62b4dfaa9b9f",
+"size": 8297
 },
 "Fluent in a Year/FY07 Coffee plans.md": {
-"sha256": "a65bb7b1d8b7f9043571a5df17fef141d66d0bd376ba113dfbe9c3b3b8d91fc0",
-"size": 8658
+"sha256": "d6282a899fe2cc1bbc0fd9f31865bde780a0ff780cc4791a566cde18d02dca43",
+"size": 8718
 },
 "Fluent in a Year/FY08 Who are you.md": {
 "sha256": "25b4ad06aef173d70a3f3668be925c904e169e603d89c8f20e3687a4c42ed4be",
@@ -666,8 +670,8 @@
 "size": 24
 },
 "What's New.md": {
-"sha256": "d8243744f0d354a75d46b8d90821c9bf4e25b347e6a5ffbfa4624ea031dc7c58",
-"size": 11844
+"sha256": "8decb45022ed72b262f512466a9cd91af30b1ef67aeac6c222e60f3221c561ac",
+"size": 12228
 },
 "Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

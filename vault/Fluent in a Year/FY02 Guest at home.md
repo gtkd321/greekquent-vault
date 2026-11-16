@@ -17,9 +17,9 @@ One line a day, same people, one scene. Read it from the top each day, then add 
 > 1. Καλώς ήρθες! — Ορίστε το κινητό σου. — Ευχαριστώ! Θέλεις λίγο νερό; — Όχι, ευχαριστώ. (Welcome! — Here is your phone. — Thank you! Do you want a little water? — No, thank you.)
 > 2. Τι θέλεις; Καφέ; Τσάι; — Τσάι, παρακαλώ. — Εντάξει. Και λίγο ψωμί; (What do you want? Coffee? Tea? — Tea, please. — Okay. And a little bread?)
 > 3. Γεια σου, παιδί μου. Είσαι ο Νίκος; — Ναι. — Καλό παιδί! (Hello, my child. Are you Nikos? — Yes. — Good kid!)
-> 4. Έλα! Το σπίτι μου. — Πολλά πράγματα! — Ναι, πολλά. Πάμε; (Come! My house. — So many things! — Yes, a lot. Shall we go?)
+> 4. Έλα! Το σπίτι μου. — Πόσα πράγματα! — Ναι, πολλά. Πάμε μέσα; (Come in! My house. — So many things! — Yes, lots. Shall we go in?)
 > 5. Πάω στη δουλειά! — Μαμά, ο Νίκος είναι φίλος μου. — Μου αρέσει ο φίλος σου! (I'm going to work! — Mom, Nikos is my friend. — I like your friend!)
-> 6. Κοίτα! Ένα κλειδί. — Ωραία... Μαμά, τι είναι; — Από τη γιαγιά. Λυπάμαι, δεν ξέρω. (Look! A key. — Nice... Mom, what is it? — From grandma. I'm sorry, I don't know.)
+> 6. Κοίτα! Ένα κλειδί. — Ωραίο κλειδί! Μαμά, τι είναι; — Είναι από τη γιαγιά. Λυπάμαι, δεν ξέρω τι ανοίγει. (Look! A key. — A nice key! Mom, what is it? — It's from grandma. I'm sorry, I don't know what it opens.)
 
 ## This week's words
 
@@ -50,7 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[παιδί|το παιδί]] **child** (#71): Έχω ένα παιδί. (I have one kid.)
 
 > [!todo]- Thu · day 10 of 300
-> **Today's line:** Έλα! Το σπίτι μου. — Πολλά πράγματα! — Ναι, πολλά. Πάμε; (Come! My house. — So many things! — Yes, a lot. Shall we go?)
+> **Today's line:** Έλα! Το σπίτι μου. — Πόσα πράγματα! — Ναι, πολλά. Πάμε μέσα; (Come in! My house. — So many things! — Yes, lots. Shall we go in?)
 > - [[έλα]] **come (on)** (#72): Έλα γρήγορα! (Come quick!)
 > - [[σπίτι|το σπίτι]] **house, home** (#75): Θα 'μαστε στο σπίτι σήμερα. (We will be at home today.)
 > - [[πολύς]] **much, many** (#77): Υπάρχουν πολλά νησιά στην Ελλάδα. (There are many islands in Greece.)
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μου αρέσει]] **I like it** (#114): Μου αρέσουν πολύ τα σκυλιά. (I like dogs very much.)
 
 > [!todo]- Sat · day 12 of 300
-> **Today's line:** Κοίτα! Ένα κλειδί. — Ωραία... Μαμά, τι είναι; — Από τη γιαγιά. Λυπάμαι, δεν ξέρω. (Look! A key. — Nice... Mom, what is it? — From grandma. I'm sorry, I don't know.)
+> **Today's line:** Κοίτα! Ένα κλειδί. — Ωραίο κλειδί! Μαμά, τι είναι; — Είναι από τη γιαγιά. Λυπάμαι, δεν ξέρω τι ανοίγει. (Look! A key. — A nice key! Mom, what is it? — It's from grandma. I'm sorry, I don't know what it opens.)
 > - [[κοίτα]] **look** (#117): Κοίτα τι μπορώ να κάνω. (Look what I can do.)
 > - [[ωραία]] **nice(ly), great** (#123): Τι ωραία θέα! (What a beautiful view!)
 > - [[μαμά|η μαμά]] **mom** (#132): Καληνύχτα, μαμά.

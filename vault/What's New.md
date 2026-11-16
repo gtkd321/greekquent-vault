@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, evening: Comebacks you can answer
+> - **Comebacks** now show who is speaking. You hear the line in Greek, then answer it as the next person: "You, as Grandma: Yes, you! Take the key and come."
+> - Five story lines that didn't flow are rewritten, so the exchange makes sense: days 10, 12, 18, 31 and 40. Today's line, the week pages and Story Lines all match.
+
 > [!info]- November 17, later: More class in Greek
 > - New note: **[[11 Classroom Greek]]**, the same phrases every class, with a Hear button and a gesture for each. Learn your side once, and you can stay in Greek when you're stuck.
 > - Class now opens with a short **rally** in Greek: the teacher asks, you answer, then you swap. Lesson 5 is the first one, under **Rally** on the lesson page.

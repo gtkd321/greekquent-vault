@@ -14,7 +14,7 @@ tags: [greek-fiay]
 One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
 
 > [!quote]- The week in six lines
-> 1. Πού είναι το κλειδί; — Ένα λεπτό... — Δύο... πέντε... μισή ώρα! (Where is the key? — One minute... — Two... five... half an hour!)
+> 1. Πού είναι το κλειδί; — Ένα λεπτό... Ψάχνω. — Δύο λεπτά, πέντε λεπτά... μισή ώρα! (Where is the key? — One minute... I'm looking. — Two minutes, five minutes... half an hour!)
 > 2. Νομίζω πως κάποιος το έχει. — Ποιος; Είναι κάτι μικρό... έτσι. (I think someone has it. — Who? It's something small... like this.)
 > 3. Εσείς; Τι θέλετε; — Ένα κλειδί. Μόνο ένα, παλιό. — Ελάτε μαζί μου. (You? What do you want? — A key. Only one, an old one. — Come with me.)
 > 4. Εκεί: ένα κλειδί, σαν το δικό σας; — Όχι. Ακόμα τίποτα. (There: a key, like yours? — No. Still nothing.)
@@ -26,7 +26,7 @@ One line a day, same people, one scene. Read it from the top each day, then add 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L05 Lost items and the shop-student|L05 Lost items and the shop]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 31 of 300
-> **Today's line:** Πού είναι το κλειδί; — Ένα λεπτό... — Δύο... πέντε... μισή ώρα! (Where is the key? — One minute... — Two... five... half an hour!)
+> **Today's line:** Πού είναι το κλειδί; — Ένα λεπτό... Ψάχνω. — Δύο λεπτά, πέντε λεπτά... μισή ώρα! (Where is the key? — One minute... I'm looking. — Two minutes, five minutes... half an hour!)
 > - [[πού]] **where** (#87): Πού να το ξέρω εγώ! (How should I know!)
 > - [[δύο]] **two** (#104): Το φιλμ κράτησε δύο ώρες. (The film lasted 2 hours.)
 > - [[λεπτό|το λεπτό]] **minute** (#140): Δώστε μου ένα λεπτό. (Give me a minute.)

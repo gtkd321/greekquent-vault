@@ -19,7 +19,7 @@ One line a day, same people, one scene. Read it from the top each day, then add 
 > 3. Ποιος είναι; — Η Μαρία, γιαγιά! — Μαρία μου! Βέβαια! Μία φορά τον χρόνο σε βλέπω! (Who is it? — It's Maria, grandma! — My Maria! Of course! I see you once a year!)
 > 4. Γιαγιά, τι συμβαίνει; Ένα κλειδί; — Θέλεις την αλήθεια; Είναι το κλειδί από το παλιό μου σπίτι. (Grandma, what's going on? A key? — Do you want the truth? It's the key to my old house.)
 > 5. Μια στιγμή... Μαρία; Δεν σε βλέπω! — Γιαγιά; Προσπαθώ... Νίκο, βοήθα! (One moment... Maria? I can't see you! — Grandma? I'm trying... Niko, help!)
-> 6. Μαρία, έλα στο χωριό. Σε περιμένω. — Δεν καταλαβαίνω... Έρχομαι; (Maria, come to the village. I'm waiting for you. — I don't understand... I'm coming?)
+> 6. Μαρία, έλα στο χωριό. Σε περιμένω. — Δεν καταλαβαίνω... Να έρθω εγώ; — Ναι, εσύ! Πάρε το κλειδί και έλα. (Maria, come to the village. I'm waiting for you. — I don't understand... You want me to come? — Yes, you! Take the key and come.)
 
 ## This week's words
 
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φεύγω]] **I leave** (#164): Τι ώρα φεύγει το λεωφορείο; (What time does the bus leave?)
 
 > [!todo]- Sat · day 18 of 300
-> **Today's line:** Μαρία, έλα στο χωριό. Σε περιμένω. — Δεν καταλαβαίνω... Έρχομαι; (Maria, come to the village. I'm waiting for you. — I don't understand... I'm coming?)
+> **Today's line:** Μαρία, έλα στο χωριό. Σε περιμένω. — Δεν καταλαβαίνω... Να έρθω εγώ; — Ναι, εσύ! Πάρε το κλειδί και έλα. (Maria, come to the village. I'm waiting for you. — I don't understand... You want me to come? — Yes, you! Take the key and come.)
 > - [[περιμένω]] **I wait** (#165): Δε θέλω να σας περιμένω. (I don't want to wait for you.)
 > - [[έρχομαι]] **I come** (#173): Ήρθε η ώρα να αρχίσετε. (Now's the time to begin.)
 > - [[παίρνω]] **I take** (#177): Δεν ήξερα πόσα να πάρω. (I didn't know how many to get.)

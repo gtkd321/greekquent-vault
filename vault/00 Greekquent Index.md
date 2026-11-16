@@ -2,7 +2,7 @@
 
 **Greekquent** · Θα τα πούμε. The 1,500 most common Greek words, taught through real scenes.
 
-**Start here:** [[Today]] · [[Setting up]] · [[What's New]]
+**Start here:** [[Today]] · [[Setting up]] · [[What's New]] · [[11 Classroom Greek]]
 
 > [!summary]- Lessons
 > - Your lesson pages are in **Scripts/Beginner**, one per class. The whole year is also in Handouts as one workbook. Not sure which file to open? See [[00 Which file is which-student|Which file is which]].

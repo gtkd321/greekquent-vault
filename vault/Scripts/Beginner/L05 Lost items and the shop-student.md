@@ -34,6 +34,25 @@ tags: [greek-student]
 
 **Out in the world this week:** Find a Greek product in a grocery store (olive oil, feta, yogurt) and read one word from the label out loud. Copy that word by hand into your notebook.
 
+## Rally
+
+Class starts with this, all in Greek. The teacher asks, you answer, then you swap and ask. Practice your side before class: on Today, tap **Practice my side**. Stuck? Use [[11 Classroom Greek]].
+
+- Teacher: **Γεια σας! Τι κάνεις;** — Hi, everyone. How are you?
+- You: **Καλά, ευχαριστώ. Εσύ;** — Good, thanks. And you?
+- Teacher: **Πού είναι το κινητό σου;** — Where is your phone?
+- You: **Εδώ είναι!** or **Δεν ξέρω.** — Here it is! / I don't know.
+- Teacher: **Έχεις τα κλειδιά σου;** — Do you have your keys?
+- You: **Ναι, έχω τα κλειδιά μου.** or **Όχι, δεν έχω τα κλειδιά μου.** — Yes, I have my keys. / No, I don't have my keys.
+- Teacher: **Μπορείς τώρα;** — Can you now?
+- You: **Όχι, δεν μπορώ. Έχω δουλειά.** — No, I can't. I'm busy.
+- Teacher: **Γιατί δεν μπορείς;** — Why can't you?
+- You: **Γιατί δεν έχω ώρα.** — Because I don't have time.
+- Teacher: **Πόσο κάνει;** — How much is it? (the teacher holds something up)
+- You: **Δύο ευρώ.** or **Πέντε ευρώ.** — Two euros. / Five euros.
+
+**Swap:** now you ask the teacher the same questions, then ask the person next to you.
+
 ## Today's phrases
 
 Make the gesture every time you say the phrase. It helps the phrase stick.
@@ -51,7 +70,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Δύο ευρώ.** | Two euros. | Tap two fingers on the counter, one coin at a time. |
 | **Δεν ξέρω.** | I don't know. | Shrug with palms up. |
 
-> [!todo]- Word list: 15 new words to black-mark
+> [!todo]- Word list: 15 new words to black-mark at home
 > Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > να (3) · είμαι (4) · αυτός (9) · μου (12) · εδώ (28) · ξέρω (33) · καλός (47) · πού (87) · η δουλειά (94) · η μέρα (103) · δύο (104) · το λεπτό (140) · πέντε (323) · μισό (1398) · το ευρώ (1496)

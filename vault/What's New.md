@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, later: More class in Greek
+> - New note: **[[11 Classroom Greek]]**, the same phrases every class, with a Hear button and a gesture for each. Learn your side once, and you can stay in Greek when you're stuck.
+> - Class now opens with a short **rally** in Greek: the teacher asks, you answer, then you swap. Lesson 5 is the first one, under **Rally** on the lesson page.
+> - On Today, **This week's rally** shows up the week before class. Tap **Practice my side** to hear each question, answer out loud, then check.
+
 > [!info]- November 17, late: A big card, only when it helps
 > - **Practice it** on today's line opens one big card in front of the page: listen, say it from memory, then check. Mark it said from there.
 > - **Quiz me** on Comebacks shows one line at a time: English first, say it, then reveal the Greek.

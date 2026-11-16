@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17e';
+const VAULT_RELEASE = '2026-11-17f';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -589,6 +589,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Student questions: video questions and answers from the public library, shown at the end of the matching note.
     this.registerMarkdownPostProcessor((el, ctx) => this.questionsBox(el, ctx));
     this.registerMarkdownCodeBlockProcessor('greekquent-questions', (src, el) => this.questionsIndex(el));
+    // Classroom Greek and other phrase lists: one line per phrase, "Greek | English | gesture", each with a Hear button.
+    this.registerMarkdownCodeBlockProcessor('greekquent-say', (src, el) => this.sayList(el, src));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) this.words = null; if (f.path.startsWith('Fluent in a Year/')) this.beats = null; }));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === CARDS || f.path === PAIRS_NOTE) this.refreshCards(); }));
     // Word cards opened from the graph fade in (about a fifth of a second) instead of flashing in.
@@ -1632,6 +1634,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (col.track === 'kid') await this.kidCard(sp, wk.fm.lesson || await this.currentLesson(), dd < 0 ? 1 : dow);
         else if (cal) await this.storyCard(sp, beats, cal, dd >= 0 && dow === 0, col);
         this.comebackCard(sp, beats, col, cal);
+        if (col.track !== 'kid') await this.rallyCard(sp, Number(wk.fm.lesson) || Number(((await this.weekNote(week + 1)) || { fm: {} }).fm.lesson));  // no-class weeks show next week's rally
         if (col.track === 'kid') for (const d of Object.values(days)) d.words.sort((a, b) => (/^(ο|η|το) /.test(b.label) ? 1 : 0) - (/^(ο|η|το) /.test(a.label) ? 1 : 0));
         if (dd >= 0 && dow === 0) {
           const all = Object.values(days).flatMap(d => d.words);
@@ -1850,6 +1853,58 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (done) r.createSpan({ cls: 'gq-hint', text: 'Already marked as said.' }); else { const ok = r.createEl('button', { text: 'I said it', cls: 'mod-cta' }); ok.onclick = () => { this.saidBeat(n); api.close(); }; }
         if (n <= SCENE_DAYS) { const w = r.createEl('button', { text: 'Watch it' }); w.onclick = () => { api.close(); this.openApp('story', '#d=' + n); }; } } }
     ]);
+  }
+  // ---------- Immersion: Classroom Greek and the weekly rally ----------
+  sayList(el, src) {
+    const ul = el.createEl('ul', { cls: 'gq-say' });
+    for (const row of src.split('\n').map(x => x.trim()).filter(Boolean)) {
+      const [gr, en, gest] = row.split('|').map(x => (x || '').trim());
+      const li = ul.createEl('li'); const top = li.createDiv('gq-say-top');
+      this.hearBtn(top, gr.replace(/«…»|…/g, ' ').replace(/\s+/g, ' ').trim(), 'Hear');
+      top.createEl('strong', { text: gr, attr: { lang: 'el' } }); if (en) top.createSpan({ cls: 'gq-say-en', text: en });
+      if (gest) li.createDiv({ cls: 'gq-hint gq-say-g', text: gest });
+    }
+  }
+  // Rally lines live under "## Rally" on the lesson page: "- Teacher: **…** — …" and "- You: **…** or **…** — …".
+  rallyPairs(txt) {
+    const lines = this.kidLines(this.kidSection(txt, 'Rally')), out = [];
+    for (const l of lines) {
+      const alts = l.gr.split(/\*\*\s*or\s*\*\*/).map(x => x.trim()).filter(Boolean);
+      if (/^teacher/i.test(l.who)) out.push({ t: l.gr, ten: l.en, you: [], yen: '' });
+      else if (out.length) { const p = out[out.length - 1]; p.you = alts; p.yen = l.en; }
+    }
+    return out.filter(p => p.you.length);
+  }
+  async rallyCard(sp, n) {
+    const f = n && this.lessonPage(n); if (!f) return;
+    const pairs = this.rallyPairs(await this.app.vault.cachedRead(f)); if (!pairs.length) return;
+    const c = sp.createDiv('gq-tcard'), h = c.createDiv('gq-thead');
+    h.createEl('strong', { text: `This week's rally · Lesson ${n}` });
+    c.createDiv({ cls: 'gq-hint', text: `Class opens with ${pairs.length} questions in Greek. Hear each one, answer out loud, then check.` });
+    const r = c.createDiv('gq-row'); this.popBtn(r, 'Practice my side', () => this.popRally(n, pairs));
+    const cg = r.createEl('button', { text: 'Classroom Greek', cls: 'gq-mini' }); cg.onclick = () => this.openNote('11 Classroom Greek.md');
+  }
+  // The student's side: hear the teacher, answer from memory, check. Then swap and ask.
+  popRally(n, pairs) {
+    const steps = pairs.map((p, k) => ({ label: 'Teacher asks', build: (el, api) => {
+      el.createDiv({ cls: 'gq-hint', text: 'Listen, then answer out loud in Greek.' });
+      el.createDiv({ cls: 'gq-pop-big', text: p.t, attr: { lang: 'el' } }); say(p.t);
+      const en = el.createDiv({ cls: 'gq-hint gq-pop-hide', text: p.ten });
+      const ans = el.createDiv('gq-pop-hide gq-rally-ans');
+      for (const y of p.you) { const a = ans.createDiv('gq-pop-big gq-pop-ans'); a.createSpan({ text: y, attr: { lang: 'el' } }); }
+      if (p.yen) ans.createDiv({ cls: 'gq-hint', text: p.yen });
+      const r = el.createDiv('gq-row'); this.hearBtn(r, p.t, 'Hear again');
+      const m = r.createEl('button', { text: 'What does it mean?', cls: 'gq-mini' }); m.onclick = () => { en.removeClass('gq-pop-hide'); m.remove(); };
+      const s = r.createEl('button', { text: 'Check my answer', cls: 'mod-cta' });
+      s.onclick = () => { ans.removeClass('gq-pop-hide'); say(p.you[0]); s.remove(); if (p.you.length > 1) this.hearBtn(r, p.you.join(' '), 'Hear both'); const nx = r.createEl('button', { text: 'Next', cls: 'mod-cta' }); nx.onclick = api.next; };
+    } }));
+    steps.push({ label: 'Swap', build: (el, api) => {
+      el.createDiv({ cls: 'gq-hint', text: 'Now you ask. Say each question out loud, as if to the teacher.' });
+      const ol = el.createEl('ol', { cls: 'gq-storylist gq-pop-list' }); for (const p of pairs) ol.createEl('li', { text: p.t, attr: { lang: 'el' } });
+      const r = el.createDiv('gq-row'); this.hearBtn(r, pairs.map(p => p.t).join(' '), 'Hear them all');
+      const d = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); d.onclick = api.close;
+    } });
+    this.pop(`Rally · Lesson ${n}`, steps);
   }
   // Comebacks: English first, say it, then reveal the Greek. One at a time.
   popComebacks(due) {

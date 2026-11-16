@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Mar 8 to Mar 14 · **Class:** [[L17 Weekend plans-student|L17 Weekend plans]] ([[L17 Weekend plans-student|student page]]) · **Running total:** 540 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Το Σαββατοκύριακο: βόλτα με την εγγονή μου και μετά πάρτι! (The weekend: a walk with my granddaughter and then a party!)
+> 2. Πλέον μιλάω ελληνικά. Διαφορετικό! Δείχνω με το δάχτυλο λιγότερο. (Now I speak Greek. Different! I point with my finger less.)
+> 3. Μια ερώτηση: ποια είναι η τιμή; — Η σειρά σου! (One question: what is the price? — Your turn!)
+> 4. Η φίλη μου τρώει οτιδήποτε. Πονάει η κοιλιά της! (My friend eats anything. Her belly hurts!)
+> 5. Ένα τέλειο ταξίδι! Τα αγαπημένα μου ρούχα, κι είμαι ευτυχισμένη. (A perfect trip! My favorite clothes, and I'm happy.)
+> 6. Το δείπνο ήταν υπέροχα! Όλοι χαρούμενοι. Μισώ να φεύγω. (Dinner was wonderful! Everyone happy. I hate to leave.)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L17 Weekend plans-student|L17 Weekend plans]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 103 of 300
+> **Today's line:** Το Σαββατοκύριακο: βόλτα με την εγγονή μου και μετά πάρτι! (The weekend: a walk with my granddaughter and then a party!)
 > - [[βόλτα|η βόλτα]] **walk, stroll** (#635): Θέλετε να πάτε μια βόλτα; (Would you like to go for a walk?)
 > - [[Σαββατοκύριακο|το Σαββατοκύριακο]] **weekend** (#1075): Πως πήγε το Σαββατοκύριακο;
 > - [[πάρτι|το πάρτι]] **party** (#392): Πρέπει να πάω στο πάρτι; (Should I go to the party?)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[εγγονή|η εγγονή]] **granddaughter** (#1422): Αυτή είναι η Νίνα, η εγγονή σου.
 
 > [!todo]- Tue · day 104 of 300
+> **Today's line:** Πλέον μιλάω ελληνικά. Διαφορετικό! Δείχνω με το δάχτυλο λιγότερο. (Now I speak Greek. Different! I point with my finger less.)
 > - [[ελληνικός]] **Greek (adj.)** (#398): Η Κρήτη είναι ένα μεγάλο ελληνικό νησί. (Crete is a big Greek island.)
 > - [[έρευνα|η έρευνα]] **research, search** (#399): Έκανα λίγη έρευνα.
 > - [[πλέον]] **now, any more** (#404): Δεν χρειάζεται πλέον να μετράτε. (No need to count anymore.)
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[δάχτυλο|το δάχτυλο]] **finger** (#1424): Έχω πόνο στο δάχτυλό μου. (I have a pain in my finger.)
 
 > [!todo]- Wed · day 105 of 300
+> **Today's line:** Μια ερώτηση: ποια είναι η τιμή; — Η σειρά σου! (One question: what is the price? — Your turn!)
 > - [[πλευρά|η πλευρά]] **side** (#411): Είναι ξάδερφός μου από την πλευρά του πατέρα. (He is my cousin on the father's side.)
 > - [[ερώτηση|η ερώτηση]] **question** (#412): Καθηγητά, έχω μια ερώτηση. (Professor, I have a question.)
 > - [[σειρά|η σειρά]] **turn, series, order** (#414): Δική σου σειρά είναι απόψε. (It's your turn tonight.)
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τιμή|η τιμή]] **price, honor** (#415): Οι τιμές ανέβηκαν.
 
 > [!todo]- Thu · day 106 of 300
+> **Today's line:** Η φίλη μου τρώει οτιδήποτε. Πονάει η κοιλιά της! (My friend eats anything. Her belly hurts!)
 > - [[σχετικά]] **relatively, about** (#416): Είμαι αρκετά αυστηρός σχετικά με αυτό. (I'm pretty strict about it.)
 > - [[φίλη|η φίλη]] **friend (female)** (#418): Πού είναι η φίλη σου; (Where's your girlfriend?)
 > - [[οτιδήποτε]] **anything** (#419): Υπάρχει οτιδήποτε φτηνό εδώ μέσα;
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κοιλιά|η κοιλιά]] **belly** (#1426): Πονάει η κοιλιά μου.
 
 > [!todo]- Fri · day 107 of 300
+> **Today's line:** Ένα τέλειο ταξίδι! Τα αγαπημένα μου ρούχα, κι είμαι ευτυχισμένη. (A perfect trip! My favorite clothes, and I'm happy.)
 > - [[τέλειος]] **perfect** (#422): Το σλόγκαν τους είναι τέλειο. (Their slogan is perfect.)
 > - [[ταξίδι|το ταξίδι]] **trip, journey** (#436): Πηγαίνω σε ένα ταξίδι. (I'm going on a trip.)
 > - [[ρούχα|τα ρούχα]] **clothes** (#451): Σου αρέσουν τα ρούχα μου; (Do you like my clothes?)
@@ -49,13 +66,15 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ευτυχισμένος]] **happy** (#470): Είναι ευτυχισμένος. (He is happy.)
 
 > [!todo]- Sat · day 108 of 300
+> **Today's line:** Το δείπνο ήταν υπέροχα! Όλοι χαρούμενοι. Μισώ να φεύγω. (Dinner was wonderful! Everyone happy. I hate to leave.)
 > - [[δείπνο|το δείπνο]] **dinner** (#472): Το δείπνο είναι το βράδυ. (Dinner is in the evening.)
 > - [[υπέροχα]] **wonderfully** (#473): Πέρασα υπέροχα.
 > - [[χαρούμενος]] **happy, cheerful** (#478): Ο Τόνι ήταν χαρούμενος. (Tony was happy.)
-> - [[μισώ]] **I hate** (#489): Γιατί σε μισώ. (Because I hate you.)
+> - [[μισώ]] **I hate** (#489): Μισώ το κρύο. (I hate the cold.)
 > - [[εξαφανίζομαι]] **I disappear** (#556): Ο Τομ έχει εξαφανιστεί.
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w20` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the [[L17 Weekend plans-student|L17 Weekend plans]] scene using at least 5 of this week's words. Bring it to the group meet.

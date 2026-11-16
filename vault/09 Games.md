@@ -21,6 +21,15 @@ Links: [[Today]] · [[00 Greekquent Index]] · [[07 Fluent in a Year]]
 > - **Letter rules:** the setup screen lists them (χ → ch, φ → ph, θ → th, ψ → ps, ξ → x, υ → y, κ → c, initial vowel → h), and you can play only the words for one rule. Every answer shows the rule and a one-line bridge, for example "Strategy was first the art of leading an army."
 > - 85% hit-rate check and a missed list at the end, like the Buzzer.
 
+> [!summary]- Greekquent Γιαγιά (find the notebooks, don't get fed)
+> [Open Greekquent Γιαγιά](https://www.perplexity.ai/computer/a/greekquent-giagia-T2tsaLMvQiuN84Ng0un.IA)
+> - One player, made for kids and remote students. Works in any phone browser, iPhone or Android, and with a keyboard on a computer.
+> - Walk around the house (Κουζίνα, Σαλόνι, Διάδρομος, Υπνοδωμάτιο, Μπάνιο, Μπαλκόνι) and find 7 τετράδια. Each one says a Greek word aloud and gives three English meanings.
+> - Right answer: Γιαγιά stops for 2 seconds ("Μπράβο!"). Wrong answer: she gets a little faster, and the notebook stays so the word comes back.
+> - She catches you 3 times and it's dinner ("Φάε, παιδί μου!"). Find all 7 and the door opens.
+> - **Words from:** any kid lesson (with earlier lessons mixed in), the top 100, 300 or all 1,500, or today's words from the Today page.
+> - The end screen lists missed words with Hear buttons and can send them to Review on Today.
+
 > [!summary]- Run it in class
 > 1. Pick the current lesson, play to 5.
 > 2. Winner stays, the next student challenges.

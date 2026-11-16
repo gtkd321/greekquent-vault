@@ -16,6 +16,17 @@ tags: [greek-student, kid]
 - You: **Χθες ήθελα να πάω στο πάρκο, αλλά δεν μπορούσα.** — Yesterday I wanted to go to the park, but I couldn't.
 - You: **Έβλεπα τηλεόραση.** — I was watching TV.
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Χθες ο Spider-Man ήθελε να φάει…** — Yesterday Spider-Man wanted to eat…
+- You (teacher): **…αλλά δεν είχε ψωμί!** — …but he didn't have any bread!
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 The three-panel comic.

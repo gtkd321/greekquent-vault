@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Jan 25 to Jan 31 · **Class:** [[L11 Going places-student|L11 Going places]] ([[L11 Going places-student|student page]]) · **Running total:** 360 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Το καλοκαίρι, κάθε Σάββατο και Κυριακή, πάμε στο χωριό, στον φούρνο. (In summer, every Saturday and Sunday, we go to the village, to the bakery.)
+> 2. Απόψε, αμέσως! Μερικοί φίλοι έρχονται αυτόν τον μήνα. (Tonight, right away! Some friends are coming this month.)
+> 3. Πότε φεύγουμε ξανά; Μήπως αύριο; — Μάλιστα, κατά τις οκτώ. (When do we leave again? Maybe tomorrow? — Yes indeed, around eight.)
+> 4. Την επόμενη εβδομάδα πάμε με τα πόδια. Είναι κοντά, όχι πια μακριά. (Next week we go on foot. It's close, not far anymore.)
+> 5. Χάνω το τηλέφωνο στο αυτοκίνητο. Μου δείχνει πού είναι. Αντίο! (I lose my phone in the car. She shows me where it is. Bye!)
+> 6. Οδηγώ στην ταβέρνα. Φοβάμαι λίγο. — Άσε, αλλάζω εγώ θέση. (I drive to the taverna. I'm a bit afraid. — Let it go, I'll switch places.)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L11 Going places-student|L11 Going places]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 67 of 300
+> **Today's line:** Το καλοκαίρι, κάθε Σάββατο και Κυριακή, πάμε στο χωριό, στον φούρνο. (In summer, every Saturday and Sunday, we go to the village, to the bakery.)
 > - [[χωριό|το χωριό]] **village** (#760): Το σπίτι είναι στο χωριό. (The house is in the village.)
 > - [[καλοκαίρι|το καλοκαίρι]] **summer** (#1087): Μ' αρέσει το καλοκαίρι. (I love summer.)
 > - [[Σάββατο|το Σάββατο]] **Saturday** (#1196): Σήμερα είναι Σάββατο. (It's Saturday today.)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φούρνος|ο φούρνος]] **bakery, oven** (#1438): Που είναι ο φούρνος;
 
 > [!todo]- Tue · day 68 of 300
+> **Today's line:** Απόψε, αμέσως! Μερικοί φίλοι έρχονται αυτόν τον μήνα. (Tonight, right away! Some friends are coming this month.)
 > - [[θέμα|το θέμα]] **subject, issue** (#211): Ας μπούμε στο θέμα. (Let's get down to brass tacks.)
 > - [[απόψε]] **tonight** (#214): Είσαι έτοιμος γι' απόψε; (Are you ready for tonight?)
 > - [[μερικοί]] **some, a few** (#215): Θα πάρω άδεια μερικές μέρες. (I'll take a few days off.)
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αμέσως]] **immediately** (#219): Ναι, έρχομαι αμέσως. (Yes, I'm coming immediately.)
 
 > [!todo]- Wed · day 69 of 300
+> **Today's line:** Πότε φεύγουμε ξανά; Μήπως αύριο; — Μάλιστα, κατά τις οκτώ. (When do we leave again? Maybe tomorrow? — Yes indeed, around eight.)
 > - [[ξανά]] **again** (#220): Το έχει κάνει ξανά και ξανά. (He's done that again and again.)
 > - [[πότε]] **when** (#221): Πότε μπορώ να τη δώ; (When can I see her?)
 > - [[μήπως]] **perhaps, by any chance** (#222): Μήπως έχεις ώρα;
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κατά]] **during, against, according to** (#230): Κατά τη γνώμη μου, είσαι όμορφη. (In my opinion, you're beautiful.)
 
 > [!todo]- Thu · day 70 of 300
+> **Today's line:** Την επόμενη εβδομάδα πάμε με τα πόδια. Είναι κοντά, όχι πια μακριά. (Next week we go on foot. It's close, not far anymore.)
 > - [[πια]] **anymore** (#232): Πάψε πια να κλαις. (Now stop crying.)
 > - [[επόμενος]] **next** (#234): Θυμηθείται με την επόμενη φορά. (Remember me next time.)
 > - [[κοντά]] **near** (#240): Είναι κοντά στο σπίτι σου; (Is it near your house?)
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[εβδομάδα|η εβδομάδα]] **week** (#303): Κολυμπάω μία φορά την εβδομάδα. (I swim once a week.)
 
 > [!todo]- Fri · day 71 of 300
+> **Today's line:** Χάνω το τηλέφωνο στο αυτοκίνητο. Μου δείχνει πού είναι. Αντίο! (I lose my phone in the car. She shows me where it is. Bye!)
 > - [[τηλέφωνο|το τηλέφωνο]] **telephone** (#304): Αυτός είναι στο τηλέφωνο τώρα. (He's now on the phone.)
 > - [[αυτοκίνητο|το αυτοκίνητο]] **car** (#313): Αυτός έχει ένα αυτοκίνητο. (He has a car.)
 > - [[αντίο]] **goodbye** (#320): Αντίο και καληνύχτα.
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[δείχνω]] **I show** (#337): Μου έδειξε το δωμάτιό της. (She showed me her room.)
 
 > [!todo]- Sat · day 72 of 300
+> **Today's line:** Οδηγώ στην ταβέρνα. Φοβάμαι λίγο. — Άσε, αλλάζω εγώ θέση. (I drive to the taverna. I'm a bit afraid. — Let it go, I'll switch places.)
 > - [[αλλάζω]] **I change** (#347): Θ' αλλάξει αυτό; (Will that change?)
 > - [[ταβέρνα|η ταβέρνα]] **tavern** (#1414): Σε αυτή την ταβέρνα τρως καλό κρέας και πίνεις τέλειο κρασί.
 > - [[άσε]] **let it be, never mind** (#357): Άσε με να φύγω! (Let me go!)
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[οδηγώ]] **I drive, I lead** (#403): Οδηγεί γρήγορα. (He drives fast.)
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w14` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the [[L11 Going places-student|L11 Going places]] scene using at least 5 of this week's words. Bring it to the group meet.

@@ -16,6 +16,17 @@ tags: [greek-student, kid]
 - You: **Θα πάω στη θάλασσα!** — I'll go to the sea!
 - Ss: **Μπράβο!** — Bravo!
 
+## You are the teacher
+
+Swap: now you are the teacher. Run the game and tell the grown-up what to say.
+
+- You (teacher): **Θέλετε νερό;** — Would you like water?
+- You (teacher): **Πού είναι ο Spider-Man;** — Where is Spider-Man?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 A certificate, colored and signed: Μπράβο!

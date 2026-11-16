@@ -17,6 +17,16 @@ tags: [greek-student, kid]
 - You: **Πάω στη θάλασσα!** — I'm going to the sea!
 - Grown-up: **Μπράβο! Εδώ είναι!** — Well done! Here it is!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Θέλεις νερό;** — Do you want water?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 Clue cards drawn by the teacher (or older kids), each with a picture from that lesson's game.

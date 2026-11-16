@@ -122,3 +122,22 @@ body:not(.gq-l-simple) .gq-lv-only-simple, body:not(.gq-l-intermediate) .gq-lv-o
 .gq-has-switch > .empty-state { padding-top: 44px; }
 .gq-tnext a { cursor: pointer; }
 .gq-tnext.gq-tcard button { margin: 6px 8px 0 0; }
+/* Background update chip: small, never blocks taps */
+.gq-upd { position: fixed; left: 12px; bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); z-index: 30; pointer-events: none; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--background-secondary); border: 1px solid var(--background-modifier-border); color: var(--text-muted); }
+body.is-mobile .gq-upd { bottom: calc(env(safe-area-inset-bottom, 0px) + 64px); }
+/* Daily story line, comebacks, kid track */
+.gq-story .gq-line { font-size: 1.35em; line-height: 1.45; margin: 10px 0 4px; }
+.gq-story .gq-line strong { color: var(--text-accent); font-weight: 600; }
+.gq-line-en { margin-bottom: 4px; }
+.gq-sofar { margin: 6px 0; font-size: 0.92em; color: var(--text-muted); }
+.gq-sofar summary { cursor: pointer; }
+.gq-sofarline { margin: 3px 0 3px 4px; }
+.gq-storylist { margin: 8px 0; padding-left: 22px; }
+.gq-storylist li { margin: 6px 0; }
+.gq-storylist li[lang], .gq-storylist .gq-line { font-size: 1.1em; margin: 0; }
+.gq-kid .gq-storylist li { color: var(--text-muted); }
+.gq-kid .gq-storylist li.gq-now { color: var(--text-normal); font-size: 1.15em; }
+.gq-comeback .gq-cbrow { border-top: 1px solid var(--background-modifier-border); padding: 8px 0 2px; }
+.gq-comeback .gq-cbrow:first-of-type { border-top: 0; }
+.gq-cbgr { font-size: 1.15em; margin-top: 4px; }
+.gq-today .gq-mini { min-height: 32px; }

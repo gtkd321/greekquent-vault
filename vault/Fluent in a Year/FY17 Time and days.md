@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Feb 15 to Feb 21 · **Class:** [[L14 Time and days-student|L14 Time and days]] ([[L14 Time and days-student|student page]]) · **Running total:** 450 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Τη Δευτέρα νωρίς, την Παρασκευή στις έξι παρά τέταρτο. (On Monday early, on Friday at a quarter to six.)
+> 2. Από την αρχή: η κατάσταση είναι κακή, αλλά σχεδόν όλοι είναι ζωντανοί! (From the beginning: the situation is bad, but almost everyone is alive!)
+> 3. Χθες βρήκα κάτι μυστικό, κάπου μεταξύ δύο βιβλίων. (Yesterday I found something secret, somewhere between two books.)
+> 4. Αληθινό; Πάρα πολύ σύντομα το μαθαίνουμε. Με ασφάλεια. (Real? We'll find out very soon. Safely.)
+> 5. Είναι πλάκα! Ένα εύκολο παιχνίδι. Καλή τύχη, και στη συνέχεια... (It's a joke! An easy game. Good luck, and next...)
+> 6. Ρωτάω: πιάνω το νόημα; Όλη τη βδομάδα άσχημα... Καληνύχτα! (I ask: do I get it? All week badly... Good night!)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L14 Time and days-student|L14 Time and days]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 85 of 300
+> **Today's line:** Τη Δευτέρα νωρίς, την Παρασκευή στις έξι παρά τέταρτο. (On Monday early, on Friday at a quarter to six.)
 > - [[μισός]] **half** (#376): Φεύγουμε σε μισή ώρα. (We leave in half an hour.)
 > - [[παρά]] **despite; to (time)** (#445): Είναι τρεις παρά τέταρτο. (It's a quarter to three.)
 > - [[νωρίς]] **early** (#604): Είναι ακόμα πολύ νωρίς. (It is still too early.)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[Δευτέρα|η Δευτέρα]] **Monday** (#1182): Είναι Δευτέρα κι έχει λιακάδα. (It's Monday and it's sunny.)
 
 > [!todo]- Tue · day 86 of 300
+> **Today's line:** Από την αρχή: η κατάσταση είναι κακή, αλλά σχεδόν όλοι είναι ζωντανοί! (From the beginning: the situation is bad, but almost everyone is alive!)
 > - [[κακός]] **bad** (#302): Η όρασή του είναι κακή. (His eyesight is bad.)
 > - [[αρχή|η αρχή]] **beginning** (#305): Το ήξερε από την αρχή. (He knew it all along.)
 > - [[κατάσταση|η κατάσταση]] **situation** (#307): Η κατάσταση είναι σοβαρή. (The situation is grave.)
@@ -28,13 +42,15 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σχεδόν]] **almost** (#309): Είναι σχεδόν 20 χρονών. (She's at most 20 years old.)
 
 > [!todo]- Wed · day 87 of 300
-> - [[πόλεμος|ο πόλεμος]] **war** (#310): Είχε σκοτωθεί στον πόλεμο. (He was killed in the war.)
+> **Today's line:** Χθες βρήκα κάτι μυστικό, κάπου μεταξύ δύο βιβλίων. (Yesterday I found something secret, somewhere between two books.)
+> - [[πόλεμος|ο πόλεμος]] **war** (#310): Ο παππούς μου μιλάει για τον πόλεμο. (My grandfather talks about the war.)
 > - [[κάπου]] **somewhere** (#315): Έχεις κάπου να πας; (Do you have someplace to go?)
 > - [[μεταξύ]] **between** (#316): Ο ανελκυστήρας κόλλησε μεταξύ δύο ορόφων. (The lift is stuck between two floors.)
 > - [[χθες]] **yesterday** (#317): Χτες ήταν τα γεννέθλιά μου. (Yesterday was my birthday.)
 > - [[μυστικός]] **secret** (#321): Αυτό δεν είναι ένα μυστικό. (It isn't a secret.)
 
 > [!todo]- Thu · day 88 of 300
+> **Today's line:** Αληθινό; Πάρα πολύ σύντομα το μαθαίνουμε. Με ασφάλεια. (Real? We'll find out very soon. Safely.)
 > - [[φυλακή|η φυλακή]] **prison** (#322): Οι κακοί είναι στη φυλακή. (The bad people are in prison.)
 > - [[ασφάλεια|η ασφάλεια]] **safety, security** (#325): Οδήγα με ασφάλεια. (Drive safely.)
 > - [[πάρα πολύ]] **very much** (#328): Έφαγα πάρα πολύ.
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σύντομα]] **soon** (#331): Σύντομα θα 'ναι έτοιμο. (It'll be ready soon.)
 
 > [!todo]- Fri · day 89 of 300
+> **Today's line:** Είναι πλάκα! Ένα εύκολο παιχνίδι. Καλή τύχη, και στη συνέχεια... (It's a joke! An easy game. Good luck, and next...)
 > - [[πλάκα|η πλάκα]] **joke, fun** (#339): Πλάκα μου κάνεις;
 > - [[συνέχεια|η συνέχεια]] **continuation** (#340): Οι ελιές τοποθετούνται στη συνέχεια σε άλμη. (The olives are subsequently placed in brine.)
 > - [[παιχνίδι|το παιχνίδι]] **game, toy** (#350): Μου αρέσει αυτό το παιχνίδι. (I like this game.)
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τύχη|η τύχη]] **luck** (#367): Σου εύχομαι καλή τύχη. (I wish you good luck.)
 
 > [!todo]- Sat · day 90 of 300
+> **Today's line:** Ρωτάω: πιάνω το νόημα; Όλη τη βδομάδα άσχημα... Καληνύχτα! (I ask: do I get it? All week badly... Good night!)
 > - [[βδομάδα|η βδομάδα]] **week** (#370): Κολυμπάω μια φορά τη βδομάδα. (I swim once a week.)
 > - [[άσχημα]] **badly** (#375): Μιλάω πολύ άσχημα εσπεράντο. (I speak Esperanto very badly.)
 > - [[πιάνω]] **I catch, I grab** (#396): Ο αετός δεν πιάνει μύγες. (The eagle does not catch flies.)
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[καληνύχτα]] **good night** (#417): Θέλω να της πω καληνύχτα. (I want to tell her good night.)
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w17` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the [[L14 Time and days-student|L14 Time and days]] scene using at least 5 of this week's words. Bring it to the group meet.

@@ -17,6 +17,16 @@ tags: [greek-student, kid]
 - You: **Έχει ήλιο!** — It's sunny!
 - You: **Βλέπω τον χαρταετό!** — I see the kite!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Τι καιρό κάνει;** — What's the weather like?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 The kite, in bright colors, with a tail of tissue paper.

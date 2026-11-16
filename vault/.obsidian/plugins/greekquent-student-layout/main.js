@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-16e';
+const VAULT_RELEASE = '2026-11-16f';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -38,6 +38,7 @@ const TEACHER_MARK = '.obsidian/greekquent-teacher.json';
 // Fluent in a Year: week 1 starts Monday, Oct 26, 2026. Mon to Sat are word days, Sunday is review.
 const COURSE_START = [2026, 9, 26];
 const COUSINS_URL = 'https://greekquent-cousins.pplx.app/';
+const GIAGIA_URL = 'https://www.perplexity.ai/computer/a/greekquent-giagia-T2tsaLMvQiuN84Ng0un.IA';
 const BUZZER_URL = 'https://www.perplexity.ai/computer/a/greekquent-buzzer-f3uOHxBFS6Ko8YnCc99fzw';
 const COLORS = [['red', "Don't have it"], ['yellow', 'Kind of'], ['green', 'Have it']];
 // Layouts: Simple (default) shows Today and the newest lesson; Intermediate adds tools; Advanced opens everything.
@@ -498,7 +499,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Student questions: video questions and answers from the public library, shown at the end of the matching note.
     this.registerMarkdownPostProcessor((el, ctx) => this.questionsBox(el, ctx));
     this.registerMarkdownCodeBlockProcessor('greekquent-questions', (src, el) => this.questionsIndex(el));
-    this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) this.words = null; }));
+    this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) this.words = null; if (f.path.startsWith('Fluent in a Year/')) this.beats = null; }));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === CARDS || f.path === PAIRS_NOTE) this.refreshCards(); }));
     // Word cards opened from the graph fade in (about a fifth of a second) instead of flashing in.
     this.registerDomEvent(document, 'pointerdown', e => { if (e.target.closest && e.target.closest('.workspace-leaf-content[data-type="localgraph"], .workspace-leaf-content[data-type="graph"]')) this.graphTouch = Date.now(); }, true);
@@ -936,8 +937,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (!man || !man.files) { if (!quiet) new Notice('The update server sent something unexpected. Try again later.'); return; }
       let mine = {}; try { mine = JSON.parse(await ad.read(INSTALLED)); } catch (e) {}
       if (mine.release === man.release) { if (!quiet) new Notice(`Already up to date (release ${man.release}).`); return; }
-      if (quiet) { const n = new Notice(`A Greekquent update (${man.release}) is ready. Tap here to install it.`, 0); n.noticeEl.onclick = () => { n.hide(); this.updateVault(false); }; return; }
-      const note = new Notice('Updating Greekquent...', 0);
+      if (quiet) { this.updateReady = man.release; this.refreshToday(); const n = new Notice(`A Greekquent update is ready. Tap here to install it in the background.`, 10000); n.noticeEl.onclick = () => { n.hide(); this.updateVault(false); }; return; }
+      // Runs in the background: a short heads-up, then a small progress chip that never blocks taps.
+      new Notice('Updating in the background. Keep working.', 4000);
+      const note = this.chip('Updating...');
       const want = Object.entries(man.files).filter(([p]) => !KEEP_LOCAL(p));
       let changed = 0, removed = 0, config = false, stale = 0;
       for (let i = 0; i < want.length; i++) {
@@ -951,10 +954,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const dir = p.split('/').slice(0, -1).join('/');
         if (dir && !(await ad.exists(dir))) await ad.mkdir(dir);
         await ad.writeBinary(p, r.arrayBuffer); changed++; if (p.startsWith('.obsidian/plugins/')) config = true;
-        note.setMessage(`Updating Greekquent... ${changed} file${changed === 1 ? '' : 's'}`);
+        note.setText(`Updating... ${Math.round((i + 1) / want.length * 100)}%`);
       }
       if (stale) {
-        note.hide();
+        note.remove();
         new Notice(`Greekquent update: ${changed} file${changed === 1 ? '' : 's'} updated, ${stale} still on the way from GitHub. Tap Update vault again in about 5 minutes. Your My Work folder was not touched.`, 15000);
         return;
       }
@@ -963,11 +966,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (const p of Object.keys(mine.files || {})) if (!man.files[p] && !KEEP_LOCAL(p) && await ad.exists(p)) { await ad.remove(p); removed++; gone.push(p); }
       await this.pruneEmpty(gone);
       await ad.write(INSTALLED, JSON.stringify({ release: man.release, files: man.files }));
-      note.hide();
-      const done = new Notice(`Greekquent updated to ${man.release}: ${changed} changed, ${removed} removed. Your My Work folder was not touched.` + (config ? ' Close and reopen Obsidian to finish.' : '') + ' Tap here to see what\'s new.', 15000);
+      note.remove(); this.updateReady = null; this.refreshToday();
+      const done = new Notice(`Greekquent updated. My Work was not touched.` + (config ? ' Close and reopen Obsidian to finish.' : '') + ' Tap to see what\'s new.', 8000);
       done.noticeEl.onclick = () => { done.hide(); this.openNote(WHATS_NEW); };
-    } finally { this.updating = false; }
+    } finally { this.updating = false; const c = document.querySelector('.gq-upd'); if (c) c.remove(); }
   }
+  chip(t) { let c = document.querySelector('.gq-upd'); if (!c) c = document.body.createDiv({ cls: 'gq-upd', attr: { role: 'status', 'aria-live': 'polite' } }); c.setText(t); return c; }
   // ---------- More menu (left toolbar) ----------
   moreMenu(evt) {
     const m = new Menu();
@@ -975,6 +979,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (l !== 'simple') m.addItem(i => i.setTitle('Word graph').setIcon('git-fork').onClick(() => this.openGraph()));
     m.addItem(i => i.setTitle('Send homework').setIcon('send').onClick(() => this.sendHomework()));
     if (l === 'advanced') m.addItem(i => i.setTitle('Ask on video').setIcon('video').onClick(() => this.askVideo()));
+    m.addItem(i => i.setTitle(this.colors().track === 'kid' ? 'Kid track: turn off' : 'Kid track').setIcon('baby').onClick(() => this.setTrack(this.colors().track === 'kid' ? '' : 'kid')));
     m.addSeparator();
     m.addItem(i => i.setTitle('Share feedback').setIcon('message-square').onClick(() => this.feedback()));
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
@@ -1000,7 +1005,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, layout: String(fm.layout || ''), hint_off: String(fm.hint_off || '') };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, layout: String(fm.layout || ''), hint_off: String(fm.hint_off || ''), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), track: String(fm.track || '') };
   }
   colorOf(word) { const c = this.colors(); return COLORS.map(x => x[0]).find(k => c[k].includes(word)) || ''; }
   async progressFile() {
@@ -1137,8 +1142,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const txt = await this.app.vault.cachedRead(file), days = {};
     let cur = null;
     for (const line of txt.split('\n')) {
-      const h = line.match(/^> \[!todo\]-?\s*(Mon|Tue|Wed|Thu|Fri|Sat)\b(.*)$/); if (h) { cur = h[1]; days[cur] = { label: (h[1] + h[2]).trim(), words: [] }; continue; }
+      const h = line.match(/^> \[!todo\]-?\s*(Mon|Tue|Wed|Thu|Fri|Sat)\b(.*)$/); if (h) { cur = h[1]; const dn = h[2].match(/day (\d+)/); days[cur] = { label: (h[1] + h[2]).trim(), n: dn ? +dn[1] : 0, words: [] }; continue; }
       if (!line.startsWith('>')) { cur = null; continue; }
+      const tl = cur && line.match(/^> \*\*Today's line:\*\*\s*(.+?)\s*\(([^()]*)\)\s*$/);
+      if (tl) { days[cur].line = { gr: tl[1].trim(), en: tl[2].trim() }; continue; }
       const w = cur && line.match(/^> - \[\[([^\]|]+)(?:\|([^\]]+))?\]\] \*\*([^*]+)\*\*/);
       if (w) days[cur].words.push({ word: w[1].trim(), label: (w[2] || w[1]).trim(), en: w[3].trim() });
     }
@@ -1168,6 +1175,114 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const row = parent.createDiv('gq-row gq-lv-int'); const list = words.map(w => w.word);
     const b = row.createEl('button', { text: 'Play Buzzer with these' }); b.onclick = () => window.open(this.gameUrl(BUZZER_URL, list));
     const c = row.createEl('button', { text: 'Play Cousins with these' }); c.onclick = () => window.open(this.gameUrl(COUSINS_URL, list));
+    const y = row.createEl('button', { text: 'Play Γιαγιά with these' }); y.onclick = () => window.open(this.gameUrl(GIAGIA_URL, list));
+  }
+  // ---------- Daily story: one line a day, same people all week ----------
+  // Every word day (1 to 300) has one line. last_beat in My progress is the last line the student said.
+  async beatIndex() {
+    if (this.beats) return this.beats;
+    const out = {};
+    for (const f of this.app.vault.getMarkdownFiles()) {
+      if (!f.path.startsWith('Fluent in a Year/')) continue;
+      const fm = (this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}; if (!+fm.fiay_week) continue;
+      const days = await this.weekDays(f); const list = Object.values(days).filter(d => d.n && d.line).sort((a, b) => a.n - b.n);
+      list.forEach((d, i) => { out[d.n] = { n: d.n, week: +fm.fiay_week, file: f, i: i + 1, of: list.length, gr: d.line.gr, en: d.line.en, words: d.words, label: d.label, lesson: +fm.lesson || 0 }; });
+    }
+    return this.beats = out;
+  }
+  // Highlight the day's words inside the line (matched on the start of the word, accents ignored).
+  lineEl(parent, gr, words) {
+    const stems = (words || []).map(w => fold((w.label || w.word).replace(/^(ο|η|το|οι|τα|τον|την)\s+/i, '').split(/[ ,]/)[0])).filter(x => x.length > 1).map(x => x.length > 4 ? x.slice(0, x.length - 2) : x);
+    const el = parent.createDiv('gq-line'); el.setAttr('lang', 'el');
+    for (const part of gr.split(/(\s+)/)) {
+      const f = fold(part.replace(/[^\p{L}]/gu, ''));
+      if (f && stems.some(st => f.startsWith(st))) el.createEl('strong', { text: part }); else el.appendText(part);
+    }
+    return el;
+  }
+  hearBtn(parent, text, label) { const b = parent.createEl('button', { text: label || 'Hear it', cls: 'gq-mini' }); b.onclick = () => say(text); return b; }
+  async saidBeat(n) {
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.last_beat = n; });
+    setTimeout(() => this.refreshToday(), 300);
+  }
+  async setTrack(t) {
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { if (t) fm.track = t; else delete fm.track; });
+    new Notice(t === 'kid' ? 'Kid track on: Today shows the kid lesson lines and the easiest words first.' : 'Kid track off.', 5000);
+    setTimeout(() => this.refreshToday(), 300);
+  }
+  async storyCard(box, beats, cal, isSun, col) {
+    const last = col.last_beat;
+    // Behind = they said a line before, then missed days. New students start at today's line.
+    const behind = last && last < cal - 1 ? cal - 1 - last : 0;
+    const n = behind ? last + 1 : cal, b = beats[n]; if (!b) return;
+    if (isSun && beats[cal]) {
+      const card = box.createDiv('gq-tcard gq-story'), head = card.createDiv('gq-thead'), b = beats[cal];
+      head.createEl('strong', { text: 'This week\'s story' });
+      card.createDiv({ cls: 'gq-hint', text: 'Sunday: read the whole story aloud, top to bottom.' });
+      const lines = Object.values(beats).filter(x => x.week === b.week).sort((a, c) => a.n - c.n);
+      const ol = card.createEl('ol', { cls: 'gq-storylist' });
+      for (const x of lines) { const li = ol.createEl('li'); this.lineEl(li, x.gr, x.words); li.createDiv({ cls: 'gq-hint', text: x.en }); }
+      const row = card.createDiv('gq-row'); this.hearBtn(row, lines.map(x => x.gr).join(' '), 'Hear the whole story');
+      if (!behind) return;
+    }
+    const card = box.createDiv('gq-tcard gq-story');
+    const head = card.createDiv('gq-thead');
+    head.createEl('strong', { text: behind ? 'Pick up where you left off' : 'Today\'s line' });
+    head.createSpan({ cls: 'gq-hint', text: `  · week ${b.week}, line ${b.i} of ${b.of}` });
+    if (behind) card.createDiv({ cls: 'gq-hint', text: `You are ${behind} line${behind === 1 ? '' : 's'} behind. No rush: one or two a day, or jump to today.` });
+    const before = Object.values(beats).filter(x => x.week === b.week && x.n < n).sort((a, c) => a.n - c.n);
+    if (before.length) {
+      const d = card.createEl('details', { cls: 'gq-sofar' }); d.createEl('summary', { text: `Story so far (${before.length})` });
+      for (const x of before) { const r = d.createDiv('gq-sofarline'); r.createSpan({ text: x.gr, attr: { lang: 'el' } }); r.createSpan({ cls: 'gq-hint', text: '  ' + x.en }); }
+    }
+    this.lineEl(card, b.gr, b.words);
+    const en = card.createDiv({ cls: 'gq-hint gq-line-en', text: b.en }); en.style.display = 'none';
+    const row = card.createDiv('gq-row');
+    this.hearBtn(row, b.gr);
+    const sh = row.createEl('button', { text: 'Show English', cls: 'gq-mini' }); sh.onclick = () => { en.style.display = ''; sh.remove(); };
+    if (last >= n) row.createSpan({ cls: 'gq-hint', text: 'Said it. ' + (n >= cal ? 'Next line tomorrow.' : '') });
+    else { const ok = row.createEl('button', { text: 'I said it', cls: 'mod-cta gq-mini' }); ok.onclick = () => this.saidBeat(n); }
+    if (behind) { const j = row.createEl('a', { text: 'Jump to today', href: '#' }); j.onclick = e => { e.preventDefault(); this.saidBeat(cal - 1); }; }
+    return b;
+  }
+  // Comebacks: lines said 1, 3 and 7 lines ago return as a quick quiz. English first, then the Greek.
+  comebackCard(box, beats, col, cal) {
+    const last = Math.min(col.last_beat, (cal || 1e9) - 1); if (last < 1) return;
+    const due = [last, last - 2, last - 6].filter(k => k >= 1 && beats[k]).map(k => beats[k]);
+    if (!due.length) return;
+    const card = box.createDiv('gq-tcard gq-comeback');
+    card.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Comebacks' });
+    card.createDiv({ cls: 'gq-hint', text: 'Say it in Greek first, then tap to check.' });
+    const lv = this.level(), shown = lv === 'simple' ? due.slice(0, 1) : due;
+    for (const b of shown) {
+      const r = card.createDiv('gq-cbrow'); r.createDiv({ text: b.en });
+      const g = r.createDiv({ cls: 'gq-line gq-cbgr', text: b.gr, attr: { lang: 'el' } }); g.style.display = 'none';
+      const row = r.createDiv('gq-row'); const s = row.createEl('button', { text: 'Show Greek', cls: 'gq-mini' }); s.onclick = () => { g.style.display = ''; s.remove(); say(b.gr); };
+      this.hearBtn(row, b.gr, 'Hear');
+    }
+  }
+  // Kid track: the kid lesson for this week (or the latest one), one line a day, plus the kid-teacher swap.
+  async kidCard(box, lesson, dow) {
+    const nn = String(lesson || 1).padStart(2, '0');
+    const f = this.app.vault.getMarkdownFiles().find(x => x.path.startsWith('Scripts/Kid/') && x.basename.startsWith('K' + nn + ' ') && /-student$/.test(x.basename))
+      || this.app.vault.getMarkdownFiles().find(x => x.path.startsWith('Scripts/Kid/') && x.basename.startsWith('K' + nn + ' '));
+    if (!f) return;
+    const txt = await this.app.vault.cachedRead(f);
+    const sec = (txt.split(/\n## /).find(x => /^Say it/.test(x)) || '');
+    const lines = [...sec.matchAll(/^- ([^:*]+):\s*\*\*(.+?)\*\*\s*—\s*(.+)$/gm)].map(m => ({ who: m[1].trim(), gr: m[2].trim(), en: m[3].trim() }));
+    const card = box.createDiv('gq-tcard gq-story gq-kid');
+    const head = card.createDiv('gq-thead'); head.createEl('strong', { text: 'Kid track · ' + f.basename.replace(/^K\d+\s*/, '').replace(/-student$/, '') });
+    if (lines.length) {
+      const k = (Math.max(1, dow || 1) - 1) % lines.length, pick = lines.slice(0, k + 1);
+      const ol = card.createEl('ol', { cls: 'gq-storylist' });
+      pick.forEach((l, i) => { const li = ol.createEl('li', { cls: i === k ? 'gq-now' : '' }); li.createSpan({ cls: 'gq-hint', text: l.who + ': ' }); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); li.createDiv({ cls: 'gq-hint', text: l.en }); });
+      const row = card.createDiv('gq-row'); this.hearBtn(row, lines[k].gr);
+    }
+    card.createDiv({ cls: 'gq-hint', text: 'Then swap: the kid is the teacher and asks the questions. The grown-up gets one wrong on purpose.' });
+    const row2 = card.createDiv('gq-row'); const ob = row2.createEl('button', { text: 'Open the kid lesson', cls: 'gq-mini' }); ob.onclick = () => this.openNote(f.path);
+    const gy = row2.createEl('button', { text: 'Play Γιαγιά', cls: 'gq-mini' }); gy.onclick = () => window.open(GIAGIA_URL + '#k=' + (lesson || 1));
   }
   async renderToday(el) {
     // Each render builds off-screen and swaps in at the end; only the newest render for a container wins.
@@ -1200,13 +1315,20 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (lp) { const lb = links.createEl('button', { text: `Lesson ${wk.fm.lesson} page` }); lb.onclick = () => this.openNote(lp.path); }
         else links.createSpan({ cls: 'gq-hint', text: 'No class this week.' });
         const days = await this.weekDays(wk.file);
+        const beats = await this.beatIndex(), dayNow = days[DAYS[dd < 0 ? 1 : (dow || 6)]];
+        const cal = dd < 0 ? 1 : (dayNow && dayNow.n) || Math.max(0, ...Object.keys(beats).map(Number).filter(k => beats[k].week < week));
+        const sp = box.createDiv(); box.insertBefore(sp, card);
+        if (col.track === 'kid') await this.kidCard(sp, wk.fm.lesson || await this.currentLesson(), dd < 0 ? 1 : dow);
+        else if (cal) await this.storyCard(sp, beats, cal, dd >= 0 && dow === 0, col);
+        this.comebackCard(sp, beats, col, cal);
+        if (col.track === 'kid') for (const d of Object.values(days)) d.words.sort((a, b) => (/^(ο|η|το) /.test(b.label) ? 1 : 0) - (/^(ο|η|το) /.test(a.label) ? 1 : 0));
         if (dd >= 0 && dow === 0) {
           const all = Object.values(days).flatMap(d => d.words);
           card.createDiv({ cls: 'gq-tsub', text: `Sunday is review day: this week's ${all.length} words. Say each one, then color it.` });
           this.wordList(card, all); if (all.length) this.playRow(card, all);
         } else {
           const d = days[DAYS[dd < 0 ? 1 : dow]];
-          if (d && d.words.length) { card.createDiv({ cls: 'gq-tsub', text: `Today's 5 words · ${d.label}` }); this.wordList(card, d.words); this.playRow(card, d.words); }
+          if (d && d.words.length) { card.createDiv({ cls: 'gq-tsub', text: `Today's words · ${d.label}${d.line ? ' · bold in today\'s line' : ''}` }); this.wordList(card, d.words); this.playRow(card, d.words); }
           else card.createDiv({ cls: 'gq-hint', text: 'No new words today.' });
         }
       }
@@ -1258,6 +1380,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const foot = box.createDiv('gq-hint');
       const wn = foot.createEl('a', { text: "What's new", href: '#' }); wn.onclick = e => { e.preventDefault(); this.openNote(WHATS_NEW); };
       foot.appendText(` · vault ${rel} · `);
+      if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
+      const kt = foot.createEl('a', { text: col.track === 'kid' ? 'Kid track: on' : 'Kid track', href: '#' }); kt.onclick = e => { e.preventDefault(); this.setTrack(col.track === 'kid' ? '' : 'kid'); }; foot.appendText(' · ');
       const ix = foot.createEl('a', { text: 'Index', href: '#' }); ix.onclick = e => { e.preventDefault(); this.openNote('00 Greekquent Index.md'); };
       if (tok === el.gqTok) { el.empty(); el.appendChild(box); }
     }

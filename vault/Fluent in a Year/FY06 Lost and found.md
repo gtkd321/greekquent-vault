@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Nov 30 to Dec 6 · **Class:** [[L05 Lost items and the shop-student|L05 Lost items and the shop]] ([[L05 Lost items and the shop-student|student page]]) · **Running total:** 180 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Πού είναι; Δύο λεπτά, πέντε, μισή ώρα... (Where is it? Two minutes, five, half an hour...)
+> 2. Κάποιος λέει πως βρήκε κάτι. — Έτσι; Πέντε ευρώ! (Someone says he found something. — Really? Five euros!)
+> 3. Όταν ψάχνετε μαζί μας, εσείς βρίσκετε μόνο κλειδιά. (When you look with us, you only find keys.)
+> 4. Είναι εκεί ακόμα, σαν του Νίκου. Αρχίζω να γελάω. (It's still there, like Nikos's. I start to laugh.)
+> 5. Ελπίζω να μένει εδώ. Γνωρίζω τον κύριο που το φέρνει. (I hope it stays here. I know the man who brings it.)
+> 6. Χαίρομαι! Γυρίζω, φτάνω, δουλεύω. Δεν πειράζει. (I'm glad! I return, I arrive, I work. It doesn't matter.)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L05 Lost items and the shop-student|L05 Lost items and the shop]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 31 of 300
+> **Today's line:** Πού είναι; Δύο λεπτά, πέντε, μισή ώρα... (Where is it? Two minutes, five, half an hour...)
 > - [[πού]] **where** (#87): Πού να το ξέρω εγώ! (How should I know!)
 > - [[δύο]] **two** (#104): Το φιλμ κράτησε δύο ώρες. (The film lasted 2 hours.)
 > - [[λεπτό|το λεπτό]] **minute** (#140): Δώστε μου ένα λεπτό. (Give me a minute.)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μισό]] **half** (#1398): Μισό λεπτό, παρακαλώ. (Just a moment, please.)
 
 > [!todo]- Tue · day 32 of 300
+> **Today's line:** Κάποιος λέει πως βρήκε κάτι. — Έτσι; Πέντε ευρώ! (Someone says he found something. — Really? Five euros!)
 > - [[ευρώ|το ευρώ]] **euro** (#1496): Τι σας χρωστάω; - Τέσσερα ευρώ σας παρακαλώ. (How much do I owe you? - Four euros, please.)
 > - [[πως]] **that (conj.)** (#36): Νόμιζα πως ήταν φίλος σου. (I thought he was your friend.)
 > - [[κάτι]] **something** (#41): Έχω κάτι για σένα. (I have something to give you.)
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[έτσι]] **so, like this** (#44): Αστειεύεσαι, έτσι δεν είναι; (You're kidding, right?)
 
 > [!todo]- Wed · day 33 of 300
+> **Today's line:** Όταν ψάχνετε μαζί μας, εσείς βρίσκετε μόνο κλειδιά. (When you look with us, you only find keys.)
 > - [[εσείς]] **you (plural/formal)** (#45): Κι εσείς, πώς είστε; (And you, how are you?)
 > - [[όταν]] **when** (#48): Πίνω νερό όταν διψάω.
 > - [[μόνο]] **only** (#49): Το έκανα μόνο για τα λεφτά. (I only did it for the money.)
@@ -35,13 +50,15 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μαζί]] **together** (#51): Δε σας θέλουμε μαζί μας. (We don't want you with us.)
 
 > [!todo]- Thu · day 34 of 300
+> **Today's line:** Είναι εκεί ακόμα, σαν του Νίκου. Αρχίζω να γελάω. (It's still there, like Nikos's. I start to laugh.)
 > - [[εκεί]] **there** (#54): Δε θα 'μαι εκεί. (I won't be there.)
-> - [[σαν]] **like, as** (#57): Θέλω να φαίνεται σαν διάρρηξη. (I want it to look like a robbery.)
+> - [[σαν]] **like, as** (#57): Τρέχει σαν τον άνεμο. (He runs like the wind.)
 > - [[ακόμα]] **still, yet, even** (#59): Η θάλασσα είναι ακόμα ήρεμη. (The sea is still calm.)
 > - [[του]] **him, his** (#60): Έχω κάτι να του πω. (I have something to tell him.)
 > - [[αρχίζω]] **I begin** (#194): Είχα αρχίσει να βαριέμαι λίγο. (I was getting a little bored.)
 
 > [!todo]- Fri · day 35 of 300
+> **Today's line:** Ελπίζω να μένει εδώ. Γνωρίζω τον κύριο που το φέρνει. (I hope it stays here. I know the man who brings it.)
 > - [[μένω]] **I stay, I live** (#201): Δεν θα μείνω πολύ εδώ. (I won't stay here long.)
 > - [[γνωρίζω]] **I know, I meet** (#205): Δε γνωρίζω όλη την αλήθεια. (I don't know the whole truth.)
 > - [[χρησιμοποιώ]] **I use** (#226): Μπορώ να χρησιμοποιήσω το τηλέφωνό σας; (May I use your phone?)
@@ -49,13 +66,15 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φέρνω]] **I bring** (#233): Τα φέρνω βόλτα.
 
 > [!todo]- Sat · day 36 of 300
+> **Today's line:** Χαίρομαι! Γυρίζω, φτάνω, δουλεύω. Δεν πειράζει. (I'm glad! I return, I arrive, I work. It doesn't matter.)
 > - [[χαίρομαι]] **I am glad** (#235): Χαίρομαι που σας βλέπω. (I'm glad to see you.)
 > - [[γυρίζω]] **I return, I turn** (#237): Θα γυρίσω στις 6:30. (I will return at 6:30.)
 > - [[φτάνω]] **I arrive, I reach** (#238): Η Λίντα δεν έχει φτάσει ακόμα. (Linda hasn't arrived yet.)
-> - [[πειράζει]] **it matters, it bothers** (#242): Κάπνισε, δε με πειράζει. (Go ahead and smoke; I don't mind.)
+> - [[πειράζει]] **it matters, it bothers** (#242): Δε με πειράζει να περιμένω. (I don't mind waiting.)
 > - [[δουλεύω]] **I work** (#255): Δε δουλεύει, είναι άνεργος. (He doesn't work; he's unemployed.)
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w06` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the [[L05 Lost items and the shop-student|L05 Lost items and the shop]] scene using at least 5 of this week's words. Bring it to the group meet.

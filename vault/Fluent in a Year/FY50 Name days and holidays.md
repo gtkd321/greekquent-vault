@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Oct 4 to Oct 10 · **No class this week** · **Running total:** 1440 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Ο γείτονας χορεύει με ρυθμό. Απαγορεύεται; Όχι! (The neighbor dances to the rhythm. Is it forbidden? No!)
+> 2. Ένα σημείωμα στην πόρτα: διαγωνισμός για αρχαία ελληνικά! (A note on the door: a competition in ancient Greek!)
+> 3. Ένα αστέρι στην τσέπη μου: η πολύτιμη συνταγή για κοτόπουλο! (A star in my pocket: the precious chicken recipe!)
+> 4. Σοκολάτα στον διάδρομο! Προέρχεται από την κουζίνα. (Chocolate in the hallway! It comes from the kitchen.)
+> 5. Εφόσον είναι ξεκάθαρο, πάμε στη βιβλιοθήκη. (Provided it's clear, let's go to the library.)
+> 6. Ανεβαίνω στο πλοίο. Ο καπετάνιος ταξιδεύει μαζί μας. (I board the ship. The captain travels with us.)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **name days and holidays** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 283 of 300
+> **Today's line:** Ο γείτονας χορεύει με ρυθμό. Απαγορεύεται; Όχι! (The neighbor dances to the rhythm. Is it forbidden? No!)
 > - [[ρυθμός|ο ρυθμός]] **rhythm, pace** (#1288): Δεν θα συνέλθει ποτέ μ' αυτούς τους ρυθμούς.
 > - [[απαγορεύεται]] **it is forbidden** (#1289): Απαγορεύεται η είσοδος στο χειρουργείο. (Entry to the operating room is prohibited.)
 > - [[γείτονας|ο γείτονας]] **neighbor** (#1290): Οι γείτονες είναι θορυβώδεις. (The neighbors are noisy.)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φρουρός|ο φρουρός]] **guard** (#1293): Στέκομαι φρουρός.
 
 > [!todo]- Tue · day 284 of 300
+> **Today's line:** Ένα σημείωμα στην πόρτα: διαγωνισμός για αρχαία ελληνικά! (A note on the door: a competition in ancient Greek!)
 > - [[σημείωμα|το σημείωμα]] **note** (#1294): Της έγραψα ένα σημείωμα ότι θα λείπω.
 > - [[αρχαίος]] **ancient** (#1295): Μιλάω αρχαία ελληνικά. (I speak Classical Greek.)
 > - [[διαγωνισμός|ο διαγωνισμός]] **competition** (#1296): Κερδίσαμε τον διαγωνισμό!
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[διαζύγιο|το διαζύγιο]] **divorce** (#1298): Τελικά πήραμε διαζύγιο.
 
 > [!todo]- Wed · day 285 of 300
+> **Today's line:** Ένα αστέρι στην τσέπη μου: η πολύτιμη συνταγή για κοτόπουλο! (A star in my pocket: the precious chicken recipe!)
 > - [[μέγεθος|το μέγεθος]] **size** (#1299): Το μέγεθος δεν έχει σημασία.
 > - [[αστέρι|το αστέρι]] **star** (#1300): Δεν βλέπω το αστέρι.
 > - [[κοτόπουλο|το κοτόπουλο]] **chicken** (#1301): Αγόρασε κοτόπουλο.
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τσέπη|η τσέπη]] **pocket** (#1303): Έχει τα δάκρυα στην τσέπη. (She's a crybaby.)
 
 > [!todo]- Thu · day 286 of 300
+> **Today's line:** Σοκολάτα στον διάδρομο! Προέρχεται από την κουζίνα. (Chocolate in the hallway! It comes from the kitchen.)
 > - [[εμφάνιση|η εμφάνιση]] **appearance** (#1304): Μη κρίνετε τον άνθρωπο από την εμφάνισή του.
 > - [[εξέλιξη|η εξέλιξη]] **development** (#1305): Ο Δαρβίνος ανέπτυξε τη θεωρία της εξέλιξης.
 > - [[προέρχομαι]] **I come from** (#1306): Το λάδι προέρχεται από ελιές. (The oil comes from olives.)
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σοκολάτα|η σοκολάτα]] **chocolate** (#1308): Σου αρέσει η λευκή σοκολάτα; (Do you like white chocolate?)
 
 > [!todo]- Fri · day 287 of 300
+> **Today's line:** Εφόσον είναι ξεκάθαρο, πάμε στη βιβλιοθήκη. (Provided it's clear, let's go to the library.)
 > - [[εφόσον]] **provided that** (#1309): Εφόσον έχω άδεια σήμερα, ας πάμε στην παραλία.
 > - [[πύργος|ο πύργος]] **tower** (#1310): Αυτός είν' ένας πύργος.
 > - [[παρόμοιος]] **similar** (#1311): Το ποδήλατό σου είναι παρόμοιο με το δικό μου.
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[βιβλιοθήκη|η βιβλιοθήκη]] **library, bookcase** (#1313): Ήταν αυτοί χθες στη βιβλιοθήκη; (Were they in the library yesterday?)
 
 > [!todo]- Sat · day 288 of 300
+> **Today's line:** Ανεβαίνω στο πλοίο. Ο καπετάνιος ταξιδεύει μαζί μας. (I board the ship. The captain travels with us.)
 > - [[ανεβαίνω]] **I go up** (#1314): Οι τιμές συνέχισαν να ανεβαίνουν.
 > - [[λύκειο|το λύκειο]] **high school** (#1315)
 > - [[ιός|ο ιός]] **virus** (#1316): Ο ιός χάλασε τον υπολογιστή μου.
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[καπετάνιος|ο καπετάνιος]] **captain** (#1318): Ο καπετάνιος μας καλωσόρισε.
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w50` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the theme **name days and holidays** using at least 5 of this week's words. Bring it to the group meet.

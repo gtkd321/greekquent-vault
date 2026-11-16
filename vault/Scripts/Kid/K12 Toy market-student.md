@@ -17,6 +17,17 @@ tags: [greek-student, kid]
 - Grown-up: **Θέλω ένα κιλό, παρακαλώ.** — I'd like one kilo, please.
 - You: **Ορίστε!** — Here you go!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Καλημέρα! Έχετε ντομάτες;** — Good morning! Do you have tomatoes?
+- You (teacher): **Πόσο κάνουν;** — How much are they?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 Price tags with drawings of the food. The kid can write the numbers in Greek words once he knows them.

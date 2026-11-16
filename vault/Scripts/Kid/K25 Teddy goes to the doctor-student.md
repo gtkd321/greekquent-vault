@@ -18,6 +18,17 @@ tags: [greek-student, kid]
 - Grown-up: **Χριστός Ανέστη!** — Christ is risen!
 - You: **Αληθώς Ανέστη!** — Truly He is risen!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Τι έχεις;** — What's wrong?
+- You (teacher): **Μπορείτε να μου δώσετε κάτι για το κεφάλι;** — Can you give me something for my head?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 A paper outline of a body where the kid puts sticker band-aids on the part that hurts.

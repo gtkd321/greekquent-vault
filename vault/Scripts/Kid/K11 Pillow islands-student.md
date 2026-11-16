@@ -17,6 +17,17 @@ tags: [greek-student, kid]
 - You: **Πάμε!** — Let's go!
 - Grown-up: **Μπορούμε να πάμε στο σχολείο;** — Can we go to school?
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Πού πας;** — Where are you going?
+- You (teacher): **Μπορούμε να πάμε στο σχολείο;** — Can we go to school?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 The kid draws each island's sign with a picture (waves, a church dome, a swing).

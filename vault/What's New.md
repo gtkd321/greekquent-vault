@@ -2,6 +2,17 @@
 
 Back to [[Today]].
 
+> [!info]- November 16, overnight: A story every day
+> - **Today's line.** Each day now has one short story line that uses that day's words (they are in bold). The same people all week: Μαρία, Νίκος, γιαγιά, παππούς, θεία and the νονός. Say it, tap Hear it, then tap **I said it**.
+> - **The week in six lines.** Each line adds to the one before, so by Saturday you can tell a little story. On Sunday, Today shows the whole story to read aloud. Every week page has it too, under This week's story.
+> - **Comebacks.** Lines you said 1, 3 and 7 days ago come back on Today. You see the English, say it in Greek, then tap to check. Spacing like this helps words stick ([a study of spaced practice with young learners](https://www.tandfonline.com/doi/full/10.1080/2331186X.2017.1287391)).
+> - **Missed a few days?** Today picks up where you left off, one or two lines at a time, or you can jump to today. Nothing is lost.
+> - **Kid track.** For younger learners: tap **Kid track** at the bottom of Today or in the More menu. Today then shows the kid lesson lines, one more each day, with the easy words (things you can point at) first ([research on easy-to-picture words](https://academic.oup.com/applij/article/43/2/293/6277142)).
+> - **You are the teacher.** Every kid lesson now ends with a swap: the kid asks the questions and catches the grown-up's mistakes.
+> - **New game: Γιαγιά.** Find 7 notebooks in the house before Γιαγιά feeds you. Each notebook is a word. [Open it](https://www.perplexity.ai/computer/a/greekquent-giagia-T2tsaLMvQiuN84Ng0un.IA), or tap Play Γιαγιά on Today.
+> - **Cleaner examples.** Odd or grown-up example sentences on word cards and in the Anki deck were replaced with everyday ones.
+> - **Updates run in the background.** When an update is ready, tap the notice and keep working. A small chip in the corner shows the progress. Your My Work is never touched.
+
 > [!info]- November 16, late night: Three layouts
 > - **A calmer start.** At the top of every page there is a small switch: **Simple**, **Intermediate**, **Advanced**. Everyone starts on Simple.
 > - **Simple:** Today and this week's lesson stay bright. The rest of the file list is grayed out but still opens if you tap it. Tools: Look up, Send homework, My homework.

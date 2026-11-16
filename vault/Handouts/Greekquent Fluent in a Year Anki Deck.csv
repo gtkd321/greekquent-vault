@@ -63,7 +63,7 @@
 φαίνομαι,I seem,Η θεία μου φαίνεται νέα. (My aunt looks young.),fiay::w02 fiay::d012
 λυπάμαι,I'm sorry,Λυπάμαι για αυτό.,fiay::w02 fiay::d012
 εμείς,we,Εμείς είμαστε το πρόβλημα. (We're the problem.),fiay::w03 fiay::d013
-γιατί,"why, because",Πες μας γιατί τη σκότωσες. (Tell us why you killed her.),fiay::w03 fiay::d013
+γιατί,"why, because",Πες μου γιατί γελάς. (Tell me why you are laughing.),fiay::w03 fiay::d013
 καλά,"well, fine",Τα Γαλλικά σου είναι καλά. (Your French is good.),fiay::w03 fiay::d013
 η ώρα,"hour, time",Ήρθε η ώρα να αρχίσετε. (Now's the time to begin.),fiay::w03 fiay::d013
 σήμερα,today,Θα πάω σπίτι νωρίς σήμερα. (I'm going home early today.),fiay::w03 fiay::d013
@@ -74,7 +74,7 @@
 τέλεια,perfect(ly),Τα μαλλιά σου είναι τέλεια. (Your hair is perfect.),fiay::w03 fiay::d014
 βέβαια,of course,Βέβαια ξαφνιάστηκα.,fiay::w03 fiay::d015
 ποιος,"who, which",Ποιός είναι ο λόγος; (What is the reason?),fiay::w03 fiay::d015
-ο χρόνος,"time, year",Πέθανε πριν από δέκα χρόνια. (He died ten years ago.),fiay::w03 fiay::d015
+ο χρόνος,"time, year",Μένω εδώ δέκα χρόνια. (I have lived here ten years.),fiay::w03 fiay::d015
 η φορά,time (occasion),Ακόμα θυμάμαι την πρώτη φορά. (I still remember the first time.),fiay::w03 fiay::d015
 η ζωή,life,Η ζωή μου είναι εδώ. (My life is here.),fiay::w03 fiay::d015
 η αλήθεια,truth,Θα σου πω την αλήθεια. (I'll tell you the truth.),fiay::w03 fiay::d016
@@ -106,10 +106,10 @@
 μεγάλος,"big, old (age)",Θα σκάψω ένα μεγάλο τούνελ. (I'll dig a large tunnel.),fiay::w04 fiay::d021
 σωστά,"correctly, right",Την κάνω σωστά;,fiay::w04 fiay::d021
 ο μπαμπάς,dad,"Σ'αγαπώ, μπαμπά.",fiay::w04 fiay::d021
-μικρός,"small, young",Το πέος σου είναι μικρό. (Your penis is small.),fiay::w04 fiay::d021
+μικρός,"small, young",Το σπίτι μας είναι μικρό. (Our house is small.),fiay::w04 fiay::d021
 ο άντρας,"man, husband",Ο άντρας είναι ψηλός. (The man is tall.),fiay::w04 fiay::d022
 ο κόσμος,"world, people",Όλος ο κόσμος τον αγαπάει. (Everybody loves him.),fiay::w04 fiay::d022
-φυσικά,of course,Φυσικά είναι φασίστες. (Of course they're fascists.),fiay::w04 fiay::d022
+φυσικά,of course,Φυσικά θα έρθω! (Of course I will come!),fiay::w04 fiay::d022
 το χέρι,"hand, arm",Είναι στο χέρι σου. (It's in your hands.),fiay::w04 fiay::d022
 δίνω,I give,Θα σου δώσω ένα βιβλίο. (I'll give you a book.),fiay::w04 fiay::d022
 ο καιρός,"weather, time",Πόσο καιρό θα μείνεις εδώ; (How long will you stay here?),fiay::w04 fiay::d023
@@ -168,7 +168,7 @@
 μας,"us, our",Η Ιστορία θα μας κρίνει. (History will judge us.),fiay::w06 fiay::d033
 μαζί,together,Δε σας θέλουμε μαζί μας. (We don't want you with us.),fiay::w06 fiay::d033
 εκεί,there,Δε θα 'μαι εκεί. (I won't be there.),fiay::w06 fiay::d034
-σαν,"like, as",Θέλω να φαίνεται σαν διάρρηξη. (I want it to look like a robbery.),fiay::w06 fiay::d034
+σαν,"like, as",Τρέχει σαν τον άνεμο. (He runs like the wind.),fiay::w06 fiay::d034
 ακόμα,"still, yet, even",Η θάλασσα είναι ακόμα ήρεμη. (The sea is still calm.),fiay::w06 fiay::d034
 του,"him, his",Έχω κάτι να του πω. (I have something to tell him.),fiay::w06 fiay::d034
 αρχίζω,I begin,Είχα αρχίσει να βαριέμαι λίγο. (I was getting a little bored.),fiay::w06 fiay::d034
@@ -180,7 +180,7 @@
 χαίρομαι,I am glad,Χαίρομαι που σας βλέπω. (I'm glad to see you.),fiay::w06 fiay::d036
 γυρίζω,"I return, I turn",Θα γυρίσω στις 6:30. (I will return at 6:30.),fiay::w06 fiay::d036
 φτάνω,"I arrive, I reach",Η Λίντα δεν έχει φτάσει ακόμα. (Linda hasn't arrived yet.),fiay::w06 fiay::d036
-πειράζει,"it matters, it bothers","Κάπνισε, δε με πειράζει. (Go ahead and smoke; I don't mind.)",fiay::w06 fiay::d036
+πειράζει,"it matters, it bothers",Δε με πειράζει να περιμένω. (I don't mind waiting.),fiay::w06 fiay::d036
 δουλεύω,I work,"Δε δουλεύει, είναι άνεργος. (He doesn't work; he's unemployed.)",fiay::w06 fiay::d036
 κανένας,"nobody, no one",Δεν το είπα σε κανέναν. (I didn't tell anyone.),fiay::w07 fiay::d037
 της,"her, hers",Έχω κάτι να της πω. (I have something to tell her.),fiay::w07 fiay::d037
@@ -216,7 +216,7 @@
 τα Χριστούγεννα,Christmas,"Καλά Χριστούγεννα αγάπη μου! (Merry Christmas, my love!)",fiay::w08 fiay::d043
 χαίρω πολύ,pleased to meet you,Χαίρω πολύ για τη γνωριμία.,fiay::w08 fiay::d043
 η Αμερική,America,Πήγε στην Αμερική.,fiay::w08 fiay::d043
-πριν,before,Πέθανε πριν από πέντε χρόνια. (He died five years ago.),fiay::w08 fiay::d043
+πριν,before,Τρώμε πριν από το μάθημα. (We eat before the lesson.),fiay::w08 fiay::d043
 πάντα,always,Η άγνοια είναι πάντα επικίνδυνη. (Ignorance is always dangerous.),fiay::w08 fiay::d044
 πίσω,"back, behind",Βάλτο πίσω στο τραπέζι. (Put it back on the table.),fiay::w08 fiay::d044
 όπως,"as, like",Σ' αγαπώ έτσι όπως είσαι. (I love you just as you are.),fiay::w08 fiay::d044
@@ -224,7 +224,7 @@
 ίδιος,same,Μου είναι το ίδιο. (It's all the same to me.),fiay::w08 fiay::d044
 έξω,"out, outside",Ίσως μείνω έξω από αυτό. (I might sit this one out.),fiay::w08 fiay::d045
 εκείνος,that (one),Δωσ' μου εκείνο το κουτί. (Give me that box.),fiay::w08 fiay::d045
-επειδή,because,Επειδή σε μισώ.,fiay::w08 fiay::d045
+επειδή,because,Μένω σπίτι επειδή βρέχει. (I am staying home because it is raining.),fiay::w08 fiay::d045
 νέος,"new, young",Ο πατέρας μου είναι νέος. (My father is young.),fiay::w08 fiay::d045
 μέχρι,until,Θα φτάσω μέχρι το τέλος. (I'll get to the bottom of it.),fiay::w08 fiay::d045
 πάνω,"on, up, above",Ζυγίζει πάνω από 80 κιλά. (He weighs more than 80 kg.),fiay::w08 fiay::d046
@@ -240,12 +240,12 @@
 το αγόρι,boy,Πού είναι το αγόρι; (Where is the boy?),fiay::w08 fiay::d048
 δύσκολος,difficult,Τα Εβραϊκά είναι δύσκολη γλώσσα. (Hebrew is a difficult language.),fiay::w08 fiay::d048
 η ευκαιρία,opportunity,Δώσ' μου ακόμα μία ευκαιρία. (Give me one more chance.),fiay::w08 fiay::d048
-πεθαίνω,I die,Όλοι πεθαίνουν.,fiay::w08 fiay::d048
+πεθαίνω,I die,Πεθαίνω της πείνας! (I am starving!),fiay::w08 fiay::d048
 η κόρη,daughter,Ο Τομ έχει μια κόρη. (Tom has a daughter.),fiay::w08 fiay::d048
 τρία,three,Το ήξερα πριν από τρεις ώρες. (I knew this three hours ago.),fiay::w11 fiay::d049
 μπράβο,well done,"Αυτό που έκανες είναι καταπληκτικό, μπράβο!",fiay::w11 fiay::d049
 έξι,six,Ξύπνησα στις έξι η ώρα. (I woke up at six o'clock.),fiay::w11 fiay::d049
-δέκα,ten,Πέθανε πριν από δέκα χρόνια. (He died ten years ago.),fiay::w11 fiay::d049
+δέκα,ten,Έχω δέκα ευρώ. (I have ten euros.),fiay::w11 fiay::d049
 το κομμάτι,piece,Κάναμε το κομμάτι μας.,fiay::w11 fiay::d049
 η γιαγιά,grandmother,Η γιαγιά μου έχει μια γάτα. (My grandmother has a cat.),fiay::w11 fiay::d050
 τέσσερα,four,Δύο συν δύο κάνει τέσσερα. (Two plus two makes four.),fiay::w11 fiay::d050
@@ -268,7 +268,7 @@
 τριάντα,thirty,Ο Τομ είναι τριάντα. (Tom's thirty.),fiay::w11 fiay::d053
 χίλια,thousand,Σε διαμέρισμα βρέθηκαν χίλια πεντακόσια έργα τέχνης.,fiay::w11 fiay::d053
 το κεφάλι,head,Πονάει το κεφάλι μου. (My head hurts.),fiay::w11 fiay::d054
-η νύχτα,night,Πίναμε όλη νύχτα. (We drank all night.),fiay::w11 fiay::d054
+η νύχτα,night,Μιλήσαμε όλη νύχτα. (We talked all night.),fiay::w11 fiay::d054
 μπροστά,in front,Η ζωή είναι μπροστά σου. (Life lies in front of you.),fiay::w11 fiay::d054
 η καρδιά,heart,Έχει καλή καρδιά. (She has a good heart.),fiay::w11 fiay::d054
 η σαλάτα,salad,"Έχω μια σαλάτα με λάδι, ξύδι και αλάτι. (I have a salad with oil, vinegar, and salt.)",fiay::w11 fiay::d054
@@ -277,19 +277,19 @@
 η αδερφή,sister,Αυτή είναι η αδερφή μου. (This is my sister.),fiay::w12 fiay::d055
 ο αδερφός,brother,Πώς είναι ο αδερφός σου; (How is your brother?),fiay::w12 fiay::d055
 ο παππούς,grandfather,Ο παππούς μου ζει ακόμα.,fiay::w12 fiay::d055
-ο θεός,"God, god",Ο Θεός δεν είναι αληθινός. (God isn't real.),fiay::w12 fiay::d056
+ο θεός,"God, god","Δόξα τω Θεώ, είσαι καλά. (Thank God, you are okay.)",fiay::w12 fiay::d056
 γιατί όχι,why not,Γιατί όχι μαζί;,fiay::w12 fiay::d056
 όσο,as much as,Κανείς δε σ' αγαπάει όσο εγώ. (No one loves you as much as I do.),fiay::w12 fiay::d056
-ο τύπος,"type, guy",Πόσο ηλίθιος είναι ο τύπος; (How stupid is the guy?),fiay::w12 fiay::d056
+ο τύπος,"type, guy",Ποιος είναι αυτός ο τύπος; (Who is that guy?),fiay::w12 fiay::d056
 οπότε,"so, therefore","Χτες ήταν Κυριακή, οπότε κοιμήθηκα όλη μέρα.",fiay::w12 fiay::d056
 ακόμη,"still, yet",Ακόμη δεν έχω βρει δουλειά. (I still haven't found work.),fiay::w12 fiay::d057
 ως,as,Έχω φτάσει ως εδώ! (I've had it up to here.),fiay::w12 fiay::d057
 πάλι,again,Ελάτε πάλι αύριο.,fiay::w12 fiay::d057
 όλο,all the time,Τι ήταν όλο αυτό; (What was this all about?),fiay::w12 fiay::d057
 γρήγορα,quickly,Ο καιρός περνάει πολύ γρήγορα. (Time flies.),fiay::w12 fiay::d057
-το όπλο,"weapon, gun",Αυτό είναι όπλο.,fiay::w12 fiay::d058
+το όπλο,"weapon, gun",Το χαμόγελο είναι το καλύτερο όπλο. (A smile is the best weapon.),fiay::w12 fiay::d058
 αρκετά,"enough, quite",Μιλάω αρκετά καλά γαλλικά. (I speak French pretty well.),fiay::w12 fiay::d058
-νεκρός,dead,Ο σκύλος είναι νεκρός. (The dog is dead.),fiay::w12 fiay::d058
+νεκρός,dead,Τα λατινικά είναι νεκρή γλώσσα. (Latin is a dead language.),fiay::w12 fiay::d058
 ο εαυτός,self,Σκέφτεται μόνο τον εαυτό της. (She thinks only of herself.),fiay::w12 fiay::d058
 η σχέση,relationship,Αυτό δεν έχει καμία σχέση μαζί σου. (That has nothing to do with you.),fiay::w12 fiay::d058
 πενήντα,fifty,Η φίλη μας η Eli είναι πενήντα ετών.,fiay::w12 fiay::d059
@@ -327,7 +327,7 @@
 περνάω,"I pass, I spend (time)",Αυτό περνάει τα όρια!,fiay::w13 fiay::d065
 όμορφος,beautiful,Τα μάτια της είναι όμορφα. (Her eyes are beautiful.),fiay::w13 fiay::d065
 συνεχίζω,I continue,Πρέπει να συνεχίσω. (I must continue.),fiay::w13 fiay::d065
-μοιάζω,I look like,Το σχολείο μοιάζει με φυλακή. (The school looks like a prison.),fiay::w13 fiay::d066
+μοιάζω,I look like,Μοιάζεις με τη μαμά σου. (You look like your mom.),fiay::w13 fiay::d066
 βάζω,I put,Βάζω στοίχημα ότι δε λέει την αλήθεια. (I bet he isn't telling the truth.),fiay::w13 fiay::d066
 υποθέτω,I suppose,Υποθέτω πως δε θέλετε να φύγω. (I assume you don't want me to leave.),fiay::w13 fiay::d066
 σκέφτομαι,I think,Σκέφτομαι να πουλήσω το αυτοκίνητό μου. (I'm thinking of selling my car.),fiay::w13 fiay::d066
@@ -432,7 +432,7 @@
 η κατάσταση,situation,Η κατάσταση είναι σοβαρή. (The situation is grave.),fiay::w17 fiay::d086
 ζωντανός,alive,Είσαι ζωντανός; (Are you alive?),fiay::w17 fiay::d086
 σχεδόν,almost,Είναι σχεδόν 20 χρονών. (She's at most 20 years old.),fiay::w17 fiay::d086
-ο πόλεμος,war,Είχε σκοτωθεί στον πόλεμο. (He was killed in the war.),fiay::w17 fiay::d087
+ο πόλεμος,war,Ο παππούς μου μιλάει για τον πόλεμο. (My grandfather talks about the war.),fiay::w17 fiay::d087
 κάπου,somewhere,Έχεις κάπου να πας; (Do you have someplace to go?),fiay::w17 fiay::d087
 μεταξύ,between,Ο ανελκυστήρας κόλλησε μεταξύ δύο ορόφων. (The lift is stuck between two floors.),fiay::w17 fiay::d087
 χθες,yesterday,Χτες ήταν τα γεννέθλιά μου. (Yesterday was my birthday.),fiay::w17 fiay::d087
@@ -465,7 +465,7 @@
 η λέξη,word,Τι σημαίνει αυτή η λέξη; (What does this word mean?),fiay::w18 fiay::d093
 γύρω,around,Καθίσαμε όλοι γύρω από το τραπέζι. (We all sat around the table.),fiay::w18 fiay::d093
 η χάρη,"favor, grace",Θα μου κάνεις μια χάρη; (Would you do me a favour?),fiay::w18 fiay::d093
-ο θάνατος,death,Ο άνδρας καταδικάστηκε σε θάνατο. (The man was condemned to death.),fiay::w18 fiay::d093
+ο θάνατος,death,Ζωή και θάνατος είναι δύο πλευρές του ίδιου νομίσματος. (Life and death are two sides of the same coin.),fiay::w18 fiay::d093
 υπόλοιπος,"remaining, the rest",Θα πω τα υπόλοιπα αύριο.,fiay::w18 fiay::d093
 το σώμα,body,Αισθάνεσαι καλά μέσα στο σώμα σου; (Do you feel comfortable in your skin?),fiay::w18 fiay::d094
 βασικά,basically,"Βασικά, έχετε απόλυτο δίκιο.",fiay::w18 fiay::d094
@@ -507,7 +507,7 @@
 το ραντεβού,"appointment, date",Έχω ένα ραντεβού απόψε. (I have a date tonight.),fiay::w19 fiay::d101
 τηλεφωνώ,I phone,Θα τηλεφωνήσω αργότερα. (I'll call later.),fiay::w19 fiay::d101
 το μάγουλο,cheek,Την φίλησε στο μάγουλο.,fiay::w19 fiay::d101
-το κρεβάτι,bed,Είναι καλή στο κρεβάτι. (She's good in bed.),fiay::w19 fiay::d102
+το κρεβάτι,bed,Το κρεβάτι μου είναι μαλακό. (My bed is soft.),fiay::w19 fiay::d102
 παράξενος,strange,Αυτό το σπαθί έχει μια παράξενη ιστορία. (This sword has a strange history.),fiay::w19 fiay::d102
 κρατάω,"I hold, I keep",Ο καφές με κρατάει ξύπνιο. (Coffee keeps me awake.),fiay::w19 fiay::d102
 καφέ,brown,Πίνω καφέ σε ένα καφενείο. (I am drinking coffee at a cafe.),fiay::w19 fiay::d102
@@ -540,7 +540,7 @@
 το δείπνο,dinner,Το δείπνο είναι το βράδυ. (Dinner is in the evening.),fiay::w20 fiay::d108
 υπέροχα,wonderfully,Πέρασα υπέροχα.,fiay::w20 fiay::d108
 χαρούμενος,"happy, cheerful",Ο Τόνι ήταν χαρούμενος. (Tony was happy.),fiay::w20 fiay::d108
-μισώ,I hate,Γιατί σε μισώ. (Because I hate you.),fiay::w20 fiay::d108
+μισώ,I hate,Μισώ το κρύο. (I hate the cold.),fiay::w20 fiay::d108
 εξαφανίζομαι,I disappear,Ο Τομ έχει εξαφανιστεί.,fiay::w20 fiay::d108
 ο αέρας,"air, wind",Ο αέρας είναι αόρατος. (Air is invisible.),fiay::w21 fiay::d109
 ψηλά,"high, up",Ψηλά το κεφάλι!,fiay::w21 fiay::d109
@@ -581,7 +581,7 @@
 απόλυτα,absolutely,Με έπεισες απόλυτα.,fiay::w22 fiay::d116
 ο έλεγχος,"control, check",Το έχω υπό έλεγχο.,fiay::w22 fiay::d116
 η ανάγκη,need,"Ακούστε· έχω ανάγκη να σας δω. (Listen, I need to see you.)",fiay::w22 fiay::d116
-η επίθεση,attack,Δέχτηκα επίθεση.,fiay::w22 fiay::d116
+η επίθεση,attack,Η ομάδα μας κάνει επίθεση. (Our team is attacking.),fiay::w22 fiay::d116
 η άδεια,"permission, leave, license",Τα τραπέζια είναι άδεια. (The tables are empty.),fiay::w22 fiay::d117
 η επιχείρηση,"business, operation",Η επιχείρησή μας δεν πληρώνει καλά. (Our company doesn't pay well.),fiay::w22 fiay::d117
 εντελώς,completely,Είμαι εντελώς τυφλός. (I'm completely blind.),fiay::w22 fiay::d117
@@ -733,18 +733,18 @@
 ο πλανήτης,planet,Υπάρχουν τρία έξυπνα είδη στον πλανήτη. (There are three intelligent species on the planet.),fiay::w27 fiay::d146
 η τάξη,"class, order",Υπάρχουν τρία κορίτσια στην τάξη. (There are three girls in the class.),fiay::w27 fiay::d146
 ειλικρινά,honestly,"Ειλικρινά, δε μ' αρέσει.",fiay::w27 fiay::d147
-το αποτέλεσμα,result,Πέθαναν ως αποτέλεσμα της παραμέλησής μου. (They died as consequence of my neglect.),fiay::w27 fiay::d147
+το αποτέλεσμα,result,Το αποτέλεσμα είναι πολύ καλό. (The result is very good.),fiay::w27 fiay::d147
 ο Έλληνας,Greek (person),"Οι Έλληνες τρώνε συχνά και ψάρι. (Greeks often eat fish, too.)",fiay::w27 fiay::d147
 λόγω,due to,Έμεινα σπίτι λόγω βροχής.,fiay::w27 fiay::d147
 κολυμπάω,I swim,Κολυμπάω στον ωκεανό. (I'm swimming in the ocean.),fiay::w27 fiay::d147
-ξαφνικά,suddenly,Πέθανε ξαφνικά.,fiay::w27 fiay::d148
+ξαφνικά,suddenly,Ξαφνικά άρχισε να βρέχει. (Suddenly it started to rain.),fiay::w27 fiay::d148
 ανάμεσα,"between, among",Η γάτα είναι ανάμεσα σε εμένα και εσένα. (The cat is between me and you.),fiay::w27 fiay::d148
 η χιλιάδα,thousand,Υπάρχουν δύο χιλιάδες βιβλία. (There are two thousand books.),fiay::w27 fiay::d148
 εμφανίζομαι,I appear,Εμφανίστηκε στις ειδήσεις.,fiay::w27 fiay::d148
 η εργασία,"work, assignment",Κάνω την εργασία μου.,fiay::w27 fiay::d148
 το σπορ,sport,Κάνω σπορ σχεδόν κάθε μέρα. (I do sports almost every day.),fiay::w27 fiay::d149
 η παρέα,company (of friends),Θα μου κάνεις παρέα για μεσημεριανό γεύμα; (Would you join me for lunch?),fiay::w27 fiay::d149
-τελείως,completely,Ο Σάμι είναι τελείως τρελός. (Sami is literally insane.),fiay::w27 fiay::d149
+τελείως,completely,Το ξέχασα τελείως. (I completely forgot it.),fiay::w27 fiay::d149
 η αλλαγή,change,Θα κάνουμε αλλαγές.,fiay::w27 fiay::d149
 ο αθλητισμός,sports,Θέλω να κάνω αθλητισμό.,fiay::w27 fiay::d149
 καθένας,"each one, everyone",Καθένας έχει μια ζωή. (Everyone has a life.),fiay::w27 fiay::d150
@@ -772,7 +772,7 @@
 ο γέρος,old man,γράφεις σαν ένας γέρος. (You write like an old person.),fiay::w28 fiay::d154
 ο ύπνος,sleep,Μου 'φυγε ο ύπνος.,fiay::w28 fiay::d154
 το σκυλί,dog,Είδα ένα σκυλί. (I saw a dog.),fiay::w28 fiay::d154
-η ηλικία,age,Πέθανε σε ηλικία 70 ετών. (He died at the age of seventy.),fiay::w28 fiay::d155
+η ηλικία,age,Τι ηλικία έχει ο αδελφός σου; (How old is your brother?),fiay::w28 fiay::d155
 ο κίνδυνος,danger,Αυτός είναι ο κίνδυνος.,fiay::w28 fiay::d155
 η τέχνη,art,Η λογοτεχνία είναι τέχνη; (Is literature an art?),fiay::w28 fiay::d155
 η κυβέρνηση,government,Κάθε κράτος έχει κυβέρνηση.,fiay::w28 fiay::d155
@@ -808,7 +808,7 @@
 ο βασιλιάς,king,Μην μιλάς έτσι για τον βασιλιά. (Don't talk like that about the king.),fiay::w29 fiay::d161
 πλούσιος,rich,Είστε πολύ πλούσιος. (You are very rich.),fiay::w29 fiay::d161
 η εφημερίδα,newspaper,Έριξα μια ματιά στην εφημερίδα. (I took a look at the newspaper.),fiay::w29 fiay::d162
-η κράτηση,reservation,Είναι υπό κράτηση. (He's in custody.),fiay::w29 fiay::d162
+η κράτηση,reservation,Έχω κάνει κράτηση για δύο. (I have a reservation for two.),fiay::w29 fiay::d162
 το έργο,"work, project, film",Το έργο δε τελείωσε εγκαίρως.,fiay::w29 fiay::d162
 η προφορά,"pronunciation, accent",Είναι δύσκολη η γαλλική προφορά;,fiay::w29 fiay::d162
 το δευτερόλεπτο,second (time),Δώσε μας ένα δευτερόλεπτο. (Give us a second.),fiay::w29 fiay::d162
@@ -820,7 +820,7 @@
 ο διευθυντής,"director, manager",Ο Θωμάς προάχθηκε σε διευθυντή.,fiay::w30 fiay::d164
 το προσωπικό,staff,Είναι πολύ προσωπικό.,fiay::w30 fiay::d164
 το νούμερο,"number, size",Τι νούμερο παπούτσι φοράς; (What size shoes do you wear?),fiay::w30 fiay::d164
-το βήμα,step,"Ένα βήμα ακόμα και θα είχα γκρεμοτσακιστεί. (One more step, and I would have fallen off the cliff.)",fiay::w30 fiay::d164
+το βήμα,step,Ένα βήμα τη φορά. (One step at a time.),fiay::w30 fiay::d164
 επαναλαμβάνω,I repeat,Επανέλαβε την ερώτηση.,fiay::w30 fiay::d164
 απίστευτος,unbelievable,Είσαι απίστευτος.,fiay::w30 fiay::d165
 δυνατά,"loudly, strongly","Παρακαλώ, μιλήστε λίγο πιο δυνατά. (Please, speak a little louder.)",fiay::w30 fiay::d165
@@ -855,8 +855,8 @@
 η θεία,aunt,Η θεία μου έχει τρία παιδιά. (My aunt has three children.),fiay::w31 fiay::d171
 η θεραπεία,"therapy, cure",Υπάρχει θεραπεία.,fiay::w31 fiay::d171
 πέφτω,I fall,Τον άκουσα να πέφτει. (I hear him falling.),fiay::w31 fiay::d171
-η κατηγορία,"category, charge",Οι σκλάβοι θεωρούνταν άνθρωποι δεύτερης κατηγορίας.,fiay::w31 fiay::d171
-η βασίλισσα,queen,Αυτός είναι βασίλισσα. (He's a queen.),fiay::w31 fiay::d171
+η κατηγορία,"category, charge",Σε ποια κατηγορία είναι αυτό το βιβλίο; (What category is this book in?),fiay::w31 fiay::d171
+η βασίλισσα,queen,Η βασίλισσα μένει σε ένα κάστρο. (The queen lives in a castle.),fiay::w31 fiay::d171
 το λεξικό,dictionary,Έχεις ένα λεξικό; (Do you have a dictionary?),fiay::w31 fiay::d172
 λαμβάνω,I receive,Αυτός έλαβε βεβαίωση ωριμότητας.,fiay::w31 fiay::d172
 αναλαμβάνω,I take on,Θα αναλάβει την ευθύνη.,fiay::w31 fiay::d172
@@ -1020,14 +1020,14 @@
 αναγνωρίζω,I recognize,Εγώ αναγνωρίζω το λάθος μου.,fiay::w36 fiay::d204
 επείγων,urgent,Πες της πως είν' επείγον. (Tell her it's urgent.),fiay::w36 fiay::d204
 η ελευθερία,freedom,Η ελευθερία είναι άχρηστη αν δεν την ασκείτε. (Freedom is useless unless you use it.),fiay::w36 fiay::d204
-το εισιτήριο,ticket,Είχα τρία εισιτήρια. (I had three options.),fiay::w36 fiay::d204
-η απειλή,threat,Δέχομαι απειλές.,fiay::w36 fiay::d204
+το εισιτήριο,ticket,Είχα τρία εισιτήρια. (I had three tickets.),fiay::w36 fiay::d204
+η απειλή,threat,Η βροχή είναι απειλή για το πάρτι. (The rain is a threat to the party.),fiay::w36 fiay::d204
 διάφορος,various,Δεν θα κάνει καμία διάφορα.,fiay::w37 fiay::d205
 καινούριος,new,Αύριο είναι μια καινούρια μέρα. (Tomorrow is a new day.),fiay::w37 fiay::d205
 ο πολίτης,citizen,Είσαι Καναδή πολίτης;,fiay::w37 fiay::d205
 η καταστροφή,"disaster, destruction",Αυτός ερευνά τα αίτια της καταστροφής.,fiay::w37 fiay::d205
 η κλήση,call; ticket (fine),Η κλήση σας προωθείται.,fiay::w37 fiay::d205
-το έγκλημα,crime,Η διακίνηση ανθρώπων είναι έγκλημα. (Human trafficking is a crime.),fiay::w37 fiay::d206
+το έγκλημα,crime,Η αστυνομία ψάχνει για το έγκλημα. (The police are looking into the crime.),fiay::w37 fiay::d206
 εξαρτάται,it depends,Αυτό δεν εξαρτάται από μένα. (This doesn't depend on me.),fiay::w37 fiay::d206
 το ταξί,taxi,Ήρθα με ταξί από το σταθμό. (I came by taxi from the station.),fiay::w37 fiay::d206
 το καθήκον,duty,"Κάναμε το καθήκον μας, κάντε το δικό σας. (We did our duty, now do yours.)",fiay::w37 fiay::d206
@@ -1101,7 +1101,7 @@
 τελικός,final,Πέρασε στον τελικό.,fiay::w39 fiay::d220
 η παραλία,beach,Δεν πηγαίνω ποτέ στην παραλία. (I never go to the beach.),fiay::w39 fiay::d220
 ξυπνάω,I wake up,Πάντα κοιμάμαι και ξυπνάω νωρίς. (I always sleep and wake up early.),fiay::w39 fiay::d220
-η κηδεία,funeral,Δεν ήμουν στην κηδεία του.,fiay::w39 fiay::d220
+η κηδεία,funeral,Όλο το χωριό ήρθε στην κηδεία. (The whole village came to the funeral.),fiay::w39 fiay::d220
 ο ιδιοκτήτης,owner,Ποιος είναι ο ιδιοκτήτης αυτού του σπιτιού; (Who is the owner of this house?),fiay::w39 fiay::d221
 εξαιρετικός,excellent,Είστε μια εξαιρετική συγγραφέας. (You're an excellent writer.),fiay::w39 fiay::d221
 κεντρικός,central,Η Γερμανία είναι στην Κεντρική Ευρώπη.,fiay::w39 fiay::d221
@@ -1132,7 +1132,7 @@
 κυνηγάω,"I chase, I hunt",Κυνηγάω τον Τομ.,fiay::w40 fiay::d226
 τρομακτικός,scary,Είδα ένα τρομακτικό όνειρο.,fiay::w40 fiay::d226
 κανονικός,"normal, regular","Όχι, εκείνο δεν είναι κανονικό.",fiay::w40 fiay::d226
-ενάντια,against,Η ζωή είναι αγώνας ενάντια στο θάνατο. (Life is a fight against death.),fiay::w40 fiay::d227
+ενάντια,against,Κολυμπάμε ενάντια στο κύμα. (We swim against the wave.),fiay::w40 fiay::d227
 κλέβω,I steal,Ο Θωμάς κλέβει.,fiay::w40 fiay::d227
 η δράση,action,Τώρα είναι ώρα για δράση.,fiay::w40 fiay::d227
 το στήθος,chest,Πονάει το στήθος μου.,fiay::w40 fiay::d227
@@ -1166,10 +1166,10 @@
 κόβω,I cut,Κάθε μέρα κόβει ξύλα. (He chops wood every day.),fiay::w41 fiay::d233
 προστατεύω,I protect,Ο Θεός μας αγαπά και μας προστατεύει.,fiay::w41 fiay::d233
 ικανός,capable,Νομίζω ότι ο Τομ είναι ικανός.,fiay::w41 fiay::d233
-παιδικός,children's,Η παιδική κακοποίηση είναι έγκλημα.,fiay::w41 fiay::d233
+παιδικός,children's,Αυτό είναι ένα παιδικό βιβλίο. (This is a children's book.),fiay::w41 fiay::d233
 το δέρμα,"skin, leather",Έχει απαλό δέρμα.,fiay::w41 fiay::d234
 η ζημιά,damage,Κατηγόρησε τη ζημιά στον Γιάννη.,fiay::w41 fiay::d234
-πρόσφατα,recently,Πέθανε πρόσφατα.,fiay::w41 fiay::d234
+πρόσφατα,recently,Μετακόμισα πρόσφατα. (I moved recently.),fiay::w41 fiay::d234
 σύντομος,"short, brief",Ας κάνουμε ένα σύντομο διάλειμμα. (Let's take a rest for a while.),fiay::w41 fiay::d234
 συνηθισμένος,"usual, ordinary",Δεν είμαι συνηθισμένος να ξυπνάω νωρίς. (I'm not accustomed to getting up early.),fiay::w41 fiay::d234
 οκτώ,eight,Είναι οκτώ παρά είκοσι πέντε. (It's twenty-five to eight.),fiay::w42 fiay::d235
@@ -1233,7 +1233,7 @@
 η είσοδος,entrance,Απαγορεύεται η είσοδος στο χειρουργείο. (Entry to the operating room is prohibited.),fiay::w43 fiay::d246
 ο δίσκος,"disc, record, tray",,fiay::w43 fiay::d246
 ο όροφος,floor (story),Μένουμε στον τρίτο όροφο. (We live on the third floor.),fiay::w44 fiay::d247
-ο τάφος,grave,Έχει ήδη ένα πόδι στον τάφο. (He already has one foot in the grave.),fiay::w44 fiay::d247
+ο τάφος,grave,Επισκεφτήκαμε τον τάφο του παππού. (We visited grandpa's grave.),fiay::w44 fiay::d247
 στραβά,"crookedly, wrong",Όλα πήγαν στραβά.,fiay::w44 fiay::d247
 η επιτροπή,committee,Είμαστε μέλη της επιτροπής.,fiay::w44 fiay::d247
 οικογενειακός,family (adj.),Τι θαυμάσιο οικογενειακό κειμήλιο!,fiay::w44 fiay::d247
@@ -1267,7 +1267,7 @@
 η βαλίτσα,suitcase,Ετοιμάστε τις βαλίτσες σας. (Pack your bags.),fiay::w45 fiay::d253
 ο πάγος,ice,Ο πάγος έλιωσε.,fiay::w45 fiay::d253
 γουστάρω,"I like, I fancy",Γουστάρω να χορεύω.,fiay::w45 fiay::d253
-ο παράδεισος,paradise,Τα φιλιά της με πάνε στον παράδεισο. (Her kisses take me to heaven.),fiay::w45 fiay::d254
+ο παράδεισος,paradise,Αυτή η παραλία είναι παράδεισος. (This beach is paradise.),fiay::w45 fiay::d254
 η λογική,logic,Τα μαθηματικά είναι η μουσική της λογικής.,fiay::w45 fiay::d254
 εντυπωσιακός,impressive,Ο Τομ ήταν εντυπωσιακός.,fiay::w45 fiay::d254
 τα γενέθλια,birthday,Πότε είναι τα γενέθλιά σου; (When is your birthday?),fiay::w45 fiay::d254
@@ -1294,13 +1294,13 @@
 διπλός,double,Θα ήθελα ένα διπλό δωμάτιο.,fiay::w45 fiay::d258
 η ευτυχία,happiness,Ευτυχία είναι να σ'αγαπούν. (To be happy is to be loved.),fiay::w46 fiay::d259
 μετράω,"I count, I measure",Θα μετρήσω μέχρι το τρια.,fiay::w46 fiay::d259
-ο καρκίνος,cancer,Η θεία μου πέθανε από καρκίνο του πνεύμονα. (My aunt died of lung cancer.),fiay::w46 fiay::d259
+ο καρκίνος,cancer,Ο γιατρός μιλάει για τον καρκίνο. (The doctor is talking about cancer.),fiay::w46 fiay::d259
 χωρίζω,"I separate, I divorce",Ο Τομ και η Σάμη αποφάσισαν να χωρίσουν. (Tom and Sami decided to get divorced.),fiay::w46 fiay::d259
 χορεύω,I dance,Μου αρέσει να χορεύω. (I like to dance.),fiay::w46 fiay::d259
 η ντροπή,shame,Η φτώχεια δεν είναι ντροπή.,fiay::w46 fiay::d260
 ρομαντικός,romantic,Είμαι ρομαντικός;,fiay::w46 fiay::d260
 η φαντασία,imagination,Στερείσαι φαντασίας.,fiay::w46 fiay::d260
-η πληγή,wound,Τα μόνο μας ενθύμια από τη μάχη είναι οι πληγές μας.,fiay::w46 fiay::d260
+η πληγή,wound,Η πληγή στο γόνατό μου κλείνει. (The cut on my knee is healing.),fiay::w46 fiay::d260
 ο θόρυβος,noise,Κάναμε πολύ θόρυβο. (We made a lot of noise.),fiay::w46 fiay::d260
 η αίτηση,application,Αυτή έκανε αίτηση για βίζα. (She applied for a visa.),fiay::w46 fiay::d261
 πολεμάω,I fight,Οι Αμαζόνες πολεμούν με πολύχρωμα όπλα.,fiay::w46 fiay::d261
@@ -1351,7 +1351,7 @@
 παντρεμένος,married,Δεν είναι παντρεμένος. (He isn't married.),fiay::w47 fiay::d270
 ο συγγραφέας,author,Ο θείος μου είναι ο συγγραφέας του βιβλίου. (My uncle is the author of the book.),fiay::w47 fiay::d270
 οι ειδήσεις,news,Εμφανίστηκε στις ειδήσεις. (That was on the news.),fiay::w47 fiay::d270
-ηθικός,moral,Ο Τομ είναι ένας πολιτικός και ηθικός εκμαυλιστής.,fiay::w47 fiay::d270
+ηθικός,moral,Η ιστορία έχει ένα ηθικό δίδαγμα. (The story has a moral.),fiay::w47 fiay::d270
 η τοποθεσία,location,Ποια είναι η τοποθεσία της χώρας;,fiay::w48 fiay::d271
 κενός,empty,Δύο θέσεις έμειναν κενές.,fiay::w48 fiay::d271
 η παρουσία,presence,Είδα πολλά πράγματα με την παρουσία μου εκεί.,fiay::w48 fiay::d271
@@ -1367,7 +1367,7 @@
 το σύνορο,border,Αυτός πέρασε τα σύνορα.,fiay::w48 fiay::d273
 το στομάχι,stomach,Το Κούκι κοιμάται στο στομάχι μου. (Cookie is sleeping on my stomach.),fiay::w48 fiay::d273
 η ασθένεια,illness,Ήταν απών λόγω ασθένειας.,fiay::w48 fiay::d273
-κλαίω,I cry,Κλαίω κάθε φορά που σπουδάζω ελληνικά. (I cry every time I study Greek.),fiay::w48 fiay::d274
+κλαίω,I cry,Το μωρό κλαίει γιατί πεινάει. (The baby is crying because it is hungry.),fiay::w48 fiay::d274
 η εκατοντάδα,hundred,,fiay::w48 fiay::d274
 η σαμπάνια,champagne,"Σαμπάνια, παρακαλώ.",fiay::w48 fiay::d274
 το φεγγάρι,moon,Το φεγγάρι λάμπει.,fiay::w48 fiay::d274
@@ -1377,7 +1377,7 @@
 το βλέμμα,"look, gaze",Δεν μπορώ να ξεχάσω το βλέμμα της.,fiay::w48 fiay::d275
 το εργαλείο,tool,"Χρειάζομαι τα εργαλεία μου, για να το φτιάξω. (I need my tools to fix it.)",fiay::w48 fiay::d275
 το κυνήγι,hunting,Του αρέσει το κυνήγι.,fiay::w48 fiay::d275
-η αμαρτία,sin,Η επιθυμία δεν είναι αμαρτία.,fiay::w48 fiay::d276
+η αμαρτία,sin,Είναι αμαρτία να πετάς φαγητό. (It is a sin to throw food away.),fiay::w48 fiay::d276
 η κατεύθυνση,direction,Από ποια κατεύθυνση;,fiay::w48 fiay::d276
 συνηθίζω,I get used to,Η Λεϊλά ήταν μια συνηθισμένη νοικοκυρά.,fiay::w48 fiay::d276
 το μηχάνημα,machine,Ο υπολογιστής είναι πολύπλοκο μηχάνημα.,fiay::w48 fiay::d276
@@ -1396,10 +1396,10 @@
 ρισκάρω,I risk,Δεν μπορώ να το ρισκάρω.,fiay::w49 fiay::d279
 σύμφωνος,in agreement,Είμαι σύμφωνος με την πρόταση. (I am in favor of the proposition.),fiay::w49 fiay::d279
 ο ώμος,shoulder,"Όμως, ο ώμος μου πονάει.",fiay::w49 fiay::d279
-το πάθος,passion,Ο Τομ και η Μαίρη φιλήθηκαν με πάθος. (Tom and Mary passionately kissed each other.),fiay::w49 fiay::d279
+το πάθος,passion,Μιλάει για τη μουσική με πάθος. (She talks about music with passion.),fiay::w49 fiay::d279
 η ουρά,"tail, queue",Μη πατάς την ουρά του σκύλου.,fiay::w49 fiay::d280
 τέταρτος,fourth,Είναι δύο και τέταρτο.,fiay::w49 fiay::d280
-υπερβολικός,excessive,Η υπερβολική τέρψη κάνει διάσημο έναν κλέφτη.,fiay::w49 fiay::d280
+υπερβολικός,excessive,Μην είσαι υπερβολικός. (Don't exaggerate.),fiay::w49 fiay::d280
 η ακτή,coast,Το ξενοδοχείο βρίσκεται στην ακτή. (The hotel is on the coast.),fiay::w49 fiay::d280
 το χρέος,debt,Πνίγομαι στα χρέη.,fiay::w49 fiay::d280
 το σάντουιτς,sandwich,Πόσα σάντουιτς έμειναν;,fiay::w49 fiay::d281
@@ -1407,10 +1407,10 @@
 η βάρδια,shift,,fiay::w49 fiay::d281
 η δήλωση,statement,Αυτή η δήλωση δεν είναι σχετική με το θέμα.,fiay::w49 fiay::d281
 η αγκαλιά,"hug, arms",,fiay::w49 fiay::d281
-ολοκληρώνω,I complete,Ο γάμος δεν ολοκληρώθηκε.,fiay::w49 fiay::d282
+ολοκληρώνω,I complete,Ολοκλήρωσα την εργασία μου. (I finished my homework.),fiay::w49 fiay::d282
 ασφαλώς,certainly,,fiay::w49 fiay::d282
 η σύνδεση,connection,Ο αδερφός μου είναι σε σύνδεση.,fiay::w49 fiay::d282
-ο τόνος,tone; tuna; ton,Ο τόνος είναι καρκινογόνος.,fiay::w49 fiay::d282
+ο τόνος,tone; tuna; ton,Φτιάχνω σαλάτα με τόνο. (I am making a salad with tuna.),fiay::w49 fiay::d282
 το αλκοόλ,alcohol,Δεν πίνω αλκοόλ.,fiay::w49 fiay::d282
 ο ρυθμός,"rhythm, pace",Δεν θα συνέλθει ποτέ μ' αυτούς τους ρυθμούς.,fiay::w50 fiay::d283
 απαγορεύεται,it is forbidden,Απαγορεύεται η είσοδος στο χειρουργείο. (Entry to the operating room is prohibited.),fiay::w50 fiay::d283

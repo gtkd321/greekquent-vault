@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Jul 26 to Aug 1 · **No class this week** · **Running total:** 1140 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Στην οδό Ερμού, ένα φόρεμα. Επιπλέον, παπούτσια! (On Ermou Street, a dress. In addition, shoes!)
+> 2. Κλειστό! Η σχολή οδήγησης έχει συνέντευξη. Η αιτία; (Closed! The driving school has an interview. The reason?)
+> 3. Ένα μπουκάλι νερό στην εξέταση. Καυτό λεωφορείο! (A bottle of water at the exam. A hot bus!)
+> 4. Κανονική μέρα: κυνηγάω το λεωφορείο. Φυσιολογικό! (A normal day: I chase the bus. Normal!)
+> 5. Περπατάω ενάντια στον αέρα. Δράση! (I walk against the wind. Action!)
+> 6. Η λίμνη στον βόρειο δρόμο. Χωρίς αμφιβολία, ωραία! (The lake on the northern road. Without a doubt, beautiful!)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **getting around** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 223 of 300
+> **Today's line:** Στην οδό Ερμού, ένα φόρεμα. Επιπλέον, παπούτσια! (On Ermou Street, a dress. In addition, shoes!)
 > - [[οδός|η οδός]] **street** (#969): Αγόρασαν σπίτι στην οδό Παρκ. (They bought a house on Park Street.)
 > - [[πολιτικός]] **political; politician** (#970): Ήταν ένας ευφυής πολιτικός.
 > - [[ανοησία|η ανοησία]] **nonsense** (#971): Αυτά είναι ανοησίες.
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επιπλέον]] **additionally** (#973): Έχετε επιπλέον χρήματα;
 
 > [!todo]- Tue · day 224 of 300
+> **Today's line:** Κλειστό! Η σχολή οδήγησης έχει συνέντευξη. Η αιτία; (Closed! The driving school has an interview. The reason?)
 > - [[ένοχος]] **guilty** (#974): Παραδέχτηκε ότι ήταν ένοχος. (He admitted that he was guilty.)
 > - [[σχολή|η σχολή]] **school, faculty** (#975): Τελείωσε την ιατρική σχολή.
 > - [[κλειστός]] **closed** (#976): Φαίνεται ότι το μαγαζί είναι κλειστό. (It looks like the shop is closed.)
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αιτία|η αιτία]] **cause** (#978): Δε γνωρίζω την αιτία.
 
 > [!todo]- Wed · day 225 of 300
+> **Today's line:** Ένα μπουκάλι νερό στην εξέταση. Καυτό λεωφορείο! (A bottle of water at the exam. A hot bus!)
 > - [[μπουκάλι|το μπουκάλι]] **bottle** (#979): Δώσ' μου εκείνο το μπουκάλι. (Give me that bottle.)
 > - [[αντικείμενο|το αντικείμενο]] **object** (#980): Τα αντικείμενα αυτά πωλούνται στο κέντρο της πόλης.
 > - [[συμπαθώ]] **I like (a person)** (#981): Δεν τη συμπαθώ.
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[εξέταση|η εξέταση]] **exam, examination** (#983): Πώς πήγε η εξέταση;
 
 > [!todo]- Thu · day 226 of 300
+> **Today's line:** Κανονική μέρα: κυνηγάω το λεωφορείο. Φυσιολογικό! (A normal day: I chase the bus. Normal!)
 > - [[φυσιολογικός]] **normal** (#984): Να κάνεις λάθη - είναι φυσιολογικό. (Making mistakes is normal.)
 > - [[σχεδιάζω]] **I design, I plan** (#985): Αμφότεροι σχεδιάζουμε να είμαστε στο πάρτι σας. (Both of us plan to be at your party.)
 > - [[κυνηγάω]] **I chase, I hunt** (#986): Κυνηγάω τον Τομ.
@@ -42,13 +58,15 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κανονικός]] **normal, regular** (#988): Όχι, εκείνο δεν είναι κανονικό.
 
 > [!todo]- Fri · day 227 of 300
-> - [[ενάντια]] **against** (#990): Η ζωή είναι αγώνας ενάντια στο θάνατο. (Life is a fight against death.)
+> **Today's line:** Περπατάω ενάντια στον αέρα. Δράση! (I walk against the wind. Action!)
+> - [[ενάντια]] **against** (#990): Κολυμπάμε ενάντια στο κύμα. (We swim against the wave.)
 > - [[κλέβω]] **I steal** (#991): Ο Θωμάς κλέβει.
 > - [[δράση|η δράση]] **action** (#992): Τώρα είναι ώρα για δράση.
 > - [[στήθος|το στήθος]] **chest** (#993): Πονάει το στήθος μου.
 > - [[παρόν|το παρόν]] **present** (#994): Προς το παρόν, πάμε καλά. (For now, we're doing well.)
 
 > [!todo]- Sat · day 228 of 300
+> **Today's line:** Η λίμνη στον βόρειο δρόμο. Χωρίς αμφιβολία, ωραία! (The lake on the northern road. Without a doubt, beautiful!)
 > - [[λίμνη|η λίμνη]] **lake** (#995): Η λίμνη είναι πολύ βαθιά. (The lake is very deep.)
 > - [[αμφιβολία|η αμφιβολία]] **doubt** (#996): Χωρίς αμφιβολία. (Without a doubt!)
 > - [[αποκαλώ]] **I call (name)** (#997): Αυτός με αποκαλεί Πιτ.
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χαρακτήρας|ο χαρακτήρας]] **character** (#999): Έχει έναν ισχυρό χαρακτήρα.
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w40` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the theme **getting around** using at least 5 of this week's words. Bring it to the group meet.

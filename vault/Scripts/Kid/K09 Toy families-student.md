@@ -18,6 +18,18 @@ tags: [greek-student, kid]
 - You: **Θέλουν νερό!** — They want water!
 - You: **Μπορούμε;** — Can we?
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Έχετε γάτα;** — Do you (all) have a cat?
+- You (teacher): **Τι θέλουν τα παιδιά;** — What do the kids want?
+- You (teacher): **Μπορούμε;** — Can we?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 A handprint family tree: each person is a colored handprint with their Greek title written underneath.

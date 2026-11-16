@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Mar 15 to Mar 21 · **Class:** [[L18 Clean Monday kites and weather-student|L18 Clean Monday kites and weather]] ([[L18 Clean Monday kites and weather-student|student page]]) · **Running total:** 570 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Απλός καιρός: ο αέρας ψηλά, κρύο το πρωί, ζέστη το μεσημέρι. (Simple weather: wind up high, cold in the morning, heat at noon.)
+> 2. Προφανώς κάνει κρύο. Ανάβουμε φωτιά. (Obviously it's cold. We light a fire.)
+> 3. Δίπλα στο παράθυρο, όλα άσπρα. Κάπως όμορφα! (Next to the window, everything white. Kind of beautiful!)
+> 4. Κίτρινος ήλιος, ένα πλοίο στη θάλασσα. (Yellow sun, a ship on the sea.)
+> 5. Γκρι ουρανός. Σκληρή μέρα για το πλοίο. (Gray sky. A hard day for the ship.)
+> 6. Πορτοκαλί ουρανός, κρύος αέρας. Ένα πορτοκάλι, και κερδίζω τη μέρα! (Orange sky, cold wind. One orange, and I win the day!)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L18 Clean Monday kites and weather-student|L18 Clean Monday kites and weather]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 109 of 300
+> **Today's line:** Απλός καιρός: ο αέρας ψηλά, κρύο το πρωί, ζέστη το μεσημέρι. (Simple weather: wind up high, cold in the morning, heat at noon.)
 > - [[αέρας|ο αέρας]] **air, wind** (#490): Ο αέρας είναι αόρατος. (Air is invisible.)
 > - [[ψηλά]] **high, up** (#581): Ψηλά το κεφάλι!
 > - [[κρύο|το κρύο]] **cold** (#859): Κάνει πολύ κρύο εδώ. (It's very cold here.)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[απλός]] **simple** (#423): Μακάρι να ήταν τόσο απλό. (If only it were that simple.)
 
 > [!todo]- Tue · day 110 of 300
+> **Today's line:** Προφανώς κάνει κρύο. Ανάβουμε φωτιά. (Obviously it's cold. We light a fire.)
 > - [[προφανώς]] **obviously** (#426): Προφανώς έκανα λάθος.
 > - [[γόνατο|το γόνατο]] **knee** (#1427)
 > - [[αριθμός|ο αριθμός]] **number** (#427): Ξέχασα τον αριθμό σας.
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[φωτιά|η φωτιά]] **fire** (#429): Δώσε μια φωτιά.
 
 > [!todo]- Wed · day 111 of 300
+> **Today's line:** Δίπλα στο παράθυρο, όλα άσπρα. Κάπως όμορφα! (Next to the window, everything white. Kind of beautiful!)
 > - [[πραγματικότητα|η πραγματικότητα]] **reality** (#432): Στην πραγματικότητα αυτός δεν εξετάστηκε. (In fact, he didn't take the exam.)
 > - [[άσπρος]] **white** (#1428): Ο γάτος μου είναι άσπρος. (My cat is white.)
 > - [[δίπλα]] **next to** (#433): Υπάρχει ένα σπίτι δίπλα στη θάλασσα. (There is a house next to the sea.)
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επιτρέπω]] **I allow** (#437): Επιτρέψτε μου να σας συστηθώ. (Let me introduce myself.)
 
 > [!todo]- Thu · day 112 of 300
+> **Today's line:** Κίτρινος ήλιος, ένα πλοίο στη θάλασσα. (Yellow sun, a ship on the sea.)
 > - [[σύστημα|το σύστημα]] **system** (#438): Το σύστημα δουλεύει καλά.
 > - [[κίτρινος]] **yellow** (#1429): Οι κρόκοι είναι κίτρινοι.
 > - [[μέσος]] **average, middle** (#439): Η γλώσσα είναι ένα μέσο συνεννόησης. (Language is a means of communication.)
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πλοίο|το πλοίο]] **ship** (#442): Πού είναι το πλοίο;
 
 > [!todo]- Fri · day 113 of 300
+> **Today's line:** Γκρι ουρανός. Σκληρή μέρα για το πλοίο. (Gray sky. A hard day for the ship.)
 > - [[χώρος|ο χώρος]] **space, area** (#444): Υπάρχει χώρος μέσα. (There's room inside.)
 > - [[τμήμα|το τμήμα]] **department, section** (#446): Πού βρίσκεται το βόρειο τμήμα της πόλης; (Where is the northern part of the city?)
 > - [[σκληρός]] **hard, harsh** (#447): Μην είσαι τόσο σκληρός μαζί της. (Don't be so harsh with her.)
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γκρι]] **gray** (#1431): Το τσιμέντο είναι γκρι. (The cement is gray.)
 
 > [!todo]- Sat · day 114 of 300
+> **Today's line:** Πορτοκαλί ουρανός, κρύος αέρας. Ένα πορτοκάλι, και κερδίζω τη μέρα! (Orange sky, cold wind. One orange, and I win the day!)
 > - [[πορτοκαλί]] **orange (color)** (#1432): Το πουκάμισό μου είναι πορτοκαλί. (My shirt is orange.)
 > - [[προσοχή|η προσοχή]] **attention, caution** (#457): Προσοχή σκύλος!
 > - [[πορτοκάλι|το πορτοκάλι]] **orange (fruit)** (#1434): Θα ήθελες λίγο χυμό πορτοκάλι; (Would you like some orange juice?)
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κρύος]] **cold** (#1449): Την έλουσε κρύος ιδρώτας.
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w21` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the [[L18 Clean Monday kites and weather-student|L18 Clean Monday kites and weather]] scene using at least 5 of this week's words. Bring it to the group meet.

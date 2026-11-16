@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Oct 11 to Oct 17 · **No class this week** · **Running total:** 1470 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Επίσκεψη στο χωριό για τη σοδειά. Η τελετή ξεκινάει! (A visit to the village for the harvest. The ceremony begins!)
+> 2. Παρεμπιπτόντως, το ποσό λαδιού νικάει! (By the way, the amount of oil wins!)
+> 3. Χρυσό λάδι, στο ημερολόγιο του παππού. (Golden oil, in Grandpa's calendar.)
+> 4. Μεσάνυχτα. Κινούμαι αργά. Η σοφία της γιαγιάς! (Midnight. I move slowly. Grandma's wisdom!)
+> 5. Το παλτό μου στο καταφύγιο. Αμφιβάλλω, κάνει κρύο! (My coat at the shelter. I doubt it, it's cold!)
+> 6. Θάρρος! Επομένως, καναπές και ξεκούραση. (Courage! Therefore, sofa and rest.)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **olive harvest** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 289 of 300
+> **Today's line:** Επίσκεψη στο χωριό για τη σοδειά. Η τελετή ξεκινάει! (A visit to the village for the harvest. The ceremony begins!)
 > - [[άθλιος]] **miserable** (#1319)
 > - [[τελετή|η τελετή]] **ceremony** (#1320)
 > - [[επίσκεψη|η επίσκεψη]] **visit** (#1321): Θέλω να κάνω ιδιωτική επίσκεψη.
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[επικοινωνώ]] **I communicate** (#1323): Χορεύει, άρα να επικοινωνεί.
 
 > [!todo]- Tue · day 290 of 300
+> **Today's line:** Παρεμπιπτόντως, το ποσό λαδιού νικάει! (By the way, the amount of oil wins!)
 > - [[δόση|η δόση]] **dose, installment** (#1324): Οι μηνιαίες δόσεις δανείων ξεπέρασαν το κόστος των ενοικίων.
 > - [[ποσό|το ποσό]] **amount** (#1325): Ποσό σύντομη είναι η ζωή!
 > - [[νικάω]] **I win, I defeat** (#1326): Δε θα νικήσουμε.
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[παρεμπιπτόντως]] **by the way** (#1328): Παρεμπιπτόντως, βρήκες την ομπρέλα που πρόσφατα έχασες;
 
 > [!todo]- Wed · day 291 of 300
+> **Today's line:** Χρυσό λάδι, στο ημερολόγιο του παππού. (Golden oil, in Grandpa's calendar.)
 > - [[μοντέλο|το μοντέλο]] **model** (#1329): Μοιάζει με μοντέλο.
 > - [[χρυσός (golden)|χρυσός]] **golden** (#1331): Η σιωπή είναι χρυσός.
 > - [[ημερολόγιο|το ημερολόγιο]] **calendar, diary** (#1332): Κρατάς ημερολόγιο;
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[λύκος|ο λύκος]] **wolf** (#1334): Πεινάω σαν λύκος.
 
 > [!todo]- Thu · day 292 of 300
+> **Today's line:** Μεσάνυχτα. Κινούμαι αργά. Η σοφία της γιαγιάς! (Midnight. I move slowly. Grandma's wisdom!)
 > - [[πορτοφόλι|το πορτοφόλι]] **wallet** (#1335): Έχω χάσει το πορτοφόλι μου.
 > - [[κινούμαι]] **I move** (#1336): Τουλάχιστον κινούμαι στη σωστή κατεύθυνση.
 > - [[γουρούνι|το γουρούνι]] **pig** (#1337): Εχω φάει σαν γουρούνι. (I've eaten like a pig.)
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μεσάνυχτα|τα μεσάνυχτα]] **midnight** (#1339): Είναι μεσάνυχτα.
 
 > [!todo]- Fri · day 293 of 300
+> **Today's line:** Το παλτό μου στο καταφύγιο. Αμφιβάλλω, κάνει κρύο! (My coat at the shelter. I doubt it, it's cold!)
 > - [[παίκτης|ο παίκτης]] **player** (#1340): Είσαι παίκτης του τένις. (You are a tennis player.)
 > - [[καταφύγιο|το καταφύγιο]] **shelter** (#1341)
 > - [[τιμωρία|η τιμωρία]] **punishment** (#1342): Η τιμωρία θα έπρεπε να είναι ανάλογη του εγκλήματος.
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[παλτό|το παλτό]] **coat** (#1344): Αγόρασε ένα παλτό. (She bought a coat.)
 
 > [!todo]- Sat · day 294 of 300
+> **Today's line:** Θάρρος! Επομένως, καναπές και ξεκούραση. (Courage! Therefore, sofa and rest.)
 > - [[αρκούδα|η αρκούδα]] **bear** (#1345): Φοβάμαι τις αρκούδες.
 > - [[επομένως]] **therefore** (#1346): Η αδερφή μου έχει δύο γιούς, επομένως εγώ έχω δύο ανιψιούς.
 > - [[θάρρος|το θάρρος]] **courage** (#1347): Προχωρήστε με πίστη, θάρρος, δύναμη!
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[καναπές|ο καναπές]] **sofa** (#1349): Ο καναπές είναι άνετος. (The sofa is comfortable.)
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w51` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the theme **olive harvest** using at least 5 of this week's words. Bring it to the group meet.

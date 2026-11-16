@@ -17,6 +17,18 @@ tags: [greek-student, kid]
 - You: **Τρώω ψάρι!** — I'm eating fish!
 - Grown-up: **Τον λογαριασμό, παρακαλώ!** — The bill, please!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Τι θέλετε;** — What would you like?
+- You (teacher): **Τι πίνετε;** — What are you drinking?
+- You (teacher): **Νερό. Τι τρως;** — Water. What are you eating?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 Make a menu with drawings of each dish, and play-dough food to go with it.

@@ -17,6 +17,17 @@ tags: [greek-student, kid]
 - Grown-up: **Μπορείς την Τρίτη;** — Can you on Tuesday?
 - You: **Ναι, την Τρίτη μπορώ!** — Yes, on Tuesday I can!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Τι ώρα είναι, κύριε Λύκε;** — What time is it, Mr. Wolf?
+- You (teacher): **Μπορείς την Τρίτη;** — Can you on Tuesday?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 The paper-plate clock with numbers and hands.

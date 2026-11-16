@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Aug 30 to Sep 5 · **No class this week** · **Running total:** 1290 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Ο δάσκαλός μου είναι περήφανος. Η βαλίτσα μου είναι έτοιμη. (My teacher is proud. My suitcase is ready.)
+> 2. Τα γενέθλια του παππού! Εντυπωσιακή τούρτα! (Grandpa's birthday! An impressive cake!)
+> 3. Ο δημοσιογράφος τραγουδάει την τοπική διαδρομή. (The journalist sings about the local route.)
+> 4. Δωρεάν συναυλία! Φασαρία και ταλέντο στην πλατεία. (Free concert! Noise and talent in the square.)
+> 5. Στέκομαι στην ουρά. Ένα φιλί στη γιαγιά. (I stand in line. A kiss for Grandma.)
+> 6. Πολλοί καλεσμένοι, μικρή απόσταση. Διπλό γλυκό! (Many guests, short distance. Double dessert!)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **news** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 253 of 300
+> **Today's line:** Ο δάσκαλός μου είναι περήφανος. Η βαλίτσα μου είναι έτοιμη. (My teacher is proud. My suitcase is ready.)
 > - [[περήφανος]] **proud** (#1127): Είμαι πολύ περήφανος για αυτόν. (I am very proud of him.)
 > - [[δάσκαλος|ο δάσκαλος]] **teacher** (#1128): Δεν είμαι ο δάσκαλός σας. (I'm not your teacher.)
 > - [[βαλίτσα|η βαλίτσα]] **suitcase** (#1129): Ετοιμάστε τις βαλίτσες σας. (Pack your bags.)
@@ -21,13 +34,15 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γουστάρω]] **I like, I fancy** (#1131): Γουστάρω να χορεύω.
 
 > [!todo]- Tue · day 254 of 300
-> - [[παράδεισος|ο παράδεισος]] **paradise** (#1132): Τα φιλιά της με πάνε στον παράδεισο. (Her kisses take me to heaven.)
+> **Today's line:** Τα γενέθλια του παππού! Εντυπωσιακή τούρτα! (Grandpa's birthday! An impressive cake!)
+> - [[παράδεισος|ο παράδεισος]] **paradise** (#1132): Αυτή η παραλία είναι παράδεισος. (This beach is paradise.)
 > - [[λογική|η λογική]] **logic** (#1133): Τα μαθηματικά είναι η μουσική της λογικής.
 > - [[εντυπωσιακός]] **impressive** (#1134): Ο Τομ ήταν εντυπωσιακός.
 > - [[γενέθλια|τα γενέθλια]] **birthday** (#1135): Πότε είναι τα γενέθλιά σου; (When is your birthday?)
 > - [[εκπαίδευση|η εκπαίδευση]] **education, training** (#1136): Δεν σε νοιάζει η εκπαίδευσή σου;
 
 > [!todo]- Wed · day 255 of 300
+> **Today's line:** Ο δημοσιογράφος τραγουδάει την τοπική διαδρομή. (The journalist sings about the local route.)
 > - [[δημοσιογράφος|ο δημοσιογράφος]] **journalist** (#1137): Ο ξάδερφός μου είναι δημοσιογράφος. (My cousin is a journalist.)
 > - [[τοπικός]] **local** (#1138): Είναι αυτό το φαγητό τοπικό;
 > - [[εξακολουθώ]] **I continue** (#1139): Εξακολουθώ να ψάχνω τον Τομ. (I'm still trying to get in touch with Tom.)
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[διαδρομή|η διαδρομή]] **route** (#1141): Αναρωτιέμαι ποια διαδρομή είναι γρηγορότερη. (I wonder which way is faster.)
 
 > [!todo]- Thu · day 256 of 300
+> **Today's line:** Δωρεάν συναυλία! Φασαρία και ταλέντο στην πλατεία. (Free concert! Noise and talent in the square.)
 > - [[σύμβουλος|ο σύμβουλος]] **advisor** (#1142)
 > - [[φασαρία|η φασαρία]] **noise, fuss** (#1143): Έχει πολύ φασαρία εδώ.
 > - [[εσωτερικός]] **internal** (#1144): Η έρευνα απαιτεί εσωτερική κινητοποίηση.
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ταλέντο|το ταλέντο]] **talent** (#1147): Θαυμάζω το ταλέντο σου. (I admire your talent.)
 
 > [!todo]- Fri · day 257 of 300
+> **Today's line:** Στέκομαι στην ουρά. Ένα φιλί στη γιαγιά. (I stand in line. A kiss for Grandma.)
 > - [[στέκομαι]] **I stand** (#1148): Στέκομαι φρουρός.
 > - [[πρίγκιπας|ο πρίγκιπας]] **prince** (#1149): Ο πρίγκιπας χάθηκε στο δάσος.
 > - [[τεχνικός]] **technical** (#1150): Βελτίωσε την τεχνική του.
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κοινωνία|η κοινωνία]] **society** (#1152): Η κοινωνία εξελίσσεται.
 
 > [!todo]- Sat · day 258 of 300
+> **Today's line:** Πολλοί καλεσμένοι, μικρή απόσταση. Διπλό γλυκό! (Many guests, short distance. Double dessert!)
 > - [[υποστήριξη|η υποστήριξη]] **support** (#1153)
 > - [[καλεσμένος|ο καλεσμένος]] **guest** (#1154): Δε θα καλωσορίσω τους καλεσμένους.
 > - [[απόσταση|η απόσταση]] **distance** (#1155): Ακολουθεί σε μεγάλη απόσταση.
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[διπλός]] **double** (#1157): Θα ήθελα ένα διπλό δωμάτιο.
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w45` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the theme **news** using at least 5 of this week's words. Bring it to the group meet.

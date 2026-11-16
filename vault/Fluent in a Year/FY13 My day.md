@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Jan 18 to Jan 24 · **Class:** [[L10 My day-student|L10 My day]] ([[L10 My day-student|student page]]) · **Running total:** 330 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Το πρωί πίνω καφέ και διαβάζω. Μάλλον όχι τηλεόραση. (In the morning I drink coffee and read. Probably no television.)
+> 2. Είναι ήδη Τρίτη. Πάω προς το γραφείο, εκτός αν βρέχει. (It's already Tuesday. I head towards the office, unless it rains.)
+> 3. Τετάρτη, Πέμπτη: ο ίδιος δρόμος για το γραφείο. (Wednesday, Thursday: the same road to the office.)
+> 4. Ξεκινάω το αμάξι. Νιώθω καλά. Παίζω μουσική. (I start the car. I feel good. I play music.)
+> 5. Τρέχω, περνάω τη γέφυρα. Όμορφος ήλιος! Συνεχίζω. (I run, I cross the bridge. Beautiful sun! I keep going.)
+> 6. Σκέφτομαι: μοιάζω με τη μαμά μου. Μου λείπει. (I think: I look like my mom. I miss her.)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L10 My day-student|L10 My day]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 61 of 300
+> **Today's line:** Το πρωί πίνω καφέ και διαβάζω. Μάλλον όχι τηλεόραση. (In the morning I drink coffee and read. Probably no television.)
 > - [[διαβάζω]] **I read, I study** (#488): Διαβάζω το βιβλίο σου. (I read your book.)
 > - [[τηλεόραση|η τηλεόραση]] **television** (#599): Θα δω τηλεόραση. (I'll watch television.)
 > - [[πίνω]] **I drink** (#670): Η Μίλι δεν πίνει νερό. (Millie isn't drinking water.)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μάλλον]] **probably, rather** (#187): Μάλλον σε κάποια αρέσει ο Τομ. (I guess someone must like Tom.)
 
 > [!todo]- Tue · day 62 of 300
+> **Today's line:** Είναι ήδη Τρίτη. Πάω προς το γραφείο, εκτός αν βρέχει. (It's already Tuesday. I head towards the office, unless it rains.)
 > - [[ήδη]] **already** (#188): Είναι ήδη έξι. (It's six o'clock already.)
 > - [[προς]] **towards** (#193): Προς το παρόν, πάμε καλά. (For now, we're doing well.)
 > - [[οποίος]] **who, which (relative)** (#197): Το σπίτι στο οποίο έμενε κατεδαφίστηκε. (The house in which we lived was torn down.)
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[εκτός]] **except, outside** (#199): Εκτός αυτού έχει μία όμορφη γάτα. (Besides, she has a beautiful cat.)
 
 > [!todo]- Wed · day 63 of 300
+> **Today's line:** Τετάρτη, Πέμπτη: ο ίδιος δρόμος για το γραφείο. (Wednesday, Thursday: the same road to the office.)
 > - [[δρόμος|ο δρόμος]] **road, street** (#203): Δεν είναι στο δρόμο μου. (It's not on my way.)
 > - [[Τετάρτη|η Τετάρτη]] **Wednesday** (#1390): Σήμερα είναι Τετάρτη.
 > - [[πρόκειται]] **it is about to; it concerns** (#209): Τι πρόκειται να κάνεις τώρα; (What are you going to do now?)
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γραφείο|το γραφείο]] **office, desk** (#251): Βάλε το βιβλίο στο γραφείο. (Put the book on the desk.)
 
 > [!todo]- Thu · day 64 of 300
+> **Today's line:** Ξεκινάω το αμάξι. Νιώθω καλά. Παίζω μουσική. (I start the car. I feel good. I play music.)
 > - [[κακό|το κακό]] **evil, harm** (#265): Έσκασα από το κακό μου. (I was green with envy.)
 > - [[αμάξι|το αμάξι]] **car** (#272): Σου αρέσει αυτό τ' αμάξι; (Do you like this car?)
 > - [[ξεκινάω]] **I start** (#274): Θα ξεκινήσουμε.
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[νιώθω]] **I feel** (#285): Δεν νιώθω ασφαλής εδώ πια. (I don't feel safe here anymore.)
 
 > [!todo]- Fri · day 65 of 300
+> **Today's line:** Τρέχω, περνάω τη γέφυρα. Όμορφος ήλιος! Συνεχίζω. (I run, I cross the bridge. Beautiful sun! I keep going.)
 > - [[ζητάω]] **I ask for** (#294): Δε ζητάω λεφτά.
 > - [[τρέχω]] **I run** (#295): Τον είδα να τρέχει. (I saw him running.)
 > - [[περνάω]] **I pass, I spend (time)** (#298): Αυτό περνάει τα όρια!
@@ -49,13 +66,15 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[συνεχίζω]] **I continue** (#311): Πρέπει να συνεχίσω. (I must continue.)
 
 > [!todo]- Sat · day 66 of 300
-> - [[μοιάζω]] **I look like** (#314): Το σχολείο μοιάζει με φυλακή. (The school looks like a prison.)
+> **Today's line:** Σκέφτομαι: μοιάζω με τη μαμά μου. Μου λείπει. (I think: I look like my mom. I miss her.)
+> - [[μοιάζω]] **I look like** (#314): Μοιάζεις με τη μαμά σου. (You look like your mom.)
 > - [[βάζω]] **I put** (#324): Βάζω στοίχημα ότι δε λέει την αλήθεια. (I bet he isn't telling the truth.)
 > - [[υποθέτω]] **I suppose** (#329): Υποθέτω πως δε θέλετε να φύγω. (I assume you don't want me to leave.)
 > - [[σκέφτομαι]] **I think** (#342): Σκέφτομαι να πουλήσω το αυτοκίνητό μου. (I'm thinking of selling my car.)
 > - [[λείπω]] **I am absent, I am missing** (#388): Δε μας λείπει τίποτα. (We lack nothing.)
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w13` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the [[L10 My day-student|L10 My day]] scene using at least 5 of this week's words. Bring it to the group meet.

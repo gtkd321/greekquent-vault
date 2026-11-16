@@ -32,6 +32,18 @@ tags: [greek-student, kid]
 - Grown-up: **Ναι, έχω τον Spider-Man. Ορίστε.** — Yes, I have Spider-Man. Here you go.
 - You: **Ευχαριστώ!** — Thank you!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Πού είναι ο Spider-Man;** — Where is Spider-Man?
+- You (teacher): **Δεν βλέπω τον Spider-Man! Πού είναι;** — I can't see Spider-Man! Where is he?
+- You (teacher): **Έχεις τον Spider-Man;** — Do you have Spider-Man?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 The kid draws a simple map of the room and sticks a small Spider-Man sticker wherever the toy was found.

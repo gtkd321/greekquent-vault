@@ -17,6 +17,17 @@ tags: [greek-student, kid]
 - You: **Γιατί είναι βράδυ!** — Because it's evening!
 - Grown-up: **Το πρωί… το βράδυ…** — In the morning… in the evening…
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Τι κάνεις;** — What are you doing?
+- You (teacher): **Γιατί;** — Why?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 A paper-plate clock with the sun on one side and the moon on the other. The kid colors the sky for each part of the day.

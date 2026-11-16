@@ -16,6 +16,17 @@ tags: [greek-student, kid]
 - You (yellow): **Βλέπεις τη θάλασσα;** — Do you see the sea?
 - Grown-up: **Μπράβο!** — Well done!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Μπορείς αύριο;** — Can you tomorrow?
+- You (teacher): **Βλέπεις τη θάλασσα;** — Do you see the sea?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 Build the die together and let the kid draw the four pictures. The colors match the laminated packet, so the game teaches the system too.

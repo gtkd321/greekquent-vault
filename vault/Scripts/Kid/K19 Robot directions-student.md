@@ -17,6 +17,17 @@ tags: [greek-student, kid]
 - Grown-up: **Δεν βλέπω τη σημαία!** — I can't see the flag!
 - You: **Είναι κοντά!** — It's close!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Πού είναι η σημαία;** — Where is the flag?
+- You (teacher): **Δεν βλέπω τη σημαία!** — I can't see the flag!
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 Make the Greek flag together for the 25th of March: blue and white stripes, with a cross in the corner.

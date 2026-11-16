@@ -17,6 +17,17 @@ tags: [greek-student, kid]
 - You: **Μπορώ;** — May I?
 - Grown-up: **Ναι, βέβαια.** — Yes, of course.
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Μπορείς;** — Can you?
+- You (teacher): **Μπορώ;** — May I?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 A sticker chart with a strong-arm picture at the top. One sticker per Μπορώ; he asks correctly.

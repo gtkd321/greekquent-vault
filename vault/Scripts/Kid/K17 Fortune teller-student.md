@@ -16,6 +16,17 @@ tags: [greek-student, kid]
 - You: **Θα παίξω με τους φίλους.** — I'll play with my friends.
 - Grown-up: **Θα έχεις ώρα;** — Will you have time?
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Τι θα κάνεις το Σαββατοκύριακο;** — What will you do this weekend?
+- You (teacher): **Θα έχεις ώρα;** — Will you have time?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 The fortune teller, colored on the outside with drawings of each plan inside.

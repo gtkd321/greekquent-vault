@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Jul 12 to Jul 18 · **No class this week** · **Running total:** 1080 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Μαγική μέρα στο πανεπιστήμιο. Ποιος φταίει; Ο κωδικός! (A magic day at the university. Who's to blame? The code!)
+> 2. Κανονίζω μια παράσταση. Η ικανότητά μου: πουλάω εισιτήρια! (I arrange a show. My ability: I sell tickets!)
+> 3. Τα φώτα, ο ήχος, το χρυσό φόρεμα. Καμία πολιτική! (The lights, the sound, the gold dress. No politics!)
+> 4. Κάθομαι στην καρέκλα. Λογικό: καλός βαθμός! (I sit in the chair. Logical: a good grade!)
+> 5. Τρομερός κόπος, αλλά ζω για αυτό. Δε σπάω! (Terrible effort, but I live for this. I won't break!)
+> 6. Παραλίγο να κλάψω: η παλιά κούκλα της γιαγιάς! (I almost cried: Grandma's old doll!)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **feelings** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 211 of 300
+> **Today's line:** Μαγική μέρα στο πανεπιστήμιο. Ποιος φταίει; Ο κωδικός! (A magic day at the university. Who's to blame? The code!)
 > - [[πανεπιστήμιο|το πανεπιστήμιο]] **university** (#905): Θέλω να σπουδάσω στο πανεπιστήμιο. (I want to study at the university.)
 > - [[μαγικός]] **magic** (#906): Ήταν μια μαγική στιγμή.
 > - [[φταίω]] **I am to blame** (#907)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[κωδικός|ο κωδικός]] **code, password** (#910): Έχεις τον κωδικό πηγής; (Do you have the source code?)
 
 > [!todo]- Tue · day 212 of 300
+> **Today's line:** Κανονίζω μια παράσταση. Η ικανότητά μου: πουλάω εισιτήρια! (I arrange a show. My ability: I sell tickets!)
 > - [[κανονίζω]] **I arrange** (#911)
 > - [[πουλάω]] **I sell** (#912): Πουλάω ομπρέλες.
 > - [[παράσταση|η παράσταση]] **performance, show** (#913): Πότε αρχίζει η παράσταση;
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ικανότητα|η ικανότητα]] **ability** (#915): Εμπιστεύομαι τις ικανότητές του.
 
 > [!todo]- Wed · day 213 of 300
+> **Today's line:** Τα φώτα, ο ήχος, το χρυσό φόρεμα. Καμία πολιτική! (The lights, the sound, the gold dress. No politics!)
 > - [[φώτα|τα φώτα]] **lights** (#916): Ο Τομ άναψε τα φώτα.
 > - [[χρυσός|ο χρυσός]] **gold** (#917): Η σιωπή είναι χρυσός.
 > - [[πορεία|η πορεία]] **course, march** (#918): Είναι ξακουστός για τις πορείες διαμαρτυρίας του.
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πολιτική|η πολιτική]] **politics, policy** (#920): Συζητήσαμε για πολιτική. (We discussed politics.)
 
 > [!todo]- Thu · day 214 of 300
+> **Today's line:** Κάθομαι στην καρέκλα. Λογικό: καλός βαθμός! (I sit in the chair. Logical: a good grade!)
 > - [[αδύνατος]] **impossible; thin** (#921): Είναι αδύνατο να γνωρίζουμε τί θα συμβεί αύριο. (It's impossible to know what will happen tomorrow.)
 > - [[καρέκλα|η καρέκλα]] **chair** (#922): Είναι κάτω από την καρέκλα. (It is under the chair.)
 > - [[λογικός]] **logical, reasonable** (#923): Φαίνεται λογικό.
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[καταλήγω]] **I end up** (#925): Καταλήγει σε αδιέξοδο.
 
 > [!todo]- Fri · day 215 of 300
+> **Today's line:** Τρομερός κόπος, αλλά ζω για αυτό. Δε σπάω! (Terrible effort, but I live for this. I won't break!)
 > - [[τρομερός]] **terrible, tremendous** (#926): Είχα ένα τρομερό όνειρο.
 > - [[άποψη|η άποψη]] **view, opinion** (#928): Από ποιά άποψη;
 > - [[κόπος|ο κόπος]] **effort, trouble** (#929): Αξίζει το κόπο.
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σπάω]] **I break** (#931): Αυτό θα σπάσει.
 
 > [!todo]- Sat · day 216 of 300
+> **Today's line:** Παραλίγο να κλάψω: η παλιά κούκλα της γιαγιάς! (I almost cried: Grandma's old doll!)
 > - [[μαγεία|η μαγεία]] **magic** (#932)
 > - [[υγεία|η υγεία]] **health** (#933): Το σκόρδο κάνει καλό στην υγεία. (Garlic is good for one's health.)
 > - [[παραλίγο]] **almost, nearly** (#935): Παραλίγο να πιάσω το ψάρι. (I almost caught the fish.)
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χαμηλός]] **low** (#937): Η γέφυρα είναι χαμηλή.
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w38` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the theme **feelings** using at least 5 of this week's words. Bring it to the group meet.

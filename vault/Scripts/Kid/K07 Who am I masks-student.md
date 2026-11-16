@@ -17,6 +17,17 @@ tags: [greek-student, kid]
 - You: **Είμαι η γιαγιά! Είμαι από την Ελλάδα.** — I'm Grandma! I'm from Greece.
 - Ss: **Καλά Χριστούγεννα!** — Merry Christmas!
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Ποιος είσαι;** — Who are you?
+- You (teacher): **Είσαι από την Αμερική;** — Are you from America?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 The mask, plus a little name tag in Greek letters.

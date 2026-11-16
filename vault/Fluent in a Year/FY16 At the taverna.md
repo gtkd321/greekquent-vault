@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Feb 8 to Feb 14 · **Class:** [[L13 At the taverna-student|L13 At the taverna]] ([[L13 At the taverna-student|student page]]) · **Running total:** 420 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Καλησπέρα! Δύο άτομα. Ψάρι και μια μπίρα, και μετά τον λογαριασμό. (Good evening! Two people. Fish and a beer, and the bill after.)
+> 2. Τρώω κρέας και πίνω ένα ποτήρι νερό. Σωστό; (I eat meat and drink a glass of water. Correct?)
+> 3. Τι είδος ψάρι; Πόσο κάνει; Ούτε καν ξέρω! (What kind of fish? How much is it? I don't even know!)
+> 4. Πρώτα, η αλήθεια: όχι ψέμα. Δηλαδή, ανησυχώ για τα λεφτά. (First, the truth: no lie. That is, I'm worried about the money.)
+> 5. Σοβαρά; Τουλάχιστον ο καφές είναι δυνατός! Αλλιώς κοιμάμαι. (Seriously? At least the coffee is strong! Otherwise I'll fall asleep.)
+> 6. Περίεργο: μέλι στο ποτό μου! Αρκετό για το μυαλό μου. (Strange: honey in my drink! Enough for my mind.)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L13 At the taverna-student|L13 At the taverna]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 79 of 300
+> **Today's line:** Καλησπέρα! Δύο άτομα. Ψάρι και μια μπίρα, και μετά τον λογαριασμό. (Good evening! Two people. Fish and a beer, and the bill after.)
 > - [[άτομο|το άτομο]] **person, individual** (#319): Έχετε ένα τραπέζι για πέντε άτομα; (Do you have a table for five?)
 > - [[λογαριασμός|ο λογαριασμός]] **bill, account** (#572): Ορίστε ο λογαριασμός.
 > - [[μπίρα|η μπίρα]] **beer** (#654): Μια μπίρα, παρακαλώ. (A beer, please.)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ψάρι|το ψάρι]] **fish** (#798): Σου αρέσουν τα ψάρια; (Do you like fish?)
 
 > [!todo]- Tue · day 80 of 300
+> **Today's line:** Τρώω κρέας και πίνω ένα ποτήρι νερό. Σωστό; (I eat meat and drink a glass of water. Correct?)
 > - [[τρώω]] **I eat** (#902): Θέλω να φάω λίγο τυρί. (I want to eat some cheese.)
 > - [[ποτήρι|το ποτήρι]] **glass** (#951): Μου ζήτησε ένα ποτήρι νερό. (He asked for a glass of water.)
 > - [[κρέας|το κρέας]] **meat** (#1078): Δεν τρώω κρέας ο ίδιος. (I don't eat meat myself.)
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σωστός]] **correct, right** (#276): Η απάντησή του είναι σωστή. (His answer is correct.)
 
 > [!todo]- Wed · day 81 of 300
+> **Today's line:** Τι είδος ψάρι; Πόσο κάνει; Ούτε καν ξέρω! (What kind of fish? How much is it? I don't even know!)
 > - [[καν]] **even (not even)** (#277): Ούτε καν το ήξερα. (I didn't even know about it.)
 > - [[είδος|το είδος]] **kind, sort** (#280): Τι είδους πορτοκάλια καλλιεργείτε εδώ; (What kind of oranges do you plant here?)
 > - [[δύναμη|η δύναμη]] **strength, power** (#281): Η γνώση είναι δύναμη. (Knowledge is power.)
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[όπου]] **where(ver)** (#284): Όπου κι αν είσαι, να προσεύχεσαι. (Wherever you are, may you pray.)
 
 > [!todo]- Thu · day 82 of 300
+> **Today's line:** Πρώτα, η αλήθεια: όχι ψέμα. Δηλαδή, ανησυχώ για τα λεφτά. (First, the truth: no lie. That is, I'm worried about the money.)
 > - [[πρώτα]] **first(ly)** (#286): Πρώτα οι κυρίες.
 > - [[παλιός]] **old (things)** (#287): Αυτό είν' ένα παλιό γράμμα. (This is an old letter.)
 > - [[ψέμα|το ψέμα]] **lie** (#288): Είμαι σίγουρος ότι αυτό είναι ψέμα. (I am sure this is a lie.)
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ανησυχώ]] **I worry** (#290): Δεν ανησυχώ για σας. (I'm not worried about you.)
 
 > [!todo]- Fri · day 83 of 300
+> **Today's line:** Σοβαρά; Τουλάχιστον ο καφές είναι δυνατός! Αλλιώς κοιμάμαι. (Seriously? At least the coffee is strong! Otherwise I'll fall asleep.)
 > - [[σοβαρά]] **seriously** (#291): Σοβαρά μιλάς τώρα;
 > - [[αλλιώς]] **otherwise** (#293): Φύγε, αλλιώς καλώ την αστυνομία!
 > - [[τουλάχιστον]] **at least** (#296): Θα κοστίσει τουλάχιστον πέντε δολάρια. (It'll cost at least five dollars.)
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[αίμα|το αίμα]] **blood** (#318): Το αίμα είναι κόκκινο. (Blood is red.)
 
 > [!todo]- Sat · day 84 of 300
+> **Today's line:** Περίεργο: μέλι στο ποτό μου! Αρκετό για το μυαλό μου. (Strange: honey in my drink! Enough for my mind.)
 > - [[μυαλό|το μυαλό]] **mind** (#326): Βγάλ'το από το μυαλό σου! (Get it out of your mind!)
 > - [[μέλι|το μέλι]] **honey** (#1412): Μ' αρέσει το μέλι.
 > - [[περίεργος]] **strange, curious** (#343): Είναι πολύ περίεργη. (She's very curious.)
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ποτό|το ποτό]] **drink** (#425): Ας τον κεράσουμε ένα ποτό. (Let's buy him a drink.)
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w16` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the [[L13 At the taverna-student|L13 At the taverna]] scene using at least 5 of this week's words. Bring it to the group meet.

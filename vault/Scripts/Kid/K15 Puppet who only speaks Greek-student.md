@@ -17,6 +17,19 @@ tags: [greek-student, kid]
 - You: **Δεν καταλαβαίνω!** — I don't understand!
 - Grown-up (puppet): **Δεν ξέρω αγγλικά…** — I don't know English…
 
+## You are the teacher
+
+Swap: now you are the puppet. Talk to the grown-up.
+
+- You (teacher): **Γεια! Μιλάς αγγλικά;** — Hi! Do you speak English?
+- You (teacher): **Ναι! Μιλάς ελληνικά;** — Yes! Do you speak Greek?
+- You (puppet): **Γεια! Μιλάς αγγλικά;** — Hi! Do you speak English?
+- You (puppet): **Δεν ξέρω αγγλικά…** — I don't know English…
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 Making the puppet: a sock, buttons, yarn hair.

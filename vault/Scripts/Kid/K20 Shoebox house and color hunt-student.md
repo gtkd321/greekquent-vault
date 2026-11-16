@@ -17,6 +17,16 @@ tags: [greek-student, kid]
 - You: **Μια κόκκινη μπάλα!** — A red ball!
 - You: **Βλέπω ένα μεγάλο δωμάτιο.** — I see a big room.
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Βρες κάτι κόκκινο!** — Find something red!
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 The shoebox house, painted and colored, with a room for every color.

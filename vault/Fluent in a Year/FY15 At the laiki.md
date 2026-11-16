@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Feb 1 to Feb 7 · **Class:** [[L12 Laiki street market-student|L12 Laiki street market]] ([[L12 Laiki street market-student|student page]]) · **Running total:** 390 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Ένα κιλό πατάτες, είκοσι ευρώ; Εκατό; Επίσης ντομάτες. (A kilo of potatoes, twenty euros? A hundred? Also tomatoes.)
+> 2. Ελιές και ντομάτες, αφού είναι φρέσκες. Καθόλου ακριβές! (Olives and tomatoes, since they're fresh. Not expensive at all!)
+> 3. Το σχέδιο: ένα τέταρτο λάδι. Σημαντικό! (The plan: a quarter of oil. Important!)
+> 4. Λίγο ελαιόλαδο, φρούτα, λαχανικά. Και μιλάω ελληνικά! (A little olive oil, fruit, vegetables. And I speak Greek!)
+> 5. Μήλο με γιαούρτι και ζάχαρη; Φέτα με λίγο αλάτι! (Apple with yogurt and sugar? Feta with a little salt!)
+> 6. Με συγχωρείτε, ένα κουλούρι! Αξίζει. Καλή όρεξη! (Excuse me, one bread ring! It's worth it. Enjoy your meal!)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the [[L12 Laiki street market-student|L12 Laiki street market]] scene where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 73 of 300
+> **Today's line:** Ένα κιλό πατάτες, είκοσι ευρώ; Εκατό; Επίσης ντομάτες. (A kilo of potatoes, twenty euros? A hundred? Also tomatoes.)
 > - [[επίσης]] **also** (#243): Είναι επίσης μια όμορφη γυναίκα. (She is also a beautiful woman.)
 > - [[εκατό]] **hundred** (#1095): Συμφωνώ εκατό τοις εκατό. (I agree one hundred percent.)
 > - [[είκοσι]] **twenty** (#1191): Είμαι είκοσι επτά ετών. (I'm twenty-seven years old.)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πατάτα|η πατάτα]] **potato** (#1330): Με τρελαίνουν οι τηγανητές πατάτες. (I love french fries.)
 
 > [!todo]- Tue · day 74 of 300
+> **Today's line:** Ελιές και ντομάτες, αφού είναι φρέσκες. Καθόλου ακριβές! (Olives and tomatoes, since they're fresh. Not expensive at all!)
 > - [[ελιά|η ελιά]] **olive, olive tree** (#1400): Το λάδι βγαίνει από ελιές.
 > - [[ντομάτα|η ντομάτα]] **tomato** (#1404): Αρέσουν οι ντομάτες στον Τομ; (Does Tom like tomatoes?)
 > - [[καθόλου]] **not at all** (#248): Δεν είναι καθόλου έτσι. (It's not like that at all.)
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πέρα]] **beyond, over** (#253): Βλέπεις τον μαύρο καπνό εκεί πέρα; (Do you see the black smoke over there?)
 
 > [!todo]- Wed · day 75 of 300
+> **Today's line:** Το σχέδιο: ένα τέταρτο λάδι. Σημαντικό! (The plan: a quarter of oil. Important!)
 > - [[τέταρτο|το τέταρτο]] **quarter** (#1399): Είναι τρεις παρά τέταρτο. (It's a quarter to three.)
 > - [[υπόθεση|η υπόθεση]] **case, matter** (#263): Η υπόθεση βρομάει!
 > - [[σχέδιο|το σχέδιο]] **plan** (#266): Αυτό είναι το σχέδιό τους. (That's their plan.)
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[λάδι|το λάδι]] **oil** (#1401): Βάζουν λάδι στη φωτιά.
 
 > [!todo]- Thu · day 76 of 300
+> **Today's line:** Λίγο ελαιόλαδο, φρούτα, λαχανικά. Και μιλάω ελληνικά! (A little olive oil, fruit, vegetables. And I speak Greek!)
 > - [[ελαιόλαδο|το ελαιόλαδο]] **olive oil** (#1402): Τρώει βοδινό με ελαιόλαδο και κεράσια.
 > - [[φρούτο|το φρούτο]] **fruit** (#1405): Μ' αρέσουν τα φρούτα. (I like fruit.)
 > - [[λίγος]] **little, few** (#297): Έχω λίγα χρήματα. (I have a little money.)
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ελληνικά|τα ελληνικά]] **Greek (language)** (#300): Συγγνώμη, δεν μιλάω ελληνικά. (Sorry, I don't speak Greek.)
 
 > [!todo]- Fri · day 77 of 300
+> **Today's line:** Μήλο με γιαούρτι και ζάχαρη; Φέτα με λίγο αλάτι! (Apple with yogurt and sugar? Feta with a little salt!)
 > - [[μήλο|το μήλο]] **apple** (#1407): Μου αρέσουν τα μήλα. (I like apples.)
 > - [[ζάχαρη|η ζάχαρη]] **sugar** (#1408): Πίνω το τσάι χωρίς ζάχαρη. (I drink my tea without sugar.)
 > - [[αλάτι|το αλάτι]] **salt** (#1409): Πιπέρι ή αλάτι;
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[γιαούρτι|το γιαούρτι]] **yogurt** (#1411): Υπάρχει γιαούρτι στο ψυγείο.
 
 > [!todo]- Sat · day 78 of 300
+> **Today's line:** Με συγχωρείτε, ένα κουλούρι! Αξίζει. Καλή όρεξη! (Excuse me, one bread ring! It's worth it. Enjoy your meal!)
 > - [[κουλούρι|το κουλούρι]] **bread ring** (#1413): Αγόρασα κουλούρι και τσάι.
 > - [[φαγητό|το φαγητό]] **food, meal** (#348): Το φαγητό ήταν πολύ αλμυρό. (The food was very salty.)
 > - [[καλή όρεξη]] **enjoy your meal** (#1415)
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[με συγχωρείτε]] **excuse me** (#359): Με συγχωρείτε, παρακαλώ.
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w15` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the [[L12 Laiki street market-student|L12 Laiki street market]] scene using at least 5 of this week's words. Bring it to the group meet.

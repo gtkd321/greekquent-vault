@@ -9,18 +9,32 @@ tags: [greek-fiay]
 
 **Week of** Aug 23 to Aug 29 · **No class this week** · **Running total:** 1260 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Οικογενειακή ταινία στον δεύτερο όροφο. Όλα πάνε στραβά! (A family movie on the second floor. Everything goes wrong!)
+> 2. Ο θείος μου περπατάει νευρικός. Τι τρέλα! (My uncle walks around nervous. What madness!)
+> 3. Στον πίνακα, ένα ποτάμι. Το πέμπτο τραγούδι! (In the painting, a river. The fifth song!)
+> 4. Πεινάω! Κάθομαι άνετα. Σε ενημερώνω για την ταινία. (I'm hungry! I sit comfortably. I'll fill you in on the movie.)
+> 5. Ερωτευμένος ήρωας, τριγύρω μουσική. Απόλυτη ταινία! (A hero in love, music all around. The ultimate movie!)
+> 6. Διασκεδαστικό τέλος: παντρεύονται την περασμένη Κυριακή! (A fun ending: they got married last Sunday!)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **films and music** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 247 of 300
+> **Today's line:** Οικογενειακή ταινία στον δεύτερο όροφο. Όλα πάνε στραβά! (A family movie on the second floor. Everything goes wrong!)
 > - [[όροφος|ο όροφος]] **floor (story)** (#1096): Μένουμε στον τρίτο όροφο. (We live on the third floor.)
-> - [[τάφος|ο τάφος]] **grave** (#1097): Έχει ήδη ένα πόδι στον τάφο. (He already has one foot in the grave.)
+> - [[τάφος|ο τάφος]] **grave** (#1097): Επισκεφτήκαμε τον τάφο του παππού. (We visited grandpa's grave.)
 > - [[στραβά]] **crookedly, wrong** (#1098): Όλα πήγαν στραβά.
 > - [[επιτροπή|η επιτροπή]] **committee** (#1099): Είμαστε μέλη της επιτροπής.
 > - [[οικογενειακός]] **family (adj.)** (#1100): Τι θαυμάσιο οικογενειακό κειμήλιο!
 
 > [!todo]- Tue · day 248 of 300
+> **Today's line:** Ο θείος μου περπατάει νευρικός. Τι τρέλα! (My uncle walks around nervous. What madness!)
 > - [[νευρικός]] **nervous** (#1101): Είμαι νευρικός.
 > - [[άρθρο|το άρθρο]] **article** (#1102): Γράφω άρθρα τακτικά.
 > - [[περπατάω]] **I walk** (#1103): Θα περπατήσουμε.
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[θείος|ο θείος]] **uncle** (#1105): Αυτός είναι ο θείος μου. (He's my uncle.)
 
 > [!todo]- Wed · day 249 of 300
+> **Today's line:** Στον πίνακα, ένα ποτάμι. Το πέμπτο τραγούδι! (In the painting, a river. The fifth song!)
 > - [[εξουσία|η εξουσία]] **power, authority** (#1106): Ο χαρακτήρας αλλάζει όταν έρχεσαι στην εξουσία. (Character changes when you come into power.)
 > - [[έγγραφο|το έγγραφο]] **document** (#1107): Δε μπορώ να ανοίξω το έγγραφο.
 > - [[ποτάμι|το ποτάμι]] **river** (#1108): Πήγα στο ποτάμι για ψάρεμα. (I went fishing in the river.)
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[πέμπτος]] **fifth** (#1110): Μένω στον πέμπτο όροφο.
 
 > [!todo]- Thu · day 250 of 300
+> **Today's line:** Πεινάω! Κάθομαι άνετα. Σε ενημερώνω για την ταινία. (I'm hungry! I sit comfortably. I'll fill you in on the movie.)
 > - [[ενημερώνω]] **I inform** (#1111): Ήρθε χωρίς να ενημερώσει.
 > - [[προσεκτικά]] **carefully** (#1112): Ο Τζον άκουσε προσεκτικά. (John listened carefully.)
 > - [[πεινάω]] **I am hungry** (#1113): Δεν πεινάω πολύ αυτή τη στιγμή. (I'm not very hungry right now.)
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[άνετα]] **comfortably** (#1115): Δεν αισθανόμουν άνετα επειδή δεν μιλούσα γαλλικά.
 
 > [!todo]- Fri · day 251 of 300
+> **Today's line:** Ερωτευμένος ήρωας, τριγύρω μουσική. Απόλυτη ταινία! (A hero in love, music all around. The ultimate movie!)
 > - [[δικαιολογία|η δικαιολογία]] **excuse** (#1116): Άσε τις δικαιολογίες!
 > - [[απόλυτος]] **absolute** (#1117): Έχεις απόλυτο δίκαιο!
 > - [[ερωτευμένος]] **in love** (#1118): Είναι ερωτευμένος μέχρι τα μπούνια. (He's head over heels in love.)
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[τριγύρω]] **all around** (#1120)
 
 > [!todo]- Sat · day 252 of 300
+> **Today's line:** Διασκεδαστικό τέλος: παντρεύονται την περασμένη Κυριακή! (A fun ending: they got married last Sunday!)
 > - [[έκρηξη|η έκρηξη]] **explosion** (#1121): Ακούσαμε μια δυνατή έκρηξη.
 > - [[περασμένος]] **past, last** (#1122): Πού ήσουν την περασμένη Δευτέρα; (Where were you last Monday?)
 > - [[διασκεδαστικός]] **fun, entertaining** (#1123): Το παιχνίδι είναι διασκεδαστικό. (The game is fun.)
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[λειτουργία|η λειτουργία]] **operation, function; liturgy** (#1125): Το ασανσέρ είναι εκτός λειτουργίας. (The elevator is out of order.)
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w44` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the theme **films and music** using at least 5 of this week's words. Bring it to the group meet.

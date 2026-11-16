@@ -9,11 +9,24 @@ tags: [greek-fiay]
 
 **Week of** Oct 18 to Oct 24 · **No class this week** · **Running total:** 1500 of 1,500
 
+## This week's story
+
+One line a day, same people, one scene. Read it from the top each day, then add today's line. On Sunday, read the whole thing aloud.
+
+> [!quote]- The week in six lines
+> 1. Η υπόσχεση: ένα μικρό κατάστημα στο γκαράζ, με ροζ πόρτα. (The promise: a little shop in the garage, with a pink door.)
+> 2. Μετακομίζω! Μπερδεμένη, αλλά με χαμόγελο και θέα. (I'm moving! Confused, but with a smile and a view.)
+> 3. Σύμπτωση: το τυρί κοστίζει όσο πέρσι. Λιγότερο άγχος! (Coincidence: the cheese costs as much as last year. Less stress!)
+> 4. Ευγνώμων και θετική. Σέβομαι την άσκηση! (Grateful and positive. I respect the practice!)
+> 5. Ο προπονητής μου λέει: «Όχι αρνητικός!» (My coach tells me: 'Not negative!')
+> 6. Μια παρεξήγηση: η φάρμα δεν είναι στην Αθήνα. Για μένα, καλύτερα! (A misunderstanding: the farm isn't in Athens. For me, all the better!)
+
 ## This week's words
 
 Five a day. The words are the next most frequent on the list, pulled toward the theme **a year in greek** where they fit. Lesson words you meet in class come first.
 
 > [!todo]- Mon · day 295 of 300
+> **Today's line:** Η υπόσχεση: ένα μικρό κατάστημα στο γκαράζ, με ροζ πόρτα. (The promise: a little shop in the garage, with a pink door.)
 > - [[κατάστημα|το κατάστημα]] **store** (#1350): Τη συνάντησα στο κατάστημα τυχαία. (I met her in the store by accident.)
 > - [[γκαράζ|το γκαράζ]] **garage** (#1351): Ο πατέρας μου είναι στο γκαράζ. (My father is in the garage.)
 > - [[ροζ]] **pink** (#1352): Το γουρούνι είναι ροζ. (The pig is pink.)
@@ -21,6 +34,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[υπόσχεση|η υπόσχεση]] **promise** (#1354): Ο Άιζενχάουερ κράτησε την υπόσχεσή του.
 
 > [!todo]- Tue · day 296 of 300
+> **Today's line:** Μετακομίζω! Μπερδεμένη, αλλά με χαμόγελο και θέα. (I'm moving! Confused, but with a smile and a view.)
 > - [[μετακομίζω]] **I move (house)** (#1355): Ο Τομ μετακόμισε.
 > - [[αδυναμία|η αδυναμία]] **weakness** (#1356)
 > - [[θέα|η θέα]] **view** (#1357): Μου αρέσει η θέα.
@@ -28,6 +42,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χαμόγελο|το χαμόγελο]] **smile** (#1360): Ο Τομ είχε ωραίο χαμόγελο.
 
 > [!todo]- Wed · day 297 of 300
+> **Today's line:** Σύμπτωση: το τυρί κοστίζει όσο πέρσι. Λιγότερο άγχος! (Coincidence: the cheese costs as much as last year. Less stress!)
 > - [[σύμπτωση|η σύμπτωση]] **coincidence** (#1361)
 > - [[άγχος|το άγχος]] **stress, anxiety** (#1362): Είχατε άγχος με τα μαθήματα;
 > - [[κοστίζω]] **I cost** (#1363): Πόσο κοστίζουν τ' αυγά; (How much do eggs cost?)
@@ -35,6 +50,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[σενάριο|το σενάριο]] **script, scenario** (#1365): Γράφει σενάρια με προβλέψιμες πλοκές.
 
 > [!todo]- Thu · day 298 of 300
+> **Today's line:** Ευγνώμων και θετική. Σέβομαι την άσκηση! (Grateful and positive. I respect the practice!)
 > - [[σέβομαι]] **I respect** (#1366): Αυτή δε σέβεται κανέναν. (She has no respect for anyone.)
 > - [[άσκηση|η άσκηση]] **exercise** (#1367): Υπάρχουν δέκα ασκήσεις στο βιβλίο.
 > - [[θετικός]] **positive** (#1368): Κάντε κάτι θετικό.
@@ -42,6 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ευγνώμων]] **grateful** (#1370): Θα 'πρεπε να 'σαι ευγνώμων.
 
 > [!todo]- Fri · day 299 of 300
+> **Today's line:** Ο προπονητής μου λέει: «Όχι αρνητικός!» (My coach tells me: 'Not negative!')
 > - [[αποτελώ]] **I constitute** (#1371): Όλοι οι άνθρωποι αποτελούν έναν λαό.
 > - [[προπονητής|ο προπονητής]] **coach** (#1372): Είμαι ο προπονητής.
 > - [[νόμιμος]] **legal** (#1373): Είναι νόμιμα τα πυροτεχνήματα στην Αυστραλία;
@@ -49,6 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χειρουργείο|το χειρουργείο]] **operating room** (#1375): Απαγορεύεται η είσοδος στο χειρουργείο. (Entry to the operating room is prohibited.)
 
 > [!todo]- Sat · day 300 of 300
+> **Today's line:** Μια παρεξήγηση: η φάρμα δεν είναι στην Αθήνα. Για μένα, καλύτερα! (A misunderstanding: the farm isn't in Athens. For me, all the better!)
 > - [[παρεξήγηση|η παρεξήγηση]] **misunderstanding** (#1376): Προφανώς έχει γίνει κάποια παρεξήγηση.
 > - [[φάρμα|η φάρμα]] **farm** (#1377): Δούλεψα σε μία φάρμα.
 > - [[μισθός|ο μισθός]] **salary** (#1378): Αυτοί μείωσαν τον μισθό του. (They reduced his salary.)
@@ -56,6 +74,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[μένα]] **me (emphatic)** (#1380): Σε μένα μιλάτε;
 
 > [!check]- Sun · review
+> 0. Read [[#This week's story|this week's story]] aloud from the top, all six lines.
 > 1. Anki: study the `fiay::w52` cards until each is right once.
 > 2. Re-mark this week's 30 words on your printed list: red, yellow, or green.
 > 3. **Scene task:** write a 4-line dialogue for the theme **a year in greek** using at least 5 of this week's words. Bring it to the group meet.

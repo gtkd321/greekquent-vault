@@ -18,6 +18,18 @@ tags: [greek-student, kid]
 - Grown-up: **Τι έχεις;** — What do you have?
 - You: **Έχω ένα κλειδί.** — I have a key.
 
+## You are the teacher
+
+Swap: now you are the teacher. Ask the grown-up the questions.
+
+- You (teacher): **Τι έχω;** — What do I have?
+- You (teacher): **Έχεις ένα αυτοκίνητο;** — Do you have a car?
+- You (teacher): **Έχεις μια μπάλα;** — Do you have a ball?
+- Grown-up: answers, and sometimes gets it wrong on purpose. Catch it.
+- You: **Όχι! Λάθος!** — No! Wrong!
+- Grown-up: **Συγγνώμη!** — Sorry! (then says it right)
+- You: **Μπράβο! Σωστά!** — Well done! That's right!
+
 ## Make it
 
 Each object gets a picture card the kid draws and colors. The cards become his flashcards for next week.

@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-16a';
+const VAULT_RELEASE = '2026-11-16b';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -29,6 +29,7 @@ const NAME_KEY = 'greekquent-first-name';
 const LOOKUPS = MY_WORK + 'Words I looked up.md';
 const PROGRESS = MY_WORK + 'My progress.md';      // word colors (red, yellow, green) live in this note's properties
 const MISSES = MY_WORK + 'Game misses.md';
+const CARDS = MY_WORK + 'My word cards.md';   // chunks and sentences students add to word notes
 const TODAY = 'Today.md';
 const WHATS_NEW = "What's New.md";
 const SETUP = 'Setting up.md';
@@ -165,6 +166,48 @@ class LookupModal extends Modal {
     }
     this.contentEl.empty();
   }
+}
+
+// ---------- Add to this card: your own chunks and sentences for a word ----------
+class CardModal extends Modal {
+  constructor(app, plugin, word) { super(app); this.plugin = plugin; this.word = word; this.kind = 'chunk'; }
+  onOpen() {
+    const c = this.contentEl; c.addClass('gq-modal'); this.titleEl.setText(`Add to ${this.word}`);
+    const kinds = c.createDiv('gq-btns');
+    const kb = [['chunk', 'Chunk'], ['sentence', 'Sentence']].map(([k, t]) => { const b = kinds.createEl('button', { text: t }); b.onclick = () => { this.kind = k; paint(); }; return [k, b]; });
+    const hint = c.createDiv('gq-hint');
+    const paint = () => {
+      kb.forEach(([k, b]) => b.toggleClass('mod-cta', k === this.kind));
+      hint.setText(this.kind === 'chunk' ? `A chunk is a short piece you say as one, like "Έχεις τον…;" (Do you have the…?).` : `A sentence is a whole line you would really say, with ${this.word} in it.`);
+      this.gr.setAttr('placeholder', this.kind === 'chunk' ? 'Greek chunk' : 'Greek sentence');
+    };
+    this.gr = c.createEl('textarea', { attr: { rows: 2, autocapitalize: 'off', spellcheck: 'false' } }); this.gr.addClass('gq-input');
+    this.en = c.createEl('input', { type: 'text', attr: { placeholder: 'English (or leave empty and tap Translate)', autocapitalize: 'off' } }); this.en.addClass('gq-input');
+    paint();
+    const msg = c.createDiv('gq-hint');
+    const row = c.createDiv('gq-btns');
+    const tb = row.createEl('button', { text: 'Translate' });
+    tb.onclick = async () => {
+      const g = this.gr.value.trim(), e = this.en.value.trim();
+      if (!g && !e) { msg.setText('Type the Greek or the English first.'); return; }
+      msg.setText('Translating...');
+      const tr = await this.plugin.translate(g || e);
+      if (!tr) { msg.setText('Could not translate right now. You can still save it.'); return; }
+      if (g) this.en.value = tr.fromGreek ? tr.text : this.en.value; else this.gr.value = tr.greek;
+      msg.setText(tr.say ? 'say it: ' + tr.say : '');
+    };
+    const hb = row.createEl('button', { text: 'Hear it' }); hb.onclick = () => this.gr.value.trim() && say(this.gr.value.trim());
+    const sv = row.createEl('button', { text: 'Save', cls: 'mod-cta' });
+    sv.onclick = async () => {
+      const g = this.gr.value.trim();
+      if (!g) { msg.setText('Type the Greek first.'); return; }
+      if (!isGreek(g)) { msg.setText('The first box is for the Greek. Tap Translate to fill it in.'); return; }
+      await this.plugin.saveCard(this.word, this.kind, g, this.en.value.trim());
+      this.close();
+    };
+    setTimeout(() => this.gr.focus(), 50);
+  }
+  onClose() { this.contentEl.empty(); }
 }
 
 // ---------- Ask the group: a question about the note you are on, ready to paste into GroupMe ----------
@@ -418,7 +461,7 @@ class PairModal extends Modal {
 
 module.exports = class GreekquentStudentLayout extends Plugin {
   onload() {
-    this.busy = false; this.todayEls = new Set(); this.bars = new Set();
+    this.busy = false; this.todayEls = new Set(); this.bars = new Set(); this.cardBoxes = new Set();
     document.body.classList.add('greekquent-student');
     this.registerView(WEB, leaf => new OldWebView(leaf, this));
     // Left toolbar: four buttons. Today is the start screen; More holds the rest.
@@ -436,12 +479,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Today page, word color bar, and misses sent back from the games.
     this.registerMarkdownCodeBlockProcessor('greekquent-today', (src, el, ctx) => { this.todayEls.add(el); this.renderToday(el); });
     this.registerMarkdownPostProcessor((el, ctx) => this.wordBar(el, ctx));
+    this.registerMarkdownPostProcessor((el, ctx) => this.cardBox(el, ctx));
+    this.addCommand({ id: 'add-to-card', name: 'Add a chunk or sentence to this word', callback: () => { const f = this.app.workspace.getActiveFile(); if (!f || !f.path.startsWith('Words/')) { new Notice('Open a word note first.'); return; } new CardModal(this.app, this, f.basename).open(); } });
     this.registerObsidianProtocolHandler('greekquent', p => this.fromGame(p));
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path === TODAY) this.refreshToday(); }));
     // Student questions: video questions and answers from the public library, shown at the end of the matching note.
     this.registerMarkdownPostProcessor((el, ctx) => this.questionsBox(el, ctx));
     this.registerMarkdownCodeBlockProcessor('greekquent-questions', (src, el) => this.questionsIndex(el));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) this.words = null; }));
+    this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === CARDS) this.refreshCards(); }));
     // My Work notes open ready to type in.
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path.startsWith(MY_WORK)) setTimeout(() => this.editMode(f), 50); }));
     this.addCommand({ id: 'open-word-graph', name: 'Open word graph', callback: () => this.openGraph() });
@@ -944,6 +990,60 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     setTimeout(() => { this.paintBars(); this.refreshToday(); }, 300);
   }
   async setupSeen() { const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.setup_seen = true; }); setTimeout(() => this.refreshToday(), 300); }
+  // ---------- My word cards: chunks and sentences added to word notes ----------
+  cardLine(kind, gr, en) { const clean = t => t.replace(/\s+/g, ' ').replace(/\*\*/g, '').trim(); return `- ${kind === 'sentence' ? 'Sentence: ' : ''}**${clean(gr)}**${en ? ' — ' + clean(en) : ''}`; }
+  async myCards(word) {
+    let txt = ''; try { txt = await this.app.vault.adapter.read(CARDS); } catch (e) { return []; }
+    const out = [];
+    for (const sec of txt.split(/\n(?=## )/)) {
+      const m = sec.match(/^## (.+)/); if (!m || fold(m[1]) !== fold(word)) continue;
+      for (const l of sec.split('\n').slice(1)) {
+        const x = l.match(/^- (Sentence: )?(?:\*\*)?(.+?)(?:\*\*)?(?: — (.*))?$/); if (!x || !x[2].trim()) continue;
+        out.push({ kind: x[1] ? 'sentence' : 'chunk', gr: x[2].replace(/\*\*/g, '').trim(), en: (x[3] || '').trim() });
+      }
+    }
+    return out;
+  }
+  async saveCard(word, kind, gr, en) {
+    const line = this.cardLine(kind, gr, en);
+    const ad = this.app.vault.adapter;
+    let txt = ''; try { txt = await ad.read(CARDS); } catch (e) { txt = '# My word cards\n\nChunks and sentences you added to word notes. Each one shows on its word note under Chunks. You can fix or delete lines here.\n'; }
+    const secs = txt.split(/\n(?=## )/); let done = false;
+    for (let k = 0; k < secs.length; k++) {
+      const m = secs[k].match(/^## (.+)/); if (!m || fold(m[1]) !== fold(word)) continue;
+      if (!secs[k].split('\n').some(l => l.trim() === line)) secs[k] = secs[k].replace(/\s*$/, '\n') + line + '\n';
+      done = true; break;
+    }
+    if (!done) secs.push(`## ${word}\n${line}\n`);
+    if (!(await ad.exists(MY_WORK.slice(0, -1)))) await ad.mkdir(MY_WORK.slice(0, -1));
+    await ad.write(CARDS, secs.map(x => x.replace(/\s*$/, '')).join('\n\n') + '\n');
+    new Notice(`Added to ${word}. It is saved in My Work, so updates never erase it.`);
+    this.refreshCards(word);
+  }
+  cardBox(el, ctx) {
+    if (!ctx || !ctx.sourcePath || !ctx.sourcePath.startsWith('Words/')) return;
+    const h = [...el.querySelectorAll('h2')].find(x => x.textContent.trim() === 'Chunks'); if (!h || el.querySelector('.gq-cards')) return;
+    const word = ctx.sourcePath.slice(6).replace(/\.md$/, '');
+    const box = createDiv('gq-cards'); h.after(box);
+    const rec = { word, box }; this.cardBoxes.add(rec); this.paintCards(rec);
+  }
+  async paintCards(rec) {
+    const box = rec.box, list = await this.myCards(rec.word); box.empty();
+    if (list.length) {
+      box.createEl('strong', { text: 'Yours' });
+      const ul = box.createEl('ul');
+      for (const it of list) {
+        const li = ul.createEl('li');
+        if (it.kind === 'sentence') li.appendText('Sentence: ');
+        li.createEl('strong', { text: it.gr }); if (it.en) li.appendText(' — ' + it.en);
+        const hb = li.createEl('button', { text: 'Hear', cls: 'gq-mini', attr: { 'aria-label': 'Say it' } }); hb.onclick = () => say(it.gr);
+      }
+    }
+    const row = box.createDiv('gq-btns');
+    const add = row.createEl('button', { text: 'Add a chunk or sentence' }); add.onclick = () => new CardModal(this.app, this, rec.word).open();
+    if (list.length) { const o = row.createEl('button', { text: 'Edit mine' }); o.onclick = () => this.openNote(CARDS); }
+  }
+  refreshCards(word) { for (const r of [...this.cardBoxes]) { if (!r.box.isConnected) { this.cardBoxes.delete(r); continue; } if (!word || r.word === word) this.paintCards(r); } }
   wordBar(el, ctx) {
     if (!ctx || !ctx.sourcePath || !ctx.sourcePath.startsWith('Words/')) return;
     const p = el.querySelector('p'); if (!p || !/say it:/.test(p.textContent) || el.querySelector('.gq-wordbar')) return;

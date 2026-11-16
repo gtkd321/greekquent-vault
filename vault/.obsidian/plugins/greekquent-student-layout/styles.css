@@ -103,3 +103,6 @@ body.greekquent-student .gq-graph > .view-header { display: none !important; }
 .gq-bonus { flex-wrap: wrap; }
 .gq-bonus .gq-hit-text .gq-hit-sub { flex: none; }
 .gq-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.gq-cards { margin: 4px 0 12px; padding: 8px 12px; border: 1px dashed var(--background-modifier-border); border-radius: 8px; }
+.gq-cards ul { margin: 4px 0 8px; }
+.gq-cards .gq-mini { margin-left: 8px; padding: 0 8px; height: 24px; font-size: 12px; }

@@ -22,6 +22,16 @@ tags: [greek-student, kid]
 - You: **Δεν ξέρω!** — I don't know!
 - Grown-up: **Εδώ είναι!** — Here he is!
 
+**Pass him over:** one of you has Spider-Man, the other asks for him. Then swap.
+
+- Grown-up: **Έχεις τον Spider-Man;** — Do you have Spider-Man?
+- You: **Ναι, έχω τον Spider-Man!** — Yes, I have Spider-Man!
+- You: **Ορίστε.** — Here you go.
+- Grown-up: **Ευχαριστώ! Τώρα έχω τον Spider-Man!** — Thank you! Now I have Spider-Man!
+- You: **Έχεις τον Spider-Man;** — Do you have Spider-Man?
+- Grown-up: **Ναι, έχω τον Spider-Man. Ορίστε.** — Yes, I have Spider-Man. Here you go.
+- You: **Ευχαριστώ!** — Thank you!
+
 ## Make it
 
 The kid draws a simple map of the room and sticks a small Spider-Man sticker wherever the toy was found.
@@ -40,6 +50,10 @@ Do the move every time you say it.
 - **Πόσο κάνει;**: Rub thumb and fingers together.
 - **Δύο ευρώ.**: Tap two fingers on the counter, one coin at a time.
 - **Δεν ξέρω.**: Shrug with palms up.
+- **Έχεις…;**: Hold out an open hand, palm up.
+- **Έχω…**: Hug the toy to your chest.
+- **Ορίστε.**: Hand the toy over with both hands.
+- **Ευχαριστώ!**: Hand on your heart.
 
 ---
 ← [[K04 Telescope spy-student|K04 Telescope spy]] · [[K06 Traffic-light verb dice-student|K06 Traffic-light verb dice]] →

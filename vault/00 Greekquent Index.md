@@ -27,6 +27,7 @@
 > - Type in the **My Work** folder. Updates never change it.
 > - **Send homework** (More menu) texts the newest dated section of [[My Work/Homework|Homework]] to the teacher.
 > - Every look-up is saved in [[My Work/Words I looked up|Words I looked up]], with the Greek.
+> - Chunks and sentences you add to word notes are saved in [[My Work/My word cards|My word cards]].
 > - Spotted a mistake? [Text feedback to the teacher](sms:+18033990665?&body=Greekquent%20feedback%3A%20), or More, then Share feedback.
 
 > [!info]- Where the data comes from

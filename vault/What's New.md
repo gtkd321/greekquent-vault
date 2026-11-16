@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 16, later: Your own chunks and Spider-Man
+> - **Add to a word card:** on any word note, under Chunks, tap **Add a chunk or sentence**. Type the Greek, tap Translate for the English, hear it, and save. It shows on that word's note under **Yours**.
+> - Everything you add is saved in My Work, in **My word cards**, so updates never erase it. Fix or delete lines there any time.
+> - **Kid lesson 5 (Where is Spider-Man?):** new pass-it round. Έχεις τον Spider-Man; Ναι, έχω τον Spider-Man! Ορίστε. Ευχαριστώ!
+
 > [!info]- November 16: Look up stays in Obsidian
 > - **Bonus words are translated right here.** Type a word that is not in the 1,500 and the Greek shows up in the Look up box, with how to say it and a Hear it button. No more jumping to the browser.
 > - **Words I looked up now saves the Greek** next to every bonus word.

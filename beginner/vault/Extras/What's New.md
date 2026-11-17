@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, evening: Greek word order is more flexible
+> - Today's conversation now accepts other natural orders, like putting the verb first. Small words (ο, στο, να, δεν, μου) still need to stay next to their word. When your order differs, you see the line as written too.
+> - Dragging tiles on a phone should no longer open the side panel.
+
 > [!info]- November 17, afternoon: Build the conversation in Greek
 > - Today's conversation now shows the English, and you build the sentence in Greek from word tiles. The extra tiles are real Greek words from this week, so look closely at small ones like στη and στο.
 > - Miss once and a **Hear it** button appears. Miss twice and **Show me** shows the Greek.

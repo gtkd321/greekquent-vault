@@ -308,3 +308,6 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-cv-done .gq-line { display: inline; }
 .gq-story .gq-cv-prompt { font-size: 1.2em; }
 .gq-cv-en { margin: 6px 0; font-size: 1.1em; }
+.gq-cv-fb { margin: 4px 0; }
+.gq-cv-fb .gq-line { display: block; font-size: 1.05em; color: var(--text-normal); }
+.gq-convo { overscroll-behavior: contain; }

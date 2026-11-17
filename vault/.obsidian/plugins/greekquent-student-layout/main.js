@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17l';
+const VAULT_RELEASE = '2026-11-17m';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1586,7 +1586,45 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const toks = s => String(s).replace(/[“”"«»]/g, '').split(/\s+/).map(w => w.replace(/^[^\p{L}\p{N}']+|[^\p{L}\p{N}']+$/gu, '')).filter(Boolean);
     const norm = w => w.toLowerCase().replace(/’/g, "'");
     let seed = n * 97 + 13; const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    // Flexible word order: small words (articles, prepositions, να/θα/δεν, μου/σου) stay glued to their word;
+    // one chunk may move to another place in its clause; a question word stays first.
+    const FWD = new Set("ο η το οι τα τον την τη του της των τους τις στο στη στην στον στα στους στις στου στης σε σ' από απ' με για χωρίς μέχρι προς ως να θα δεν μην μη ας".split(' '));
+    const BACK = new Set(['μου', 'σου', 'μας', 'σας']), BOTH = new Set(['και', 'κι', 'ή', 'ούτε']);
+    const QW = new Set('πού τι ποιος ποια ποιο ποιοι ποιες ποιον ποιας ποιου πότε πώς γιατί πόσο πόση πόσα πόσοι πόσες μήπως'.split(' '));
+    const clausesOf = g => String(g).split(/[,.;;!:·…?]+/).map(c => toks(c).map(norm)).filter(c => c.length).map(ws => {
+      const ch = [[ws[0]]];
+      for (let k = 1; k < ws.length; k++) {
+        const a = ws[k - 1], b = ws[k];
+        const glue = FWD.has(a) || BOTH.has(a) || BOTH.has(b) || (BACK.has(b) && !FWD.has(a));
+        if (glue) ch[ch.length - 1].push(b); else ch.push([b]);
+      }
+      return { n: ws.length, ch: ch.map(c => c.join(' ')), pin: QW.has(ws[0]) };
+    });
+    const oneMove = (tg, s, pin) => {
+      const key = s.join('|'); if (tg.join('|') === key) return true;
+      if (pin && s[0] !== tg[0]) return false;
+      if (tg.length <= 3) return [...s].sort().join('|') === [...tg].sort().join('|');
+      for (let a = 0; a < tg.length; a++) { const rest = tg.slice(0, a).concat(tg.slice(a + 1)); for (let b = 0; b <= rest.length; b++) { if (b === a) continue; const c = rest.slice(0, b).concat([tg[a]], rest.slice(b)); if (c.join('|') === key) return true; } }
+      return false;
+    };
+    const accepts = (got, greek) => {
+      const cl = clausesOf(greek); let pos = 0;
+      if (got.length !== cl.reduce((s, c) => s + c.n, 0)) return false;
+      for (const c of cl) {
+        const seg = got.slice(pos, pos + c.n); pos += c.n; let ok = false;
+        const walk = (k, left, acc) => {
+          if (ok) return; if (k === seg.length) { if (!left.length && oneMove(c.ch, acc, c.pin)) ok = true; return; }
+          for (let q = 0; q < left.length; q++) { const w = left[q].split(' '); if (seg.slice(k, k + w.length).join(' ') === left[q]) walk(k + w.length, left.slice(0, q).concat(left.slice(q + 1)), acc.concat([left[q]])); }
+        };
+        walk(0, c.ch, []); if (!ok) return false;
+      }
+      return true;
+    };
     const wrap = card.createDiv('gq-convo');
+    // Keep drags and swipes on the tiles from opening Obsidian's side panels on phones.
+    const stopT = e => e.stopPropagation();
+    for (const ev of ['touchstart', 'touchend', 'pointerdown', 'pointermove', 'pointerup']) wrap.addEventListener(ev, stopT, { passive: true });
+    wrap.addEventListener('touchmove', e => { e.stopPropagation(); if (e.target && e.target.closest && e.target.closest('.gq-tile, .gq-cv-ans, .gq-cv-bank')) e.preventDefault(); }, { passive: false });
     const paint = () => {
       wrap.empty(); seed = n * 97 + 13 + i * 7;
       for (let k = 0; k < Math.min(i, turns.length); k++) {
@@ -1636,14 +1674,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const chk = row.createEl('button', { text: 'Check', cls: 'mod-cta' });
       const hint = row.createEl('button', { text: 'Hear it', cls: 'gq-mini' }); hint.style.display = 'none'; hint.onclick = () => say(x[1]);
       const show = row.createEl('button', { text: 'Show me', cls: 'gq-mini' }); show.style.display = 'none';
+      const fb = cur.createDiv('gq-hint gq-cv-fb');
       const en = this.lineEl(cur, x[1], words); en.addClass('gq-cv-en'); en.style.display = 'none';
       show.onclick = () => { en.style.display = ''; show.remove(); };
       chk.onclick = () => {
-        const got = placed.map(tl => norm(tl.w)).join(' ');
-        if (got === target.map(norm).join(' ')) {
-          ans.addClass('gq-ok'); chk.disabled = true; say(x[1]);
-          setTimeout(() => { i++; save(); paint(); if (i >= turns.length) onDone(); }, 900);
-        } else { misses++; ans.removeClass('gq-bad'); void ans.offsetWidth; ans.addClass('gq-bad'); if (misses >= 1) hint.style.display = ''; if (misses >= 2) show.style.display = ''; }
+        const got = placed.map(tl => norm(tl.w)), exact = got.join(' ') === target.map(norm).join(' ');
+        if (exact || accepts(got, x[1])) {
+          ans.addClass('gq-ok'); chk.disabled = true; say(x[1]); fb.empty();
+          if (!exact) { fb.createDiv({ text: 'Also right. The line says:' }); this.lineEl(fb, x[1], words); }
+          setTimeout(() => { i++; save(); paint(); if (i >= turns.length) onDone(); }, exact ? 900 : 2600);
+        } else { misses++; fb.empty(); if (got.length === target.length && [...got].sort().join(' ') === target.map(norm).sort().join(' ')) fb.setText('All the right words. Try another order: keep small words like ο, στο, να and δεν with the word after them.'); ans.removeClass('gq-bad'); void ans.offsetWidth; ans.addClass('gq-bad'); if (misses >= 1) hint.style.display = ''; if (misses >= 2) show.style.display = ''; }
       };
     };
     paint();

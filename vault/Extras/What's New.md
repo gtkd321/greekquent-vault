@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, later: Word web fix
+> - The Word web could stop with "could not open this word" on some phones. It now draws in a way that works on every phone and Obsidian version.
+
 > [!info]- November 17, night: One page, no tabs
 > - Greekquent now always shows one page at a time. The Word web and word notes open in the same place, and any leftover tabs close on their own. Nothing you wrote is lost.
 > - Use Back and Forward at the bottom to move between pages.

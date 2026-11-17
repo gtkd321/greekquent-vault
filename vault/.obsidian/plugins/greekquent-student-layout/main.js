@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17r';
+const VAULT_RELEASE = '2026-11-17s';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -120,6 +120,8 @@ const WEB = 'greekquent-word-web';
 const WEB_MAX = 9;
 const WEB_ORDER = { v: 0, n: 1, d: 2, o: 3, a: 4 };
 const SVGNS = 'http://www.w3.org/2000/svg';
+// SVG made with plain DOM calls, so the web draws the same on every Obsidian version and phone.
+const svgEl = (parent, tag, cls, attrs) => { const el = document.createElementNS(SVGNS, tag); if (cls) el.setAttribute('class', cls); for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, String(v)); parent.appendChild(el); return el; };
 class WordWebView extends ItemView {
   constructor(leaf, plugin) { super(leaf); this.plugin = plugin; this.path = ''; this.hist = []; this.pos = -1; this.nodes = new Map(); this.edges = []; this.raf = 0; this.data = new Map(); }
   getViewType() { return WEB; }
@@ -142,8 +144,8 @@ class WordWebView extends ItemView {
     this.agree = box.createDiv('gq-agree'); this.agree.hide();
     box.createDiv({ cls: 'gq-hint gq-ww-help', text: 'Tap a word to move there. Hold a word to see its links. Drag to play.' });
     this.stage = box.createDiv('gq-ww-stage');
-    this.svg = this.stage.createSvg('svg', { attr: { 'aria-label': 'Word web' } });
-    this.gE = this.svg.createSvg('g'); this.gN = this.svg.createSvg('g');
+    this.svg = svgEl(this.stage, 'svg', '', { 'aria-label': 'Word web' });
+    this.gE = svgEl(this.svg, 'g'); this.gN = svgEl(this.svg, 'g');
     this.chip = this.stage.createDiv('gq-ww-chip');
     const key = box.createDiv('gq-web-key');
     for (const [cls, tx] of [['v', 'verbs (doing)'], ['n', 'nouns (things, people)'], ['a', 'describing words'], ['d', 'how, when, where'], ['o', 'little words']]) { const s = key.createSpan('gq-key'); s.createSpan('gq-kdot gq-k' + cls); s.appendText(tx); }
@@ -221,19 +223,19 @@ class WordWebView extends ItemView {
       if (!m || m.dead) { if (m) m.g.remove(); m = this.mk(x.k, x.w, ox + (Math.random() - .5) * 6, oy + (Math.random() - .5) * 6); }
       Object.assign(m, { dead: false, top: 1, tx: x.tx, ty: x.ty, free: false, x0: x });
     }
-    for (const m of this.nodes.values()) { m.g.toggleClass('is-center', m === this.center); if (!m.dead) m.t.textContent = this.label(m.k); }
+    for (const m of this.nodes.values()) { m.g.classList.toggle('is-center', m === this.center); if (!m.dead) m.t.textContent = this.label(m.k); }
     this.edges = list.map(x => ({ a: p, b: x.k, inter: false }));
     for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) if (this.linked(list[i].k, list[j].k)) this.edges.push({ a: list[i].k, b: list[j].k, inter: true });
-    this.gE.empty(); for (const e of this.edges) e.el = this.gE.createSvg('line', { cls: 'gq-ww-edge' + (e.inter ? ' is-inter' : '') });
+    while (this.gE.firstChild) this.gE.firstChild.remove(); for (const e of this.edges) e.el = svgEl(this.gE, 'line', 'gq-ww-edge' + (e.inter ? ' is-inter' : ''));
     this.paintTop(w); this.unhold(); this.kick();
     this.leaf.updateHeader && this.leaf.updateHeader(); this.app.workspace.requestSaveLayout();
   }
   mk(k, w, x, y) {
-    const g = this.gN.createSvg('g', { cls: 'gq-ww-node' });
-    g.createSvg('circle', { cls: 'gq-ww-ring', attr: { r: 15 } });
-    g.createSvg('circle', { cls: 'gq-ww-dot gq-ww-' + w.t, attr: { r: 9 } });
-    const t = g.createSvg('text', { attr: { y: 28, lang: 'el' } }); t.textContent = this.label(k);
-    g.createSvg('circle', { cls: 'gq-ww-hit', attr: { r: 30 } });
+    const g = svgEl(this.gN, 'g', 'gq-ww-node');
+    svgEl(g, 'circle', 'gq-ww-ring', { r: 15 });
+    svgEl(g, 'circle', 'gq-ww-dot gq-ww-' + w.t, { r: 9 });
+    const t = svgEl(g, 'text', '', { y: 28, lang: 'el' }); t.textContent = this.label(k);
+    svgEl(g, 'circle', 'gq-ww-hit', { r: 30 });
     const m = { k, g, t, x, y, vx: 0, vy: 0, tx: 0, ty: 0, op: 0, top: 1, dead: false };
     this.bind(m); this.nodes.set(k, m); return m;
   }
@@ -257,10 +259,10 @@ class WordWebView extends ItemView {
       if (m !== drag) { m.vx *= 0.78; m.vy *= 0.78; m.x += m.vx; m.y += m.vy; }
       m.op += (m.top - m.op) * 0.18; energy += Math.abs(m.vx) + Math.abs(m.vy) + Math.abs(m.top - m.op) * 10;
       if (m.dead && m.op < 0.02) { m.g.remove(); this.nodes.delete(m.k); continue; }
-      m.g.setAttr('transform', `translate(${m.x.toFixed(1)},${m.y.toFixed(1)})`); m.g.style.opacity = m.op.toFixed(3);
+      m.g.setAttribute('transform', `translate(${m.x.toFixed(1)},${m.y.toFixed(1)})`); m.g.style.opacity = m.op.toFixed(3);
     }
     for (const e of this.edges) { const a = this.nodes.get(e.a), b = this.nodes.get(e.b); if (!a || !b || !e.el) continue;
-      e.el.setAttr('x1', a.x.toFixed(1)); e.el.setAttr('y1', a.y.toFixed(1)); e.el.setAttr('x2', b.x.toFixed(1)); e.el.setAttr('y2', b.y.toFixed(1)); e.el.style.opacity = Math.min(a.op, b.op).toFixed(3); }
+      e.el.setAttribute('x1', a.x.toFixed(1)); e.el.setAttribute('y1', a.y.toFixed(1)); e.el.setAttribute('x2', b.x.toFixed(1)); e.el.setAttribute('y2', b.y.toFixed(1)); e.el.style.opacity = Math.min(a.op, b.op).toFixed(3); }
     this.quiet = energy < 0.15 ? this.quiet + 1 : 0;
     if (this.quiet < 20 || drag) this.raf = requestAnimationFrame(() => this.tick());
   }
@@ -285,10 +287,10 @@ class WordWebView extends ItemView {
     m.g.addEventListener('pointercancel', () => { if (this.down) clearTimeout(this.down.t); this.down = null; this.drag = null; this.unhold(); this.kick(); });
   }
   hold(m) {
-    this.held = m; m.g.addClass('is-held'); if (navigator.vibrate) try { navigator.vibrate(10); } catch (e) {}
+    this.held = m; m.g.classList.add('is-held'); if (navigator.vibrate) try { navigator.vibrate(10); } catch (e) {}
     const near = new Set([m.k]);
-    for (const e of this.edges) { const on = e.a === m.k || e.b === m.k; e.el.toggleClass('is-hot', on); e.el.toggleClass('is-dim', !on); if (on) { near.add(e.a); near.add(e.b); } }
-    for (const o of this.nodes.values()) o.g.toggleClass('is-dim', !near.has(o.k));
+    for (const e of this.edges) { const on = e.a === m.k || e.b === m.k; e.el.classList.toggle('is-hot', on); e.el.classList.toggle('is-dim', !on); if (on) { near.add(e.a); near.add(e.b); } }
+    for (const o of this.nodes.values()) o.g.classList.toggle('is-dim', !near.has(o.k));
     const w = this.data.get(m.k) || {}, x = m.x0; this.chip.empty();
     this.chip.createEl('b', { text: this.label(m.k), attr: { lang: 'el' } }); this.chip.appendText(' · ' + (w.e || '') + (w.say ? ' · say it: ' + w.say : ''));
     if (x && x.phrase && m !== this.center) { const d = this.chip.createDiv({ attr: { lang: 'el' } }); d.appendText(x.phrase); if (x.en) d.createSpan({ cls: 'gq-hint', text: '  (' + x.en + ')' }); say(x.phrase); }
@@ -298,9 +300,9 @@ class WordWebView extends ItemView {
     this.chip.addClass('is-on');
   }
   unhold() {
-    if (this.held) this.held.g.removeClass('is-held'); this.held = null;
-    for (const e of this.edges) if (e.el) { e.el.removeClass('is-hot'); e.el.removeClass('is-dim'); }
-    for (const o of this.nodes.values()) o.g.removeClass('is-dim');
+    if (this.held) this.held.g.classList.remove('is-held'); this.held = null;
+    for (const e of this.edges) if (e.el) { e.el.classList.remove('is-hot', 'is-dim'); }
+    for (const o of this.nodes.values()) o.g.classList.remove('is-dim');
     this.chip && this.chip.removeClass('is-on');
   }
   paintTop(w) {
@@ -1050,7 +1052,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       await leaf.setViewState({ type: WEB, active: true, state: { path: file } });
       ws.revealLeaf(leaf);
       if (leaf.view && typeof leaf.view.go === 'function' && leaf.view.path !== file) await leaf.view.go(file);
-    } catch (e) { console.error('Greekquent word web', e); new Notice('The word web could not open this word. Try again, or open the word note.'); }
+    } catch (e) { console.error('Greekquent word web', e); new Notice('The word web could not open this word (' + String((e && e.message) || e).slice(0, 120) + '). Send your teacher a screenshot of this message.', 15000); }
   }
   // Obsidian's own "Open linked view" (local graph, backlinks, outline) only confuses here; the Word web replaces it.
   hideLinkedView() {

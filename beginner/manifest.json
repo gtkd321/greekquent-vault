@@ -1,5 +1,5 @@
 {
-"release": "2026-11-17u",
+"release": "2026-11-17v",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -30,11 +30,11 @@
 "size": 95488
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "d6ef58f41536373ec4ad0343bbbbe68f3b5a49b57e382a8904835cdc87bc58cf",
-"size": 207111
+"sha256": "7884067112cf4128394ff70c45e309b60a6e19b27e1a4f5f00a2d6d969389b5c",
+"size": 207465
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "3ba4cdbf3a2e0e926b60eb8e069c95c0cc7f898e2745ecfe983fc64e2e75c094",
+"sha256": "71faaac85f116ab1b024569db5364fb0ce4f4873c17e6b58d2d4ac108746071b",
 "size": 374
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {

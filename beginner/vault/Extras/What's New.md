@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, night: One page, no tabs
+> - Greekquent now always shows one page at a time. The Word web and word notes open in the same place, and any leftover tabs close on their own. Nothing you wrote is lost.
+> - Use Back and Forward at the bottom to move between pages.
+
 > [!info]- November 17, late: Word web fixes
 > - The Word web now opens every word, even when a Word web tab was already open in the background.
 > - "Open linked view" is gone from the note menu. Use **Word web** instead.
@@ -94,7 +98,6 @@ Back to [[Today]].
 > [!info]- November 16, night: One page at a time
 > - **No more piles of tabs.** Links now open in the same page. Use Back and Forward to move through what you've opened. Any extra tabs from before close on their own (notes save themselves, so nothing is lost).
 > - **A quieter bar on phones.** The bottom bar is now just Back, Forward and one search button. Tap it to find a note. Touch and hold it for Search inside notes, Look up a word, Today and More.
-> - Want tabs back? On the Advanced layout, More > Allow tabs.
 
 > [!info]- November 16, evening: Watch it, then play it
 > - **Story Lines.** Week 1's story is now a short cartoon for each day, with Greek subtitles that light up as the characters speak. [Open it](https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA), or tap **Watch it** under the day's line on Today.

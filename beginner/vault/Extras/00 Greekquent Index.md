@@ -12,7 +12,7 @@
 > [!summary]- Words
 > - Every one of the 1,500 words has a note in the **Words** folder: meaning, how to say it, an example sentence, words it often appears with, and ready-made phrases (chunks).
 > - Tap **Hear it** to hear the word and the color buttons to mark how well you know it.
-> - **Word graph** (More menu, or the button on a word note) shows the words that often appear with it. Tap a word to move to it.
+> - **Word web** (More menu, or the button on a word note) shows up to 9 words that go with it. Tap a word to move to it, hold a word to see its links and hear the pairing.
 > - About a third of the words have **English cognates**, related English words (χρόνος, chronic). They are memory hooks, not translations.
 > - The words in rank order, 150 per page, are in the **Word lists** folder.
 

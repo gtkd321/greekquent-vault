@@ -1,5 +1,5 @@
 {
-"release": "2026-11-17o",
+"release": "2026-11-17p",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -26,11 +26,11 @@
 "size": 95488
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "64877f2a9eb034a7cb40b15b277928b3e406e2c0a2a8c756b0d14d1341b9fad3",
-"size": 183296
+"sha256": "c909952fce8cb16ed3ee0f79ee5549559777a5750fbd544a96da1d1216390ba7",
+"size": 199225
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "2a46f20c3b60d0e1634f980378d712827fa02d9ab3135efaab66fe2ff32d5111",
+"sha256": "7ca1d651748d43e32ce711308854f7272379ca3b54ae9b334e0819c8d87ed578",
 "size": 374
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -38,8 +38,8 @@
 "size": 272119
 },
 ".obsidian/plugins/greekquent-student-layout/styles.css": {
-"sha256": "646e86b54d471e2669aca51c1a69e7d886ceeb4e0f31ec19555f64946f21c7cf",
-"size": 25535
+"sha256": "36fa431de2fca1061b0699b77a4c3eed37a6e9a0397cb0de196929865fdb16c1",
+"size": 28081
 },
 ".obsidian/plugins/meld-encrypt/main.js": {
 "sha256": "bf08d81ee9cc0e32a5726020197803c60eb5e73c9b114d80768081f051e66108",
@@ -70,8 +70,8 @@
 "size": 20632
 },
 "Extras/00 Greekquent Index.md": {
-"sha256": "839647c1c084f1508b61a43a1b05df23f7fcb004638a17a535f8fb683168c69d",
-"size": 2668
+"sha256": "fb86592b9aa0491c73544cf1e8911a19a90f4776f503b9ef6696b7f8acb78e7a",
+"size": 2711
 },
 "Extras/02 Verb Tables.md": {
 "sha256": "0e3902924a1e17e00f36c7be8af40bcd2b8c2c1b44e66b04fea8ede68fdd94af",
@@ -138,12 +138,12 @@
 "size": 528620
 },
 "Extras/Setting up.md": {
-"sha256": "cd4c33ac8edf08ae00deda6c4eb3820a84ebdb75c2b23aec32e89c47f6301532",
-"size": 2493
+"sha256": "4fafbd8380fea0bc8b0832f0e4892d668ef6cd52156ec3f7fcd31a7e68ebb318",
+"size": 2491
 },
 "Extras/What's New.md": {
-"sha256": "e500ee82f0ee34dbec5d38d8d6356d6087ebf7bda7c87c4ab62dbb65360ea909",
-"size": 16782
+"sha256": "2490cd1c742fb0ebb69107a063512795ccd3a2a3e71233168a24bef035722842",
+"size": 17252
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

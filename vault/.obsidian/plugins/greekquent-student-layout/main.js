@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17o';
+const VAULT_RELEASE = '2026-11-17p';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -113,15 +113,208 @@ const LOCAL_OPTIONS = {
   centerStrength: 0.9, repelStrength: 3, linkStrength: 1, linkDistance: 120
 };
 
-// ---------- Old Word web tabs (saved in older layouts) turn into the word graph ----------
+// ---------- Word web: the center word and up to 9 partners on springs that settle and stop ----------
+// Tap a word to move there, hold it to see its links (and hear the pairing), drag it to play.
+// No endless physics: once nothing moves for a moment the web is perfectly still until touched.
 const WEB = 'greekquent-word-web';
-class OldWebView extends ItemView {
-  constructor(leaf, plugin) { super(leaf); this.plugin = plugin; this.path = ''; }
+const WEB_MAX = 9;
+const WEB_ORDER = { v: 0, n: 1, d: 2, o: 3, a: 4 };
+const SVGNS = 'http://www.w3.org/2000/svg';
+class WordWebView extends ItemView {
+  constructor(leaf, plugin) { super(leaf); this.plugin = plugin; this.path = ''; this.hist = []; this.pos = -1; this.nodes = new Map(); this.edges = []; this.raf = 0; this.data = new Map(); }
   getViewType() { return WEB; }
-  getDisplayText() { return 'Word graph'; }
+  getDisplayText() { return this.path ? 'Word web: ' + this.path.replace(/^Words\//, '').replace(/\.md$/, '') : 'Word web'; }
   getIcon() { return 'git-fork'; }
-  async setState(st, res) { if (st && st.path) this.path = st.path; return super.setState(st, res); }
-  async onOpen() { setTimeout(() => this.plugin.graphGo(this.leaf, this.plugin.wordPath(this.path)), 50); }
+  getState() { return { path: this.path }; }
+  async setState(st, res) { await super.setState(st, res); if (st && st.path && st.path !== this.path) this.go(st.path); }
+  async onOpen() {
+    const box = this.contentEl; box.empty(); box.addClass('gq-ww');
+    const bar = box.createDiv('gq-web-bar');
+    for (const ev of ['pointerdown', 'mousedown', 'touchstart', 'touchmove', 'wheel']) bar.addEventListener(ev, e => e.stopPropagation(), { passive: true });
+    this.titleEl = bar.createDiv({ cls: 'gq-web-title gq-say', attr: { role: 'button', 'aria-label': 'Touch to listen' } });
+    this.titleEl.onclick = () => this.path && say(this.label(this.path));
+    this.back = bar.createEl('button', { text: '←', attr: { 'aria-label': 'Back' } }); this.back.onclick = () => this.step(-1);
+    this.fwd = bar.createEl('button', { text: '→', attr: { 'aria-label': 'Forward' } }); this.fwd.onclick = () => this.step(1);
+    const open = bar.createEl('button', { text: 'Word card' }); open.onclick = () => { const f = this.file(); if (f) this.plugin.mainLeaf(true).openFile(f); };
+    const pairb = bar.createEl('button', { text: 'Build a sentence' }); pairb.onclick = () => { const f = this.file(); if (f) this.plugin.openPair(f.basename); };
+    const askb = bar.createEl('button', { text: 'Ask' }); askb.onclick = () => { const f = this.file(); if (f) this.plugin.ask(f); };
+    this.trail = box.createDiv('gq-web-trail');
+    this.agree = box.createDiv('gq-agree'); this.agree.hide();
+    box.createDiv({ cls: 'gq-hint gq-ww-help', text: 'Tap a word to move there. Hold a word to see its links. Drag to play.' });
+    this.stage = box.createDiv('gq-ww-stage');
+    this.svg = this.stage.createSvg('svg', { attr: { 'aria-label': 'Word web' } });
+    this.gE = this.svg.createSvg('g'); this.gN = this.svg.createSvg('g');
+    this.chip = this.stage.createDiv('gq-ww-chip');
+    const key = box.createDiv('gq-web-key');
+    for (const [cls, tx] of [['v', 'verbs (doing)'], ['n', 'nouns (things, people)'], ['a', 'describing words'], ['d', 'how, when, where'], ['o', 'little words']]) { const s = key.createSpan('gq-key'); s.createSpan('gq-kdot gq-k' + cls); s.appendText(tx); }
+    // Swipes inside the web are for the web, not for opening Obsidian's side panels.
+    for (const ev of ['touchstart', 'touchmove', 'touchend']) this.stage.addEventListener(ev, e => { e.stopPropagation(); if (ev === 'touchmove') e.preventDefault(); }, { passive: false });
+    this.registerDomEvent(window, 'resize', () => this.path && this.go(this.path, false));
+    this.ro = new ResizeObserver(() => { const r = this.stage.getBoundingClientRect(); if (this.path && r.width && (Math.abs(r.width - this.Wd) > 20 || Math.abs(r.height - this.Ht) > 20)) this.go(this.path, false); });
+    this.ro.observe(this.stage);
+    if (this.path) { const p = this.path; this.path = ''; this.go(p); }
+  }
+  async onClose() { if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; if (this.ro) this.ro.disconnect(); }
+  file() { return this.path ? this.app.vault.getAbstractFileByPath(this.path) : null; }
+  label(p) { return this.plugin.agreeLabel(p, this.centerG || ''); }
+  // What a word note offers the web: kind, rank, meaning, and its partners with the phrase that joins them.
+  async info(p) {
+    if (this.data.has(p)) return this.data.get(p);
+    const f = this.app.vault.getAbstractFileByPath(p); if (!f) return null;
+    const fm = (this.app.metadataCache.getFileCache(f) || {}).frontmatter || {};
+    const tags = [].concat(fm.tags || []).join(' ');
+    const t = /\bverb\b/.test(tags) ? 'v' : /noun/.test(tags) ? 'n' : /adjective/.test(tags) ? 'a' : /adverb/.test(tags) ? 'd' : 'o';
+    const txt = await this.app.vault.cachedRead(f);
+    const res = name => { const d = this.app.metadataCache.getFirstLinkpathDest(name, p); return d && d.path.startsWith('Words/') && d.path !== p ? d.path : null; };
+    const pair = [], co = [];
+    const pm = txt.match(/## Pair it with\n([\s\S]*?)(?:\n## |$)/);
+    if (pm) for (const line of pm[1].split('\n')) {
+      const c = line.match(/^- \*\*(.+?):\*\*\s*(.*)/); if (!c || c[1] === 'Try') continue;
+      for (const part of c[2].split(' · ')) {
+        const l = part.match(/\[\[([^\]|#]+)(?:\|([^\]]+))?\]\]/); if (!l) continue; const q = res(l[1]); if (!q) continue;
+        const en = (part.match(/\(([^)]*)\)\s*$/) || [])[1] || '';
+        const phrase = part.replace(/\[\[([^\]|#]+)\|([^\]]+)\]\]/g, '$2').replace(/\[\[([^\]|#]+)\]\]/g, '$1').replace(/\s*\([^)]*\)\s*$/, '').trim();
+        pair.push({ k: q, cat: c[1], phrase, en });
+      }
+    }
+    const cm = txt.match(/## Often appears with\n([\s\S]*?)(?:\n## |$)/);
+    if (cm) for (const x of cm[1].matchAll(/\[\[([^\]|#]+)/g)) { const q = res(x[1]); if (q && !co.includes(q)) co.push(q); }
+    const w = { p, t, r: +fm.rank || 9999, e: String(fm.english || ''), say: fm.pronunciation || '', pair, co };
+    this.data.set(p, w); return w;
+  }
+  async partners(c) {
+    const w = await this.info(c); if (!w) return [];
+    const groups = new Map();
+    for (const x of w.pair) { if (!groups.has(x.cat)) groups.set(x.cat, []); groups.get(x.cat).push({ ...x }); }
+    const lists = [...groups.entries()].map(([cat, l]) => cat === 'Who' ? l.slice(0, 1) : l); lists.push(w.co.map(k => ({ k, phrase: '', en: '' })));
+    const out = [], seen = new Set([c]);
+    for (let round = 0; out.length < WEB_MAX && lists.some(l => l.length > round); round++)
+      for (const l of lists) { const x = l[round]; if (x && !seen.has(x.k) && out.length < WEB_MAX) { seen.add(x.k); out.push(x); } }
+    const name = c.replace(/^Words\//, '').replace(/\.md$/, ''), stem = fold(name).slice(0, Math.max(3, name.length - 2));
+    for (const x of out) {
+      x.w = await this.info(x.k);
+      if (!x.phrase && x.w) { const back = x.w.pair.find(p => p.k === c); if (back) { x.phrase = back.phrase; x.en = back.en; } }
+      if (x.phrase && w.t === 'v' && !fold(x.phrase).includes(stem)) x.phrase = name + ' ' + x.phrase;
+    }
+    return out.filter(x => x.w);
+  }
+  linked(a, b) { const A = this.data.get(a), B = this.data.get(b); return !!((A && (A.pair.some(p => p.k === b) || A.co.includes(b))) || (B && (B.pair.some(p => p.k === a) || B.co.includes(a)))); }
+  step(d) { const n = this.pos + d; if (n < 0 || n >= this.hist.length) return; this.pos = n; this.go(this.hist[n], false); }
+  async go(p, push = true) {
+    if (!p || !this.stage) { this.path = p || this.path; return; }
+    const w = await this.info(p); if (!w) return;
+    if (push && this.hist[this.pos] !== p) { this.hist = this.hist.slice(0, this.pos + 1); this.hist.push(p); this.pos = this.hist.length - 1; }
+    this.path = p; this.centerG = this.plugin.wordInfo(p).g;
+    const r = this.stage.getBoundingClientRect(); this.Wd = r.width || 360; this.Ht = r.height || 480;
+    const cx = this.Wd / 2, cy = this.Ht / 2;
+    const list = (await this.partners(p)).sort((a, b) => WEB_ORDER[a.w.t] - WEB_ORDER[b.w.t] || a.w.r - b.w.r);
+    const R = Math.min(this.Wd * 0.40, this.Ht * 0.38, 260), n = list.length || 1, nv = list.filter(x => x.w.t === 'v').length;
+    const rot = -Math.PI / 2 - (nv ? (nv - 1) / 2 : 0) * (2 * Math.PI / n);
+    list.forEach((x, i) => { const a = rot + i * 2 * Math.PI / n, rr = R * (i % 2 ? 0.86 : 1); x.tx = Math.cos(a) * rr; x.ty = Math.sin(a) * rr * (this.Ht > this.Wd ? 1.08 : 0.9); });
+    const keep = new Set([p, ...list.map(x => x.k)]), from = this.nodes.get(p);
+    const ox = from ? from.x : cx, oy = from ? from.y : cy;
+    for (const m of this.nodes.values()) if (!keep.has(m.k)) { m.dead = true; m.top = 0; const dx = m.x - ox, dy = m.y - oy, d = Math.hypot(dx, dy) || 1; m.free = true; m.tx = m.x + dx / d * 120 - cx; m.ty = m.y + dy / d * 120 - cy; }
+    this.center = from && !from.dead ? from : (from && from.g.remove(), this.mk(p, w, cx, cy));
+    Object.assign(this.center, { dead: false, top: 1, tx: 0, ty: 0, free: false, x0: null });
+    for (const x of list) {
+      let m = this.nodes.get(x.k);
+      if (!m || m.dead) { if (m) m.g.remove(); m = this.mk(x.k, x.w, ox + (Math.random() - .5) * 6, oy + (Math.random() - .5) * 6); }
+      Object.assign(m, { dead: false, top: 1, tx: x.tx, ty: x.ty, free: false, x0: x });
+    }
+    for (const m of this.nodes.values()) { m.g.toggleClass('is-center', m === this.center); if (!m.dead) m.t.textContent = this.label(m.k); }
+    this.edges = list.map(x => ({ a: p, b: x.k, inter: false }));
+    for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) if (this.linked(list[i].k, list[j].k)) this.edges.push({ a: list[i].k, b: list[j].k, inter: true });
+    this.gE.empty(); for (const e of this.edges) e.el = this.gE.createSvg('line', { cls: 'gq-ww-edge' + (e.inter ? ' is-inter' : '') });
+    this.paintTop(w); this.unhold(); this.kick();
+    this.leaf.updateHeader && this.leaf.updateHeader(); this.app.workspace.requestSaveLayout();
+  }
+  mk(k, w, x, y) {
+    const g = this.gN.createSvg('g', { cls: 'gq-ww-node' });
+    g.createSvg('circle', { cls: 'gq-ww-ring', attr: { r: 15 } });
+    g.createSvg('circle', { cls: 'gq-ww-dot gq-ww-' + w.t, attr: { r: 9 } });
+    const t = g.createSvg('text', { attr: { y: 28, lang: 'el' } }); t.textContent = this.label(k);
+    g.createSvg('circle', { cls: 'gq-ww-hit', attr: { r: 30 } });
+    const m = { k, g, t, x, y, vx: 0, vy: 0, tx: 0, ty: 0, op: 0, top: 1, dead: false };
+    this.bind(m); this.nodes.set(k, m); return m;
+  }
+  kick() { this.quiet = 0; if (!this.raf) this.raf = requestAnimationFrame(() => this.tick()); }
+  tick() {
+    this.raf = 0; const cx = this.Wd / 2, cy = this.Ht / 2, live = [...this.nodes.values()], drag = this.drag, c = this.center; let energy = 0;
+    const bx = c ? c.x : cx, by = c ? c.y : cy;
+    for (const m of live) {
+      if (drag && m === drag) continue;
+      const gx = m === c ? cx : m.free ? cx + m.tx : bx + m.tx, gy = m === c ? cy : m.free ? cy + m.ty : by + m.ty, k = m === c ? 0.05 : 0.07;
+      m.vx += (gx - m.x) * k; m.vy += (gy - m.y) * k;
+    }
+    for (let i = 0; i < live.length; i++) for (let j = i + 1; j < live.length; j++) {
+      const a = live[i], b = live[j]; if (a.dead || b.dead) continue;
+      const dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy) || 1;
+      if (d < 62) { const f = (62 - d) / d * 0.12; a.vx -= dx * f; a.vy -= dy * f; b.vx += dx * f; b.vy += dy * f; }
+    }
+    if (drag) for (const e of this.edges) { const o = e.a === drag.k ? this.nodes.get(e.b) : e.b === drag.k ? this.nodes.get(e.a) : null; if (!o) continue;
+      const dx = drag.x - o.x, dy = drag.y - o.y, d = Math.hypot(dx, dy) || 1, f = (d - 140) / d * 0.02; o.vx += dx * f; o.vy += dy * f; }
+    for (const m of live) {
+      if (m !== drag) { m.vx *= 0.78; m.vy *= 0.78; m.x += m.vx; m.y += m.vy; }
+      m.op += (m.top - m.op) * 0.18; energy += Math.abs(m.vx) + Math.abs(m.vy) + Math.abs(m.top - m.op) * 10;
+      if (m.dead && m.op < 0.02) { m.g.remove(); this.nodes.delete(m.k); continue; }
+      m.g.setAttr('transform', `translate(${m.x.toFixed(1)},${m.y.toFixed(1)})`); m.g.style.opacity = m.op.toFixed(3);
+    }
+    for (const e of this.edges) { const a = this.nodes.get(e.a), b = this.nodes.get(e.b); if (!a || !b || !e.el) continue;
+      e.el.setAttr('x1', a.x.toFixed(1)); e.el.setAttr('y1', a.y.toFixed(1)); e.el.setAttr('x2', b.x.toFixed(1)); e.el.setAttr('y2', b.y.toFixed(1)); e.el.style.opacity = Math.min(a.op, b.op).toFixed(3); }
+    this.quiet = energy < 0.15 ? this.quiet + 1 : 0;
+    if (this.quiet < 20 || drag) this.raf = requestAnimationFrame(() => this.tick());
+  }
+  bind(m) {
+    m.g.addEventListener('pointerdown', e => {
+      e.preventDefault(); e.stopPropagation(); try { m.g.setPointerCapture(e.pointerId); } catch (er) {}
+      const d = { m, sx: e.clientX, sy: e.clientY, moved: false, id: e.pointerId };
+      d.t = setTimeout(() => { if (!d.moved && this.down === d) this.hold(m); }, 420); this.down = d; this.drag = null;
+    });
+    m.g.addEventListener('pointermove', e => {
+      const d = this.down; if (!d || d.id !== e.pointerId) return;
+      if (!d.moved && !this.held && Math.hypot(e.clientX - d.sx, e.clientY - d.sy) > 8) { d.moved = true; clearTimeout(d.t); this.drag = m; this.kick(); }
+      if (this.drag === m) { const r = this.stage.getBoundingClientRect(); m.x = e.clientX - r.left; m.y = e.clientY - r.top; m.vx = m.vy = 0; }
+    });
+    m.g.addEventListener('pointerup', e => {
+      const d = this.down; if (!d || d.id !== e.pointerId) return; this.down = null; clearTimeout(d.t);
+      if (this.held) { this.unhold(); return; }
+      if (this.drag) { this.drag = null; this.kick(); return; }
+      say(this.label(m.k));
+      if (m === this.center) { m.vy -= 6; this.kick(); } else this.go(m.k);
+    });
+    m.g.addEventListener('pointercancel', () => { if (this.down) clearTimeout(this.down.t); this.down = null; this.drag = null; this.unhold(); this.kick(); });
+  }
+  hold(m) {
+    this.held = m; m.g.addClass('is-held'); if (navigator.vibrate) try { navigator.vibrate(10); } catch (e) {}
+    const near = new Set([m.k]);
+    for (const e of this.edges) { const on = e.a === m.k || e.b === m.k; e.el.toggleClass('is-hot', on); e.el.toggleClass('is-dim', !on); if (on) { near.add(e.a); near.add(e.b); } }
+    for (const o of this.nodes.values()) o.g.toggleClass('is-dim', !near.has(o.k));
+    const w = this.data.get(m.k) || {}, x = m.x0; this.chip.empty();
+    this.chip.createEl('b', { text: this.label(m.k), attr: { lang: 'el' } }); this.chip.appendText(' · ' + (w.e || '') + (w.say ? ' · say it: ' + w.say : ''));
+    if (x && x.phrase && m !== this.center) { const d = this.chip.createDiv({ attr: { lang: 'el' } }); d.appendText(x.phrase); if (x.en) d.createSpan({ cls: 'gq-hint', text: '  (' + x.en + ')' }); say(x.phrase); }
+    else say(this.label(m.k));
+    const others = [...near].filter(k => k !== m.k && k !== this.center.k).length;
+    this.chip.createDiv({ cls: 'gq-hint', text: m === this.center ? `${this.nodes.size - 1} words go with it` : others ? `Also goes with ${others} of the words here` : 'Goes with the word in the middle' });
+    this.chip.addClass('is-on');
+  }
+  unhold() {
+    if (this.held) this.held.g.removeClass('is-held'); this.held = null;
+    for (const e of this.edges) if (e.el) { e.el.removeClass('is-hot'); e.el.removeClass('is-dim'); }
+    for (const o of this.nodes.values()) o.g.removeClass('is-dim');
+    this.chip && this.chip.removeClass('is-on');
+  }
+  paintTop(w) {
+    const name = this.path.replace(/^Words\//, '').replace(/\.md$/, '');
+    this.titleEl.empty(); this.titleEl.createSpan({ text: this.label(this.path), attr: { lang: 'el' } });
+    this.titleEl.createSpan({ cls: 'gq-hint', text: `  · ${w.e}${w.say ? ' · say it: ' + w.say : ''}${w.r < 9999 ? ' · #' + w.r : ''}` });
+    this.back.disabled = this.pos <= 0; this.fwd.disabled = this.pos >= this.hist.length - 1;
+    this.trail.empty();
+    const from = Math.max(0, this.pos - 6);
+    this.hist.slice(from, this.pos + 1).forEach((h, i, a) => { const el = this.trail.createEl('a', { text: h.replace(/^Words\//, '').replace(/\.md$/, ''), href: '#', attr: { lang: 'el' } }); el.onclick = ev => { ev.preventDefault(); this.pos = from + i; this.go(h, false); }; if (i < a.length - 1) this.trail.appendText('  ›  '); });
+    // The agreement strip: a noun shows the describing words in its gender, and the other way round.
+    this.plugin.paintAgreeBox(this.agree, this.path);
+    void name;
+  }
 }
 
 // ---------- Story Lines and Γιαγιά live inside the vault and open here, offline, in the same page ----------
@@ -267,7 +460,7 @@ class LookupModal extends Modal {
     t.createDiv({ cls: 'gq-hit-sub', text: inList ? `It is #${inList.rank} of the 1,500.` : 'Bonus word, saved to Words I looked up.' });
     const btns = box.createDiv('gq-btns');
     const h = btns.createEl('button', { text: 'Hear it' }); h.onclick = () => say(gr);
-    if (inList) { const g = btns.createEl('button', { text: 'Word graph' }); g.onclick = () => { this.plugin.logLookup(q, inList); this.close(); this.plugin.openGraph(inList.path); }; }
+    if (inList) { const g = btns.createEl('button', { text: 'Word web' }); g.onclick = () => { this.plugin.logLookup(q, inList); this.close(); this.plugin.openGraph(inList.path); }; }
     if (save) this.plugin.logLookup(q, inList || null, inList ? null : tr);
   }
   fill(row, w, q) {
@@ -275,7 +468,7 @@ class LookupModal extends Modal {
     const m = t.createDiv({ cls: 'gq-hit-main' }); const c = this.plugin.colorOf(w.word); m.createSpan({ cls: 'gq-dot gq-' + (c || 'new'), attr: { 'aria-label': c ? c + ' word' : 'new word' } }); m.appendText(`${w.word}  ·  ${w.english}`);
     t.createDiv({ cls: 'gq-hit-sub', text: `${w.pron ? 'say it: ' + w.pron + '  ·  ' : ''}#${w.rank} of 1,500${w.form ? '  ·  form: ' + w.form : ''}` });
     if (w.cognates) t.createDiv({ cls: 'gq-hit-sub', text: `English cognates: ${w.cognates}${w.via ? '  (you typed a cousin: ' + w.via + ')' : ''}` });
-    const g = row.createEl('button', { text: 'Word graph' });
+    const g = row.createEl('button', { text: 'Word web' });
     g.onclick = () => { if (q) this.plugin.logLookup(q, w); this.close(); this.plugin.openGraph(w.path); };
   }
   onClose() {
@@ -585,7 +778,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   onload() {
     this.busy = false; this.todayEls = new Set(); this.bars = new Set(); this.cardBoxes = new Set();
     document.body.classList.add('greekquent-student');
-    this.registerView(WEB, leaf => new OldWebView(leaf, this));
+    this.registerView(WEB, leaf => new WordWebView(leaf, this));
     this.registerView(APPV, leaf => new AppView(leaf, this));
     this.registerView(MORE, leaf => new MoreView(leaf, this));
     // The graph redraws its labels now and then (zoom, new data). Put the agreeing forms back each time.
@@ -636,9 +829,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }));
     // My Work notes open ready to type in.
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path.startsWith(MY_WORK)) setTimeout(() => this.editMode(f), 50); }));
-    this.addCommand({ id: 'open-word-graph', name: 'Open word graph', callback: () => this.openGraph() });
+    this.addCommand({ id: 'open-word-graph', name: 'Open word web', callback: () => this.openGraph() });
     this.registerEvent(this.app.workspace.on('file-menu', (menu, file) => {
-      if (file && file.path && file.path.startsWith('Words/')) menu.addItem(i => i.setTitle('Open word graph').setIcon('git-fork').onClick(() => this.openGraph(file.path)));
+      if (file && file.path && file.path.startsWith('Words/')) menu.addItem(i => i.setTitle('Open word web').setIcon('git-fork').onClick(() => this.openGraph(file.path)));
     }));
     this.app.workspace.onLayoutReady(async () => {
       this.pruneEmpty(['Scripts/Kid variants/x', 'Scripts/Student/x']);
@@ -757,9 +950,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     } catch (e) { /* labels are a bonus; the graph still works */ }
   }
   // The agreement strip under the graph title.
-  paintAgree(leaf, path) {
-    const st = this.graphState(leaf); if (!st.agree) return;
-    const box = st.agree; box.empty(); box.hide();
+  paintAgree(leaf, path) { const st = this.graphState(leaf); if (st.agree) this.paintAgreeBox(st.agree, path); }
+  paintAgreeBox(box, path) {
+    box.empty(); box.hide();
     const c = this.wordInfo(path), links = Object.keys((this.app.metadataCache.resolvedLinks || {})[path] || {}).filter(p => p.startsWith('Words/') && p !== path);
     let head = '', items = [];
     if (c.g) { head = 'Agrees with ' + c.noun + ':'; items = links.filter(p => this.wordInfo(p).changes).map(p => this.agreePhrase(p, path)); }
@@ -845,12 +1038,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const ws = this.app.workspace;
     const a = ws.getActiveFile();
     const file = this.wordPath(path || (a ? a.path : ''));
-    let leaf = ws.getLeavesOfType('localgraph').find(l => l.getRoot() === ws.rootSplit);
+    let leaf = ws.getLeavesOfType(WEB).find(l => l.getRoot() === ws.rootSplit);
     if (!leaf) leaf = this.mainLeaf(true);
-    ws.revealLeaf(leaf);
     if (ws.leftSplit && !ws.leftSplit.collapsed) ws.leftSplit.collapse();
     if (ws.rightSplit && !ws.rightSplit.collapsed) ws.rightSplit.collapse();
-    await this.graphGo(leaf, file);
+    if (leaf.view && leaf.view.getViewType() === WEB) { ws.revealLeaf(leaf); ws.setActiveLeaf(leaf, { focus: true }); await leaf.view.go(file); return; }
+    await leaf.setViewState({ type: WEB, active: true, state: { path: file } });
+    ws.revealLeaf(leaf);
   }
   graphState(leaf) { if (!leaf.gq) leaf.gq = { hist: [], pos: -1 }; return leaf.gq; }
   async graphGo(leaf, path, fromHistory) {
@@ -1318,7 +1512,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   moreMenu(evt) {
     const m = new Menu();
     m.addItem(i => i.setTitle('More on this page').setIcon('panel-right').onClick(() => this.showMore()));
-    m.addItem(i => i.setTitle('Word graph').setIcon('git-fork').onClick(() => this.openGraph()));
+    m.addItem(i => i.setTitle('Word web').setIcon('git-fork').onClick(() => this.openGraph()));
     m.addItem(i => i.setTitle('Send homework').setIcon('send').onClick(() => this.sendHomework()));
     m.addItem(i => i.setTitle('Ask on video').setIcon('video').onClick(() => this.askVideo()));
     m.addSeparator();
@@ -2278,7 +2472,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     else if (f.path === TODAY) await this.todayExtras(c, btn);
     else if (f.path.startsWith('Words/')) {
       btn('Hear it', () => say(f.basename));
-      btn('Word graph', () => this.openGraph(f.path));
+      btn('Word web', () => this.openGraph(f.path));
       btn('Build a sentence', () => this.openPair(f.basename));
       btn('Add a chunk', () => new CardModal(this.app, this, f.basename).open());
       btn('Ask the group', () => this.ask(f));
@@ -2309,7 +2503,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async todayExtras(box, btn) {
     const col = this.colors(), words = await this.wordIndex(), wk = this.todayWeek;
     btn('Look up a word', () => new LookupModal(this.app, this).open());
-    btn('Word graph', () => this.openGraph());
+    btn('Word web', () => this.openGraph());
     btn('Games', () => this.openNote(GAMES));
     btn('Send homework', () => this.sendHomework());
     btn('My homework', () => this.openNote(MY_WORK + 'Homework.md'));

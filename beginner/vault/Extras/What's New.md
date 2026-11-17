@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, evening: A new Word web
+> - The Word web now centers on the word you choose and shows at most 9 words that go with it, colored by type.
+> - Tap a word to move there and hear it. Hold a word to see only its links and hear how the two words pair.
+> - Drag a word to play with the web. It settles and then stays still, so it no longer wobbles.
+> - **Word card** opens the word note. ← and → step back and forward through the words you visited.
+
 > [!info]- November 17: The story puzzle starts at the beginning
 > - Today's conversation is now the **Story puzzle**. Everyone starts at part 1, with the very first words, and goes through the story at their own pace. A green bar shows how far you are.
 > - Finish a part and tap **Next part** to keep going, or come back tomorrow. One or two parts a day is plenty.

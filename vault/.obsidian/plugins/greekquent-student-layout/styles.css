@@ -321,3 +321,7 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-say { cursor: pointer; border-radius: 6px; -webkit-tap-highlight-color: rgba(123, 92, 255, .15); }
 .gq-say:active { background: var(--background-modifier-hover); }
 .gq-cv-now .gq-hint.gq-say, .gq-wen + .gq-row, .gq-cv-done .gq-say { text-decoration: underline dotted var(--text-faint); text-underline-offset: 4px; }
+.gq-sbar { height: 6px; border-radius: 3px; background: var(--background-modifier-border); overflow: hidden; margin: 6px 0 2px; }
+.gq-sbar-in { height: 100%; background: #1a9850; border-radius: 3px; transition: width .4s; }
+.gq-sstart { margin-top: 6px; }
+@media (prefers-reduced-motion: reduce) { .gq-sbar-in { transition: none; } }

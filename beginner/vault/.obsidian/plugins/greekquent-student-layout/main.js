@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17n';
+const VAULT_RELEASE = '2026-11-17o';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1349,7 +1349,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, fiay: fm.fiay === true || fm.fiay === 'on', scripts: fm.scripts === 'intermediate' ? 'intermediate' : 'beginner', last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), track: String(fm.track || ''), tabs: String(fm.tabs || '') };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, fiay: fm.fiay === true || fm.fiay === 'on', scripts: fm.scripts === 'intermediate' ? 'intermediate' : 'beginner', last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: String(fm.tabs || '') };
   }
   colorOf(word) { const c = this.colors(); return COLORS.map(x => x[0]).find(k => c[k].includes(word)) || ''; }
   async progressFile() {
@@ -1554,42 +1554,53 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     await this.app.fileManager.processFrontMatter(f, fm => { fm.last_beat = n; });
     setTimeout(() => this.refreshToday(), 300);
   }
+  // The story puzzle goes at each student's own pace, from part 1. story_at in My progress = parts finished.
+  async setStory(k) {
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.story_at = k; if (!(parseInt(fm.last_beat, 10) >= k)) fm.last_beat = k; });
+  }
+  storyWeeks(beats) {
+    const out = [];
+    for (const k of Object.keys(beats).map(Number).sort((a, b) => a - b)) { const b = beats[k]; if (!out.length || out[out.length - 1].week !== b.week) out.push({ week: b.week, first: k, title: b.file.basename.replace(/^FY\d+\s*/, '').replace(/ no class this week$/, '') }); }
+    return out;
+  }
+  startMenu(evt, beats) {
+    const m = new Menu();
+    m.addItem(i => i.setTitle('From the very beginning').onClick(async () => { await this.setStory(0); this.refreshToday(); }));
+    for (const w of this.storyWeeks(beats)) m.addItem(i => i.setTitle(`Week ${w.week}: ${w.title}`).onClick(async () => { await this.setStory(w.first - 1); this.refreshToday(); }));
+    m.showAtMouseEvent(evt);
+  }
   async storyCard(box, beats, cal, isSun, col) {
-    const last = col.last_beat;
-    // Behind = they said a line before, then missed days. New students start at today's line.
-    const behind = last && last < cal - 1 ? cal - 1 - last : 0;
-    const n = behind ? last + 1 : cal, b = beats[n]; if (!b) return;
-    if (isSun && beats[cal]) {
-      const card = box.createDiv('gq-tcard gq-story'), head = card.createDiv('gq-thead'), b = beats[cal];
-      head.createEl('strong', { text: 'This week\'s story' });
-      card.createDiv({ cls: 'gq-hint', text: 'Sunday: read the whole story aloud, top to bottom.' });
-      const lines = Object.values(beats).filter(x => x.week === b.week).sort((a, c) => a.n - c.n);
-      const ol = card.createEl('ol', { cls: 'gq-storylist' });
-      for (const x of lines) { const li = ol.createEl('li'); this.lineEl(li, x.gr, x.words); li.createDiv({ cls: 'gq-hint', text: x.en }); }
-      const row = card.createDiv('gq-row'); this.hearBtn(row, lines.map(x => x.gr).join(' '), 'Hear the whole story');
-      this.popBtn(row, 'Read it line by line', () => this.popLines(`This week's story · week ${b.week}`, lines, 'Say each line with the voice.'));
-      if (lines[0] && lines[0].n <= SCENE_DAYS) this.sceneRow(card, lines[0].n, true);
-      if (!behind) return;
-    }
+    const days = Object.keys(beats).map(Number).sort((a, b) => a - b); if (!days.length) return;
+    const at = col.story_at || 0;
+    let idx = days.findIndex(k => k > at); const finished = idx < 0; if (finished) idx = days.length - 1;
+    const n = days[idx], b = beats[n], doneN = days.filter(k => k <= at).length;
     const card = box.createDiv('gq-tcard gq-story');
     const head = card.createDiv('gq-thead');
-    head.createEl('strong', { text: behind ? 'Pick up where you left off' : 'Today\'s conversation' });
-    head.createSpan({ cls: 'gq-hint', text: `  · week ${b.week}, day ${b.i} of ${b.of}` });
-    if (behind) {
-      const h = card.createDiv({ cls: 'gq-hint', text: `You are ${behind} day${behind === 1 ? '' : 's'} behind. No rush: one or two a day, or ` });
-      const j = h.createEl('a', { text: 'jump to today', href: '#' }); j.onclick = e => { e.preventDefault(); this.saidBeat(cal - 1); }; h.appendText('.');
+    head.createEl('strong', { text: 'Story puzzle' });
+    head.createSpan({ cls: 'gq-hint', text: `  · part ${idx + 1} of ${days.length}` });
+    const bar = card.createDiv({ cls: 'gq-sbar', attr: { role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': String(days.length), 'aria-valuenow': String(doneN) } });
+    bar.createDiv('gq-sbar-in').style.width = (100 * doneN / days.length).toFixed(1) + '%';
+    const wk = this.storyWeeks(beats).find(w => w.week === b.week);
+    card.createDiv({ cls: 'gq-hint', text: `${doneN} done · week ${b.week}${wk && wk.title ? ': ' + wk.title : ''}` });
+    if (col.story_at === null && col.last_beat > 1 && beats[col.last_beat + 1]) {
+      const h = card.createDiv({ cls: 'gq-hint' }); h.appendText('Already in the story? ');
+      const j = h.createEl('a', { text: `Continue from part ${days.indexOf(col.last_beat + 1) + 1}`, href: '#' }); j.onclick = async e => { e.preventDefault(); await this.setStory(col.last_beat); this.refreshToday(); };
     }
     const T = await this.storyTurns();
     let turns = T[n]; if (!turns || !turns.length || turns.map(x => x[1]).join(' — ') !== b.gr) turns = [['', b.gr, b.en]];
     // Wrong-answer tiles come from the rest of this week's story, so they look like real choices.
     const pool = Object.values(beats).filter(x => x.week === b.week && x.n !== n).flatMap(x => (T[x.n] || [['', x.gr || '', '']]).map(y => y[1]));
     const before = Object.values(beats).filter(x => x.week === b.week && x.n < n).sort((p, q) => p.n - q.n);
-    this.todayBeat = { b, n, before, done: last >= n };
-    this.convoGame(card, turns, n, b.words, last >= n, pool, () => { if (this.colors().last_beat < n) this.saidBeat(n); });
+    this.todayBeat = { b, n, before, done: at >= n };
+    const next = finished ? null : () => this.refreshToday();
+    this.convoGame(card, turns, n, b.words, at >= n, pool, () => this.setStory(Math.max(n, this.colors().story_at || 0)), next, finished);
+    const r = card.createDiv('gq-row gq-sstart');
+    const st = r.createEl('a', { text: doneN ? 'Start somewhere else' : 'Know some Greek already? Start further in', href: '#', cls: 'gq-hint' }); st.onclick = e => { e.preventDefault(); this.startMenu(e, beats); };
     return b;
   }
   // One sentence at a time: the Greek on top, the English built underneath from word tiles (tap or drag). Then the next sentence opens.
-  convoGame(card, turns, n, words, done, pool, onDone) {
+  convoGame(card, turns, n, words, done, pool, onDone, next, last) {
     const key = 'gq-convo-' + this.app.vault.getName() + '-' + n; let store = null; try { store = window.localStorage; } catch (e) {}
     let saved = null; try { saved = store && store.getItem(key); } catch (e) {} if (saved === undefined) saved = null;
     let i = saved === null ? (done ? turns.length : 0) : Math.min(+saved || 0, turns.length);
@@ -1645,7 +1656,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
       if (i >= turns.length) {
         const row = wrap.createDiv('gq-row');
-        row.createSpan({ cls: 'gq-hint', text: 'Done for today. Touch a line to listen, then say it out loud.' });
+        if (next) { const nx = row.createEl('button', { text: 'Next part ›', cls: 'mod-cta' }); nx.onclick = next; }
+        row.createSpan({ cls: 'gq-hint', text: last ? 'You finished the whole story. Touch a line to listen.' : 'Touch a line to listen, then say it out loud. One or two parts a day is plenty.' });
         const again = row.createEl('button', { text: 'Play again', cls: 'gq-mini' }); again.onclick = () => { i = 0; save(); paint(); };
         return;
       }
@@ -1692,7 +1704,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (exact || accepts(got, x[1])) {
           ans.addClass('gq-ok'); chk.disabled = true; say(x[1]); fb.empty();
           if (!exact) { fb.createDiv({ text: 'Also right. The line says:' }); this.lineEl(fb, x[1], words); }
-          setTimeout(() => { i++; save(); paint(); if (i >= turns.length) onDone(); }, exact ? 900 : 2600);
+          setTimeout(() => { i++; save(); if (i >= turns.length) onDone(); paint(); }, exact ? 900 : 2600);
         } else { misses++; fb.empty(); if (got.length === target.length && [...got].sort().join(' ') === target.map(norm).sort().join(' ')) fb.setText('All the right words. Try another order: keep small words like ο, στο, να and δεν with the word after them.'); ans.removeClass('gq-bad'); void ans.offsetWidth; ans.addClass('gq-bad'); if (misses >= 1) hint.style.display = ''; if (misses >= 2) show.style.display = ''; }
       };
     };
@@ -1766,7 +1778,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     y.appendText(c.en);
   }
   async comebackCard(box, beats, col, cal) {
-    const last = Math.min(col.last_beat, (cal || 1e9) - 1); if (last < 1) return;
+    const last = col.story_at !== null ? col.story_at : Math.min(col.last_beat, (cal || 1e9) - 1); if (last < 1) return;
     const due = [last, last - 2, last - 6].filter(k => k >= 1 && beats[k]).map(k => beats[k]);
     if (!due.length) return;
     const T = await this.storyTurns(), cbs = due.map(b => this.comebackTurns(b, T));
@@ -1810,8 +1822,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const cal = dd < 0 ? 1 : (dayNow && dayNow.n) || Math.max(0, ...Object.keys(beats).map(Number).filter(k => beats[k].week < week));
         this.todayBeat = null;
         if (cal) await this.storyCard(box, beats, cal, dd >= 0 && dow === 0, col);
-        // Comebacks open once today's conversation is done.
-        if (!cal || col.last_beat >= cal) await this.comebackCard(box, beats, col, cal);
+        // Comebacks bring back earlier parts of the story the student has finished.
+        if (col.story_at) await this.comebackCard(box, beats, col, cal);
         await this.classCard(box, wk, week);
         // Fluent in a Year is optional: its words show here only for students who turn it on.
         if (col.fiay) {

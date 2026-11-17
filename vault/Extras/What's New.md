@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!info]- November 17: The story puzzle starts at the beginning
+> - Today's conversation is now the **Story puzzle**. Everyone starts at part 1, with the very first words, and goes through the story at their own pace. A green bar shows how far you are.
+> - Finish a part and tap **Next part** to keep going, or come back tomorrow. One or two parts a day is plenty.
+> - Already know some Greek? Tap **Start further in** under the puzzle and pick a week. If you were already in the story, tap **Continue from part N** at the top.
+> - Comebacks now bring back parts you have finished.
+
 > [!info]- November 17, night: Touch to listen
 > - **Today's conversation:** touch a word tile to hear it as you add it. Finished lines play when you touch them. After a miss, touch the hint to hear the whole line.
 > - **Fluent in a Year words:** touch the big word to hear it. **Word note** opens its page.

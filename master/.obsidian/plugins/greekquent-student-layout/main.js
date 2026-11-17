@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17t';
+const VAULT_RELEASE = '2026-11-17u';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -122,6 +122,18 @@ const WEB_ORDER = { v: 0, n: 1, d: 2, o: 3, a: 4 };
 const SVGNS = 'http://www.w3.org/2000/svg';
 // Split a pairing line at ' · ', but not inside the English in parentheses, e.g. (arrive · almost).
 const splitDots = s => { const out = []; let d = 0, cur = ''; for (let i = 0; i < s.length; i++) { const ch = s[i]; if (ch === '(') d++; else if (ch === ')') d = Math.max(0, d - 1); if (!d && s.startsWith(' · ', i)) { out.push(cur); cur = ''; i += 2; continue; } cur += ch; } out.push(cur); return out; };
+// The kids' hello song: an original tune, played by the phone itself (no audio files, works offline).
+// Each note is [syllable, MIDI pitch, beats]; a null syllable is a rest. Stressed syllables land on strong beats.
+const HELLO_SONG = [
+  { gr: 'Γεια σας, γεια σας, φίλοι!', en: 'Hi, hi, friends!', move: 'Big wave to everyone', chords: [60, 65],
+    notes: [['Γεια ', 67, 1], ['σας, ', 67, 1], ['γεια ', 64, 1], ['σας, ', 64, 1], ['φί', 69, 1], ['λοι!', 67, 2], [null, 0, 1]] },
+  { gr: 'Γεια σου, γεια σου, εσύ!', en: 'Hi, hi, you!', move: 'Small wave, then point to one person', chords: [60, 67],
+    notes: [['Γεια ', 67, 1], ['σου, ', 67, 1], ['γεια ', 64, 1], ['σου, ', 64, 1], ['ε', 62, 1], ['σύ!', 60, 2], [null, 0, 1]] },
+  { gr: 'Τι έχεις; Τι έχεις;', en: 'What do you have? What do you have?', move: 'Palms up, shoulders up', chords: [60, 65],
+    notes: [[null, 0, 0.5], ['Τι ', 64, 0.5], ['έ', 67, 1], ['χεις; ', 65, 1], [null, 0, 0.5], ['Τι ', 64, 0.5], ['έ', 69, 1], ['χεις;', 67, 2], [null, 0, 1]] },
+  { gr: 'Ώρα για ελληνικά!', en: 'Time for Greek!', move: 'Tap your wrist, then both arms up', chords: [65, 60],
+    notes: [['Ώ', 72, 1], ['ρα ', 69, 0.5], ['για ', 69, 0.5], ['ελ', 67, 0.5], ['λη', 64, 0.5], ['νι', 62, 1], ['κά!', 60, 3], [null, 0, 1]] },
+];
 // SVG made with plain DOM calls, so the web draws the same on every Obsidian version and phone.
 const svgEl = (parent, tag, cls, attrs) => { const el = document.createElementNS(SVGNS, tag); if (cls) el.setAttribute('class', cls); for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, String(v)); parent.appendChild(el); return el; };
 class WordWebView extends ItemView {
@@ -2100,6 +2112,62 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   kidSection(txt, name) { const s = txt.split(/\n## /).find(x => x.startsWith(name)); return s ? s.slice(name.length) : ''; }
   kidLines(sec) { return [...sec.matchAll(/^- ([^:*]+):\s*\*\*(.+?)\*\*\s*(?:—\s*(.+))?$/gm)].map(m => ({ who: m[1].trim(), gr: m[2].trim(), en: (m[3] || '').trim() })); }
+  // ---------- Kids: the hello song ----------
+  helloSong(box) {
+    const c = box.createDiv('gq-tcard gq-kid gq-song'), h = c.createDiv('gq-thead');
+    h.createEl('strong', { text: 'Hello song' }); h.createSpan({ cls: 'gq-hint', text: '  · sing it together to start, and do the moves' });
+    const rows = HELLO_SONG.map(l => {
+      const r = c.createDiv('gq-song-line'), g = r.createDiv({ cls: 'gq-song-gr', attr: { lang: 'el' } });
+      const syl = l.notes.filter(n => n[0]).map(n => g.createSpan({ cls: 'gq-syl', text: n[0] }));
+      r.createDiv({ cls: 'gq-hint gq-song-move', text: l.move + ' · ' + l.en });
+      return { r, syl };
+    });
+    const row = c.createDiv('gq-row');
+    const play = row.createEl('button', { text: 'Sing the hello song', cls: 'mod-cta' });
+    const slow = row.createEl('button', { text: 'Slower', cls: 'gq-mini' });
+    const words = row.createEl('button', { text: 'Hear the words', cls: 'gq-mini' });
+    c.createDiv({ cls: 'gq-hint', text: 'No sound? Turn the phone volume up and check it is not on silent.' });
+    const stop = () => { if (this.songStop) { this.songStop(); this.songStop = null; } };
+    const run = bpm => {
+      stop();
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) { new Notice('This device cannot play the tune. Sing it with Hear the words.'); return; }
+      const ctx = new AC(); if (ctx.state === 'suspended') ctx.resume();
+      const beat = 60 / bpm, t0 = ctx.currentTime + 0.15, timers = [];
+      const out = ctx.createGain(); out.gain.value = 0.9; out.connect(ctx.destination);
+      const hz = m => 440 * Math.pow(2, (m - 69) / 12);
+      const tone = (m, at, dur, type, vol) => {
+        const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type; o.frequency.value = hz(m);
+        g.gain.setValueAtTime(0.0001, at); g.gain.exponentialRampToValueAtTime(vol, at + 0.02);
+        g.gain.exponentialRampToValueAtTime(vol * 0.55, at + Math.min(0.25, dur * 0.5)); g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+        o.connect(g); g.connect(out); o.start(at); o.stop(at + dur + 0.05);
+      };
+      const tick = at => tone(84, at, 0.06, 'square', 0.05);
+      // Count-in: four soft ticks, so everyone starts together.
+      for (let i = 0; i < 4; i++) tick(t0 + i * beat);
+      let at = t0 + 4 * beat;
+      const ui = (ms, fn) => timers.push(setTimeout(fn, Math.max(0, ms)));
+      const clear = () => { for (const x of rows) { x.r.classList.remove('is-now'); x.syl.forEach(s => s.classList.remove('is-on')); } };
+      HELLO_SONG.forEach((l, li) => {
+        const start = at; let k = 0;
+        l.chords.forEach((root, bi) => { const b = start + bi * 4 * beat; tone(root - 12, b, 1.9 * beat, 'sine', 0.22); tone(root - 5, b + 2 * beat, 1.9 * beat, 'sine', 0.16); });
+        for (const [s, m, d] of l.notes) {
+          if (s) {
+            tone(m, at, d * beat * 0.92, 'triangle', 0.32);
+            const idx = k++, when = (at - ctx.currentTime) * 1000;
+            ui(when, () => { if (idx === 0) { clear(); rows[li].r.classList.add('is-now'); } rows[li].syl.forEach((x, j) => x.classList.toggle('is-on', j <= idx)); });
+          }
+          at += d * beat;
+        }
+      });
+      ui((at - ctx.currentTime) * 1000 + 200, () => { clear(); play.setText('Sing it again'); this.songStop = null; try { ctx.close(); } catch (e) {} });
+      play.setText('Stop');
+      this.songStop = () => { timers.forEach(clearTimeout); clear(); play.setText('Sing the hello song'); try { ctx.close(); } catch (e) {} };
+    };
+    play.onclick = () => { if (this.songStop) stop(); else run(112); };
+    slow.onclick = () => run(84);
+    words.onclick = () => { stop(); say(HELLO_SONG.map(l => l.gr).join(' ')); };
+  }
   async renderKidsToday(el, tok, info) {
     const box = createDiv('gq-today gq-kids-today'), col = this.colors(), wk = this.kidWeek(info);
     const f = this.kidFile(wk.lesson);
@@ -2110,6 +2178,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const a = s.createEl('a', { text: 'read Setting up', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); };
       s.createSpan({ text: ' first (2 minutes). ' }); const x = s.createEl('button', { text: 'Got it' }); x.onclick = () => this.setupSeen();
     }
+    this.helloSong(box);
     if (!f) { box.createDiv({ cls: 'gq-tcard', text: 'This lesson is not in the vault yet. Tap More, then Update vault.' }); if (tok === el.gqTok) { el.empty(); el.appendChild(box); } return; }
     const txt = await this.app.vault.cachedRead(f), title = f.basename.replace(/^K\d+\s*/, '').replace(/-student$/, '');
     // 1. The game

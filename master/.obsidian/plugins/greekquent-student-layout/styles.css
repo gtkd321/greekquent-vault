@@ -352,3 +352,12 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-ww-chip b { font-size: 17px; }
 .gq-ww .gq-web-key { border-top: 1px solid var(--background-modifier-border); padding: 6px 12px calc(8px + env(safe-area-inset-bottom)); }
 @media (prefers-reduced-motion: reduce) { .gq-ww-chip { transition: none; } }
+/* Kids: hello song. The line being sung lights up one syllable at a time. */
+.gq-song-line { padding: 6px 8px; border-radius: 10px; margin: 2px 0; transition: background .2s; }
+.gq-song-line.is-now { background: var(--background-modifier-hover, rgba(0,0,0,.05)); }
+.gq-song-gr { font-size: 1.25em; font-weight: 600; line-height: 1.4; }
+.gq-syl { color: var(--text-muted); transition: color .1s; }
+.gq-syl.is-on { color: var(--text-normal); }
+.gq-song-line:not(.is-now) .gq-syl { color: var(--text-normal); }
+.gq-song-move { margin-top: 1px; }
+.gq-song-line.is-now .gq-syl.is-on { color: var(--text-accent, var(--interactive-accent)); }

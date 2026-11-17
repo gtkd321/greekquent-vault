@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17j';
+const VAULT_RELEASE = '2026-11-17k';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1338,7 +1338,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, scripts: fm.scripts === 'intermediate' ? 'intermediate' : 'beginner', last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), track: String(fm.track || ''), tabs: String(fm.tabs || '') };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, fiay: fm.fiay === true || fm.fiay === 'on', scripts: fm.scripts === 'intermediate' ? 'intermediate' : 'beginner', last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), track: String(fm.track || ''), tabs: String(fm.tabs || '') };
   }
   colorOf(word) { const c = this.colors(); return COLORS.map(x => x[0]).find(k => c[k].includes(word)) || ''; }
   async progressFile() {
@@ -1562,25 +1562,132 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }
     const card = box.createDiv('gq-tcard gq-story');
     const head = card.createDiv('gq-thead');
-    head.createEl('strong', { text: behind ? 'Pick up where you left off' : 'Today\'s line' });
-    head.createSpan({ cls: 'gq-hint', text: `  · week ${b.week}, line ${b.i} of ${b.of}` });
-    if (behind) card.createDiv({ cls: 'gq-hint', text: `You are ${behind} line${behind === 1 ? '' : 's'} behind. No rush: one or two a day, or jump to today.` });
-    const before = Object.values(beats).filter(x => x.week === b.week && x.n < n).sort((a, c) => a.n - c.n);
-    if (before.length) {
-      const d = card.createEl('details', { cls: 'gq-sofar' }); d.createEl('summary', { text: `Story so far (${before.length})` });
-      for (const x of before) { const r = d.createDiv('gq-sofarline'); r.createSpan({ text: x.gr, attr: { lang: 'el' } }); r.createSpan({ cls: 'gq-hint', text: '  ' + x.en }); }
+    head.createEl('strong', { text: behind ? 'Pick up where you left off' : 'Today\'s conversation' });
+    head.createSpan({ cls: 'gq-hint', text: `  · week ${b.week}, day ${b.i} of ${b.of}` });
+    if (behind) {
+      const h = card.createDiv({ cls: 'gq-hint', text: `You are ${behind} day${behind === 1 ? '' : 's'} behind. No rush: one or two a day, or ` });
+      const j = h.createEl('a', { text: 'jump to today', href: '#' }); j.onclick = e => { e.preventDefault(); this.saidBeat(cal - 1); }; h.appendText('.');
     }
-    this.lineEl(card, b.gr, b.words);
-    const en = card.createDiv({ cls: 'gq-hint gq-line-en', text: b.en }); en.style.display = 'none';
-    const row = card.createDiv('gq-row');
-    this.hearBtn(row, b.gr);
-    const sh = row.createEl('button', { text: 'Show English', cls: 'gq-mini' }); sh.onclick = () => { en.style.display = ''; sh.remove(); };
-    if (last >= n) row.createSpan({ cls: 'gq-hint', text: 'Said it. ' + (n >= cal ? 'Next line tomorrow.' : '') });
-    else { const ok = row.createEl('button', { text: 'I said it', cls: 'mod-cta gq-mini' }); ok.onclick = () => this.saidBeat(n); }
-    if (behind) { const j = row.createEl('a', { text: 'Jump to today', href: '#' }); j.onclick = e => { e.preventDefault(); this.saidBeat(cal - 1); }; }
-    const pr = card.createDiv('gq-row'); this.popBtn(pr, 'Practice it', () => this.popLine(b, n, last >= n));
-    this.sceneRow(card, n);
+    const T = await this.storyTurns();
+    let turns = T[n]; if (!turns || !turns.length || turns.map(x => x[1]).join(' — ') !== b.gr) turns = [['', b.gr, b.en]];
+    // Wrong-answer tiles come from the rest of this week's story, so they look like real choices.
+    const pool = Object.values(beats).filter(x => x.week === b.week && x.n !== n).flatMap(x => (T[x.n] || [['', '', x.en]]).map(y => y[2]));
+    const before = Object.values(beats).filter(x => x.week === b.week && x.n < n).sort((p, q) => p.n - q.n);
+    this.todayBeat = { b, n, before, done: last >= n };
+    this.convoGame(card, turns, n, b.words, last >= n, pool, () => { if (this.colors().last_beat < n) this.saidBeat(n); });
     return b;
+  }
+  // One sentence at a time: the Greek on top, the English built underneath from word tiles (tap or drag). Then the next sentence opens.
+  convoGame(card, turns, n, words, done, pool, onDone) {
+    const key = 'gq-convo-' + this.app.vault.getName() + '-' + n; let store = null; try { store = window.localStorage; } catch (e) {}
+    let saved = null; try { saved = store && store.getItem(key); } catch (e) {} if (saved === undefined) saved = null;
+    let i = saved === null ? (done ? turns.length : 0) : Math.min(+saved || 0, turns.length);
+    const save = () => { try { if (store) store.setItem(key, String(i)); } catch (e) {} };
+    const toks = s => String(s).replace(/[“”"«»]/g, '').split(/\s+/).map(w => w.replace(/^[^\p{L}\p{N}']+|[^\p{L}\p{N}']+$/gu, '')).filter(Boolean);
+    const norm = w => w.toLowerCase().replace(/’/g, "'");
+    let seed = n * 97 + 13; const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    const wrap = card.createDiv('gq-convo');
+    const paint = () => {
+      wrap.empty(); seed = n * 97 + 13 + i * 7;
+      for (let k = 0; k < Math.min(i, turns.length); k++) {
+        const x = turns[k], r = wrap.createDiv('gq-cv-done');
+        if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' });
+        r.createSpan({ text: x[1], attr: { lang: 'el' } }); r.createDiv({ cls: 'gq-hint', text: x[2] });
+      }
+      if (i >= turns.length) {
+        const row = wrap.createDiv('gq-row');
+        this.hearBtn(row, turns.map(x => x[1]).join(' '), 'Hear it all');
+        row.createSpan({ cls: 'gq-hint', text: 'Done for today. Say it out loud once.' });
+        const again = row.createEl('button', { text: 'Play again', cls: 'gq-mini' }); again.onclick = () => { i = 0; save(); paint(); };
+        return;
+      }
+      const x = turns[i], cur = wrap.createDiv('gq-cv-now');
+      cur.createDiv({ cls: 'gq-hint', text: (turns.length > 1 ? `Sentence ${i + 1} of ${turns.length}` : 'One sentence') + (x[0] ? ` · ${x[0]}` : '') });
+      const gl = this.lineEl(cur, x[1], words); gl.addClass('gq-cv-gr');
+      const hr = cur.createDiv('gq-row'); this.hearBtn(hr, x[1]);
+      const target = toks(x[2]), want = new Set(target.map(norm));
+      const extra = [...new Set(pool.flatMap(toks).filter(w => !want.has(norm(w)) && w.length > 1))];
+      const nExtra = Math.min(extra.length, Math.max(3, Math.min(6, Math.ceil(target.length / 2))));
+      const picks = []; while (picks.length < nExtra && extra.length) picks.push(extra.splice(Math.floor(rnd() * extra.length), 1)[0]);
+      const tiles = [...target, ...picks].map((w, k) => ({ w, k })).sort(() => rnd() - 0.5);
+      const ans = cur.createDiv({ cls: 'gq-cv-ans', attr: { 'aria-label': 'Your English' } });
+      const bank = cur.createDiv({ cls: 'gq-cv-bank', attr: { 'aria-label': 'Word tiles' } });
+      cur.createDiv({ cls: 'gq-hint gq-cv-help', text: 'Tap the English words in order (or drag them up). Tap a word again to take it back.' });
+      const placed = [];
+      const place = tl => { if (tl.used) return; tl.used = true; tl.btn.addClass('gq-used'); const c = ans.createEl('button', { text: tl.w, cls: 'gq-tile' }); tl.clone = c; placed.push(tl); bindDrag(c, () => unplace(tl), bank); ans.removeClass('gq-bad'); };
+      const unplace = tl => { if (!tl.used) return; tl.used = false; tl.btn.removeClass('gq-used'); tl.clone.remove(); placed.splice(placed.indexOf(tl), 1); ans.removeClass('gq-bad'); };
+      // Tap moves a tile; dragging it onto the other area does the same (pointer events work with touch and mouse).
+      const bindDrag = (el, act, dest) => {
+        let sx = 0, sy = 0, drag = false, id = null;
+        el.onpointerdown = e => { sx = e.clientX; sy = e.clientY; drag = false; id = e.pointerId; try { el.setPointerCapture(id); } catch (er) {} };
+        el.onpointermove = e => { if (id !== e.pointerId) return; const dx = e.clientX - sx, dy = e.clientY - sy; if (!drag && Math.hypot(dx, dy) > 8) { drag = true; el.addClass('gq-drag'); } if (drag) el.style.transform = `translate(${dx}px, ${dy}px)`; };
+        el.onpointerup = e => {
+          if (id !== e.pointerId) return; id = null;
+          if (!drag) { act(); return; }
+          el.removeClass('gq-drag'); el.style.transform = '';
+          const r = dest.getBoundingClientRect();
+          if (e.clientX >= r.left - 20 && e.clientX <= r.right + 20 && e.clientY >= r.top - 24 && e.clientY <= r.bottom + 24) act();
+        };
+        el.onpointercancel = () => { id = null; drag = false; el.removeClass('gq-drag'); el.style.transform = ''; };
+      };
+      for (const tl of tiles) { tl.btn = bank.createEl('button', { text: tl.w, cls: 'gq-tile' }); bindDrag(tl.btn, () => place(tl), ans); }
+      const row = cur.createDiv('gq-row'); let misses = 0;
+      const chk = row.createEl('button', { text: 'Check', cls: 'mod-cta' });
+      const show = row.createEl('button', { text: 'Show me', cls: 'gq-mini' }); show.style.display = 'none';
+      const en = cur.createDiv({ cls: 'gq-hint gq-cv-en', text: x[2] }); en.style.display = 'none';
+      show.onclick = () => { en.style.display = ''; show.remove(); };
+      chk.onclick = () => {
+        const got = placed.map(tl => norm(tl.w)).join(' ');
+        if (got === target.map(norm).join(' ')) {
+          ans.addClass('gq-ok'); chk.disabled = true; say(x[1]);
+          setTimeout(() => { i++; save(); paint(); if (i >= turns.length) onDone(); }, 900);
+        } else { misses++; ans.removeClass('gq-bad'); void ans.offsetWidth; ans.addClass('gq-bad'); if (misses >= 2) show.style.display = ''; }
+      };
+    };
+    paint();
+  }
+  // Fluent in a Year words, one at a time. Marking a color moves to the next word; the dots jump to any of them.
+  wordStep(card, words, key) {
+    if (!words.length) return;
+    let i = this.wsIdx && this.wsIdx.key === key ? this.wsIdx.i : 0; if (i >= words.length) i = 0;
+    const box = card.createDiv('gq-wstep');
+    const go = k => { i = k; this.wsIdx = { key, i }; paint(); };
+    const paint = () => {
+      box.empty(); const w = words[i];
+      const dots = box.createDiv({ cls: 'gq-wdots', attr: { role: 'tablist' } });
+      words.forEach((x, k) => { const d = dots.createEl('button', { cls: 'gq-wdot gq-' + (this.colorOf(x.word) || 'new') + (k === i ? ' is-on' : ''), attr: { 'aria-label': `Word ${k + 1} of ${words.length}` } }); d.onclick = () => go(k); });
+      box.createDiv({ cls: 'gq-hint', text: `Word ${i + 1} of ${words.length}` });
+      const g = box.createDiv({ cls: 'gq-wbig', attr: { lang: 'el' } });
+      const a = g.createEl('a', { text: w.label || w.word, cls: 'internal-link', href: '#' }); a.onclick = e => { e.preventDefault(); this.app.workspace.openLinkText(w.word, TODAY, false); };
+      const en = box.createDiv({ cls: 'gq-hint gq-wen', text: w.en || '' }); en.style.visibility = 'hidden';
+      const r = box.createDiv('gq-row'); this.hearBtn(r, w.label || w.word);
+      const m = r.createEl('button', { text: 'Show meaning', cls: 'gq-mini' }); m.onclick = () => { en.style.visibility = ''; m.remove(); };
+      const cr = box.createDiv({ cls: 'gq-colors gq-wcolors', attr: { role: 'group', 'aria-label': 'How well do you know it?' } });
+      for (const [k, label] of COLORS) {
+        const b = cr.createEl('button', { text: label, cls: 'gq-c gq-' + k + (this.colorOf(w.word) === k ? ' is-on' : '') });
+        b.onclick = () => { this.wsIdx = { key, i: Math.min(i + 1, words.length - 1) }; if (this.colorOf(w.word) !== k) this.setColor(w.word, k); if (i + 1 < words.length) go(i + 1); else paint(); };
+      }
+      if (i === words.length - 1 && words.every(x => this.colorOf(x.word))) box.createDiv({ cls: 'gq-hint', text: 'All marked. Red ones come back in Review.' });
+    };
+    this.wsIdx = { key, i }; paint();
+  }
+  // This week in class: the lesson page and the opening rally, in one card.
+  async classCard(box, wk, week) {
+    const n = Number(wk && wk.fm.lesson) || 0, next = n || Number(((await this.weekNote(week + 1)) || { fm: {} }).fm.lesson) || 0;
+    if (!next) return;
+    const f = this.lessonPage(next);
+    const c = box.createDiv('gq-tcard gq-class'), h = c.createDiv('gq-thead');
+    h.createEl('strong', { text: n ? `This week in class · Lesson ${n}` : `No class this week · next is Lesson ${next}` });
+    const r = c.createDiv('gq-row');
+    if (f) { const lb = r.createEl('button', { text: 'Lesson page' }); lb.onclick = () => this.openNote(f.path); }
+    const pairs = f ? this.rallyPairs(await this.app.vault.cachedRead(f)) : [];
+    if (pairs.length) this.popBtn(r, `Practice the rally (${pairs.length})`, () => this.popRally(next, pairs));
+    const cg = r.createEl('button', { text: 'Classroom Greek', cls: 'gq-mini' }); cg.onclick = () => this.openNote(EXTRAS + '11 Classroom Greek.md');
+  }
+  async setFiay(on) {
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { if (on) fm.fiay = true; else delete fm.fiay; });
+    setTimeout(() => this.refreshToday(), 300);
   }
   // Watch the line as a short cartoon, or play it as a text adventure. Opens inside the vault, offline.
   sceneRow(card, n, week) {
@@ -1644,46 +1751,45 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         s.createSpan({ text: ' (2 minutes). ' }); const x = s.createEl('button', { text: 'Got it' }); x.onclick = () => this.setupSeen();
       }
       const wk = await this.weekNote(week);
-      const card = box.createDiv('gq-tcard');
-      if (!wk) card.createDiv({ text: 'Fluent in a Year is finished. Keep reviewing your red and yellow words below.' });
-      else {
-        const head = card.createDiv('gq-thead');
-        const title = (wk.file.basename.replace(/^FY\d+\s*/, '') || '').replace(/ no class this week$/, '');
-        head.createEl('strong', { text: `Week ${week}: ${title}` });
-        if (dd < 0) head.createSpan({ text: '  · starts Monday, Oct 26' });
-        const links = card.createDiv('gq-row');
-        const wl = links.createEl('button', { text: 'This week\'s words' }); wl.onclick = () => this.openNote(wk.file.path);
-        const lp = wk.fm.lesson && this.lessonPage(wk.fm.lesson);
-        if (lp) { const lb = links.createEl('button', { text: `Lesson ${wk.fm.lesson} page` }); lb.onclick = () => this.openNote(lp.path); }
-        else links.createSpan({ cls: 'gq-hint', text: 'No class this week.' });
+      if (wk) {
         const days = await this.weekDays(wk.file);
         const beats = await this.beatIndex(), dayNow = days[DAYS[dd < 0 ? 1 : (dow || 6)]];
         const cal = dd < 0 ? 1 : (dayNow && dayNow.n) || Math.max(0, ...Object.keys(beats).map(Number).filter(k => beats[k].week < week));
-        const sp = box.createDiv(); box.insertBefore(sp, card);
-        if (cal) await this.storyCard(sp, beats, cal, dd >= 0 && dow === 0, col);
-        await this.comebackCard(sp, beats, col, cal);
-        await this.rallyCard(sp, Number(wk.fm.lesson) || Number(((await this.weekNote(week + 1)) || { fm: {} }).fm.lesson));  // no-class weeks show next week's rally
-        if (dd >= 0 && dow === 0) {
-          const all = Object.values(days).flatMap(d => d.words);
-          card.createDiv({ cls: 'gq-tsub', text: `Sunday is review day: this week's ${all.length} words. Say each one, then color it.` });
-          this.wordList(card, all); this.todayPlay = all;
-        } else {
-          const d = days[DAYS[dd < 0 ? 1 : dow]];
-          if (d && d.words.length) { card.createDiv({ cls: 'gq-tsub', text: `Today's words · ${d.label}${d.line ? ' · bold in today\'s line' : ''}` }); this.wordList(card, d.words); this.todayPlay = d.words; }
+        this.todayBeat = null;
+        if (cal) await this.storyCard(box, beats, cal, dd >= 0 && dow === 0, col);
+        // Comebacks open once today's conversation is done.
+        if (!cal || col.last_beat >= cal) await this.comebackCard(box, beats, col, cal);
+        await this.classCard(box, wk, week);
+        // Fluent in a Year is optional: its words show here only for students who turn it on.
+        if (col.fiay) {
+          const card = box.createDiv('gq-tcard gq-fiay'), head = card.createDiv('gq-thead');
+          const title = (wk.file.basename.replace(/^FY\d+\s*/, '') || '').replace(/ no class this week$/, '');
+          head.createEl('strong', { text: `Fluent in a Year · week ${week}` }); head.createSpan({ cls: 'gq-hint', text: '  · ' + title + (dd < 0 ? ' · starts Monday, Oct 26' : '') });
+          let list = [], label = '';
+          if (dd >= 0 && dow === 0) { list = Object.values(days).flatMap(d => d.words); label = `Sunday review: this week's ${list.length} words`; }
+          else { const d = days[DAYS[dd < 0 ? 1 : dow]]; if (d) { list = d.words; label = `Today's words · ${d.label}`; } }
+          if (list.length) { card.createDiv({ cls: 'gq-tsub', text: label }); this.wordStep(card, list, ymd(now) + ':' + list.length); this.todayPlay = list; }
           else card.createDiv({ cls: 'gq-hint', text: 'No new words today.' });
+          const r = card.createDiv('gq-row');
+          const wl = r.createEl('button', { text: 'This week\'s page', cls: 'gq-mini' }); wl.onclick = () => this.openNote(wk.file.path);
+          const off = r.createEl('a', { text: 'Hide on Today', href: '#', cls: 'gq-hint' }); off.onclick = e => { e.preventDefault(); this.setFiay(false); };
         }
-      }
+      } else box.createDiv({ cls: 'gq-tcard gq-hint', text: 'The year is finished. Keep reviewing your red and yellow words below.' });
       // Review: red words, game misses and look-ups from the last two weeks, in the 1,500.
       const seen = new Set(), rev = [];
       const add = w => { const x = byWord.get(w); if (x && !seen.has(w) && !col.green.includes(w)) { seen.add(w); rev.push({ word: w, en: x.english }); } };
       (await this.recentWords(MISSES, 14)).forEach(add); col.red.forEach(add); (await this.recentWords(LOOKUPS, 14)).forEach(add);
-      const rc = box.createDiv('gq-tcard');
-      rc.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `Review (${rev.length})` });
-      if (!rev.length) rc.createDiv({ cls: 'gq-hint', text: 'Nothing to review yet. Words you mark red, miss in a game, or look up show up here for two weeks.' });
-      else this.wordList(rc, rev.slice(0, 20));
+      if (rev.length) {
+        const rc = box.createDiv('gq-tcard');
+        rc.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `Review (${rev.length})` });
+        rc.createDiv({ cls: 'gq-hint', text: 'Words you marked red, missed in a game, or looked up.' });
+        this.wordList(rc, rev.slice(0, 8));
+        if (rev.length > 8) rc.createDiv({ cls: 'gq-hint', text: `${rev.length - 8} more in the side panel.` });
+      }
       this.reviewPlay = rev.slice(0, 40); this.todayWeek = wk;
       const foot = box.createDiv('gq-hint gq-tfoot');
-      const mo = foot.createEl('button', { text: 'More: games, colors, tools ›', cls: 'gq-mini' }); mo.onclick = () => this.showMore();
+      const mo = foot.createEl('button', { text: 'More: story, games, colors, tools ›', cls: 'gq-mini' }); mo.onclick = () => this.showMore();
+      if (!col.fiay && wk) { const fy = foot.createEl('button', { text: 'Doing Fluent in a Year? Show its words', cls: 'gq-mini' }); fy.onclick = () => this.setFiay(true); }
       if (this.updateReady && !this.updating) { const up = foot.createEl('button', { text: 'Install update', cls: 'gq-mini' }); up.onclick = () => this.updateVault(false); }
       // Slides are parked (deckify below) until they come back for specific moments, not all of Today.
       if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.paintMore(); }
@@ -2143,6 +2249,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     btn('Send homework', () => this.sendHomework());
     btn('My homework', () => this.openNote(MY_WORK + 'Homework.md'));
     const sec = (title, open) => { const d = box.createEl('details', { cls: 'gq-more-sec' }); if (open) d.open = true; d.createEl('summary', { text: title }); return d.createDiv('gq-more-body'); };
+    const tb = this.todayBeat;
+    if (tb) {
+      const s = sec("Today's story", true);
+      const r = s.createDiv('gq-row');
+      if (tb.n <= SCENE_DAYS) { const w = r.createEl('button', { text: 'Watch it', cls: 'gq-mini' }); w.onclick = () => this.openApp('story', '#d=' + tb.n); const a = r.createEl('button', { text: 'Play it as a text adventure', cls: 'gq-mini' }); a.onclick = () => this.openApp('story', '#play&d=' + tb.n); }
+      this.popBtn(r, 'Say it line by line', () => this.popLine(tb.b, tb.n, tb.done));
+      if (tb.before.length) { s.createDiv({ cls: 'gq-tsub', text: `Story so far this week (${tb.before.length})` }); for (const x of tb.before) { const d = s.createDiv('gq-sofarline'); d.createSpan({ text: x.gr, attr: { lang: 'el' } }); d.createDiv({ cls: 'gq-hint', text: x.en }); } }
+    }
+    if ((this.reviewPlay || []).length > 8) { const s = sec(`All review words (${this.reviewPlay.length})`); this.wordList(s, this.reviewPlay); }
     if ((this.todayPlay || []).length || (this.reviewPlay || []).length) {
       const g = sec('Play with your words', true);
       if ((this.todayPlay || []).length) { g.createDiv({ cls: 'gq-tsub', text: "Today's words" }); this.playRow(g, this.todayPlay); }

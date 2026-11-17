@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, midday: A shorter Today
+> - **Today's conversation** shows one sentence at a time. Read the Greek, then tap (or drag) the English words into order and press Check. Get it right and the next line appears.
+> - **Fluent in a Year** is now off on Today unless you use it. Tap **Show its words** at the bottom of Today once to turn it on. Its five words show one at a time; marking a color moves you to the next.
+> - The story video, the text adventure and the story so far moved to **More** in the side panel.
+
 > [!info]- November 17, midday: Word graph and the Story Lines game
 > - **Word graph** opens full size in the main pane again, even when you start it from the side panel.
 > - **Story Lines, Play mode:** your prompt is now the big line in a box marked "Your turn", with the English underneath. "Last time" is a small recap at the top, and earlier prompts fade once you answer them. A day no longer prints its first prompt twice.

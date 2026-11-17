@@ -5,6 +5,8 @@ tags: [greek-fiay]
 
 An optional homework tier for students who want the whole 1,500-word list in one year: **5 words a day, 6 days a week, for 300 days**. Sunday is review. The class lessons alone cover about 250 list words; this tier covers the rest, so every word a student meets in class counts toward the 1,500.
 
+To see each day's five words on [[Today]], tap **Show its words** at the bottom of Today once. Tap **Hide on Today** to turn it off.
+
 > [!info]- How it works
 > - **52 weeks**, starting the week of Lesson 1 (Oct 26) and running to the following October: 50 word weeks of 30 words, plus two rest weeks at Christmas.
 > - **Order:** that week's lesson words come first. The rest are the next most frequent words on the list, chosen to fit the week's lesson scene or theme where they can. The learner essentials at the end of the list (days, colours, school things) are spread through the year instead of waiting for the last weeks.

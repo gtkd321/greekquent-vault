@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17s';
+const VAULT_RELEASE = '2026-11-17t';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -120,6 +120,8 @@ const WEB = 'greekquent-word-web';
 const WEB_MAX = 9;
 const WEB_ORDER = { v: 0, n: 1, d: 2, o: 3, a: 4 };
 const SVGNS = 'http://www.w3.org/2000/svg';
+// Split a pairing line at ' · ', but not inside the English in parentheses, e.g. (arrive · almost).
+const splitDots = s => { const out = []; let d = 0, cur = ''; for (let i = 0; i < s.length; i++) { const ch = s[i]; if (ch === '(') d++; else if (ch === ')') d = Math.max(0, d - 1); if (!d && s.startsWith(' · ', i)) { out.push(cur); cur = ''; i += 2; continue; } cur += ch; } out.push(cur); return out; };
 // SVG made with plain DOM calls, so the web draws the same on every Obsidian version and phone.
 const svgEl = (parent, tag, cls, attrs) => { const el = document.createElementNS(SVGNS, tag); if (cls) el.setAttribute('class', cls); for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, String(v)); parent.appendChild(el); return el; };
 class WordWebView extends ItemView {
@@ -172,11 +174,11 @@ class WordWebView extends ItemView {
     const pm = txt.match(/## Pair it with\n([\s\S]*?)(?:\n## |$)/);
     if (pm) for (const line of pm[1].split('\n')) {
       const c = line.match(/^- \*\*(.+?):\*\*\s*(.*)/); if (!c || c[1] === 'Try') continue;
-      for (const part of c[2].split(' · ')) {
+      for (const part of splitDots(c[2])) {
         const l = part.match(/\[\[([^\]|#]+)(?:\|([^\]]+))?\]\]/); if (!l) continue; const q = res(l[1]); if (!q) continue;
         const en = (part.match(/\(([^)]*)\)\s*$/) || [])[1] || '';
         const phrase = part.replace(/\[\[([^\]|#]+)\|([^\]]+)\]\]/g, '$2').replace(/\[\[([^\]|#]+)\]\]/g, '$1').replace(/\s*\([^)]*\)\s*$/, '').trim();
-        pair.push({ k: q, cat: c[1], phrase, en });
+        pair.push({ k: q, cat: c[1], phrase: phrase.replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim(), en });
       }
     }
     const cm = txt.match(/## Often appears with\n([\s\S]*?)(?:\n## |$)/);

@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!info]- November 17: Word web speaks only Greek
+> - When you hold a word, the Word web says the Greek pairing only. Before, some words also read part of the English.
+
 > [!info]- November 17, later: Word web fix
 > - The Word web could stop with "could not open this word" on some phones. It now draws in a way that works on every phone and Obsidian version.
 

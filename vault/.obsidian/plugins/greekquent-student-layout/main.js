@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17m';
+const VAULT_RELEASE = '2026-11-17n';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -63,7 +63,16 @@ const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 // Voices read a capital Η or Ο standing alone as a letter name ("ita", "omikron"). It is always the article, so lowercase it for the voice only.
 const ttsFix = t => String(t).replace(/(^|[^\p{L}])([ΗΟ])(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase());
-const say = w => { if (!window.speechSynthesis) return; const u = new SpeechSynthesisUtterance(ttsFix(w)); u.lang = 'el-GR'; speechSynthesis.cancel(); speechSynthesis.speak(u); };
+// Speaking right after cancel() is dropped on some phones (iPhone, some Android), so wait a moment when something is still talking.
+// The utterance is kept in a variable so it is not cleaned up before it speaks.
+let sayU = null, sayVoice = null;
+const greekVoice = () => { try { if (!sayVoice) sayVoice = (speechSynthesis.getVoices() || []).find(v => /^el/i.test(v.lang)) || null; } catch (e) {} return sayVoice; };
+const say = w => {
+  const ss = window.speechSynthesis; if (!ss || !w) return;
+  const u = new SpeechSynthesisUtterance(ttsFix(w)); u.lang = 'el-GR'; const v = greekVoice(); if (v) u.voice = v; sayU = u;
+  const go = () => { try { ss.resume(); } catch (e) {} ss.speak(u); };
+  if (ss.speaking || ss.pending) { ss.cancel(); setTimeout(go, 80); } else go();
+};
 const isGreek = t => /[\u0370-\u03ff\u1f00-\u1fff]/.test(t);
 const fold = t => (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').trim();
 // Gender agreement. The article and describing words take the gender of the noun they go with:
@@ -887,10 +896,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!st.bar || !box.contains(st.bar)) {
       const wrap = createDiv('gq-graph-top'); box.insertBefore(wrap, v.contentEl);
       const bar = wrap.createDiv('gq-web-bar');
+      // Taps on the bar are the bar's alone: they don't reach the graph's pan and zoom or the phone's swipe for side panels.
+      for (const ev of ['pointerdown', 'mousedown', 'touchstart', 'touchmove', 'wheel']) wrap.addEventListener(ev, e => e.stopPropagation(), { passive: true });
       st.back = bar.createEl('button', { text: '←', attr: { 'aria-label': 'Back' } });
       st.fwd = bar.createEl('button', { text: '→', attr: { 'aria-label': 'Forward' } });
       st.title = bar.createDiv('gq-web-title');
-      const say = bar.createEl('button', { text: 'Hear it', attr: { 'aria-label': 'Say the word' } });
+      const sayb = bar.createEl('button', { text: 'Hear it', attr: { 'aria-label': 'Say the word' } });
       const open = bar.createEl('button', { text: 'Open note', attr: { 'aria-label': 'Open the word note' } });
       const pairb = bar.createEl('button', { text: 'Build a sentence', attr: { 'aria-label': 'Build a sentence with this word' } });
       pairb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.openPair(f.basename); };
@@ -901,7 +912,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (const [cls, t] of [['v', 'verbs (doing)'], ['n', 'nouns (things, people)'], ['a', 'describing words'], ['d', 'how, when, where'], ['o', 'little words']]) { const s = key.createSpan('gq-key'); s.createSpan('gq-kdot gq-k' + cls); s.appendText(t); }
       st.back.onclick = () => this.graphStep(leaf, -1); st.fwd.onclick = () => this.graphStep(leaf, 1);
       open.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.app.workspace.getLeaf('tab').openFile(f); };
-      say.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) say(f.basename); };
+      sayb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) say(f.basename); };
       box.tabIndex = 0;
       this.registerDomEvent(box, 'keydown', e => { if (e.target.closest && e.target.closest('input')) return; if (e.key === 'ArrowLeft' || e.key === 'Backspace') { this.graphStep(leaf, -1); e.preventDefault(); } if (e.key === 'ArrowRight') { this.graphStep(leaf, 1); e.preventDefault(); } });
       this.registerDomEvent(box, 'mouseup', e => { if (e.button === 3) this.graphStep(leaf, -1); if (e.button === 4) this.graphStep(leaf, 1); });
@@ -917,7 +928,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (f) st.title.setText(`${f.basename}${fm.english ? ' · ' + fm.english : ''}${fm.pronunciation ? ' · say it: ' + fm.pronunciation : ''}${fm.rank ? ' · #' + fm.rank : ''}`);
     st.back.disabled = st.pos <= 0; st.fwd.disabled = st.pos >= st.hist.length - 1;
     st.trail.setText(st.hist.slice(Math.max(0, st.pos - 6), st.pos + 1).map(h => h.replace(/^Words\//, '').replace(/\.md$/, '')).join('  ›  '));
-    box.focus();
+    if (!document.body.classList.contains('is-mobile')) box.focus();
   }
   // ---------- Look up helpers ----------
   async wordIndex() {
@@ -1630,12 +1641,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (let k = 0; k < Math.min(i, turns.length); k++) {
         const x = turns[k], r = wrap.createDiv('gq-cv-done');
         if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' });
-        this.lineEl(r, x[1], words); r.createDiv({ cls: 'gq-hint', text: x[2] });
+        const gl = this.lineEl(r, x[1], words); gl.addClass('gq-say'); gl.onclick = () => say(x[1]); r.createDiv({ cls: 'gq-hint', text: x[2] });
       }
       if (i >= turns.length) {
         const row = wrap.createDiv('gq-row');
-        this.hearBtn(row, turns.map(x => x[1]).join(' '), 'Hear it all');
-        row.createSpan({ cls: 'gq-hint', text: 'Done for today. Say it out loud once.' });
+        row.createSpan({ cls: 'gq-hint', text: 'Done for today. Touch a line to listen, then say it out loud.' });
         const again = row.createEl('button', { text: 'Play again', cls: 'gq-mini' }); again.onclick = () => { i = 0; save(); paint(); };
         return;
       }
@@ -1651,9 +1661,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (tiles.slice(0, target.length).every((tl, k) => tl.w === target[k])) tiles.push(tiles.shift());
       const ans = cur.createDiv({ cls: 'gq-cv-ans', attr: { 'aria-label': 'Your Greek', lang: 'el' } });
       const bank = cur.createDiv({ cls: 'gq-cv-bank', attr: { 'aria-label': 'Greek word tiles', lang: 'el' } });
-      cur.createDiv({ cls: 'gq-hint gq-cv-help', text: 'Build it in Greek: tap the words in order (or drag them up). Tap a word again to take it back.' });
+      cur.createDiv({ cls: 'gq-hint gq-cv-help', text: 'Build it in Greek: touch a word to hear it and add it (or drag it up). Touch it again to take it back.' });
       const placed = [];
-      const place = tl => { if (tl.used) return; tl.used = true; tl.btn.addClass('gq-used'); const c = ans.createEl('button', { text: tl.w, cls: 'gq-tile' }); tl.clone = c; placed.push(tl); bindDrag(c, () => unplace(tl), bank); ans.removeClass('gq-bad'); };
+      const place = tl => { if (tl.used) return; say(tl.w); tl.used = true; tl.btn.addClass('gq-used'); const c = ans.createEl('button', { text: tl.w, cls: 'gq-tile' }); tl.clone = c; placed.push(tl); bindDrag(c, () => unplace(tl), bank); ans.removeClass('gq-bad'); };
       const unplace = tl => { if (!tl.used) return; tl.used = false; tl.btn.removeClass('gq-used'); tl.clone.remove(); placed.splice(placed.indexOf(tl), 1); ans.removeClass('gq-bad'); };
       // Tap moves a tile; dragging it onto the other area does the same (pointer events work with touch and mouse).
       const bindDrag = (el, act, dest) => {
@@ -1672,10 +1682,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (const tl of tiles) { tl.btn = bank.createEl('button', { text: tl.w, cls: 'gq-tile' }); bindDrag(tl.btn, () => place(tl), ans); }
       const row = cur.createDiv('gq-row'); let misses = 0;
       const chk = row.createEl('button', { text: 'Check', cls: 'mod-cta' });
-      const hint = row.createEl('button', { text: 'Hear it', cls: 'gq-mini' }); hint.style.display = 'none'; hint.onclick = () => say(x[1]);
+      const hint = cur.createDiv({ cls: 'gq-hint gq-say', text: 'Touch here to hear the whole line in Greek.' }); hint.style.display = 'none'; hint.onclick = () => say(x[1]);
       const show = row.createEl('button', { text: 'Show me', cls: 'gq-mini' }); show.style.display = 'none';
       const fb = cur.createDiv('gq-hint gq-cv-fb');
-      const en = this.lineEl(cur, x[1], words); en.addClass('gq-cv-en'); en.style.display = 'none';
+      const en = this.lineEl(cur, x[1], words); en.addClass('gq-cv-en'); en.addClass('gq-say'); en.onclick = () => say(x[1]); en.style.display = 'none';
       show.onclick = () => { en.style.display = ''; show.remove(); };
       chk.onclick = () => {
         const got = placed.map(tl => norm(tl.w)), exact = got.join(' ') === target.map(norm).join(' ');
@@ -1699,11 +1709,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const dots = box.createDiv({ cls: 'gq-wdots', attr: { role: 'tablist' } });
       words.forEach((x, k) => { const d = dots.createEl('button', { cls: 'gq-wdot gq-' + (this.colorOf(x.word) || 'new') + (k === i ? ' is-on' : ''), attr: { 'aria-label': `Word ${k + 1} of ${words.length}` } }); d.onclick = () => go(k); });
       box.createDiv({ cls: 'gq-hint', text: `Word ${i + 1} of ${words.length}` });
-      const g = box.createDiv({ cls: 'gq-wbig', attr: { lang: 'el' } });
-      const a = g.createEl('a', { text: w.label || w.word, cls: 'internal-link', href: '#' }); a.onclick = e => { e.preventDefault(); this.app.workspace.openLinkText(w.word, TODAY, false); };
+      const g = box.createDiv({ cls: 'gq-wbig gq-say', text: w.label || w.word, attr: { lang: 'el', role: 'button', 'aria-label': 'Touch to listen' } }); g.onclick = () => say(w.label || w.word);
+      box.createDiv({ cls: 'gq-hint', text: 'Touch the word to listen.' });
       const en = box.createDiv({ cls: 'gq-hint gq-wen', text: w.en || '' }); en.style.visibility = 'hidden';
-      const r = box.createDiv('gq-row'); this.hearBtn(r, w.label || w.word);
+      const r = box.createDiv('gq-row');
       const m = r.createEl('button', { text: 'Show meaning', cls: 'gq-mini' }); m.onclick = () => { en.style.visibility = ''; m.remove(); };
+      const nt = r.createEl('button', { text: 'Word note', cls: 'gq-mini' }); nt.onclick = () => this.app.workspace.openLinkText(w.word, TODAY, false);
       const cr = box.createDiv({ cls: 'gq-colors gq-wcolors', attr: { role: 'group', 'aria-label': 'How well do you know it?' } });
       for (const [k, label] of COLORS) {
         const b = cr.createEl('button', { text: label, cls: 'gq-c gq-' + k + (this.colorOf(w.word) === k ? ' is-on' : '') });

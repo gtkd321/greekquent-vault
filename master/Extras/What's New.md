@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, night: Touch to listen
+> - **Today's conversation:** touch a word tile to hear it as you add it. Finished lines play when you touch them. After a miss, touch the hint to hear the whole line.
+> - **Fluent in a Year words:** touch the big word to hear it. **Word note** opens its page.
+> - **Word graph:** the top buttons work again, Hear it included. On phones the graph keeps its title bar, so the buttons sit below the notch where you can tap them.
+> - Speech is more reliable on iPhone and Android when one word follows another quickly.
+
 > [!info]- November 17, evening: Greek word order is more flexible
 > - Today's conversation now accepts other natural orders, like putting the verb first. Small words (ο, στο, να, δεν, μου) still need to stay next to their word. When your order differs, you see the line as written too.
 > - Dragging tiles on a phone should no longer open the side panel.

@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17v';
+const VAULT_RELEASE = '2026-11-17w';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -122,18 +122,22 @@ const WEB_ORDER = { v: 0, n: 1, d: 2, o: 3, a: 4 };
 const SVGNS = 'http://www.w3.org/2000/svg';
 // Split a pairing line at ' · ', but not inside the English in parentheses, e.g. (arrive · almost).
 const splitDots = s => { const out = []; let d = 0, cur = ''; for (let i = 0; i < s.length; i++) { const ch = s[i]; if (ch === '(') d++; else if (ch === ')') d = Math.max(0, d - 1); if (!d && s.startsWith(' · ', i)) { out.push(cur); cur = ''; i += 2; continue; } cur += ch; } out.push(cur); return out; };
-// The kids' hello song: an original tune, played by the phone itself (no audio files, works offline).
-// Each note is [syllable, MIDI pitch, beats]; a null syllable is a rest. Every syllable sits on a beat, and stressed syllables land on strong beats.
+// The kids' hello song: the teacher's own melody, taken from his recording (Nov 17) and played by the phone itself.
+// Each note is [syllable, MIDI pitch, start s, end s, scoop-from pitch, slide-to pitch], timed as he sang it,
+// an octave up for kids. The timing is his, not squared off to a grid; Slower stretches it evenly.
 const HELLO_SONG = [
-  { gr: 'Γεια σας, γεια σας, φίλοι!', en: 'Hi, hi, friends!', move: 'Big wave to everyone', chords: [60, 65],
-    notes: [['Γεια ', 67, 1], ['σας, ', 67, 1], ['γεια ', 64, 1], ['σας, ', 64, 1], ['φί', 69, 1], ['λοι!', 67, 2], [null, 0, 1]] },
-  { gr: 'Γεια σου, γεια σου, εσύ!', en: 'Hi, hi, you!', move: 'Small wave, then point to one person', chords: [60, 67],
-    notes: [['Γεια ', 67, 1], ['σου, ', 67, 1], ['γεια ', 64, 1], ['σου, ', 64, 1], ['ε', 62, 1], ['σύ!', 60, 2], [null, 0, 1]] },
-  { gr: 'Τι έχεις; Τι έχεις;', en: 'What do you have? What do you have?', move: 'Palms up, shoulders up', chords: [60, 65],
-    notes: [['Τι ', 64, 1], ['έ', 67, 1], ['χεις; ', 67, 2], ['Τι ', 64, 1], ['έ', 69, 1], ['χεις;', 65, 2]] },
-  { gr: 'Ώρα για ελληνικά!', en: 'Time for Greek!', move: 'Tap your wrist, then both arms up', chords: [60, 60],
-    notes: [['Ώ', 72, 1], ['ρα ', 69, 1], ['για ', 67, 1], ['ελ', 64, 1], ['λη', 62, 1], ['νι', 64, 1], ['κά!', 60, 2]] },
+  { gr: 'Γεια σας, γεια σας, φίλοι!', en: 'Hi, hi, friends!', move: 'Big wave to everyone',
+    notes: [['Γεια ', 67, 0.00, 0.34, 65], ['σας, ', 67, 0.38, 0.72], ['γεια ', 62, 0.75, 1.21, 0, 64], ['σας, ', 64, 1.35, 1.66], ['φί', 69, 1.82, 2.21, 66], ['λοι!', 67, 2.23, 2.99]] },
+  { gr: 'Γεια σου, γεια σου, εσύ!', en: 'Hi, hi, you!', move: 'Small wave, then point to one person',
+    notes: [['Γεια ', 67, 4.09, 4.40, 66], ['σου, ', 64, 4.42, 4.72], ['γεια ', 64, 4.74, 4.92], ['σου, ', 64, 5.02, 5.20], ['ε', 64, 5.22, 5.42], ['σύ!', 62, 5.58, 6.42]] },
+  { gr: 'Τι έχεις; Τι έχεις;', en: 'What do you have? What do you have?', move: 'Palms up, shoulders up',
+    notes: [['Τι ', 62, 7.16, 7.42], ['έ', 67, 7.48, 7.74], ['χεις; ', 64, 7.85, 8.80], ['Τι ', 64, 9.11, 9.27], ['έ', 69, 9.43, 9.78], ['χεις;', 67, 9.80, 10.52, 66]] },
+  { gr: 'Ώρα για ελληνικά!', en: 'Time for Greek!', move: 'Tap your wrist, then both arms up',
+    notes: [['Ώ', 67, 11.06, 11.42, 62], ['ρα ', 67, 11.43, 11.87], ['για ', 64, 11.94, 12.39], ['ελ', 64, 12.39, 12.81], ['λη', 62, 12.91, 13.34], ['νι', 62, 13.34, 13.77], ['κά!', 60, 13.80, 14.69]] },
 ];
+// A soft bass under the tune: [start s, MIDI] pairs; each lasts until the next start, and the last entry is the line's end.
+const HELLO_BASS = [[[0.00, 43], [0.75, 48], [1.82, 50], [2.23, 43], [2.99]], [[4.09, 48], [5.58, 43], [6.42]], [[7.16, 48], [9.11, 45], [9.80, 50], [10.52]], [[11.06, 48], [12.91, 43], [13.80, 48], [14.69]]];
+const HELLO_BEAT = 0.47;   // his pulse, about 128 a minute; the count-in uses it
 // SVG made with plain DOM calls, so the web draws the same on every Obsidian version and phone.
 const svgEl = (parent, tag, cls, attrs) => { const el = document.createElementNS(SVGNS, tag); if (cls) el.setAttribute('class', cls); for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, String(v)); parent.appendChild(el); return el; };
 class WordWebView extends ItemView {
@@ -2118,7 +2122,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     h.createEl('strong', { text: 'Hello song' }); h.createSpan({ cls: 'gq-hint', text: '  · sing it together to start, and do the moves' });
     const rows = HELLO_SONG.map(l => {
       const r = c.createDiv('gq-song-line'), g = r.createDiv({ cls: 'gq-song-gr', attr: { lang: 'el' } });
-      const syl = l.notes.filter(n => n[0]).map(n => g.createSpan({ cls: 'gq-syl', text: n[0] }));
+      const syl = l.notes.map(n => g.createSpan({ cls: 'gq-syl', text: n[0] }));
       r.createDiv({ cls: 'gq-hint gq-song-move', text: l.move + ' · ' + l.en });
       return { r, syl };
     });
@@ -2128,30 +2132,35 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const words = row.createEl('button', { text: 'Hear the words', cls: 'gq-mini' });
     c.createDiv({ cls: 'gq-hint', text: 'No sound? Turn the phone volume up and check it is not on silent.' });
     const stop = () => { if (this.songStop) { this.songStop(); this.songStop = null; } };
-    const run = async bpm => {
+    const run = async speed => {
       stop();
       const AC = window.AudioContext || window.webkitAudioContext;
       if (!AC) { new Notice('This device cannot play the tune. Sing it with Hear the words.'); return; }
       const ctx = new AC();
       // Phones start the audio clock only after resume; schedule from the real clock once it runs.
       try { if (ctx.state !== 'running') await ctx.resume(); } catch (e) {}
-      const beat = 60 / bpm, t0 = ctx.currentTime + 0.2, events = [];
+      const beat = HELLO_BEAT * speed, t0 = ctx.currentTime + 0.2, events = [];
       const out = ctx.createGain(); out.gain.value = 0.9; out.connect(ctx.destination);
       const hz = m => 440 * Math.pow(2, (m - 69) / 12);
-      const tone = (m, at, dur, type, vol) => {
-        const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type; o.frequency.value = hz(m);
+      const tone = (m, at, dur, type, vol, from, to) => {
+        const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type;
+        // A scoop starts a little below and rises into the note, as he sang it; a slide glides to the next pitch.
+        if (from) { o.frequency.setValueAtTime(hz(from), at); o.frequency.exponentialRampToValueAtTime(hz(m), at + Math.min(0.09, dur * 0.4)); }
+        else o.frequency.setValueAtTime(hz(m), at);
+        if (to) o.frequency.exponentialRampToValueAtTime(hz(to), at + dur * 0.8);
         g.gain.setValueAtTime(0.0001, at); g.gain.exponentialRampToValueAtTime(vol, at + 0.015);
         g.gain.exponentialRampToValueAtTime(vol * 0.55, at + Math.min(0.2, dur * 0.5)); g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
         o.connect(g); g.connect(out); o.start(at); o.stop(at + dur + 0.05);
       };
       for (let i = 0; i < 4; i++) tone(84, t0 + i * beat, 0.06, 'square', 0.05);
-      let at = t0 + 4 * beat;
-      HELLO_SONG.forEach((l, li) => {
-        const start = at; let k = 0;
-        l.chords.forEach((root, bi) => { const b = start + bi * 4 * beat; tone(root - 12, b, 1.9 * beat, 'sine', 0.22); tone(root - 5, b + 2 * beat, 1.9 * beat, 'sine', 0.16); });
-        for (const [s, m, d] of l.notes) { if (s) { tone(m, at, d * beat * 0.92, 'triangle', 0.32); events.push({ at, li, idx: k++ }); } at += d * beat; }
-      });
-      const end = at;
+      const s0 = t0 + 4 * beat, k = speed;
+      for (const line of HELLO_BASS) for (let i = 0; i + 1 < line.length; i++) tone(line[i][1], s0 + line[i][0] * k, (line[i + 1][0] - line[i][0]) * k * 0.97, 'sine', 0.2);
+      HELLO_SONG.forEach((l, li) => l.notes.forEach(([s, m, a1, a2, from, to], idx) => {
+        const at = s0 + a1 * k;
+        tone(m, at, (a2 - a1) * k, 'triangle', 0.32, from, to);
+        events.push({ at, li, idx });
+      }));
+      const last = HELLO_SONG[HELLO_SONG.length - 1].notes, end = s0 + last[last.length - 1][3] * k;
       const clear = () => { for (const x of rows) { x.r.classList.remove('is-now'); x.syl.forEach(s => s.classList.remove('is-on')); } };
       // The highlight follows the audio clock itself, minus the time sound takes to reach the speaker, so it cannot drift.
       const lag = (ctx.outputLatency || 0) + (ctx.baseLatency || 0);
@@ -2170,8 +2179,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       play.setText('Stop');
       this.songStop = () => { cancelAnimationFrame(raf); clear(); play.setText('Sing the hello song'); try { ctx.close(); } catch (e) {} };
     };
-    play.onclick = () => { if (this.songStop) stop(); else run(112); };
-    slow.onclick = () => run(84);
+    play.onclick = () => { if (this.songStop) stop(); else run(1); };
+    slow.onclick = () => run(1.35);
     words.onclick = () => { stop(); say(HELLO_SONG.map(l => l.gr).join(' ')); };
   }
   async renderKidsToday(el, tok, info) {

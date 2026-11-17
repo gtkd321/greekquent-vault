@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, late: Word web fixes
+> - The Word web now opens every word, even when a Word web tab was already open in the background.
+> - "Open linked view" is gone from the note menu. Use **Word web** instead.
+> - **Word card** goes back to your open note tab instead of opening a new tab each time.
+
 > [!info]- November 17, evening: A new Word web
 > - The Word web now centers on the word you choose and shows at most 9 words that go with it, colored by type.
 > - Tap a word to move there and hear it. Hold a word to see only its links and hear how the two words pair.

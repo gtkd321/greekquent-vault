@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17p';
+const VAULT_RELEASE = '2026-11-17q';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -126,7 +126,7 @@ class WordWebView extends ItemView {
   getDisplayText() { return this.path ? 'Word web: ' + this.path.replace(/^Words\//, '').replace(/\.md$/, '') : 'Word web'; }
   getIcon() { return 'git-fork'; }
   getState() { return { path: this.path }; }
-  async setState(st, res) { await super.setState(st, res); if (st && st.path && st.path !== this.path) this.go(st.path); }
+  async setState(st, res) { await super.setState(st, res); if (st && st.path && st.path !== this.path) await this.go(st.path); }
   async onOpen() {
     const box = this.contentEl; box.empty(); box.addClass('gq-ww');
     const bar = box.createDiv('gq-web-bar');
@@ -135,7 +135,7 @@ class WordWebView extends ItemView {
     this.titleEl.onclick = () => this.path && say(this.label(this.path));
     this.back = bar.createEl('button', { text: '←', attr: { 'aria-label': 'Back' } }); this.back.onclick = () => this.step(-1);
     this.fwd = bar.createEl('button', { text: '→', attr: { 'aria-label': 'Forward' } }); this.fwd.onclick = () => this.step(1);
-    const open = bar.createEl('button', { text: 'Word card' }); open.onclick = () => { const f = this.file(); if (f) this.plugin.mainLeaf(true).openFile(f); };
+    const open = bar.createEl('button', { text: 'Word card' }); open.onclick = () => { const f = this.file(); if (!f) return; const ws = this.app.workspace; const l = ws.getLeavesOfType('markdown').find(x => x.getRoot && x.getRoot() === ws.rootSplit) || this.plugin.mainLeaf(true); l.openFile(f); ws.setActiveLeaf(l, { focus: true }); };
     const pairb = bar.createEl('button', { text: 'Build a sentence' }); pairb.onclick = () => { const f = this.file(); if (f) this.plugin.openPair(f.basename); };
     const askb = bar.createEl('button', { text: 'Ask' }); askb.onclick = () => { const f = this.file(); if (f) this.plugin.ask(f); };
     this.trail = box.createDiv('gq-web-trail');
@@ -829,6 +829,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }));
     // My Work notes open ready to type in.
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path.startsWith(MY_WORK)) setTimeout(() => this.editMode(f), 50); }));
+    this.hideLinkedView();
     this.addCommand({ id: 'open-word-graph', name: 'Open word web', callback: () => this.openGraph() });
     this.registerEvent(this.app.workspace.on('file-menu', (menu, file) => {
       if (file && file.path && file.path.startsWith('Words/')) menu.addItem(i => i.setTitle('Open word web').setIcon('git-fork').onClick(() => this.openGraph(file.path)));
@@ -1042,9 +1043,31 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!leaf) leaf = this.mainLeaf(true);
     if (ws.leftSplit && !ws.leftSplit.collapsed) ws.leftSplit.collapse();
     if (ws.rightSplit && !ws.rightSplit.collapsed) ws.rightSplit.collapse();
-    if (leaf.view && leaf.view.getViewType() === WEB) { ws.revealLeaf(leaf); ws.setActiveLeaf(leaf, { focus: true }); await leaf.view.go(file); return; }
-    await leaf.setViewState({ type: WEB, active: true, state: { path: file } });
-    ws.revealLeaf(leaf);
+    try {
+      // A tab Obsidian has not loaded yet (deferred) has no web inside it; load it first.
+      if (leaf.isDeferred && leaf.loadIfDeferred) await leaf.loadIfDeferred();
+      if (leaf.view && leaf.view.getViewType() === WEB && typeof leaf.view.go === 'function') { ws.setActiveLeaf(leaf, { focus: true }); ws.revealLeaf(leaf); await leaf.view.go(file); return; }
+      await leaf.setViewState({ type: WEB, active: true, state: { path: file } });
+      ws.revealLeaf(leaf);
+      if (leaf.view && typeof leaf.view.go === 'function' && leaf.view.path !== file) await leaf.view.go(file);
+    } catch (e) { console.error('Greekquent word web', e); new Notice('The word web could not open this word. Try again, or open the word note.'); }
+  }
+  // Obsidian's own "Open linked view" (local graph, backlinks, outline) only confuses here; the Word web replaces it.
+  hideLinkedView() {
+    const proto = Menu.prototype, plugin = this, NO = /^open (linked view|local graph|backlinks|outgoing links|outline|linked mentions)/i;
+    const clean = menu => {
+      if (!menu || !Array.isArray(menu.items)) return;
+      menu.items = menu.items.filter(it => { const tx = ((it.titleEl || it.dom || {}).textContent || '').trim(); if (NO.test(tx)) { if (it.dom) it.dom.remove(); return false; } return true; });
+      // Drop a separator left doubled or dangling at either end.
+      const isSep = it => it && !it.titleEl && it.dom && it.dom.classList && it.dom.classList.contains('menu-separator');
+      menu.items = menu.items.filter((it, i, a) => { const drop = isSep(it) && (i === 0 || i === a.length - 1 || isSep(a[i - 1])); if (drop && it.dom) it.dom.remove(); return !drop; });
+    };
+    for (const m of ['showAtPosition', 'showAtMouseEvent']) {
+      const orig = proto[m]; if (typeof orig !== 'function' || orig.gqWrapped) continue;
+      const wrap = function (...a) { try { clean(this); } catch (e) {} return orig.apply(this, a); };
+      wrap.gqWrapped = true; proto[m] = wrap;
+      plugin.register(() => { if (proto[m] === wrap) proto[m] = orig; });
+    }
   }
   graphState(leaf) { if (!leaf.gq) leaf.gq = { hist: [], pos: -1 }; return leaf.gq; }
   async graphGo(leaf, path, fromHistory) {

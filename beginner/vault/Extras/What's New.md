@@ -2,8 +2,12 @@
 
 Back to [[Today]].
 
+> [!info]- November 17, afternoon: Build the conversation in Greek
+> - Today's conversation now shows the English, and you build the sentence in Greek from word tiles. The extra tiles are real Greek words from this week, so look closely at small ones like στη and στο.
+> - Miss once and a **Hear it** button appears. Miss twice and **Show me** shows the Greek.
+
 > [!info]- November 17, midday: A shorter Today
-> - **Today's conversation** shows one sentence at a time. Read the Greek, then tap (or drag) the English words into order and press Check. Get it right and the next line appears.
+> - **Today's conversation** shows one sentence at a time. Tap (or drag) the word tiles into order and press Check. Get it right and the next line appears.
 > - **Fluent in a Year** is now off on Today unless you use it. Tap **Show its words** at the bottom of Today once to turn it on. Its five words show one at a time; marking a color moves you to the next.
 > - The story video, the text adventure and the story so far moved to **More** in the side panel.
 

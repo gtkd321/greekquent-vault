@@ -305,3 +305,6 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-wcolors .gq-c.gq-red { border-color: #d73027; } .gq-wcolors .gq-c.gq-yellow { border-color: #e6b400; } .gq-wcolors .gq-c.gq-green { border-color: #1a9850; }
 .gq-wcolors .gq-c.is-on { color: #fff; font-weight: 600; }
 .gq-wcolors .gq-c.gq-red.is-on { background: #d73027; } .gq-wcolors .gq-c.gq-yellow.is-on { background: #b38b00; } .gq-wcolors .gq-c.gq-green.is-on { background: #1a9850; }
+.gq-cv-done .gq-line { display: inline; }
+.gq-story .gq-cv-prompt { font-size: 1.2em; }
+.gq-cv-en { margin: 6px 0; font-size: 1.1em; }

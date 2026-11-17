@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-17k';
+const VAULT_RELEASE = '2026-11-17l';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1571,7 +1571,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const T = await this.storyTurns();
     let turns = T[n]; if (!turns || !turns.length || turns.map(x => x[1]).join(' — ') !== b.gr) turns = [['', b.gr, b.en]];
     // Wrong-answer tiles come from the rest of this week's story, so they look like real choices.
-    const pool = Object.values(beats).filter(x => x.week === b.week && x.n !== n).flatMap(x => (T[x.n] || [['', '', x.en]]).map(y => y[2]));
+    const pool = Object.values(beats).filter(x => x.week === b.week && x.n !== n).flatMap(x => (T[x.n] || [['', x.gr || '', '']]).map(y => y[1]));
     const before = Object.values(beats).filter(x => x.week === b.week && x.n < n).sort((p, q) => p.n - q.n);
     this.todayBeat = { b, n, before, done: last >= n };
     this.convoGame(card, turns, n, b.words, last >= n, pool, () => { if (this.colors().last_beat < n) this.saidBeat(n); });
@@ -1592,7 +1592,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (let k = 0; k < Math.min(i, turns.length); k++) {
         const x = turns[k], r = wrap.createDiv('gq-cv-done');
         if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' });
-        r.createSpan({ text: x[1], attr: { lang: 'el' } }); r.createDiv({ cls: 'gq-hint', text: x[2] });
+        this.lineEl(r, x[1], words); r.createDiv({ cls: 'gq-hint', text: x[2] });
       }
       if (i >= turns.length) {
         const row = wrap.createDiv('gq-row');
@@ -1603,16 +1603,17 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
       const x = turns[i], cur = wrap.createDiv('gq-cv-now');
       cur.createDiv({ cls: 'gq-hint', text: (turns.length > 1 ? `Sentence ${i + 1} of ${turns.length}` : 'One sentence') + (x[0] ? ` · ${x[0]}` : '') });
-      const gl = this.lineEl(cur, x[1], words); gl.addClass('gq-cv-gr');
-      const hr = cur.createDiv('gq-row'); this.hearBtn(hr, x[1]);
-      const target = toks(x[2]), want = new Set(target.map(norm));
+      cur.createDiv({ cls: 'gq-cv-gr gq-cv-prompt', text: x[2] });
+      const target = toks(x[1]), want = new Set(target.map(norm));
       const extra = [...new Set(pool.flatMap(toks).filter(w => !want.has(norm(w)) && w.length > 1))];
       const nExtra = Math.min(extra.length, Math.max(3, Math.min(6, Math.ceil(target.length / 2))));
       const picks = []; while (picks.length < nExtra && extra.length) picks.push(extra.splice(Math.floor(rnd() * extra.length), 1)[0]);
-      const tiles = [...target, ...picks].map((w, k) => ({ w, k })).sort(() => rnd() - 0.5);
-      const ans = cur.createDiv({ cls: 'gq-cv-ans', attr: { 'aria-label': 'Your English' } });
-      const bank = cur.createDiv({ cls: 'gq-cv-bank', attr: { 'aria-label': 'Word tiles' } });
-      cur.createDiv({ cls: 'gq-hint gq-cv-help', text: 'Tap the English words in order (or drag them up). Tap a word again to take it back.' });
+      const tiles = [...target, ...picks].map((w, k) => ({ w, k }));
+      for (let a = tiles.length - 1; a > 0; a--) { const b = Math.floor(rnd() * (a + 1)); [tiles[a], tiles[b]] = [tiles[b], tiles[a]]; }
+      if (tiles.slice(0, target.length).every((tl, k) => tl.w === target[k])) tiles.push(tiles.shift());
+      const ans = cur.createDiv({ cls: 'gq-cv-ans', attr: { 'aria-label': 'Your Greek', lang: 'el' } });
+      const bank = cur.createDiv({ cls: 'gq-cv-bank', attr: { 'aria-label': 'Greek word tiles', lang: 'el' } });
+      cur.createDiv({ cls: 'gq-hint gq-cv-help', text: 'Build it in Greek: tap the words in order (or drag them up). Tap a word again to take it back.' });
       const placed = [];
       const place = tl => { if (tl.used) return; tl.used = true; tl.btn.addClass('gq-used'); const c = ans.createEl('button', { text: tl.w, cls: 'gq-tile' }); tl.clone = c; placed.push(tl); bindDrag(c, () => unplace(tl), bank); ans.removeClass('gq-bad'); };
       const unplace = tl => { if (!tl.used) return; tl.used = false; tl.btn.removeClass('gq-used'); tl.clone.remove(); placed.splice(placed.indexOf(tl), 1); ans.removeClass('gq-bad'); };
@@ -1633,15 +1634,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (const tl of tiles) { tl.btn = bank.createEl('button', { text: tl.w, cls: 'gq-tile' }); bindDrag(tl.btn, () => place(tl), ans); }
       const row = cur.createDiv('gq-row'); let misses = 0;
       const chk = row.createEl('button', { text: 'Check', cls: 'mod-cta' });
+      const hint = row.createEl('button', { text: 'Hear it', cls: 'gq-mini' }); hint.style.display = 'none'; hint.onclick = () => say(x[1]);
       const show = row.createEl('button', { text: 'Show me', cls: 'gq-mini' }); show.style.display = 'none';
-      const en = cur.createDiv({ cls: 'gq-hint gq-cv-en', text: x[2] }); en.style.display = 'none';
+      const en = this.lineEl(cur, x[1], words); en.addClass('gq-cv-en'); en.style.display = 'none';
       show.onclick = () => { en.style.display = ''; show.remove(); };
       chk.onclick = () => {
         const got = placed.map(tl => norm(tl.w)).join(' ');
         if (got === target.map(norm).join(' ')) {
           ans.addClass('gq-ok'); chk.disabled = true; say(x[1]);
           setTimeout(() => { i++; save(); paint(); if (i >= turns.length) onDone(); }, 900);
-        } else { misses++; ans.removeClass('gq-bad'); void ans.offsetWidth; ans.addClass('gq-bad'); if (misses >= 2) show.style.display = ''; }
+        } else { misses++; ans.removeClass('gq-bad'); void ans.offsetWidth; ans.addClass('gq-bad'); if (misses >= 1) hint.style.display = ''; if (misses >= 2) show.style.display = ''; }
       };
     };
     paint();

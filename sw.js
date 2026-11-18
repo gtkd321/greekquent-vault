@@ -1,11 +1,15 @@
 // Greekquent web app: works offline after the first visit. Network first for version.json, cache first for
 // everything else (file names carry the version, so a new release is fetched fresh). Only this app's cache is used.
-const CACHE = 'greekquent-beginner-2026-11-18m-eacc36f1';
+const CACHE = 'greekquent-beginner-2026-11-18n-d7396f38';
+// Other editions live in folders under this one and run their own worker. Leave their requests alone.
+const SKIP = ["intermediate/", "kids/"];
+const BASE = new URL('./', self.location).pathname;
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', 'index.html', 'app.css', 'shim.js', 'app.js', 'lib/js-yaml.min.js', 'lib/marked.umd.js', 'icon.svg', 'manifest.webmanifest']).catch(() => {}))); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('greekquent-beginner-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', e => {
   const u = new URL(e.request.url);
   if (e.request.method !== 'GET' || u.origin !== location.origin) return;
+  if (SKIP.some(d => u.pathname.startsWith(BASE + d))) return;
   const isVer = u.pathname.endsWith('/version.json') || u.pathname.endsWith('/') || u.pathname.endsWith('/index.html');
   if (isVer) {
     e.respondWith(fetch(e.request).then(r => { const c = r.clone(); const key = u.pathname.endsWith('version.json') ? 'version.json' : e.request; caches.open(CACHE).then(x => x.put(key, c)); return r; })

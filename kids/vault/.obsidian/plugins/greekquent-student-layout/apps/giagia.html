@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!--GQ_START-->
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="obsidian://"]');
+  if (a && window.parent !== window) { e.preventDefault(); window.parent.postMessage({ gq: 'obsidian', url: a.href }, '*'); }
+}, true);
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Greekquent Γιαγιά</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6efe2; --ink: #2b2620; --muted: #6d6458; --card: #fffaf1; --line: #e2d6c2;
+  --blue: #1f5fa8; --blue-d: #174a84; --green: #2f7d4f; --red: #b23a2e; --gold: #d9a43a;
+  --font: 'Noto Sans', system-ui, sans-serif; --disp: 'Comfortaa', 'Noto Sans', sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: var(--font); -webkit-tap-highlight-color: transparent; }
+body { overscroll-behavior: none; touch-action: manipulation; }
+#app { position: fixed; inset: 0; display: flex; flex-direction: column; }
+button { font: inherit; cursor: pointer; border-radius: 12px; border: 0; min-height: 44px; padding: 0 18px; }
+.primary { background: var(--blue); color: #fff; font-weight: 700; font-size: 18px; }
+.primary:hover { background: var(--blue-d); }
+.ghost { background: transparent; color: var(--blue); border: 2px solid var(--line); font-weight: 600; }
+#hud { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; padding-top: max(8px, env(safe-area-inset-top)); font-weight: 700; font-variant-numeric: tabular-nums; }
+#hud[hidden] { display: none; }
+.hud-l, .hud-r { display: flex; align-items: center; gap: 8px; min-width: 96px; }
+.hud-r { justify-content: flex-end; }
+.hud-c { flex: 1; text-align: center; font-family: var(--disp); font-size: 15px; line-height: 1.25; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#btnMute { min-height: 32px; padding: 0 10px; font-size: 13px; }
+.nb-icon { width: 16px; height: 20px; background: var(--blue); border-radius: 2px 4px 4px 2px; box-shadow: inset 3px 0 0 #0d2f57; display: inline-block; }
+#hudLives { letter-spacing: 2px; color: var(--red); font-size: 18px; }
+#stage { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; }
+canvas { display: block; touch-action: none; }
+/* A classic d-pad in the middle: ▲ on top, ◀ ▶ at the sides, ▼ below.
+   The bottom gap keeps it above Obsidian's own bottom bar (search, tabs). */
+#pad { display: grid; grid-template-columns: 1fr 62px 62px 62px 1fr; grid-template-rows: 58px 58px 58px; gap: 4px; padding: 8px max(14px, env(safe-area-inset-left)) calc(72px + env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-right)); }
+#pad[hidden] { display: none; }
+#pad button { background: var(--card); border: 2px solid var(--line); color: var(--ink); font-size: 24px; min-height: 58px; padding: 0; user-select: none; -webkit-user-select: none; }
+#pad button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+#pad::before { content: ''; grid-column: 3; grid-row: 2; background: var(--line); border-radius: 50%; width: 18px; height: 18px; place-self: center; }
+#pad [data-d=up] { grid-column: 3; grid-row: 1; border-radius: 12px 12px 4px 4px; }
+#pad [data-d=left] { grid-column: 2; grid-row: 2; border-radius: 12px 4px 4px 12px; }
+#pad [data-d=right] { grid-column: 4; grid-row: 2; border-radius: 4px 12px 12px 4px; }
+#pad [data-d=down] { grid-column: 3; grid-row: 3; border-radius: 4px 4px 12px 12px; }
+.screen { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(246, 239, 226, .92); overflow-y: auto; z-index: 5; }
+.screen[hidden] { display: none; }
+#quiz { background: rgba(43, 38, 32, .55); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px 20px; width: min(440px, 100%); box-shadow: 0 10px 30px rgba(60, 40, 20, .15); margin: auto; }
+.brand { margin: 0; color: var(--muted); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+h1, h2 { font-family: var(--disp); margin: 4px 0 8px; }
+h1 { font-size: 44px; color: var(--blue); }
+h2 { font-size: 28px; }
+.lead { font-size: 16px; line-height: 1.5; margin: 0 0 12px; }
+.rules { margin: 0 0 14px; padding-left: 20px; font-size: 15px; line-height: 1.5; color: var(--muted); }
+.field { display: flex; flex-direction: column; gap: 4px; margin: 10px 0; font-weight: 600; font-size: 14px; }
+select { font: inherit; font-size: 16px; min-height: 44px; border-radius: 10px; border: 2px solid var(--line); background: #fff; padding: 0 10px; color: var(--ink); }
+.hint { color: var(--muted); font-size: 14px; margin: 10px 0 0; line-height: 1.4; }
+#btnStart { width: 100%; margin-top: 8px; }
+.quiz { text-align: center; }
+.gr { font-family: var(--disp); font-size: 38px; font-weight: 700; margin: 8px 0 10px; color: var(--ink); overflow-wrap: anywhere; }
+.opts { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+.opts button { background: #fff; border: 2px solid var(--line); color: var(--ink); font-size: 18px; min-height: 52px; font-weight: 600; }
+.opts button.right { background: var(--green); color: #fff; border-color: var(--green); }
+.opts button.wrong { background: var(--red); color: #fff; border-color: var(--red); }
+.fb { min-height: 26px; font-family: var(--disp); font-size: 20px; font-weight: 700; margin: 12px 0 0; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.row button { flex: 1; }
+.miss { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
+.miss b { font-size: 18px; }
+.miss span { color: var(--muted); }
+.miss button { min-height: 36px; padding: 0 12px; font-size: 14px; }
+a { color: var(--blue); }
+
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="hud" hidden>
+    <div class="hud-l"><span class="nb-icon" aria-hidden="true"></span><span id="hudNb">0/7</span></div>
+    <div class="hud-c" id="hudMsg" aria-live="polite"></div>
+    <div class="hud-r"><span id="hudLives" aria-label="Tries left"></span><button id="btnMute" class="ghost" aria-label="Sound on">Ήχος</button></div>
+  </header>
+  <div id="stage"><canvas id="cv" aria-label="The house. Find the notebooks."></canvas></div>
+  <div id="pad" hidden>
+    <button data-d="left" aria-label="Left">◀</button>
+    <button data-d="up" aria-label="Up">▲</button>
+    <button data-d="down" aria-label="Down">▼</button>
+    <button data-d="right" aria-label="Right">▶</button>
+  </div>
+
+  <section id="setup" class="screen">
+    <div class="card">
+      <p class="brand">Greekquent</p>
+      <h1>Γιαγιά</h1>
+      <p class="lead">Find the 7 τετράδια (notebooks) in the house. Each one asks you a word. Γιαγιά wants to feed you, so don't let her catch you.</p>
+      <ul class="rules">
+        <li>Right answer: Γιαγιά stops for 2 seconds. "Μπράβο!"</li>
+        <li>Wrong answer: she gets a little faster. The notebook stays, so come back to it.</li>
+        <li>She catches you 3 times and it's dinner time. Find all 7 and run out the door.</li>
+      </ul>
+      <label class="field"><span>Words</span>
+        <select id="selSrc"></select>
+      </label>
+      <label class="field"><span>Speed</span>
+        <select id="selSpeed"><option value="easy">Easy (little kids)</option><option value="normal" selected>Normal</option><option value="fast">Fast</option></select>
+      </label>
+      <p class="hint" id="poolHint"></p>
+      <button id="btnStart" class="primary">Play</button>
+      <p class="hint">Move with the arrow keys, WASD, the buttons, or swipe.</p>
+    </div>
+  </section>
+
+  <section id="quiz" class="screen" hidden>
+    <div class="card quiz">
+      <p class="hint">Τι σημαίνει; (What does it mean?)</p>
+      <p class="gr" id="qGr" lang="el"></p>
+      <button id="qHear" class="ghost">Hear it</button>
+      <div id="qOpts" class="opts"></div>
+      <p id="qFb" class="fb" aria-live="assertive"></p>
+    </div>
+  </section>
+
+  <section id="end" class="screen" hidden>
+    <div class="card">
+      <h2 id="endTitle"></h2>
+      <p id="endSub" class="lead"></p>
+      <div id="endMiss"></div>
+      <div class="row">
+        <button id="btnAgain" class="primary">Play again</button>
+        <button id="btnMenu" class="ghost">Change words</button>
+      </div>
+      <p class="hint"><a id="sendObs" href="#">Send missed words to Obsidian</a> (they show up in Review on Today).</p>
+    </div>
+  </section>
+</div>
+<script>
+window.GQ_WORDS=[["ο, η, το","the",1,2,"o"],["και","and",2,1,"o"],["να","to (verb particle)",3,5,"o"],["είμαι","I am",4,5,"o"],["εγώ","I",5,1,"o"],["δεν","not",6,2,"o"],["θα","will (future particle)",7,5,"o"],["σε","in, at, to",8,1,"o"],["αυτός","he, this",9,5,"o"],["ένας, μία, ένα","a, one",10,1,"o"],["με","with",11,5,"o"],["μου","me, my",12,5,"o"],["για","for, about",13,5,"o"],["που","that, which, where",14,5,"o"],["εσύ","you (singular)",15,1,"o"],["σου","you, your",16,1,"o"],["έχω","I have",17,1,"v"],["τι","what",18,1,"o"],["ότι","that (conj.)",19,5,"o"],["από","from, by",20,5,"o"],["κάνω","I do, I make",21,1,"v"],["όχι","no",22,1,"o"],["ναι","yes",23,1,"o"],["μπορώ","I can",24,1,"o"],["αν","if",25,5,"o"],["αλλά","but",27,2,"o"],["εδώ","here",28,5,"o"],["θέλω","I want",29,1,"v"],["εμείς","we",30,3,"o"],["πολύ","very, a lot",31,5,"o"],["όλος","all, whole",32,5,"o"],["ξέρω","I know",33,1,"v"],["γιατί","why, because",34,3,"o"],["μην","don't (negation)",35,5,"o"],["τώρα","now",37,4,"o"],["λέω","I say, I tell",38,1,"v"],["καλά","well, fine",39,3,"o"],["εντάξει","okay",40,2,"o"],["κάτι","something",41,6,"o"],["κάποιος","someone",42,6,"o"],["άλλος","other",43,4,"o"],["έτσι","so, like this",44,6,"o"],["εσείς","you (plural/formal)",45,6,"o"],["καλός","good",47,2,"o"],["όταν","when",48,6,"o"],["μόνο","only",49,6,"o"],["μας","us, our",50,6,"o"],["μαζί","together",51,6,"o"],["ποιος","who, which",52,3,"o"],["εκεί","there",54,6,"o"],["σας","you, your (pl./formal)",55,1,"o"],["ευχαριστώ","thank you",56,1,"o"],["σαν","like, as",57,6,"o"],["ακόμα","still, yet, even",59,6,"o"],["του","him, his",60,6,"o"],["κανένας","nobody, no one",61,7,"o"],["της","her, hers",62,7,"o"],["τίποτα","nothing",63,4,"o"],["ο κύριος","Mr., sir, gentleman",64,7,"m"],["ή","or",65,4,"o"],["πώς","how",66,1,"o"],["ποτέ","never",69,7,"o"],["τους","them, their",70,7,"o"],["το παιδί","child",71,2,"n"],["έλα","come (on)",72,2,"o"],["το σπίτι","house, home",75,2,"n"],["μέσα","inside",76,7,"o"],["πάμε","let's go",78,2,"o"],["αυτοί","they",80,7,"o"],["παρακαλώ","please; you're welcome",83,1,"o"],["λίγο","a little",85,2,"o"],["πιο","more",86,7,"o"],["πού","where",87,6,"o"],["δικός μου","my own, mine",88,7,"o"],["βλέπω","I see",89,1,"v"],["μετά","after",90,7,"o"],["πριν","before",91,8,"o"],["πάντα","always",92,8,"o"],["πίσω","back, behind",95,8,"v"],["γεια","hi, bye",96,1,"o"],["ο άνθρωπος","person, human",97,4,"m"],["μεγάλος","big, old (age)",99,4,"o"],["η ώρα","hour, time",101,3,"f"],["η μέρα","day",103,3,"f"],["δύο","two",104,6,"o"],["ίδιος","same",107,8,"o"],["πάω","I go",108,2,"v"],["έξω","out, outside",110,8,"v"],["εκείνος","that (one)",111,8,"o"],["ο φίλος","friend",112,2,"m"],["επειδή","because",113,8,"o"],["μου αρέσει","I like it",114,2,"o"],["κοίτα","look",117,2,"o"],["πάνω","on, up, above",118,8,"v"],["σωστά","correctly, right",121,4,"o"],["ωραία","nice(ly), great",123,2,"o"],["κάθε","every",125,11,"o"],["πρώτος","first",127,11,"o"],["κάτω","down, below",130,11,"v"],["η μαμά","mom",132,2,"f"],["ο μπαμπάς","dad",133,4,"m"],["μικρός","small, young",136,4,"o"],["σήμερα","today",137,3,"o"],["το όνομα","name",139,5,"n"],["το λεπτό","minute",140,6,"n"],["πόσο","how much",145,3,"o"],["τελευταίος","last",147,11,"o"],["συγγνώμη","sorry, excuse me",148,5,"o"],["το λάθος","mistake",151,7,"n"],["η κυρία","Mrs., lady",154,5,"f"],["μιλάω","I speak, I talk",156,3,"v"],["το χέρι","hand, arm",158,4,"n"],["βοηθάω","I help",159,3,"v"],["δίνω","I give",161,4,"v"],["φεύγω","I leave",164,3,"v"],["περιμένω","I wait",165,3,"v"],["ο καιρός","weather, time",166,4,"m"],["το κορίτσι","girl",167,4,"n"],["πάλι","again",170,12,"o"],["η μητέρα","mother",172,5,"f"],["έρχομαι","I come",173,3,"v"],["τρία","three",174,11,"o"],["γρήγορα","quickly",175,12,"o"],["παίρνω","I take",177,3,"v"],["καταλαβαίνω","I understand",180,3,"v"],["η οικογένεια","family",183,5,"f"],["ο πατέρας","father",190,8,"m"],["η πόλη","city, town",192,5,"f"],["το μωρό","baby",196,5,"n"],["το βράδυ","evening",200,3,"n"],["έτοιμος","ready",202,7,"o"],["ο δρόμος","road, street",203,13,"m"],["αύριο","tomorrow",204,3,"o"],["σταματάω","I stop",206,4,"v"],["ακούω","I hear, I listen",207,4,"v"],["το μάτι","eye",212,7,"n"],["η ομάδα","team, group",216,8,"f"],["αμέσως","immediately",219,14,"o"],["ξανά","again",220,14,"o"],["πότε","when",221,14,"o"],["το αγόρι","boy",223,8,"n"],["βρίσκω","I find",224,4,"v"],["η πόρτα","door",225,11,"f"],["δύσκολος","difficult",228,8,"o"],["φέρνω","I bring",233,6,"v"],["αγαπάω","I love",239,7,"v"],["κοντά","near",240,14,"o"],["επίσης","also",243,15,"o"],["η βοήθεια","help",244,12,"f"],["ωραίος","beautiful, nice",245,7,"o"],["ορίστε","here you are; pardon?",249,1,"o"],["η Ελλάδα","Greece",250,8,"f"],["το πρωί","morning",256,3,"n"],["το κεφάλι","head",257,11,"n"],["το δωμάτιο","room",260,12,"n"],["η νύχτα","night",261,11,"f"],["μπροστά","in front",264,11,"o"],["η καρδιά","heart",267,11,"f"],["θυμάμαι","I remember",269,7,"v"],["το νερό","water",270,1,"n"],["ψάχνω","I look for",273,7,"v"],["ξεκινάω","I start",274,13,"v"],["το πόδι","foot, leg",275,14,"n"],["σωστός","correct, right",276,16,"o"],["ο γιατρός","doctor",278,12,"m"],["τέλεια","perfect(ly)",279,3,"o"],["η δύναμη","strength, power",281,16,"f"],["πόσος","how much, how many",282,16,"o"],["παίζω","I play",283,13,"v"],["παλιός","old (things)",287,16,"o"],["τρέχω","I run",295,13,"v"],["όμορφος","beautiful",299,13,"o"],["τα ελληνικά","Greek (language)",300,15,"o"],["κακός","bad",302,17,"o"],["το τηλέφωνο","telephone",304,14,"n"],["δυνατός","strong, loud, possible",306,16,"o"],["το σχολείο","school",312,12,"n"],["το αυτοκίνητο","car",313,14,"n"],["χθες","yesterday",317,17,"o"],["μυστικός","secret",321,17,"o"],["πέντε","five",323,6,"o"],["βάζω","I put",324,13,"v"],["χάνω","I lose, I miss",327,14,"v"],["η ταινία","film, movie",333,18,"f"],["δείχνω","I show",337,14,"v"],["το φαγητό","food, meal",348,15,"n"],["γύρω","around",349,18,"v"],["το παιχνίδι","game, toy",350,17,"n"],["καλημέρα","good morning",351,4,"o"],["εύκολος","easy",355,17,"o"],["το σώμα","body",360,18,"n"],["φοβάμαι","I am afraid",361,14,"v"],["δεύτερος","second",366,19,"o"],["οι γονείς","parents",368,12,"o"],["αστείος","funny",372,18,"o"],["γλυκός","sweet",373,12,"o"],["μισός","half",376,17,"o"],["το πρόσωπο","face, person",382,19,"n"],["το βιβλίο","book",394,1,"n"],["πιάνω","I catch, I grab",396,17,"v"],["η αδερφή","sister",397,12,"f"],["καλώς ήρθες","welcome",400,2,"o"],["ρωτάω","I ask",402,17,"v"],["μπράβο","well done",405,11,"o"],["μαθαίνω","I learn",406,18,"v"],["το κρεβάτι","bed",408,19,"n"],["έξι","six",410,11,"o"],["καληνύχτα","good night",417,17,"o"],["η φίλη","friend (female)",418,20,"f"],["γράφω","I write",424,18,"v"],["ο αριθμός","number",427,21,"m"],["η φωτιά","fire",429,21,"f"],["δίπλα","next to",433,21,"o"],["τελειώνω","I finish",448,18,"v"],["τα ρούχα","clothes",451,20,"o"],["δέκα","ten",460,11,"o"],["το κομμάτι","piece",461,11,"n"],["κερδίζω","I win, I earn",477,21,"v"],["χαρούμενος","happy, cheerful",478,20,"o"],["κάθομαι","I sit",483,19,"v"],["διαβάζω","I read, I study",488,13,"v"],["ο αέρας","air, wind",490,21,"m"],["ο αδερφός","brother",496,12,"m"],["το ζώο","animal",511,24,"n"],["τα μαλλιά","hair",515,24,"o"],["το φως","light",523,24,"n"],["το δώρο","gift",525,24,"n"],["καινούργιος","new",536,23,"o"],["άρρωστος","sick",542,25,"o"],["το στόμα","mouth",543,25,"n"],["κλείνω","I close",546,25,"v"],["καθαρός","clean, clear",552,25,"o"],["συχνά","often",579,26,"o"],["φτιάχνω","I make, I fix",580,26,"v"],["ψηλά","high, up",581,21,"o"],["ο πλανήτης","planet",589,27,"m"],["η τηλεόραση","television",599,13,"f"],["το μπάνιο","bath, bathroom; swim",603,23,"n"],["η γιαγιά","grandmother",606,11,"f"],["το τραπέζι","table",615,28,"n"],["η εκκλησία","church",621,4,"f"],["ξεχνάω","I forget",623,28,"v"],["το σκυλί","dog",628,28,"n"],["ο κίνδυνος","danger",630,28,"m"],["τέσσερα","four",631,11,"o"],["το κλειδί","key",632,1,"n"],["το δέντρο","tree",643,29,"n"],["η τσάντα","bag",645,1,"f"],["ο ήλιος","sun",651,4,"m"],["ανοίγω","I open",657,29,"v"],["δεξιά","right (direction)",659,22,"o"],["ο βασιλιάς","king",661,29,"m"],["η θάλασσα","sea",668,4,"f"],["το παπούτσι","shoe",669,30,"n"],["πίνω","I drink",670,13,"v"],["το δάσος","forest",687,30,"n"],["σώζω","I save",689,30,"v"],["τα Χριστούγεννα","Christmas",690,8,"o"],["το πρωινό","breakfast",695,30,"n"],["το κουτί","box",706,31,"n"],["η θεία","aunt",709,31,"f"],["πέφτω","I fall",712,31,"v"],["η βασίλισσα","queen",714,31,"f"],["σιγά","slowly, quietly",719,18,"o"],["το νησί","island",722,31,"n"],["πονάω","I hurt, I ache",723,28,"v"],["το παράθυρο","window",726,31,"n"],["φοράω","I wear",727,31,"v"],["το πουλί","bird",730,32,"n"],["το τσάι","tea",732,2,"n"],["η μπάλα","ball",738,32,"f"],["αριστερά","left",745,22,"o"],["η κουζίνα","kitchen, cuisine",754,23,"f"],["το χωριό","village",760,14,"n"],["κρύβω","I hide",763,33,"v"],["το άλογο","horse",781,33,"n"],["ο ουρανός","sky",782,33,"m"],["το τέρας","monster",787,34,"n"],["το λουλούδι","flower",790,34,"n"],["το διάστημα","space, period",793,34,"n"],["μπλε","blue",795,22,"o"],["το ψάρι","fish",798,16,"n"],["κόκκινος","red",810,23,"o"],["η γάτα","cat",831,35,"f"],["κοιμάμαι","I sleep",834,35,"v"],["μαύρος","black",839,23,"o"],["κουρασμένος","tired",846,25,"o"],["το δόντι","tooth",848,28,"n"],["ο ήρωας","hero",849,36,"m"],["η μύτη","nose",852,36,"f"],["επτά","seven",856,36,"o"],["το κρύο","cold",859,21,"n"],["ο παππούς","grandfather",894,12,"m"],["η πέτρα","stone",898,37,"f"],["καθαρίζω","I clean",901,37,"v"],["τρώω","I eat",902,16,"v"],["μαγικός","magic",906,38,"o"],["το βουνό","mountain",909,4,"n"],["η καρέκλα","chair",922,38,"f"],["αγγλικός","English",927,18,"o"],["σπάω","I break",931,38,"v"],["η μαγεία","magic",932,38,"f"],["το χρώμα","color",934,23,"n"],["η κούκλα","doll",936,38,"f"],["ρίχνω","I throw",939,39,"v"],["το καπέλο","hat",942,39,"n"],["η παραλία","beach",956,39,"f"],["ξυπνάω","I wake up",957,39,"v"],["το φόρεμα","dress",972,40,"n"],["το πάρκο","park",1014,41,"n"],["οκτώ","eight",1031,42,"o"],["ο κήπος","garden",1032,23,"m"],["θυμωμένος","angry",1034,42,"o"],["ζεστός","warm, hot",1039,42,"o"],["το γάλα","milk",1047,42,"n"],["η σκάλα","stairs, ladder",1065,43,"f"],["η γιορτή","celebration, name day",1070,43,"f"],["το Σαββατοκύριακο","weekend",1075,20,"n"],["το κρέας","meat",1078,16,"n"],["απαντάω","I answer",1090,43,"v"],["εκατό","hundred",1095,15,"o"],["περπατάω","I walk",1103,44,"v"],["ο θείος","uncle",1105,44,"m"],["το ποτάμι","river",1108,44,"n"],["πεινάω","I am hungry",1113,44,"v"],["ο δάσκαλος","teacher",1128,45,"m"],["τραγουδάω","I sing",1140,45,"v"],["στέκομαι","I stand",1148,45,"v"],["μετράω","I count, I measure",1159,46,"v"],["χορεύω","I dance",1162,46,"v"],["πολεμάω","I fight",1169,46,"v"],["η βροχή","rain",1172,46,"f"],["είκοσι","twenty",1191,15,"o"],["η μάσκα","mask",1193,47,"f"],["το κάστρο","castle",1212,47,"n"],["κλαίω","I cry",1240,48,"v"],["η ζέστη","heat",1243,21,"f"],["το φεγγάρι","moon",1244,48,"n"],["το αυτί","ear",1245,48,"n"],["πετάω","I fly, I throw away",1261,49,"v"],["το ψωμί","bread",1269,2,"n"],["ο ώμος","shoulder",1270,49,"m"],["η πίτσα","pizza",1278,49,"f"],["το αυγό","egg",1283,27,"n"],["πράσινος","green",1291,23,"o"],["το αστέρι","star",1300,50,"n"],["το κοτόπουλο","chicken",1301,50,"n"],["η σοκολάτα","chocolate",1308,50,"f"],["ανεβαίνω","I go up",1314,50,"v"],["νικάω","I win, I defeat",1326,51,"v"],["η πατάτα","potato",1330,15,"f"],["ο λύκος","wolf",1334,51,"m"],["το γουρούνι","pig",1337,51,"n"],["η αρκούδα","bear",1345,51,"f"],["ροζ","pink",1352,52,"o"],["το τυρί","cheese",1364,52,"n"],["βρέχει","it is raining",1384,4,"o"],["εννιά","nine",1392,11,"o"],["έντεκα","eleven",1393,11,"o"],["δώδεκα","twelve",1394,11,"o"],["η ελιά","olive, olive tree",1400,15,"f"],["η σαλάτα","salad",1403,11,"f"],["η ντομάτα","tomato",1404,15,"f"],["το φρούτο","fruit",1405,15,"n"],["το μήλο","apple",1407,15,"n"],["η ζάχαρη","sugar",1408,15,"f"],["το μέλι","honey",1412,16,"n"],["το κουλούρι","bread ring",1413,15,"n"],["καλή όρεξη","enjoy your meal",1415,15,"o"],["χρόνια πολλά","happy birthday, best wishes",1417,19,"o"],["τα αδέρφια","siblings",1418,12,"o"],["ο ξάδερφος","cousin",1419,19,"m"],["η ξαδέρφη","cousin (female)",1420,19,"f"],["το δάχτυλο","finger",1424,20,"n"],["η πλάτη","back (body)",1425,20,"f"],["η κοιλιά","belly",1426,20,"f"],["το γόνατο","knee",1427,21,"n"],["άσπρος","white",1428,21,"o"],["κίτρινος","yellow",1429,21,"o"],["καφέ","brown",1430,19,"o"],["γκρι","gray",1431,21,"o"],["πορτοκαλί","orange (color)",1432,21,"o"],["μωβ","purple",1433,22,"o"],["το πορτοκάλι","orange (fruit)",1434,21,"n"],["κρύος","cold",1449,21,"o"],["μαγειρεύω","I cook",1451,19,"v"],["πλένω","I wash",1453,26,"v"],["κολυμπάω","I swim",1455,27,"v"],["η μουσική","music",1459,24,"f"],["λάθος","wrong",1478,32,"o"],["το Πάσχα","Easter",1484,27,"n"],["η Αμερική","America",1490,8,"f"],["το ευρώ","euro",1496,6,"n"],["ευθεία","straight ahead",1499,22,"o"],["μακριά","far",1500,22,"o"],["λυπημένος","sad",1501,1,"o"],["χοροπηδάω","I jump, I hop",1502,1,"v"],["ζωγραφίζω","I draw, I paint",1503,1,"v"],["γελάω","I laugh",1504,1,"v"]];
+window.GQ_PHRASES=[["Γεια σας","Hello (to a group, or polite)",1],["Γεια σου","Hi (to one friend)",1],["Πώς σε λένε;","What's your name?",1],["Με λένε…","My name is…",1],["Έχω ένα…","I have a…",1],["Έχεις ένα…;","Do you have a…?",1],["Ναι, έχω.","Yes, I do.",1],["Τι έχεις;","What do you have?",1],["Γεια σου!","Hi!",1],["Γεια σου! Πώς σε λένε;","Hi! What's your name?",1],["Με λένε Μαρία. Εσένα;","My name is Maria. And you?",1],["Με λένε Νίκο.","My name is Nikos.",1],["Τι έχεις στην τσάντα;","What do you have in your bag?",1],["Έχω ένα βιβλίο και ένα στυλό. Εσύ;","I have a book and a pen. You?",1],["Έχω ένα κινητό, ένα κλειδί και νερό.","I have a phone, a key, and water.",1],["Έχεις ένα τετράδιο;","Do you have a notebook?",1],["Όχι. Έχεις ένα στυλό;","No. Do you have a pen?",1],["Ναι, έχω. Ορίστε!","Yes, I do. Here you go!",1],["Ευχαριστώ!","Thank you!",1],["Παρακαλώ.","You're welcome.",1],["Γεια σου, Νίκο!","Bye, Nikos!",1],["Γεια!","Bye!",1],["Θέλεις λίγο νερό;","Would you like a little water?",2],["Ναι, θέλω λίγο…, ευχαριστώ.","Yes, I'd like a little…, thank you.",2],["Όχι, ευχαριστώ.","No, thank you.",2],["Θέλεις ένα γλυκό;","Would you like a sweet?",2],["Έχεις ψωμί;","Do you have bread?",2],["Ο Νίκος θέλει τσάι.","Nikos wants tea.",2],["…αλλά…","…but…",2],["Γεια σου! Καλώς ήρθες!","Hi! Welcome!",2],["Γεια σου, Μαρία! Ευχαριστώ.","Hi, Maria! Thank you.",2],["Ναι, θέλω λίγο νερό, ευχαριστώ.","Yes, I'd like a little water, thank you.",2],["Θέλεις τσάι;","Do you want tea?",2],["Ναι, θέλω τσάι, ευχαριστώ.","Yes, I'd like tea, thank you.",2],["Έχω και ένα γλυκό. Θέλεις;","I also have a sweet. Would you like one?",2],["Λίγο; Θέλεις λίγο;","A little? Do you want a little?",2],["Ναι, λίγο! Ευχαριστώ.","Yes, a little! Thank you.",2],["Νίκο, θέλεις κι εσύ τσάι;","Nikos, do you want tea too?",2],["Όχι, θέλω καφέ.","No, I want coffee.",2],["Ο Νίκος θέλει καφέ, αλλά δεν έχω καφέ! Έχω τσάι.","Nikos wants coffee, but I don't have coffee! I have tea.",2],["Ναι, τσάι!","Yes, tea!",2],["Η Μαρία έχει ένα γλυκό. Ο Νίκος θέλει καφέ, αλλά…","Maria has a sweet. Nikos wants coffee, but…",2],["Μπορώ;","May I?",3],["Ναι, βέβαια.","Yes, of course.",3],["Μπορείς;","Can you?",3],["Θέλω, αλλά δεν μπορώ.","I want to, but I can't.",3],["Μπορείς σήμερα το βράδυ;","Can you make it tonight?",3],["Λυπάμαι, δεν μπορώ.","Sorry, I can't.",3],["Αύριο το πρωί μπορώ.","Tomorrow morning I can.",3],["Έχεις ώρα;","Do you have time?",3],["Γεια σου, Νίκο! Μπορώ; (points to the empty chair)","Hi, Nikos! May I?",3],["Ναι, βέβαια!","Yes, of course!",3],["Έχεις ώρα σήμερα;","Do you have time today?",3],["Όχι σήμερα. Γιατί;","Not today. Why?",3],["Θέλω καφέ. Μπορείς σήμερα το βράδυ;","I want a coffee. Can you make it tonight?",3],["Λυπάμαι, δεν μπορώ. Θέλω, αλλά δεν μπορώ.","Sorry, I can't. I want to, but I can't.",3],["Αύριο το πρωί;","Tomorrow morning?",3],["Αύριο το πρωί… ναι, μπορώ!","Tomorrow morning… yes, I can!",3],["Τέλεια! Και η Μαρία; Μπορεί;","Perfect! And Maria? Can she?",3],["Η Μαρία δεν μπορεί το πρωί. Μπορεί το βράδυ.","Maria can't in the morning. She can in the evening.",3],["Καλά. Αύριο το πρωί εμείς, και το βράδυ η Μαρία!","Okay. Tomorrow morning us, and in the evening Maria!",3],["Εντάξει! Γεια!","Okay! Bye!",3],["Βλέπω τη θάλασσα.","I see the sea.",4],["Τι βλέπεις;","What do you see?",4],["Τι κάνεις; – Καλά.","How are you? – Good.",4],["Τι θέλετε;","What would you like? (polite / group)",4],["Ένα νερό, παρακαλώ.","A water, please.",4],["Τίποτα άλλο;","Anything else?",4],["Όχι, τίποτα.","No, nothing.",4],["Μπορείς τώρα;","Can you now?",4],["Βλέπω τη θάλασσα. Βλέπω και μια βάρκα.","I see the sea. I also see a boat.",4],["Βλέπεις τον ήλιο;","Do you see the sun?",4],["Ναι, βλέπω τον ήλιο. Και ένα βουνό.","Yes, I see the sun. And a mountain.",4],["Βλέπεις μια εκκλησία;","Do you see a church?",4],["Ναι, βλέπω μια εκκλησία και ένα σπίτι.","Yes, I see a church and a house.",4],["Καλημέρα! Τι θέλετε;","Good morning! What would you like?",4],["Καλημέρα! Ένα νερό και έναν καφέ, παρακαλώ.","Good morning! A water and a coffee, please.",4],["(to B) Τι θέλετε;","What would you like?",4],["Ένα τσάι, παρακαλώ.","A tea, please.",4],["Όχι, τίποτα. Ευχαριστώ.","No, nothing. Thank you.",4],["Ορίστε.","Here you are.",4],["Τι κάνεις, Μαρία;","How are you, Maria?",4],["Καλά! Εσύ;","Good! You?",4],["Δεν έχω…","I don't have…",5],["Πού είναι το κινητό μου;","Where is my phone?",5],["Δεν βλέπω…","I can't see… / I don't see…",5],["Εδώ είναι!","Here it is!",5],["Γιατί δεν μπορείς;","Why can't you?",5],["Έχω δουλειά.","I have work. / I'm busy.",5],["Μπορώ να δω;","May I see?",5],["Πόσο κάνει;","How much is it?",5],["Δύο ευρώ.","Two euros.",5],["Δεν ξέρω.","I don't know.",5],["Ωχ! Πού είναι το κινητό μου;","Oh no! Where's my phone?",5],["Δεν ξέρω. Δεν βλέπω το κινητό σου.","I don't know. I don't see your phone.",5],["Δεν έχω το κινητό μου! Και τα κλειδιά μου;","I don't have my phone! And my keys?",5],["Τα κλειδιά σου είναι εδώ!","Your keys are here!",5],["Ευχαριστώ! Αλλά το κινητό μου;","Thanks! But my phone?",5],["Είναι στην τσάντα σου;","Is it in your bag?",5],["Όχι, δεν είναι… Μισό λεπτό… Εδώ είναι!","No, it isn't… Wait a second… Here it is!",5],["Τέλεια! Μπορείς τώρα; Θέλω καφέ.","Great! Can you come now? I want a coffee.",5],["Όχι, δεν μπορώ. Έχω δουλειά.","No, I can't. I'm busy with work.",5],["Γιατί δεν έχω ώρα!","Because I don't have time!",5],["Καλημέρα! Μπορώ να δω;","Good morning! May I look?",5],["Και αυτό;","And this one?",5],["Πέντε ευρώ.","Five euros.",5],["Δεν θέλω αυτό. Θέλω το βιβλίο. Ορίστε δύο ευρώ.","I don't want this one. I want the book. Here are two euros.",5],["Ευχαριστώ! Καλή μέρα!","Thank you! Have a good day!",5],["Θέλεις έναν καφέ;","Do you want a coffee?",6],["Καλά, εσύ;","Fine, and you?",6],["Δεν έχω ώρα σήμερα.","I don't have time today.",6],["Αύριο μπορείς;","Can you tomorrow?",6],["Τέλεια!","Perfect!",6],["Τα λέμε αύριο.","See you tomorrow.",6],["Ξέρεις; – Δεν ξέρω.","Do you know? – I don't know.",6],["στο καφενείο","at the café (kafeneio)",6],["Γεια σου, Νίκο! Τι κάνεις;","Hi, Nikos! How are you?",6],["Καλά. Θέλεις έναν καφέ;","Good. Do you want to get a coffee?",6],["Θέλω, αλλά δεν έχω ώρα σήμερα.","I'd like to, but I don't have time today.",6],["Αύριο το πρωί μπορώ. Ξέρεις το καφενείο;","Tomorrow morning I can. Do you know the kafeneio?",6],["Ναι, ξέρω!","Yes, I know it!",6],["Και η Μαρία; Θέλει;","And Maria? Does she want to come?",6],["Η Μαρία θέλει, αλλά δεν μπορεί. Έχει δουλειά.","Maria wants to, but she can't. She has work.",6],["Τέλεια. Τα λέμε αύριο!","Perfect. See you tomorrow!",6],["Ένα καφέ και ένα τσάι, παρακαλώ.","A coffee and a tea, please.",6],["Και ένα νερό.","And a water.",6],["Όχι, ευχαριστούμε.","No, thank you.",6],["Βλέπεις τη Μαρία; Είναι εδώ!","Do you see Maria? She's here!",6],["Μαρία! Μπορείς τώρα;","Maria! Can you now?",6],["Τώρα μπορώ! Θέλω έναν καφέ!","Now I can! I want a coffee!",6],["Είμαι ο/η… από…","I'm … from …",7],["Από πού είσαι;","Where are you from?",7],["Είμαι από την Αμερική.","I'm from America.",7],["Έχω μια οικογένεια εδώ.","I have a family here.",7],["Καλά Χριστούγεννα!","Merry Christmas!",7],["Γεια σας! Είμαι η Μαρία.","Hello! I'm Maria.",7],["Χαίρω πολύ. Είμαι ο Νίκος.","Nice to meet you. I'm Nikos.",7],["Από πού είσαι, Νίκο;","Where are you from, Nikos?",7],["Είμαι από την Αμερική. Εσύ;","I'm from America. You?",7],["Είμαι από την Ελλάδα, από την Κρήτη.","I'm from Greece, from Crete.",7],["Είσαι εδώ με την οικογένεια;","Are you here with your family?",7],["Ναι, έχω μια οικογένεια εδώ.","Yes, I have a family here.",7],["Τι ωραία! Θέλεις να δεις την Αμερική;","How nice! Do you want to see America?",7],["Θέλω, αλλά δεν μπορώ τώρα.","I want to, but I can't right now.",7],["Καλά Χριστούγεννα, Μαρία!","Merry Christmas, Maria!",7],["Είναι από την Αμερική.","He's from America.",7],["Είναι από την Ελλάδα, από την Κρήτη.","She's from Greece, from Crete.",7],["Ποιος έχει το φλουρί;","Who has the coin?",8],["Εγώ έχω!","I do! / I have it!",8],["ένα κομμάτι","a piece",8],["Καλή χρονιά!","Happy New Year!",8],["Δεν έχω.","I don't have it.",8],["Δεν έχω!","I don't!",8],["Εγώ! Εγώ έχω το φλουρί!","Me! I have the coin!",8],["Μπράβο! Καλή χρονιά!","Well done! Happy New Year!",8],["Πόσα κομμάτια έχεις;","How many pieces do you have?",8],["Έχω δύο.","I have two.",8],["Δύο; Θέλω κι εγώ ένα!","Two? I want one too!",8],["Έχουμε δύο παιδιά.","We have two children.",9],["Έχετε παιδιά;","Do you have children?",9],["η γιαγιά μου","my grandmother",9],["ο παππούς μου","my grandfather",9],["Θέλουν…","They want…",9],["Αυτή είναι η οικογένειά μου.","This is my family.",9],["Ωραία! Αυτή είναι η μητέρα σου;","Nice! Is this your mother?",9],["Ναι, και αυτός είναι ο πατέρας μου.","Yes, and this is my father.",9],["Έχεις αδελφό ή αδελφή;","Do you have a brother or a sister?",9],["Έχω έναν αδελφό και μια αδελφή.","I have a brother and a sister.",9],["Έχουν παιδιά;","Do they have kids?",9],["Ναι, έχουν τρία παιδιά. Εσείς; Έχετε παιδιά;","Yes, they have three kids. And you? Do you have kids?",9],["Ναι, έχουμε δύο παιδιά. Θέλουν γλυκά!","Yes, we have two kids. They want sweets!",9],["Και η γιαγιά σου;","And your grandmother?",9],["Η γιαγιά μου και ο παππούς μου είναι στην Ελλάδα.","My grandmother and grandfather are in Greece.",9],["Βλέπετε τη γιαγιά;","Do you see your grandmother?",9],["Όχι, δεν μπορούμε. Αλλά έχουμε φωτογραφίες!","No, we can't. But we have photos!",9],["Θέλω να κάνω…, αλλά δεν μπορώ.","I want to do…, but I can't.",10],["Τι κάνεις το πρωί;","What do you do in the morning?",10],["Μετά δουλεύω.","Afterward I work.",10],["Μπορώ να…","I can…",10],["στο σπίτι","at home",10],["Το πρωί πίνω καφέ. Μετά δουλεύω.","In the morning I drink coffee. Then I work.",10],["Δουλεύεις στο σπίτι;","Do you work from home?",10],["Ναι, δουλεύω στο σπίτι. Εσύ; Τι κάνεις το πρωί;","Yes, I work from home. You? What do you do in the morning?",10],["Το πρωί είμαι στη δουλειά.","In the morning I'm at work.",10],["Και το μεσημέρι;","And at midday?",10],["Το μεσημέρι κάνω ένα διάλειμμα.","At midday I take a break.",10],["Και το βράδυ;","And in the evening?",10],["Το βράδυ θέλω να κάνω γυμναστική, αλλά δεν μπορώ. Είμαι κουρασμένη!","In the evening I want to exercise, but I can't. I'm tired!",10],["Κι εγώ! Το βράδυ θέλω να διαβάσω, αλλά βλέπω τηλεόραση.","Me too! In the evening I want to read, but I watch TV.",10],["Χα! Μπορούμε να κάνουμε γυμναστική μαζί;","Ha! Can we exercise together?",10],["Ναι! Το πρωί μπορώ.","Yes! I can in the morning.",10],["Τέλεια! Πάντα το πρωί!","Perfect! Always in the morning!",10],["Θέλω να πάω στη θάλασσα.","I want to go to the sea.",11],["Μπορούμε να πάμε;","Can we go?",11],["Πάμε στην εκκλησία.","We're going to church. / Let's go to church.",11],["στο χωριό","to / in the village",11],["στη δουλειά","at / to work",11],["Γεια! Πού πας;","Hi! Where are you going?",11],["Πάω στη δουλειά. Εσύ;","I'm going to work. You?",11],["Πάω στο σούπερ μάρκετ. Μετά πάω στο σπίτι.","I'm going to the supermarket. Then I'm going home.",11],["Το Σάββατο πού πας;","Where are you going on Saturday?",11],["Θέλω να πάω στη θάλασσα!","I want to go to the beach!",11],["Μπορώ να έρθω;","Can I come?",11],["Ναι! Πάμε μαζί!","Yes! Let's go together!",11],["Και την Κυριακή;","And on Sunday?",11],["Την Κυριακή πάμε στην εκκλησία, και μετά στο χωριό.","On Sunday we go to church, and then to the village.",11],["Τι ωραία! Θέλω να πάω στο χωριό σου!","How nice! I want to go to your village!",11],["Μπορούμε να πάμε το καλοκαίρι.","We can go in the summer.",11],["Πάμε!","Let's go!",11],["Πόσο κάνουν;","How much are they?",12],["Έχετε ελιές;","Do you have olives?",12],["Θέλω ένα κιλό.","I want a kilo.",12],["Ένα κιλό ντομάτες, παρακαλώ.","A kilo of tomatoes, please.",12],["Ελάτε, ελάτε! Φρέσκες ντομάτες!","Come on over! Fresh tomatoes!",12],["Καλημέρα! Πόσο κάνουν οι ντομάτες;","Good morning! How much are the tomatoes?",12],["Δύο ευρώ το κιλό.","Two euros a kilo.",12],["Θέλω ένα κιλό ντομάτες, παρακαλώ.","I'd like a kilo of tomatoes, please.",12],["Ορίστε. Τίποτα άλλο;","Here you go. Anything else?",12],["Ναι, έχω. Καλαμάτας. Πέντε ευρώ το κιλό.","Yes, I do. Kalamata. Five euros a kilo.",12],["Μισό κιλό, παρακαλώ.","Half a kilo, please.",12],["Θέλετε και πατάτες; Είναι πολύ καλές.","Do you want potatoes too? They're very good.",12],["Όχι, ευχαριστώ. Πόσο κάνουν όλα;","No, thank you. How much is everything?",12],["Δύο και δυόμισι… τέσσερα και πενήντα.","Two plus two and a half… four fifty.",12],["Ορίστε πέντε ευρώ.","Here's five euros.",12],["Και πενήντα λεπτά ρέστα. Καλή σας μέρα!","And fifty cents change. Have a good day!",12],["Ευχαριστώ, επίσης!","Thank you, you too!",12],["Θα ήθελα…","I would like…",13],["Έχετε ψάρι σήμερα;","Do you have fish today?",13],["Τον λογαριασμό, παρακαλώ.","The bill, please.",13],["Πολύ νόστιμο!","Very tasty!",13],["Καλή όρεξη!","Enjoy your meal!",13],["Καλησπέρα! Πόσα άτομα;","Good evening! How many people?",13],["Δύο, παρακαλώ.","Two, please.",13],["Ελάτε. Τι θα πιείτε;","Come this way. What will you drink?",13],["Θα ήθελα ένα ποτήρι κρασί.","I'd like a glass of wine.",13],["Εγώ νερό, παρακαλώ.","Water for me, please.",13],["Και να φάτε;","And to eat?",13],["Ναι, έχουμε φρέσκο ψάρι.","Yes, we have fresh fish.",13],["Θα ήθελα ψάρι και μια σαλάτα.","I'd like the fish and a salad.",13],["Εγώ δεν τρώω ψάρι. Θα ήθελα κρέας, ένα σουβλάκι.","I don't eat fish. I'd like meat, a souvlaki.",13],["Πολύ ωραία.","Very good.",13],["Ναι! Το ψάρι είναι πολύ νόστιμο.","Yes! The fish is delicious.",13],["Αμέσως.","Right away.",13],["Τι ώρα είναι;","What time is it?",14],["Μπορείς την Τρίτη στις έξι;","Can you on Tuesday at six?",14],["στις έξι και μισή","at six thirty",14],["και τέταρτο","quarter past",14],["Είναι νωρίς. / Είναι αργά.","It's early. / It's late.",14],["Είναι έξι και μισή.","It's six thirty.",14],["Ωχ, είναι αργά!","Oh no, it's late!",14],["Γιατί;","Why?",14],["Έχω δουλειά στις εφτά!","I have work at seven!",14],["Α, εντάξει. Μπορείς την Τρίτη στις έξι; Θέλω να πάμε για καφέ.","Oh, okay. Can you do Tuesday at six? I want to go for coffee.",14],["Την Τρίτη δεν μπορώ. Την Τετάρτη μπορώ.","I can't on Tuesday. I can on Wednesday.",14],["Την Τετάρτη στις έξι και τέταρτο;","Wednesday at six fifteen?",14],["Είναι νωρίς για μένα. Στις εφτά;","That's early for me. At seven?",14],["Εντάξει, την Τετάρτη στις εφτά.","Okay, Wednesday at seven.",14],["Τέλεια, τα λέμε!","Perfect, see you then!",14],["Μιλάτε αγγλικά;","Do you speak English?",15],["Πιο σιγά, παρακαλώ.","More slowly, please.",15],["Δεν καταλαβαίνω.","I don't understand.",15],["Μπορείτε να το πείτε ξανά;","Can you say it again?",15],["Θέλω να μάθω ελληνικά.","I want to learn Greek.",15],["Μιλάω λίγα ελληνικά.","I speak a little Greek.",15],["Συγγνώμη, μιλάτε αγγλικά;","Excuse me, do you speak English?",15],["Λίγο. Μιλάτε ελληνικά;","A little. Do you speak Greek?",15],["Μπράβο! Από πού είστε;","Good for you! Where are you from?",15],["Από την Αμερική. Θέλω να μάθω ελληνικά.","From America. I want to learn Greek.",15],["Τι ωραία! Πόσο καιρό μαθαίνετε;","How lovely! How long have you been learning?",15],["Δεν καταλαβαίνω. Πιο σιγά, παρακαλώ.","I don't understand. Slower, please.",15],["Πό-σο και-ρό μα-θαί-νε-τε;","How… long… have you been learning?",15],["Α! Τρεις μήνες.","Oh! Three months.",15],["Μιλάτε πολύ καλά!","You speak very well!",15],["Μπορείτε να το πείτε ξανά; Θέλω να το ακούσω ξανά!","Can you say that again? I want to hear it again!",15],["Πώς λέμε «bakery» στα ελληνικά;","How do you say \"bakery\" in Greek?",15],["Φούρνος.","Fournos.",15],["Φούρνος. Ευχαριστώ! Ξέρετε πού είναι ο φούρνος;","Fournos. Thank you! Do you know where the bakery is?",15],["Ναι, εκεί!","Yes, over there!",15],["Η οικογένειά μου είναι από…","My family is from…",16],["Την Κυριακή πάω στην εκκλησία.","On Sunday I go to church.",16],["Τι τρως;","What do you eat?",16],["Μιλάς ελληνικά;","Do you speak Greek?",16],["Θέλω να μάθω να μαγειρεύω.","I want to learn to cook.",16],["σαν εσένα","like you",16],["Καλά! Μπορείς σήμερα;","Good! Can you get together today?",16],["Σήμερα δεν μπορώ, έχω δουλειά. Αύριο στις δέκα;","Today I can't, I have work. Tomorrow at ten?",16],["Εντάξει. Πάμε στη λαϊκή;","Okay. Shall we go to the market?",16],["Ναι! Θέλω ντομάτες και ελιές.","Yes! I want tomatoes and olives.",16],["Πόσο κάνουν οι ελιές;","How much are the olives?",16],["Πέντε ευρώ το κιλό.","Five euros a kilo.",16],["Ένα κιλό, παρακαλώ.","A kilo, please.",16],["Δεν ξέρω… Δεν βλέπω το κινητό σου.","I don't know… I don't see your phone.",16],["Εδώ είναι! Στην τσάντα μου.","Here it is! In my bag.",16],["Πάμε για καφέ;","Shall we get a coffee?",16],["Δύο καφέδες, παρακαλώ.","Two coffees, please.",16],["Είναι δώδεκα.","It's twelve.",16],["Ωχ, είναι αργά. Θέλω να πάω στο σπίτι.","Oh no, it's late. I want to go home.",16],["Τα λέμε, Νίκο!","See you, Nikos!",16],["Τι θα κάνεις το Σαββατοκύριακο;","What will you do this weekend?",17],["Θα έχω ώρα.","I'll have time.",17],["Θα δω μια ταινία.","I'll watch a movie.",17],["Θα πάμε βόλτα.","We'll go for a walk.",17],["Θα πάω…","I'll go…",17],["Το Σάββατο θα πάω στη θάλασσα με τους φίλους μου.","On Saturday I'll go to the beach with my friends.",17],["Ωραία!","Nice!",17],["Εσύ;","You?",17],["Το Σάββατο θα δουλέψω. Αλλά την Κυριακή θα έχω ώρα.","On Saturday I'll work. But on Sunday I'll have time.",17],["Θα δεις μια ταινία;","Will you watch a movie?",17],["Ναι, θα δω μια ταινία με τα παιδιά. Και μετά θα πάμε βόλτα.","Yes, I'll watch a movie with the kids. And then we'll go for a walk.",17],["Θέλεις να έρθεις στη θάλασσα την Κυριακή;","Do you want to come to the beach on Sunday?",17],["Δεν μπορώ, αλλά το άλλο Σάββατο θα έρθω!","I can't, but next Saturday I'll come!",17],["Τέλεια. Θα φάμε ψάρι!","Perfect. We'll eat fish!",17],["Θα είναι πολύ ωραία. Καλό Σαββατοκύριακο!","That will be really nice. Have a good weekend!",17],["Επίσης!","You too!",17],["Τι καιρό κάνει;","What's the weather like?",18],["Κάνει κρύο.","It's cold.",18],["Κάνει ζέστη.","It's hot.",18],["Βρέχει.","It's raining.",18],["Έχει αέρα.","It's windy.",18],["Βλέπω τον χαρταετό!","I see the kite!",18],["Καλή Σαρακοστή!","Have a good Lent!",18],["Καλή Σαρακοστή! Τι καιρό κάνει σήμερα;","Have a good Lent! What's the weather like today?",18],["Κάνει λίγο κρύο, αλλά έχει ήλιο.","It's a little cold, but it's sunny.",18],["Έχει αέρα;","Is it windy?",18],["Ναι, έχει πολύ αέρα! Είναι καλή μέρα για χαρταετό.","Yes, it's very windy! It's a good day for a kite.",18],["Έχεις χαρταετό;","Do you have a kite?",18],["Ναι, έχω έναν μεγάλο χαρταετό. Πάμε στον λόφο!","Yes, I have a big kite. Let's go to the hill!",18],["Πάμε! Θέλω λαγάνα και ελιές.","Let's go! I want lagana and olives.",18],["Έχω λαγάνα, ελιές και χαλβά.","I have lagana, olives, and halva.",18],["Βλέπω τον χαρταετό σου! Είναι πολύ ψηλά!","I see your kite! It's really high!",18],["Ωχ, βρέχει!","Oh no, it's raining!",18],["Δεν πειράζει. Πάμε στο σπίτι. Κάνει κρύο τώρα.","Never mind. Let's go home. It's cold now.",18],["Πού είναι…;","Where is…?",19],["Μπορείτε να μου πείτε πού είναι…;","Can you tell me where … is?",19],["Πηγαίνετε ευθεία.","Go straight ahead.",19],["δεξιά / αριστερά","right / left",19],["Είναι κοντά;","Is it near?",19],["Είναι μακριά.","It's far.",19],["Δεν βλέπω την πλατεία.","I don't see the square.",19],["Συγγνώμη, μπορείτε να μου πείτε πού είναι η πλατεία;","Excuse me, can you tell me where the square is?",19],["Ναι, βέβαια. Πηγαίνετε ευθεία.","Yes, of course. Go straight ahead.",19],["Ευθεία…","Straight…",19],["Μετά δεξιά. Και μετά αριστερά.","Then right. And then left.",19],["Ναι, είναι κοντά. Πέντε λεπτά.","Yes, it's close. Five minutes.",19],["Συγγνώμη, δεν βλέπω την πλατεία. Είναι εδώ;","Excuse me, I don't see the square. Is it here?",19],["Όχι, η πλατεία είναι πίσω από την εκκλησία.","No, the square is behind the church.",19],["Πάτε για την παρέλαση;","Are you going to the parade?",19],["Ναι! Σήμερα είναι 25η Μαρτίου.","Yes! Today is the 25th of March.",19],["Χρόνια πολλά! Βλέπετε τις σημαίες; Η παρέλαση είναι εκεί.","Happy holiday! Do you see the flags? The parade is over there.",19],["Ναι, τις βλέπω! Ευχαριστώ πολύ!","Yes, I see them! Thank you so much!",19],["Έχω ένα μικρό σπίτι.","I have a small house.",20],["ένα μεγάλο δωμάτιο","a big room",20],["Η κουζίνα είναι μικρή.","The kitchen is small.",20],["Βλέπω ένα κόκκινο…","I see a red…",20],["καινούργιο ή παλιό;","new or old?",20],["Πού μένεις;","Where do you live?",20],["Μένω σε ένα μικρό σπίτι κοντά στη θάλασσα.","I live in a small house near the sea.",20],["Τι ωραία! Είναι καινούργιο ή παλιό;","How nice! Is it new or old?",20],["Είναι παλιό, αλλά είναι μεγάλο.","It's old, but it's big.",20],["Τι χρώμα είναι;","What color is it?",20],["Είναι άσπρο με μια μπλε πόρτα.","It's white with a blue door.",20],["Πόσα δωμάτια έχει;","How many rooms does it have?",20],["Έχει δύο μικρά δωμάτια και μια μεγάλη κουζίνα.","It has two small rooms and a big kitchen.",20],["Μια μεγάλη κουζίνα! Τρως στην κουζίνα;","A big kitchen! Do you eat in the kitchen?",20],["Ναι! Η κουζίνα είναι κόκκινη. Εσύ; Έχεις σπίτι ή διαμέρισμα;","Yes! The kitchen is red. You? Do you have a house or an apartment?",20],["Έχω ένα καινούργιο διαμέρισμα. Είναι μικρό, αλλά έχει ένα μεγάλο μπαλκόνι.","I have a new apartment. It's small, but it has a big balcony.",20],["Βλέπεις τη θάλασσα από το μπαλκόνι;","Can you see the sea from the balcony?",20],["Όχι, βλέπω ένα μεγάλο βουνό.","No, I see a big mountain.",20],["Και αυτό είναι καλό!","That's good too!",20],["Μου αρέσει…","I like… (one thing)",21],["Μου αρέσουν…","I like… (several things)",21],["Μου αρέσει να μαγειρεύω.","I like to cook.",21],["Σου αρέσει η μουσική;","Do you like music?",21],["Θέλω να τρέξω.","I want to go running.",21],["Πάω στο γυμναστήριο.","I go to the gym.",21],["Τι σου αρέσει να κάνεις;","What do you like to do?",21],["Μου αρέσει να μαγειρεύω. Εσένα;","I like to cook. You?",21],["Μου αρέσει να τρέχω. Πάω στο γυμναστήριο κάθε μέρα.","I like to run. I go to the gym every day.",21],["Κάθε μέρα; Μπράβο! Σου αρέσει η μουσική;","Every day? Good for you! Do you like music?",21],["Ναι, μου αρέσει πολύ η ελληνική μουσική.","Yes, I really like Greek music.",21],["Μου αρέσουν τα ελληνικά τραγούδια, αλλά δεν καταλαβαίνω τα λόγια.","I like Greek songs, but I don't understand the lyrics.",21],["Κι εγώ! Σου αρέσουν οι ταινίες;","Me neither! Do you like movies?",21],["Όχι πολύ. Μου αρέσει να διαβάζω.","Not much. I like to read.",21],["Τι σου αρέσει να μαγειρεύεις;","What do you like to cook?",21],["Μου αρέσει να μαγειρεύω μουσακά!","I like to make moussaka!",21],["Μου αρέσει ο μουσακάς! Θέλω να φάω τώρα!","I love moussaka! I want to eat right now!",21],["Έλα το Σάββατο. Θα μαγειρέψω!","Come on Saturday. I'll cook!",21],["Χθες ήθελα να πάω, αλλά δεν μπορούσα.","Yesterday I wanted to go, but I couldn't.",22],["Είχα πολλή δουλειά.","I had a lot of work.",22],["Δεν μπορούσα.","I couldn't.",22],["Ήμουν στο σπίτι.","I was at home.",22],["Πέρσι ήμουν στην Ελλάδα.","Last year I was in Greece.",22],["Γεια σου! Χθες ήθελα να σε δω.","Hi! I wanted to see you yesterday.",22],["Χθες δεν μπορούσα. Είχα πολλή δουλειά.","I couldn't yesterday. I had a lot of work.",22],["Το βράδυ ήμουν στο σπίτι. Ήμουν πολύ κουρασμένη.","In the evening I was at home. I was very tired.",22],["Έβλεπες τηλεόραση;","Were you watching TV?",22],["Ναι, έβλεπα μια ταινία. Εσύ;","Yes, I was watching a movie. You?",22],["Εγώ ήθελα να πάω στη θάλασσα, αλλά δεν μπορούσα. Δεν είχα αυτοκίνητο.","I wanted to go to the beach, but I couldn't. I didn't have a car.",22],["Κρίμα! Πέρσι είχες αυτοκίνητο, έτσι;","Too bad! You had a car last year, right?",22],["Ναι, πέρσι είχα, αλλά τώρα δεν έχω.","Yes, last year I had one, but now I don't.",22],["Θέλεις να πάμε μαζί το Σάββατο; Έχω αυτοκίνητο.","Do you want to go together on Saturday? I have a car.",22],["Ναι! Ευχαριστώ!","Yes! Thank you!",22],["Τι έκανες το Σαββατοκύριακο;","What did you do on the weekend?",23],["Πήγα στη θάλασσα.","I went to the sea.",23],["Είδα τη Μαρία.","I saw Maria.",23],["Έφαγα ψάρι.","I ate fish.",23],["Ήπια έναν καφέ.","I had a coffee.",23],["Το Σάββατο πήγα στη θάλασσα.","On Saturday I went to the beach.",23],["Ωραία! Με ποιον;","Nice! Who with?",23],["Με τη Μαρία. Είδα και τον Νίκο εκεί!","With Maria. I saw Nikos there too!",23],["Αλήθεια; Τι είπε;","Really? What did he say?",23],["Είπε «Γεια σας!» και μετά έφαγε ένα παγωτό.","He said \"Hi!\" and then he ate an ice cream.",23],["Χα! Κι εσύ; Τι έφαγες;","Ha! And you? What did you eat?",23],["Έφαγα ψάρι και ήπια μια μπίρα. Εσύ τι έκανες;","I ate fish and had a beer. What did you do?",23],["Είχα πολλή δουλειά. Την Κυριακή πήγα στην εκκλησία και μετά ήπια έναν καφέ με τη γιαγιά μου.","I had a lot of work. On Sunday I went to church and then had a coffee with my grandmother.",23],["Πώς είναι η γιαγιά σου;","How's your grandmother?",23],["Καλά! Είπε ότι θέλει να σε δει.","Good! She said she wants to see you.",23],["Κι εγώ!","Me too!",23],["Καλή Ανάσταση!","Blessed Resurrection! (Holy Week greeting)",24],["Καλό Πάσχα!","Happy Easter!",24],["Έχω μια λαμπάδα.","I have an Easter candle.",24],["Θέλεις κόκκινο αυγό;","Do you want a red egg?",24],["Καλή Ανάσταση! Έχεις λαμπάδα για την Ανάσταση;","Have a blessed Resurrection! Do you have a candle for the Resurrection service?",24],["Ναι, έχω μια άσπρη λαμπάδα. Τα παιδιά έχουν λαμπάδες με χρώματα.","Yes, I have a white candle. The kids have colorful ones.",24],["Βάφεις αυγά;","Do you dye eggs?",24],["Ναι, τη Μεγάλη Πέμπτη βάφουμε κόκκινα αυγά. Θέλεις κόκκινο αυγό;","Yes, on Holy Thursday we dye red eggs. Do you want a red egg?",24],["Ναι, θέλω! Και τσουρέκι;","Yes, I do! And tsoureki?",24],["Έχω τσουρέκι από τη γιαγιά. Είναι πολύ νόστιμο.","I have tsoureki from Grandma. It's delicious.",24],["Πού θα είσαι το Πάσχα;","Where will you be for Easter?",24],["Θα είμαι εδώ, στην εκκλησία. Εσύ;","I'll be here, at church. You?",24],["Θα πάω στο χωριό.","I'll go to the village.",24],["Χριστός Ανέστη! – Αληθώς Ανέστη!","Christ is risen! – Truly He is risen!",25],["Με πονάει το κεφάλι.","My head hurts.",25],["Μπορείτε να μου δώσετε…;","Can you give me…?",25],["Έχετε κάτι για…;","Do you have something for…?",25],["Πονάει ο λαιμός μου.","My throat hurts.",25],["Χριστός Ανέστη!","Christ is risen!",25],["Αληθώς Ανέστη! Τι θέλετε;","Truly He is risen! What can I get you?",25],["Με πονάει το κεφάλι. Έχετε κάτι για το κεφάλι;","I have a headache. Do you have something for it?",25],["Ναι, βέβαια. Πονάει και ο λαιμός σας;","Yes, of course. Does your throat hurt too?",25],["Όχι, ο λαιμός μου είναι καλά. Αλλά δεν μπορώ να κοιμηθώ.","No, my throat is fine. But I can't sleep.",25],["Έχετε πυρετό;","Do you have a fever?",25],["Ορίστε. Ένα χάπι τρεις φορές την ημέρα. Αν δεν είστε καλύτερα, πηγαίνετε στον γιατρό.","Here you go. One pill three times a day. If you don't feel better, go to the doctor.",25],["Ευχαριστώ. Πόσο κάνει;","Thank you. How much is it?",25],["Τέσσερα ευρώ. Περαστικά!","Four euros. Feel better soon!",25],["Θα ήθελα…, παρακαλώ.","I would like…, please.",26],["Πόσο κάνουν…;","How much are…?",26],["Φέτος έμαθα…","This year I learned…",26],["Το καλοκαίρι θα πάω…","This summer I'll go…",26],["Καλό καλοκαίρι!","Have a good summer!",26],["Έναν καφέ και ένα νερό, παρακαλώ.","A coffee and a water, please.",26],["Έχετε γλυκό;","Do you have anything sweet?",26],["Ναι, έχουμε μπακλαβά.","Yes, we have baklava.",26],["Ένα, παρακαλώ.","One, please.",26],["Θα πάω στη θάλασσα. Θέλεις να έρθεις;","I'll go to the beach. Do you want to come?",26],["Θέλω, αλλά δεν μπορώ το Σάββατο. Έχω δουλειά. Την Κυριακή μπορώ.","I'd like to, but I can't on Saturday. I have work. I can on Sunday.",26],["Τέλεια, την Κυριακή στις δέκα!","Perfect, Sunday at ten!",26],["Όχι, ευχαριστώ. Καλή σας μέρα!","No, thank you. Have a good day!",26]];
+
+</script>
+<script>
+window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea party", [29, 270, 297, 373, 732, 936, 1047, 1345]], [3, "Μπορείς; challenge", [29, 334]], [4, "Telescope spy", [75, 89, 615, 651, 668, 831]], [5, "Where is Spider-Man?", [17, 33, 89, 95, 118, 130, 225, 249, 394, 433, 615, 706, 922, 1157]], [6, "Traffic-light verb dice", [17, 29, 89, 204, 405, 409, 668, 1269]], [7, "Who am I? masks", [250, 606, 690, 1490]], [8, "Find the coin", [17, 68, 104, 132, 133, 174, 460, 461]], [9, "Toy families", [71, 104, 172, 190, 270, 831]], [10, "My day charades", [29, 200, 256]], [11, "Pillow islands", [29, 75, 108, 312, 668, 1014]], [12, "Toy market", [29, 104, 145, 249, 351, 1199, 1404, 1496]], [13, "Stuffed-animal taverna", [270, 798, 902, 1403]], [14, "Τι ώρα είναι, κύριε Λύκε;", [64, 101, 104, 154, 174, 348]], [15, "Puppet who only speaks Greek", [33, 156, 180, 300]], [16, "Treasure hunt review", [17, 29, 108, 130, 270, 405, 546, 615, 632, 668]], [17, "Fortune teller", [101, 108, 112, 333, 1014, 1075]], [18, "Weather moves and a kite", [89, 166, 651, 766, 859, 1039, 1243, 1384, 1449]], [19, "Robot directions", [89, 206, 240, 659, 745, 1499]], [20, "Shoebox house and color hunt", [17, 75, 89, 136, 260, 313, 738, 754, 810, 1429]], [21, "Thumbs up, thumbs down", [295, 313, 1459]], [22, "Spider-Man's bad day", [108, 317, 599, 1014, 1269]], [23, "Weekend show and tell", [132, 628, 1014, 1047, 1075, 1278]], [24, "Red eggs and candles", [17, 29, 810, 1283]], [25, "Teddy goes to the doctor", [158, 257, 723, 1426]], [26, "The big show", [108, 270, 405, 668]]];
+
+</script>
+<script>
+(() => {
+  'use strict';
+  // ---------- words ----------
+  const ALL = window.GQ_WORDS.map(([g, en, rank, w, pos]) => ({ g, en, rank, pos }));
+  const byRank = new Map(ALL.map(x => [x.rank, x]));
+  const KIDS = window.GQ_KIDS || [];
+  const lemma = g => g.split(',')[0].trim().replace(/^(ο|η|το|οι|τα) /, '');
+  // ο, η, το and ένας, μία, ένα show all three genders, not just the first.
+  const show = g => g.split(',').map(x => x.trim()).join(' / ');
+  // Words sent from the vault: ...#w=χρόνος,σπίτι
+  const MINE = (() => { try { const m = (window.GQ_HASH || location.hash).match(/[#&]w=([^&]*)/); return m ? decodeURIComponent(m[1]).split(',').map(s => s.trim()).filter(Boolean) : []; } catch (e) { return []; } })();
+  const MINE_WORDS = ALL.filter(x => MINE.includes(lemma(x.g)));
+  const DEBUG = /[#&]debug/.test((window.GQ_HASH || location.hash));
+
+  const selSrc = document.getElementById('selSrc');
+  const opt = (v, t) => { const o = document.createElement('option'); o.value = v; o.textContent = t; selSrc.appendChild(o); };
+  if (MINE_WORDS.length) opt('mine', `My words (${MINE_WORDS.length})`);
+  for (const [n, title] of KIDS) opt('k' + n, `Kid lesson ${n}: ${title}`);
+  opt('top9999', 'All my words (387)');
+
+  { const km = (window.GQ_HASH || location.hash).match(/[#&]k=(\d+)/); if (km && KIDS.some(x => x[0] === +km[1])) selSrc.value = 'k' + km[1]; }
+  function pool(src) {
+    if (src === 'mine') return MINE_WORDS.slice();
+    if (src.startsWith('top')) { const n = +src.slice(3); return ALL.filter(x => x.rank <= n && x.rank > 12); }
+    const n = +src.slice(1); let out = [];
+    // This lesson's words first, then earlier kid lessons until there are at least 7.
+    for (let k = n; k >= 1 && out.length < 7; k--) { const L = KIDS.find(x => x[0] === k); if (L) out = out.concat(L[2].map(r => byRank.get(r)).filter(x => x && !out.includes(x))); }
+    return out;
+  }
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const poolHint = document.getElementById('poolHint');
+  const updHint = () => { const p = pool(selSrc.value); poolHint.textContent = p.length ? `${p.length} words: ${p.slice(0, 8).map(x => show(x.g)).join(', ')}${p.length > 8 ? '…' : ''}` : 'No words found.'; };
+  selSrc.onchange = updHint; updHint();
+
+  // ---------- speech and sound ----------
+  let muted = false, actx = null, elVoice = null;
+  const pickVoice = () => { try { const v = speechSynthesis.getVoices(); elVoice = v.find(x => /^el/i.test(x.lang)) || null; } catch (e) {} };
+  if (window.speechSynthesis) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  function say(t) {
+    if (muted || !window.speechSynthesis) return;
+    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(String(t).replace(/(^|[^\p{L}])([ΗΟ])(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase())); u.lang = 'el-GR'; if (elVoice) u.voice = elVoice; u.rate = .9; speechSynthesis.speak(u); } catch (e) {}
+  }
+  function beep(f, d, type = 'sine', vol = .12) {
+    if (muted) return;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      const o = actx.createOscillator(), g = actx.createGain(); o.type = type; o.frequency.value = f;
+      g.gain.setValueAtTime(vol, actx.currentTime); g.gain.exponentialRampToValueAtTime(.001, actx.currentTime + d);
+      o.connect(g).connect(actx.destination); o.start(); o.stop(actx.currentTime + d);
+    } catch (e) {}
+  }
+  const btnMute = document.getElementById('btnMute');
+  btnMute.onclick = () => { muted = !muted; btnMute.textContent = muted ? 'Σίγαση' : 'Ήχος'; btnMute.setAttribute('aria-label', muted ? 'Sound off' : 'Sound on'); };
+
+  // ---------- map ----------
+  // # wall, . floor, N notebook, P player start, G Γιαγιά start, E exit door
+  const MAP = [
+    '#############',
+    '#G....#.....#',
+    '#..N..#..N..#',
+    '#...........#',
+    '#.....#.....#',
+    '###.#####.###',
+    '#...........#',
+    '#P....N.....#',
+    '#...........#',
+    '###.#####.###',
+    '#.....#.....#',
+    '#..N..#..N..#',
+    '#...........#',
+    '#.....#....N#',
+    '####.###.####',
+    '#.....N.....#',
+    '######E######',
+  ];
+  const COLS = MAP[0].length, ROWS = MAP.length;
+  const ROOMS = [
+    { name: 'Κουζίνα', en: 'kitchen', c0: 1, r0: 1, c1: 5, r1: 4, fill: '#f3e6cf', pat: 'tile' },
+    { name: 'Σαλόνι', en: 'living room', c0: 7, r0: 1, c1: 11, r1: 4, fill: '#e9dccb', pat: 'rug' },
+    { name: 'Διάδρομος', en: 'hallway', c0: 1, r0: 6, c1: 11, r1: 8, fill: '#e4d3b8', pat: 'wood' },
+    { name: 'Υπνοδωμάτιο', en: 'bedroom', c0: 1, r0: 10, c1: 5, r1: 13, fill: '#dfe6ef', pat: 'bed' },
+    { name: 'Μπάνιο', en: 'bathroom', c0: 7, r0: 10, c1: 11, r1: 13, fill: '#d9ecec', pat: 'tile' },
+    { name: 'Μπαλκόνι', en: 'balcony', c0: 1, r0: 15, c1: 11, r1: 15, fill: '#e6eedb', pat: 'plants' },
+  ];
+  let start = {}, gStart = {}, exitT = {}, nbSpots = [];
+  MAP.forEach((row, r) => [...row].forEach((ch, c) => {
+    if (ch === 'P') start = { c, r }; if (ch === 'G') gStart = { c, r }; if (ch === 'E') exitT = { c, r }; if (ch === 'N') nbSpots.push({ c, r });
+  }));
+  const wall = (c, r) => r < 0 || r >= ROWS || c < 0 || c >= COLS || MAP[r][c] === '#' || (MAP[r][c] === 'E' && !S.exitOpen);
+  const DIRS = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+
+  // ---------- state ----------
+  const SPEEDS = { easy: { p: 4.2, g: 1.7, inc: .2, max: 3.2 }, normal: { p: 4.6, g: 2.4, inc: .3, max: 4.2 }, fast: { p: 5, g: 3, inc: .35, max: 4.9 } };
+  const S = { mode: 'setup', words: [], nbs: [], found: 0, catches: 0, misses: [], wrongs: 0, exitOpen: false, freeze: 0, grace: 0, safe: 0, msg: '', msgT: 0, t: 0, spd: SPEEDS.normal, src: '' };
+  const P = { c: 0, r: 0, tc: 0, tr: 0, k: 1, dir: null, want: null };
+  const G = { c: 0, r: 0, tc: 0, tr: 0, k: 1, spd: 2 };
+  const pos = e => ({ x: e.c + (e.tc - e.c) * e.k, y: e.r + (e.tr - e.r) * e.k });
+
+  function newGame() {
+    S.src = selSrc.value; S.spd = SPEEDS[document.getElementById('selSpeed').value] || SPEEDS.normal;
+    let p = shuffle(pool(S.src));
+    if (!p.length) p = shuffle(ALL.filter(x => x.rank > 12 && x.rank <= 100));
+    const words = []; while (words.length < nbSpots.length) words.push(p[words.length % p.length]);
+    S.words = words; S.nbs = nbSpots.map((s, i) => ({ ...s, w: words[i], got: false }));
+    S.found = 0; S.catches = 0; S.misses = []; S.wrongs = 0; S.exitOpen = false; S.t = 0;
+    G.spd = S.spd.g; resetPositions(3); S.mode = 'play';
+    show_(['setup', 'end', 'quiz'], false); hud.hidden = false; padEl.hidden = !touchy; layout(); setMsg('Η γιαγιά μαγειρεύει… Go.', 2.5); updHud();
+  }
+  function resetPositions(grace) {
+    Object.assign(P, { c: start.c, r: start.r, tc: start.c, tr: start.r, k: 1, dir: null, want: null });
+    Object.assign(G, { c: gStart.c, r: gStart.r, tc: gStart.c, tr: gStart.r, k: 1 });
+    S.grace = grace; S.freeze = 0; S.safe = 0;
+  }
+  function setMsg(t, d = 2) { S.msg = t; S.msgT = d; hudMsg.textContent = t; }
+
+  // ---------- movement ----------
+  function stepEntity(e, speed, dt, choose) {
+    let move = speed * dt;
+    while (move > 0) {
+      if (e.k >= 1) { e.c = e.tc; e.r = e.tr; e.k = 1; const d = choose(e); if (!d) return; e.tc = e.c + d[0]; e.tr = e.r + d[1]; e.k = 0; }
+      const left = 1 - e.k, m = Math.min(left, move); e.k += m; move -= m;
+    }
+  }
+  function choosePlayer(e) {
+    if (P.want && !wall(e.c + DIRS[P.want][0], e.r + DIRS[P.want][1])) { P.dir = P.want; return DIRS[P.dir]; }
+    if (P.dir && P.swipe && !wall(e.c + DIRS[P.dir][0], e.r + DIRS[P.dir][1])) return DIRS[P.dir];
+    return null;
+  }
+  function bfsNext(from, to) {
+    const key = (c, r) => r * COLS + c, prev = new Map([[key(from.c, from.r), null]]), q = [[from.c, from.r]];
+    while (q.length) {
+      const [c, r] = q.shift(); if (c === to.c && r === to.r) break;
+      for (const d of Object.values(DIRS)) { const nc = c + d[0], nr = r + d[1], k = key(nc, nr); if (MAP[nr] && MAP[nr][nc] !== '#' && MAP[nr][nc] !== 'E' && !prev.has(k)) { prev.set(k, [c, r]); q.push([nc, nr]); } }
+    }
+    let cur = [to.c, to.r]; if (!prev.has(key(cur[0], cur[1]))) return null;
+    let p = prev.get(key(cur[0], cur[1])); if (!p) return null;
+    while (p && !(p[0] === from.c && p[1] === from.r)) { cur = p; p = prev.get(key(p[0], p[1])); }
+    return [cur[0] - from.c, cur[1] - from.r];
+  }
+  const chooseG = e => { const pt = P.k > .5 ? { c: P.tc, r: P.tr } : { c: P.c, r: P.r }; return bfsNext(e, pt); };
+
+  function update(dt) {
+    S.t += dt;
+    if (S.msgT > 0) { S.msgT -= dt; if (S.msgT <= 0) hudMsg.textContent = S.exitOpen ? 'The door is open. Run.' : ''; }
+    if (S.mode !== 'play') return;
+    stepEntity(P, S.spd.p, dt, choosePlayer);
+    if (S.grace > 0) S.grace -= dt; else if (S.freeze > 0) S.freeze -= dt; else stepEntity(G, G.spd, dt, chooseG);
+    if (S.safe > 0) S.safe -= dt;
+    const pp = pos(P), gp = pos(G);
+    // notebooks
+    for (const n of S.nbs) if (!n.got && Math.abs(pp.x - n.c) < .35 && Math.abs(pp.y - n.r) < .35 && S.safe <= 0) { openQuiz(n); return; }
+    // exit
+    if (S.exitOpen && P.c === exitT.c && P.r === exitT.r) { finish(true); return; }
+    // caught
+    if (S.safe <= 0 && Math.hypot(pp.x - gp.x, pp.y - gp.y) < .62) caught();
+  }
+  function caught() {
+    S.catches++; beep(220, .25, 'triangle'); beep(165, .35, 'triangle');
+    say('Φάε, παιδί μου!'); updHud();
+    if (S.catches >= 3) { finish(false); return; }
+    setMsg('Φάε, παιδί μου! Back to the start.', 2.5); resetPositions(2);
+  }
+
+  // ---------- quiz ----------
+  const quiz = document.getElementById('quiz'), qGr = document.getElementById('qGr'), qOpts = document.getElementById('qOpts'), qFb = document.getElementById('qFb');
+  let qWord = null;
+  document.getElementById('qHear').onclick = () => qWord && say(show(qWord.g));
+  function openQuiz(n) {
+    S.mode = 'quiz'; P.want = null; P.dir = null; clearPad();
+    const w = n.w; qWord = w; qGr.textContent = show(w.g); qFb.textContent = ''; qOpts.innerHTML = '';
+    const used = new Set([w.en]), dis = [];
+    for (const x of shuffle(S.words.concat(shuffle(ALL.filter(y => y.rank <= 400 && y.rank > 12)).slice(0, 20)))) { if (dis.length >= 2) break; if (!used.has(x.en)) { used.add(x.en); dis.push(x); } }
+    const choices = shuffle([w, ...dis]);
+    for (const c of choices) {
+      const b = document.createElement('button'); b.textContent = c.en; b.onclick = () => answer(n, c, b, choices); qOpts.appendChild(b);
+    }
+    quiz.hidden = false; say(show(w.g)); beep(660, .08);
+    setTimeout(() => { const f = qOpts.querySelector('button'); if (f && !touchy) f.focus(); }, 50);
+  }
+  function answer(n, c, b, choices) {
+    const btns = [...qOpts.children]; btns.forEach(x => x.disabled = true);
+    const right = c === n.w;
+    btns[choices.indexOf(n.w)].classList.add('right');
+    if (right) {
+      if (window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w: lemma(n.w.g) }, '*'); } catch (e) {}
+      n.got = true; S.found++; S.freeze = 2; beep(784, .1); setTimeout(() => beep(1046, .15), 90);
+      qFb.textContent = 'Μπράβο!'; qFb.style.color = 'var(--green)'; say('Μπράβο!');
+      if (S.found >= S.nbs.length) { S.exitOpen = true; }
+    } else {
+      b.classList.add('wrong'); S.wrongs++; G.spd = Math.min(S.spd.max, G.spd + S.spd.inc); beep(196, .3, 'square', .06);
+      if (!S.misses.includes(n.w)) S.misses.push(n.w);
+      qFb.textContent = `Όχι. ${show(n.w.g)} = ${n.w.en}`; qFb.style.color = 'var(--red)'; setTimeout(() => say(show(n.w.g)), 300);
+    }
+    updHud();
+    setTimeout(() => {
+      quiz.hidden = true; S.mode = 'play'; S.safe = 1.2;
+      if (right) setMsg(S.exitOpen ? 'All 7. The door is open. Run.' : 'Μπράβο! Γιαγιά stops for 2 seconds.', 2.5);
+      else setMsg('She is a little faster now. Come back to that notebook.', 2.5);
+    }, right ? 900 : 1900);
+  }
+
+  // ---------- end ----------
+  function finish(won) {
+    S.mode = 'end'; hud.hidden = true; padEl.hidden = true; clearPad();
+    document.getElementById('endTitle').textContent = won ? 'Μπράβο! You got out.' : 'Φάε, παιδί μου!';
+    document.getElementById('endSub').textContent = won
+      ? `All 7 notebooks, caught ${S.catches} time${S.catches === 1 ? '' : 's'}, ${S.wrongs} wrong answer${S.wrongs === 1 ? '' : 's'}.`
+      : `Γιαγιά caught you 3 times. You found ${S.found} of 7 notebooks. Dinner, then try again.`;
+    const box = document.getElementById('endMiss'); box.innerHTML = '';
+    if (S.misses.length) {
+      const h = document.createElement('p'); h.className = 'hint'; h.textContent = 'Words to practice (mark them red on your list):'; box.appendChild(h);
+      for (const w of S.misses) {
+        const r = document.createElement('div'); r.className = 'miss';
+        r.innerHTML = `<div><b lang="el"></b> <span></span></div>`; r.querySelector('b').textContent = show(w.g); r.querySelector('span').textContent = w.en;
+        const hb = document.createElement('button'); hb.className = 'ghost'; hb.textContent = 'Hear'; hb.onclick = () => say(show(w.g)); r.appendChild(hb); box.appendChild(r);
+      }
+    } else { const h = document.createElement('p'); h.className = 'hint'; h.textContent = 'No missed words this time.'; box.appendChild(h); }
+    const so = document.getElementById('sendObs');
+    so.parentElement.hidden = !S.misses.length;
+    so.href = 'obsidian://greekquent?game=Yiayia&misses=' + encodeURIComponent(S.misses.map(w => lemma(w.g)).join(','));
+    document.getElementById('end').hidden = false;
+    won ? [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .15), i * 110)) : null;
+  }
+  document.getElementById('btnAgain').onclick = newGame;
+  document.getElementById('btnMenu').onclick = () => { S.mode = 'setup'; show_(['end'], false); document.getElementById('setup').hidden = false; };
+  document.getElementById('btnStart').onclick = newGame;
+  function show_(ids, on) { ids.forEach(id => document.getElementById(id).hidden = !on); }
+
+  // ---------- HUD ----------
+  const hud = document.getElementById('hud'), hudMsg = document.getElementById('hudMsg');
+  function updHud() {
+    document.getElementById('hudNb').textContent = `${S.found}/${S.nbs.length}`;
+    document.getElementById('hudLives').textContent = '♥'.repeat(Math.max(0, 3 - S.catches)) + '♡'.repeat(Math.min(3, S.catches));
+  }
+
+  // ---------- input ----------
+  const touchy = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+  const KEYS = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right', w: 'up', s: 'down', a: 'left', d: 'right', W: 'up', S: 'down', A: 'left', D: 'right' };
+  const held = [];
+  addEventListener('keydown', e => {
+    const d = KEYS[e.key]; if (!d || S.mode !== 'play') return; e.preventDefault();
+    if (!held.includes(d)) held.push(d); P.want = d; P.swipe = false;
+  });
+  addEventListener('keyup', e => { const d = KEYS[e.key]; if (!d) return; const i = held.indexOf(d); if (i >= 0) held.splice(i, 1); P.want = held[held.length - 1] || null; });
+  const padEl = document.getElementById('pad');
+  const clearPad = () => { padEl.querySelectorAll('.on').forEach(b => b.classList.remove('on')); held.length = 0; };
+  padEl.querySelectorAll('button').forEach(b => {
+    const d = b.dataset.d;
+    b.addEventListener('pointerdown', e => { e.preventDefault(); b.setPointerCapture && b.setPointerCapture(e.pointerId); b.classList.add('on'); P.want = d; P.swipe = false; });
+    const up = () => { b.classList.remove('on'); if (P.want === d) P.want = null; };
+    b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('lostpointercapture', up);
+  });
+  // Swipe on the house: keep walking that way until a wall.
+  let sw = null; const cv = document.getElementById('cv');
+  cv.addEventListener('pointerdown', e => { sw = { x: e.clientX, y: e.clientY }; });
+  cv.addEventListener('pointermove', e => {
+    if (!sw || S.mode !== 'play') return; const dx = e.clientX - sw.x, dy = e.clientY - sw.y;
+    if (Math.hypot(dx, dy) < 18) return;
+    const d = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up');
+    P.want = d; P.dir = d; P.swipe = true; sw = { x: e.clientX, y: e.clientY };
+  });
+  addEventListener('pointerup', () => { sw = null; });
+
+  // ---------- render ----------
+  const ctx = cv.getContext('2d'); let T = 30, dpr = 1;
+  function layout() {
+    const st = document.getElementById('stage'); const w = st.clientWidth, h = st.clientHeight;
+    T = Math.max(14, Math.floor(Math.min(w / COLS, h / ROWS))); dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = COLS * T * dpr; cv.height = ROWS * T * dpr; cv.style.width = COLS * T + 'px'; cv.style.height = ROWS * T + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  addEventListener('resize', layout);
+  function rr(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+  function drawRoom(R) {
+    const x = R.c0 * T, y = R.r0 * T, w = (R.c1 - R.c0 + 1) * T, h = (R.r1 - R.r0 + 1) * T;
+    ctx.fillStyle = R.fill; ctx.fillRect(x, y, w, h);
+    ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+    if (R.pat === 'tile') { ctx.fillStyle = 'rgba(0,0,0,.045)'; for (let c = R.c0; c <= R.c1; c++) for (let r = R.r0; r <= R.r1; r++) if ((c + r) % 2) ctx.fillRect(c * T, r * T, T, T); }
+    if (R.pat === 'wood') { ctx.strokeStyle = 'rgba(120,80,40,.12)'; ctx.lineWidth = 1; for (let yy = y; yy < y + h; yy += T / 3) { ctx.beginPath(); ctx.moveTo(x, yy); ctx.lineTo(x + w, yy); ctx.stroke(); } }
+    if (R.pat === 'rug') { ctx.fillStyle = '#c9a27a'; rr(x + T * 1.2, y + T * 1.2, w - T * 2.4, h - T * 2.4, T * .3); ctx.fill(); ctx.strokeStyle = '#a5402f'; ctx.lineWidth = Math.max(2, T * .08); rr(x + T * 1.4, y + T * 1.4, w - T * 2.8, h - T * 2.8, T * .2); ctx.stroke(); }
+    if (R.pat === 'bed') { ctx.fillStyle = '#b8c7dc'; rr(x + T * 3.1, y + T * .15, T * 1.75, T * 1.6, T * .2); ctx.fill(); ctx.fillStyle = '#fff'; rr(x + T * 3.3, y + T * .3, T * 1.35, T * .45, T * .15); ctx.fill(); }
+    if (R.pat === 'plants') { for (const c of [4.5, 9, 10.6]) { ctx.fillStyle = '#b5603a'; ctx.fillRect(c * T - T * .2, y + T * .55, T * .4, T * .35); ctx.fillStyle = '#4f8a3a'; ctx.beginPath(); ctx.arc(c * T, y + T * .45, T * .28, 0, 7); ctx.fill(); } }
+    ctx.restore();
+    // label
+    ctx.font = `700 ${Math.max(10, Math.round(T * .36))}px Comfortaa, 'Noto Sans', sans-serif`; ctx.textBaseline = 'top'; ctx.fillStyle = 'rgba(43,38,32,.55)';
+    ctx.fillText(R.name, x + T * .15, y + h - T * .5);
+  }
+  function drawWalls() {
+    ctx.fillStyle = '#7a5a3c';
+    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (MAP[r][c] === '#') ctx.fillRect(c * T, r * T, T + .5, T + .5);
+    ctx.fillStyle = 'rgba(255,255,255,.08)';
+    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (MAP[r][c] === '#') ctx.fillRect(c * T, r * T, T, T * .15);
+    // door
+    const ex = exitT.c * T, ey = exitT.r * T;
+    ctx.fillStyle = S.exitOpen ? '#9fd18b' : '#3b6ea8'; ctx.fillRect(ex + T * .08, ey, T * .84, T);
+    if (!S.exitOpen) { ctx.fillStyle = '#d9a43a'; ctx.beginPath(); ctx.arc(ex + T * .72, ey + T * .5, T * .07, 0, 7); ctx.fill(); }
+    else { const p = .5 + .5 * Math.sin(S.t * 6); ctx.strokeStyle = `rgba(47,125,79,${.4 + .5 * p})`; ctx.lineWidth = 3; ctx.strokeRect(ex + 2, ey + 2, T - 4, T - 4); }
+  }
+  function drawNotebook(n) {
+    const bob = Math.sin(S.t * 3 + n.c) * T * .05, x = n.c * T + T * .26, y = n.r * T + T * .18 + bob, w = T * .48, h = T * .62;
+    ctx.fillStyle = 'rgba(0,0,0,.12)'; ctx.beginPath(); ctx.ellipse(n.c * T + T / 2, n.r * T + T * .86, T * .26, T * .07, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = '#1f5fa8'; rr(x, y, w, h, T * .06); ctx.fill();
+    ctx.fillStyle = '#0d2f57'; ctx.fillRect(x, y, w * .16, h);
+    ctx.fillStyle = '#fff'; ctx.fillRect(x + w * .32, y + h * .25, w * .5, h * .12);
+  }
+  function drawKid(p) {
+    const x = (p.x + .5) * T, y = (p.y + .5) * T, r = T * .46, blink = S.safe > 0 && Math.floor(S.t * 10) % 2;
+    if (blink) ctx.globalAlpha = .45;
+    ctx.fillStyle = 'rgba(0,0,0,.15)'; ctx.beginPath(); ctx.ellipse(x, y + r * .9, r * .7, r * .2, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = '#d9a43a'; ctx.beginPath(); ctx.ellipse(x, y + r * .45, r * .6, r * .45, 0, 0, 7); ctx.fill();
+    ctx.strokeStyle = '#7a5a3c'; ctx.lineWidth = Math.max(1.5, T * .05); ctx.stroke();
+    ctx.fillStyle = '#f2c9a0'; ctx.beginPath(); ctx.arc(x, y - r * .2, r * .5, 0, 7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#4a2f1d'; ctx.beginPath(); ctx.arc(x, y - r * .32, r * .52, Math.PI * 1.02, Math.PI * 1.98); ctx.fill();
+    ctx.fillStyle = '#2b2620'; ctx.beginPath(); ctx.arc(x - r * .18, y - r * .16, r * .07, 0, 7); ctx.arc(x + r * .18, y - r * .16, r * .07, 0, 7); ctx.fill();
+    ctx.strokeStyle = '#8a4a32'; ctx.lineWidth = Math.max(1, T * .035); ctx.beginPath(); ctx.arc(x, y - r * .05, r * .17, .25, Math.PI - .25); ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+  function drawGiagia(p) {
+    const x = (p.x + .5) * T, y = (p.y + .5) * T + T * .08, r = T * .5, frozen = S.freeze > 0 || S.grace > 0;
+    ctx.fillStyle = 'rgba(0,0,0,.15)'; ctx.beginPath(); ctx.ellipse(x, y + r * .95, r * .85, r * .25, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = '#2d2a33'; ctx.beginPath(); ctx.moveTo(x - r * .85, y + r * .9); ctx.lineTo(x - r * .5, y - r * .1); ctx.lineTo(x + r * .5, y - r * .1); ctx.lineTo(x + r * .85, y + r * .9); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#f6efe2'; ctx.fillRect(x - r * .35, y + r * .15, r * .7, r * .6); // apron
+    ctx.fillStyle = '#eac3a0'; ctx.beginPath(); ctx.arc(x, y - r * .3, r * .48, 0, 7); ctx.fill();
+    ctx.fillStyle = '#1c1a20'; ctx.beginPath(); ctx.arc(x, y - r * .38, r * .56, Math.PI * .92, Math.PI * 2.08); ctx.lineTo(x + r * .5, y - r * .05); ctx.lineTo(x - r * .5, y - r * .05); ctx.fill(); // headscarf
+    ctx.fillStyle = '#eac3a0'; ctx.beginPath(); ctx.arc(x, y - r * .22, r * .38, 0, 7); ctx.fill();
+    ctx.strokeStyle = '#2b2620'; ctx.lineWidth = Math.max(1, T * .03);
+    if (frozen) { ctx.beginPath(); ctx.arc(x - r * .15, y - r * .28, r * .07, Math.PI, 0); ctx.arc(x + r * .15, y - r * .28, r * .07, Math.PI, 0); ctx.stroke(); }
+    else { ctx.fillStyle = '#2b2620'; ctx.beginPath(); ctx.arc(x - r * .15, y - r * .28, r * .055, 0, 7); ctx.arc(x + r * .15, y - r * .28, r * .055, 0, 7); ctx.fill(); }
+    ctx.beginPath(); ctx.arc(x, y - r * .15, r * .14, .2, Math.PI - .2); ctx.stroke();
+    // wooden spoon
+    const sw = Math.sin(S.t * (frozen ? 0 : 8)) * .4;
+    ctx.save(); ctx.translate(x + r * .7, y + r * .1); ctx.rotate(-.6 + sw); ctx.fillStyle = '#b07a43'; ctx.fillRect(-r * .05, -r * .9, r * .1, r * .9); ctx.beginPath(); ctx.ellipse(0, -r * .95, r * .14, r * .2, 0, 0, 7); ctx.fill(); ctx.restore();
+    if (frozen) { ctx.font = `700 ${Math.max(10, Math.round(T * .34))}px Comfortaa, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'bottom'; ctx.fillStyle = '#2f7d4f'; ctx.fillText(S.grace > 0 ? '…' : 'zzz', x, y - r * .9); ctx.textAlign = 'left'; }
+  }
+  // debug overlay (add #debug to the URL)
+  let fr = 0, fl = performance.now(), fps = 0;
+  function render() {
+    ctx.clearRect(0, 0, COLS * T, ROWS * T);
+    ctx.fillStyle = '#e8dcc6'; ctx.fillRect(0, 0, COLS * T, ROWS * T);
+    ROOMS.forEach(drawRoom);
+    // door gaps get the hallway floor
+    ctx.fillStyle = '#e4d3b8';
+    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (MAP[r][c] !== '#' && !ROOMS.some(R => c >= R.c0 && c <= R.c1 && r >= R.r0 && r <= R.r1) && MAP[r][c] !== 'E') ctx.fillRect(c * T, r * T, T, T);
+    drawWalls();
+    if (S.mode !== 'setup') { S.nbs.forEach(n => !n.got && drawNotebook(n)); drawKid(pos(P)); drawGiagia(pos(G)); }
+    if (DEBUG) { fr++; const n = performance.now(); if (n - fl > 1000) { fps = fr * 1000 / (n - fl); fr = 0; fl = n; } ctx.fillStyle = 'rgba(0,0,0,.7)'; ctx.fillRect(0, 0, 120, 18); ctx.fillStyle = '#0f0'; ctx.font = '11px monospace'; ctx.textBaseline = 'top'; ctx.fillText('FPS ' + fps.toFixed(0), 4, 3); }
+  }
+  let last = performance.now(), manual = false;
+  function loop(now) { const dt = Math.min(.05, (now - last) / 1000); last = now; if (!manual) update(dt); render(); requestAnimationFrame(loop); }
+  layout(); requestAnimationFrame(loop);
+
+  // ---------- test hooks ----------
+  window.advanceTime = ms => { manual = true; const n = Math.max(1, Math.round(ms / (1000 / 60))); for (let i = 0; i < n; i++) update(1 / 60); render(); manual = false; };
+  window.render_game_to_text = () => JSON.stringify({
+    coords: 'tiles, origin top-left, x right, y down', mode: S.mode, player: pos(P), giagia: { ...pos(G), speed: G.spd, frozen: S.freeze > 0 },
+    notebooks: S.nbs.filter(n => !n.got).map(n => ({ x: n.c, y: n.r, word: n.w.g })), found: S.found, catches: S.catches, exitOpen: S.exitOpen, exit: exitT,
+    quiz: S.mode === 'quiz' ? { greek: qWord && qWord.g, choices: [...qOpts.children].map(b => b.textContent), answer: qWord && qWord.en } : null, misses: S.misses.map(w => w.g),
+  });
+  window.__gq = { S, P, G, MAP };
+})();
+
+</script>
+</body>
+</html>

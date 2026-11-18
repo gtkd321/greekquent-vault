@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18m';
+const VAULT_RELEASE = '2026-11-18n';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -164,7 +164,8 @@ class WordWebView extends ItemView {
     this.stage = box.createDiv('gq-ww-stage');
     this.svg = svgEl(this.stage, 'svg', '', { 'aria-label': 'Word web' });
     this.gE = svgEl(this.svg, 'g'); this.gN = svgEl(this.svg, 'g');
-    this.chip = this.stage.createDiv('gq-ww-chip');
+    // The word card sits at the top, over the buttons and the instructions, so it never hides words in the web.
+    this.chip = box.createDiv('gq-ww-chip');
     const key = box.createDiv('gq-web-key');
     for (const [cls, tx] of [['v', 'verbs (doing)'], ['n', 'nouns (things, people)'], ['a', 'describing words'], ['d', 'how, when, where'], ['o', 'little words']]) { const s = key.createSpan('gq-key'); s.createSpan('gq-kdot gq-k' + cls); s.appendText(tx); }
     // Swipes inside the web are for the web, not for opening Obsidian's side panels.
@@ -326,15 +327,17 @@ class WordWebView extends ItemView {
     else say(this.label(m.k));
     const others = [...near].filter(k => k !== m.k && k !== this.center.k).length;
     this.chip.createDiv({ cls: 'gq-hint', text: m === this.center ? `${this.nodes.size - 1} words go with it` : others ? `Also goes with ${others} of the words here` : 'Goes with the word in the middle' });
-    this.chip.addClass('is-on');
+    this.chipPlace(); this.chip.addClass('is-on');
   }
+  // The card's bottom edge sits just above the web: it covers the instructions, never the words.
+  chipPlace() { const c = this.chip; if (!c || !this.stage) return; c.style.top = Math.max(4, this.stage.offsetTop - c.offsetHeight - 4) + 'px'; }
   // Plural of a noun: spoken, and shown in the chip for a moment.
   plural(m) {
     const w = this.data.get(m.k) || {}; this.chip.empty(); clearTimeout(this.plTimer);
     if (w.pl) { this.chip.createEl('b', { text: w.pl, attr: { lang: 'el' } }); this.chip.appendText('  · more than one'); say(w.pl); }
     else if (w.already) { this.chip.createEl('b', { text: this.label(m.k), attr: { lang: 'el' } }); this.chip.appendText('  · already plural'); say(this.label(m.k)); }
     else this.chip.appendText(w.t === 'n' ? 'This one usually has no plural.' : 'Double-tap a thing or a person (a purple word) to hear its plural.');
-    this.chip.addClass('is-on'); this.plTimer = setTimeout(() => { if (!this.held) this.chip.removeClass('is-on'); }, 2200);
+    this.chipPlace(); this.chip.addClass('is-on'); this.plTimer = setTimeout(() => { if (!this.held) this.chip.removeClass('is-on'); }, 2200);
   }
   unhold() {
     if (this.held) this.held.g.classList.remove('is-held'); this.held = null;

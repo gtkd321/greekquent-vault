@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, evening: small fixes
+> - Word web: holding a word plays the phrase once (εγώ → Εγώ θέλω να πάω), without saying the word twice.
+> - Your world shows on Today from the start, even before your first φόρα.
+
 > [!info]- November 18, late night: tidier pages
 > - Word pages: Hear it, Word web and More sit in one row, with the three colors on their own row below.
 > - Hold a word in the Word web and you hear that word first, then it in a phrase. When the word changes in the phrase (σε + το = στο), the card says so.

@@ -29,15 +29,15 @@ if (window.top !== window) {
   window.open = (u, t, f) => { if (/^(sms|tel|mailto):/i.test(String(u))) { try { window.top.location.href = u; return null; } catch (e) {} } return open(u, t, f); };
 }
 
-// More menu: updates happen on their own and work saves itself, so neither needs a button.
+// More menu: updates happen on their own and work saves itself, so neither needs a button. Backups do.
 // "Put it on my home screen" shows only in a browser tab, where it matters most.
 G.menuHook = menu => {
   const i = menu.items.findIndex(x => x && x.title === 'Update vault');
   if (i < 0) return;
-  const home = G.home;
-  if (home) { menu.items.splice(i, 1); return; }
-  const it = new (G.MenuItemClass)(); it.setTitle('Put it on my home screen').onClick(() => installHelp());
-  menu.items.splice(i, 1, it);
+  const mk = (t, fn) => { const it = new (G.MenuItemClass)(); it.setTitle(t).onClick(fn); return it; };
+  // A copy of your work as a file, and bringing it back: for a new phone or a new home-screen icon.
+  const keep = [mk('Save a copy of my work', () => G.backup()), mk('Restore my work', () => G.restore())];
+  menu.items.splice(i, 1, ...(G.home ? [] : [mk('Put it on my home screen', () => installHelp())]), ...keep);
 };
 
 function installHelp() {
@@ -52,6 +52,7 @@ function installHelp() {
     const ol = c.createEl('ol');
     for (const t of ['Open this page in Safari.', 'Tap Share (the square with the arrow).', 'Tap Add to Home Screen, then Add.']) ol.createEl('li', { text: t });
     c.createEl('p', { cls: 'gq-hint', text: 'Use it from the home screen icon. In a Safari tab, an iPhone can clear your colors and φόρα after a week away.' });
+    c.createEl('p', { cls: 'gq-hint', text: 'Replacing an old icon? In the old one, tap ⋯ then Save a copy of my work. In the new one, tap ⋯ then Restore my work.' });
   } else {
     const ol = c.createEl('ol');
     for (const t of ['Open this page in Chrome.', 'Tap the menu (three dots).', 'Tap Install app or Add to Home screen.']) ol.createEl('li', { text: t });

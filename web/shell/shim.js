@@ -482,6 +482,7 @@ G.backup = () => {
   const out = { app: 'Greekquent Beginner web', made: new Date().toISOString(), files: {} , dirs: [...dirs()] };
   for (const k of ovKeys()) out.files[k] = ls.getItem(OV + k);
   const d = ls.getItem(DATAK); if (d) out.data = d;
+  out.extra = {}; for (const k of ['greekquent-questions', 'gq-world-tap']) { const v = ls.getItem(k); if (v !== null) out.extra[k] = v; }
   const blob = new Blob([JSON.stringify(out, null, 1)], { type: 'application/json' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Greekquent my work ' + new Date().toISOString().slice(0, 10) + '.json';
   document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 2000);
@@ -494,7 +495,7 @@ G.restore = () => {
     try {
       const d = JSON.parse(await f.text()); if (!d || !d.files) throw new Error('not a backup');
       let n = 0; for (const [p, t] of Object.entries(d.files)) { if (typeof t !== 'string') continue; const mine = ls.getItem(OV + p); if (mine !== null && mine !== t && mine.length > t.length) continue; ls.setItem(OV + p, t); n++; }
-      for (const x of d.dirs || []) addDir(x); if (d.data && !ls.getItem(DATAK)) ls.setItem(DATAK, d.data);
+      for (const x of d.dirs || []) addDir(x); for (const [k, v] of Object.entries(d.extra || {})) if (ls.getItem(k) === null && typeof v === 'string') ls.setItem(k, v); if (d.data) { const mine = ls.getItem(DATAK); if (!mine || d.data.length >= mine.length) ls.setItem(DATAK, d.data); }
       new Notice(`Brought back ${n} note${n === 1 ? '' : 's'}. Reloading.`); setTimeout(() => location.reload(), 900);
     } catch (e) { new Notice('That file is not a Greekquent backup.'); }
   };

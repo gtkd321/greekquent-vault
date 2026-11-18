@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, evening: every game is in the vault
+> - **Buzzer** and **Cousins** now open inside Obsidian, like Γιαγιά and Story Lines. No internet needed, and they update with the vault.
+> - **Play Buzzer with these** and **Play Cousins with these** (More on Today) open them in the vault with your words.
+> - The old website links are gone from [[09 Games]].
+
 > [!info]- November 18, late: Γιαγιά d-pad
 > - In **Γιαγιά** on a phone, the arrows are now a classic d-pad in the middle: ▲ on top, ◀ and ▶ at the sides, ▼ below. It still sits above Obsidian's search bar.
 

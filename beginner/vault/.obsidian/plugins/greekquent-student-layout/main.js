@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18i';
+const VAULT_RELEASE = '2026-11-18j';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -52,12 +52,8 @@ const KIDS_MARK = '.obsidian/greekquent-kids.json';
 const KIDS_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-kids-vault/main/';
 // Fluent in a Year: week 1 starts Monday, Oct 26, 2026. Mon to Sat are word days, Sunday is review.
 const COURSE_START = [2026, 9, 26];
-const COUSINS_URL = 'https://greekquent-cousins.pplx.app/';
 // Animated scenes and the text adventure exist for these days so far.
-const STORY_URL = 'https://www.perplexity.ai/computer/a/greekquent-story-lines-1bIJ0178Q2KldfTqtqgKZA';
 const SCENE_DAYS = 300;
-const GIAGIA_URL = 'https://www.perplexity.ai/computer/a/greekquent-giagia-T2tsaLMvQiuN84Ng0un.IA';
-const BUZZER_URL = 'https://www.perplexity.ai/computer/a/greekquent-buzzer-f3uOHxBFS6Ko8YnCc99fzw';
 const COLORS = [['red', "Don't have it"], ['yellow', 'Kind of'], ['green', 'Have it']];
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -355,9 +351,9 @@ class WordWebView extends ItemView {
   }
 }
 
-// ---------- Story Lines and Γιαγιά live inside the vault and open here, offline, in the same page ----------
+// ---------- Story Lines, Γιαγιά, Buzzer and Cousins live inside the vault and open here, offline, in the same page ----------
 const APPV = 'greekquent-app';
-const APPS = { story: { file: 'storylines.html', title: 'Story Lines', icon: 'clapperboard' }, giagia: { file: 'giagia.html', title: 'Γιαγιά', icon: 'gamepad-2' } };
+const APPS = { story: { file: 'storylines.html', title: 'Story Lines', icon: 'clapperboard' }, giagia: { file: 'giagia.html', title: 'Γιαγιά', icon: 'gamepad-2' }, buzzer: { file: 'buzzer.html', title: 'Buzzer', icon: 'zap' }, cousins: { file: 'cousins.html', title: 'Cousins', icon: 'users' } };
 class AppView extends ItemView {
   constructor(leaf, plugin) { super(leaf); this.plugin = plugin; this.which = 'story'; this.hash = ''; this.shown = ''; }
   getViewType() { return APPV; }
@@ -1768,7 +1764,6 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!this.showSwitch() || this.colors().scripts !== 'intermediate') return beg;
     return fs.find(f => f.path.startsWith('Scripts/Intermediate/') && f.basename.startsWith('I' + nn + ' ')) || beg;
   }
-  gameUrl(base, words) { return base + '#w=' + encodeURIComponent(words.join(',')); }
   wordList(parent, words) {
     const ul = parent.createEl('ul', { cls: 'gq-tlist' });
     for (const w of words) {
@@ -1790,8 +1785,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   playRow(parent, words) {
     const row = parent.createDiv('gq-row'); const list = words.map(w => w.word);
-    const b = row.createEl('button', { text: 'Play Buzzer with these' }); b.onclick = () => window.open(this.gameUrl(BUZZER_URL, list));
-    const c = row.createEl('button', { text: 'Play Cousins with these' }); c.onclick = () => window.open(this.gameUrl(COUSINS_URL, list));
+    const b = row.createEl('button', { text: 'Play Buzzer with these' }); b.onclick = () => this.openApp('buzzer', '#w=' + encodeURIComponent(list.join(',')));
+    const c = row.createEl('button', { text: 'Play Cousins with these' }); c.onclick = () => this.openApp('cousins', '#w=' + encodeURIComponent(list.join(',')));
     const y = row.createEl('button', { text: 'Play Γιαγιά with these' }); y.onclick = () => this.openApp('giagia', '#w=' + encodeURIComponent(list.join(',')));
   }
   // ---------- Daily story: one line a day, same people all week ----------

@@ -84,6 +84,7 @@ select { font: inherit; font-size: 16px; min-height: 44px; border-radius: 10px; 
 .miss button { min-height: 36px; padding: 0 12px; font-size: 14px; }
 a { color: var(--blue); }
 
+  #qGr.cue-long { font-size: 1.3rem; }
 </style>
 </head>
 <body>
@@ -171,7 +172,7 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
   const MINE = (() => { try { const m = (window.GQ_HASH || location.hash).match(/[#&]w=([^&]*)/); return m ? decodeURIComponent(m[1]).split(',').map(s => s.trim()).filter(Boolean) : []; } catch (e) { return []; } })();
   const MINE_WORDS = ALL.filter(x => MINE.includes(lemma(x.g)));
   // Letters: a notebook plays a sound and you pick its letter. #L=1..4 picks a set of six, #L=all all 24.
-  const LETTERS = [["α", "Α", "a", "father", "άλογο", "horse", ""], ["ε", "Ε", "e", "egg", "ελέφαντας", "elephant", ""], ["ο", "Ο", "o", "octopus", "ομπρέλα", "umbrella", ""], ["μ", "Μ", "m", "moon", "μήλο", "apple", "μα"], ["π", "Π", "p", "pig", "πάπια", "duck", "πα"], ["τ", "Τ", "t", "top", "τυρί", "cheese", "τα"], ["ι", "Ι", "ee", "see", "ιππότης", "knight", ""], ["κ", "Κ", "k", "kite", "κότα", "hen", "κα"], ["λ", "Λ", "l", "lion", "λεμόνι", "lemon", "λα"], ["ν", "Ν", "n", "nose", "νερό", "water", "να"], ["σ", "Σ", "s", "sun", "σκύλος", "dog", "σα"], ["ρ", "Ρ", "r", "a quick tap of the tongue", "ρολόι", "clock", "ρα"], ["β", "Β", "v", "van", "βάρκα", "boat", "βα"], ["γ", "Γ", "gh", "a soft, breathy g", "γάτα", "cat", "γα"], ["δ", "Δ", "th", "this", "δέντρο", "tree", "δα"], ["φ", "Φ", "f", "fish", "φίδι", "snake", "φα"], ["χ", "Χ", "h", "a scratchy h, like clearing your throat", "χαρτί", "paper", "χα"], ["υ", "Υ", "ee", "see", "ύπνος", "sleep", ""], ["η", "Η", "ee", "see", "ήλιος", "sun", ""], ["ζ", "Ζ", "z", "zoo", "ζάχαρη", "sugar", "ζα"], ["θ", "Θ", "th", "thin", "θάλασσα", "sea", "θα"], ["ξ", "Ξ", "ks", "box", "ξύλο", "wood", "ξα"], ["ψ", "Ψ", "ps", "tops", "ψάρι", "fish", "ψα"], ["ω", "Ω", "o", "octopus", "ώρα", "time, hour", ""]].map(([l, u, s, h, w, en, syl]) => ({ g: l, en: s + ', ' + (h.includes(' ') ? h : 'like ' + h), L: { l, u, s, h: h.includes(' ') ? h : 'like ' + h, w, wen: en, say: syl ? syl + ', ' + w : w }, rank: 0 }));
+  const LETTERS = [["α", "Α", "a", "father", "άλογο", "horse", ""], ["ε", "Ε", "e", "egg", "ελέφαντας", "elephant", ""], ["ο", "Ο", "o", "octopus", "ομπρέλα", "umbrella", ""], ["μ", "Μ", "m", "moon", "μήλο", "apple", "μα"], ["π", "Π", "p", "pig", "πάπια", "duck", "πα"], ["τ", "Τ", "t", "top", "τυρί", "cheese", "τα"], ["ι", "Ι", "ee", "see", "ιππότης", "knight", ""], ["κ", "Κ", "k", "kite", "κότα", "hen", "κα"], ["λ", "Λ", "l", "lion", "λεμόνι", "lemon", "λα"], ["ν", "Ν", "n", "nose", "νερό", "water", "να"], ["σ", "Σ", "s", "sun", "σκύλος", "dog", "σα"], ["ρ", "Ρ", "r", "a quick tap of the tongue", "ρολόι", "clock", "ρα"], ["β", "Β", "v", "van", "βάρκα", "boat", "βα"], ["γ", "Γ", "gh", "a soft, breathy g", "γάτα", "cat", "γα"], ["δ", "Δ", "th", "this", "δέντρο", "tree", "δα"], ["φ", "Φ", "f", "fish", "φίδι", "snake", "φα"], ["χ", "Χ", "h", "a scratchy h, like clearing your throat", "χαρτί", "paper", "χα"], ["υ", "Υ", "ee", "see", "ύπνος", "sleep", ""], ["η", "Η", "ee", "see", "ήλιος", "sun", ""], ["ζ", "Ζ", "z", "zoo", "ζάχαρη", "sugar", "ζα"], ["θ", "Θ", "th", "thin", "θάλασσα", "sea", "θα"], ["ξ", "Ξ", "ks", "box", "ξύλο", "wood", "ξα"], ["ψ", "Ψ", "ps", "tops", "ψάρι", "fish", "ψα"], ["ω", "Ω", "o", "octopus", "ώρα", "time, hour", ""]].map(([l, u, s, h, w, en, syl]) => ({ g: l, en: (h.includes(' ') ? h : 'like ' + h), L: { l, u, s, h: h.includes(' ') ? h : 'like ' + h, w, wen: en, say: syl ? syl + ', ' + w : w }, rank: 0 }));
   const LSETS = [0, 1, 2, 3].map(i => LETTERS.slice(i * 6, i * 6 + 6));
   const DEBUG = /[#&]debug/.test((window.GQ_HASH || location.hash));
 
@@ -377,10 +378,11 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
     const dis = [];
     if (w.L) {
       // Letters: hear the sound, pick the letter. Wrong choices never share its sound (η, ι, υ all say ee).
-      qAsk.textContent = 'Which letter makes this sound?'; qGr.textContent = w.L.s; qGr.removeAttribute('lang'); qSub.hidden = false; qSub.textContent = w.L.h;
+      qAsk.textContent = 'Which letter makes this sound?'; // Show an English cue word, never a bare Latin letter: p looks like ρ, n like η, v like ν, and a gives α away.
+      const cue = w.L.h.replace(/^like /, ''); qGr.textContent = cue; qGr.removeAttribute('lang'); qGr.classList.toggle('cue-long', cue.includes(' ')); qSub.hidden = false; qSub.textContent = 'Listen for the sound at the start, then pick the Greek letter.';
       for (const x of shuffle(S.words.concat(shuffle(LETTERS.slice())))) { if (dis.length >= 2) break; if (x.L.s !== w.L.s && !dis.some(d => d.L.s === x.L.s)) dis.push(x); }
     } else {
-      qAsk.textContent = 'Τι σημαίνει; (What does it mean?)'; qGr.textContent = show(w.g); qGr.setAttribute('lang', 'el'); qSub.hidden = true;
+      qAsk.textContent = 'Τι σημαίνει; (What does it mean?)'; qGr.textContent = show(w.g); qGr.setAttribute('lang', 'el'); qGr.classList.remove('cue-long'); qSub.hidden = true;
       const used = new Set([w.en]);
       for (const x of shuffle(S.words.concat(shuffle(ALL.filter(y => y.rank <= 400 && y.rank > 12)).slice(0, 20)))) { if (dis.length >= 2) break; if (!x.L && !used.has(x.en)) { used.add(x.en); dis.push(x); } }
     }
@@ -404,7 +406,7 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
     } else {
       b.classList.add('wrong'); S.wrongs++; G.spd = Math.min(S.spd.max, G.spd + S.spd.inc); beep(196, .3, 'square', .06);
       if (!S.misses.includes(n.w)) S.misses.push(n.w);
-      qFb.textContent = n.w.L ? `Όχι. ${n.w.L.l} says ${n.w.L.s}, as in ${n.w.L.w} (${n.w.L.wen}).` : `Όχι. ${show(n.w.g)} = ${n.w.en}`; qFb.style.color = 'var(--red)'; setTimeout(() => say(sayOf(n.w)), 300);
+      qFb.textContent = n.w.L ? `Όχι. It was ${n.w.L.l}, as in ${n.w.L.w} (${n.w.L.wen}).` : `Όχι. ${show(n.w.g)} = ${n.w.en}`; qFb.style.color = 'var(--red)'; setTimeout(() => say(sayOf(n.w)), 300);
     }
     updHud();
     setTimeout(() => {

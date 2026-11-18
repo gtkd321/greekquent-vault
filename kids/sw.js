@@ -1,6 +1,6 @@
 // Greekquent web app: works offline after the first visit. Network first for version.json, cache first for
 // everything else (file names carry the version, so a new release is fetched fresh). Only this app's cache is used.
-const CACHE = 'greekquent-kids-2026-11-18y-4a4f1efd';
+const CACHE = 'greekquent-kids-2026-11-18z-66b17e25';
 // Other editions live in folders under this one and run their own worker. Leave their requests alone.
 const SKIP = [];
 const BASE = new URL('./', self.location).pathname;

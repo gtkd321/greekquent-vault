@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, later: tabs, the Words list and a tour
+> - **Tabs that show up as you go:** Today first. **Words** appears after you color your first word, **Class** after your first class or the tour. More is now at the top.
+> - **Words:** search, then List or Web. The list is all 1,500 words like a spreadsheet. Tap the color box to mark red, yellow or green. Filter by color, or turn on Cover English to test yourself.
+> - **Class:** this week's lesson page, sending homework, texting your teacher, and practice together.
+> - **The tour:** 9 short steps, about 5 minutes, 2 φόρα for each step you do (once). Start it from the Next card or More, then Take the tour. Stop any time and pick it up later.
+
 > [!info]- November 18, late evening: steps, dances and a calmer start
 > - **Next** at the top of Today: one thing to do now, and about how long. After a few days away it asks for just one line.
 > - **Steps and dances:** every φόρα point is a step. 3 steps is a συρτός, 12 a καλαματιανός, then χασάπικο, τσάμικο and ζεϊμπέκικο. Dancers join your world, and dances collect. Sometimes a guest dance from another island shows up.

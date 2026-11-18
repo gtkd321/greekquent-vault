@@ -165,7 +165,7 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
 
   const selSrc = document.getElementById('selSrc');
   const opt = (v, t) => { const o = document.createElement('option'); o.value = v; o.textContent = t; selSrc.appendChild(o); };
-  if (MINE_WORDS.length) opt('mine', `My words from Today (${MINE_WORDS.length})`);
+  if (MINE_WORDS.length) opt('mine', `My words (${MINE_WORDS.length})`);
   for (const [n, title] of KIDS) opt('k' + n, `Kid lesson ${n}: ${title}`);
   opt('top100', 'Top 100 words'); opt('top300', 'Top 300 words'); opt('top1500', 'All 1,500 words');
 

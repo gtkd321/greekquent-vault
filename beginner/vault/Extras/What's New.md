@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, evening: Games from a word card
+> - On a word card, **More** now has **Play Γιαγιά with this word** (the word and the words it often appears with) and a **Games** button.
+
 > [!info]- November 18, later: Γιαγιά arrows on two rows
 > - In **Γιαγιά** on a phone, the arrows are bigger and sit higher, above Obsidian's search bar: ▲ over ◀ on the left, ▼ over ▶ on the right. The house is a little smaller to make room.
 

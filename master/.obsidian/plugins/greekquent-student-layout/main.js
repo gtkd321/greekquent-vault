@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18e';
+const VAULT_RELEASE = '2026-11-18f';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1771,6 +1771,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (w.en) li.appendText('  ' + w.en);
     }
   }
+  gamesNote() { return this.isKids ? 'Games.md' : GAMES; }
+  // A word and the words it goes with (from its card), for a game round.
+  async webWords(path) {
+    const name = p => p.replace(/^Words\//, '').replace(/\.md$/, '');
+    const co = (await this.coList(path)).filter(p => this.app.vault.getAbstractFileByPath(p));
+    return [name(path), ...co.slice(0, 8).map(name)];
+  }
   playRow(parent, words) {
     const row = parent.createDiv('gq-row'); const list = words.map(w => w.word);
     const b = row.createEl('button', { text: 'Play Buzzer with these' }); b.onclick = () => window.open(this.gameUrl(BUZZER_URL, list));
@@ -2646,6 +2653,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       btn('Hear it', () => say(f.basename));
       btn('Word web', () => this.openGraph(f.path));
       btn('Build a sentence', () => this.openPair(f.basename));
+      btn('Play Γιαγιά with this word', async () => this.openApp('giagia', '#w=' + encodeURIComponent((await this.webWords(f.path)).join(','))));
+      btn('Games', () => this.openNote(this.gamesNote()));
       btn('Add a chunk', () => new CardModal(this.app, this, f.basename).open());
       btn('Ask the group', () => this.ask(f));
     } else {
@@ -2663,7 +2672,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (!parts.length) c.createDiv({ cls: 'gq-hint', text: 'Nothing else on this page.' });
     }
     // Extras: every other article, one tap away (the same notes as the Extras folder).
-    const ex = this.app.vault.getMarkdownFiles().filter(x => x.path.startsWith(EXTRAS) && x.path.split('/').length === 2).sort((a, b) => a.basename.localeCompare(b.basename));
+    // The Kids vault keeps its few extra pages (Games, Setting up, What's New, Lessons) at the top level.
+    const ex = this.app.vault.getMarkdownFiles().filter(x => this.isKids ? x.path.split('/').length === 1 && x.path !== TODAY : x.path.startsWith(EXTRAS) && x.path.split('/').length === 2).sort((a, b) => a.basename.localeCompare(b.basename));
     if (ex.length) {
       const d = c.createEl('details', { cls: 'gq-more-sec' }); d.createEl('summary', { text: 'Extras' });
       const ul = d.createEl('ul', { cls: 'gq-tlist' });
@@ -2676,7 +2686,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const col = this.colors(), words = await this.wordIndex(), wk = this.todayWeek;
     btn('Look up a word', () => new LookupModal(this.app, this).open());
     btn('Word web', () => this.openGraph());
-    btn('Games', () => this.openNote(GAMES));
+    btn('Games', () => this.openNote(this.gamesNote()));
     btn('Send homework', () => this.sendHomework());
     btn('My homework', () => this.openNote(MY_WORK + 'Homework.md'));
     const sec = (title, open) => { const d = box.createEl('details', { cls: 'gq-more-sec' }); if (open) d.open = true; d.createEl('summary', { text: title }); return d.createDiv('gq-more-body'); };

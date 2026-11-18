@@ -68,6 +68,12 @@ select { font: inherit; font-size: 16px; min-height: 44px; border-radius: 10px; 
 .opts { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
 .opts button { background: #fff; border: 2px solid var(--line); color: var(--ink); font-size: 18px; min-height: 52px; font-weight: 600; }
 .opts button.right { background: var(--green); color: #fff; border-color: var(--green); }
+.opts.letters { flex-direction: row; justify-content: center; }
+.opts.letters button { font-size: 40px; min-width: 76px; min-height: 76px; }
+.qrow { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+#qSay:disabled { background: var(--green); color: #fff; border-color: var(--green); opacity: 1; }
+#qSay.live { background: var(--red); color: #fff; border-color: var(--red); }
+#qSub { margin-top: -6px; }
 .opts button.wrong { background: var(--red); color: #fff; border-color: var(--red); }
 .fb { min-height: 26px; font-family: var(--disp); font-size: 20px; font-weight: 700; margin: 12px 0 0; }
 .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
@@ -119,9 +125,11 @@ a { color: var(--blue); }
 
   <section id="quiz" class="screen" hidden>
     <div class="card quiz">
-      <p class="hint">Τι σημαίνει; (What does it mean?)</p>
+      <p class="hint" id="qAsk">Τι σημαίνει; (What does it mean?)</p>
       <p class="gr" id="qGr" lang="el"></p>
-      <button id="qHear" class="ghost">Hear it</button>
+      <p class="hint" id="qSub" hidden></p>
+      <div class="row qrow"><button id="qHear" class="ghost">Hear it</button><button id="qSay" class="ghost" hidden>Say it · bonus</button></div>
+      <p id="qSayFb" class="hint" aria-live="polite"></p>
       <div id="qOpts" class="opts"></div>
       <p id="qFb" class="fb" aria-live="assertive"></p>
     </div>
@@ -162,17 +170,24 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
   // Words sent from the vault: ...#w=χρόνος,σπίτι
   const MINE = (() => { try { const m = (window.GQ_HASH || location.hash).match(/[#&]w=([^&]*)/); return m ? decodeURIComponent(m[1]).split(',').map(s => s.trim()).filter(Boolean) : []; } catch (e) { return []; } })();
   const MINE_WORDS = ALL.filter(x => MINE.includes(lemma(x.g)));
+  // Letters: a notebook plays a sound and you pick its letter. #L=1..4 picks a set of six, #L=all all 24.
+  const LETTERS = [["α", "Α", "a", "father", "άλογο", "horse", ""], ["ε", "Ε", "e", "egg", "ελέφαντας", "elephant", ""], ["ο", "Ο", "o", "octopus", "ομπρέλα", "umbrella", ""], ["μ", "Μ", "m", "moon", "μήλο", "apple", "μα"], ["π", "Π", "p", "pig", "πάπια", "duck", "πα"], ["τ", "Τ", "t", "top", "τυρί", "cheese", "τα"], ["ι", "Ι", "ee", "see", "ιππότης", "knight", ""], ["κ", "Κ", "k", "kite", "κότα", "hen", "κα"], ["λ", "Λ", "l", "lion", "λεμόνι", "lemon", "λα"], ["ν", "Ν", "n", "nose", "νερό", "water", "να"], ["σ", "Σ", "s", "sun", "σκύλος", "dog", "σα"], ["ρ", "Ρ", "r", "a quick tap of the tongue", "ρολόι", "clock", "ρα"], ["β", "Β", "v", "van", "βάρκα", "boat", "βα"], ["γ", "Γ", "gh", "a soft, breathy g", "γάτα", "cat", "γα"], ["δ", "Δ", "th", "this", "δέντρο", "tree", "δα"], ["φ", "Φ", "f", "fish", "φίδι", "snake", "φα"], ["χ", "Χ", "h", "a scratchy h, like clearing your throat", "χαρτί", "paper", "χα"], ["υ", "Υ", "ee", "see", "ύπνος", "sleep", ""], ["η", "Η", "ee", "see", "ήλιος", "sun", ""], ["ζ", "Ζ", "z", "zoo", "ζάχαρη", "sugar", "ζα"], ["θ", "Θ", "th", "thin", "θάλασσα", "sea", "θα"], ["ξ", "Ξ", "ks", "box", "ξύλο", "wood", "ξα"], ["ψ", "Ψ", "ps", "tops", "ψάρι", "fish", "ψα"], ["ω", "Ω", "o", "octopus", "ώρα", "time, hour", ""]].map(([l, u, s, h, w, en, syl]) => ({ g: l, en: s + ', ' + (h.includes(' ') ? h : 'like ' + h), L: { l, u, s, h: h.includes(' ') ? h : 'like ' + h, w, wen: en, say: syl ? syl + ', ' + w : w }, rank: 0 }));
+  const LSETS = [0, 1, 2, 3].map(i => LETTERS.slice(i * 6, i * 6 + 6));
   const DEBUG = /[#&]debug/.test((window.GQ_HASH || location.hash));
 
   const selSrc = document.getElementById('selSrc');
   const opt = (v, t) => { const o = document.createElement('option'); o.value = v; o.textContent = t; selSrc.appendChild(o); };
   if (MINE_WORDS.length) opt('mine', `My words (${MINE_WORDS.length})`);
+  LSETS.forEach((x, i) => opt('L' + (i + 1), `Letters ${i + 1}: ${x.map(y => y.g).join(' ')}`)); opt('Lall', 'All 24 letters');
   for (const [n, title] of KIDS) opt('k' + n, `Kid lesson ${n}: ${title}`);
   opt('top9999', 'All my words (387)');
 
   { const km = (window.GQ_HASH || location.hash).match(/[#&]k=(\d+)/); if (km && KIDS.some(x => x[0] === +km[1])) selSrc.value = 'k' + km[1]; }
+  { const lm = (window.GQ_HASH || location.hash).match(/[#&]L=(\d|all)/); if (lm) selSrc.value = lm[1] === 'all' ? 'Lall' : 'L' + Math.min(4, Math.max(1, +lm[1])); }
   function pool(src) {
     if (src === 'mine') return MINE_WORDS.slice();
+    if (src === 'Lall') return LETTERS.slice();
+    if (/^L\d$/.test(src)) return LSETS[+src.slice(1) - 1].slice();
     if (src.startsWith('top')) { const n = +src.slice(3); return ALL.filter(x => x.rank <= n && x.rank > 12); }
     const n = +src.slice(1); let out = [];
     // This lesson's words first, then earlier kid lessons until there are at least 7.
@@ -316,17 +331,54 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
   // ---------- quiz ----------
   const quiz = document.getElementById('quiz'), qGr = document.getElementById('qGr'), qOpts = document.getElementById('qOpts'), qFb = document.getElementById('qFb');
   let qWord = null;
-  document.getElementById('qHear').onclick = () => qWord && say(show(qWord.g));
+  const qAsk = document.getElementById('qAsk'), qSub = document.getElementById('qSub'), qSay = document.getElementById('qSay'), qSayFb = document.getElementById('qSayFb');
+  const sayOf = w => w.L ? w.L.say : show(w.g);
+  document.getElementById('qHear').onclick = () => qWord && say(sayOf(qWord));
+  // Say it: the phone's speech to text listens. Heard right: Γιαγιά waits 2 more seconds and the vault adds 2 bonus φόρα.
+  const SRec = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+  const foldG = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').replace(/[^\p{L}\s]/gu, ' ').replace(/\s+/g, ' ').trim();
+  const SMALL = new Set(['ο', 'η', 'το', 'οι', 'τα', 'τον', 'την', 'ενασ', 'μια', 'ενα']);
+  const near = (a, b) => { if (a === b) return true; if (Math.abs(a.length - b.length) > 1 || a.length < 4) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; };
+  const heard = (target, alts) => { let tw = foldG(target).split(' ').filter(Boolean); const c = tw.filter(w => !SMALL.has(w)); if (c.length) tw = c; return alts.some(a => { const hw = foldG(a).split(' ').filter(Boolean); return tw.every(w => hw.some(h => near(w, h))); }); };
+  let srOff = false, bonusBank = 0;
+  const sayTarget = w => w.L ? w.L.w : lemma(w.g);
+  qSay.onclick = () => {
+    if (!qWord || qSay.disabled || !SRec) return; const w = qWord;
+    try { speechSynthesis.cancel(); } catch (e) {}
+    let r; try { r = new SRec(); } catch (e) { qSay.hidden = true; return; }
+    r.lang = 'el-GR'; r.maxAlternatives = 5; r.interimResults = false; let alts = [];
+    qSay.textContent = 'Listening…'; qSay.classList.add('live'); qSayFb.textContent = w.L ? `Say ${w.L.w}` : '';
+    const t = setTimeout(() => { try { r.stop(); } catch (e) {} }, 6000);
+    r.onresult = e => { for (const x of e.results) for (const y of x) alts.push(y.transcript); };
+    r.onerror = e => { clearTimeout(t); qSay.classList.remove('live'); qSay.textContent = 'Say it · bonus';
+      if (e.error === 'no-speech' || e.error === 'aborted') qSayFb.textContent = 'Nothing heard. Try again.';
+      else { srOff = true; qSay.hidden = true; qSayFb.textContent = ''; } };
+    r.onend = () => { clearTimeout(t); qSay.classList.remove('live'); if (qWord !== w) return;
+      if (heard(sayTarget(w), alts)) { qSay.textContent = 'Heard it'; qSay.disabled = true; qSayFb.textContent = 'Bonus: Γιαγιά waits 2 more seconds.'; bonusBank = 2; S.said = (S.said || 0) + 1; beep(988, .1);
+        if (window.parent !== window) try { window.parent.postMessage({ gq: 'said', w: w.L ? 'γράμμα:' + w.L.l : lemma(w.g) }, '*'); } catch (e) {} }
+      else if (qSay.textContent === 'Listening…') { qSay.textContent = 'Say it · bonus'; qSayFb.textContent = alts.length ? `Heard "${alts[0]}". Try again.` : 'Nothing heard. Try again.'; } };
+    try { r.start(); } catch (e) { clearTimeout(t); qSay.classList.remove('live'); qSay.textContent = 'Say it · bonus'; }
+  };
   function openQuiz(n) {
     S.mode = 'quiz'; P.want = null; P.dir = null; clearPad();
-    const w = n.w; qWord = w; qGr.textContent = show(w.g); qFb.textContent = ''; qOpts.innerHTML = '';
-    const used = new Set([w.en]), dis = [];
-    for (const x of shuffle(S.words.concat(shuffle(ALL.filter(y => y.rank <= 400 && y.rank > 12)).slice(0, 20)))) { if (dis.length >= 2) break; if (!used.has(x.en)) { used.add(x.en); dis.push(x); } }
-    const choices = shuffle([w, ...dis]);
-    for (const c of choices) {
-      const b = document.createElement('button'); b.textContent = c.en; b.onclick = () => answer(n, c, b, choices); qOpts.appendChild(b);
+    const w = n.w; qWord = w; qFb.textContent = ''; qOpts.innerHTML = ''; bonusBank = 0;
+    qSay.hidden = !SRec || srOff; qSay.disabled = false; qSay.textContent = 'Say it · bonus'; qSayFb.textContent = '';
+    const dis = [];
+    if (w.L) {
+      // Letters: hear the sound, pick the letter. Wrong choices never share its sound (η, ι, υ all say ee).
+      qAsk.textContent = 'Which letter makes this sound?'; qGr.textContent = w.L.s; qGr.removeAttribute('lang'); qSub.hidden = false; qSub.textContent = w.L.h;
+      for (const x of shuffle(S.words.concat(shuffle(LETTERS.slice())))) { if (dis.length >= 2) break; if (x.L.s !== w.L.s && !dis.some(d => d.L.s === x.L.s)) dis.push(x); }
+    } else {
+      qAsk.textContent = 'Τι σημαίνει; (What does it mean?)'; qGr.textContent = show(w.g); qGr.setAttribute('lang', 'el'); qSub.hidden = true;
+      const used = new Set([w.en]);
+      for (const x of shuffle(S.words.concat(shuffle(ALL.filter(y => y.rank <= 400 && y.rank > 12)).slice(0, 20)))) { if (dis.length >= 2) break; if (!x.L && !used.has(x.en)) { used.add(x.en); dis.push(x); } }
     }
-    quiz.hidden = false; say(show(w.g)); beep(660, .08);
+    const choices = shuffle([w, ...dis]);
+    qOpts.classList.toggle('letters', !!w.L);
+    for (const c of choices) {
+      const b = document.createElement('button'); b.textContent = c.L ? c.L.l : c.en; if (c.L) b.setAttribute('lang', 'el'); b.onclick = () => answer(n, c, b, choices); qOpts.appendChild(b);
+    }
+    quiz.hidden = false; say(sayOf(w)); beep(660, .08);
     setTimeout(() => { const f = qOpts.querySelector('button'); if (f && !touchy) f.focus(); }, 50);
   }
   function answer(n, c, b, choices) {
@@ -334,19 +386,19 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
     const right = c === n.w;
     btns[choices.indexOf(n.w)].classList.add('right');
     if (right) {
-      if (window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w: lemma(n.w.g) }, '*'); } catch (e) {}
-      n.got = true; S.found++; S.freeze = 2; beep(784, .1); setTimeout(() => beep(1046, .15), 90);
+      if (window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w: n.w.L ? 'γράμμα:' + n.w.L.l : lemma(n.w.g) }, '*'); } catch (e) {}
+      n.got = true; S.found++; S.freeze = 2 + bonusBank; bonusBank = 0; beep(784, .1); setTimeout(() => beep(1046, .15), 90);
       qFb.textContent = 'Μπράβο!'; qFb.style.color = 'var(--green)'; say('Μπράβο!');
       if (S.found >= S.nbs.length) { S.exitOpen = true; }
     } else {
       b.classList.add('wrong'); S.wrongs++; G.spd = Math.min(S.spd.max, G.spd + S.spd.inc); beep(196, .3, 'square', .06);
       if (!S.misses.includes(n.w)) S.misses.push(n.w);
-      qFb.textContent = `Όχι. ${show(n.w.g)} = ${n.w.en}`; qFb.style.color = 'var(--red)'; setTimeout(() => say(show(n.w.g)), 300);
+      qFb.textContent = n.w.L ? `Όχι. ${n.w.L.l} says ${n.w.L.s}, as in ${n.w.L.w} (${n.w.L.wen}).` : `Όχι. ${show(n.w.g)} = ${n.w.en}`; qFb.style.color = 'var(--red)'; setTimeout(() => say(sayOf(n.w)), 300);
     }
     updHud();
     setTimeout(() => {
       quiz.hidden = true; S.mode = 'play'; S.safe = 1.2;
-      if (right) setMsg(S.exitOpen ? 'All 7. The door is open. Run.' : 'Μπράβο! Γιαγιά stops for 2 seconds.', 2.5);
+      if (right) setMsg(S.exitOpen ? 'All 7. The door is open. Run.' : S.freeze > 2 ? 'Μπράβο! Γιαγιά stops for 4 seconds.' : 'Μπράβο! Γιαγιά stops for 2 seconds.', 2.5);
       else setMsg('She is a little faster now. Come back to that notebook.', 2.5);
     }, right ? 900 : 1900);
   }
@@ -360,16 +412,16 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
       : `Γιαγιά caught you 3 times. You found ${S.found} of 7 notebooks. Dinner, then try again.`;
     const box = document.getElementById('endMiss'); box.innerHTML = '';
     if (S.misses.length) {
-      const h = document.createElement('p'); h.className = 'hint'; h.textContent = 'Words to practice (mark them red on your list):'; box.appendChild(h);
+      const h = document.createElement('p'); h.className = 'hint'; h.textContent = S.misses.some(w => w.L) ? 'Letters to practice:' : 'Words to practice (mark them red on your list):'; box.appendChild(h);
       for (const w of S.misses) {
         const r = document.createElement('div'); r.className = 'miss';
-        r.innerHTML = `<div><b lang="el"></b> <span></span></div>`; r.querySelector('b').textContent = show(w.g); r.querySelector('span').textContent = w.en;
-        const hb = document.createElement('button'); hb.className = 'ghost'; hb.textContent = 'Hear'; hb.onclick = () => say(show(w.g)); r.appendChild(hb); box.appendChild(r);
+        r.innerHTML = `<div><b lang="el"></b> <span></span></div>`; r.querySelector('b').textContent = w.L ? `${w.L.u} ${w.L.l}` : show(w.g); r.querySelector('span').textContent = w.L ? `${w.L.s}, as in ${w.L.w}` : w.en;
+        const hb = document.createElement('button'); hb.className = 'ghost'; hb.textContent = 'Hear'; hb.onclick = () => say(sayOf(w)); r.appendChild(hb); box.appendChild(r);
       }
     } else { const h = document.createElement('p'); h.className = 'hint'; h.textContent = 'No missed words this time.'; box.appendChild(h); }
     const so = document.getElementById('sendObs');
-    so.parentElement.hidden = !S.misses.length;
-    so.href = 'obsidian://greekquent?game=Yiayia&misses=' + encodeURIComponent(S.misses.map(w => lemma(w.g)).join(','));
+    so.parentElement.hidden = !S.misses.filter(w => !w.L).length;
+    so.href = 'obsidian://greekquent?game=Yiayia&misses=' + encodeURIComponent(S.misses.filter(w => !w.L).map(w => lemma(w.g)).join(','));
     document.getElementById('end').hidden = false;
     won ? [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .15), i * 110)) : null;
   }

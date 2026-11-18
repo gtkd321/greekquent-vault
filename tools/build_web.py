@@ -85,7 +85,11 @@ m = js
 import re
 mm = re.search(r"const VAULT_RELEASE = '([^']+)'", m); rel = mm.group(1) if mm else 'dev'
 blob = json.dumps({'notes': notes, 'static': sorted(static)}, ensure_ascii=False, separators=(',', ':'))
-h = hashlib.sha256((ED + blob + js + ''.join(open(os.path.join(shell, x), encoding='utf-8').read() for x in ['shim.js', 'app.js', 'app.css'])).encode()).hexdigest()[:8]
+# Every file counts toward the version, so a change to only a stylesheet or a game still reaches phones.
+hh = hashlib.sha256((ED + blob + js).encode())
+for x in sorted(static): hh.update(x.encode()); hh.update(open(os.path.join(out, 'vault', x), 'rb').read())
+for x in sorted(os.listdir(shell)): hh.update(x.encode()); hh.update(open(os.path.join(shell, x), 'rb').read())
+h = hh.hexdigest()[:8]
 ver = f'{rel}-{h}'
 open(os.path.join(out, 'notes.json'), 'w', encoding='utf-8').write(blob)
 json.dump({'version': ver}, open(os.path.join(out, 'version.json'), 'w'))

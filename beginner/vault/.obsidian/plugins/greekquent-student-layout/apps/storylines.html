@@ -579,6 +579,8 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
     const s = d.steps[step];
     if (s.any || match(v, s.ans)) {
       if (!s.any) speak(s.ans[0]);
+      // In Greekquent, a right word earns φόρα like any word you get right.
+      if (!s.any && window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w: String(s.ans[0]) }, '*'); } catch (e) {}
       misses = 0; $('chips').innerHTML = ''; step++;
       if (s.ok === 'line') {
         await type('* The scene clicks into place. *');

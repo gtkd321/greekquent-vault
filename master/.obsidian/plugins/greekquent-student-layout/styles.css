@@ -377,6 +377,7 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-mo-bars { display: flex; align-items: flex-end; gap: 3px; height: 32px; margin: 8px 0 4px; }
 .gq-mo-bar { flex: 1; background: var(--background-modifier-border); border-radius: 2px; min-height: 3px; }
 .gq-mo-bar.is-today { background: var(--interactive-accent); }
+.gq-mo-barcap { font-size: var(--font-ui-smaller, 12px); color: var(--text-muted); margin: 0 0 6px; }
 .gq-mo-ans { font-weight: 600; color: var(--text-normal); }
 .gq-mo-how { margin-top: 6px; font-size: .9em; color: var(--text-muted); }
 .gq-mo-how summary { cursor: pointer; }
@@ -405,3 +406,9 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-world-cap { margin-top: 4px; }
 .gq-world-say { font-weight: 600; } .gq-world-say:empty { display: none; }
 .gq-world-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 8px 0; }
+
+/* +N φόρα: a small pill near the top for a moment */
+.gq-mo-toast { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 62px); left: 50%; transform: translate(-50%, 0); z-index: 1000; padding: 6px 14px; border-radius: 999px; background: var(--interactive-accent); color: var(--text-on-accent, #fff); font-weight: 650; font-size: 15px; box-shadow: 0 4px 14px rgba(0,0,0,.15); pointer-events: none; animation: gq-mo-in .25s ease-out; transition: opacity .35s, transform .35s; }
+.gq-mo-toast.is-out { opacity: 0; transform: translate(-50%, -6px); }
+@keyframes gq-mo-in { from { opacity: 0; transform: translate(-50%, 6px); } }
+@media (prefers-reduced-motion: reduce) { .gq-mo-toast { animation: none; transition: opacity .2s; } .gq-mo-toast.is-out { transform: translate(-50%, 0); } }

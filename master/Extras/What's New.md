@@ -2,6 +2,13 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, night: φόρα for almost everything
+> - Comebacks, today's line and the rally now ask **Had it** or **Not yet** after you check. Had it counts like a word you got right. Not yet still earns 1 for trying.
+> - Finishing a read-through, the rally swap, the hello song or a kid card (**We did it**) earns 2. Sending homework earns 3, and asking the class earns 2. Once a day each.
+> - **Guess first** in Look up earns 1, and a new word in the **Word web** earns 1 (up to 5 a day). The Story Lines game counts too.
+> - A small "+3 φόρα" shows at the top when points land.
+> - Under the φόρα bars: "Your last 2 weeks. Today is blue."
+
 > [!info]- November 18, after midnight: Word web card moved
 > - When you hold a word in the **Word web**, its card now shows above the web, over the instructions. It no longer covers the other words.
 

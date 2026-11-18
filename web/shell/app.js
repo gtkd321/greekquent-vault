@@ -21,12 +21,20 @@ G.patch = P => {
   P.keyModal = function () {};
 };
 
+// An old home-screen icon (the address before the move) shows the app inside a full-screen frame with ?home=1.
+// Treat that as the home-screen app, and send text and phone links to the top page so Messages opens.
+G.home = matchMedia('(display-mode: standalone)').matches || navigator.standalone || /[?&]home=1/.test(location.search);
+if (window.top !== window) {
+  const open = window.open.bind(window);
+  window.open = (u, t, f) => { if (/^(sms|tel|mailto):/i.test(String(u))) { try { window.top.location.href = u; return null; } catch (e) {} } return open(u, t, f); };
+}
+
 // More menu: updates happen on their own and work saves itself, so neither needs a button.
 // "Put it on my home screen" shows only in a browser tab, where it matters most.
 G.menuHook = menu => {
   const i = menu.items.findIndex(x => x && x.title === 'Update vault');
   if (i < 0) return;
-  const home = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  const home = G.home;
   if (home) { menu.items.splice(i, 1); return; }
   const it = new (G.MenuItemClass)(); it.setTitle('Put it on my home screen').onClick(() => installHelp());
   menu.items.splice(i, 1, it);

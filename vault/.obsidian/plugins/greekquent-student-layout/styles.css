@@ -433,3 +433,37 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
   table.gq-stack td:nth-child(n+3) { font-size: 0.88em; color: var(--text-muted); }
   table.gq-stack td[data-label]::before { content: attr(data-label) ": "; }
 }
+
+/* ---------- 18s: Next card, plan, steps and dances, make it stick, walk mode, calm mode ---------- */
+.gq-next { border-color: var(--interactive-accent); border-width: 2px; }
+.gq-next .gq-thead strong { font-size: 1.05em; }
+.gq-next-line { font-size: 1.08em; margin: 2px 0 8px; }
+.gq-next .gq-row button.mod-cta { min-height: 44px; min-width: 120px; font-size: 1.02em; }
+.gq-next .gq-row button:not(.mod-cta) { min-height: 40px; }
+.gq-next-back { margin-top: 8px; }
+.gq-plan { margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--background-modifier-border); }
+.gq-plan-say { font-weight: 600; }
+.gq-plan-chips { margin-top: 6px; flex-wrap: wrap; gap: 6px; align-items: center; }
+.gq-plan-chips input { min-width: 0; flex: 1 1 180px; min-height: 36px; }
+.gq-steps { margin-top: 4px; }
+.gq-dances { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 2px; }
+.gq-dance { font-size: .9em; padding: 3px 10px; min-height: 30px; border-radius: 999px; border: 1px solid var(--background-modifier-border); background: var(--background-secondary); }
+.gq-dance.is-guest { border-color: #c9a227; }
+.gq-dance-n { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.gq-world-new { font-weight: 650; color: var(--text-normal); }
+.gq-mo-toast.is-dance { max-width: 92vw; text-align: center; }
+.gq-stick { margin: 8px 0; padding: 8px 10px; border-radius: 8px; background: var(--background-secondary); }
+.gq-stick-h { font-weight: 650; }
+.gq-stick .gq-row { margin-top: 6px; align-items: center; gap: 10px; }
+.gq-together { margin-top: 6px; align-items: center; gap: 8px; }
+button.is-think { opacity: .6; }
+.gq-pulse { animation: gq-pulse 1.6s ease-out 1; }
+@keyframes gq-pulse { 0% { box-shadow: 0 0 0 0 var(--interactive-accent); } 100% { box-shadow: 0 0 0 10px transparent; } }
+.gq-walk .gq-walk-gr { font-size: 1.6em; line-height: 1.35; margin: 14px 0 6px; min-height: 2.7em; }
+.gq-walk .gq-walk-en { font-size: 1.1em; color: var(--text-muted); min-height: 1.5em; margin-bottom: 8px; }
+.gq-walk .gq-row button { min-height: 48px; min-width: 110px; }
+button.gq-mini.is-on { border-color: var(--interactive-accent); }
+/* Calm mode: nothing moves. */
+body.gq-calm *, body.gq-calm *::before, body.gq-calm *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+@media (prefers-reduced-motion: reduce) { .gq-pulse { animation: none; outline: 2px solid var(--interactive-accent); } }
+body.gq-calm .gq-pulse { outline: 2px solid var(--interactive-accent); }

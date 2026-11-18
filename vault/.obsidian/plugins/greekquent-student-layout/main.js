@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18f';
+const VAULT_RELEASE = '2026-11-18g';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1601,7 +1601,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, fiay: fm.fiay === true || fm.fiay === 'on', scripts: fm.scripts === 'intermediate' ? 'intermediate' : 'beginner', last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '' };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, fiay: fm.fiay === true || fm.fiay === 'on', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '' };
   }
   colorOf(word) { const c = this.colors(); return COLORS.map(x => x[0]).find(k => c[k].includes(word)) || ''; }
   async progressFile() {
@@ -2067,6 +2067,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const start = new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2]);
       const dd = Math.floor((now - start) / 864e5);
       const week = dd < 0 ? 1 : Math.floor(dd / 7) + 1, dow = now.getDay();
+      box.createDiv({ cls: 'gq-edition', text: 'Greekquent ' + this.editionName() });
       box.createEl('h2', { text: `Today · ${now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}` });
       if (this.showSwitch()) this.scriptSwitch(box);
       if (!col.setup_seen) {
@@ -2548,8 +2549,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.paintScripts();
     return sw;
   }
+  editionName() { return this.isTeacher ? 'Teacher' : this.isKids ? 'Kids' : this.edition === 'beginner' ? 'Beginner' : 'Intermediate'; }
+  // The level you picked stays lit. Right after a tap, the saved setting can take a moment to reach Obsidian's cache, so the tap wins.
   paintScripts() {
-    const v = this.colors().scripts;
+    const v = this.scriptsNow || this.colors().scripts;
     for (const b of document.querySelectorAll('.gq-sw button')) { const on = b.getAttribute('data-scripts') === v; b.classList.toggle('is-on', on); b.setAttribute('aria-checked', String(on)); }
   }
   // Shows one scripts folder in the sidebar (CSS on data-path, so it survives folder opens and redraws).
@@ -2723,7 +2726,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}
     const foot = box.createDiv('gq-hint gq-more-foot');
     const wn = foot.createEl('a', { text: "What's new", href: '#' }); wn.onclick = e => { e.preventDefault(); this.openNote(WHATS_NEW); };
-    foot.appendText(` · vault ${rel}${this.edition === 'beginner' ? ' (Beginner)' : ''} · `);
+    foot.appendText(` · vault ${rel} (${this.editionName()}) · `);
     if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
     const ix = foot.createEl('a', { text: 'Index', href: '#' }); ix.onclick = e => { e.preventDefault(); this.openNote(INDEX); };
   }

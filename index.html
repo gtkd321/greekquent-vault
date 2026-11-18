@@ -1,11 +1,36 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Greekquent has moved</title>
-<meta http-equiv="refresh" content="0; url=https://gtkd321.github.io/frequent/greek/">
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Greekquent</title>
 <link rel="canonical" href="https://gtkd321.github.io/frequent/greek/">
-<style>body{font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#f7f4ee;color:#23211d;max-width:32em;margin:15vh auto;padding:0 20px}a{color:#1f5fa8}</style>
-<script>location.replace('https://gtkd321.github.io/frequent/greek/' + location.search + location.hash);</script>
+<style>
+html,body{margin:0;height:100%;background:#f7f4ee;color:#23211d;font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme: dark){html,body{background:#1c1b19;color:#ece8de}}
+p{max-width:32em;margin:15vh auto 0;padding:0 20px}a{color:#1f5fa8}
+#app{position:fixed;top:env(safe-area-inset-top);right:env(safe-area-inset-right);bottom:env(safe-area-inset-bottom);left:env(safe-area-inset-left);width:calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));height:calc(100% - env(safe-area-inset-top) - env(safe-area-inset-bottom));border:0;display:block}
+</style>
+<script>
+// Greekquent moved to /frequent/greek/. A home-screen icon saved at this old address keeps opening full screen:
+// it shows the new app inside this page instead of leaving, which would bring up the browser's own bars.
+// In a browser tab it simply goes to the new address. Same site, so progress is the same either way.
+(function () {
+  var m = location.pathname.match(/\/greekquent-vault\/(intermediate|kids)\//);
+  var url = 'https://gtkd321.github.io/frequent/greek/' + (m ? m[1] + '/' : '');
+  var home = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone;
+  if (!home) { location.replace(url + location.search + location.hash); return; }
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.innerHTML = '';
+    var f = document.createElement('iframe'); f.id = 'app'; f.title = 'Greekquent';
+    f.allow = 'autoplay; microphone; clipboard-write';
+    var q = location.search ? location.search + '&home=1' : '?home=1';
+    f.src = url + q + location.hash; document.body.appendChild(f);
+  });
+})();
+</script>
 </head><body>
-<p>Greekquent has a new address: <a href="https://gtkd321.github.io/frequent/greek/">gtkd321.github.io/frequent/greek/</a></p>
-<p>Your progress comes with you. If you saved the app to your home screen, open the new address and add it again.</p>
+<p>Greekquent has a new address: <a href="https://gtkd321.github.io/frequent/greek/">gtkd321.github.io/frequent/greek/</a>. Your progress comes with you.</p>
 </body></html>

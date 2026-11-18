@@ -1,7 +1,7 @@
-// Greekquent moved to https://gtkd321.github.io/frequent/greek/kids/. This worker steps aside; the new app clears the old offline copy itself.
-// Progress lives in localStorage on the same origin and is never touched.
+// Greekquent moved to https://gtkd321.github.io/frequent/greek/. This worker steps aside; the new app clears the old offline copy itself.
+// Progress lives in localStorage on the same origin and is never touched. Open pages reload so the home-screen icon stays full screen.
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', e => { e.waitUntil((async () => {
   await self.registration.unregister();
-  for (const c of await self.clients.matchAll({ type: 'window' })) c.navigate('https://gtkd321.github.io/frequent/greek/kids/').catch(() => {});
+  for (const c of await self.clients.matchAll({ type: 'window' })) c.navigate(c.url).catch(() => {});
 })()); });

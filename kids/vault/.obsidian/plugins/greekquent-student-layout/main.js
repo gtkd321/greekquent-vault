@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18q';
+const VAULT_RELEASE = '2026-11-18r';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1895,7 +1895,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   moCard(box) {
     const c = box.createDiv('gq-tcard gq-mo'); c.dataset.tour = 'mo'; this.moEl = c; this.moDraw(c);
   }
-  moPaint() { if (this.moEl && this.moEl.isConnected) this.moDraw(this.moEl); }
+  // Redraw every φόρα card on screen. Obsidian can build Today twice at once, so a single saved element
+  // may be the copy that was thrown away; points and a new world would then land where nobody sees them.
+  moPaint() { const els = new Set([...document.querySelectorAll('.gq-tcard.gq-mo')]); if (this.moEl && this.moEl.isConnected) els.add(this.moEl); for (const c of els) this.moDraw(c); }
   moDraw(c) {
     c.empty(); const { days } = this.moData(), now = new Date(), m = this.moScore(days, new Date());
     // Before the first point: one quiet line. The full card (world, bars) arrives with the first φόρα.

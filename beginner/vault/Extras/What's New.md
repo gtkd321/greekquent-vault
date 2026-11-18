@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!info]- November 19, later: every point grows your world
+> - **Your world grows with φόρα now,** not only green words. Every game, puzzle, letter match and green word moves it. The card says how many more φόρα until it grows. Nothing shrinks: your world starts at least where it was.
+
 > [!info]- November 19: send a card to your teacher
 > - **Send to teacher:** on a word note with a card photo, tap Send to teacher. Say what you tried (optional) and whether your teacher may show it to the class without your name. 2 φόρα, once a day.
 > - **Card ideas:** a new page with tricks for paper cards that stick. Your teacher adds the best ideas from classmates' cards.

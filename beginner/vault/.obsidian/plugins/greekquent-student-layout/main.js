@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-18x';
+const VAULT_RELEASE = '2026-11-18y';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -487,7 +487,7 @@ class MoreView extends ItemView {
   async onClose() { this.contentEl.empty(); }
 }
 // ---------- Your world: a small pixel scene on the φόρα card ----------
-// Green words build it (it never shrinks). φόρα only sets the mood: a quiet night, an evening, a sunny day, a festival.
+// Every φόρα point builds it (it never shrinks). Today's φόρα sets the mood: a quiet night, an evening, a sunny day, a festival.
 const WORLDS = {
   village: { name: 'Village', eras: [
     { name: 'Ancient village', items: [['house', 'το σπίτι'], ['tree', 'η ελιά'], ['temple', 'ο ναός'], ['house', 'η αυλή'], ['amphora', 'ο αμφορέας'], ['temple', 'η αγορά']] },
@@ -499,7 +499,7 @@ const WORLDS = {
     { name: 'First harvest', items: [['olives', 'οι ελιές'], ['basket', 'το καλάθι'], ['olives', 'το λιόδεντρο'], ['basket', 'το δίχτυ'], ['olives', 'η συγκομιδή'], ['donkey', 'το γαϊδουράκι']] },
     { name: 'The press', items: [['press', 'το λιοτρίβι'], ['olives', 'οι ελιές'], ['jar', 'το πιθάρι'], ['basket', 'το καλάθι'], ['jar', 'το λάδι'], ['donkey', 'το γαϊδουράκι']] },
     { name: 'The tasting', items: [['table', 'το τραπέζι'], ['bottle', 'το μπουκάλι'], ['olives', 'το λιόδεντρο'], ['bottle', 'το λάδι'], ['table', 'το ψωμί'], ['bottle', 'η γεύση']] }] },
-  // Dance: the easiest world. Every φόρα point is a step (not only green words), and the floor fills with the dances you learn.
+  // Dance: the quickest world. Every φόρα point is a step, and the floor fills with the dances you learn.
   dance: { name: 'Dance', eras: [{ name: 'Πανηγύρι', items: [] }] },
   pet: { name: 'Pet', eras: [
     { name: 'Little Φοράκι', items: [] }, { name: 'Φοράκι grows', items: [] }, { name: 'Φοράκι in a hat', items: [] }, { name: 'Φοράκι the great', items: [] }] },
@@ -507,9 +507,10 @@ const WORLDS = {
 const W_W = 160, W_H = 56;
 function worldMood(today, score) { return score >= 25 || today >= 25 ? 3 : today >= 1 || score >= 10 ? 2 : score >= 3 ? 1 : 0; }
 const MOODS = ['A quiet night', 'An evening', 'A sunny day', 'A festival'];
-// The world grows fast at first and slower later: item k needs total x (k/23)^2 green words (3, 12, 26, 46, 71 ... 1,500).
+// The world grows fast at first and slower later: item k needs W_PTS x (k/23)^2 φόρα points in all (6, 23, 52, 91, 142 ... 3,000),
+// so every game, puzzle and green word moves it. 3,000 is about a school year of steady practice.
 // Each gap is a little longer than the one before (rewards that start often and thin out gradually), and early words count for more anyway.
-const W_STAGES = 24;
+const W_STAGES = 24, W_PTS = 3000;
 const worldNeed = (k, total) => Math.max(k, Math.ceil(total * Math.pow(k / (W_STAGES - 1), 2)));
 function worldStage(green, total) {
   let idx = 1; while (idx < W_STAGES && green >= worldNeed(idx, total)) idx++;
@@ -1950,7 +1951,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const obj = k => (fm[k] && typeof fm[k] === 'object' && !Array.isArray(fm[k])) ? fm[k] : {};
     const mem = this.moMem && Date.now() - this.moMem.t < 15000 ? this.moMem : null;
-    return { days: mem ? mem.days : obj('days'), got: obj('got'), up: obj('up'), met: obj('met'), dance: mem && mem.dance ? mem.dance : obj('dance'), steps: mem && mem.steps !== undefined ? +mem.steps : (fm.steps !== undefined && fm.steps !== null && Number.isFinite(+fm.steps) ? +fm.steps : 0), firsts: mem && mem.firsts ? mem.firsts : obj('firsts') };
+    return { days: mem ? mem.days : obj('days'), got: obj('got'), up: obj('up'), met: obj('met'), dance: mem && mem.dance ? mem.dance : obj('dance'), grow: mem && mem.grow !== undefined ? +mem.grow : (fm.grow !== undefined && fm.grow !== null && Number.isFinite(+fm.grow) ? +fm.grow : null), steps: mem && mem.steps !== undefined ? +mem.steps : (fm.steps !== undefined && fm.steps !== null && Number.isFinite(+fm.steps) ? +fm.steps : 0), firsts: mem && mem.firsts ? mem.firsts : obj('firsts') };
   }
   // φόρα on a day = sum of each day's points x (6/7)^(days since).
   moScore(days, at) {
@@ -1994,16 +1995,19 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       // Steps belong to the Dance world only, so there is one kind of progress at a time. They carry across days (fm.steps never resets).
       // Dance starts at step 0 the first time you pick it; in other worlds fm.steps waits untouched.
       if (dw && (!Number.isFinite(+fm.steps) || fm.steps === null || fm.steps === '')) fm.steps = 0;
+      // World growth: a running total of φόρα points (fm.grow). The first time, start at least where green words had the world, so it never shrinks.
+      if (fm.grow === undefined || fm.grow === null || !Number.isFinite(+fm.grow)) fm.grow = this.growSeed(fm.days);
       const before = +fm.days[today] || 0, now = Math.min(MO_CAP, before + pts); gained = now - before;
       if (now) fm.days[today] = now;
       for (const d of Object.keys(fm.days)) if (gap(d) > 60) delete fm.days[d];
       // Steps: finishing a dance's real steps adds it to the collection and dates the first time. A guest dance can still visit on a big day.
       for (const k of ['dance', 'firsts', 'danced']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
       const add = k => { if (fm.danced[k] === today) return; fm.danced[k] = today; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); };
+      fm.grow = (+fm.grow || 0) + gained;
       if (dw) { const was = danceNow(fm.steps); fm.steps = (+fm.steps || 0) + gained; const is = danceNow(fm.steps);
       for (let j = was.learned; j < is.learned; j++) { const k = DANCE_PATH[j % DANCE_PATH.length][0]; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); }
       if (now >= 12 && Object.keys(fm.days).length >= 7 && dayHash(today) % 4 === 0) add(GUEST_DANCES[dayHash(today + 'g') % GUEST_DANCES.length][0]); }
-      this.moMem = { days: { ...fm.days }, steps: fm.steps, dance: { ...fm.dance }, firsts: { ...fm.firsts }, t: Date.now() };
+      this.moMem = { days: { ...fm.days }, grow: fm.grow, steps: fm.steps, dance: { ...fm.dance }, firsts: { ...fm.firsts }, t: Date.now() };
     });
     if (danced.length) this.danceAt = Date.now();
     if (gained) { this.moPaint(); this.moToast(gained, danced.length ? 'you danced ' + danced.join(' and ') : ''); }
@@ -2022,6 +2026,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     y.onclick = () => { this.moAdd('recall', key); after(); }; n.onclick = () => { this.moAdd('try', key); after(); };
   }
   async setWorld(w) { this.worldNow = w; if (w) this.tourHit('world'); const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (w) fm.world = w; else delete fm.world; }); this.moPaint(); }
+  growSeed(days) {
+    const sum = Object.values(days || {}).reduce((a, v) => a + (+v || 0), 0);
+    const g = worldStage(this.colors().green.length, this.words ? this.words.length : 1500).idx;
+    return Math.max(sum, g > 1 ? worldNeed(g - 1, W_PTS) : 0);
+  }
+  growNow() { const g = this.moData().grow; return g === null ? this.growSeed(this.moData().days) : g; }
   worldDraw(c, todayPts, score) {
     const w = this.worldNow !== undefined ? this.worldNow : this.colors().world;
     if (!w || !WORLDS[w]) {
@@ -2031,15 +2041,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }
     if (w === 'dance') { this.danceWorld(c, todayPts, score); return; }
     if (!this.words && !this.worldWait) { this.worldWait = true; this.wordIndex().then(() => this.moPaint()); }
-    const total = this.words ? this.words.length : 1500, green = this.colors().green.length, st = worldStage(green, total), mood = worldMood(todayPts, score);
+    const pts = this.growNow(), st = worldStage(pts, W_PTS), mood = worldMood(todayPts, score);
     const box = c.createDiv('gq-world'), cv = box.createEl('canvas', { cls: 'gq-world-cv', attr: { width: W_W, height: W_H, role: 'img', 'aria-label': `${WORLDS[w].eras[st.era].name}. ${MOODS[mood]}.` } });
     const ctx = cv.getContext('2d'); if (!ctx) return; ctx.imageSmoothingEnabled = false;
     const items = w === 'pet' ? [] : WORLDS[w].eras[st.era].items.slice(0, st.n);
     const cap = box.createDiv({ cls: 'gq-hint gq-world-cap' });
-    const name = w === 'pet' ? (st.f === 0 ? 'An egg. Turn a word green to hatch it' : WORLDS.pet.eras[st.era].name) : WORLDS[w].eras[st.era].name;
+    const name = w === 'pet' ? (st.f === 0 ? 'An egg. Get your first φόρα to hatch it' : WORLDS.pet.eras[st.era].name) : WORLDS[w].eras[st.era].name;
     cap.appendText(`${name} · ${MOODS[mood].toLowerCase()} · ${st.idx} of ${W_STAGES}`);
-    const more = st.next - green;
-    cap.appendText(st.next ? ` · ${more} more green word${more === 1 ? '' : 's'} to grow` : ' · all grown. Θα τα πούμε.');
+    const more = st.next - pts;
+    cap.appendText(st.next ? ` · ${more} more φόρα to grow` : ' · all grown. Θα τα πούμε.');
     // A new piece of the world: say its name, and date it in My momentum so the teacher can see how the pace feels.
     if (this.words) {
       const fs = this.moData().firsts || {}, top = Math.max(1, ...Object.keys(fs).filter(k => k.startsWith('world ')).map(k => +k.slice(6) || 0));
@@ -2058,7 +2068,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       word.setText(w === 'pet' ? `Φοράκι says: ${t}` : t); say(t);
     };
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
-    // Dancers live in the Dance world only; the other worlds grow with green words and nothing else.
+    // Dancers live in the Dance world only; the other worlds grow with φόρα and show no dances.
     const crew = 0, long = Date.now() - (this.danceAt || 0) < 8000;
     const run = () => {
       cancelAnimationFrame(cv._raf); const t0 = performance.now(), dur = long && crew ? 6000 : 3000;
@@ -2108,7 +2118,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πήρες φόρα;', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πήρες φόρα;');
       top.createDiv({ cls: 'gq-mo-n', text: '0', attr: { 'aria-label': 'Momentum 0' } });
       this.worldDraw(c, 0, 0);
-      c.createDiv({ cls: 'gq-hint', text: 'φόρα means momentum. Pick one world. Dance is the quickest: every point is a step, and 6 steps is ο συρτός. Village, Olive grove and Pet grow with green words.' });
+      c.createDiv({ cls: 'gq-hint', text: 'φόρα means momentum. Pick one world. Dance is the quickest: every point is a step, and 6 steps is ο συρτός. Village, Olive grove and Pet grow a little with every φόρα point.' });
       return;
     }
     c.removeClass('is-fresh');
@@ -2131,7 +2141,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       'Everything else you finish adds a little: puzzles, sentences, songs, homework.',
       'A day off fades it a bit, so a little every day wins.',
       ...(this.colors().world === 'dance' ? ['Every point is also a step (βήμα) toward the dance you are learning. Steps add up across days: ο συρτός has 6, ο καλαματιανός 12, and later dances take 2 or 3 points a step.'] : [])]) ul.createEl('li', { text: t });
-    if (this.colors().world) { const li = ul.createEl('li'); li.appendText(this.colors().world === 'dance' ? 'Your dance floor grows with every point and never shrinks. ' : 'Your world grows with green words and never shrinks. '); const ch = li.createEl('a', { text: 'Change my world', href: '#' }); ch.onclick = e => { e.preventDefault(); this.setWorld(''); }; }
+    if (this.colors().world) { const li = ul.createEl('li'); li.appendText(this.colors().world === 'dance' ? 'Your dance floor grows with every point and never shrinks. ' : 'Your world grows with every φόρα point and never shrinks. '); const ch = li.createEl('a', { text: 'Change my world', href: '#' }); ch.onclick = e => { e.preventDefault(); this.setWorld(''); }; }
   }
   // ---------- Paper round: the app keeps the schedule, the paper cards do the work ----------
   // Red pile every day, yellow every other day, green on Sundays. A card with no color yet sits in the red pile.

@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19k · Comebacks listen to you
+> Comebacks now have a **Say it** button, on Today and in Quiz me. Answer out loud in Greek and the phone checks you. When it hears your answer, the Greek shows, it counts as Had it and you get +2 φόρα for saying it. Close counts: about three words in four is enough on a long line. If your phone can't listen here, the button opens a box instead; tap the microphone on your keyboard and say it.
+
 > [!tip]- 2026-11-19j · Android: Words tab and full screen
 > Words is now always in the bottom bar, from the first day. Before, it appeared only after you colored your first word, so a new phone looked different. And if Chrome's Desktop site setting is on, which some Android phones and tablets do by default, the app used to look small with empty space around it. It now fills the screen either way.
 

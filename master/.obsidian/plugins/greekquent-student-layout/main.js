@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19j';
+const VAULT_RELEASE = '2026-11-19k';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -2738,7 +2738,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const T = await this.storyTurns(), cbs = due.map(b => this.comebackTurns(b, T));
     const card = box.createDiv('gq-tcard gq-comeback'); this.cbList = cbs;
     const ch = card.createDiv('gq-thead'); ch.createEl('strong', { text: 'Comebacks' }); ch.createSpan({ cls: 'gq-hint', text: `  · about ${Math.max(1, Math.round(cbs.length * 0.5))} min` });
-    card.createDiv({ cls: 'gq-hint', text: cbs.some(c => c.ctx.length) ? 'Read or hear the line, then answer it in Greek. Tap to check.' : 'Say it in Greek first, then tap to check.' });
+    card.createDiv({ cls: 'gq-hint', text: cbs.some(c => c.ctx.length) ? 'Read or hear the line, then answer it in Greek. Tap Say it and the phone checks you.' : 'Say it in Greek. Tap Say it and the phone checks you.' });
     const shown = cbs.slice(0, 1);   // one on the page; Quiz me runs them all
     for (const c of shown) {
       const r = card.createDiv('gq-cbrow'); this.cbPrompt(r, c, false);
@@ -2747,6 +2747,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (c.ctx.length) this.hearBtn(row, c.ctx.map(x => x.g).join(' '), 'Hear the line');
       const s = row.createEl('button', { text: 'Show my answer', cls: 'gq-mini' }); s.onclick = () => { g.style.display = ''; s.remove(); say(c.gr); };
       if (!c.ctx.length) { s.setText('Show Greek'); this.hearBtn(row, c.gr, 'Hear'); }
+      // Say it: the phone listens, and when it hears the answer the Greek shows.
+      this.sayIt(r.createDiv('gq-row'), c.gr, 'said:cb:' + c.gr.slice(0, 80), 'Say it · +2', () => { g.style.display = ''; s.remove(); });
     }
     const qr = card.createDiv('gq-row'); this.popBtn(qr, cbs.length > 1 ? `Quiz me (${cbs.length})` : 'Quiz me', () => this.popComebacks(cbs));
   }
@@ -3721,13 +3723,20 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // Comebacks: English first, say it, then reveal the Greek. One at a time.
   popComebacks(due) {
     const steps = due.map((c, k) => ({ label: 'Comeback', build: (el, api) => {
-      el.createDiv({ cls: 'gq-hint', text: c.ctx.length ? 'Listen, then answer in Greek.' : 'Say it in Greek first.' });
+      el.createDiv({ cls: 'gq-hint', text: c.ctx.length ? 'Listen, then answer in Greek out loud. Tap Say it and the phone checks you.' : 'Say it in Greek. Tap Say it and the phone checks you.' });
       this.cbPrompt(el, c, true); if (c.ctx.length) say(c.ctx.map(x => x.g).join(' '));
       const g = el.createDiv({ cls: 'gq-pop-big gq-pop-hide', text: c.gr, attr: { lang: 'el' } });
       const r = el.createDiv('gq-row'); if (c.ctx.length) this.hearBtn(r, c.ctx.map(x => x.g).join(' '), 'Hear the line');
       const s = r.createEl('button', { text: c.ctx.length ? 'Show my answer' : 'Show Greek', cls: 'mod-cta' });
       this.thinkBeat(s, 'Say it out loud first');
-      s.onclick = () => { g.removeClass('gq-pop-hide'); say(c.gr); s.remove(); this.hearBtn(r, c.gr, 'Hear again'); this.hadIt(r, 'cb:' + c.gr.slice(0, 80), k === due.length - 1 ? () => { this.markDone('cb'); api.close(); this.refreshToday(); } : api.next); };
+      const after = k === due.length - 1 ? () => { this.markDone('cb'); api.close(); this.refreshToday(); } : api.next;
+      // Say it: when the phone hears the answer, the Greek shows and it counts as Had it, so one tap moves on.
+      const sr = el.createDiv('gq-row');
+      this.sayIt(sr, c.gr, 'said:cb:' + c.gr.slice(0, 80), 'Say it · +2', () => {
+        g.removeClass('gq-pop-hide'); s.remove(); r.empty(); this.moAdd('recall', 'cb:' + c.gr.slice(0, 80));
+        this.hearBtn(r, c.gr, 'Hear it'); const nx = r.createEl('button', { text: k === due.length - 1 ? 'Done' : 'Next', cls: 'mod-cta' }); nx.onclick = after;
+      });
+      s.onclick = () => { g.removeClass('gq-pop-hide'); say(c.gr); s.remove(); sr.remove(); this.hearBtn(r, c.gr, 'Hear again'); this.hadIt(r, 'cb:' + c.gr.slice(0, 80), after); };
     } }));
     this.pop('Comebacks', steps);
   }

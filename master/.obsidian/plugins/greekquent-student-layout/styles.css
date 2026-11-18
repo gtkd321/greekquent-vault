@@ -399,3 +399,9 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-paper-btns { justify-content: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
 .gq-paper-btns button { min-height: 44px; min-width: 96px; }
 .gq-paper-m .gq-c.gq-green { border: 2px solid #1a9850; } .gq-paper-m .gq-c.gq-red { border: 2px solid #d73027; }
+/* Your world */
+.gq-world { margin: 8px 0 2px; }
+.gq-world-cv { width: 100%; height: auto; aspect-ratio: 160 / 56; image-rendering: pixelated; image-rendering: crisp-edges; border-radius: 8px; display: block; cursor: pointer; background: #5fb4f0; }
+.gq-world-cap { margin-top: 4px; }
+.gq-world-say { font-weight: 600; } .gq-world-say:empty { display: none; }
+.gq-world-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 8px 0; }

@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18l';
+const VAULT_RELEASE = '2026-11-18m';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -401,6 +401,100 @@ class MoreView extends ItemView {
   paint() { this.plugin.renderMore(this); }
   async onClose() { this.contentEl.empty(); }
 }
+// ---------- Your world: a small pixel scene on the φόρα card ----------
+// Green words build it (it never shrinks). φόρα only sets the mood: a quiet night, an evening, a sunny day, a festival.
+const WORLDS = {
+  village: { name: 'Village', eras: [
+    { name: 'Ancient village', items: [['house', 'το σπίτι'], ['tree', 'η ελιά'], ['temple', 'ο ναός'], ['house', 'η αυλή'], ['amphora', 'ο αμφορέας'], ['temple', 'η αγορά']] },
+    { name: 'Byzantine town', items: [['church', 'η εκκλησία'], ['house', 'το σπίτι'], ['cypress', 'το κυπαρίσσι'], ['house', 'ο φούρνος'], ['church', 'το μοναστήρι'], ['cypress', 'ο κήπος']] },
+    { name: 'Island harbor', items: [['cube', 'το σπίτι'], ['mill', 'ο μύλος'], ['boat', 'η βάρκα'], ['cube', 'το καφενείο'], ['church', 'το εκκλησάκι'], ['boat', 'το καΐκι']] },
+    { name: 'Modern city', items: [['block', 'η πολυκατοικία'], ['kiosk', 'το περίπτερο'], ['block', 'το γραφείο'], ['tree', 'το πάρκο'], ['block', 'το σχολείο'], ['bus', 'το λεωφορείο']] }] },
+  grove: { name: 'Olive grove', eras: [
+    { name: 'Young grove', items: [['sapling', 'το δεντράκι'], ['sapling', 'η ελιά'], ['sapling', 'το χώμα'], ['sapling', 'το νερό'], ['sapling', 'ο ήλιος'], ['sapling', 'το χωράφι']] },
+    { name: 'First harvest', items: [['olives', 'οι ελιές'], ['basket', 'το καλάθι'], ['olives', 'το λιόδεντρο'], ['basket', 'το δίχτυ'], ['olives', 'η συγκομιδή'], ['donkey', 'το γαϊδουράκι']] },
+    { name: 'The press', items: [['press', 'το λιοτρίβι'], ['olives', 'οι ελιές'], ['jar', 'το πιθάρι'], ['basket', 'το καλάθι'], ['jar', 'το λάδι'], ['donkey', 'το γαϊδουράκι']] },
+    { name: 'The tasting', items: [['table', 'το τραπέζι'], ['bottle', 'το μπουκάλι'], ['olives', 'το λιόδεντρο'], ['bottle', 'το λάδι'], ['table', 'το ψωμί'], ['bottle', 'η γεύση']] }] },
+  pet: { name: 'Pet', eras: [
+    { name: 'Little Φοράκι', items: [] }, { name: 'Φοράκι grows', items: [] }, { name: 'Φοράκι in a hat', items: [] }, { name: 'Φοράκι the great', items: [] }] },
+};
+const W_W = 160, W_H = 56;
+function worldMood(today, score) { return score >= 25 || today >= 25 ? 3 : today >= 1 || score >= 10 ? 2 : score >= 3 ? 1 : 0; }
+const MOODS = ['A quiet night', 'An evening', 'A sunny day', 'A festival'];
+function worldStage(green, total) {
+  const f = Math.max(0, Math.min(1, green / Math.max(1, total))), era = Math.min(3, Math.floor(f * 4));
+  const inEra = Math.min(6, Math.floor((f * 4 - era) * 6) + 1), per = total / 24;
+  const next = era === 3 && inEra === 6 ? 0 : Math.ceil((era * 6 + inEra) * per);
+  return { f, era, n: inEra, next };
+}
+function worldPaint(ctx, w, st, mood, t) {
+  const R = (x, y, ww, hh, c) => { ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), ww, hh); };
+  const sky = [['#141b38', '#2a3466'], ['#5a4a8a', '#e9896a'], ['#5fb4f0', '#a9ddff'], ['#4aa8f0', '#bfe6ff']][mood];
+  for (let y = 0; y < 44; y++) { const k = y / 43; const a = sky[0], b = sky[1]; const mix = i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - k) + parseInt(b.substr(i, 2), 16) * k); ctx.fillStyle = `rgb(${mix(1)},${mix(3)},${mix(5)})`; ctx.fillRect(0, y, W_W, 1); }
+  if (mood === 0) { for (const [x, y] of [[12, 6], [40, 12], [70, 4], [101, 9], [130, 5], [150, 14], [88, 16]]) if ((Math.floor(t * 6) + x) % 5) R(x, y, 1, 1, '#fff'); R(132, 6, 6, 6, '#f3efd1'); R(134, 6, 4, 4, '#141b38'); }
+  else { const sy = mood === 1 ? 30 - t * 4 : 12 - t * 4, sx = mood === 1 ? 128 : 22; R(sx, sy, 8, 8, mood === 1 ? '#ffb347' : '#ffe14d'); R(sx - 1, sy + 1, 10, 6, mood === 1 ? '#ffb347' : '#ffe14d'); R(sx + 1, sy - 1, 6, 10, mood === 1 ? '#ffb347' : '#ffe14d'); }
+  if (mood >= 2) for (const [x, y] of [[50, 8], [104, 14]]) { const cx = x + ((t * 10) % 20); R(cx, y, 14, 3, '#fff'); R(cx + 3, y - 2, 7, 2, '#fff'); }
+  const sea = w === 'village' && st.era === 2;
+  if (sea) { R(0, 40, 64, 16, '#2b7bb9'); for (let x = 0; x < 64; x += 8) R(x + ((t * 16) % 8), 44 + (x % 16 ? 0 : 4), 4, 1, '#8fd0ff'); R(64, 40, 96, 16, '#d9c79a'); R(64, 40, 96, 2, '#bba57a'); }
+  else { const g = w === 'grove' ? ['#8a6a3a', '#6f5530'] : st.era === 3 && w === 'village' ? ['#9a9a9a', '#7c7c7c'] : ['#6aa84f', '#4f8a3a']; R(0, 42, W_W, 14, g[0]); R(0, 42, W_W, 2, g[1]); for (let x = 3; x < W_W; x += 11) R(x, 48 + (x % 3), 2, 1, g[1]); }
+  const lit = mood <= 1 ? '#ffd860' : '#6b8fb3';
+  const D = {
+    house: (x, y) => { R(x, y - 10, 12, 10, '#e8d8b0'); R(x - 1, y - 14, 14, 4, '#c0502a'); R(x + 1, y - 16, 10, 2, '#c0502a'); R(x + 5, y - 5, 3, 5, '#6b4a2a'); R(x + 1, y - 8, 3, 2, lit); },
+    temple: (x, y) => { R(x - 1, y - 2, 18, 2, '#e8e2d0'); for (let i = 0; i < 4; i++) R(x + 1 + i * 4, y - 12, 2, 10, '#f4f0e4'); R(x - 1, y - 14, 18, 2, '#e8e2d0'); R(x + 2, y - 17, 12, 3, '#e8e2d0'); R(x + 5, y - 19, 6, 2, '#e8e2d0'); },
+    tree: (x, y) => { R(x + 4, y - 6, 2, 6, '#6b4a2a'); R(x, y - 13, 10, 7, '#5d8a3a'); R(x + 2, y - 15, 6, 2, '#5d8a3a'); R(x + 2, y - 11, 2, 1, '#8fbf5a'); },
+    amphora: (x, y) => { R(x + 2, y - 8, 5, 7, '#c0602a'); R(x + 3, y - 10, 3, 2, '#c0602a'); R(x + 1, y - 9, 1, 3, '#c0602a'); R(x + 7, y - 9, 1, 3, '#c0602a'); R(x + 3, y - 1, 3, 1, '#c0602a'); R(x + 2, y - 5, 5, 1, '#1d1d1d'); },
+    church: (x, y) => { R(x, y - 10, 14, 10, '#f4f0e4'); R(x + 3, y - 15, 8, 5, '#2f6fbf'); R(x + 5, y - 17, 4, 2, '#2f6fbf'); R(x + 6, y - 20, 2, 3, '#e0b030'); R(x + 5, y - 6, 4, 6, '#8a5a2a'); R(x + 2, y - 8, 2, 2, lit); R(x + 10, y - 8, 2, 2, lit); },
+    cypress: (x, y) => { R(x + 3, y - 3, 2, 3, '#6b4a2a'); R(x + 2, y - 15, 4, 12, '#2f5a2a'); R(x + 3, y - 18, 2, 3, '#2f5a2a'); },
+    cube: (x, y) => { R(x, y - 11, 12, 11, '#fbfbf4'); R(x, y - 12, 12, 1, '#dcdcd0'); R(x + 4, y - 6, 4, 6, '#2f6fbf'); R(x + 1, y - 9, 2, 2, '#2f6fbf'); R(x + 9, y - 9, 2, 2, '#2f6fbf'); },
+    mill: (x, y, t) => { R(x + 2, y - 14, 8, 14, '#fbfbf4'); R(x + 1, y - 16, 10, 2, '#a0522d'); R(x + 5, y - 5, 2, 5, '#6b4a2a'); const a = t * 6, cx = x + 6, cy = y - 15; for (let k = 0; k < 4; k++) { const an = a + k * Math.PI / 2; for (let r = 2; r < 8; r++) R(cx + Math.cos(an) * r, cy + Math.sin(an) * r, 1, 1, '#d8cfb0'); } },
+    boat: (x, y, t) => { const by = 46 + Math.round(Math.sin(t * 8 + x) * 1); const bx = x > 64 ? 10 + (x % 40) : x; R(bx, by, 14, 3, '#c0392b'); R(bx + 1, by + 3, 12, 1, '#8a2a20'); R(bx + 6, by - 8, 1, 8, '#6b4a2a'); R(bx + 7, by - 7, 5, 6, '#fbfbf4'); },
+    block: (x, y) => { R(x, y - 22, 14, 22, '#cfcabd'); for (let r = 0; r < 5; r++) for (let c = 0; c < 3; c++) R(x + 2 + c * 4, y - 20 + r * 4, 2, 2, (r + c + x) % 3 ? lit : '#5a7090'); },
+    kiosk: (x, y) => { R(x, y - 9, 10, 9, '#3f8f5a'); R(x - 1, y - 11, 12, 2, '#e0b030'); R(x + 2, y - 7, 6, 3, '#fff2b0'); },
+    bus: (x, y, t) => { const bx = 70 + ((t * 60) % 90) - 20; R(bx, y - 9, 20, 8, '#2f6fbf'); for (let i = 0; i < 4; i++) R(bx + 2 + i * 4, y - 8, 3, 3, '#cfe8ff'); R(bx + 3, y - 1, 3, 2, '#222'); R(bx + 14, y - 1, 3, 2, '#222'); },
+    sapling: (x, y, t, k) => { const h = 3 + Math.min(8, k * 1.5); R(x + 4, y - h, 1, h, '#6b4a2a'); R(x + 2, y - h - 2, 5, 3, '#6aa84f'); },
+    olives: (x, y) => { D.tree(x, y); for (const [a, b] of [[2, -12], [6, -10], [4, -8], [7, -13]]) R(x + a, y + b, 1, 1, '#3a2a4a'); },
+    basket: (x, y) => { R(x + 1, y - 5, 8, 5, '#b8873a'); R(x + 2, y - 7, 6, 1, '#b8873a'); R(x + 2, y - 6, 6, 1, '#3a2a4a'); },
+    donkey: (x, y, t) => { const dx = x + Math.round(Math.sin(t * 3) * 3); R(dx, y - 7, 10, 4, '#8a8a8a'); R(dx + 9, y - 10, 3, 4, '#8a8a8a'); R(dx + 9, y - 12, 1, 2, '#8a8a8a'); R(dx + 1, y - 3, 1, 3, '#5a5a5a'); R(dx + 8, y - 3, 1, 3, '#5a5a5a'); },
+    press: (x, y, t) => { R(x, y - 12, 16, 12, '#d9c7a0'); R(x - 1, y - 14, 18, 2, '#a0522d'); const a = t * 5; R(x + 7 + Math.round(Math.cos(a) * 4), y - 7, 3, 3, '#7a7a7a'); R(x + 3, y - 4, 10, 2, '#8a6a3a'); },
+    jar: (x, y) => { R(x + 1, y - 9, 7, 9, '#b0603a'); R(x + 2, y - 11, 5, 2, '#b0603a'); R(x + 2, y - 6, 5, 1, '#e8d8b0'); },
+    table: (x, y) => { R(x, y - 6, 14, 2, '#8a5a2a'); R(x + 1, y - 4, 1, 4, '#6b4a2a'); R(x + 12, y - 4, 1, 4, '#6b4a2a'); R(x + 3, y - 8, 3, 2, '#e8c070'); R(x + 8, y - 9, 2, 3, '#7a9a2a'); },
+    bottle: (x, y) => { R(x + 2, y - 9, 4, 9, '#5f7f1f'); R(x + 3, y - 12, 2, 3, '#5f7f1f'); R(x + 3, y - 13, 2, 1, '#c0392b'); R(x + 2, y - 6, 4, 2, '#f4f0e4'); },
+  };
+  if (w === 'pet') { petPaint(R, st, mood, t); return; }
+  const items = WORLDS[w].eras[st.era].items.slice(0, st.n), slots = sea ? [70, 90, 110, 130, 76, 120] : [8, 32, 56, 82, 106, 132];
+  items.forEach(([kind], i) => {
+    const appear = Math.min(1, Math.max(0, (t - i * 0.08) * 5)); if (appear <= 0) return;
+    const isNew = i === items.length - 1, hop = isNew ? -Math.round(Math.abs(Math.sin(Math.min(1, t * 1.6) * Math.PI * 2)) * 4 * (1 - Math.min(1, t))) : 0;
+    let x = slots[i]; if (sea && kind === 'boat') x = i * 13 + 4;
+    ctx.globalAlpha = appear; D[kind](x, 44 + hop, t, st.n); ctx.globalAlpha = 1;
+    if (isNew && t > 0.4 && t < 0.9 && Math.floor(t * 20) % 2) { R(x + 6, 20 + hop, 1, 1, '#fff'); R(x + 2, 24, 1, 1, '#fff'); R(x + 11, 23, 1, 1, '#fff'); }
+  });
+  // A walker crosses, like the map in old console games.
+  if (mood >= 1) { const px = Math.round(-6 + t * 172) % 172, leg = Math.floor(t * 12) % 2; R(px, 37, 3, 3, '#f0c8a0'); R(px, 40, 3, 4, w === 'grove' ? '#2f6fbf' : '#c0392b'); R(px + (leg ? 0 : 2), 44, 1, 2, '#333'); }
+  if (mood === 3) for (let k = 0; k < 18; k++) { const cx = (k * 37 + t * 40) % W_W, cy = (k * 13 + t * 50) % 40; R(cx, cy, 2, 1, ['#e74c3c', '#f1c40f', '#2ecc71', '#3498db', '#fff'][k % 5]); }
+}
+function petPaint(R, st, mood, t) {
+  const cx = 80, base = 44;
+  if (st.f === 0) { const wob = Math.round(Math.sin(t * 20) * (t < 0.6 ? 1 : 0)); R(cx - 5 + wob, base - 14, 10, 14, '#fbf4e0'); R(cx - 6 + wob, base - 10, 12, 8, '#fbf4e0'); R(cx - 3 + wob, base - 9, 2, 2, '#e0b030'); R(cx + 2 + wob, base - 5, 2, 2, '#e0b030'); return; }
+  const s = 1 + st.era * 0.35, hop = mood >= 2 ? Math.round(Math.abs(Math.sin(t * Math.PI * (mood === 3 ? 6 : 3))) * 5) : 0;
+  const W = Math.round(14 * s), H = Math.round(12 * s), x = cx - W / 2, y = base - H - hop, fur = '#f2a65a', ear = '#d9823a';
+  R(cx - W / 2 + 2, base, W - 4, 2, 'rgba(0,0,0,0.2)');
+  R(x, y + 2, W, H - 2, fur); R(x + 1, y + 1, W - 2, 1, fur); R(x + 1, y - 2, 3, 3, ear); R(x + W - 4, y - 2, 3, 3, ear);
+  R(x + 3, y + H - 4, W - 6, 3, '#fbe0c0');
+  const blink = Math.floor(t * 10) % 9 === 0, ey = y + Math.round(H * 0.35);
+  if (mood === 0 || blink) { R(x + 3, ey + 1, 3, 1, '#222'); R(x + W - 6, ey + 1, 3, 1, '#222'); }
+  else { R(x + 3, ey, 2, 3, '#222'); R(x + W - 5, ey, 2, 3, '#222'); R(x + 3, ey, 1, 1, '#fff'); R(x + W - 5, ey, 1, 1, '#fff'); }
+  R(cx - 1, ey + 3, 2, 1, mood >= 2 ? '#c0392b' : '#8a4a2a');
+  R(x + 1, ey + 4, 2, 1, '#f08a8a'); R(x + W - 3, ey + 4, 2, 1, '#f08a8a');
+  R(x + W, y + H - 6 + Math.round(Math.sin(t * 8)), 4, 2, fur);
+  if (st.era === 2) { R(cx - 3, y - 4, 6, 2, '#2f6fbf'); R(cx - 1, y - 6, 2, 2, '#2f6fbf'); }
+  if (st.era >= 3) { R(cx - 4, y - 8, 8, 2, '#e0b030'); R(cx - 4, y - 10, 2, 2, '#e0b030'); R(cx - 1, y - 11, 2, 3, '#e0b030'); R(cx + 2, y - 10, 2, 2, '#e0b030'); }
+  if (mood === 0) for (let k = 0; k < 3; k++) { const zy = y - 6 - k * 5 - Math.round(t * 4); R(x + W + 3 + k * 3, zy, 3, 1, '#fff'); R(x + W + 5 + k * 3, zy + 1, 1, 1, '#fff'); R(x + W + 3 + k * 3, zy + 2, 3, 1, '#fff'); }
+  if (mood === 3) for (let k = 0; k < 3; k++) { const ny = 20 - ((t * 30 + k * 10) % 18); R(30 + k * 40, ny, 2, 2, '#fff'); R(32 + k * 40, ny - 4, 1, 5, '#fff'); }
+  // toys appear as the pet grows
+  const toys = Math.min(5, Math.floor(st.f * 20));
+  for (let k = 0; k < toys; k++) { const tx = [20, 130, 40, 112, 145][k]; R(tx, base - 4, 4, 4, ['#e74c3c', '#3498db', '#f1c40f', '#9b59b6', '#2ecc71'][k]); }
+}
+
 class PaperModal extends Modal {
   constructor(app, plugin, list) { super(app); this.plugin = plugin; this.list = list; this.i = 0; this.got = 0; this.miss = []; }
   onOpen() { this.contentEl.addClass('gq-modal', 'gq-paper-m'); this.titleEl.setText('Paper round'); this.draw(); }
@@ -1637,7 +1731,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, fiay: fm.fiay === true || fm.fiay === 'on', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '' };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, world: typeof fm.world === 'string' ? fm.world : '', fiay: fm.fiay === true || fm.fiay === 'on', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '' };
   }
   cards() { const f = this.app.vault.getAbstractFileByPath(PROGRESS); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return this.cardsNow || (Array.isArray(fm.cards) ? fm.cards.map(String) : []); }
   async setCard(word, on) {
@@ -1716,6 +1810,39 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     });
     if (gained) this.moPaint();
   }
+  async setWorld(w) { this.worldNow = w; const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (w) fm.world = w; else delete fm.world; }); this.moPaint(); }
+  worldDraw(c, todayPts, score) {
+    const w = this.worldNow !== undefined ? this.worldNow : this.colors().world;
+    if (!w || !WORLDS[w]) {
+      const r = c.createDiv('gq-world-pick'); r.createSpan({ cls: 'gq-hint', text: 'Pick a world to grow: ' });
+      for (const k of ['village', 'grove', 'pet']) { const b = r.createEl('button', { text: WORLDS[k].name, cls: 'gq-mini' }); b.onclick = () => this.setWorld(k); }
+      return;
+    }
+    if (!this.words && !this.worldWait) { this.worldWait = true; this.wordIndex().then(() => this.moPaint()); }
+    const total = this.words ? this.words.length : 1500, green = this.colors().green.length, st = worldStage(green, total), mood = worldMood(todayPts, score);
+    const box = c.createDiv('gq-world'), cv = box.createEl('canvas', { cls: 'gq-world-cv', attr: { width: W_W, height: W_H, role: 'img', 'aria-label': `${WORLDS[w].eras[st.era].name}. ${MOODS[mood]}.` } });
+    const ctx = cv.getContext('2d'); if (!ctx) return; ctx.imageSmoothingEnabled = false;
+    const items = w === 'pet' ? [] : WORLDS[w].eras[st.era].items.slice(0, st.n);
+    const cap = box.createDiv({ cls: 'gq-hint gq-world-cap' });
+    const name = w === 'pet' ? (st.f === 0 ? 'An egg. Turn a word green to hatch it' : WORLDS.pet.eras[st.era].name) : WORLDS[w].eras[st.era].name;
+    cap.appendText(`${name} · ${MOODS[mood].toLowerCase()}`);
+    cap.appendText(st.next ? ` · grows at ${st.next} green words (${green} now)` : ' · all grown. Θα τα πούμε.');
+    const word = box.createDiv({ cls: 'gq-world-say', attr: { lang: 'el' } });
+    const greens = this.colors().green; let k = 0;
+    const speak = () => {
+      const list = w === 'pet' ? (greens.length ? greens : ['γεια σου']) : items.map(x => x[1]);
+      if (!list.length) return; const t = list[(k++ + Math.floor(Math.random() * list.length)) % list.length];
+      word.setText(w === 'pet' ? `Φοράκι says: ${t}` : t); say(t);
+    };
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const run = () => {
+      cancelAnimationFrame(this.worldRaf); const t0 = performance.now();
+      const step = now => { const t = Math.min(1, (now - t0) / 3000); worldPaint(ctx, w, st, mood, t); if (t < 1 && cv.isConnected) this.worldRaf = requestAnimationFrame(step); };
+      if (reduce) worldPaint(ctx, w, st, mood, 1); else this.worldRaf = requestAnimationFrame(step);
+    };
+    cv.onclick = () => { run(); speak(); };
+    run();
+  }
   // The card at the top of Today. The same question the teacher asks in class.
   moCard(box) {
     const c = box.createDiv('gq-tcard gq-mo'); c.dataset.tour = 'mo'; this.moEl = c; this.moDraw(c);
@@ -1727,6 +1854,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const top = c.createDiv('gq-mo-top');
     const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πήρες φόρα;', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πήρες φόρα;');
     top.createDiv({ cls: 'gq-mo-n', text: String(m), attr: { 'aria-label': `Momentum ${m}` } });
+    this.worldDraw(c, todayPts, m);
     c.createDiv({ cls: 'gq-hint', text: `Did you get going? · ${todayPts ? '+' + todayPts + ' today' : 'nothing yet today'} · ${gain >= 0 ? '+' : ''}${gain} this week` });
     const bars = c.createDiv({ cls: 'gq-mo-bars', attr: { 'aria-hidden': 'true' } });
     for (let k = 13; k >= 0; k--) { const d = new Date(); d.setDate(d.getDate() - k); const p = +days[ymd(d)] || 0; const b = bars.createDiv('gq-mo-bar' + (k === 0 ? ' is-today' : '')); b.style.height = Math.max(3, Math.round(30 * p / MO_CAP)) + 'px'; }
@@ -1735,6 +1863,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const d = c.createEl('details', { cls: 'gq-mo-how' }); d.createEl('summary', { text: 'How φόρα works' });
     const ul = d.createEl('ul');
     for (const t of ['A word right again on a later day: 3 (the first time: 1, the same day again: 0).', 'A color you moved up, still right two days later: 5.', 'Your own sentence: 3. A story puzzle line: 1, or 3 on a later day.', 'A new card on paper: 1. Paper round cards count like any word you get right.', 'Up to 40 a day. A day off fades it by a seventh, so a little every day beats a lot at once.']) ul.createEl('li', { text: t });
+    if (this.colors().world) { const li = ul.createEl('li'); li.appendText('Your world grows with your green words and never shrinks. φόρα only sets the weather. '); const ch = li.createEl('a', { text: 'Change my world', href: '#' }); ch.onclick = e => { e.preventDefault(); this.setWorld(''); }; }
   }
   // ---------- Paper round: the app keeps the schedule, the paper cards do the work ----------
   // Red pile every day, yellow every other day, green on Sundays. A card with no color yet sits in the red pile.

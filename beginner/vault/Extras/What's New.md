@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, night: your world shows right away
+> - In Obsidian, picking a world or earning φόρα now updates the card you see straight away. Before, it could update a hidden copy of Today, so the world and the counter seemed stuck.
+
 > [!info]- November 18, evening: small fixes
 > - Word web: holding a word plays the phrase once (εγώ → Εγώ θέλω να πάω), without saying the word twice.
 > - Your world shows on Today from the start, even before your first φόρα.

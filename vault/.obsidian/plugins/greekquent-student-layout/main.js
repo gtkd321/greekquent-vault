@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18j';
+const VAULT_RELEASE = '2026-11-18k';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -123,6 +123,10 @@ const splitDots = s => { const out = []; let d = 0, cur = ''; for (let i = 0; i 
 // Kids dessert words: a treat after the lesson. Never tested, never colored. [Greek, English, sounds like English]
 const DESSERT = [["ο σούπερ ήρωας", "superhero", 1], ["ο Σπάιντερμαν", "Spider-Man", 1], ["η αράχνη", "spider", 0], ["ο ιστός", "web", 0], ["η κάπα", "cape", 0], ["η στολή", "costume, suit", 0], ["η υπερδύναμη", "superpower", 0], ["αόρατος", "invisible", 0], ["το ρομπότ", "robot", 1], ["ο δεινόσαυρος", "dinosaur", 1], ["ο δράκος", "dragon", 0], ["το φάντασμα", "ghost", 0], ["ο πειρατής", "pirate", 1], ["ο θησαυρός", "treasure", 0], ["ο πύραυλος", "rocket", 0], ["ο αστροναύτης", "astronaut", 1], ["ο εξωγήινος", "alien", 0], ["ο νίντζα", "ninja", 1], ["ο ιππότης", "knight", 0], ["το σπαθί", "sword", 0], ["η ασπίδα", "shield", 0], ["ο μονόκερος", "unicorn", 0], ["ο καρχαρίας", "shark", 0], ["το λιοντάρι", "lion", 0], ["ο ελέφαντας", "elephant", 1], ["η μαϊμού", "monkey", 0], ["το φίδι", "snake", 0], ["ο βάτραχος", "frog", 0], ["η πεταλούδα", "butterfly", 0], ["το παγωτό", "ice cream", 0], ["η καραμέλα", "candy", 1], ["η τούρτα", "birthday cake", 0], ["το μπαλόνι", "balloon", 1], ["το ποδήλατο", "bike", 0], ["το τρένο", "train", 1], ["το ελικόπτερο", "helicopter", 1], ["ο λουκουμάς", "honey doughnut", 0]];
 const DESSERT_FILE = 'My Work/My dessert words.md';
+// Momentum (φόρα): points for practice that builds memory, fading by 1/7 each day.
+// Spaced recall and colors that stick count most; repeats on the same day count nothing; at most MO_CAP points a day.
+const MO_FILE = MY_WORK + 'My momentum.md';
+const MO_CAP = 40, MO_KEEP = 6 / 7;
 const HELLO_SONG = [
   { gr: 'Γεια σας, γεια σας, φίλοι!', en: 'Hi, hi, friends!', move: 'Big wave to everyone', chords: [60, 65],
     notes: [['Γεια ', 67, 1], ['σας, ', 67, 1], ['γεια ', 64, 1], ['σας, ', 64, 1], ['φί', 69, 1], ['λοι!', 67, 2], [null, 0, 1]] },
@@ -820,7 +824,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) { this.infoCache = null; this.coCache = null; } }));
     // The in-vault games send results here instead of through an obsidian:// link.
     this.registerDomEvent(window, 'message', e => {
-      const d = e.data; if (!d || d.gq !== 'obsidian' || typeof d.url !== 'string') return;
+      const d = e.data; if (d && d.gq === 'mo' && typeof d.w === 'string' && d.w) { this.moAdd('recall', d.w.split(',')[0].trim().replace(/^(ο|η|το|οι|τα) /, '').slice(0, 80)); return; }
+      if (!d || d.gq !== 'obsidian' || typeof d.url !== 'string') return;
       try { const u = new URL(d.url); const p = {}; u.searchParams.forEach((v, k) => { p[k] = v; }); this.fromGame(p); } catch (err) {}
     });
     // Left toolbar: four buttons. Today is the start screen; More holds the rest.
@@ -1053,6 +1058,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!(await ad.exists(MY_WORK.slice(0, -1)))) await ad.mkdir(MY_WORK.slice(0, -1));
     const links = [...new Set(words)].map(w => `[[${w}]]`).join(' ');
     await ad.write(PAIRS_NOTE, txt.replace(/\s*$/, '\n') + `- ${own ? 'Own: ' : ''}${gr.replace(/\n+/g, ' ')}${en ? ' (' + en + ')' : ''} · ${links}\n`);
+    this.moAdd(own ? 'own' : 'built', gr);
     const n = await this.pairCount();
     new Notice(`Saved. ${n.points} pair point${n.points === 1 ? '' : 's'} this week.`);
     this.refreshToday();
@@ -1404,7 +1410,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     body = body.trim();
     if (!body || /^## [^\n]*$/.test(body)) { new Notice('Write your homework under the newest heading first.'); return; }
     if (body.length > 3000) { body = body.slice(0, 3000); new Notice('Homework is long, so only the first 3,000 characters were added. Send the rest in a second text.'); }
-    window.open(smsLink(`Greekquent homework (${f.basename}):\n${body}`));
+    const md = this.moData().days, mo = this.moScore(md), w7 = new Date(); w7.setDate(w7.getDate() - 7);
+    window.open(smsLink(`Greekquent homework (${f.basename}):\n${body}\n\nΦόρα ${mo} (${mo - this.moScore(md, w7) >= 0 ? '+' : ''}${mo - this.moScore(md, w7)} this week)`));
   }
   async sha(buf) { const h = await crypto.subtle.digest('SHA-256', buf); return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join(''); }
   // Fallback for devices where the key box is awkward: a note "My Work/Teacher key.md" holding the key is moved into settings and deleted.
@@ -1581,6 +1588,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addItem(i => i.setTitle('Share feedback').setIcon('message-square').onClick(() => this.feedback()));
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
     m.addItem(i => i.setTitle('Setting up').setIcon('help-circle').onClick(() => this.openNote(SETUP)));
+    if (this.isKids) m.addItem(i => i.setTitle('Take the tour').setIcon('map').onClick(async () => { await this.tourSet(0); await this.openToday(); }));
     m.addItem(i => i.setTitle('Update vault').setIcon('refresh-cw').onClick(() => this.updateVault(false)));
     if (this.isTeacher) m.addItem(i => i.setTitle('Teacher update key').setIcon('key').onClick(() => this.keyModal()));
     if (evt && evt.clientX !== undefined) m.showAtMouseEvent(evt); else m.showAtPosition({ x: 60, y: 200 });
@@ -1613,7 +1621,71 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!this.app.vault.getAbstractFileByPath(MY_WORK.slice(0, -1))) await this.app.vault.createFolder(MY_WORK.slice(0, -1));
     return this.app.vault.create(PROGRESS, '---\nred: []\nyellow: []\ngreen: []\n---\n# My progress\n\nYour word colors live in this note. Change them with the color buttons on any word note: red = don\'t have it, yellow = kind of, green = have it. Tap a color again to clear it. The Today page counts them.\n');
   }
+  // ---------- Momentum ----------
+  moData() {
+    const f = this.app.vault.getAbstractFileByPath(MO_FILE);
+    const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+    const obj = k => (fm[k] && typeof fm[k] === 'object' && !Array.isArray(fm[k])) ? fm[k] : {};
+    return { days: this.moMem && Date.now() - this.moMem.t < 15000 ? this.moMem.days : obj('days'), got: obj('got'), up: obj('up'), met: obj('met') };
+  }
+  // φόρα on a day = sum of each day's points x (6/7)^(days since).
+  moScore(days, at) {
+    const t = at || new Date(); t.setHours(12, 0, 0, 0); let m = 0;
+    for (const [d, p] of Object.entries(days || {})) { const [y, mo, da] = d.split('-').map(Number); const k = Math.round((t - new Date(y, mo - 1, da, 12)) / 864e5); if (k >= 0) m += (+p || 0) * Math.pow(MO_KEEP, k); }
+    return Math.round(m);
+  }
+  moAdd(kind, key, extra) { (this.moQ = this.moQ || []).push([kind, String(key || ''), extra || '']); clearTimeout(this.moT); this.moT = setTimeout(() => this.moFlush(), 1200); }
+  async moFlush() {
+    const q = this.moQ || []; this.moQ = []; if (!q.length) return;
+    let f = this.app.vault.getAbstractFileByPath(MO_FILE);
+    if (!f) {
+      if (!this.app.vault.getAbstractFileByPath(MY_WORK.slice(0, -1))) await this.app.vault.createFolder(MY_WORK.slice(0, -1));
+      f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠήρες φόρα; This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
+    }
+    const today = ymd(new Date()), gap = d => { const [a, b, c] = String(d).split('-').map(Number); const n = new Date(); n.setHours(12, 0, 0, 0); return Math.round((n - new Date(a, b - 1, c, 12)) / 864e5); };
+    let gained = 0;
+    await this.app.fileManager.processFrontMatter(f, fm => {
+      for (const k of ['days', 'got', 'up', 'met']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
+      let pts = 0;
+      for (const [kind, key, extra] of q) {
+        if (kind === 'recall') {
+          const last = fm.got[key]; if (last !== today) pts += last ? 3 : 1; fm.got[key] = today;
+          if (fm.up[key] && gap(fm.up[key]) >= 2) { pts += 5; delete fm.up[key]; }
+        } else if (kind === 'up') { if (!fm.met[key]) { fm.met[key] = today; pts += 1; } fm.up[key] = today; }
+        else if (kind === 'down') delete fm.up[key];
+        else if (kind === 'own') pts += 3;
+        else if (kind === 'built') pts += 1;
+      }
+      const before = +fm.days[today] || 0, now = Math.min(MO_CAP, before + pts); gained = now - before;
+      if (now) fm.days[today] = now;
+      for (const d of Object.keys(fm.days)) if (gap(d) > 60) delete fm.days[d];
+      this.moMem = { days: { ...fm.days }, t: Date.now() };
+    });
+    if (gained) this.moPaint();
+  }
+  // The card at the top of Today. The same question the teacher asks in class.
+  moCard(box) {
+    const c = box.createDiv('gq-tcard gq-mo'); c.dataset.tour = 'mo'; this.moEl = c; this.moDraw(c);
+  }
+  moPaint() { if (this.moEl && this.moEl.isConnected) this.moDraw(this.moEl); }
+  moDraw(c) {
+    c.empty(); const { days } = this.moData(), now = new Date(), m = this.moScore(days, new Date());
+    const wk = new Date(); wk.setDate(wk.getDate() - 7); const gain = m - this.moScore(days, wk), todayPts = +days[ymd(now)] || 0;
+    const top = c.createDiv('gq-mo-top');
+    const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πήρες φόρα;', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πήρες φόρα;');
+    top.createDiv({ cls: 'gq-mo-n', text: String(m), attr: { 'aria-label': `Momentum ${m}` } });
+    c.createDiv({ cls: 'gq-hint', text: `Did you get going? · ${todayPts ? '+' + todayPts + ' today' : 'nothing yet today'} · ${gain >= 0 ? '+' : ''}${gain} this week` });
+    const bars = c.createDiv({ cls: 'gq-mo-bars', attr: { 'aria-hidden': 'true' } });
+    for (let k = 13; k >= 0; k--) { const d = new Date(); d.setDate(d.getDate() - k); const p = +days[ymd(d)] || 0; const b = bars.createDiv('gq-mo-bar' + (k === 0 ? ' is-today' : '')); b.style.height = Math.max(3, Math.round(30 * p / MO_CAP)) + 'px'; }
+    const ans = todayPts >= 15 ? 'Ναι, πήρα φόρα.' : todayPts ? 'Λίγο.' : 'Όχι ακόμα, αλλά θα πάρω.';
+    const a = c.createDiv({ cls: 'gq-hint gq-say', attr: { lang: 'el' } }); a.appendText('Say it: '); a.createSpan({ text: ans, cls: 'gq-mo-ans' }); a.onclick = () => say(ans);
+    const d = c.createEl('details', { cls: 'gq-mo-how' }); d.createEl('summary', { text: 'How φόρα works' });
+    const ul = d.createEl('ul');
+    for (const t of ['A word right again on a later day: 3 (the first time: 1, the same day again: 0).', 'A color you moved up, still right two days later: 5.', 'Your own sentence: 3. A story puzzle line: 1, or 3 on a later day.', 'Up to 40 a day. A day off fades it by a seventh, so a little every day beats a lot at once.']) ul.createEl('li', { text: t });
+  }
   async setColor(word, color) {
+    const was = this.colorOf(word), R = { '': 0, red: 1, yellow: 2, green: 3 };
+    if (R[color || ''] > R[was]) this.moAdd('up', word); else if (R[color || ''] < R[was]) this.moAdd('down', word);
     const f = await this.progressFile();
     await this.app.fileManager.processFrontMatter(f, fm => {
       for (const [k] of COLORS) { fm[k] = (Array.isArray(fm[k]) ? fm[k] : []).map(String).filter(w => w !== word); }
@@ -1968,6 +2040,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (exact || accepts(got, x[1])) {
           ans.addClass('gq-ok'); chk.disabled = true; say(x[1]); fb.empty();
           if (!exact) { fb.createDiv({ text: 'Also right. The line says:' }); this.lineEl(fb, x[1], words); }
+          this.moAdd('recall', 'π:' + n + ':' + i);
           setTimeout(() => { i++; save(); if (i >= turns.length) onDone(); paint(); }, exact ? 900 : 2600);
         } else { misses++; fb.empty(); if (got.length === target.length && [...got].sort().join(' ') === target.map(norm).sort().join(' ')) fb.setText('All the right words. Try another order: keep small words like ο, στο, να and δεν with the word after them.'); ans.removeClass('gq-bad'); void ans.offsetWidth; ans.addClass('gq-bad'); if (misses >= 1) hint.style.display = ''; if (misses >= 2) show.style.display = ''; }
       };
@@ -2075,6 +2148,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       box.createDiv({ cls: 'gq-edition', text: 'Greekquent ' + this.editionName() });
       box.createEl('h2', { text: `Today · ${now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}` });
       if (this.showSwitch()) this.scriptSwitch(box);
+      this.moCard(box);
       if (!col.setup_seen) {
         const s = box.createDiv('gq-tcard gq-tnew'); s.createSpan({ text: 'New here? ' });
         const a = s.createEl('a', { text: 'Read Setting up', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); };
@@ -2217,11 +2291,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const a = s.createEl('a', { text: 'read Setting up', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); };
       s.createSpan({ text: ' first (2 minutes). ' }); const x = s.createEl('button', { text: 'Got it' }); x.onclick = () => this.setupSeen();
     }
-    this.helloSong(box);
+    this.helloSong(box); if (box.lastElementChild) box.lastElementChild.dataset.tour = 'hello';
+    this.moCard(box);
     if (!f) { box.createDiv({ cls: 'gq-tcard', text: 'This lesson is not in the vault yet. Tap More, then Update vault.' }); if (tok === el.gqTok) { el.empty(); el.appendChild(box); } return; }
     const txt = await this.app.vault.cachedRead(f), title = f.basename.replace(/^K\d+\s*/, '').replace(/-student$/, '');
     // 1. The game
-    const g = box.createDiv('gq-tcard gq-kid'), gh = g.createDiv('gq-thead');
+    const g = box.createDiv('gq-tcard gq-kid'), gh = g.createDiv('gq-thead'); g.dataset.tour = 'game';
     gh.createEl('strong', { text: `This week's game: ${title}` });
     gh.createSpan({ cls: 'gq-hint', text: `  · lesson ${wk.lesson}` + (wk.before ? ' · class starts Oct 26' : '') });
     const game = (txt.match(/\*\*The game:\*\*\s*(.+)/) || [])[1]; if (game) g.createDiv({ cls: 'gq-kidgame', text: game });
@@ -2237,11 +2312,20 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       lines.slice(0, k + 1).forEach((l, i) => { const li = ol.createEl('li', { cls: i === k ? 'gq-now' : '' }); li.createSpan({ cls: 'gq-hint', text: l.who + ': ' }); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); if (l.en) li.createDiv({ cls: 'gq-hint', text: l.en }); });
       const r = c.createDiv('gq-row'); this.hearBtn(r, lines[k].gr); this.hearBtn(r, lines.slice(0, k + 1).map(l => l.gr).join(' '), 'Hear them all');
       this.popBtn(r, 'One line at a time', () => this.popLines('Say it together', lines.slice(0, k + 1)));
+      // 2b. Story puzzle: the lines learned so far, built from word tiles (drag or tap). Each new day adds the new line.
+      const turns = lines.slice(0, k + 1).filter(l => l.en).map(l => [l.who, l.gr, l.en]);
+      if (turns.length) {
+        const pz = box.createDiv('gq-tcard gq-kid gq-story'); pz.dataset.tour = 'puzzle';
+        pz.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Story puzzle' });
+        pz.createDiv({ cls: 'gq-hint', text: 'Read the English. Drag the Greek words up to finish the line, or just tap them.' });
+        const pool = lines.map(l => l.gr).concat(this.kidLines(this.kidSection(txt, 'You are the teacher')).map(l => l.gr));
+        this.convoGame(pz, turns, 5000 + wk.lesson, [], false, pool, () => {}, null, false);
+      }
     }
     // 3. Swap: the kid is the teacher
     const sw = this.kidLines(this.kidSection(txt, 'You are the teacher'));
     if (sw.length) {
-      const c = box.createDiv('gq-tcard gq-kid'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Now you are the teacher' });
+      const c = box.createDiv('gq-tcard gq-kid'); c.dataset.tour = 'teacher'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Now you are the teacher' });
       c.createDiv({ cls: 'gq-hint', text: 'Swap. The kid asks the questions. The grown-up gets one wrong on purpose. Catch it.' });
       const ol = c.createEl('ol', { cls: 'gq-storylist gq-plain' });
       for (const l of sw) { const li = ol.createEl('li'); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); if (l.en) li.createDiv({ cls: 'gq-hint', text: l.en }); }
@@ -2249,7 +2333,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // 4. This week's words, nouns first, with the colors
     const words = (await this.wordIndex()).filter(w => (w.kid || []).includes(wk.lesson));
     if (words.length) {
-      const c = box.createDiv('gq-tcard gq-kid'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `This week's words (${words.length})` });
+      const c = box.createDiv('gq-tcard gq-kid'); c.dataset.tour = 'words'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `This week's words (${words.length})` });
       c.createDiv({ cls: 'gq-hint', text: 'Hear it, say it, then pick a color: red is not yet, yellow is kind of, green is got it.' });
       const ul = c.createEl('ul', { cls: 'gq-kidwords' });
       words.forEach((w, i) => {
@@ -2274,11 +2358,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (mv.length > 8) c.createDiv({ cls: 'gq-hint', text: `The first 8 of ${mv.length}. The rest are on the lesson page.` });
       for (const m of mv.slice(0, 8)) { const li = ul.createEl('li'); li.createSpan({ text: m[1], attr: { lang: 'el' } }); li.createDiv({ cls: 'gq-hint', text: m[2] }); }
     }
-    await this.dessertCard(box);
+    const nb = box.childElementCount; await this.dessertCard(box); if (box.childElementCount > nb) box.lastElementChild.dataset.tour = 'dessert';
     // Small buttons under the cards
-    const tc = box.createDiv('gq-tcard gq-row gq-ttools');
+    const tc = box.createDiv('gq-tcard gq-row gq-ttools'); tc.dataset.tour = 'tools';
     const tool = (t, fn, cls) => { const b = tc.createEl('button', { text: t, cls: cls || '' }); b.onclick = fn; };
-    tool('Play Γιαγιά', () => this.openApp('giagia', '#k=' + wk.lesson), 'mod-cta');
+    tool('Play Γιαγιά', () => this.openApp('giagia', '#k=' + wk.lesson), 'mod-cta'); tc.lastElementChild.dataset.tour = 'giagia';
     tool('All lessons', () => this.openNote('Lessons.md'));
     tool('Look up a word', () => new LookupModal(this.app, this).open());
     let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}
@@ -2288,7 +2372,44 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
     const gu = foot.createEl('a', { text: 'For grown-ups', href: '#' }); gu.onclick = e => { e.preventDefault(); this.openNote(SETUP); };
     // Slides parked here too: the kids Today is a plain list of cards.
-    if (tok === el.gqTok) { el.empty(); el.appendChild(box); }
+    if (tok === el.gqTok) { el.empty(); el.appendChild(box); if (col.setup_seen) this.kidTour(box, wk.lesson); }
+  }
+  // ---------- Kids tour: the fun first, the useful bits in between. One tip at a time, on the real cards. ----------
+  // tour_at in My progress = the next tip. 99 = finished or skipped. More > Take the tour starts it again.
+  tourSteps(lesson) {
+    return [
+      ['hello', 'Start with a song', 'Sing the hello song together and do the moves. It starts every lesson.'],
+      ['giagia', 'Γιαγιά', 'Find 7 notebooks before Γιαγιά feeds you. Use the arrows or swipe. Come back here when you are done.', 'Play Γιαγιά', () => this.openApp('giagia', '#k=' + lesson)],
+      ['puzzle', 'Story puzzle', 'Drag the Greek words up to finish the line, or tap them. Try one now.'],
+      ['mo', 'Πήρες φόρα;', 'Right answers give you φόρα (momentum). A little every day keeps it high. Say the answer out loud.'],
+      ['dessert', 'Dessert word', 'A treat after the lesson: pick a word, say it, make up a move, then draw it.'],
+      ['words', "This week's words", 'Hear each word, then pick a color: red is not yet, yellow is kind of, green is got it.'],
+      ['teacher', 'Now you are the teacher', 'Swap. The kid asks. The grown-up gets one wrong on purpose. Catch it.'],
+      ['game', "This week's game", 'Open the lesson to see the whole game for class.'],
+      ['words', 'Word web', 'Open any word, tap More, then Word web. Tap a word to go there, double-tap to hear more than one, hold to see what it goes with.'],
+      ['tools', 'The rest', 'Look up any word here. Updates come by themselves. Grown-ups: Setting up has the details. Take the tour again from More.']
+    ];
+  }
+  async tourSet(n) { this.tourAt = n; const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.tour_at = n; }); }
+  kidTour(box, lesson) {
+    const pf = this.app.vault.getAbstractFileByPath(PROGRESS), fm = pf ? ((this.app.metadataCache.getFileCache(pf) || {}).frontmatter || {}) : {};
+    let at = this.tourAt !== undefined ? this.tourAt : (parseInt(fm.tour_at, 10) || 0);
+    const steps = this.tourSteps(lesson);
+    const show = () => {
+      box.querySelectorAll('.gq-tour-on').forEach(x => x.removeClass('gq-tour-on')); const old = box.querySelector('.gq-tour'); if (old) old.remove();
+      while (at < steps.length && !box.querySelector(`[data-tour="${steps[at][0]}"]`)) at++;
+      if (at >= steps.length) { if ((parseInt(fm.tour_at, 10) || 0) < 99 || this.tourAt !== 99) this.tourSet(99); return; }
+      const [k, t, b, label, fn] = steps[at], el = box.querySelector(`[data-tour="${k}"]`);
+      el.addClass('gq-tour-on'); el.style.scrollMarginTop = '12px'; setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+      const tip = box.createDiv({ cls: 'gq-tour', attr: { role: 'dialog', 'aria-label': 'Tour' } });
+      tip.createDiv({ cls: 'gq-tour-step', text: `Tour · ${at + 1} of ${steps.length}` });
+      tip.createDiv({ cls: 'gq-tour-t', text: t, attr: { lang: 'el' } }); tip.createDiv({ text: b });
+      const r = tip.createDiv('gq-row'), last = at === steps.length - 1;
+      if (label) { const a = r.createEl('button', { text: label, cls: 'mod-cta' }); a.onclick = async () => { at++; await this.tourSet(at); fn(); }; }
+      const nx = r.createEl('button', { text: last ? 'Done' : 'Next', cls: label ? '' : 'mod-cta' }); nx.onclick = () => { at = last ? 99 : at + 1; this.tourSet(at); show(); };
+      if (!last) { const sk = r.createEl('button', { text: 'Skip the tour', cls: 'gq-mini gq-tour-skip' }); sk.onclick = () => { at = 99; this.tourSet(99); show(); }; }
+    };
+    if (at < 99) show();
   }
   // ---------- Pop-out card: one big card in front of the page, for a few focused moments ----------
   // Used for today's line, comebacks, the Sunday read-through and the kid lines. Everything else stays in the list.

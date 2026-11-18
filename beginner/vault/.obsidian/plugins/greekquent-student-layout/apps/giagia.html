@@ -334,6 +334,7 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
     const right = c === n.w;
     btns[choices.indexOf(n.w)].classList.add('right');
     if (right) {
+      if (window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w: lemma(n.w.g) }, '*'); } catch (e) {}
       n.got = true; S.found++; S.freeze = 2; beep(784, .1); setTimeout(() => beep(1046, .15), 90);
       qFb.textContent = 'Μπράβο!'; qFb.style.color = 'var(--green)'; say('Μπράβο!');
       if (S.found >= S.nbs.length) { S.exitOpen = true; }

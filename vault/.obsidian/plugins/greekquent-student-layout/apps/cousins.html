@@ -496,10 +496,12 @@ window.GQ_COUSINS=[["ιδέα", "idea", "idea", "Same word, same meaning.", 1, 1
   $('#nextBtn').addEventListener('click', advance);
   document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && G.revealing && $('#game').classList.contains('on')) { e.preventDefault(); advance(); } });
 
+  // Each right answer goes to the vault's Momentum (φόρα) when the game runs inside Obsidian.
+  function momo() { if (window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w: G.item.g }, '*'); } catch (e) {} }
   function tap(k, i, btn) {
     if (!G.active || G.locked[k]) return;
     G.taps[k]++;
-    if (i === G.correct) { G.hits[k]++; reveal(k); return; }
+    if (i === G.correct) { G.hits[k]++; momo(); reveal(k); return; }
     G.locked[k] = true; btn.classList.add('wrong'); H[k].classList.add('locked');
     sfx.wrong(); vibrate([40, 40, 40]);
     markMissed();

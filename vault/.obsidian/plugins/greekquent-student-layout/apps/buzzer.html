@@ -407,10 +407,12 @@ window.GQ_PHRASES=[["Γεια σας","Hello (to a group, or polite)",1],["Γε�
     later(done ? finish : next, done ? 1500 : 1700);
   }
 
+  // Each right answer goes to the vault's Momentum (φόρα) when the game runs inside Obsidian.
+  function momo() { if (window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w: G.item.kind === 'w' ? lemma(G.item.g) : G.item.g }, '*'); } catch (e) {} }
   function tap(k, i, btn) {
     if (!G.active || G.locked[k]) return;
     G.taps[k]++;
-    if (i === G.correct) { G.hits[k]++; reveal(k); return; }
+    if (i === G.correct) { G.hits[k]++; momo(); reveal(k); return; }
     G.locked[k] = true; btn.classList.add('wrong'); H[k].classList.add('locked');
     sfx.wrong(); vibrate([40, 40, 40]);
     if (!G.missed.has(G.item.g)) markMissed();

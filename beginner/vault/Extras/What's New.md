@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, night: Πήρες φόρα?
+> - Today has a new card: **Πήρες φόρα;** (did you get momentum going?). Right answers add to it. It fades a little each day off, so a little every day beats a lot at once.
+> - Points count remembering, not just tapping: a word right again on a later day is worth 3, a color you moved up that is still right two days later is worth 5, your own sentence is worth 3. Up to 40 a day.
+> - **Send homework** now adds your φόρα, so your teacher can put the top three on the class board. Open **How φόρα works** on the card for the details.
+
 > [!info]- November 18, evening: every game is in the vault
 > - **Buzzer** and **Cousins** now open inside Obsidian, like Γιαγιά and Story Lines. No internet needed, and they update with the vault.
 > - **Play Buzzer with these** and **Play Cousins with these** (More on Today) open them in the vault with your words.

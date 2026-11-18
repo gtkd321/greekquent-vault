@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, midnight: one world at a time, and say it to solve it
+> - **Dances live in the Dance world only.** Village, Olive grove and Pet grow with green words and nothing else, so there's one kind of progress on the card. Pick Dance if you'd rather learn dances step by step. Any dances you already collected are kept, and they show again when you switch to Dance. Dance starts at step 0 the first time you pick it.
+> - **Say it fills in the puzzle:** in the story puzzle, say the line before building it. When your phone hears it right, the tiles fill in by themselves, in order, and you go on to the next sentence.
+
 > [!info]- November 18, late night: learn a dance step by step, and a steadier Say it
 > - **Dances, step by step:** every φόρα point is a step toward the dance you are learning, and steps add up across days. ο συρτός has 6 steps, ο καλαματιανός 12, then το τσάμικο (12), το χασάπικο (21) and το ζεϊμπέκικο. The first two take 1 point a step, later ones 2 or 3. Dances you already collected stay.
 > - **New world: Dance.** The easiest world: every point counts, not only green words. A festival floor with a dancer for each dance you learn and a mark for each step. Tap it to watch the steps you have so far. To switch, open How φόρα works and tap Change my world.

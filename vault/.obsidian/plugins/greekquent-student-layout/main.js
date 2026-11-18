@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18v';
+const VAULT_RELEASE = '2026-11-18w';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1925,7 +1925,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const obj = k => (fm[k] && typeof fm[k] === 'object' && !Array.isArray(fm[k])) ? fm[k] : {};
     const mem = this.moMem && Date.now() - this.moMem.t < 15000 ? this.moMem : null;
-    return { days: mem ? mem.days : obj('days'), got: obj('got'), up: obj('up'), met: obj('met'), dance: mem && mem.dance ? mem.dance : obj('dance'), steps: mem && mem.steps !== undefined ? +mem.steps : (fm.steps !== undefined && fm.steps !== null && Number.isFinite(+fm.steps) ? +fm.steps : Object.values(obj('days')).reduce((a, v) => a + (+v || 0), 0)), firsts: mem && mem.firsts ? mem.firsts : obj('firsts') };
+    return { days: mem ? mem.days : obj('days'), got: obj('got'), up: obj('up'), met: obj('met'), dance: mem && mem.dance ? mem.dance : obj('dance'), steps: mem && mem.steps !== undefined ? +mem.steps : (fm.steps !== undefined && fm.steps !== null && Number.isFinite(+fm.steps) ? +fm.steps : 0), firsts: mem && mem.firsts ? mem.firsts : obj('firsts') };
   }
   // φόρα on a day = sum of each day's points x (6/7)^(days since).
   moScore(days, at) {
@@ -1942,7 +1942,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠήρες φόρα; This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- Comebacks, today\'s line and the rally: Had it counts like a word. Not yet: 1 for trying.\n- A finished read-through, rally swap, song or kid card: 2. Homework sent: 3. A question to the class: 2. Once a day each.\n- Guess first in Look up: 1. A new word in the Word web: 1, up to 5 a day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
     }
     const today = ymd(new Date()), gap = d => { const [a, b, c] = String(d).split('-').map(Number); const n = new Date(); n.setHours(12, 0, 0, 0); return Math.round((n - new Date(a, b - 1, c, 12)) / 864e5); };
-    let gained = 0; const danced = [];
+    let gained = 0; const danced = []; const dw = (this.worldNow !== undefined ? this.worldNow : this.colors().world) === 'dance';
     await this.app.fileManager.processFrontMatter(f, fm => {
       for (const k of ['days', 'got', 'up', 'met', 'made', 'tried', 'did', 'web', 'said']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
       // tried and did only need today; yesterday's entries go.
@@ -1966,17 +1966,18 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         // A new word explored in the Word web: 1, once per word, up to 5 a day.
         else if (kind === 'web') { const n = Object.values(fm.web).filter(d => d === today).length; if (!fm.web[key] && n < 5) { fm.web[key] = today; pts += 1; } }
       }
-      // Steps carry across days (fm.steps never resets). The first time, start from the points already in My momentum, quietly.
-      if (!Number.isFinite(+fm.steps) || fm.steps === null || fm.steps === '') fm.steps = Object.values(fm.days || {}).reduce((a, v) => a + (+v || 0), 0);
+      // Steps belong to the Dance world only, so there is one kind of progress at a time. They carry across days (fm.steps never resets).
+      // Dance starts at step 0 the first time you pick it; in other worlds fm.steps waits untouched.
+      if (dw && (!Number.isFinite(+fm.steps) || fm.steps === null || fm.steps === '')) fm.steps = 0;
       const before = +fm.days[today] || 0, now = Math.min(MO_CAP, before + pts); gained = now - before;
       if (now) fm.days[today] = now;
       for (const d of Object.keys(fm.days)) if (gap(d) > 60) delete fm.days[d];
       // Steps: finishing a dance's real steps adds it to the collection and dates the first time. A guest dance can still visit on a big day.
       for (const k of ['dance', 'firsts', 'danced']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
       const add = k => { if (fm.danced[k] === today) return; fm.danced[k] = today; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); };
-      const was = danceNow(fm.steps); fm.steps = (+fm.steps || 0) + gained; const is = danceNow(fm.steps);
+      if (dw) { const was = danceNow(fm.steps); fm.steps = (+fm.steps || 0) + gained; const is = danceNow(fm.steps);
       for (let j = was.learned; j < is.learned; j++) { const k = DANCE_PATH[j % DANCE_PATH.length][0]; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); }
-      if (now >= 12 && Object.keys(fm.days).length >= 7 && dayHash(today) % 4 === 0) add(GUEST_DANCES[dayHash(today + 'g') % GUEST_DANCES.length][0]);
+      if (now >= 12 && Object.keys(fm.days).length >= 7 && dayHash(today) % 4 === 0) add(GUEST_DANCES[dayHash(today + 'g') % GUEST_DANCES.length][0]); }
       this.moMem = { days: { ...fm.days }, steps: fm.steps, dance: { ...fm.dance }, firsts: { ...fm.firsts }, t: Date.now() };
     });
     if (danced.length) this.danceAt = Date.now();
@@ -2032,8 +2033,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       word.setText(w === 'pet' ? `Φοράκι says: ${t}` : t); say(t);
     };
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
-    // Today's dances step across the front of the world: two dancers, plus one for each dance done today.
-    const nd = danceNow(this.moData().steps).learned, crew = nd ? Math.min(7, 2 + nd) : 0, long = Date.now() - (this.danceAt || 0) < 8000;
+    // Dancers live in the Dance world only; the other worlds grow with green words and nothing else.
+    const crew = 0, long = Date.now() - (this.danceAt || 0) < 8000;
     const run = () => {
       cancelAnimationFrame(cv._raf); const t0 = performance.now(), dur = long && crew ? 6000 : 3000;
       const step = now => { const t = Math.min(1, (now - t0) / dur); worldPaint(ctx, w, st, mood, t); if (crew) drawDancers(ctx, crew, t * dur / 3000); if (t < 1 && cv.isConnected) cv._raf = requestAnimationFrame(step); };
@@ -2082,7 +2083,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πήρες φόρα;', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πήρες φόρα;');
       top.createDiv({ cls: 'gq-mo-n', text: '0', attr: { 'aria-label': 'Momentum 0' } });
       this.worldDraw(c, 0, 0);
-      c.createDiv({ cls: 'gq-hint', text: 'φόρα means momentum. Do the story puzzle to start your world. Every point is a step: 6 steps and you know ο συρτός.' });
+      c.createDiv({ cls: 'gq-hint', text: 'φόρα means momentum. Pick one world. Dance is the quickest: every point is a step, and 6 steps is ο συρτός. Village, Olive grove and Pet grow with green words.' });
       return;
     }
     c.removeClass('is-fresh');
@@ -2104,7 +2105,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       'Remembering a word on a later day earns the most.',
       'Everything else you finish adds a little: puzzles, sentences, songs, homework.',
       'A day off fades it a bit, so a little every day wins.',
-      'Every point is also a step (βήμα) toward the dance you are learning. Steps add up across days: ο συρτός has 6, ο καλαματιανός 12, and later dances take 2 or 3 points a step.']) ul.createEl('li', { text: t });
+      ...(this.colors().world === 'dance' ? ['Every point is also a step (βήμα) toward the dance you are learning. Steps add up across days: ο συρτός has 6, ο καλαματιανός 12, and later dances take 2 or 3 points a step.'] : [])]) ul.createEl('li', { text: t });
     if (this.colors().world) { const li = ul.createEl('li'); li.appendText(this.colors().world === 'dance' ? 'Your dance floor grows with every point and never shrinks. ' : 'Your world grows with green words and never shrinks. '); const ch = li.createEl('a', { text: 'Change my world', href: '#' }); ch.onclick = e => { e.preventDefault(); this.setWorld(''); }; }
   }
   // ---------- Paper round: the app keeps the schedule, the paper cards do the work ----------
@@ -2475,7 +2476,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const bank = cur.createDiv({ cls: 'gq-cv-bank', attr: { 'aria-label': 'Greek word tiles', lang: 'el' } });
       cur.createDiv({ cls: 'gq-hint gq-cv-help', text: 'Build it in Greek: touch a word to hear it and add it (or drag it up). Touch it again to take it back.' });
       const placed = [];
-      const place = tl => { if (tl.used) return; say(tl.w); tl.used = true; tl.btn.addClass('gq-used'); const c = ans.createEl('button', { text: tl.w, cls: 'gq-tile' }); tl.clone = c; placed.push(tl); bindDrag(c, () => unplace(tl), bank); ans.removeClass('gq-bad'); };
+      const place = (tl, quiet) => { if (tl.used) return; if (!quiet) say(tl.w); tl.used = true; tl.btn.addClass('gq-used'); const c = ans.createEl('button', { text: tl.w, cls: 'gq-tile' }); tl.clone = c; placed.push(tl); bindDrag(c, () => unplace(tl), bank); ans.removeClass('gq-bad'); };
       const unplace = tl => { if (!tl.used) return; tl.used = false; tl.btn.removeClass('gq-used'); tl.clone.remove(); placed.splice(placed.indexOf(tl), 1); ans.removeClass('gq-bad'); };
       // Tap moves a tile; dragging it onto the other area does the same (pointer events work with touch and mouse).
       const bindDrag = (el, act, dest) => {
@@ -2496,7 +2497,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const chk = row.createEl('button', { text: 'Check', cls: 'mod-cta' });
       const hint = cur.createDiv({ cls: 'gq-hint gq-say', text: 'Touch here to hear the whole line in Greek.' }); hint.style.display = 'none'; hint.onclick = () => say(x[1]);
       const show = row.createEl('button', { text: 'Show me', cls: 'gq-mini' }); show.style.display = 'none';
-      this.sayIt(row, x[1], 'said:π:' + n + ':' + i, 'Say the line · +2');
+      // Said it right before building it: the tiles fill in by themselves, in order, and the line counts as solved.
+      const autofill = () => {
+        if (chk.disabled) return;
+        for (const tl of [...placed]) unplace(tl);
+        for (const w of target) { const tl = tiles.find(t => !t.used && norm(t.w) === norm(w)); if (tl) place(tl, true); }
+        chk.onclick();
+      };
+      this.sayIt(row, x[1], 'said:π:' + n + ':' + i, 'Say the line · +2', autofill);
       const fb = cur.createDiv('gq-hint gq-cv-fb');
       const en = this.lineEl(cur, x[1], words); en.addClass('gq-cv-en'); en.addClass('gq-say'); en.onclick = () => say(x[1]); en.style.display = 'none';
       show.onclick = () => { en.style.display = ''; show.remove(); };
@@ -2691,13 +2699,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   // Steps and dances on the φόρα card: how many steps today, the next dance, and the collection.
   stepsRow(c, todayPts) {
-    const d = danceNow(this.moData().steps), row = c.createDiv('gq-hint gq-steps');
-    row.appendText(`Βήματα (steps) today: ${todayPts}`);
-    const w = this.worldNow !== undefined ? this.worldNow : this.colors().world;
-    if (w !== 'dance') { row.appendText(' · learning '); const n = row.createSpan({ cls: 'gq-say', text: DANCE_NAME[d.k], attr: { lang: 'el' } }); n.onclick = () => say(DANCE_NAME[d.k]); row.appendText(`: step ${d.steps} of ${d.n}`); }
+    if ((this.worldNow !== undefined ? this.worldNow : this.colors().world) !== 'dance') return;
     const got = Object.entries(this.moData().dance || {}).filter(([k, v]) => DANCE_NAME[k] && +v > 0);
     if (!got.length) return;
     const order = [...DANCES.map(d => d[1]), ...GUEST_DANCES.map(d => d[0])]; got.sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0]));
+    c.createDiv({ cls: 'gq-hint gq-steps', text: 'Your dances' });
     const box = c.createDiv({ cls: 'gq-dances', attr: { 'aria-label': 'Your dances' } });
     for (const [k, v] of got) { const b = box.createEl('button', { cls: 'gq-dance' + (GUEST_DANCES.some(g => g[0] === k) ? ' is-guest' : ''), attr: { lang: 'el' } }); b.createSpan({ text: DANCE_NAME[k] }); if (+v > 1) b.createSpan({ cls: 'gq-dance-n', text: ' ×' + v }); b.onclick = () => say(DANCE_NAME[k]); }
   }
@@ -3123,15 +3129,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     draw();
   }
   // A "Say it" button: listen, then +2 φόρα when the phone hears the target. key keeps it to once a day.
-  sayIt(parent, target, key, label) {
+  // onWin (optional): what the screen does once the phone hears it right, e.g. fill in the story puzzle.
+  sayIt(parent, target, key, label, onWin) {
     const w = parent.createSpan('gq-sayit');
     const b = w.createEl('button', { text: label || 'Say it · +2', cls: 'gq-mini gq-sayit-b', attr: { 'aria-label': 'Say it out loud for 2 bonus φόρα' } });
     const fb = w.createSpan({ cls: 'gq-hint gq-sayit-fb' });
-    const win = () => { b.setText('Heard it · +2'); b.addClass('is-ok'); b.disabled = true; fb.setText(''); this.moAdd('said', key); };
+    const win = () => { b.setText('Heard it · +2'); b.addClass('is-ok'); b.disabled = true; fb.setText(''); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} };
     const typed = () => {
       b.remove(); fb.setText('');
       const i = w.createEl('input', { cls: 'gq-sayit-in', attr: { type: 'text', lang: 'el', placeholder: 'Tap the mic on the keyboard and say it', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' } });
-      const chk = () => { if (!i.value.trim()) return; if (heardIt(target, [i.value])) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); this.moAdd('said', key); } else fb.setText(' Not quite. Try again.'); };
+      const chk = () => { if (!i.value.trim()) return; if (heardIt(target, [i.value])) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} } else fb.setText(' Not quite. Try again.'); };
       i.onchange = chk; i.onkeydown = e => { if (e.key === 'Enter') chk(); };
       w.appendChild(fb);
     };

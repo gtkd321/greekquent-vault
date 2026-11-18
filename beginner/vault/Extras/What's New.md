@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19i · Greek voice off
+> On Android, the ringer switch silences calls and notifications but not the Greek voice. Now you can turn it off yourself: More, then **Greek voice: on (turn off)**. It stays off on this phone, games included, until you turn it back on the same way.
+
 > [!tip]- 2026-11-19h · New game: Τι λέμε; (hello and goodbye)
 > Greek greetings depend on the time of day and on whether you are coming or going. Καλησπέρα is only a hello; leaving, you say Καλό απόγευμα or Καλό βράδυ, and Καληνύχτα only at bedtime. The new game shows a sky, a clock and a scene, and you pick what to say, in three levels. Open it from Games, or from More on the καλημέρα, καλησπέρα and καληνύχτα word notes. Those notes also have a short When to say it box.
 

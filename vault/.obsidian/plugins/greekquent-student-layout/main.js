@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19h';
+const VAULT_RELEASE = '2026-11-19i';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -70,8 +70,10 @@ const ttsFix = t => String(t).replace(/(^|[^\p{L}])([ΑΕΗΙΟΥΩΆΈΉΊΌΎ�
 // The utterance is kept in a variable so it is not cleaned up before it speaks.
 let sayU = null, sayVoice = null;
 const greekVoice = () => { try { if (!sayVoice) sayVoice = (speechSynthesis.getVoices() || []).find(v => /^el/i.test(v.lang)) || null; } catch (e) {} return sayVoice; };
+// Greek voice off (this device): phones keep speaking in silent mode, because Android's ringer switch does not mute media.
+const gqQuiet = () => { try { return window.localStorage.getItem('gq-quiet') === '1'; } catch (e) { return false; } };
 const say = w => {
-  const ss = window.speechSynthesis; if (!ss || !w) return;
+  const ss = window.speechSynthesis; if (!ss || !w || gqQuiet()) return;
   const u = new SpeechSynthesisUtterance(ttsFix(w)); u.lang = 'el-GR'; const v = greekVoice(); if (v) u.voice = v; sayU = u;
   const go = () => { try { ss.resume(); } catch (e) {} ss.speak(u); };
   if (ss.speaking || ss.pending) { ss.cancel(); setTimeout(go, 80); } else go();
@@ -451,7 +453,7 @@ class AppView extends ItemView {
     let html = '';
     try { html = await this.app.vault.adapter.read(this.plugin.manifest.dir + '/apps/' + a.file); }
     catch (e) { c.createDiv({ cls: 'gq-hint', text: 'This one is still on its way. Tap More, then Update vault.' }); this.shown = ''; return; }
-    html = html.replace('<!--GQ_START-->', '<script>window.GQ_HASH=' + JSON.stringify(this.hash) + ';</script>');
+    html = html.replace('<!--GQ_START-->', '<script>window.GQ_HASH=' + JSON.stringify(this.hash) + ';' + 'try{var ss=window.speechSynthesis,sp=ss.speak.bind(ss);ss.speak=function(u){var q=false;try{q=localStorage.getItem(\'gq-quiet\')===\'1\';}catch(e){}if(!q)sp(u);};}catch(e){}' + '</script>');
     const f = c.createEl('iframe', { cls: 'gq-appframe', attr: { title: a.title, allow: 'microphone; autoplay' } });
     f.srcdoc = html;
   }
@@ -1930,6 +1932,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addSeparator();
     m.addItem(i => i.setTitle('Share feedback').setIcon('message-square').onClick(() => this.feedback()));
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
+    m.addItem(i => i.setTitle(gqQuiet() ? 'Greek voice: off (turn on)' : 'Greek voice: on (turn off)').setIcon(gqQuiet() ? 'volume-x' : 'volume-2').onClick(() => this.setQuiet(!gqQuiet())));
     m.addItem(i => i.setTitle('Setting up').setIcon('help-circle').onClick(() => this.openNote(SETUP)));
     m.addItem(i => i.setTitle(this.tourLeft() ? 'Take the tour' : 'Take the tour again').setIcon('map').onClick(() => this.tourStart()));
     m.addItem(i => i.setTitle('Update vault').setIcon('refresh-cw').onClick(() => this.updateVault(false)));
@@ -2775,6 +2778,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!el) return; el.scrollIntoView({ behavior: this.calmOn() ? 'auto' : 'smooth', block: 'start' });
     el.removeClass('gq-pulse'); void el.offsetWidth; el.addClass('gq-pulse'); setTimeout(() => el.removeClass('gq-pulse'), 1800);
   }
+  // The phone's ringer switch can't be read from an app, so the Greek voice has its own switch, kept on this device.
+  setQuiet(q) {
+    try { window.localStorage.setItem('gq-quiet', q ? '1' : '0'); } catch (e) {}
+    if (q) { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {} }
+    new Notice(q ? 'Greek voice off on this device. Turn it back on in More.' : 'Greek voice on.');
+  }
   calmOn() { return this.calmNow !== undefined ? this.calmNow : this.progFm().calm === true; }
   applyCalm() { document.body.classList.toggle('gq-calm', this.calmOn()); }
   async setCalm(on) { this.calmNow = on; this.applyCalm(); const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (on) fm.calm = true; else delete fm.calm; }); this.moPaint(); this.paintMore(); }
@@ -2862,8 +2871,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const r = s.createDiv('gq-row');
     const calm = r.createEl('button', { text: this.calmOn() ? 'Calm mode: on' : 'Calm mode: off', cls: 'gq-mini' + (this.calmOn() ? ' is-on' : '') }); calm.onclick = () => this.setCalm(!this.calmOn());
     const snd = r.createEl('button', { text: this.noise ? 'Focus sound: on' : 'Focus sound: off', cls: 'gq-mini' + (this.noise ? ' is-on' : '') }); snd.onclick = () => { const on = this.toggleNoise(); snd.setText(on ? 'Focus sound: on' : 'Focus sound: off'); snd.toggleClass('is-on', on); };
+    const vo = r.createEl('button', { text: gqQuiet() ? 'Greek voice: off' : 'Greek voice: on', cls: 'gq-mini' + (gqQuiet() ? '' : ' is-on') }); vo.onclick = () => { this.setQuiet(!gqQuiet()); vo.setText(gqQuiet() ? 'Greek voice: off' : 'Greek voice: on'); vo.toggleClass('is-on', !gqQuiet()); };
     const wk = r.createEl('button', { text: 'Walk mode', cls: 'gq-mini' }); wk.onclick = () => this.walkMode();
-    s.createDiv({ cls: 'gq-hint', text: 'Calm mode stops the moving parts. Focus sound is a soft hiss (pink noise) that helps some people and bothers others, so it is off until you turn it on. Walk mode plays your Greek hands-free.' });
+    s.createDiv({ cls: 'gq-hint', text: 'Calm mode stops the moving parts. Focus sound is a soft hiss (pink noise) that helps some people and bothers others, so it is off until you turn it on. Walk mode plays your Greek hands-free. Greek voice off keeps the app quiet on this device, for class or a silent phone: Android\'s ringer switch does not mute it.' });
     const plan = this.planNowGet(); if (plan) s.createDiv({ cls: 'gq-hint', text: `Your plan: after ${plan}, today's line.` });
     if (!this.app.vault.getAbstractFileByPath(EXTRAS + '13 Focus tips.md')) return;
     const tip = s.createEl('a', { text: 'Focus tips', href: '#', cls: 'gq-hint' }); tip.onclick = e => { e.preventDefault(); this.openNote(EXTRAS + '13 Focus tips.md'); };

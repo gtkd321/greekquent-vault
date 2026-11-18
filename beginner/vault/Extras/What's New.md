@@ -3,9 +3,7 @@
 Back to [[Today]].
 
 > [!info]- November 18, night: Your level stays lit
-> - The **Beginner / Intermediate** switch keeps the level you picked lit in purple, on Today and on lesson pages.
-> - The top of Today now says which Greekquent you have (Greekquent Intermediate or Greekquent Beginner).
-> - Obsidian shows your vault's folder name in the vault list. To see Greekquent Intermediate there too, rename the vault in Obsidian's vault switcher. This is optional, and your work and colors stay put.
+> - The top of Today now says which Greekquent you have (Greekquent Beginner).
 
 > [!info]- November 18, evening: Games from a word card
 > - On a word card, **More** now has **Play Γιαγιά with this word** (the word and the words it often appears with) and a **Games** button.

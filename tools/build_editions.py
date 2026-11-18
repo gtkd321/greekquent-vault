@@ -72,4 +72,7 @@ if os.path.exists(wn):
     t = open(wn, encoding='utf-8').read()
     t = re.sub(r"\n> - \*\*Beginner and Intermediate:\*\* this copy has both sets of scripts[^\n]*", '', t)
     t = re.sub(r"\n> - The download is now called \*\*Greekquent Intermediate\*\*[^\n]*", '', t)
+    t = re.sub(r"\n> - The \*\*Beginner / Intermediate\*\* switch[^\n]*", '', t)
+    t = re.sub(r"\n> - Obsidian shows your vault's folder name[^\n]*", '', t)
+    t = t.replace('(Greekquent Intermediate or Greekquent Beginner)', '(Greekquent Beginner)')
     open(wn, 'w', encoding='utf-8').write(t)

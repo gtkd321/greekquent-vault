@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, after midnight: Word web card moved
+> - When you hold a word in the **Word web**, its card now shows above the web, over the instructions. It no longer covers the other words.
+
 > [!info]- November 18, midnight: Your world
 > - The φόρα card now has a small world to grow. Pick one: a **Village** that grows from ancient to Byzantine to an island harbor to a modern city, an **Olive grove** from saplings to harvest to the press to a tasting, or a **Pet**, Φοράκι, that hatches and grows.
 > - **Green words build it**, and it never shrinks. φόρα only sets the weather: a quiet night, an evening, a sunny day, or a festival.

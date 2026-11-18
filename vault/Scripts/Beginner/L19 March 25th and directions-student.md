@@ -49,7 +49,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Δεν βλέπω την πλατεία.** | I don't see the square. | Shade your eyes, look around, then shrug. |
 
 > [!todo]- Word list: 10 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > πίσω (95) · κοντά (240) · δίπλα (433) · δεξιά (659) · αριστερά (745) · μπλε (795) · χρόνια πολλά (1417) · η πλατεία (1436) · ευθεία (1499) · μακριά (1500)
 

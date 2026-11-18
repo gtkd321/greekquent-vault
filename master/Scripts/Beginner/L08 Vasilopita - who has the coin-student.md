@@ -46,7 +46,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Καλή χρονιά!** | Happy New Year! | Raise a glass for a toast. |
 
 > [!todo]- Word list: 11 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > για (13) · ποιος (52) · τρία (174) · μπράβο (405) · έξι (410) · δέκα (460) · το κομμάτι (461) · η γιαγιά (606) · τέσσερα (631) · η χρονιά (989) · εννιά (1392)
 

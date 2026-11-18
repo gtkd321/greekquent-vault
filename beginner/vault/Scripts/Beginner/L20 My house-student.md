@@ -47,7 +47,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **καινούργιο ή παλιό;** | new or old? | Shiny sparkle hands, then bend over like an old person. |
 
 > [!todo]- Word list: 19 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > κάτι (41) · μικρός (136) · μένω (201) · η πόρτα (225) · το δωμάτιο (260) · παλιός (287) · καινούργιος (536) · το μπάνιο (603) · το διαμέρισμα (711) · η κουζίνα (754) · κόκκινος (810) · μαύρος (839) · το χρώμα (934) · ο κήπος (1032) · ο σκύλος (1174) · πράσινος (1291) · άσπρος (1428) · κίτρινος (1429) · γκρι (1431)
 

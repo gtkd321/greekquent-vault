@@ -71,7 +71,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Δεν ξέρω.** | I don't know. | Shrug with palms up. |
 
 > [!todo]- Word list: 15 new words to black-mark at home
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > να (3) · είμαι (4) · αυτός (9) · μου (12) · εδώ (28) · ξέρω (33) · καλός (47) · πού (87) · η δουλειά (94) · η μέρα (103) · δύο (104) · το λεπτό (140) · πέντε (323) · μισό (1398) · το ευρώ (1496)
 

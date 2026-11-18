@@ -47,7 +47,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Καλή όρεξη!** | Enjoy your meal! | Both hands sweep over the table, offering the food. |
 
 > [!todo]- Word list: 12 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > θα (7) · αμέσως (219) · το άτομο (319) · ο λογαριασμός (572) · η μπίρα (654) · καλησπέρα (677) · το ψάρι (798) · τρώω (902) · το ποτήρι (951) · το κρέας (1078) · η σαλάτα (1403) · καλή όρεξη (1415)
 

@@ -47,7 +47,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Είναι νωρίς. / Είναι αργά.** | It's early. / It's late. | Yawn and stretch for νωρίς; tap the wrist anxiously for αργά. |
 
 > [!todo]- Word list: 10 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > αργά (185) · μισός (376) · παρά (445) · νωρίς (604) · η Παρασκευή (1011) · η Δευτέρα (1182) · η Τρίτη (1389) · η Τετάρτη (1390) · η Πέμπτη (1391) · το τέταρτο (1399)
 

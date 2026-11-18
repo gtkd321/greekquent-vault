@@ -49,7 +49,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **…αλλά…** | …but… | One hand out, then the other hand out on the other side. |
 
 > [!todo]- Word list: 10 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > ο, η, το (1) · δεν (6) · αλλά (27) · θέλω (29) · λίγο (85) · καλώς ήρθες (400) · ο καφές (409) · το κρασί (704) · το τσάι (732) · το ψωμί (1269)
 

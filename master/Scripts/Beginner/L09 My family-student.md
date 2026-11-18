@@ -47,7 +47,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Θέλουν…** | They want… | Point at two other people, then reach out eagerly. |
 
 > [!todo]- Word list: 11 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > εσείς (45) · ή (65) · το παιδί (71) · αυτοί (80) · η μητέρα (172) · ο πατέρας (190) · η φωτογραφία (292) · γλυκός (373) · η αδερφή (397) · ο αδερφός (496) · ο παππούς (894)
 

@@ -50,7 +50,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Τι έχεις;** | What do you have? | Both palms up, shoulders slightly raised. |
 
 > [!todo]- Word list: 24 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > και (2) · εγώ (5) · σε (8) · ένας, μία, ένα (10) · εσύ (15) · σου (16) · έχω (17) · τι (18) · όχι (22) · ναι (23) · λέω (38) · σας (55) · ευχαριστώ (56) · πώς (66) · παρακαλώ (83) · γεια (96) · ορίστε (249) · το νερό (270) · το βιβλίο (394) · το κλειδί (632) · η τσάντα (645) · το κινητό (664) · το τετράδιο (1472) · το στυλό (1474)
 

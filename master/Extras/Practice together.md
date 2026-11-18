@@ -1,7 +1,7 @@
 ---
 tags: [greek-student, focus]
 when: "Tuesdays 6:15–7:15 pm Eastern"
-link: ""
+link: "https://meet.google.com/cpp-zqsz-htm"
 ---
 # Practice together
 

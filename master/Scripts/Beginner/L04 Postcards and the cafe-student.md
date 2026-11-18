@@ -50,7 +50,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Μπορείς τώρα;** | Can you now? | Point at the floor twice, quickly ("now"). |
 
 > [!todo]- Word list: 12 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > κάνω (21) · τώρα (37) · άλλος (43) · τίποτα (63) · το σπίτι (75) · βλέπω (89) · καλημέρα (351) · η εκκλησία (621) · ο ήλιος (651) · η θάλασσα (668) · το βουνό (909) · η βάρκα (1200)
 

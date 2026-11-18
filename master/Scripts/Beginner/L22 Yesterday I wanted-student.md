@@ -47,7 +47,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Πέρσι ήμουν στην Ελλάδα.** | Last year I was in Greece. | Throw your thumb far back over the shoulder, then point east. |
 
 > [!todo]- Word list: 5 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > έτσι (44) · όταν (48) · το αυτοκίνητο (313) · χθες (317) · κουρασμένος (846)
 

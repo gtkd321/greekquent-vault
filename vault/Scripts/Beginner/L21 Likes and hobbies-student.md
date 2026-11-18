@@ -48,7 +48,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Πάω στο γυμναστήριο.** | I go to the gym. | Lift an imaginary dumbbell. |
 
 > [!todo]- Word list: 10 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > του (60) · έλα (72) · μου αρέσει (114) · κάθε (125) · ο λόγος (144) · τρέχω (295) · ελληνικός (398) · το τραγούδι (613) · το χιλιόμετρο (1146) · η μουσική (1459)
 

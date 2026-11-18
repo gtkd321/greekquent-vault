@@ -48,7 +48,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Μιλάω λίγα ελληνικά.** | I speak a little Greek. | Talking-puppet hand, then pinch fingers for "a little". |
 
 > [!todo]- Word list: 14 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > εκεί (54) · πιο (86) · συγγνώμη (148) · μιλάω (156) · ο καιρός (166) · καταλαβαίνω (180) · σημαίνει (186) · ο μήνας (217) · ξανά (220) · λίγος (297) · τα ελληνικά (300) · μαθαίνω (406) · σιγά (719) · αγγλικός (927)
 

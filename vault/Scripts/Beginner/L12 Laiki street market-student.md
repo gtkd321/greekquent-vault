@@ -46,7 +46,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Ένα κιλό ντομάτες, παρακαλώ.** | A kilo of tomatoes, please. | Weigh the bag, then cup a round tomato. |
 
 > [!todo]- Word list: 13 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > πολύ (31) · όλος (32) · επίσης (243) · εκατό (1095) · είκοσι (1191) · το κιλό (1199) · η πατάτα (1330) · έντεκα (1393) · δώδεκα (1394) · τριάντα (1395) · πενήντα (1396) · η ελιά (1400) · η ντομάτα (1404)
 

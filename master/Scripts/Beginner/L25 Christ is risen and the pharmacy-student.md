@@ -47,7 +47,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Πονάει ο λαιμός μου.** | My throat hurts. | Hold your throat and swallow painfully. |
 
 > [!todo]- Word list: 12 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > αν (25) · η φορά (84) · το χέρι (158) · δίνω (161) · το κεφάλι (257) · το πόδι (275) · ο γιατρός (278) · ο λαιμός (680) · πονάω (723) · το δόντι (848) · η πλάτη (1425) · η κοιλιά (1426)
 

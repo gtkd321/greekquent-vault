@@ -47,7 +47,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **στο σπίτι** | at home | Make a roof over your head with both hands. |
 
 > [!todo]- Word list: 8 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > μαζί (51) · μετά (90) · πάντα (92) · δουλεύω (255) · διαβάζω (488) · η τηλεόραση (599) · πίνω (670) · το διάλειμμα (1126)
 

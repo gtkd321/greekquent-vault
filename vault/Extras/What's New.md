@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19e · Print and download
+> The Handouts folder moved to one page outside the app: [[Print and download]]. It has the 1,500 words with a box to mark in color, the Verb Sheet, Sentence Tiles, the workbook (one lesson at a time or the whole year), both textbooks and the flashcard decks. The app and the sidebar are shorter. If you wrote in a handout, it is saved in My Work.
+> 
+> Practice together now has a Join button: Tuesdays 6:15–7:15 pm Eastern on Google Meet.
+
 > [!tip]- 2026-11-19d · Α sounds like Α
 > A capital vowel on its own, like Α! or Ε;, and short cries like Ωχ, Αχ and Ωπ, are now read aloud as sounds, not as "κεφαλαίο Α" or letter by letter. This works in every page and game.
 > 

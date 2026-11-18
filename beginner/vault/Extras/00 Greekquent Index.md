@@ -5,7 +5,7 @@
 **Start here:** [[Today]] · [[Setting up]] · [[What's New]] · [[11 Classroom Greek]]
 
 > [!summary]- Lessons
-> - Your lesson pages are in **Scripts/Beginner**, one per class. The whole year is also in Handouts as one workbook. Not sure which file to open? See [[00 Which file is which-student|Which file is which]].
+> - Your lesson pages are in **Scripts/Beginner**, one per class. The whole year is also one printable workbook on the [[Print and download]] page, with the textbook, the Verb Sheet, Sentence Tiles and the flashcard decks.
 > - Verbs: [[02 Verb Tables]].
 > - Five words a day for a year: [[07 Fluent in a Year]].
 

@@ -47,7 +47,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Θα πάω…** | I'll go… | Step forward onto the "tomorrow" line on the floor. |
 
 > [!todo]- Word list: 4 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > ο φίλος (112) · η ταινία (333) · η βόλτα (635) · το Σαββατοκύριακο (1075)
 

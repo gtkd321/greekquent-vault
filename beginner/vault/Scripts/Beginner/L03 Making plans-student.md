@@ -50,7 +50,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 | **Έχεις ώρα;** | Do you have time? | Tap your wrist. |
 
 > [!todo]- Word list: 15 new words to black-mark
-> Find these on your printed word list (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
+> Find these on your [printed word list](https://gtkd321.github.io/frequent/greek/print/words.html) (the number is the word's place on the list) and mark them in black today. At each review, re-mark them red, yellow, or green.
 >
 > μπορώ (24) · εμείς (30) · γιατί (34) · καλά (39) · εντάξει (40) · πολύς (77) · η ώρα (101) · σήμερα (137) · πόσο (145) · λυπάμαι (155) · το βράδυ (200) · αύριο (204) · το πρωί (256) · τέλεια (279) · βέβαια (334)
 

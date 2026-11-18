@@ -38,16 +38,16 @@ button { font: inherit; cursor: pointer; border-radius: 12px; border: 0; min-hei
 #hudLives { letter-spacing: 2px; color: var(--red); font-size: 18px; }
 #stage { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; }
 canvas { display: block; touch-action: none; }
-/* Two thumb groups at the edges: left and up for the left thumb, down and right for the right thumb.
-   The middle stays empty, so the phone's own bottom buttons never cover the arrows. */
-#pad { display: grid; grid-template-columns: 64px 64px 1fr 64px 64px; grid-template-rows: 60px; gap: 8px; padding: 8px max(12px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-right)); }
+/* Two rows at the thumbs: ▲ above ◀ for the left thumb, ▼ above ▶ for the right thumb.
+   The middle stays empty, and the bottom gap keeps the arrows above Obsidian's own bottom bar (search, tabs). */
+#pad { display: grid; grid-template-columns: 76px 1fr 76px; grid-template-rows: 64px 64px; gap: 10px; padding: 10px max(14px, env(safe-area-inset-left)) calc(72px + env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-right)); }
 #pad[hidden] { display: none; }
-#pad button { background: var(--card); border: 2px solid var(--line); color: var(--ink); font-size: 22px; min-height: 60px; padding: 0; user-select: none; -webkit-user-select: none; }
+#pad button { background: var(--card); border: 2px solid var(--line); color: var(--ink); font-size: 26px; min-height: 64px; padding: 0; user-select: none; -webkit-user-select: none; }
 #pad button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
-#pad [data-d=left] { grid-column: 1; grid-row: 1; }
-#pad [data-d=up] { grid-column: 2; grid-row: 1; }
-#pad [data-d=down] { grid-column: 4; grid-row: 1; }
-#pad [data-d=right] { grid-column: 5; grid-row: 1; }
+#pad [data-d=up] { grid-column: 1; grid-row: 1; }
+#pad [data-d=left] { grid-column: 1; grid-row: 2; }
+#pad [data-d=down] { grid-column: 3; grid-row: 1; }
+#pad [data-d=right] { grid-column: 3; grid-row: 2; }
 .screen { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(246, 239, 226, .92); overflow-y: auto; z-index: 5; }
 .screen[hidden] { display: none; }
 #quiz { background: rgba(43, 38, 32, .55); }

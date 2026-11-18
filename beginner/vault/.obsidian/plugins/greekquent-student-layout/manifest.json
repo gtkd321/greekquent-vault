@@ -1,7 +1,7 @@
 {
   "id": "greekquent-student-layout",
   "name": "Greekquent Student Layout",
-  "version": "2.20.9",
+  "version": "2.20.10",
   "minAppVersion": "1.4.0",
   "description": "Simplified student view: file list on the left, study tools on the right, no whole-vault graph and no editing buttons. Turn it off to get the full Obsidian interface back.",
   "author": "Greekquent",

@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, later: Γιαγιά arrows on two rows
+> - In **Γιαγιά** on a phone, the arrows are bigger and sit higher, above Obsidian's search bar: ▲ over ◀ on the left, ▼ over ▶ on the right. The house is a little smaller to make room.
+
 > [!info]- November 18: Double-tap for the plural
 > - In the **Word web**, double-tap a thing or a person (a purple word) to hear more than one: το σπίτι becomes τα σπίτια. One tap still moves there, as before.
 > - Every word card for a thing or a person now shows its plural next to "say it".

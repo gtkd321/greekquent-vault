@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-18y';
+const VAULT_RELEASE = '2026-11-18z';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3102,9 +3102,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const set = LETTER_SETS[n - 1], miss = new Map(); let left = set.length, sel = null;
       const bank = c.createDiv('gq-abc-bank'), grid = c.createDiv('gq-abc-grid');
       const cards = this.shuf(set.slice()).map(x => {
-        const k = grid.createDiv({ cls: 'gq-abc-card', attr: { role: 'button', tabindex: '0', 'aria-label': `Sound: ${x.s}, ${x.h}` } }); k.gqL = x;
+        const k = grid.createDiv({ cls: 'gq-abc-card', attr: { role: 'button', tabindex: '0', 'aria-label': `Sound ${x.h}` } }); k.gqL = x;
         k.createDiv({ cls: 'gq-abc-slot', attr: { lang: 'el' } });
-        const t = k.createDiv('gq-abc-txt'); const tb = t.createDiv('gq-abc-top'); tb.createEl('b', { text: x.s }); tb.createSpan({ cls: 'gq-abc-hear', text: 'Hear' }); t.createSpan({ cls: 'gq-hint', text: x.h });
+        const t = k.createDiv('gq-abc-txt'); const tb = t.createDiv('gq-abc-top'); // English cue word, not a bare Latin letter (p looks like ρ, n like η, v like ν).
+        tb.createEl('b', { text: x.h.replace(/^like /, '') }); tb.createSpan({ cls: 'gq-abc-hear', text: 'Hear' });
         const act = () => { if (sel && !k.hasClass('is-ok')) { const s0 = sel; sel = null; s0.removeClass('is-sel'); match(s0, k); } else say(x.say); };
         k.onclick = act; k.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } };
         return k;

@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-18z · Letter sounds show a word, not a letter
+> The letter games now show an English cue word like "pig" instead of a bare "p". Some Latin letters look like Greek ones (p and ρ, n and η, v and ν), and "a" gave α away.
+
 > [!info]- November 19, later: every point grows your world
 > - **Your world grows with φόρα now,** not only green words. Every game, puzzle, letter match and green word moves it. The card says how many more φόρα until it grows. Nothing shrinks: your world starts at least where it was.
 

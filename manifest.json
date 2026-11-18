@@ -1,5 +1,5 @@
 {
-"release": "2026-11-18y",
+"release": "2026-11-18z",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -22,8 +22,8 @@
 "size": 51071
 },
 ".obsidian/plugins/greekquent-student-layout/apps/giagia.html": {
-"sha256": "24f783f033a52d4f244d823d531a15373049dcc5f05f7c6d1a86bce4138f4376",
-"size": 145843
+"sha256": "fb03ea810d4fba27e8e36319dfe66610f686ba41d1b6206b69c51f653479318a",
+"size": 146169
 },
 ".obsidian/plugins/greekquent-student-layout/apps/storylines.html": {
 "sha256": "2a805ea6ec0e7311bb0cfd1c6f9d6a9948cc90fbedc6968cdc53dc282048b295",
@@ -34,11 +34,11 @@
 "size": 95488
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "d45e277f6250a7a314a86893af0973877bddf7c32a14da2fe359313597308db7",
-"size": 332786
+"sha256": "f0b744c4f3e0f78112e1beb0570750cc564e4c50c15a886daea0575c055cd8b4",
+"size": 332848
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "ed1e54826b016ae7ec86edea287bfd4aad04d6faae060307281bc15120ff037f",
+"sha256": "3db28208785b2ecde0ed56a58f1a97c1fc2c7db47df5398575e328e80f7a25e5",
 "size": 375
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -46,8 +46,8 @@
 "size": 272119
 },
 ".obsidian/plugins/greekquent-student-layout/styles.css": {
-"sha256": "1381e402a3c4b7ac661e96c9d0034cd76c89ebda5fcda6a6651e2255045dc5ec",
-"size": 45673
+"sha256": "639dced9e7d83142a31a229bbc240cb6a5c0ff1d3090d32858a8c4a10f58e0e1",
+"size": 45712
 },
 ".obsidian/plugins/greekquent-student-layout/verbs.json": {
 "sha256": "00e00b6ade1bfc6dc9bdc85b7daef690e8a4a0e3cbb2b57ae0c9e0596c27767d",
@@ -170,8 +170,8 @@
 "size": 2491
 },
 "Extras/What's New.md": {
-"sha256": "6de0a9cab2ddb38fb0faf023f3fc52a1cfe6a4c301ec6faf2daa6036ee3055dd",
-"size": 29102
+"sha256": "50e025ed2b0eedad186dc2d30a7df7677dd287d045b176fa007e8985f1b62e8f",
+"size": 29344
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

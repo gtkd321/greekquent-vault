@@ -7,7 +7,8 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18w';
+// © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
+const VAULT_RELEASE = '2026-11-18x';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -36,6 +37,8 @@ const SETUP = 'Extras/Setting up.md';
 const INDEX = 'Extras/00 Greekquent Index.md';
 const GAMES = 'Extras/09 Games.md';
 const EXTRAS = 'Extras/';
+const CARD_IDEAS = EXTRAS + '14 Card ideas.md', COPYRIGHT_NOTE = EXTRAS + 'Copyright.md';
+const COPYRIGHT = '© 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.';
 // Editions of the student vault. Beginner has this file ({"edition": "beginner"}) and updates from the beginner/ folder of the same repo.
 // No file = the Intermediate edition (Beginner and Intermediate scripts, with a switch between them).
 const EDITION_MARK = '.obsidian/greekquent-edition.json';
@@ -1562,7 +1565,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (f.path.startsWith(MY_WORK)) { new Notice('My Work notes are private. Open a word or lesson note instead.'); return; }
     new VideoAskModal(this.app, this, f).open();
   }
-  async shareVideo(file, text) {
+  async shareVideo(file, text, saveDir) {
     const mobile = document.body.classList.contains('is-mobile') || /Android|iPhone|iPad/.test(navigator.userAgent);
     // Copy the message first: some apps drop the text when a video is attached, so it can be pasted as a caption.
     try { navigator.clipboard.writeText(text); } catch (e) {}
@@ -1570,18 +1573,18 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       try { await navigator.share({ files: [file], text }); new Notice('If the message is missing in GroupMe, paste it: it is copied.', 8000); return true; }
       catch (e) { if (e && e.name === 'AbortError') return false; }
     }
-    if (mobile) {
-      // Phone without file sharing: save into My Work, which the Files app (iPhone) or file manager (Android) can open.
-      const dir = MY_WORK + 'Video questions';
+    if (mobile && !window.GQW) {
+      // Obsidian on a phone without file sharing: save into My Work (the web app downloads instead, below), which the Files app (iPhone) or file manager (Android) can open.
+      const dir = MY_WORK + (saveDir || 'Video questions');
       try { if (!this.app.vault.getAbstractFileByPath(dir)) await this.app.vault.createFolder(dir);
         await this.app.vault.createBinary(`${dir}/${file.name}`, await file.arrayBuffer());
-        new Notice(`Saved to ${dir}/${file.name} and copied the message. In GroupMe, attach the video from Files and paste the message.`, 15000); return true; }
-      catch (e) { new Notice('Could not save the video. Record it with the camera app and send it in GroupMe instead.', 10000); return false; }
+        new Notice(`Saved to ${dir}/${file.name} and copied the message. In GroupMe, attach the ${file.type.startsWith('image') ? 'photo' : 'video'} from Files and paste the message.`, 15000); return true; }
+      catch (e) { new Notice(file.type.startsWith('image') ? 'Could not save the photo. Take it with the camera app and send it in GroupMe instead.' : 'Could not save the video. Record it with the camera app and send it in GroupMe instead.', 10000); return false; }
     }
     // Computer: download the video and copy the message.
     const a = document.createElement('a'); a.href = URL.createObjectURL(file); a.download = file.name; document.body.appendChild(a); a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
-    new Notice(`Saved ${file.name} and copied the message. In GroupMe, attach the video and paste the message.`, 12000);
+    new Notice(`Saved ${file.name} and copied the message. In GroupMe, attach the ${file.type.startsWith('image') ? 'photo' : 'video'} and paste the message.`, 12000);
     return true;
   }
   async questions() {
@@ -1894,6 +1897,28 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.paintBars();
   }
   cardPhoto(word) { return CARD_DIR + word.replace(/[\\/:*?"<>|#^\[\]]/g, '_') + '.jpg'; }
+  // Send a card photo to the teacher, who looks for card-making habits worth teaching the whole class.
+  // The student decides whether it may be shown to the class (always without a name). 2 φόρα, once a day.
+  sendCard(word) {
+    const m = new Modal(this.app), c = m.contentEl; m.titleEl.setText('Send your card to your teacher');
+    c.createEl('p', { text: 'Your teacher looks at cards to find tricks that help, then shares the best ideas with everyone.' });
+    const q = c.createEl('input', { type: 'text', attr: { placeholder: 'What did you try on this card? (optional)', style: 'width:100%;margin:4px 0 10px', autocomplete: 'off' } });
+    c.createEl('p', { text: 'Can your teacher show this card to the class, without your name?' });
+    const r = c.createDiv({ attr: { style: 'display:flex;gap:8px;flex-wrap:wrap' } });
+    const go = async ok => {
+      m.close();
+      try {
+        const buf = await this.app.vault.adapter.readBinary(this.cardPhoto(word));
+        const file = new File([buf], 'card-' + word.replace(/[^\p{L}\p{N}]+/gu, '-') + '.jpg', { type: 'image/jpeg' });
+        const tried = q.value.trim();
+        const text = `Greekquent card: ${word}\nShow the class (no name): ${ok ? 'yes' : 'no, just my teacher'}` + (tried ? `\nWhat I tried: ${tried}` : '');
+        if (await this.shareVideo(file, text, 'Card photos to send')) { this.moAdd('did', 'cardsend', 2); this.moFlush(); }
+      } catch (e) { new Notice('That card photo could not be sent. Take a new photo and try again.'); }
+    };
+    r.createEl('button', { text: 'Yes, show the class', cls: 'mod-cta' }).onclick = () => go(true);
+    r.createEl('button', { text: 'Just my teacher' }).onclick = () => go(false);
+    m.open();
+  }
   // A photo of the card, made small (about 40 KB) so it fits on any phone.
   pickPhoto(word, done) {
     const inp = createEl('input', { attr: { type: 'file', accept: 'image/*', capture: 'environment' } });
@@ -2227,6 +2252,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const img = row.createEl('img', { cls: 'gq-card-img', attr: { alt: 'Your card for ' + rec.word, src: (u => u.startsWith('data:') || !this.photoT ? u : u + (u.includes('?') ? '&' : '?') + this.photoT)(ad.getResourcePath(p)) } });
       const r = row.createEl('a', { text: 'New photo', href: '#', cls: 'gq-hint' }); r.onclick = e => { e.preventDefault(); this.pickPhoto(rec.word, () => this.paintPhoto(rec, true)); };
       img.onclick = () => img.toggleClass('is-big', !img.hasClass('is-big'));
+      row.appendText(' · '); const sd = row.createEl('a', { text: 'Send to teacher', href: '#', cls: 'gq-hint' }); sd.onclick = e => { e.preventDefault(); this.sendCard(rec.word); };
+      if (this.app.vault.getAbstractFileByPath(CARD_IDEAS)) { row.appendText(' · '); const ci = row.createEl('a', { text: 'Card ideas', href: '#', cls: 'gq-hint' }); ci.onclick = e => { e.preventDefault(); this.openNote(CARD_IDEAS); }; }
     } else {
       const a = row.createEl('a', { text: 'Add a photo of your card', href: '#', cls: 'gq-hint' }); a.onclick = e => { e.preventDefault(); this.pickPhoto(rec.word, () => this.paintPhoto(rec, true)); };
       row.createSpan({ cls: 'gq-hint', text: ' (optional)' });
@@ -3860,6 +3887,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     foot.appendText(` · vault ${rel} (${this.editionName()}) · `);
     if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
     const ix = foot.createEl('a', { text: 'Index', href: '#' }); ix.onclick = e => { e.preventDefault(); this.openNote(INDEX); };
+    const cr = box.createDiv({ cls: 'gq-hint gq-more-foot gq-copyright', text: COPYRIGHT + ' ' });
+    const tn = [COPYRIGHT_NOTE, 'Copyright.md'].find(x => this.app.vault.getAbstractFileByPath(x));
+    if (tn) { const t = cr.createEl('a', { text: 'Terms', href: '#' }); t.onclick = e => { e.preventDefault(); this.openNote(tn); }; }
   }
   // The newest lesson so far: this week's, or the last week that had class.
   async currentLesson() {

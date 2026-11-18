@@ -1,5 +1,5 @@
 {
-"release": "2026-11-18w",
+"release": "2026-11-18x",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -38,11 +38,11 @@
 "size": 95488
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "6be9e207fdfdc4b2214d5bac2d17dda09fdb6037266aad64e358f44a63793374",
-"size": 328751
+"sha256": "3b94ac4d3319ed1a7ec64fede18b528464ab4cda6b09c73fd0e634fd20c44265",
+"size": 331893
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "5334d31fa0e0b939b1c2039084b28fe8dcc91b8f88d902193dab745442a9c10f",
+"sha256": "780636c20d2dde21511f1a05e3191b4a792fc6b1cc735cb659d4302a804e9e9a",
 "size": 375
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -125,6 +125,14 @@
 "sha256": "66d5fdc6f992e35f208ae19a4124cc8dd9c1bd3b5cda87c107ff2e03a597cd76",
 "size": 1690
 },
+"Extras/14 Card ideas.md": {
+"sha256": "6c2fab7c1425291f0edaa4050eaccdf991fb813d6a5df61ae4d3b84f96f6f2fa",
+"size": 815
+},
+"Extras/Copyright.md": {
+"sha256": "4c89dc8afd438c7ff09b696f47157538eabe4c16f9dc6d3c7751447b1df183ea",
+"size": 627
+},
 "Extras/Handouts/00 Which file is which-student.md": {
 "sha256": "e040bf40731c2e9f4c0049bbef14d61016117cad0a8d7619c03ad3acac044d98",
 "size": 734
@@ -166,8 +174,8 @@
 "size": 2491
 },
 "Extras/What's New.md": {
-"sha256": "e6654baa176f800c980b56e229387dc05186d266a2c5083f15ee6a7e60cc8478",
-"size": 27556
+"sha256": "ee0a3b137f98e43c88212491073da9e93f9e9d90ca78dca2e44f7313a29bdacb",
+"size": 28061
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

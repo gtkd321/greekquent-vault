@@ -361,3 +361,9 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-song-line:not(.is-now) .gq-syl { color: var(--text-normal); }
 .gq-song-move { margin-top: 1px; }
 .gq-song-line.is-now .gq-syl.is-on { color: var(--text-accent, var(--interactive-accent)); }
+/* Kids dessert word */
+.gq-dessert .gq-dshow { text-align: center; }
+.gq-dessert .gq-dword { font-size: 2em; font-weight: 600; padding: 8px 20px; height: auto; margin: 8px auto 2px; display: inline-block; }
+.gq-dessert .gq-den { color: var(--text-muted); margin-bottom: 8px; }
+.gq-dessert .gq-dpad canvas { width: 100%; max-width: 600px; aspect-ratio: 15 / 8; border: 2px dashed var(--background-modifier-border); border-radius: 12px; touch-action: none; background: var(--background-primary); display: block; margin: 0 auto 6px; }
+.gq-dessert .gq-dadd input { flex: 1 1 140px; min-width: 0; }

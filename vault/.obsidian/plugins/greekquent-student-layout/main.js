@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18b';
+const VAULT_RELEASE = '2026-11-18c';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -124,6 +124,9 @@ const SVGNS = 'http://www.w3.org/2000/svg';
 const splitDots = s => { const out = []; let d = 0, cur = ''; for (let i = 0; i < s.length; i++) { const ch = s[i]; if (ch === '(') d++; else if (ch === ')') d = Math.max(0, d - 1); if (!d && s.startsWith(' · ', i)) { out.push(cur); cur = ''; i += 2; continue; } cur += ch; } out.push(cur); return out; };
 // The kids' hello song: an original tune, played by the phone itself (no audio files, works offline).
 // Each note is [syllable, MIDI pitch, beats]; a null syllable is a rest. Every syllable sits on a beat, and stressed syllables land on strong beats.
+// Kids dessert words: a treat after the lesson. Never tested, never colored. [Greek, English, sounds like English]
+const DESSERT = [["ο σούπερ ήρωας", "superhero", 1], ["ο Σπάιντερμαν", "Spider-Man", 1], ["η αράχνη", "spider", 0], ["ο ιστός", "web", 0], ["η κάπα", "cape", 0], ["η στολή", "costume, suit", 0], ["η υπερδύναμη", "superpower", 0], ["αόρατος", "invisible", 0], ["το ρομπότ", "robot", 1], ["ο δεινόσαυρος", "dinosaur", 1], ["ο δράκος", "dragon", 0], ["το φάντασμα", "ghost", 0], ["ο πειρατής", "pirate", 1], ["ο θησαυρός", "treasure", 0], ["ο πύραυλος", "rocket", 0], ["ο αστροναύτης", "astronaut", 1], ["ο εξωγήινος", "alien", 0], ["ο νίντζα", "ninja", 1], ["ο ιππότης", "knight", 0], ["το σπαθί", "sword", 0], ["η ασπίδα", "shield", 0], ["ο μονόκερος", "unicorn", 0], ["ο καρχαρίας", "shark", 0], ["το λιοντάρι", "lion", 0], ["ο ελέφαντας", "elephant", 1], ["η μαϊμού", "monkey", 0], ["το φίδι", "snake", 0], ["ο βάτραχος", "frog", 0], ["η πεταλούδα", "butterfly", 0], ["το παγωτό", "ice cream", 0], ["η καραμέλα", "candy", 1], ["η τούρτα", "birthday cake", 0], ["το μπαλόνι", "balloon", 1], ["το ποδήλατο", "bike", 0], ["το τρένο", "train", 1], ["το ελικόπτερο", "helicopter", 1], ["ο λουκουμάς", "honey doughnut", 0]];
+const DESSERT_FILE = 'My Work/My dessert words.md';
 const HELLO_SONG = [
   { gr: 'Γεια σας, γεια σας, φίλοι!', en: 'Hi, hi, friends!', move: 'Big wave to everyone', chords: [60, 65],
     notes: [['Γεια ', 67, 1], ['σας, ', 67, 1], ['γεια ', 64, 1], ['σας, ', 64, 1], ['φί', 69, 1], ['λοι!', 67, 2], [null, 0, 1]] },
@@ -439,7 +442,7 @@ class LookupModal extends Modal {
       if (hide) {
         // Guessing first (pretesting) helps the answer stick, even when the guess is wrong.
         t.createDiv({ cls: 'gq-hit-main', text: greekQuery ? `${w.word} = ?` : `${w.english} = ?` });
-        t.createDiv({ cls: 'gq-hit-sub', text: `#${w.rank}  Say your guess out loud, then reveal.` });
+        t.createDiv({ cls: 'gq-hit-sub', text: `${this.plugin.isKids ? '' : '#' + w.rank + '  '}Say your guess out loud, then reveal.` });
         const r = row.createEl('button', { text: 'Reveal' });
         r.onclick = () => { this.plugin.logLookup(q, w); row.empty(); this.fill(row, w); };
       } else this.fill(row, w, q);
@@ -473,7 +476,7 @@ class LookupModal extends Modal {
     if (tr.say) t.createDiv({ cls: 'gq-hit-sub', text: 'say it: ' + tr.say });
     for (const a of tr.alts.slice(0, 3)) t.createDiv({ cls: 'gq-hit-sub', text: `${a.pos}: ${a.terms.slice(0, 4).join(', ')}` });
     const inList = this.plugin.findWords(gr).find(w => fold(w.word) === fold(gr));
-    t.createDiv({ cls: 'gq-hit-sub', text: inList ? `It is #${inList.rank} of the 1,500.` : 'Bonus word, saved to Words I looked up.' });
+    t.createDiv({ cls: 'gq-hit-sub', text: inList ? (this.plugin.isKids ? 'It is one of your words.' : `It is #${inList.rank} of the 1,500.`) : 'Bonus word, saved to Words I looked up.' });
     const btns = box.createDiv('gq-btns');
     const h = btns.createEl('button', { text: 'Hear it' }); h.onclick = () => say(gr);
     if (inList) { const g = btns.createEl('button', { text: 'Word web' }); g.onclick = () => { this.plugin.logLookup(q, inList); this.close(); this.plugin.openGraph(inList.path); }; }
@@ -482,7 +485,7 @@ class LookupModal extends Modal {
   fill(row, w, q) {
     const t = row.createDiv('gq-hit-text');
     const m = t.createDiv({ cls: 'gq-hit-main' }); const c = this.plugin.colorOf(w.word); m.createSpan({ cls: 'gq-dot gq-' + (c || 'new'), attr: { 'aria-label': c ? c + ' word' : 'new word' } }); m.appendText(`${w.word}  ·  ${w.english}`);
-    t.createDiv({ cls: 'gq-hit-sub', text: `${w.pron ? 'say it: ' + w.pron + '  ·  ' : ''}#${w.rank} of 1,500${w.form ? '  ·  form: ' + w.form : ''}` });
+    t.createDiv({ cls: 'gq-hit-sub', text: [w.pron ? 'say it: ' + w.pron : '', this.plugin.isKids ? '' : '#' + w.rank + ' of 1,500', w.form ? 'form: ' + w.form : ''].filter(Boolean).join('  ·  ') });
     if (w.cognates) t.createDiv({ cls: 'gq-hit-sub', text: `English cognates: ${w.cognates}${w.via ? '  (you typed a cousin: ' + w.via + ')' : ''}` });
     const g = row.createEl('button', { text: 'Word web' });
     g.onclick = () => { if (q) this.plugin.logLookup(q, w); this.close(); this.plugin.openGraph(w.path); };
@@ -1158,7 +1161,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     if (f && !v.gqTitled) { v.gqTitled = true; const base = v.getDisplayText.bind(v); v.getDisplayText = () => v.file ? 'Word graph: ' + v.file.basename : base(); }
     leaf.updateHeader && leaf.updateHeader();
-    if (f) st.title.setText(`${f.basename}${fm.english ? ' · ' + fm.english : ''}${fm.pronunciation ? ' · say it: ' + fm.pronunciation : ''}${fm.rank ? ' · #' + fm.rank : ''}`);
+    if (f) st.title.setText(`${f.basename}${fm.english ? ' · ' + fm.english : ''}${fm.pronunciation ? ' · say it: ' + fm.pronunciation : ''}${fm.rank && !this.isKids ? ' · #' + fm.rank : ''}`);
     st.back.disabled = st.pos <= 0; st.fwd.disabled = st.pos >= st.hist.length - 1;
     st.trail.setText(st.hist.slice(Math.max(0, st.pos - 6), st.pos + 1).map(h => h.replace(/^Words\//, '').replace(/\.md$/, '')).join('  ›  '));
     if (!document.body.classList.contains('is-mobile')) box.focus();
@@ -1474,7 +1477,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
       // Files the teacher removed since the last update (only files that came from an update, never My Work).
       const gone = [];
-      for (const p of Object.keys(mine.files || {})) if (!man.files[p] && !KEEP_LOCAL(p) && await ad.exists(p)) { await ad.remove(p); removed++; gone.push(p); }
+      for (const p of Object.keys(mine.files || {})) if (!man.files[p] && !KEEP_LOCAL(p) && await ad.exists(p)) {
+        // A note someone wrote in is moved into My Work instead of deleted.
+        let edited = false; if (p.endsWith('.md')) { try { edited = (await this.sha(await ad.readBinary(p))) !== mine.files[p].sha256; } catch (e) {} }
+        if (edited) { const q = MY_WORK + 'Kept from updates/' + p, d = q.split('/').slice(0, -1).join('/'); try { if (!(await ad.exists(d))) await ad.mkdir(d); if (!(await ad.exists(q))) { await ad.write(q, await ad.read(p)); } } catch (e) { continue; } }
+        await ad.remove(p); removed++; gone.push(p);
+      }
       await this.pruneEmpty(gone);
       await ad.write(INSTALLED, JSON.stringify({ release: man.release, files: man.files }));
       note.remove(); this.updateReady = null; this.refreshToday();
@@ -2241,6 +2249,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (mv.length > 8) c.createDiv({ cls: 'gq-hint', text: `The first 8 of ${mv.length}. The rest are on the lesson page.` });
       for (const m of mv.slice(0, 8)) { const li = ul.createEl('li'); li.createSpan({ text: m[1], attr: { lang: 'el' } }); li.createDiv({ cls: 'gq-hint', text: m[2] }); }
     }
+    await this.dessertCard(box);
     // Small buttons under the cards
     const tc = box.createDiv('gq-tcard gq-row gq-ttools');
     const tool = (t, fn, cls) => { const b = tc.createEl('button', { text: t, cls: cls || '' }); b.onclick = fn; };
@@ -2294,6 +2303,56 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     card.addEventListener('touchend', e => { const t = e.changedTouches[0] || {}, dx = t.clientX - sx, dy = t.clientY - sy; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) { e.stopPropagation(); go(i + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1); } });
     go(0, 1); setTimeout(() => x.focus(), 50);
     return api;
+  }
+  // Dessert word: one word from the jar, then say it, make up a move, and draw it.
+  async myDesserts() {
+    const f = this.app.vault.getAbstractFileByPath(DESSERT_FILE); if (!f) return [];
+    const t = await this.app.vault.cachedRead(f), out = [];
+    for (const m of t.matchAll(/^\s*[-*]\s*(.+?)\s+[–—=-]\s+(.+?)\s*$/gm)) out.push([m[1], m[2], 0, 1]);
+    return out;
+  }
+  async addDessert(gr, en) {
+    const line = `- ${gr} – ${en}`, ad = this.app.vault.adapter;
+    if (!(await ad.exists('My Work'))) await ad.mkdir('My Work');
+    if (await ad.exists(DESSERT_FILE)) { const t = await ad.read(DESSERT_FILE); await ad.write(DESSERT_FILE, t.replace(/\n*$/, '\n') + line + '\n'); }
+    else await ad.write(DESSERT_FILE, '# My dessert words\n\nOur own treats for the jar. One per line: Greek – English.\n\n' + line + '\n');
+  }
+  async dessertCard(box) {
+    const c = box.createDiv('gq-tcard gq-kid gq-dessert'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Dessert word' });
+    c.createDiv({ cls: 'gq-hint', text: 'A treat after the lesson. Pick one, say it, make up a move, draw it.' });
+    const show = c.createDiv('gq-dshow'), r = c.createDiv('gq-row');
+    const pick = r.createEl('button', { text: 'Pick a dessert word', cls: 'mod-cta' });
+    const add = r.createEl('button', { text: 'Add our own', cls: 'gq-mini' });
+    let last = '';
+    pick.onclick = async () => {
+      const jar = DESSERT.concat(await this.myDesserts()).filter(x => x[0] !== last);
+      const w = jar[Math.floor(Math.random() * jar.length)]; last = w[0]; show.empty();
+      const b = show.createEl('button', { cls: 'gq-dword', text: w[0], attr: { lang: 'el', 'aria-label': 'Hear ' + w[0] } }); b.onclick = () => say(w[0]);
+      show.createDiv({ cls: 'gq-den', text: w[1] + (w[2] ? '  ·  sounds like English' : '') + (w[3] ? '  ·  one of ours' : '') });
+      say(w[0]); pick.setText('Another one');
+      this.drawPad(show);
+    };
+    add.onclick = () => {
+      if (c.querySelector('.gq-dadd')) return;
+      const f = c.createDiv('gq-dadd gq-row');
+      const g = f.createEl('input', { attr: { type: 'text', placeholder: 'Greek (δράκος)', lang: 'el', 'aria-label': 'Greek word' } });
+      const e = f.createEl('input', { attr: { type: 'text', placeholder: 'English (dragon)', 'aria-label': 'English' } });
+      const s = f.createEl('button', { text: 'Put it in the jar', cls: 'gq-mini' });
+      s.onclick = async () => { const a = g.value.trim(), b = e.value.trim(); if (!a || !b) { new Notice('Type the Greek and the English.'); return; } await this.addDessert(a, b); new Notice(`${a} is in the jar. It is saved in My Work, My dessert words.`); f.remove(); };
+      g.focus();
+    };
+  }
+  // A small place to draw with a finger or a mouse. Not saved.
+  drawPad(parent) {
+    const wrap = parent.createDiv('gq-dpad'), cv = wrap.createEl('canvas', { attr: { width: 600, height: 320, 'aria-label': 'Draw it here' } });
+    const x = cv.getContext('2d'); if (!x) return; let down = false;
+    x.lineWidth = 6; x.lineCap = 'round'; x.lineJoin = 'round'; x.strokeStyle = getComputedStyle(document.body).getPropertyValue('--text-normal') || '#222';
+    const at = ev => { const b = cv.getBoundingClientRect(); return [(ev.clientX - b.left) * cv.width / b.width, (ev.clientY - b.top) * cv.height / b.height]; };
+    cv.onpointerdown = ev => { down = true; cv.setPointerCapture && cv.setPointerCapture(ev.pointerId); x.beginPath(); x.moveTo(...at(ev)); };
+    cv.onpointermove = ev => { if (!down) return; x.lineTo(...at(ev)); x.stroke(); };
+    cv.onpointerup = cv.onpointercancel = () => { down = false; };
+    const r = wrap.createDiv('gq-row'); const cl = r.createEl('button', { text: 'Clear', cls: 'gq-mini' }); cl.onclick = () => x.clearRect(0, 0, cv.width, cv.height);
+    r.createSpan({ cls: 'gq-hint', text: 'Draw it here, or on paper.' });
   }
   popBtn(row, text, fn) { const b = row.createEl('button', { text, cls: 'gq-mini gq-popbtn' }); b.onclick = fn; return b; }
   // Today's line: listen, say it from memory, then mark it said.

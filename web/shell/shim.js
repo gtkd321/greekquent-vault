@@ -94,6 +94,11 @@ function hasDir(p) {
 function allPaths() { const s = new Set(Object.keys(BASE)); for (const k of ovKeys()) s.add(k); for (const k of STATIC) s.add(k); return s; }
 function mdPaths() { return [...allPaths()].filter(p => p.endsWith('.md') && !p.startsWith('.')); }
 function readSync(p) { const o = ls.getItem(OV + p); if (o !== null) return o; return BASE[p]; }
+function toDataUrl(p, buf) {
+  const u = new Uint8Array(buf); let b = ''; for (let i = 0; i < u.length; i += 0x8000) b += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000));
+  const ext = (p.split('.').pop() || '').toLowerCase(), mime = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp' }[ext] || 'application/octet-stream';
+  return 'data:' + mime + ';base64,' + btoa(b);
+}
 function existsFile(p) { return ls.getItem(OV + p) !== null || p in BASE || STATIC.has(p); }
 const metaCache = new Map();
 let linkIndex = null, resolved = null;
@@ -179,9 +184,9 @@ const adapter = {
   async list(p) { p = norm(p).replace(/\/$/, ''); const pre = p ? p + '/' : ''; const fl = new Set(), fd = new Set(); for (const x of allPaths()) if (x.startsWith(pre)) { const rest = x.slice(pre.length); if (rest.includes('/')) fd.add(pre + rest.split('/')[0]); else fl.add(x); } for (const d of dirs()) if (d.startsWith(pre) && !d.slice(pre.length).includes('/') && d !== p) fd.add(d); return { files: [...fl], folders: [...fd] }; },
   async remove(p) { p = norm(p); ls.removeItem(OV + p); delete BASE[p]; metaCache.delete(p); linkIndex = null; resolved = null; },
   async rmdir() {},
-  async readBinary(p) { p = norm(p); const t = readSync(p); if (t !== undefined) return new TextEncoder().encode(t).buffer; return fetchStatic(p, 'bin'); },
-  async writeBinary(p, buf) { writeSync(norm(p), new TextDecoder().decode(buf)); },
-  getResourcePath(p) { return 'vault/' + p; },
+  async readBinary(p) { p = norm(p); const t = readSync(p); if (t !== undefined) { if (t.startsWith('data:')) { const b = atob(t.slice(t.indexOf(',') + 1)), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u.buffer; } return new TextEncoder().encode(t).buffer; } return fetchStatic(p, 'bin'); },
+  async writeBinary(p, buf) { writeSync(norm(p), toDataUrl(p, buf)); },
+  getResourcePath(p) { p = norm(p); const t = ls.getItem(OV + p); if (t && t.startsWith('data:')) return t; return 'vault/' + p; },
   getName() { return 'Greekquent Beginner'; }
 };
 function norm(p) { return String(p || '').replace(/^\/+/, '').replace(/\/+$/, ''); }
@@ -201,7 +206,7 @@ class Vault extends Events {
   async process(f, fn) { const t = await adapter.read(f.path); const n = fn(t); writeSync(f.path, n); return n; }
   async append(f, d) { writeSync(f.path, (readSync(f.path) || '') + d); }
   async create(p, d) { p = norm(p); if (existsFile(p)) throw new Error('File already exists.'); return writeSync(p, String(d || '')); }
-  async createBinary(p, buf) { p = norm(p); const b64 = btoa(String.fromCharCode(...new Uint8Array(buf).slice(0, 2e6))); return writeSync(p, 'data:;base64,' + b64); }
+  async createBinary(p, buf) { p = norm(p); return writeSync(p, toDataUrl(p, buf)); }
   async createFolder(p) { addDir(norm(p)); return folder(norm(p)); }
   async delete(f) { await adapter.remove(f.path); this.trigger('delete', f); }
   async trash(f) { return this.delete(f); }

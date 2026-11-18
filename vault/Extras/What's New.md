@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, late night: Paper round
+> - Your paper cards count now. When you make a card, tap **On paper** on that word's note. That is worth 1 φόρα, once per word.
+> - **Paper round** on Today tells you which pile to pull: red every day, yellow every other day, green on Sundays. The piles match your colors.
+> - Tap **Start**, find each card, say the other side out loud, flip it, then tap **Got it** or **Not yet**. A card you get counts like any word you get right. Not yet moves it back to red.
+> - Optional: **Add a photo of your card** on the word note, so you see your own handwriting there.
+
 > [!info]- November 18, night: Πήρες φόρα?
 > - Today has a new card: **Πήρες φόρα;** (did you get momentum going?). Right answers add to it. It fades a little each day off, so a little every day beats a lot at once.
 > - Points count remembering, not just tapping: a word right again on a later day is worth 3, a color you moved up that is still right two days later is worth 5, your own sentence is worth 3. Up to 40 a day.

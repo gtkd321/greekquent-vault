@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18k';
+const VAULT_RELEASE = '2026-11-18l';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -127,6 +127,7 @@ const DESSERT_FILE = 'My Work/My dessert words.md';
 // Spaced recall and colors that stick count most; repeats on the same day count nothing; at most MO_CAP points a day.
 const MO_FILE = MY_WORK + 'My momentum.md';
 const MO_CAP = 40, MO_KEEP = 6 / 7;
+const CARD_DIR = MY_WORK + 'Card photos/';
 const HELLO_SONG = [
   { gr: 'Γεια σας, γεια σας, φίλοι!', en: 'Hi, hi, friends!', move: 'Big wave to everyone', chords: [60, 65],
     notes: [['Γεια ', 67, 1], ['σας, ', 67, 1], ['γεια ', 64, 1], ['σας, ', 64, 1], ['φί', 69, 1], ['λοι!', 67, 2], [null, 0, 1]] },
@@ -400,6 +401,30 @@ class MoreView extends ItemView {
   paint() { this.plugin.renderMore(this); }
   async onClose() { this.contentEl.empty(); }
 }
+class PaperModal extends Modal {
+  constructor(app, plugin, list) { super(app); this.plugin = plugin; this.list = list; this.i = 0; this.got = 0; this.miss = []; }
+  onOpen() { this.contentEl.addClass('gq-modal', 'gq-paper-m'); this.titleEl.setText('Paper round'); this.draw(); }
+  draw() {
+    const c = this.contentEl; c.empty(); const P = this.plugin;
+    if (this.i >= this.list.length) {
+      P.paperDone = ymd(new Date()); P.progressFile().then(f => this.app.fileManager.processFrontMatter(f, fm => { fm.paper_done = P.paperDone; }));
+      c.createDiv({ cls: 'gq-paper-big', text: this.got ? `${this.got} of ${this.list.length}` : 'Done' });
+      c.createDiv({ cls: 'gq-hint', text: this.miss.length ? `Put these back in the red pile: ${this.miss.join(', ')}.` : 'Every card came back. Move a card up a pile by changing its color on its word note.' });
+      const b = c.createEl('button', { text: 'Close', cls: 'mod-cta' }); b.onclick = () => this.close(); return;
+    }
+    const [w, pile] = this.list[this.i];
+    c.createDiv({ cls: 'gq-hint', text: `Card ${this.i + 1} of ${this.list.length} · ${pile} pile` });
+    const t = c.createDiv({ cls: 'gq-paper-big gq-say', text: w, attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); t.onclick = () => say(w);
+    c.createDiv({ cls: 'gq-hint', text: 'Find this card, say the other side out loud, then flip it.' });
+    const row = c.createDiv('gq-row gq-paper-btns');
+    const g = row.createEl('button', { text: 'Got it', cls: 'gq-c gq-green' }); g.onclick = () => { P.moAdd('recall', w); this.got++; this.next(); };
+    const n = row.createEl('button', { text: 'Not yet', cls: 'gq-c gq-red' }); n.onclick = () => { this.miss.push(w); if (P.colorOf(w) && P.colorOf(w) !== 'red') P.setColor(w, 'red'); this.next(); };
+    const s = row.createEl('button', { text: 'Not here' }); s.onclick = () => this.next();
+  }
+  next() { this.i++; this.draw(); }
+  onClose() { this.contentEl.empty(); this.plugin.refreshToday && this.plugin.refreshToday(); }
+}
+
 class SparkModal extends Modal {
   constructor(app, plugin, words) { super(app); this.plugin = plugin; this.words = words; }
   onOpen() {
@@ -1614,6 +1639,33 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
     return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, fiay: fm.fiay === true || fm.fiay === 'on', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '' };
   }
+  cards() { const f = this.app.vault.getAbstractFileByPath(PROGRESS); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return this.cardsNow || (Array.isArray(fm.cards) ? fm.cards.map(String) : []); }
+  async setCard(word, on) {
+    const f = await this.progressFile(); let list = [];
+    await this.app.fileManager.processFrontMatter(f, fm => { list = Array.isArray(fm.cards) ? fm.cards.map(String).filter(w => w !== word) : []; if (on) list.push(word); fm.cards = list; });
+    this.cardsNow = list; setTimeout(() => { this.cardsNow = null; }, 3000);
+    if (on) this.moAdd('card', word);
+    this.paintBars();
+  }
+  cardPhoto(word) { return CARD_DIR + word.replace(/[\\/:*?"<>|#^\[\]]/g, '_') + '.jpg'; }
+  // A photo of the card, made small (about 40 KB) so it fits on any phone.
+  pickPhoto(word, done) {
+    const inp = createEl('input', { attr: { type: 'file', accept: 'image/*', capture: 'environment' } });
+    inp.onchange = async () => {
+      const file = inp.files && inp.files[0]; if (!file) return;
+      try {
+        const url = URL.createObjectURL(file), img = new Image();
+        await new Promise((ok, bad) => { img.onload = ok; img.onerror = bad; img.src = url; });
+        const k = Math.min(1, 640 / Math.max(img.width, img.height)), cv = createEl('canvas');
+        cv.width = Math.round(img.width * k); cv.height = Math.round(img.height * k); cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); URL.revokeObjectURL(url);
+        const blob = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.7)), buf = await blob.arrayBuffer();
+        const ad = this.app.vault.adapter; if (!(await ad.exists(CARD_DIR.slice(0, -1)))) await ad.mkdir(CARD_DIR.slice(0, -1));
+        await ad.writeBinary(this.cardPhoto(word), buf); this.photoT = Date.now();
+        new Notice('Card photo saved.'); done && done();
+      } catch (e) { new Notice('That photo did not save. Try again, or skip it. The paper card is what counts.'); }
+    };
+    inp.click();
+  }
   colorOf(word) { const c = this.colors(); return COLORS.map(x => x[0]).find(k => c[k].includes(word)) || ''; }
   async progressFile() {
     let f = this.app.vault.getAbstractFileByPath(PROGRESS);
@@ -1645,7 +1697,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const today = ymd(new Date()), gap = d => { const [a, b, c] = String(d).split('-').map(Number); const n = new Date(); n.setHours(12, 0, 0, 0); return Math.round((n - new Date(a, b - 1, c, 12)) / 864e5); };
     let gained = 0;
     await this.app.fileManager.processFrontMatter(f, fm => {
-      for (const k of ['days', 'got', 'up', 'met']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
+      for (const k of ['days', 'got', 'up', 'met', 'made']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
       let pts = 0;
       for (const [kind, key, extra] of q) {
         if (kind === 'recall') {
@@ -1655,6 +1707,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         else if (kind === 'down') delete fm.up[key];
         else if (kind === 'own') pts += 3;
         else if (kind === 'built') pts += 1;
+        else if (kind === 'card') { if (!fm.made[key]) { fm.made[key] = today; pts += 1; } }
       }
       const before = +fm.days[today] || 0, now = Math.min(MO_CAP, before + pts); gained = now - before;
       if (now) fm.days[today] = now;
@@ -1681,7 +1734,24 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const a = c.createDiv({ cls: 'gq-hint gq-say', attr: { lang: 'el' } }); a.appendText('Say it: '); a.createSpan({ text: ans, cls: 'gq-mo-ans' }); a.onclick = () => say(ans);
     const d = c.createEl('details', { cls: 'gq-mo-how' }); d.createEl('summary', { text: 'How φόρα works' });
     const ul = d.createEl('ul');
-    for (const t of ['A word right again on a later day: 3 (the first time: 1, the same day again: 0).', 'A color you moved up, still right two days later: 5.', 'Your own sentence: 3. A story puzzle line: 1, or 3 on a later day.', 'Up to 40 a day. A day off fades it by a seventh, so a little every day beats a lot at once.']) ul.createEl('li', { text: t });
+    for (const t of ['A word right again on a later day: 3 (the first time: 1, the same day again: 0).', 'A color you moved up, still right two days later: 5.', 'Your own sentence: 3. A story puzzle line: 1, or 3 on a later day.', 'A new card on paper: 1. Paper round cards count like any word you get right.', 'Up to 40 a day. A day off fades it by a seventh, so a little every day beats a lot at once.']) ul.createEl('li', { text: t });
+  }
+  // ---------- Paper round: the app keeps the schedule, the paper cards do the work ----------
+  // Red pile every day, yellow every other day, green on Sundays. A card with no color yet sits in the red pile.
+  paperPiles(dd) {
+    const dow = new Date().getDay(), piles = ['red']; if (((dd % 2) + 2) % 2 === 0) piles.push('yellow'); if (dow === 0) piles.push('green');
+    const by = { red: [], yellow: [], green: [] }; for (const w of this.cards()) by[this.colorOf(w) || 'red'].push(w);
+    return { piles, by, list: piles.flatMap(k => by[k].map(w => [w, k])) };
+  }
+  paperCard(box, dd) {
+    const n = this.cards().length; if (!n && !this.colors().setup_seen) return;
+    const c = box.createDiv('gq-tcard gq-paper'); c.dataset.tour = 'paper';
+    const h = c.createDiv('gq-thead'); h.createEl('strong', { text: 'Paper round' });
+    if (!n) { c.createDiv({ cls: 'gq-hint', text: 'Made a paper card? Tap On paper on that word\'s note. Then the app tells you which pile to pull each day.' }); return; }
+    const { piles, by, list } = this.paperPiles(dd), pf = this.app.vault.getAbstractFileByPath(PROGRESS), done = (this.paperDone || String(((pf && this.app.metadataCache.getFileCache(pf)) || {}).frontmatter?.paper_done || '')) === ymd(new Date());
+    h.createSpan({ cls: 'gq-hint', text: ` · ${n} card${n === 1 ? '' : 's'}` });
+    c.createDiv({ cls: 'gq-hint', text: done ? 'Done for today. Θα τα πούμε.' : list.length ? `Today: your ${piles.filter(k => by[k].length).join(' and ')} pile${piles.filter(k => by[k].length).length > 1 ? 's' : ''}, ${list.length} card${list.length === 1 ? '' : 's'}.` : `Today is the ${piles.join(' and ')} pile, and it is empty. Nice.` });
+    if (list.length && !done) { const b = c.createEl('button', { text: 'Start', cls: 'mod-cta' }); b.onclick = () => new PaperModal(this.app, this, list).open(); }
   }
   async setColor(word, color) {
     const was = this.colorOf(word), R = { '': 0, red: 1, yellow: 2, green: 3 };
@@ -1768,9 +1838,26 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const mo = bar.createEl('button', { text: 'More ›', attr: { 'aria-label': 'More on this word: pairs, word graph, scripts' } }); mo.onclick = () => this.showMore();
     const grp = bar.createDiv({ cls: 'gq-colors', attr: { role: 'group', 'aria-label': 'How well do you know it?' } });
     const btns = COLORS.map(([k, label]) => { const b = grp.createEl('button', { text: label, cls: 'gq-c gq-' + k }); b.onclick = () => this.setColor(word, this.colorOf(word) === k ? '' : k); return [k, b]; });
-    const rec = { word, btns, el: bar }; this.bars.add(rec); this.paintBar(rec);
+    const card = this.isKids ? null : bar.createEl('button', { text: 'On paper', cls: 'gq-card-btn', attr: { 'aria-label': 'I made a paper card for this word' } }); card && (card.onclick = () => this.setCard(word, !this.cards().includes(word)));
+    const photo = createDiv('gq-card-row'); bar.after(photo);
+    const rec = { word, btns, el: bar, card, photo }; this.bars.add(rec); this.paintBar(rec);
   }
-  paintBar(rec) { const c = this.colorOf(rec.word); for (const [k, b] of rec.btns) { b.toggleClass('is-on', c === k); b.setAttr('aria-pressed', String(c === k)); } }
+  paintBar(rec) {
+    const c = this.colorOf(rec.word); for (const [k, b] of rec.btns) { b.toggleClass('is-on', c === k); b.setAttr('aria-pressed', String(c === k)); }
+    if (!rec.card) return; const on = this.cards().includes(rec.word); rec.card.toggleClass('is-on', on); rec.card.setAttr('aria-pressed', String(on));
+    this.paintPhoto(rec, on);
+  }
+  async paintPhoto(rec, on) {
+    const row = rec.photo, ad = this.app.vault.adapter, p = this.cardPhoto(rec.word); row.empty(); if (!on) return;
+    if (await ad.exists(p)) {
+      const img = row.createEl('img', { cls: 'gq-card-img', attr: { alt: 'Your card for ' + rec.word, src: (u => u.startsWith('data:') || !this.photoT ? u : u + (u.includes('?') ? '&' : '?') + this.photoT)(ad.getResourcePath(p)) } });
+      const r = row.createEl('a', { text: 'New photo', href: '#', cls: 'gq-hint' }); r.onclick = e => { e.preventDefault(); this.pickPhoto(rec.word, () => this.paintPhoto(rec, true)); };
+      img.onclick = () => img.toggleClass('is-big', !img.hasClass('is-big'));
+    } else {
+      const a = row.createEl('a', { text: 'Add a photo of your card', href: '#', cls: 'gq-hint' }); a.onclick = e => { e.preventDefault(); this.pickPhoto(rec.word, () => this.paintPhoto(rec, true)); };
+      row.createSpan({ cls: 'gq-hint', text: ' (optional)' });
+    }
+  }
   paintBars() { for (const r of [...this.bars]) { if (!r.el.isConnected) { this.bars.delete(r); continue; } this.paintBar(r); } }
   // ---------- Games send missed words back: obsidian://greekquent?game=Cousins&misses=χρόνος,σπίτι ----------
   async fromGame(p) {
@@ -2149,6 +2236,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       box.createEl('h2', { text: `Today · ${now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}` });
       if (this.showSwitch()) this.scriptSwitch(box);
       this.moCard(box);
+      this.paperCard(box, dd);
       if (!col.setup_seen) {
         const s = box.createDiv('gq-tcard gq-tnew'); s.createSpan({ text: 'New here? ' });
         const a = s.createEl('a', { text: 'Read Setting up', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); };

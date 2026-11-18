@@ -67,7 +67,7 @@ body.is-phone .gq-web-title { order: -1; flex-basis: 100%; font-size: 16px; }
 /* Word note bar: Hear it, Word graph, colors */
 .gq-wordbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0.4em 0 1em; }
 .gq-wordbar button { font-size: 15px; padding: 6px 12px; min-height: 40px; }
-.gq-colors { display: flex; gap: 6px; flex-wrap: wrap; }
+.gq-colors { display: flex; gap: 6px; flex-wrap: wrap; flex-basis: 100%; }
 .gq-wordbar .gq-c { border: 2px solid transparent; }
 .gq-wordbar .gq-c.gq-red { border-color: #d73027; } .gq-wordbar .gq-c.gq-yellow { border-color: #e6b400; } .gq-wordbar .gq-c.gq-green { border-color: #1a9850; }
 .gq-wordbar .gq-c.is-on { color: #fff; font-weight: 600; }
@@ -412,3 +412,24 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-mo-toast.is-out { opacity: 0; transform: translate(-50%, -6px); }
 @keyframes gq-mo-in { from { opacity: 0; transform: translate(-50%, 6px); } }
 @media (prefers-reduced-motion: reduce) { .gq-mo-toast { animation: none; transition: opacity .2s; } .gq-mo-toast.is-out { transform: translate(-50%, 0); } }
+
+/* 18p: On paper is a small toggle, not a fourth big button */
+.gq-wordbar .gq-card-btn { font-size: 13px; min-height: 34px; padding: 4px 10px; }
+/* φόρα before the first point: one quiet line */
+.gq-mo.is-fresh { padding-top: 8px; padding-bottom: 8px; }
+.gq-mo.is-fresh .gq-mo-top { margin-bottom: 2px; }
+/* On this page */
+.gq-jump { margin: 0 0 1em; font-size: 15px; }
+.gq-jump summary { cursor: pointer; color: var(--text-muted); }
+.gq-jump ul { margin: 0.4em 0 0; padding-left: 1.2em; }
+.gq-jump li { margin: 0.25em 0; }
+/* Lesson tables become one card per row on a phone */
+@media (max-width: 520px) {
+  table.gq-stack, table.gq-stack tbody, table.gq-stack tr, table.gq-stack td { display: block; width: 100%; }
+  table.gq-stack thead { display: none; }
+  table.gq-stack tr { border: 1px solid var(--background-modifier-border); border-radius: 8px; padding: 8px 10px; margin: 0 0 8px; }
+  table.gq-stack td { border: 0 !important; padding: 1px 0 !important; text-align: left !important; }
+  table.gq-stack td:first-child { font-size: 1.15em; font-weight: 600; }
+  table.gq-stack td:nth-child(n+3) { font-size: 0.88em; color: var(--text-muted); }
+  table.gq-stack td[data-label]::before { content: attr(data-label) ": "; }
+}

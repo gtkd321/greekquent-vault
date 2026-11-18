@@ -14,7 +14,7 @@ Two minutes, once. Back to [[Today]].
 > - **Today** (house): the Story puzzle, one sentence at a time from part 1 at your own pace (read the English, then build it in Greek from word tiles; touch a tile to hear it), comebacks, this week's class, and words to review. Doing Fluent in a Year? Tap **Show its words** at the bottom once and its five words appear, one at a time.
 > - **Look up** (magnifying glass): any word in English or Greek. Words outside the 1,500 are translated right in the box. Tick Guess first to try before you see the answer.
 > - **Ask** (two people): a question about the page you are on, ready to share in the class GroupMe. You can also ask on video from there.
-> - **More** (three dots): More on this page, Word web, Send homework, Share feedback, What's new, Check for updates, Back up my work.
+> - **More** (three dots): More on this page, Word web, Send homework, Share feedback, What's new, Put it on my home screen.
 
 > [!tip]- Less on the page, more in the side panel
 > Lessons and word pages show the main things first. The extras (word pairs, words that go together, review prompts, word links) sit in the side panel: tap **More on this page** near the top of a lesson or on a word's button row. It slides in from the right. Every other article is in the **Index** (at the bottom of the side panel on Today).
@@ -27,4 +27,4 @@ Two minutes, once. Back to [[Today]].
 
 > [!tip]- 5. Updates and your work
 > - Updates arrive by themselves in the background. Nothing to tap.
-> - Your colors, φόρα and homework live on this phone (or computer) only. Tap **More**, then **Back up my work** now and then. **Restore my work** brings a backup to a new phone.
+> - Your colors, φόρα and homework live on this phone (or computer) only. It saves as you go and updates never touch it. On an iPhone, open it from the home screen icon: in a Safari tab, iPhones clear site data after about a week away.

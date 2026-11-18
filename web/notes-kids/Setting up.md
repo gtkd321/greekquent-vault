@@ -23,7 +23,7 @@ For grown-ups. Two minutes, once. Back to [[Today]].
 > They sit along the bottom of the screen.
 > - **Today** (house): this week's game.
 > - **Look up** (magnifying glass): any word in English or Greek.
-> - **More** (three dots): Send homework, Share feedback, What's new, Check for updates, Back up my work.
+> - **More** (three dots): Send homework, Share feedback, What's new, Put it on my home screen.
 >
 > Under the cards on Today: **Play Γιαγιά** (a word game with this week's words), **All lessons**, and **Look up a word**.
 
@@ -32,4 +32,4 @@ For grown-ups. Two minutes, once. Back to [[Today]].
 
 > [!tip]- 5. Updates and your work
 > - Updates arrive by themselves in the background. Nothing to tap.
-> - Colors, φόρα and notes live on this phone (or computer) only. Tap **More**, then **Back up my work** now and then. **Restore my work** brings a backup to a new phone.
+> - Colors, φόρα and notes live on this phone (or computer) only. It saves as you go and updates never touch it. On an iPhone, open it from the home screen icon: in a Safari tab, iPhones clear site data after about a week away.

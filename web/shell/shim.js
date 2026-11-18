@@ -166,7 +166,7 @@ function changed(path, isNew) {
 }
 function writeSync(p, data) {
   const isNew = !existsFile(p);
-  try { ls.setItem(OV + p, data); } catch (e) { new Notice('This phone is out of room for Greekquent notes. Back up your work from More.'); throw e; }
+  try { ls.setItem(OV + p, data); } catch (e) { new Notice('This phone is out of room for Greekquent notes. Delete a few photos to make room.'); throw e; }
   if (p.includes('/')) addDir(p.slice(0, p.lastIndexOf('/')));
   changed(p, isNew); return tfile(p);
 }

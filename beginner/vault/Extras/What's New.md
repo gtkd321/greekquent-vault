@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19a · Tap the world to hear it
+> Tap anything in your world picture to hear its Greek name and see the English: the sun, clouds, moon and stars, the sea, every house, tree and olive, your pet and its toys, the dancers and the festival lights. The young olive grove now shows the soil, a watering can and a field fence.
+
 > [!tip]- 2026-11-18z · Letter sounds show a word, not a letter
 > The letter games now show an English cue word like "pig" instead of a bare "p". Some Latin letters look like Greek ones (p and ρ, n and η, v and ν), and "a" gave α away.
 

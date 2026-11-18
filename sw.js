@@ -1,6 +1,6 @@
 // Greekquent web app: works offline after the first visit. Network first for version.json, cache first for
 // everything else (file names carry the version, so a new release is fetched fresh). Only this app's cache is used.
-const CACHE = 'greekquent-beginner-2026-11-18l-56a0cb4b';
+const CACHE = 'greekquent-beginner-2026-11-18m-eacc36f1';
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', 'index.html', 'app.css', 'shim.js', 'app.js', 'lib/js-yaml.min.js', 'lib/marked.umd.js', 'icon.svg', 'manifest.webmanifest']).catch(() => {}))); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('greekquent-beginner-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', e => {

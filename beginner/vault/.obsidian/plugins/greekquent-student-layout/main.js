@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18t';
+const VAULT_RELEASE = '2026-11-18u';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -133,6 +133,32 @@ const splitDots = s => { const out = []; let d = 0, cur = ''; for (let i = 0; i 
 // The kids' hello song: an original tune, played by the phone itself (no audio files, works offline).
 // Each note is [syllable, MIDI pitch, beats]; a null syllable is a rest. Every syllable sits on a beat, and stressed syllables land on strong beats.
 // Kids dessert words: a treat after the lesson. Never tested, never colored. [Greek, English, sounds like English]
+// ---------- Say it: the phone's own speech to text checks a word or line said out loud, for bonus φόρα ----------
+// Chrome on Android and Safari on iPhone have it built in. Where it is missing or fails (Obsidian on a computer, some Android apps),
+// the button falls back to a text box, so the keyboard's microphone can do the listening instead.
+const SRec = () => window.SpeechRecognition || window.webkitSpeechRecognition || null;
+const foldG = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').replace(/[^\p{L}\s]/gu, ' ').replace(/\s+/g, ' ').trim();
+const SMALL_W = new Set(['ο', 'η', 'το', 'οι', 'τα', 'τον', 'την', 'του', 'τησ', 'των', 'ενασ', 'μια', 'μια', 'ενα']);
+const near = (a, b) => { if (a === b) return true; if (Math.abs(a.length - b.length) > 1 || a.length < 4) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; };
+// True when what was heard holds the target: every word of one or two words, three of four in a longer line. Small words like ο and το are left out.
+const heardIt = (target, alts) => {
+  let tw = foldG(target).split(' ').filter(Boolean); const content = tw.filter(w => !SMALL_W.has(w)); if (content.length) tw = content;
+  return (alts || []).some(a => { const hw = foldG(a).split(' ').filter(Boolean); const n = tw.filter(w => hw.some(h => near(w, h))).length; return tw.length <= 2 ? n === tw.length : n / tw.length >= 0.75; });
+};
+const listenGreek = () => new Promise((res, rej) => {
+  const R = SRec(); if (!R) { rej('none'); return; }
+  let r; try { r = new R(); } catch (e) { rej('none'); return; }
+  r.lang = 'el-GR'; r.interimResults = false; r.maxAlternatives = 5; r.continuous = false;
+  let out = null; const t = setTimeout(() => { try { r.stop(); } catch (e) {} }, 7000);
+  r.onresult = e => { out = []; for (const x of e.results) for (const y of x) out.push(y.transcript); };
+  r.onerror = e => { clearTimeout(t); rej(e.error || 'error'); };
+  r.onend = () => { clearTimeout(t); res(out || []); };
+  try { r.start(); } catch (e) { clearTimeout(t); rej('busy'); }
+});
+// Kids start with the letters: each one's sound, a word that starts with it, and four sets of six. No two letters in a set share a sound.
+// [lower, upper, sound, like, word, English, syllable to say]
+const LETTERS = [["α", "Α", "a", "father", "άλογο", "horse", ""], ["ε", "Ε", "e", "egg", "ελέφαντας", "elephant", ""], ["ο", "Ο", "o", "octopus", "ομπρέλα", "umbrella", ""], ["μ", "Μ", "m", "moon", "μήλο", "apple", "μα"], ["π", "Π", "p", "pig", "πάπια", "duck", "πα"], ["τ", "Τ", "t", "top", "τυρί", "cheese", "τα"], ["ι", "Ι", "ee", "see", "ιππότης", "knight", ""], ["κ", "Κ", "k", "kite", "κότα", "hen", "κα"], ["λ", "Λ", "l", "lion", "λεμόνι", "lemon", "λα"], ["ν", "Ν", "n", "nose", "νερό", "water", "να"], ["σ", "Σ", "s", "sun", "σκύλος", "dog", "σα"], ["ρ", "Ρ", "r", "a quick tap of the tongue", "ρολόι", "clock", "ρα"], ["β", "Β", "v", "van", "βάρκα", "boat", "βα"], ["γ", "Γ", "gh", "a soft, breathy g", "γάτα", "cat", "γα"], ["δ", "Δ", "th", "this", "δέντρο", "tree", "δα"], ["φ", "Φ", "f", "fish", "φίδι", "snake", "φα"], ["χ", "Χ", "h", "a scratchy h, like clearing your throat", "χαρτί", "paper", "χα"], ["υ", "Υ", "ee", "see", "ύπνος", "sleep", ""], ["η", "Η", "ee", "see", "ήλιος", "sun", ""], ["ζ", "Ζ", "z", "zoo", "ζάχαρη", "sugar", "ζα"], ["θ", "Θ", "th", "thin", "θάλασσα", "sea", "θα"], ["ξ", "Ξ", "ks", "box", "ξύλο", "wood", "ξα"], ["ψ", "Ψ", "ps", "tops", "ψάρι", "fish", "ψα"], ["ω", "Ω", "o", "octopus", "ώρα", "time, hour", ""]].map(([l, u, s, h, w, en, syl]) => ({ l, u, s, h: h.includes(' ') ? h : 'like ' + h, w, en, say: syl ? syl + ', ' + w : w }));
+const LETTER_SETS = [0, 1, 2, 3].map(i => LETTERS.slice(i * 6, i * 6 + 6));
 const DESSERT = [["ο σούπερ ήρωας", "superhero", 1], ["ο Σπάιντερμαν", "Spider-Man", 1], ["η αράχνη", "spider", 0], ["ο ιστός", "web", 0], ["η κάπα", "cape", 0], ["η στολή", "costume, suit", 0], ["η υπερδύναμη", "superpower", 0], ["αόρατος", "invisible", 0], ["το ρομπότ", "robot", 1], ["ο δεινόσαυρος", "dinosaur", 1], ["ο δράκος", "dragon", 0], ["το φάντασμα", "ghost", 0], ["ο πειρατής", "pirate", 1], ["ο θησαυρός", "treasure", 0], ["ο πύραυλος", "rocket", 0], ["ο αστροναύτης", "astronaut", 1], ["ο εξωγήινος", "alien", 0], ["ο νίντζα", "ninja", 1], ["ο ιππότης", "knight", 0], ["το σπαθί", "sword", 0], ["η ασπίδα", "shield", 0], ["ο μονόκερος", "unicorn", 0], ["ο καρχαρίας", "shark", 0], ["το λιοντάρι", "lion", 0], ["ο ελέφαντας", "elephant", 1], ["η μαϊμού", "monkey", 0], ["το φίδι", "snake", 0], ["ο βάτραχος", "frog", 0], ["η πεταλούδα", "butterfly", 0], ["το παγωτό", "ice cream", 0], ["η καραμέλα", "candy", 1], ["η τούρτα", "birthday cake", 0], ["το μπαλόνι", "balloon", 1], ["το ποδήλατο", "bike", 0], ["το τρένο", "train", 1], ["το ελικόπτερο", "helicopter", 1], ["ο λουκουμάς", "honey doughnut", 0]];
 const DESSERT_FILE = 'My Work/My dessert words.md';
 // Momentum (φόρα): points for practice that builds memory, fading by 1/7 each day.
@@ -406,7 +432,7 @@ class AppView extends ItemView {
     try { html = await this.app.vault.adapter.read(this.plugin.manifest.dir + '/apps/' + a.file); }
     catch (e) { c.createDiv({ cls: 'gq-hint', text: 'This one is still on its way. Tap More, then Update vault.' }); this.shown = ''; return; }
     html = html.replace('<!--GQ_START-->', '<script>window.GQ_HASH=' + JSON.stringify(this.hash) + ';</script>');
-    const f = c.createEl('iframe', { cls: 'gq-appframe', attr: { title: a.title } });
+    const f = c.createEl('iframe', { cls: 'gq-appframe', attr: { title: a.title, allow: 'microphone; autoplay' } });
     f.srcdoc = html;
   }
 }
@@ -1023,7 +1049,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) { this.infoCache = null; this.coCache = null; } }));
     // The in-vault games send results here instead of through an obsidian:// link.
     this.registerDomEvent(window, 'message', e => {
-      const d = e.data; if (d && d.gq === 'mo' && typeof d.w === 'string' && d.w) { this.moAdd('recall', d.w.split(',')[0].trim().replace(/^(ο|η|το|οι|τα) /, '').slice(0, 80)); return; }
+      const d = e.data; if (d && d.gq === 'said' && typeof d.w === 'string' && d.w) { this.moAdd('said', 'said:' + d.w.slice(0, 80)); return; }
+      if (d && d.gq === 'mo' && typeof d.w === 'string' && d.w) { this.moAdd('recall', d.w.split(',')[0].trim().replace(/^(ο|η|το|οι|τα) /, '').slice(0, 80)); return; }
       if (!d || d.gq !== 'obsidian' || typeof d.url !== 'string') return;
       try { const u = new URL(d.url); const p = {}; u.searchParams.forEach((v, k) => { p[k] = v; }); this.fromGame(p); } catch (err) {}
     });
@@ -1895,9 +1922,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const today = ymd(new Date()), gap = d => { const [a, b, c] = String(d).split('-').map(Number); const n = new Date(); n.setHours(12, 0, 0, 0); return Math.round((n - new Date(a, b - 1, c, 12)) / 864e5); };
     let gained = 0; const danced = [];
     await this.app.fileManager.processFrontMatter(f, fm => {
-      for (const k of ['days', 'got', 'up', 'met', 'made', 'tried', 'did', 'web']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
+      for (const k of ['days', 'got', 'up', 'met', 'made', 'tried', 'did', 'web', 'said']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
       // tried and did only need today; yesterday's entries go.
-      for (const k of ['tried', 'did']) for (const x of Object.keys(fm[k])) if (fm[k][x] !== today) delete fm[k][x];
+      for (const k of ['tried', 'did', 'said']) for (const x of Object.keys(fm[k])) if (fm[k][x] !== today) delete fm[k][x];
       let pts = 0;
       for (const [kind, key, extra] of q) {
         if (kind === 'recall') {
@@ -1912,6 +1939,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         else if (kind === 'try') { if (fm.tried[key] !== today && fm.got[key] !== today) { fm.tried[key] = today; pts += 1; } }
         // Finished something (a read-through, the rally, the song, homework sent): its points, once a day.
         else if (kind === 'did') { if (fm.did[key] !== today) { fm.did[key] = today; pts += Math.max(1, Math.min(5, +extra || 1)); } }
+        // Said out loud and the phone heard it: 2, once a day per word or line, up to 8 a day.
+        else if (kind === 'said') { const n = Object.keys(fm.said).length; if (!fm.said[key] && n < 8) { fm.said[key] = today; pts += 2; } }
         // A new word explored in the Word web: 1, once per word, up to 5 a day.
         else if (kind === 'web') { const n = Object.values(fm.web).filter(d => d === today).length; if (!fm.web[key] && n < 5) { fm.web[key] = today; pts += 1; } }
       }
@@ -2416,6 +2445,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const chk = row.createEl('button', { text: 'Check', cls: 'mod-cta' });
       const hint = cur.createDiv({ cls: 'gq-hint gq-say', text: 'Touch here to hear the whole line in Greek.' }); hint.style.display = 'none'; hint.onclick = () => say(x[1]);
       const show = row.createEl('button', { text: 'Show me', cls: 'gq-mini' }); show.style.display = 'none';
+      this.sayIt(row, x[1], 'said:π:' + n + ':' + i, 'Say the line · +2');
       const fb = cur.createDiv('gq-hint gq-cv-fb');
       const en = this.lineEl(cur, x[1], words); en.addClass('gq-cv-en'); en.addClass('gq-say'); en.onclick = () => say(x[1]); en.style.display = 'none';
       show.onclick = () => { en.style.display = ''; show.remove(); };
@@ -2858,7 +2888,17 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       s.createSpan({ text: ' first (2 minutes). ' }); const x = s.createEl('button', { text: 'Got it' }); x.onclick = () => this.setupSeen();
     }
     this.helloSong(box); if (box.lastElementChild) box.lastElementChild.dataset.tour = 'hello';
+    // Starting out: the song, the letters and φόρα only, until the first letter set is done (or a grown-up opens the rest).
+    const pf = this.progFm(), lDone = this.lettersDone(), simple = !this.kidFullNow && !pf.kid_full && !lDone.length && !this.moHasDays();
+    this.kidSimpleOn = simple;
+    if (lDone.length < LETTER_SETS.length) this.lettersCard(box);
     this.moCard(box);
+    if (simple) {
+      const c = box.createDiv('gq-tcard gq-kid gq-kidrest');
+      c.createDiv({ cls: 'gq-hint', text: 'After the first letters, the rest of today opens: the lesson game, the story puzzle and this week\'s words.' });
+      const b = c.createDiv('gq-row').createEl('button', { text: 'Show the rest of today', cls: 'gq-mini' }); b.onclick = () => this.kidFull();
+      this.kidFoot(box, el, tok, col, wk); return;
+    }
     if (!f) { box.createDiv({ cls: 'gq-tcard', text: 'This lesson is not in the vault yet. Tap More, then Update vault.' }); if (tok === el.gqTok) { el.empty(); el.appendChild(box); } return; }
     const txt = await this.app.vault.cachedRead(f), title = f.basename.replace(/^K\d+\s*/, '').replace(/-student$/, '');
     // 1. The game
@@ -2933,6 +2973,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     tool('Play Γιαγιά', () => this.openApp('giagia', '#k=' + wk.lesson), 'mod-cta'); tc.lastElementChild.dataset.tour = 'giagia';
     tool('All lessons', () => this.openNote('Lessons.md'));
     tool('Look up a word', () => new LookupModal(this.app, this).open());
+    if (lDone.length >= LETTER_SETS.length) this.lettersCard(box);
+    await this.kidFoot(box, el, tok, col, wk);
+  }
+  async kidFoot(box, el, tok, col, wk) {
     let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}
     const foot = box.createDiv('gq-hint');
     const wn = foot.createEl('a', { text: "What's new", href: '#' }); wn.onclick = e => { e.preventDefault(); this.openNote(WHATS_NEW); };
@@ -2942,6 +2986,123 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Slides parked here too: the kids Today is a plain list of cards.
     if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.tabsSync(); this.kidLesson = wk.lesson; if (col.setup_seen) { if (this.tourState().at === undefined) this.tourState().at = 0; this.tourShow(); } }
   }
+  moHasDays() { const f = this.app.vault.getAbstractFileByPath(MO_FILE); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return !!((this.moMem && Object.keys(this.moMem.days || {}).length) || (fm.days && typeof fm.days === 'object' && Object.keys(fm.days).length)); }
+  async kidFull() { this.kidFullNow = true; const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.kid_full = true; }); this.refreshToday(); }
+  lettersDone() { const v = this.lettersNow || this.progFm().letters; return Array.isArray(v) ? v.map(Number).filter(n => n >= 1 && n <= LETTER_SETS.length) : []; }
+  // Letters and sounds: tap a sound card to hear it, drag each letter onto the sound it makes (or tap the letter, then the sound).
+  // A right match on the first try is a recall (γράμμα:β), so a letter remembered on a later day is worth 3 like a word. A set done: 2 φόρα, once a day.
+  lettersCard(box) {
+    const c = box.createDiv('gq-tcard gq-kid gq-abc'); c.dataset.tour = 'letters';
+    const stopT = e => e.stopPropagation();
+    for (const ev of ['touchstart', 'touchend', 'pointerdown', 'pointermove', 'pointerup']) c.addEventListener(ev, stopT, { passive: true });
+    c.addEventListener('touchmove', e => { e.stopPropagation(); if (e.target && e.target.closest && e.target.closest('.gq-abc-tile')) e.preventDefault(); }, { passive: false });
+    const draw = () => {
+      c.empty(); clearTimeout(this.abcDemo);
+      const done = this.lettersDone(), all = LETTER_SETS.length;
+      let n = this.letterSet; if (!n) { const i = LETTER_SETS.findIndex((x, k) => !done.includes(k + 1)); n = i < 0 ? 1 : i + 1; }
+      const h = c.createDiv('gq-thead'); h.createEl('strong', { text: 'Letters and sounds' });
+      h.createSpan({ cls: 'gq-hint', text: done.length >= all ? '  · all 24 letters done' : `  · set ${n} of ${all}` });
+      c.createDiv({ cls: 'gq-hint', text: 'Tap a sound to hear it. Drag each letter onto the sound it makes, or tap a letter, then its sound.' });
+      const sets = c.createDiv('gq-row gq-abc-sets');
+      LETTER_SETS.forEach((x, i) => { const b = sets.createEl('button', { cls: 'gq-mini' + (i + 1 === n ? ' is-on' : '') + (done.includes(i + 1) ? ' is-done' : ''), text: x.map(y => y.l).join(' '), attr: { lang: 'el', 'aria-label': `Set ${i + 1}` + (done.includes(i + 1) ? ', done' : '') } }); b.onclick = () => { this.letterSet = i + 1; draw(); }; });
+      const set = LETTER_SETS[n - 1], miss = new Map(); let left = set.length, sel = null;
+      const bank = c.createDiv('gq-abc-bank'), grid = c.createDiv('gq-abc-grid');
+      const cards = this.shuf(set.slice()).map(x => {
+        const k = grid.createDiv({ cls: 'gq-abc-card', attr: { role: 'button', tabindex: '0', 'aria-label': `Sound: ${x.s}, ${x.h}` } }); k.gqL = x;
+        k.createDiv({ cls: 'gq-abc-slot', attr: { lang: 'el' } });
+        const t = k.createDiv('gq-abc-txt'); const tb = t.createDiv('gq-abc-top'); tb.createEl('b', { text: x.s }); tb.createSpan({ cls: 'gq-abc-hear', text: 'Hear' }); t.createSpan({ cls: 'gq-hint', text: x.h });
+        const act = () => { if (sel && !k.hasClass('is-ok')) { const s0 = sel; sel = null; s0.removeClass('is-sel'); match(s0, k); } else say(x.say); };
+        k.onclick = act; k.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } };
+        return k;
+      });
+      const match = (tile, k) => {
+        const x = tile.gqL;
+        if (k.gqL === x) {
+          k.addClass('is-ok'); k.querySelector('.gq-abc-slot').setText(x.l); k.createDiv({ cls: 'gq-abc-word', text: `${x.w} · ${x.en}`, attr: { lang: 'el' } });
+          tile.addClass('gq-used'); say(x.say); if (!miss.get(x.l)) this.moAdd('recall', 'γράμμα:' + x.l);
+          const sw = k.createDiv('gq-abc-say'); this.sayIt(sw, x.w, 'said:' + x.w, `Say ${x.w}`); sw.onclick = e => e.stopPropagation();
+          if (--left === 0) finish();
+        } else {
+          miss.set(x.l, (miss.get(x.l) || 0) + 1); k.addClass('is-no'); tile.addClass('is-no'); setTimeout(() => { k.removeClass('is-no'); tile.removeClass('is-no'); }, 500);
+          if (miss.get(x.l) >= 2) { const r = cards.find(q => q.gqL === x); if (r) r.addClass('is-hint'); }
+        }
+      };
+      for (const x of this.shuf(set.slice())) {
+        const b = bank.createEl('button', { cls: 'gq-abc-tile', attr: { lang: 'el', 'aria-label': `Letter ${x.u} ${x.l}` } }); b.gqL = x;
+        b.createSpan({ cls: 'gq-abc-big', text: x.l }); b.createSpan({ cls: 'gq-abc-up', text: x.u });
+        let sx = 0, sy = 0, drag = false, id = null;
+        b.onpointerdown = e => { sx = e.clientX; sy = e.clientY; drag = false; id = e.pointerId; try { b.setPointerCapture(id); } catch (er) {} };
+        b.onpointermove = e => { if (id !== e.pointerId) return; const dx = e.clientX - sx, dy = e.clientY - sy; if (!drag && Math.hypot(dx, dy) > 8) { drag = true; b.addClass('gq-drag'); } if (drag) b.style.transform = `translate(${dx}px, ${dy}px)`; };
+        b.onpointerup = e => {
+          if (id !== e.pointerId) return; id = null;
+          if (!drag) { if (sel === b) { sel = null; b.removeClass('is-sel'); return; } if (sel) sel.removeClass('is-sel'); sel = b; b.addClass('is-sel'); return; }
+          drag = false; b.removeClass('gq-drag'); b.style.transform = '';
+          const k = cards.find(q => { if (q.hasClass('is-ok')) return false; const r = q.getBoundingClientRect(); return e.clientX >= r.left - 6 && e.clientX <= r.right + 6 && e.clientY >= r.top - 6 && e.clientY <= r.bottom + 6; });
+          if (k) { if (sel) { sel.removeClass('is-sel'); sel = null; } match(b, k); }
+        };
+        b.onpointercancel = () => { id = null; drag = false; b.removeClass('gq-drag'); b.style.transform = ''; };
+      }
+      const r = c.createDiv('gq-row');
+      const demo = r.createEl('button', { text: 'Show me first', cls: 'gq-mini' });
+      demo.onclick = () => {
+        let i = 0; const tiles = [...bank.children];
+        const step = () => {
+          c.querySelectorAll('.is-demo').forEach(q => q.removeClass('is-demo')); if (i >= set.length) return;
+          const x = set[i++], t = tiles.find(q => q.gqL === x), k = cards.find(q => q.gqL === x);
+          if (t) t.addClass('is-demo'); if (k) k.addClass('is-demo'); say(x.say); this.abcDemo = setTimeout(step, 2200);
+        };
+        step();
+      };
+      const fin = c.createDiv('gq-abc-fin');
+      const finish = async () => {
+        const f = await this.progressFile(); let list = [];
+        await this.app.fileManager.processFrontMatter(f, fm => { list = Array.isArray(fm.letters) ? fm.letters.map(Number) : []; if (!list.includes(n)) list.push(n); list.sort(); fm.letters = list; });
+        this.lettersNow = list; setTimeout(() => { this.lettersNow = null; }, 3000);
+        this.moAdd('did', 'letters:' + n, 2); this.tourHit('letters');
+        demo.remove(); bank.style.display = 'none'; fin.empty(); fin.createDiv({ cls: 'gq-abc-yay', text: `Μπράβο. All ${set.length} letters in set ${n}.` });
+        const fr = fin.createDiv('gq-row');
+        const nx = LETTER_SETS.findIndex((x, k) => !list.includes(k + 1));
+        if (nx >= 0) { const b = fr.createEl('button', { text: `Next: set ${nx + 1}`, cls: 'mod-cta' }); b.onclick = () => { this.letterSet = nx + 1; draw(); }; }
+        const g = fr.createEl('button', { text: 'Play Γιαγιά with these letters', cls: nx >= 0 ? '' : 'mod-cta' }); g.onclick = () => this.openApp('giagia', '#L=' + n);
+        const a = fr.createEl('button', { text: 'Again', cls: 'gq-mini' }); a.onclick = () => draw();
+        if (this.kidSimpleOn) { this.kidSimpleOn = false; this.kidFullNow = true; const m = fin.createDiv('gq-hint', d => d.setText('The rest of today is open now, below.')); setTimeout(() => this.refreshToday(), 4000); }
+      };
+      if (done.length >= all) { const g = r.createEl('button', { text: 'Play Γιαγιά with all the letters', cls: 'gq-mini' }); g.onclick = () => this.openApp('giagia', '#L=all'); }
+    };
+    draw();
+  }
+  // A "Say it" button: listen, then +2 φόρα when the phone hears the target. key keeps it to once a day.
+  sayIt(parent, target, key, label) {
+    const w = parent.createSpan('gq-sayit');
+    const b = w.createEl('button', { text: label || 'Say it · +2', cls: 'gq-mini gq-sayit-b', attr: { 'aria-label': 'Say it out loud for 2 bonus φόρα' } });
+    const fb = w.createSpan({ cls: 'gq-hint gq-sayit-fb' });
+    const win = () => { b.setText('Heard it · +2'); b.addClass('is-ok'); b.disabled = true; fb.setText(''); this.moAdd('said', key); };
+    const typed = () => {
+      b.remove(); fb.setText('');
+      const i = w.createEl('input', { cls: 'gq-sayit-in', attr: { type: 'text', lang: 'el', placeholder: 'Tap the mic on the keyboard and say it', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' } });
+      const chk = () => { if (!i.value.trim()) return; if (heardIt(target, [i.value])) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); this.moAdd('said', key); } else fb.setText(' Not quite. Try again.'); };
+      i.onchange = chk; i.onkeydown = e => { if (e.key === 'Enter') chk(); };
+      w.appendChild(fb);
+    };
+    if (!SRec() || this.lsGet('sroff', 0)) { b.onclick = typed; return w; }
+    b.onclick = async () => {
+      if (b.hasClass('is-live')) return;
+      try { window.speechSynthesis && speechSynthesis.cancel(); } catch (e) {}
+      b.addClass('is-live'); b.setText('Listening…'); fb.setText('');
+      try {
+        const alts = await listenGreek(); b.removeClass('is-live');
+        if (heardIt(target, alts)) win();
+        else { b.setText(label || 'Say it · +2'); fb.setText(alts.length ? ` Heard "${alts[0]}". Try again.` : ' Nothing heard. Try again, a little louder.'); }
+      } catch (e) {
+        b.removeClass('is-live'); b.setText(label || 'Say it · +2');
+        if (e === 'no-speech' || e === 'aborted') fb.setText(' Nothing heard. Try again.');
+        // Blocked or not working here (Obsidian on a computer blocks it): use the keyboard's microphone instead, from now on.
+        else { this.lsSet('sroff', 1); typed(); if (e === 'not-allowed' && window.GQW) fb.setText(' The microphone is blocked for this site. A grown-up can allow it in the browser settings.'); }
+      }
+    };
+    return w;
+  }
+  shuf(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   // ---------- The tour: the fun first, the useful bits in between, on the real screens ----------
   // Each step is done by doing it (finish a line, pick a color, open a game), worth 2 φόρα once, ever.
   // Steps can be done in any order and on different days. Numbered dots let a teacher say "everyone on step 4" in class.
@@ -2951,12 +3112,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const k = this.kidLesson || 1;
       return [
         { k: 'hello', at: ['hello'], t: 'Start with a song', b: 'Sing the hello song together and do the moves. It starts every lesson.', ev: 'song' },
+        { k: 'letters', at: ['letters'], t: 'Letters and sounds', b: 'Tap a sound to hear it. Drag each letter onto the sound it makes. Finish one set of six.', ev: 'letters' },
         { k: 'giagia', at: ['giagia'], t: 'Γιαγιά', b: 'Find 7 notebooks before Γιαγιά feeds you. Use the arrows or swipe. Come back here when you are done.', go: ['Play Γιαγιά', () => this.openApp('giagia', '#k=' + k)], ev: 'game' },
         { k: 'puzzle', at: ['puzzle'], t: 'Story puzzle', b: 'Drag the Greek words up to finish the line, or tap them. Finish one line.', ev: 'story' },
         { k: 'mo', at: ['mo'], t: 'Πήρες φόρα;', b: 'Right answers give you φόρα (momentum) and steps. Pick a world. Green words make it grow.', ev: 'world' },
         { k: 'words', at: ['words'], t: "This week's words", b: 'Hear each word, then pick a color: red is not yet, yellow is kind of, green is got it.', ev: 'up' },
         { k: 'teacher', at: ['teacher'], t: 'Now you are the teacher', b: 'Swap. The kid asks. The grown-up gets one wrong on purpose. Catch it. Then tap We did it.', ev: 'teacher' },
-        { k: 'dessert', at: ['dessert'], t: 'Dessert word', b: 'A treat after the lesson: pick a word, say it, make up a move, then draw it.' },
         { k: 'web', at: ['tab-words'], t: 'Word web', b: 'Tap a word to go there, double-tap to hear more than one, hold to see what it goes with.', go: ['Open the Word web', () => this.openGraph()], ev: 'web' },
         { k: 'class', at: ['tab-class'], t: 'Class', b: "This week's lesson and game, and a way to text the teacher.", go: ['Open Class', () => this.openClass()], ev: 'class', tab: 'class' }
       ];
@@ -2974,13 +3135,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     ];
   }
   tourState() {
-    if (!this.tour) { const fm = this.progFm(); this.tour = { at: fm.tour_at === undefined || fm.tour_at === null ? undefined : parseInt(fm.tour_at, 10), done: Array.isArray(fm.tour_done) ? fm.tour_done.map(String) : [] }; }
+    if (!this.tour) { const fm = this.progFm(); this.tour = { at: fm.tour_at === undefined || fm.tour_at === null ? undefined : parseInt(fm.tour_at, 10), done: Array.isArray(fm.tour_done) ? fm.tour_done.map(String) : [], seen: Array.isArray(fm.tour_seen) ? fm.tour_seen.map(String) : [] }; }
     return this.tour;
   }
   tourLeft() { const d = this.tourState().done; return this.tourSteps().filter(x => x.ev && !d.includes(x.k)).length; }
   tourOpen() { const a = this.tourState().at; return a !== undefined && a < 99; }
   tourIs(k) { if (!this.tourOpen()) return false; const st = this.tourSteps()[this.tourState().at]; return !!st && st.k === k; }
-  async tourSave() { const t = this.tourState(), f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (t.at === undefined) delete fm.tour_at; else fm.tour_at = t.at; fm.tour_done = [...t.done]; }); }
+  async tourSave() { const t = this.tourState(), f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (t.at === undefined) delete fm.tour_at; else fm.tour_at = t.at; fm.tour_done = [...t.done]; fm.tour_seen = [...(t.seen || [])]; }); }
   // Kept for older calls: set the step showing.
   async tourSet(n) { this.tourState().at = n; await this.tourSave(); }
   async tourStart(n) {
@@ -3022,9 +3183,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const t = this.tourState(); if (!this.tourOpen()) return;
     const steps = this.tourSteps(); if (t.at >= steps.length) { t.at = 99; this.tourSave(); return; }
     const st = steps[t.at];
+    // Seen: the step was shown. Its dot turns yellow (kind of) until it is tried, then green.
+    if (!t.seen) t.seen = []; if (!t.seen.includes(st.k)) { t.seen.push(st.k); this.tourSave(); }
     if (st.tab) this.tabReveal(st.tab);
     const vis = el => el && (el.offsetParent !== null || el.getClientRects().length);
     let el = null; for (const k of st.at || []) { el = [...document.querySelectorAll(`[data-tour="${k}"]`)].find(vis); if (el) break; }
+    // Kids starting out see only the first cards; a step further down opens the rest of today.
+    if (!el && this.isKids && this.kidSimpleOn && (st.at || []).some(k => !k.startsWith('tab-'))) { this.kidSimpleOn = false; this.kidFull(); return; }
     if (el) { el.addClass('gq-tour-on'); if (!el.closest('#gq-nav') && !el.closest('.side-dock-ribbon')) { el.style.scrollMarginTop = '12px'; setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60); } }
     const tip = document.body.createDiv({ cls: 'gq-tour' + (this.tourMin ? ' is-min' : ''), attr: { role: 'dialog', 'aria-label': 'Tour' } });
     const done = k => t.done.includes(k);
@@ -3036,14 +3201,19 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     top.createSpan({ cls: 'gq-tour-step', text: `Step ${t.at + 1} of ${steps.length}` });
     const mn = top.createEl('button', { cls: 'gq-tour-x', text: '–', attr: { 'aria-label': 'Make the tour small' } }); mn.onclick = () => { this.tourMin = true; this.tourShow(); };
     const dots = tip.createDiv({ cls: 'gq-tour-dots', attr: { 'aria-label': 'Tour steps' } });
-    steps.forEach((x, i) => { const d = dots.createEl('button', { text: String(i + 1), cls: 'gq-tour-dot' + (i === t.at ? ' is-at' : '') + (x.ev && done(x.k) ? ' is-done' : ''), attr: { 'aria-label': `Step ${i + 1}: ${x.t}` + (done(x.k) ? ', done' : '') } }); d.onclick = () => { t.at = i; this.tourSave(); this.tourShow(); }; });
+    steps.forEach((x, i) => { const d = dots.createEl('button', { text: String(i + 1), cls: 'gq-tour-dot' + (i === t.at ? ' is-at' : '') + (x.ev && done(x.k) ? ' is-done' : (t.seen.includes(x.k) && i !== t.at ? ' is-seen' : '')), attr: { 'aria-label': `Step ${i + 1}: ${x.t}` + (done(x.k) ? ', done' : t.seen.includes(x.k) ? ', seen, not tried yet' : '') } }); d.onclick = () => { t.at = i; this.tourSave(); this.tourShow(); }; });
     tip.createDiv({ cls: 'gq-tour-t', text: st.t + (st.ev && done(st.k) ? ' · done' : ''), attr: { lang: 'el' } });
     tip.createDiv({ text: st.b });
-    if (st.ev && !done(st.k)) tip.createDiv({ cls: 'gq-hint', text: 'Do it to finish this step: +2 φόρα.' });
+    if (st.ev && !done(st.k)) tip.createDiv({ cls: 'gq-hint', text: 'Try it to finish this step: +2 φόρα.' });
+    if (this.tourSkipped) { tip.createDiv({ cls: 'gq-hint gq-tour-skipped', text: `Step ${this.tourSkipped} stays yellow until you try it. Tap its dot any time.` }); this.tourSkipped = 0; }
+    if (t.seen.some(k => !done(k) && k !== st.k)) tip.createDiv({ cls: 'gq-hint gq-tour-key', text: 'Green: tried it · Yellow: seen, not tried yet' });
     const r = tip.createDiv('gq-row'), last = t.at === steps.length - 1;
     if (st.go) { const a = r.createEl('button', { text: st.go[0], cls: 'mod-cta' }); a.onclick = () => { this.tourMin = true; this.tourShow(); st.go[1](); }; }
     const nx = r.createEl('button', { text: last ? 'Done' : 'Next', cls: st.go ? '' : 'mod-cta' });
-    nx.onclick = () => { t.at = last ? 99 : t.at + 1; this.tourSave(); if (last) this.tourBye(); this.tourShow(); };
+    // Next skips steps already tried. A step left untried stays yellow, and saying so keeps it a choice, not a slip.
+    const nxi = steps.findIndex((x, i) => i > t.at && !(x.ev && done(x.k)));
+    if (nxi < 0) nx.setText('Done');
+    nx.onclick = () => { if (st.ev && !done(st.k)) this.tourSkipped = t.at + 1; t.at = nxi < 0 ? 99 : nxi; this.tourSave(); if (nxi < 0) { this.tourSkipped = 0; this.tourBye(); } this.tourShow(); };
     const sk = r.createEl('button', { text: last ? 'Close' : 'Later', cls: 'gq-mini gq-tour-skip' }); sk.onclick = () => { t.at = 99; this.lsSet('tourlater', Date.now() + 3 * 864e5); this.tourSave(); this.tourShow(); this.refreshToday(); };
   }
   tourBye() { const left = this.tourLeft(); new Notice(left ? `Tour closed. ${left} step${left === 1 ? '' : 's'} still to try, any time: More, then Take the tour.` : 'Tour done. Θα τα πούμε.'); this.refreshToday(); }

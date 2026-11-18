@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, night: say it out loud, and a clearer tour
+> - **Say it · +2:** next to Check in the story puzzle. Tap it and say the line in Greek. When your phone hears it right, you get 2 bonus φόρα (up to 8 times a day). If your phone can't listen in the app, a text box opens instead: tap the microphone on your keyboard and say it there.
+> - **Tour:** Next now skips steps you already did. A step you saw but didn't try turns yellow. Try it any time from its dot to turn it green and get its points.
+
 > [!info]- November 18, later: tabs, the Words list and a tour
 > - **Tabs that show up as you go:** Today first. **Words** appears after you color your first word, **Class** after your first class or the tour. More is now at the top.
 > - **Words:** search, then List or Web. The list is all 1,500 words like a spreadsheet. Tap the color box to mark red, yellow or green. Filter by color, or turn on Cover English to test yourself.

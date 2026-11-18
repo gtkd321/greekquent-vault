@@ -1,0 +1,10 @@
+{
+  "every": 50,
+  "greek_releases_since_fork_build": 0,
+  "forks": [
+    "german",
+    "arabic"
+  ],
+  "forks_built": false,
+  "note": "Demo forks rebuild on every 50th Greek release. Add 1 per Greek release; at 50 rebuild and reset."
+}

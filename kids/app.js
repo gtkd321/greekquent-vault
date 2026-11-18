@@ -20,13 +20,15 @@ G.patch = P => {
   P.keyModal = function () {};
 };
 
-// More menu: the backup lives here, and "Update vault" becomes a quiet check.
+// More menu: updates happen on their own and work saves itself, so neither needs a button.
+// "Put it on my home screen" shows only in a browser tab, where it matters most.
 G.menuHook = menu => {
   const i = menu.items.findIndex(x => x && x.title === 'Update vault');
   if (i < 0) return;
-  menu.items[i].setTitle('Check for updates');
-  const add = (t, cb) => { const it = new (G.MenuItemClass)(); it.setTitle(t).onClick(cb); return it; };
-  menu.items.splice(i + 1, 0, add('Back up my work', () => G.backup()), add('Restore my work', () => G.restore()), add('Put it on my home screen', () => installHelp()));
+  const home = matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  if (home) { menu.items.splice(i, 1); return; }
+  const it = new (G.MenuItemClass)(); it.setTitle('Put it on my home screen').onClick(() => installHelp());
+  menu.items.splice(i, 1, it);
 };
 
 function installHelp() {
@@ -40,22 +42,23 @@ function installHelp() {
   } else if (ios) {
     const ol = c.createEl('ol');
     for (const t of ['Open this page in Safari.', 'Tap Share (the square with the arrow).', 'Tap Add to Home Screen, then Add.']) ol.createEl('li', { text: t });
-    c.createEl('p', { cls: 'gq-hint', text: 'Use it from the home screen icon. That keeps your colors and φόρα safe on this phone.' });
+    c.createEl('p', { cls: 'gq-hint', text: 'Use it from the home screen icon. In a Safari tab, an iPhone can clear your colors and φόρα after a week away.' });
   } else {
     const ol = c.createEl('ol');
     for (const t of ['Open this page in Chrome.', 'Tap the menu (three dots).', 'Tap Install app or Add to Home screen.']) ol.createEl('li', { text: t });
   }
-  c.createEl('p', { cls: 'gq-hint', text: 'Your work stays on this phone. Back up my work (in More) saves a copy you can bring to another phone.' });
+  c.createEl('p', { cls: 'gq-hint', text: 'Your work saves on this phone as you go.' });
   m.open();
 }
 
 let loaded = '';
-async function checkUpdate(loud) {
+async function checkUpdate(loud, wait) {
   try {
     const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); const v = (await r.json()).version;
     if (v && v !== loaded) {
       if (loud) new Notice('Updating. Your work stays as it is.');
       try { const reg = navigator.serviceWorker && await navigator.serviceWorker.getRegistration(); if (reg) await reg.update(); } catch (e) {}
+      if (wait) return true; // ready for the next break; nothing changes on screen
       sessionStorage.setItem('gqk-updated', v);
       setTimeout(() => location.reload(), loud ? 700 : 0);
       return true;
@@ -132,8 +135,14 @@ async function boot() {
     $('#gq-boot').remove();
     app.workspace.ready();
     const up = sessionStorage.getItem('gqk-updated'); if (up) { sessionStorage.removeItem('gqk-updated'); setTimeout(() => new Notice('Updated to ' + up + '. Your work is all here.'), 1500); }
-    setInterval(() => checkUpdate(false), 30 * 60 * 1000);
-    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') checkUpdate(false); });
+    // Never reload under someone mid-activity. A new version is fetched quietly and switched in at a natural break:
+    // the next launch, or coming back after 10+ minutes away.
+    let away = 0;
+    setInterval(() => checkUpdate(false, true), 30 * 60 * 1000);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') { away = Date.now(); return; }
+      checkUpdate(false, Date.now() - away < 10 * 60 * 1000);
+    });
   } catch (e) {
     console.error(e);
     status.textContent = 'Greekquent could not start (' + (e && e.message || e) + '). Check the internet connection and open the link again.';

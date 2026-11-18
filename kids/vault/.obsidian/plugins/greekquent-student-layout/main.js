@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18n';
+const VAULT_RELEASE = '2026-11-18o';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -227,7 +227,7 @@ class WordWebView extends ItemView {
   async go(p, push = true) {
     if (!p || !this.stage) { this.path = p || this.path; return; }
     const w = await this.info(p); if (!w) return;
-    if (push && this.hist[this.pos] !== p) { this.hist = this.hist.slice(0, this.pos + 1); this.hist.push(p); this.pos = this.hist.length - 1; }
+    if (push && this.hist[this.pos] !== p) { this.hist = this.hist.slice(0, this.pos + 1); this.hist.push(p); this.pos = this.hist.length - 1; if (this.hist.length > 1) this.plugin.moAdd('web', p); }
     this.path = p; this.centerG = this.plugin.wordInfo(p).g;
     const r = this.stage.getBoundingClientRect(); this.Wd = r.width || 360; this.Ht = r.height || 480;
     const cx = this.Wd / 2, cy = this.Ht / 2;
@@ -585,7 +585,7 @@ class LookupModal extends Modal {
         t.createDiv({ cls: 'gq-hit-main', text: greekQuery ? `${w.word} = ?` : `${w.english} = ?` });
         t.createDiv({ cls: 'gq-hit-sub', text: `${this.plugin.isKids ? '' : '#' + w.rank + '  '}Say your guess out loud, then reveal.` });
         const r = row.createEl('button', { text: 'Reveal' });
-        r.onclick = () => { this.plugin.logLookup(q, w); row.empty(); this.fill(row, w); };
+        r.onclick = () => { this.plugin.logLookup(q, w); this.plugin.moAdd('try', 'look:' + w.word); row.empty(); this.fill(row, w); };
       } else this.fill(row, w, q);
     }
     if (!hits.length) L.createDiv({ cls: 'gq-hint', text: 'Not in the 1,500.' });
@@ -695,7 +695,7 @@ class AskModal extends Modal {
     this.box = c.createEl('textarea', { attr: { rows: 4, placeholder: 'Your question (English or Greek)' } }); this.box.addClass('gq-input');
     const row = c.createDiv('gq-row');
     const send = row.createEl('button', { text: 'Share to GroupMe', cls: 'mod-cta' });
-    send.onclick = async () => { await this.plugin.shareQuestion(head + '\n' + this.box.value.trim() + '\n' + this.plugin.noteUrl(this.file)); this.close(); };
+    send.onclick = async () => { this.plugin.moAdd('did', 'ask', 2); await this.plugin.shareQuestion(head + '\n' + this.box.value.trim() + '\n' + this.plugin.noteUrl(this.file)); this.close(); };
     const vid = row.createEl('button', { text: 'Ask on video instead' });
     vid.onclick = () => { const t = this.box.value.trim(); this.close(); new VideoAskModal(this.app, this.plugin, this.file, t).open(); };
     if (GROUPME_JOIN) { const j = row.createEl('button', { text: 'Join the class group' }); j.onclick = () => window.open(GROUPME_JOIN); }
@@ -1533,6 +1533,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!body || /^## [^\n]*$/.test(body)) { new Notice('Write your homework under the newest heading first.'); return; }
     if (body.length > 3000) { body = body.slice(0, 3000); new Notice('Homework is long, so only the first 3,000 characters were added. Send the rest in a second text.'); }
     const md = this.moData().days, mo = this.moScore(md), w7 = new Date(); w7.setDate(w7.getDate() - 7);
+    this.moAdd('did', 'homework', 3); this.moFlush();
     window.open(smsLink(`Greekquent homework (${f.basename}):\n${body}\n\nΦόρα ${mo} (${mo - this.moScore(md, w7) >= 0 ? '+' : ''}${mo - this.moScore(md, w7)} this week)`));
   }
   async sha(buf) { const h = await crypto.subtle.digest('SHA-256', buf); return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join(''); }
@@ -1789,12 +1790,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     let f = this.app.vault.getAbstractFileByPath(MO_FILE);
     if (!f) {
       if (!this.app.vault.getAbstractFileByPath(MY_WORK.slice(0, -1))) await this.app.vault.createFolder(MY_WORK.slice(0, -1));
-      f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠήρες φόρα; This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
+      f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠήρες φόρα; This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- Comebacks, today\'s line and the rally: Had it counts like a word. Not yet: 1 for trying.\n- A finished read-through, rally swap, song or kid card: 2. Homework sent: 3. A question to the class: 2. Once a day each.\n- Guess first in Look up: 1. A new word in the Word web: 1, up to 5 a day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
     }
     const today = ymd(new Date()), gap = d => { const [a, b, c] = String(d).split('-').map(Number); const n = new Date(); n.setHours(12, 0, 0, 0); return Math.round((n - new Date(a, b - 1, c, 12)) / 864e5); };
     let gained = 0;
     await this.app.fileManager.processFrontMatter(f, fm => {
-      for (const k of ['days', 'got', 'up', 'met', 'made']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
+      for (const k of ['days', 'got', 'up', 'met', 'made', 'tried', 'did', 'web']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
+      // tried and did only need today; yesterday's entries go.
+      for (const k of ['tried', 'did']) for (const x of Object.keys(fm[k])) if (fm[k][x] !== today) delete fm[k][x];
       let pts = 0;
       for (const [kind, key, extra] of q) {
         if (kind === 'recall') {
@@ -1805,13 +1808,32 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         else if (kind === 'own') pts += 3;
         else if (kind === 'built') pts += 1;
         else if (kind === 'card') { if (!fm.made[key]) { fm.made[key] = today; pts += 1; } }
+        // Tried from memory but missed it: 1, once a day per item. Trying is the work that makes it stick.
+        else if (kind === 'try') { if (fm.tried[key] !== today && fm.got[key] !== today) { fm.tried[key] = today; pts += 1; } }
+        // Finished something (a read-through, the rally, the song, homework sent): its points, once a day.
+        else if (kind === 'did') { if (fm.did[key] !== today) { fm.did[key] = today; pts += Math.max(1, Math.min(5, +extra || 1)); } }
+        // A new word explored in the Word web: 1, once per word, up to 5 a day.
+        else if (kind === 'web') { const n = Object.values(fm.web).filter(d => d === today).length; if (!fm.web[key] && n < 5) { fm.web[key] = today; pts += 1; } }
       }
       const before = +fm.days[today] || 0, now = Math.min(MO_CAP, before + pts); gained = now - before;
       if (now) fm.days[today] = now;
       for (const d of Object.keys(fm.days)) if (gap(d) > 60) delete fm.days[d];
       this.moMem = { days: { ...fm.days }, t: Date.now() };
     });
-    if (gained) this.moPaint();
+    if (gained) { this.moPaint(); this.moToast(gained); }
+  }
+  // A small "+3 φόρα" at the top for a moment, so the points are felt where the work happens.
+  moToast(n) {
+    const old = document.querySelector('.gq-mo-toast'); if (old) old.remove();
+    const t = document.body.createDiv({ cls: 'gq-mo-toast', text: `+${n} φόρα`, attr: { role: 'status' } });
+    setTimeout(() => t.addClass('is-out'), 1300); setTimeout(() => t.remove(), 1700);
+  }
+  // "We did it" on a kid card: 2 φόρα, once a day.
+  didBtn(c, key) { const b = c.createDiv('gq-row').createEl('button', { text: 'We did it', cls: 'gq-mini' }); b.onclick = () => { this.moAdd('did', key, 2); b.setText('Done today'); b.disabled = true; }; }
+  // After a reveal: did you have it? Had it counts as recall; Not yet still earns a point for trying.
+  hadIt(r, key, after) {
+    const y = r.createEl('button', { text: 'Had it', cls: 'mod-cta' }); const n = r.createEl('button', { text: 'Not yet' });
+    y.onclick = () => { this.moAdd('recall', key); after(); }; n.onclick = () => { this.moAdd('try', key); after(); };
   }
   async setWorld(w) { this.worldNow = w; const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (w) fm.world = w; else delete fm.world; }); this.moPaint(); }
   worldDraw(c, todayPts, score) {
@@ -1861,11 +1883,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     c.createDiv({ cls: 'gq-hint', text: `Did you get going? · ${todayPts ? '+' + todayPts + ' today' : 'nothing yet today'} · ${gain >= 0 ? '+' : ''}${gain} this week` });
     const bars = c.createDiv({ cls: 'gq-mo-bars', attr: { 'aria-hidden': 'true' } });
     for (let k = 13; k >= 0; k--) { const d = new Date(); d.setDate(d.getDate() - k); const p = +days[ymd(d)] || 0; const b = bars.createDiv('gq-mo-bar' + (k === 0 ? ' is-today' : '')); b.style.height = Math.max(3, Math.round(30 * p / MO_CAP)) + 'px'; }
+    c.createDiv({ cls: 'gq-mo-barcap', text: 'Your last 2 weeks. Today is blue; taller means more φόρα.' });
     const ans = todayPts >= 15 ? 'Ναι, πήρα φόρα.' : todayPts ? 'Λίγο.' : 'Όχι ακόμα, αλλά θα πάρω.';
     const a = c.createDiv({ cls: 'gq-hint gq-say', attr: { lang: 'el' } }); a.appendText('Say it: '); a.createSpan({ text: ans, cls: 'gq-mo-ans' }); a.onclick = () => say(ans);
     const d = c.createEl('details', { cls: 'gq-mo-how' }); d.createEl('summary', { text: 'How φόρα works' });
     const ul = d.createEl('ul');
-    for (const t of ['A word right again on a later day: 3 (the first time: 1, the same day again: 0).', 'A color you moved up, still right two days later: 5.', 'Your own sentence: 3. A story puzzle line: 1, or 3 on a later day.', 'A new card on paper: 1. Paper round cards count like any word you get right.', 'Up to 40 a day. A day off fades it by a seventh, so a little every day beats a lot at once.']) ul.createEl('li', { text: t });
+    for (const t of ['A word right again on a later day: 3 (the first time: 1, the same day again: 0).', 'A color you moved up, still right two days later: 5.', 'Your own sentence: 3. A story puzzle line: 1, or 3 on a later day.', 'A new card on paper: 1. Paper round cards count like any word you get right.', 'Comebacks, today\'s line and the rally: tap Had it for word points. Not yet still earns 1 for trying.', 'Finishing a read-through, the rally swap, the song or a kid card: 2. Sending homework: 3. Asking the class: 2. Once a day each.', 'Guess first in Look up: 1. A new word in the Word web: 1 (up to 5 a day).', 'Up to 40 a day. A day off fades it by a seventh, so a little every day beats a lot at once.']) ul.createEl('li', { text: t });
     if (this.colors().world) { const li = ul.createEl('li'); li.appendText('Your world grows with your green words and never shrinks. φόρα only sets the weather. '); const ch = li.createEl('a', { text: 'Change my world', href: '#' }); ch.onclick = e => { e.preventDefault(); this.setWorld(''); }; }
   }
   // ---------- Paper round: the app keeps the schedule, the paper cards do the work ----------
@@ -2107,6 +2130,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async saidBeat(n) {
     const f = await this.progressFile();
     await this.app.fileManager.processFrontMatter(f, fm => { fm.last_beat = n; });
+    this.moAdd('did', 'beat:' + n, 1);
     setTimeout(() => this.refreshToday(), 300);
   }
   // The story puzzle goes at each student's own pace, from part 1. story_at in My progress = parts finished.
@@ -2491,7 +2515,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
           rows[ev.li].syl[ev.idx].classList.add('is-on');
         }
         if (now < end + 0.1) raf = requestAnimationFrame(frame);
-        else { clear(); play.setText('Sing it again'); this.songStop = null; try { ctx.close(); } catch (e) {} }
+        else { clear(); play.setText('Sing it again'); this.songStop = null; this.moAdd('did', 'song', 2); try { ctx.close(); } catch (e) {} }
       };
       raf = requestAnimationFrame(frame);
       play.setText('Stop');
@@ -2549,6 +2573,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       c.createDiv({ cls: 'gq-hint', text: 'Swap. The kid asks the questions. The grown-up gets one wrong on purpose. Catch it.' });
       const ol = c.createEl('ol', { cls: 'gq-storylist gq-plain' });
       for (const l of sw) { const li = ol.createEl('li'); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); if (l.en) li.createDiv({ cls: 'gq-hint', text: l.en }); }
+      this.didBtn(c, 'teacher:' + wk.lesson);
     }
     // 4. This week's words, nouns first, with the colors
     const words = (await this.wordIndex()).filter(w => (w.kid || []).includes(wk.lesson));
@@ -2577,6 +2602,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const ul = c.createEl('ul', { cls: 'gq-storylist gq-plain' });
       if (mv.length > 8) c.createDiv({ cls: 'gq-hint', text: `The first 8 of ${mv.length}. The rest are on the lesson page.` });
       for (const m of mv.slice(0, 8)) { const li = ul.createEl('li'); li.createSpan({ text: m[1], attr: { lang: 'el' } }); li.createDiv({ cls: 'gq-hint', text: m[2] }); }
+      this.didBtn(c, 'moves:' + wk.lesson);
     }
     const nb = box.childElementCount; await this.dessertCard(box); if (box.childElementCount > nb) box.lastElementChild.dataset.tour = 'dessert';
     // Small buttons under the cards
@@ -2726,7 +2752,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const big = (el, t) => this.lineEl(el.createDiv('gq-pop-big'), t, b.words);
     this.pop(`Today's line · week ${b.week}`, [
       { label: 'Listen', build: (el, api) => { el.createDiv({ cls: 'gq-hint', text: 'Hear it, then say it out loud with the voice.' }); big(el, b.gr); const r = el.createDiv('gq-row'); this.hearBtn(r, b.gr); say(b.gr); const nx = r.createEl('button', { text: 'Ready', cls: 'mod-cta' }); nx.onclick = api.next; } },
-      { label: 'From memory', build: (el, api) => { el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek without looking, then check.' }); el.createDiv({ cls: 'gq-pop-big gq-pop-en', text: b.en }); const g = el.createDiv('gq-pop-big gq-pop-hide'); this.lineEl(g, b.gr, b.words); const r = el.createDiv('gq-row'); const c = r.createEl('button', { text: 'Check', cls: 'mod-cta' }); c.onclick = () => { g.removeClass('gq-pop-hide'); say(b.gr); c.remove(); const nx = r.createEl('button', { text: 'Next', cls: 'mod-cta' }); nx.onclick = api.next; }; } },
+      { label: 'From memory', build: (el, api) => { el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek without looking, then check.' }); el.createDiv({ cls: 'gq-pop-big gq-pop-en', text: b.en }); const g = el.createDiv('gq-pop-big gq-pop-hide'); this.lineEl(g, b.gr, b.words); const r = el.createDiv('gq-row'); const c = r.createEl('button', { text: 'Check', cls: 'mod-cta' }); c.onclick = () => { g.removeClass('gq-pop-hide'); say(b.gr); c.remove(); this.hadIt(r, 'line:' + b.gr.slice(0, 80), api.next); }; } },
       { label: 'Done', build: (el, api) => { big(el, b.gr); el.createDiv({ cls: 'gq-hint', text: b.en });
         const r = el.createDiv('gq-row');
         if (done) r.createSpan({ cls: 'gq-hint', text: 'Already marked as said.' }); else { const ok = r.createEl('button', { text: 'I said it', cls: 'mod-cta' }); ok.onclick = () => { this.saidBeat(n); api.close(); }; }
@@ -2775,13 +2801,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const r = el.createDiv('gq-row'); this.hearBtn(r, p.t, 'Hear again');
       const m = r.createEl('button', { text: 'What does it mean?', cls: 'gq-mini' }); m.onclick = () => { en.removeClass('gq-pop-hide'); m.remove(); };
       const s = r.createEl('button', { text: 'Check my answer', cls: 'mod-cta' });
-      s.onclick = () => { ans.removeClass('gq-pop-hide'); say(p.you[0]); s.remove(); if (p.you.length > 1) this.hearBtn(r, p.you.join(' '), 'Hear both'); const nx = r.createEl('button', { text: 'Next', cls: 'mod-cta' }); nx.onclick = api.next; };
+      s.onclick = () => { ans.removeClass('gq-pop-hide'); say(p.you[0]); s.remove(); if (p.you.length > 1) this.hearBtn(r, p.you.join(' '), 'Hear both'); this.hadIt(r, 'rally:' + p.t.slice(0, 80), api.next); };
     } }));
     steps.push({ label: 'Swap', build: (el, api) => {
       el.createDiv({ cls: 'gq-hint', text: 'Now you ask. Say each question out loud, as if to the teacher.' });
       const ol = el.createEl('ol', { cls: 'gq-storylist gq-pop-list' }); for (const p of pairs) ol.createEl('li', { text: p.t, attr: { lang: 'el' } });
       const r = el.createDiv('gq-row'); this.hearBtn(r, pairs.map(p => p.t).join(' '), 'Hear them all');
-      const d = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); d.onclick = api.close;
+      const d = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); d.onclick = () => { this.moAdd('did', 'rally-swap:' + n, 2); api.close(); };
     } });
     this.pop(`Rally · Lesson ${n}`, steps);
   }
@@ -2793,7 +2819,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const g = el.createDiv({ cls: 'gq-pop-big gq-pop-hide', text: c.gr, attr: { lang: 'el' } });
       const r = el.createDiv('gq-row'); if (c.ctx.length) this.hearBtn(r, c.ctx.map(x => x.g).join(' '), 'Hear the line');
       const s = r.createEl('button', { text: c.ctx.length ? 'Show my answer' : 'Show Greek', cls: 'mod-cta' });
-      s.onclick = () => { g.removeClass('gq-pop-hide'); say(c.gr); s.remove(); this.hearBtn(r, c.gr, 'Hear again'); const nx = r.createEl('button', { text: k === due.length - 1 ? 'Done' : 'Next', cls: 'mod-cta' }); nx.onclick = k === due.length - 1 ? api.close : api.next; };
+      s.onclick = () => { g.removeClass('gq-pop-hide'); say(c.gr); s.remove(); this.hearBtn(r, c.gr, 'Hear again'); this.hadIt(r, 'cb:' + c.gr.slice(0, 80), k === due.length - 1 ? api.close : api.next); };
     } }));
     this.pop('Comebacks', steps);
   }
@@ -2809,7 +2835,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     steps.push({ label: 'All together', build: (el, api) => {
       el.createDiv({ cls: 'gq-hint', text: 'Now the whole thing, top to bottom.' });
       const ol = el.createEl('ol', { cls: 'gq-storylist gq-pop-list' }); for (const l of lines) ol.createEl('li', { text: l.gr, attr: { lang: 'el' } });
-      const r = el.createDiv('gq-row'); this.hearBtn(r, lines.map(l => l.gr).join(' '), 'Hear it all'); const d = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); d.onclick = api.close;
+      const r = el.createDiv('gq-row'); this.hearBtn(r, lines.map(l => l.gr).join(' '), 'Hear it all'); const d = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); d.onclick = () => { this.moAdd('did', 'lines:' + title, 2); api.close(); };
     } });
     this.pop(title, steps);
   }

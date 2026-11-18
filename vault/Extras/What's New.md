@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, late: Γιαγιά d-pad
+> - In **Γιαγιά** on a phone, the arrows are now a classic d-pad in the middle: ▲ on top, ◀ and ▶ at the sides, ▼ below. It still sits above Obsidian's search bar.
+
 > [!info]- November 18, late: Word web says μπορώ να βλέπω
 > - When you hold a word in the **Word web**, it now uses the verb form you already know after να: μπορώ να βλέπω (I can see). Before, it said βλέπω μπορώ να δω.
 > - The one-time form (μπορώ να δω) is shown in small letters under it, for when you are ready for it.

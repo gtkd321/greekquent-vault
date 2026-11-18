@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19f · The tour counts what you already did
+> Picked a world, colored a word or played a game before the tour got there? It now counts: the step turns green, you get the 2 φόρα, and the tour moves on. This works for things done before you started the tour, too.
+
 > [!tip]- 2026-11-19e · Print and download
 > The Handouts folder moved to one page outside the app: [[Print and download]]. It has the 1,500 words with a box to mark in color, the Verb Sheet, Sentence Tiles, the workbook (one lesson at a time or the whole year), both textbooks and the flashcard decks. The app and the sidebar are shorter. If you wrote in a handout, it is saved in My Work.
 > 

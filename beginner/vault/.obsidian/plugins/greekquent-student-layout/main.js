@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19e';
+const VAULT_RELEASE = '2026-11-19f';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -2008,6 +2008,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async progressFile() {
     let f = this.app.vault.getAbstractFileByPath(PROGRESS);
     if (f) return f;
+    if (this._pfMaking) return this._pfMaking;
+    this._pfMaking = this._progressMake().finally(() => { this._pfMaking = null; });
+    return this._pfMaking;
+  }
+  async _progressMake() {
     if (!this.app.vault.getAbstractFileByPath(MY_WORK.slice(0, -1))) await this.app.vault.createFolder(MY_WORK.slice(0, -1));
     return this.app.vault.create(PROGRESS, '---\nred: []\nyellow: []\ngreen: []\n---\n# My progress\n\nYour word colors live in this note. Change them with the color buttons on any word note: red = don\'t have it, yellow = kind of, green = have it. Tap a color again to clear it. The Today page counts them.\n');
   }
@@ -3302,18 +3307,34 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     ];
   }
   tourState() {
-    if (!this.tour) { const fm = this.progFm(); this.tour = { at: fm.tour_at === undefined || fm.tour_at === null ? undefined : parseInt(fm.tour_at, 10), done: Array.isArray(fm.tour_done) ? fm.tour_done.map(String) : [], seen: Array.isArray(fm.tour_seen) ? fm.tour_seen.map(String) : [] }; }
+    if (!this.tour) { const fm = this.progFm(); this.tour = { at: fm.tour_at === undefined || fm.tour_at === null ? undefined : parseInt(fm.tour_at, 10), done: Array.isArray(fm.tour_done) ? fm.tour_done.map(String) : [], seen: Array.isArray(fm.tour_seen) ? fm.tour_seen.map(String) : [], early: Array.isArray(fm.tour_early) ? fm.tour_early.map(String) : [] }; }
     return this.tour;
   }
   tourLeft() { const d = this.tourState().done; return this.tourSteps().filter(x => x.ev && !d.includes(x.k)).length; }
   tourOpen() { const a = this.tourState().at; return a !== undefined && a < 99; }
   tourIs(k) { if (!this.tourOpen()) return false; const st = this.tourSteps()[this.tourState().at]; return !!st && st.k === k; }
-  async tourSave() { const t = this.tourState(), f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (t.at === undefined) delete fm.tour_at; else fm.tour_at = t.at; fm.tour_done = [...t.done]; fm.tour_seen = [...(t.seen || [])]; }); }
+  async tourSave() { const t = this.tourState(), f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (t.at === undefined) delete fm.tour_at; else fm.tour_at = t.at; fm.tour_done = [...t.done]; fm.tour_seen = [...(t.seen || [])]; if ((t.early || []).length) fm.tour_early = [...t.early]; else delete fm.tour_early; }); }
   // Kept for older calls: set the step showing.
   async tourSet(n) { this.tourState().at = n; await this.tourSave(); }
+  // Steps already done count: things tried before the tour started, and choices already made
+  // (a world picked, a moment picked, a word colored), which can't be done again the same way.
+  tourCatchUp() {
+    const t = this.tourState(), steps = this.tourSteps(), col = this.colors(), fm = this.progFm();
+    const evs = new Set(t.early || []);
+    if (this.worldNow || col.world) evs.add('world');
+    if (this.planNow || fm.plan) evs.add('plan');
+    if (col.red.length + col.yellow.length + col.green.length) evs.add('up');
+    let n = 0;
+    for (const st of steps) if (st.ev && evs.has(st.ev) && !t.done.includes(st.k)) { t.done.push(st.k); if (!t.seen.includes(st.k)) t.seen.push(st.k); this.moAdd('did', 'tour:' + st.k, 2); n++; }
+    const had = (t.early || []).length; t.early = [];
+    if (n || had) this.tourSave();
+    return n;
+  }
   async tourStart(n) {
     const t = this.tourState(), steps = this.tourSteps();
     this.lsSet('tourlater', 0); this.tourMin = false;
+    if (t.at === undefined) t.at = 0;
+    const got = this.tourCatchUp(); if (got) new Notice(`You already did ${got} step${got === 1 ? '' : 's'} of the tour: +${got * 2} φόρα.`);
     t.at = n !== undefined ? n : Math.max(0, steps.findIndex(x => x.ev && !t.done.includes(x.k)));
     await this.tourSave(); await this.openToday(); setTimeout(() => this.tourShow(), 400);
   }
@@ -3329,8 +3350,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   tourHit(ev) {
     const t = this.tourState(), steps = this.tourSteps();
     const st = steps.find(x => x.ev === ev && !t.done.includes(x.k)); if (!st) return;
-    // Only while the tour has been started at least once, so students who never take it see no change.
-    if (t.at === undefined) return;
+    // Before the tour has started, just remember it (no points, no change on screen). Starting the tour credits it.
+    if (t.at === undefined) { if (!t.early) t.early = []; if (!t.early.includes(ev)) { t.early.push(ev); this.tourSave(); } return; }
     t.done.push(st.k); this.moAdd('did', 'tour:' + st.k, 2);
     const cur = steps[t.at]; if (cur && cur.k === st.k) { const nx = steps.findIndex((x, i) => i > t.at && !(x.ev && t.done.includes(x.k))); t.at = nx < 0 ? 99 : nx; }
     this.tourSave(); setTimeout(() => this.tourShow(), 300);
@@ -3349,6 +3370,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const old = document.querySelector('.gq-tour'); if (old) old.remove();
     const t = this.tourState(); if (!this.tourOpen()) return;
     const steps = this.tourSteps(); if (t.at >= steps.length) { t.at = 99; this.tourSave(); return; }
+    if (this.tourCatchUp()) { const cur = steps[t.at]; if (cur && cur.ev && t.done.includes(cur.k)) { const nx = steps.findIndex((x, i) => i > t.at && !(x.ev && t.done.includes(x.k))); t.at = nx < 0 ? 99 : nx; this.tourSave(); if (nx < 0) { this.tourBye(); return; } } }
     const st = steps[t.at];
     // Seen: the step was shown. Its dot turns yellow (kind of) until it is tried, then green.
     if (!t.seen) t.seen = []; if (!t.seen.includes(st.k)) { t.seen.push(st.k); this.tourSave(); }

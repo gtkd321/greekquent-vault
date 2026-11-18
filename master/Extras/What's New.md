@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19g · Leave out εσύ if you like
+> In the story puzzle, Greek lets you drop εγώ, εσύ, εμείς or εσείς at the start of a sentence, because the verb already says who. Build it without the word and it counts; the line then shows it in parentheses, like (Εσύ) είσαι ο Νίκος; Each solved line now shows its φόρα: +1 the first time, +3 on a later day. A replay the same day says it was already counted.
+
 > [!tip]- 2026-11-19f · The tour counts what you already did
 > Picked a world, colored a word or played a game before the tour got there? It now counts: the step turns green, you get the 2 φόρα, and the tour moves on. This works for things done before you started the tour, too.
 

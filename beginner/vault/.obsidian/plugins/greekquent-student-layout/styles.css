@@ -554,3 +554,4 @@ button.gq-sayit-b.is-ok { background: #43a047; color: #fff; border-color: #43a04
 @keyframes gq-pulse-b { 50% { opacity: .7; } }
 .gq-sayit-in { min-width: 220px; font-size: 16px; }
 @media (prefers-reduced-motion: reduce) { .gq-abc-card.is-no, button.gq-abc-tile.is-no, button.gq-sayit-b.is-live { animation: none; } }
+.gq-cv-pts { color: var(--text-accent); font-weight: 600; margin-top: 4px; }

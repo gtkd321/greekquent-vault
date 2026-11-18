@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19f';
+const VAULT_RELEASE = '2026-11-19g';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -151,7 +151,7 @@ const splitDots = s => { const out = []; let d = 0, cur = ''; for (let i = 0; i 
 // the button falls back to a text box, so the keyboard's microphone can do the listening instead.
 const SRec = () => window.SpeechRecognition || window.webkitSpeechRecognition || null;
 const foldG = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').replace(/[^\p{L}\s]/gu, ' ').replace(/\s+/g, ' ').trim();
-const SMALL_W = new Set(['ο', 'η', 'το', 'οι', 'τα', 'τον', 'την', 'του', 'τησ', 'των', 'ενασ', 'μια', 'μια', 'ενα']);
+const SMALL_W = new Set(['ο', 'η', 'το', 'οι', 'τα', 'τον', 'την', 'του', 'τησ', 'των', 'ενασ', 'μια', 'μια', 'ενα', 'εγω', 'εσυ', 'εμεισ', 'εσεισ']);
 const near = (a, b) => { if (a === b) return true; if (Math.abs(a.length - b.length) > 1 || a.length < 4) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; };
 // True when what was heard holds the target: every word of one or two words, three of four in a longer line. Small words like ο and το are left out.
 const heardIt = (target, alts) => {
@@ -2556,6 +2556,24 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
       return true;
     };
+    // Greek drops subject pronouns: a clause-opening εγώ, εσύ, εμείς or εσείς before a verb may be left out.
+    // Variants: [checkable line, line with the left-out word in parentheses].
+    const OPT = new Set(['εγώ', 'εσύ', 'εμείς', 'εσείς']);
+    const optVariants = g => {
+      const parts = String(g).split(/([,.;;!:·…?—]+)/), spots = [];
+      parts.forEach((pc, pi) => { if (pi % 2) return; const ws = pc.split(/(\s+)/), idx = ws.map((w, wi) => [w, wi]).filter(([w]) => w.trim());
+        const bare = w => norm(w.replace(/[^\p{L}']/gu, ''));
+        if (idx.length > 1 && OPT.has(bare(idx[0][0])) && !BOTH.has(bare(idx[1][0])) && !OPT.has(bare(idx[1][0]))) spots.push([pi, idx[0][1]]); });
+      const out = [];
+      for (let m = 1; m < (1 << Math.min(spots.length, 4)); m++) {
+        const drop = parts.map(pc => pc), keep = parts.map(pc => pc);
+        spots.forEach(([pi, wi], k) => { if (!(m & (1 << k))) return; const ws = parts[pi].split(/(\s+)/), ws2 = [...ws];
+          ws[wi] = ''; if (ws[wi + 1] !== undefined) ws[wi + 1] = ws[wi + 1].replace(/^\s+/, ''); drop[pi] = (/^\s/.test(parts[pi]) ? ' ' : '') + ws.join('').trim();
+          ws2[wi] = '(' + ws2[wi] + ')'; keep[pi] = ws2.join(''); });
+        out.push([drop.join(''), keep.join('')]);
+      }
+      return out;
+    };
     const wrap = card.createDiv('gq-convo');
     // Keep drags and swipes on the tiles from opening Obsidian's side panels on phones.
     const stopT = e => e.stopPropagation();
@@ -2623,9 +2641,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       show.onclick = () => { en.style.display = ''; show.remove(); };
       chk.onclick = () => {
         const got = placed.map(tl => norm(tl.w)), exact = got.join(' ') === target.map(norm).join(' ');
-        if (exact || accepts(got, x[1])) {
+        let opt = null;
+        if (!exact && !accepts(got, x[1])) for (const [g2, shown] of optVariants(x[1])) { if (got.join(' ') === toks(g2).map(norm).join(' ') || accepts(got, g2)) { opt = shown; break; } }
+        if (exact || opt || accepts(got, x[1])) {
           ans.addClass('gq-ok'); chk.disabled = true; say(x[1]); fb.empty();
-          if (!exact) { fb.createDiv({ text: 'Also right. The line says:' }); this.lineEl(fb, x[1], words); }
+          if (opt) { fb.createDiv({ text: 'Also right. The word in parentheses is optional, because the verb already says who:' }); this.lineEl(fb, opt, words); }
+          else if (!exact) { fb.createDiv({ text: 'Also right. The line says:' }); this.lineEl(fb, x[1], words); }
+          // Show what the line earned: 1 the first time, 3 on a later day, nothing for a replay the same day.
+          let gain = 1; try { const mf = this.app.vault.getAbstractFileByPath(MO_FILE), fmm = mf && this.app.metadataCache.getFileCache(mf), last = fmm && fmm.frontmatter && fmm.frontmatter.got && fmm.frontmatter.got['π:' + n + ':' + i]; gain = last === ymd(new Date()) ? 0 : last ? 3 : 1; } catch (e) {}
+          fb.createDiv({ cls: 'gq-cv-pts', text: gain ? `+${gain} φόρα` : 'Already counted today. Come back tomorrow for +3 φόρα.' });
           this.moAdd('recall', 'π:' + n + ':' + i);
           setTimeout(() => { i++; save(); if (i >= turns.length) onDone(); paint(); }, exact ? 900 : 2600);
         } else { misses++; fb.empty(); if (got.length === target.length && [...got].sort().join(' ') === target.map(norm).sort().join(' ')) fb.setText('All the right words. Try another order: keep small words like ο, στο, να and δεν with the word after them.'); ans.removeClass('gq-bad'); void ans.offsetWidth; ans.addClass('gq-bad'); if (misses >= 1) hint.style.display = ''; if (misses >= 2) show.style.display = ''; }
@@ -3324,6 +3348,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (this.worldNow || col.world) evs.add('world');
     if (this.planNow || fm.plan) evs.add('plan');
     if (col.red.length + col.yellow.length + col.green.length) evs.add('up');
+    // Story lines already solved (before the tour, or on an older version) count for the story step.
+    if ((col.story_at || 0) > 0) evs.add('story');
+    else { try { const pre = 'gq-convo-' + this.app.vault.getName() + '-', ls = window.localStorage; for (let q = 0; q < ls.length; q++) { const k = ls.key(q); if (k && k.startsWith(pre) && +ls.getItem(k) > 0) { evs.add('story'); break; } } } catch (e) {} }
+    try { const mf = this.app.vault.getAbstractFileByPath(MO_FILE), mc = mf && this.app.metadataCache.getFileCache(mf), got = mc && mc.frontmatter && mc.frontmatter.got; if (got && Object.keys(got).some(k => k.startsWith('π:'))) evs.add('story'); } catch (e) {}
     let n = 0;
     for (const st of steps) if (st.ev && evs.has(st.ev) && !t.done.includes(st.k)) { t.done.push(st.k); if (!t.seen.includes(st.k)) t.seen.push(st.k); this.moAdd('did', 'tour:' + st.k, 2); n++; }
     const had = (t.early || []).length; t.early = [];

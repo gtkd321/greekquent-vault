@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19c · Clearer phrases in the Word web
+> Hold a word in the Word web and you hear one clean phrase. With είμαι in the middle, αυτός now says "αυτός είναι ο φίλος μου" and τι says "τι ώρα είναι;", without an extra είμαι in front. φταίω εγώ now reads "it's my fault".
+
 > [!tip]- 2026-11-19b · A new world: Gyro
 > Pick Gyro in Change my world and build a γύρος, piece by piece: the spit and the fire, the cook, pita, tomato, onion, fries and τζατζίκι, the wrap in its paper, and at last your own souvlaki shop with a menu and a delivery scooter. Tap anything to hear its name. The web app also has a new address: gtkd321.github.io/frequent/greek/. Old links still work, and your progress comes with you.
 

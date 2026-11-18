@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19b';
+const VAULT_RELEASE = '2026-11-19c';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -83,6 +83,15 @@ const wwForm = (lab, phrase) => {
   if (f === 'σε') { const t = toks.find(t => /^σ(το|τον|την|τη|τα|τις|τους|τ')$/i.test(t)); if (t) return `Here σε joins the next word: σε + ${t.slice(1)} = ${t}.`; }
   let best = '', n = 0; for (const t of toks) { const g = wwFold(t); let k = 0; while (k < g.length && k < f.length && g[k] === f[k]) k++; if (k > n) { n = k; best = t; } }
   return n >= 3 ? `Here it is ${best}: the ending changes to fit.` : '';
+};
+// Does a phrase already hold the verb, in any form? Then the web says the phrase as it is, without the verb in front
+// (είμαι + αυτός → "αυτός είναι ο φίλος μου", not "είμαι αυτός είναι ο φίλος μου"). είμαι changes its whole shape, so it has a list.
+const VERB_FORMS = { 'είμαι': ['ειμαι', 'εισαι', 'ειναι', 'ειμαστε', 'ειστε', 'εισαστε', 'ημουν', 'ημουνα', 'ησουν', 'ησουνα', 'ηταν', 'ητανε', 'ημασταν', 'ησασταν'] };
+const hasVerb = (name, phrase) => {
+  const f = fold(name), toks = fold(phrase).split(/[\s,.;!·?«»;]+/).filter(Boolean);
+  if (VERB_FORMS[name]) return toks.some(t => VERB_FORMS[name].includes(t));
+  const st = f.replace(/(ομαι|αμαι|ουμαι|ω)$/, ''), s = st.length >= 2 ? st : f.slice(0, 3);
+  return toks.some(t => t.startsWith(s));
 };
 const isGreek = t => /[\u0370-\u03ff\u1f00-\u1fff]/.test(t);
 const fold = t => (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').trim();
@@ -270,7 +279,7 @@ class WordWebView extends ItemView {
       if (!x.phrase && x.w) { const back = x.w.pair.find(p => p.k === c); if (back) { x.phrase = back.phrase; x.en = back.en; } }
       // να + the form learners already know: μπορώ να δω becomes μπορώ να βλέπω (the one-time form is kept for the chip).
       if (x.phrase) { const e = this.plugin.easyVerbs(x.phrase); if (e !== x.phrase) { x.once = x.phrase; x.phrase = e; } }
-      if (x.phrase && w.t === 'v' && !fold(x.phrase).includes(stem)) { x.phrase = name + ' ' + x.phrase; if (x.once) x.once = name + ' ' + x.once; }
+      if (x.phrase && w.t === 'v' && !hasVerb(name, x.phrase)) { x.phrase = name + ' ' + x.phrase; if (x.once) x.once = name + ' ' + x.once; }
     }
     return out.filter(x => x.w);
   }

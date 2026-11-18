@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 18: Double-tap for the plural
+> - In the **Word web**, double-tap a thing or a person (a purple word) to hear more than one: το σπίτι becomes τα σπίτια. One tap still moves there, as before.
+> - Every word card for a thing or a person now shows its plural next to "say it".
+> - The download is now called **Greekquent Intermediate**. If you already have the vault, nothing changes: it keeps its name and updates as before.
+
 > [!info]- November 17: Word web speaks only Greek
 > - When you hold a word, the Word web says the Greek pairing only. Before, some words also read part of the English.
 

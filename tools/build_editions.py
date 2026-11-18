@@ -71,4 +71,5 @@ wn = os.path.join(out_b, 'Extras', "What's New.md")
 if os.path.exists(wn):
     t = open(wn, encoding='utf-8').read()
     t = re.sub(r"\n> - \*\*Beginner and Intermediate:\*\* this copy has both sets of scripts[^\n]*", '', t)
+    t = re.sub(r"\n> - The download is now called \*\*Greekquent Intermediate\*\*[^\n]*", '', t)
     open(wn, 'w', encoding='utf-8').write(t)

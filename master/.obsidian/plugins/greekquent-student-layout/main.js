@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18c';
+const VAULT_RELEASE = '2026-11-18d';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -159,7 +159,7 @@ class WordWebView extends ItemView {
     const askb = bar.createEl('button', { text: 'Ask' }); askb.onclick = () => { const f = this.file(); if (f) this.plugin.ask(f); };
     this.trail = box.createDiv('gq-web-trail');
     this.agree = box.createDiv('gq-agree'); this.agree.hide();
-    box.createDiv({ cls: 'gq-hint gq-ww-help', text: 'Tap a word to move there. Hold a word to see its links. Drag to play.' });
+    box.createDiv({ cls: 'gq-hint gq-ww-help', text: 'Tap a word to move there. Double-tap a thing to hear more than one. Hold a word to see its links. Drag to play.' });
     this.stage = box.createDiv('gq-ww-stage');
     this.svg = svgEl(this.stage, 'svg', '', { 'aria-label': 'Word web' });
     this.gE = svgEl(this.svg, 'g'); this.gN = svgEl(this.svg, 'g');
@@ -198,7 +198,7 @@ class WordWebView extends ItemView {
     }
     const cm = txt.match(/## Often appears with\n([\s\S]*?)(?:\n## |$)/);
     if (cm) for (const x of cm[1].matchAll(/\[\[([^\]|#]+)/g)) { const q = res(x[1]); if (q && !co.includes(q)) co.push(q); }
-    const w = { p, t, r: +fm.rank || 9999, e: String(fm.english || ''), say: fm.pronunciation || '', pair, co };
+    const w = { p, t, r: +fm.rank || 9999, e: String(fm.english || ''), say: fm.pronunciation || '', pl: String(fm.plural || ''), already: /noun-pl/.test(tags), pair, co };
     this.data.set(p, w); return w;
   }
   async partners(c) {
@@ -298,8 +298,12 @@ class WordWebView extends ItemView {
       const d = this.down; if (!d || d.id !== e.pointerId) return; this.down = null; clearTimeout(d.t);
       if (this.held) { this.unhold(); return; }
       if (this.drag) { this.drag = null; this.kick(); return; }
+      // Double-tap: hear the plural. A single tap waits a moment before moving, so the second tap can land.
+      const now = Date.now(), lt = this.lastTap;
+      if (lt && lt.k === m.k && now - lt.t < 320) { clearTimeout(lt.go); this.lastTap = null; this.plural(m); if (m !== this.center) this.go(m.k); return; }
       say(this.label(m.k));
-      if (m === this.center) { m.vy -= 6; this.kick(); } else this.go(m.k);
+      this.lastTap = { k: m.k, t: now, go: m === this.center ? 0 : setTimeout(() => { this.lastTap = null; this.go(m.k); }, 320) };
+      if (m === this.center) { m.vy -= 6; this.kick(); }
     });
     m.g.addEventListener('pointercancel', () => { if (this.down) clearTimeout(this.down.t); this.down = null; this.drag = null; this.unhold(); this.kick(); });
   }
@@ -315,6 +319,14 @@ class WordWebView extends ItemView {
     const others = [...near].filter(k => k !== m.k && k !== this.center.k).length;
     this.chip.createDiv({ cls: 'gq-hint', text: m === this.center ? `${this.nodes.size - 1} words go with it` : others ? `Also goes with ${others} of the words here` : 'Goes with the word in the middle' });
     this.chip.addClass('is-on');
+  }
+  // Plural of a noun: spoken, and shown in the chip for a moment.
+  plural(m) {
+    const w = this.data.get(m.k) || {}; this.chip.empty(); clearTimeout(this.plTimer);
+    if (w.pl) { this.chip.createEl('b', { text: w.pl, attr: { lang: 'el' } }); this.chip.appendText('  · more than one'); say(w.pl); }
+    else if (w.already) { this.chip.createEl('b', { text: this.label(m.k), attr: { lang: 'el' } }); this.chip.appendText('  · already plural'); say(this.label(m.k)); }
+    else this.chip.appendText(w.t === 'n' ? 'This one usually has no plural.' : 'Double-tap a thing or a person (a purple word) to hear its plural.');
+    this.chip.addClass('is-on'); this.plTimer = setTimeout(() => { if (!this.held) this.chip.removeClass('is-on'); }, 2200);
   }
   unhold() {
     if (this.held) this.held.g.classList.remove('is-held'); this.held = null;

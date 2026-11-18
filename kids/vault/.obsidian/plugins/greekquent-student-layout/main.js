@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-18z';
+const VAULT_RELEASE = '2026-11-19a';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -495,15 +495,17 @@ const WORLDS = {
     { name: 'Island harbor', items: [['cube', 'το σπίτι'], ['mill', 'ο μύλος'], ['boat', 'η βάρκα'], ['cube', 'το καφενείο'], ['church', 'το εκκλησάκι'], ['boat', 'το καΐκι']] },
     { name: 'Modern city', items: [['block', 'η πολυκατοικία'], ['kiosk', 'το περίπτερο'], ['block', 'το γραφείο'], ['tree', 'το πάρκο'], ['block', 'το σχολείο'], ['bus', 'το λεωφορείο']] }] },
   grove: { name: 'Olive grove', eras: [
-    { name: 'Young grove', items: [['sapling', 'το δεντράκι'], ['sapling', 'η ελιά'], ['sapling', 'το χώμα'], ['sapling', 'το νερό'], ['sapling', 'ο ήλιος'], ['sapling', 'το χωράφι']] },
-    { name: 'First harvest', items: [['olives', 'οι ελιές'], ['basket', 'το καλάθι'], ['olives', 'το λιόδεντρο'], ['basket', 'το δίχτυ'], ['olives', 'η συγκομιδή'], ['donkey', 'το γαϊδουράκι']] },
+    { name: 'Young grove', items: [['sapling', 'το δεντράκι'], ['sapling', 'η ελιά'], ['soil', 'το χώμα'], ['can', 'το νερό'], ['sapling', 'το φύλλο'], ['fence', 'το χωράφι']] },
+    { name: 'First harvest', items: [['olives', 'οι ελιές'], ['basket', 'το καλάθι'], ['olives', 'το λιόδεντρο'], ['net', 'το δίχτυ'], ['olives', 'η συγκομιδή'], ['donkey', 'το γαϊδουράκι']] },
     { name: 'The press', items: [['press', 'το λιοτρίβι'], ['olives', 'οι ελιές'], ['jar', 'το πιθάρι'], ['basket', 'το καλάθι'], ['jar', 'το λάδι'], ['donkey', 'το γαϊδουράκι']] },
-    { name: 'The tasting', items: [['table', 'το τραπέζι'], ['bottle', 'το μπουκάλι'], ['olives', 'το λιόδεντρο'], ['bottle', 'το λάδι'], ['table', 'το ψωμί'], ['bottle', 'η γεύση']] }] },
+    { name: 'The tasting', items: [['table', 'το τραπέζι'], ['bottle', 'το μπουκάλι'], ['olives', 'το λιόδεντρο'], ['bottle', 'το λάδι'], ['table', 'το ψωμί'], ['cup', 'το ποτηράκι']] }] },
   // Dance: the quickest world. Every φόρα point is a step, and the floor fills with the dances you learn.
   dance: { name: 'Dance', eras: [{ name: 'Πανηγύρι', items: [] }] },
   pet: { name: 'Pet', eras: [
     { name: 'Little Φοράκι', items: [] }, { name: 'Φοράκι grows', items: [] }, { name: 'Φοράκι in a hat', items: [] }, { name: 'Φοράκι the great', items: [] }] },
 };
+// English for each piece of a world, shown next to the Greek when it is tapped.
+const WORLD_EN = {"το σπίτι": "house", "η ελιά": "olive tree", "ο ναός": "temple", "η αυλή": "courtyard", "ο αμφορέας": "amphora", "η αγορά": "marketplace", "η εκκλησία": "church", "το κυπαρίσσι": "cypress", "ο φούρνος": "bakery", "το μοναστήρι": "monastery", "ο κήπος": "garden", "ο μύλος": "windmill", "η βάρκα": "boat", "το καφενείο": "café", "το εκκλησάκι": "chapel", "το καΐκι": "fishing boat", "η πολυκατοικία": "apartment building", "το περίπτερο": "kiosk", "το γραφείο": "office", "το πάρκο": "park", "το σχολείο": "school", "το λεωφορείο": "bus", "το δεντράκι": "little tree", "το χώμα": "soil", "το νερό": "water", "το φύλλο": "leaf", "το χωράφι": "field", "οι ελιές": "olives", "το καλάθι": "basket", "το λιόδεντρο": "olive tree", "το δίχτυ": "net", "η συγκομιδή": "harvest", "το γαϊδουράκι": "little donkey", "το λιοτρίβι": "olive press", "το πιθάρι": "storage jar", "το λάδι": "olive oil", "το τραπέζι": "table", "το μπουκάλι": "bottle", "το ψωμί": "bread", "το ποτηράκι": "tasting glass"};
 const W_W = 160, W_H = 56;
 function worldMood(today, score) { return score >= 25 || today >= 25 ? 3 : today >= 1 || score >= 10 ? 2 : score >= 3 ? 1 : 0; }
 const MOODS = ['A quiet night', 'An evening', 'A sunny day', 'A festival'];
@@ -556,16 +558,23 @@ function drawDancers(ctx, n, t) {
   }
   R(x0 - 2, 44 - (Math.floor(t * 14) % 2), 2, 1, '#ffffff');   // the leader's handkerchief
 }
+// Everything drawn under mark() becomes a tap target: the canvas keeps a list of [x0, y0, x1, y1, Greek, English].
 function worldPaint(ctx, w, st, mood, t) {
-  const R = (x, y, ww, hh, c) => { ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), ww, hh); };
+  const hits = []; let tr = null;
+  const R = (x, y, ww, hh, c) => { x = Math.round(x); y = Math.round(y); ctx.fillStyle = c; ctx.fillRect(x, y, ww, hh); if (tr) { tr[0] = Math.min(tr[0], x); tr[1] = Math.min(tr[1], y); tr[2] = Math.max(tr[2], x + ww); tr[3] = Math.max(tr[3], y + hh); } };
+  const mark = (gr, en, fn) => { tr = [1e9, 1e9, -1e9, -1e9]; fn(); if (tr[2] > tr[0]) hits.push([...tr, gr, en]); tr = null; };
+  ctx.canvas._hits = hits;
+  hits.push([0, 0, W_W, 42, 'ο ουρανός', 'sky']);
   const sky = [['#141b38', '#2a3466'], ['#5a4a8a', '#e9896a'], ['#5fb4f0', '#a9ddff'], ['#4aa8f0', '#bfe6ff']][mood];
   for (let y = 0; y < 44; y++) { const k = y / 43; const a = sky[0], b = sky[1]; const mix = i => Math.round(parseInt(a.substr(i, 2), 16) * (1 - k) + parseInt(b.substr(i, 2), 16) * k); ctx.fillStyle = `rgb(${mix(1)},${mix(3)},${mix(5)})`; ctx.fillRect(0, y, W_W, 1); }
-  if (mood === 0) { for (const [x, y] of [[12, 6], [40, 12], [70, 4], [101, 9], [130, 5], [150, 14], [88, 16]]) if ((Math.floor(t * 6) + x) % 5) R(x, y, 1, 1, '#fff'); R(132, 6, 6, 6, '#f3efd1'); R(134, 6, 4, 4, '#141b38'); }
-  else { const sy = mood === 1 ? 30 - t * 4 : 12 - t * 4, sx = mood === 1 ? 128 : 22; R(sx, sy, 8, 8, mood === 1 ? '#ffb347' : '#ffe14d'); R(sx - 1, sy + 1, 10, 6, mood === 1 ? '#ffb347' : '#ffe14d'); R(sx + 1, sy - 1, 6, 10, mood === 1 ? '#ffb347' : '#ffe14d'); }
-  if (mood >= 2) for (const [x, y] of [[50, 8], [104, 14]]) { const cx = x + ((t * 10) % 20); R(cx, y, 14, 3, '#fff'); R(cx + 3, y - 2, 7, 2, '#fff'); }
+  if (mood === 0) { for (const [x, y] of [[12, 6], [40, 12], [70, 4], [101, 9], [130, 5], [150, 14], [88, 16]]) { if ((Math.floor(t * 6) + x) % 5) R(x, y, 1, 1, '#fff'); hits.push([x - 3, y - 3, x + 4, y + 4, 'το αστέρι', 'star']); } mark('το φεγγάρι', 'moon', () => { R(132, 6, 6, 6, '#f3efd1'); R(134, 6, 4, 4, '#141b38'); }); }
+  else mark(mood === 1 ? 'το ηλιοβασίλεμα' : 'ο ήλιος', mood === 1 ? 'sunset' : 'sun', () => { const sy = mood === 1 ? 30 - t * 4 : 12 - t * 4, sx = mood === 1 ? 128 : 22; R(sx, sy, 8, 8, mood === 1 ? '#ffb347' : '#ffe14d'); R(sx - 1, sy + 1, 10, 6, mood === 1 ? '#ffb347' : '#ffe14d'); R(sx + 1, sy - 1, 6, 10, mood === 1 ? '#ffb347' : '#ffe14d'); });
+  if (mood >= 2) for (const [x, y] of [[50, 8], [104, 14]]) mark('το σύννεφο', 'cloud', () => { const cx = x + ((t * 10) % 20); R(cx, y, 14, 3, '#fff'); R(cx + 3, y - 2, 7, 2, '#fff'); });
   const sea = w === 'village' && st.era === 2;
-  if (sea) { R(0, 40, 64, 16, '#2b7bb9'); for (let x = 0; x < 64; x += 8) R(x + ((t * 16) % 8), 44 + (x % 16 ? 0 : 4), 4, 1, '#8fd0ff'); R(64, 40, 96, 16, '#d9c79a'); R(64, 40, 96, 2, '#bba57a'); }
-  else { const g = w === 'grove' ? ['#8a6a3a', '#6f5530'] : st.era === 3 && w === 'village' ? ['#9a9a9a', '#7c7c7c'] : ['#6aa84f', '#4f8a3a']; R(0, 42, W_W, 14, g[0]); R(0, 42, W_W, 2, g[1]); for (let x = 3; x < W_W; x += 11) R(x, 48 + (x % 3), 2, 1, g[1]); }
+  if (sea) { mark('η θάλασσα', 'sea', () => { R(0, 40, 64, 16, '#2b7bb9'); for (let x = 0; x < 64; x += 8) R(x + ((t * 16) % 8), 44 + (x % 16 ? 0 : 4), 4, 1, '#8fd0ff'); }); mark('η άμμος', 'sand', () => { R(64, 40, 96, 16, '#d9c79a'); R(64, 40, 96, 2, '#bba57a'); }); }
+  else { const g = w === 'grove' ? ['#8a6a3a', '#6f5530'] : st.era === 3 && w === 'village' ? ['#9a9a9a', '#7c7c7c'] : ['#6aa84f', '#4f8a3a'];
+    const gl = w === 'grove' ? ['η γη', 'the ground'] : w === 'dance' ? ['η πλατεία', 'village square'] : st.era === 3 && w === 'village' ? ['ο δρόμος', 'street'] : ['το γρασίδι', 'grass'];
+    mark(gl[0], gl[1], () => { R(0, 42, W_W, 14, g[0]); R(0, 42, W_W, 2, g[1]); for (let x = 3; x < W_W; x += 11) R(x, 48 + (x % 3), 2, 1, g[1]); }); }
   const lit = mood <= 1 ? '#ffd860' : '#6b8fb3';
   const D = {
     house: (x, y) => { R(x, y - 10, 12, 10, '#e8d8b0'); R(x - 1, y - 14, 14, 4, '#c0502a'); R(x + 1, y - 16, 10, 2, '#c0502a'); R(x + 5, y - 5, 3, 5, '#6b4a2a'); R(x + 1, y - 8, 3, 2, lit); },
@@ -587,27 +596,34 @@ function worldPaint(ctx, w, st, mood, t) {
     press: (x, y, t) => { R(x, y - 12, 16, 12, '#d9c7a0'); R(x - 1, y - 14, 18, 2, '#a0522d'); const a = t * 5; R(x + 7 + Math.round(Math.cos(a) * 4), y - 7, 3, 3, '#7a7a7a'); R(x + 3, y - 4, 10, 2, '#8a6a3a'); },
     jar: (x, y) => { R(x + 1, y - 9, 7, 9, '#b0603a'); R(x + 2, y - 11, 5, 2, '#b0603a'); R(x + 2, y - 6, 5, 1, '#e8d8b0'); },
     table: (x, y) => { R(x, y - 6, 14, 2, '#8a5a2a'); R(x + 1, y - 4, 1, 4, '#6b4a2a'); R(x + 12, y - 4, 1, 4, '#6b4a2a'); R(x + 3, y - 8, 3, 2, '#e8c070'); R(x + 8, y - 9, 2, 3, '#7a9a2a'); },
+    soil: (x, y) => { R(x, y - 3, 14, 3, '#5a4022'); R(x + 2, y - 5, 10, 2, '#5a4022'); R(x + 4, y - 6, 2, 1, '#7a5a32'); R(x + 9, y - 6, 2, 1, '#7a5a32'); },
+    can: (x, y, t) => { R(x + 2, y - 7, 8, 7, '#8a9aa8'); R(x + 3, y - 9, 6, 2, '#8a9aa8'); R(x + 10, y - 6, 4, 1, '#8a9aa8'); R(x + 13, y - 7, 2, 1, '#8a9aa8'); for (let k = 0; k < 3; k++) R(x + 14 + k, y - 4 + ((Math.floor(t * 12) + k * 2) % 4), 1, 1, '#8fd0ff'); },
+    fence: (x, y) => { for (let i = 0; i < 4; i++) R(x + i * 4, y - 7, 1, 7, '#a07a4a'); R(x, y - 6, 14, 1, '#a07a4a'); R(x, y - 3, 14, 1, '#a07a4a'); },
+    net: (x, y) => { R(x - 2, y - 2, 18, 2, '#2f6a3a'); for (let i = 0; i < 18; i += 3) R(x - 2 + i, y - 3, 1, 1, '#3f8a4a'); R(x + 4, y - 4, 1, 1, '#3a2a4a'); R(x + 9, y - 3, 1, 1, '#3a2a4a'); },
+    cup: (x, y) => { R(x + 2, y - 6, 6, 6, '#2f6fbf'); R(x + 1, y - 7, 8, 1, '#2f6fbf'); R(x + 3, y - 5, 4, 1, '#d8c040'); },
     bottle: (x, y) => { R(x + 2, y - 9, 4, 9, '#5f7f1f'); R(x + 3, y - 12, 2, 3, '#5f7f1f'); R(x + 3, y - 13, 2, 1, '#c0392b'); R(x + 2, y - 6, 4, 2, '#f4f0e4'); },
   };
-  if (w === 'pet') { petPaint(R, st, mood, t); return; }
+  if (w === 'pet') { petPaint(R, st, mood, t, mark, hits); return; }
   const items = WORLDS[w].eras[st.era].items.slice(0, st.n), slots = sea ? [70, 90, 110, 130, 76, 120] : [8, 32, 56, 82, 106, 132];
   items.forEach(([kind], i) => {
     const appear = Math.min(1, Math.max(0, (t - i * 0.08) * 5)); if (appear <= 0) return;
     const isNew = i === items.length - 1, hop = isNew ? -Math.round(Math.abs(Math.sin(Math.min(1, t * 1.6) * Math.PI * 2)) * 4 * (1 - Math.min(1, t))) : 0;
     let x = slots[i]; if (sea && kind === 'boat') x = i * 13 + 4;
-    ctx.globalAlpha = appear; D[kind](x, 44 + hop, t, st.n); ctx.globalAlpha = 1;
+    ctx.globalAlpha = appear; mark(items[i][1], WORLD_EN[items[i][1]] || '', () => D[kind](x, 44 + hop, t, st.n)); ctx.globalAlpha = 1;
     if (isNew && t > 0.4 && t < 0.9 && Math.floor(t * 20) % 2) { R(x + 6, 20 + hop, 1, 1, '#fff'); R(x + 2, 24, 1, 1, '#fff'); R(x + 11, 23, 1, 1, '#fff'); }
   });
   // A walker crosses, like the map in old console games.
-  if (mood >= 1) { const px = Math.round(-6 + t * 172) % 172, leg = Math.floor(t * 12) % 2; R(px, 37, 3, 3, '#f0c8a0'); R(px, 40, 3, 4, w === 'grove' ? '#2f6fbf' : '#c0392b'); R(px + (leg ? 0 : 2), 44, 1, 2, '#333'); }
+  if (mood >= 1) mark('ο περαστικός', 'passer-by', () => { const px = Math.round(-6 + t * 172) % 172, leg = Math.floor(t * 12) % 2; R(px, 37, 3, 3, '#f0c8a0'); R(px, 40, 3, 4, w === 'grove' ? '#2f6fbf' : '#c0392b'); R(px + (leg ? 0 : 2), 44, 1, 2, '#333'); });
+  if (mood === 3) hits.push([0, 0, W_W, 40, 'η γιορτή', 'celebration']);
   if (mood === 3) for (let k = 0; k < 18; k++) { const cx = (k * 37 + t * 40) % W_W, cy = (k * 13 + t * 50) % 40; R(cx, cy, 2, 1, ['#e74c3c', '#f1c40f', '#2ecc71', '#3498db', '#fff'][k % 5]); }
 }
-function petPaint(R, st, mood, t) {
+function petPaint(R, st, mood, t, mark, hits) {
   const cx = 80, base = 44;
-  if (st.f === 0) { const wob = Math.round(Math.sin(t * 20) * (t < 0.6 ? 1 : 0)); R(cx - 5 + wob, base - 14, 10, 14, '#fbf4e0'); R(cx - 6 + wob, base - 10, 12, 8, '#fbf4e0'); R(cx - 3 + wob, base - 9, 2, 2, '#e0b030'); R(cx + 2 + wob, base - 5, 2, 2, '#e0b030'); return; }
+  if (st.f === 0) { hits.push([cx - 8, base - 16, cx + 8, base + 1, 'το αυγό', 'egg']); const wob = Math.round(Math.sin(t * 20) * (t < 0.6 ? 1 : 0)); R(cx - 5 + wob, base - 14, 10, 14, '#fbf4e0'); R(cx - 6 + wob, base - 10, 12, 8, '#fbf4e0'); R(cx - 3 + wob, base - 9, 2, 2, '#e0b030'); R(cx + 2 + wob, base - 5, 2, 2, '#e0b030'); return; }
   const s = 1 + st.era * 0.35, hop = mood >= 2 ? Math.round(Math.abs(Math.sin(t * Math.PI * (mood === 3 ? 6 : 3))) * 5) : 0;
   const W = Math.round(14 * s), H = Math.round(12 * s), x = cx - W / 2, y = base - H - hop, fur = '#f2a65a', ear = '#d9823a';
   R(cx - W / 2 + 2, base, W - 4, 2, 'rgba(0,0,0,0.2)');
+  hits.push([x - 1, y - 3, x + W + 5, base, 'το Φοράκι', 'Foraki, your pet']);
   R(x, y + 2, W, H - 2, fur); R(x + 1, y + 1, W - 2, 1, fur); R(x + 1, y - 2, 3, 3, ear); R(x + W - 4, y - 2, 3, 3, ear);
   R(x + 3, y + H - 4, W - 6, 3, '#fbe0c0');
   const blink = Math.floor(t * 10) % 9 === 0, ey = y + Math.round(H * 0.35);
@@ -616,14 +632,27 @@ function petPaint(R, st, mood, t) {
   R(cx - 1, ey + 3, 2, 1, mood >= 2 ? '#c0392b' : '#8a4a2a');
   R(x + 1, ey + 4, 2, 1, '#f08a8a'); R(x + W - 3, ey + 4, 2, 1, '#f08a8a');
   R(x + W, y + H - 6 + Math.round(Math.sin(t * 8)), 4, 2, fur);
-  if (st.era === 2) { R(cx - 3, y - 4, 6, 2, '#2f6fbf'); R(cx - 1, y - 6, 2, 2, '#2f6fbf'); }
-  if (st.era >= 3) { R(cx - 4, y - 8, 8, 2, '#e0b030'); R(cx - 4, y - 10, 2, 2, '#e0b030'); R(cx - 1, y - 11, 2, 3, '#e0b030'); R(cx + 2, y - 10, 2, 2, '#e0b030'); }
+  if (st.era === 2) mark('το καπέλο', 'hat', () => { R(cx - 3, y - 4, 6, 2, '#2f6fbf'); R(cx - 1, y - 6, 2, 2, '#2f6fbf'); });
+  if (st.era >= 3) mark('το στέμμα', 'crown', () => { R(cx - 4, y - 8, 8, 2, '#e0b030'); R(cx - 4, y - 10, 2, 2, '#e0b030'); R(cx - 1, y - 11, 2, 3, '#e0b030'); R(cx + 2, y - 10, 2, 2, '#e0b030'); });
   if (mood === 0) for (let k = 0; k < 3; k++) { const zy = y - 6 - k * 5 - Math.round(t * 4); R(x + W + 3 + k * 3, zy, 3, 1, '#fff'); R(x + W + 5 + k * 3, zy + 1, 1, 1, '#fff'); R(x + W + 3 + k * 3, zy + 2, 3, 1, '#fff'); }
   if (mood === 3) for (let k = 0; k < 3; k++) { const ny = 20 - ((t * 30 + k * 10) % 18); R(30 + k * 40, ny, 2, 2, '#fff'); R(32 + k * 40, ny - 4, 1, 5, '#fff'); }
   // toys appear as the pet grows
   const toys = Math.min(5, Math.floor(st.f * 20));
-  for (let k = 0; k < toys; k++) { const tx = [20, 130, 40, 112, 145][k]; R(tx, base - 4, 4, 4, ['#e74c3c', '#3498db', '#f1c40f', '#9b59b6', '#2ecc71'][k]); }
+  for (let k = 0; k < toys; k++) { const tx = [20, 130, 40, 112, 145][k]; mark('το παιχνίδι', 'toy', () => R(tx, base - 4, 4, 4, ['#e74c3c', '#3498db', '#f1c40f', '#9b59b6', '#2ecc71'][k])); }
+  if (mood === 0) hits.push([x + W, y - 20, x + W + 14, y, 'κοιμάται', 'it is sleeping']);
 }
+
+// The piece of the world under a tap: the smallest target within 3 pixels, so a star or a cloud wins over the sky.
+function worldHit(cv, e) {
+  const hs = cv._hits; if (!hs || !hs.length || !e || e.clientX == null) return null;
+  const r = cv.getBoundingClientRect(); if (!r.width) return null;
+  const x = (e.clientX - r.left) * W_W / r.width, y = (e.clientY - r.top) * W_H / r.height;
+  let best = null, area = 1e9;
+  for (const h of hs) { if (x < h[0] - 3 || x > h[2] + 3 || y < h[1] - 3 || y > h[3] + 3) continue; const a = (h[2] - h[0]) * (h[3] - h[1]); if (a < area) { area = a; best = h; } }
+  return best;
+}
+// Until the first tap, a quiet line says the picture can be touched.
+function worldTip(el) { let seen = '1'; try { seen = localStorage.getItem('gq-world-tap'); } catch (x) {} if (!seen) { el.setText('Tap anything in the picture to hear its name.'); el.removeAttribute('lang'); } }
 
 class PaperModal extends Modal {
   constructor(app, plugin, list) { super(app); this.plugin = plugin; this.list = list; this.i = 0; this.got = 0; this.miss = []; }
@@ -2061,6 +2090,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
     }
     const word = box.createDiv({ cls: 'gq-world-say', attr: { lang: 'el' } });
+    worldTip(word);
     const greens = this.colors().green; let k = 0;
     const speak = () => {
       const list = w === 'pet' ? (greens.length ? greens : ['γεια σου']) : items.map(x => x[1]);
@@ -2075,7 +2105,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const step = now => { const t = Math.min(1, (now - t0) / dur); worldPaint(ctx, w, st, mood, t); if (crew) drawDancers(ctx, crew, t * dur / 3000); if (t < 1 && cv.isConnected) cv._raf = requestAnimationFrame(step); };
       if (reduce) { worldPaint(ctx, w, st, mood, 1); if (crew) drawDancers(ctx, crew, 1); } else { step(t0); }
     };
-    cv.onclick = () => { run(); speak(); };
+    cv.onclick = e => { const h = worldHit(cv, e); try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {} run(); word.setAttribute('lang', 'el'); if (h) { word.setText(`${h[4]} · ${h[5]}`); say(h[4]); } else speak(); };
     run();
   }
   // The Dance world: a festival floor. One dancer for you, one more for each dance learned (up to 7).
@@ -2095,12 +2125,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (let i = 0; i < d.n; i++) R(x0 + i * gap, 52, gap - 2, 2, i < lit ? '#ffd860' : 'rgba(0,0,0,0.35)');
     };
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
+    const danceHits = () => { const hs = cv._hits || [], x0 = Math.round((W_W - crew * 9) / 2) - 5;
+      hs.push([0, 2, W_W, 7, 'τα φωτάκια', 'festival lights'], [4, 50, W_W - 4, 56, 'τα βήματα', 'steps'], [x0, 40, x0 + crew * 9 + 6, 54, crew > 1 ? 'οι χορευτές' : 'ο χορευτής', crew > 1 ? 'dancers' : 'dancer'], [x0 - 2, 40, x0 + 3, 46, 'το μαντήλι', 'handkerchief']); };
     const run = () => {
       cancelAnimationFrame(cv._raf); const t0 = performance.now(), dur = Math.max(1200, d.steps * 420);
-      const frame = now => { const t = Math.min(1, (now - t0) / dur); worldPaint(ctx, 'dance', st, mood, 1); marks(t); drawDancers(ctx, crew, d.steps ? t * d.steps / 7 : 0); if (t < 1 && cv.isConnected) cv._raf = requestAnimationFrame(frame); };
-      if (reduce) { worldPaint(ctx, 'dance', st, mood, 1); marks(1); drawDancers(ctx, crew, 0); } else frame(t0);
+      const frame = now => { const t = Math.min(1, (now - t0) / dur); worldPaint(ctx, 'dance', st, mood, 1); danceHits(); marks(t); drawDancers(ctx, crew, d.steps ? t * d.steps / 7 : 0); if (t < 1 && cv.isConnected) cv._raf = requestAnimationFrame(frame); };
+      if (reduce) { worldPaint(ctx, 'dance', st, mood, 1); danceHits(); marks(1); drawDancers(ctx, crew, 0); } else frame(t0);
     };
-    cv.onclick = () => { run(); say(name); };
+    const word = box.createDiv({ cls: 'gq-world-say', attr: { lang: 'el' } });
+    worldTip(word);
+    cv.onclick = e => { const h = worldHit(cv, e); try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {} run(); word.setAttribute('lang', 'el'); if (h) { word.setText(`${h[4]} · ${h[5]}`); say(h[4]); } else say(name); };
     run();
   }
   // The card at the top of Today. The same question the teacher asks in class.

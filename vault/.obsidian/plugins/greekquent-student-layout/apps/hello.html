@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!--GQ_START-->
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="obsidian://"]');
+  if (a && window.parent !== window) { e.preventDefault(); window.parent.postMessage({ gq: 'obsidian', url: a.href }, '*'); }
+}, true);
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f2a44">
+<title>Greekquent Τι λέμε;</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f2a44%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22%3E%CE%93%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f2a44; --paper:#f6f1e7; --muted:#5f6873; --line:#d9d2c3;
+  --ok:#2f7d4f; --ok-soft:#d7eedf; --bad:#b3261e; --bad-soft:#f6dcd9;
+  --font:'Commissioner', 'Noto Sans', system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--font)}
+body{overflow-y:auto;touch-action:manipulation}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit;background:none}
+.screen{display:none;min-height:100%}
+.screen.on{display:block}
+.wrap{width:100%;max-width:520px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px max(24px,env(safe-area-inset-bottom))}
+
+/* start */
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:6px 0 4px}
+.brand h1{font-size:30px;font-weight:800}
+.brand .slogan{white-space:nowrap;font-style:italic;color:var(--muted);font-size:15px}
+.lede{color:var(--muted);font-size:16px;line-height:1.45;margin:6px 0 16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.card h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px;font-weight:600}
+.levels{display:grid;gap:8px}
+.lv{display:flex;align-items:center;gap:12px;text-align:left;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--paper);min-height:56px}
+.lv b{font-size:16px} .lv span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.lv[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)} .lv[aria-pressed="true"] span{color:#cfd8e3}
+.lv:disabled{opacity:.45}
+.lv .n{flex:0 0 30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;border:2px solid currentColor}
+.start{width:100%;background:var(--ink);color:#fff;font-size:19px;font-weight:700;border-radius:14px;padding:18px;margin:4px 0 12px}
+.check{display:flex;align-items:center;gap:10px;font-size:15px;min-height:40px}
+.check input{width:22px;height:22px;accent-color:var(--ink)}
+details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:12px}
+details summary{font-weight:700;cursor:pointer;min-height:28px;list-style-position:inside}
+.rules{margin-top:10px;font-size:15px;line-height:1.45}
+.rules table{width:100%;border-collapse:collapse;margin:6px 0 10px}
+.rules td,.rules th{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+.rules th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.rules .g{font-weight:700;white-space:nowrap}
+.rules p{margin:6px 0}
+.say{cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+
+/* game */
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.top button{font-size:14px;font-weight:600;padding:8px 12px;border:1px solid var(--line);border-radius:10px;min-height:40px;background:#fff}
+.dots{display:flex;gap:5px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dots i.ok{background:var(--ok)} .dots i.bad{background:var(--bad)} .dots i.now{background:var(--ink)}
+.sky{position:relative;height:150px;border-radius:16px;overflow:hidden;color:#fff;transition:background .6s}
+.sky svg{position:absolute;inset:0;width:100%;height:100%}
+.clock{position:absolute;left:16px;bottom:12px;text-shadow:0 1px 4px rgba(0,0,0,.55)}
+.clock.right{left:auto;right:16px;text-align:right}
+.clock b{display:block;font-size:40px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.clock span{font-size:14px;font-weight:600;opacity:.95}
+.day{position:absolute;left:50%;transform:translateX(-50%);top:12px;font-size:14px;font-weight:700;background:rgba(0,0,0,.25);padding:4px 10px;border-radius:20px}
+.scene{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}
+.way{flex:0 0 64px;height:64px;border-radius:14px;display:grid;place-items:center;background:var(--paper)}
+.way svg{width:44px;height:44px}
+.scene .t{font-size:20px;font-weight:800;line-height:1.2}
+.scene .s{font-size:15px;color:var(--muted);margin-top:3px;line-height:1.35}
+.scene .gr{font-style:normal;color:var(--ink);font-weight:600}
+.ask{font-size:15px;color:var(--muted);margin:2px 2px 8px}
+.opts{display:grid;gap:10px}
+.opt{min-height:64px;border-radius:14px;background:#fff;font-size:clamp(20px,5.8vw,26px);font-weight:700;padding:10px 14px;border:2px solid var(--ink);box-shadow:0 2px 0 rgba(15,42,68,.15);text-align:center}
+.opt.long{font-size:clamp(17px,4.8vw,22px)}
+.opt.right{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.wrong{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt.dim{opacity:.35}
+.why{display:none;margin-top:12px;border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.45}
+.why.on{display:block}
+.why.ok{background:var(--ok-soft)} .why.bad{background:var(--bad-soft)}
+.why .g{font-weight:800}
+.why .root{display:block;margin-top:6px;font-size:14px;color:var(--muted)}
+.next{display:none;width:100%;margin-top:12px;background:var(--ink);color:#fff;font-size:18px;font-weight:700;border-radius:14px;padding:16px}
+.next.on{display:block}
+
+/* end */
+.big{font-size:34px;font-weight:800;margin:10px 0 4px}
+.sub{color:var(--muted);font-size:16px;margin-bottom:14px;line-height:1.4}
+.miss{list-style:none;margin:4px 0}
+.miss li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:16px}
+.miss li b{font-weight:700}
+.btns{display:grid;gap:10px;margin:12px 0}
+.btn{min-height:50px;border-radius:12px;font-size:17px;font-weight:700;border:1px solid var(--ink);background:#fff}
+.btn.pri{background:var(--ink);color:#fff}
+.foot{font-size:12px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.4}
+@media (prefers-reduced-motion: reduce){ .sky{transition:none} }
+</style>
+</head>
+<body>
+
+<section class="screen on" id="setup"><div class="wrap">
+  <div class="brand"><h1>Τι λέμε;</h1><span class="slogan">Θα τα πούμε.</span></div>
+  <p class="lede">Hello and goodbye through the day. Look at the clock, see if you are coming or going, and pick what a Greek would say.</p>
+  <button class="start" id="go">Start</button>
+  <div class="card"><h2>Level</h2><div class="levels" id="levels"></div></div>
+  <details id="cheat"><summary>When to say what</summary><div class="rules" id="rules"></div></details>
+  <label class="check"><input type="checkbox" id="sound" checked> Sound and Greek voice</label>
+  <p class="foot">© 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.</p>
+</div></section>
+
+<section class="screen" id="game"><div class="wrap">
+  <div class="top"><button id="quit">‹ Menu</button><div class="dots" id="dots" aria-label="Progress"></div></div>
+  <div class="sky" id="sky"><svg viewBox="0 0 400 150" preserveAspectRatio="none" aria-hidden="true"><path d="M0 150 Q200 -40 400 150" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2" stroke-dasharray="4 6"/><g id="orb"></g><path d="M0 138 L60 120 L110 132 L170 112 L230 130 L300 116 L360 128 L400 120 L400 150 L0 150Z" fill="rgba(0,0,0,.18)"/></svg>
+    <div class="day" id="day" hidden></div>
+    <div class="clock"><b id="clock">9:00</b><span id="clock2"></span></div>
+  </div>
+  <div class="scene"><div class="way" id="way"></div><div><div class="t" id="sceneT"></div><div class="s" id="sceneS"></div></div></div>
+  <p class="ask" id="ask">What do you say?</p>
+  <div class="opts" id="opts"></div>
+  <div class="why" id="why" role="status" aria-live="polite"></div>
+  <button class="next" id="next">Next</button>
+</div></section>
+
+<section class="screen" id="end"><div class="wrap">
+  <div class="big" id="score"></div>
+  <p class="sub" id="verdict"></p>
+  <div class="card" id="missCard" hidden><h2>Say these again</h2><ul class="miss" id="miss"></ul></div>
+  <div class="btns">
+    <button class="btn pri" id="again">Play again</button>
+    <button class="btn" id="up" hidden>Next level</button>
+    <button class="btn" id="save" hidden>Send missed ones to Review</button>
+    <button class="btn" id="menu">Menu</button>
+  </div>
+</div></section>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const KEY = 'gq-hello';
+  const store = (() => { let o = {}; try { o = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {} return { get: (k, d) => (k in o ? o[k] : d), set: (k, v) => { o[k] = v; try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} } }; })();
+  const S = { lvl: store.get('lvl', 1), open: store.get('open', 1), sound: store.get('sound', true) };
+
+  // ---------- what to say ----------
+  // Each phrase: the Greek, its English, the word in the 1,500 it practices, and why.
+  const P = {
+    km:  { g: 'Καλημέρα', en: 'good morning (hello)', w: 'καλημέρα' },
+    ks:  { g: 'Καλησπέρα', en: 'good evening (hello after lunch)', w: 'καλησπέρα' },
+    kn:  { g: 'Καληνύχτα', en: 'good night (bedtime goodbye)', w: 'καληνύχτα' },
+    kme: { g: 'Καλή μέρα', en: 'have a good day (goodbye)', w: 'μέρα' },
+    kmes:{ g: 'Καλό μεσημέρι', en: 'have a good midday (goodbye)', w: 'καλός' },
+    ka:  { g: 'Καλό απόγευμα', en: 'have a good afternoon (goodbye)', w: 'απόγευμα' },
+    kb:  { g: 'Καλό βράδυ', en: 'have a good evening (goodbye)', w: 'βράδυ' },
+    ksy: { g: 'Καλή συνέχεια', en: 'enjoy the rest of your day (goodbye)', w: 'συνέχεια' }
+  };
+  const ROOT = {
+    ks: 'καλή + εσπέρα: εσπέρα is the old word for evening. Καλησπέρα is a hello, never a goodbye.',
+    ka: 'απόγευμα = από + γεύμα, after the meal. The afternoon starts after lunch.',
+    kn: 'καλή + νύχτα, good night.',
+    km: 'καλή + μέρα, good day.'
+  };
+
+  const WHO = [
+    { gr: 'ο Νίκος', en: 'Nikos, your friend', pl: 'σου' },
+    { gr: 'η γιαγιά', en: 'Grandma', pl: 'σου' },
+    { gr: 'η Μαρία', en: 'Maria, your cousin', pl: 'σου' },
+    { gr: 'η κυρία Ελένη', en: 'Mrs. Eleni, the neighbor', pl: 'σας' },
+    { gr: 'ο κύριος Παύλος', en: 'Mr. Pavlos at the shop', pl: 'σας' },
+    { gr: 'η παρέα', en: 'a group of friends', pl: 'σας' }
+  ];
+  const WHERE = {
+    morning: [['στον φούρνο', 'the bakery'], ['στο περίπτερο', 'the kiosk'], ['στο καφέ', 'the café'], ['στο σχολείο', 'school']],
+    midday: [['στη λαϊκή', 'the street market'], ['στης γιαγιάς', "Grandma's, for lunch"]],
+    afternoon: [['στο καφέ', 'the café'], ['στην πλατεία', 'the square'], ['στο περίπτερο', 'the kiosk']],
+    evening: [['στην ταβέρνα', 'the taverna'], ['στην πλατεία', 'the square'], ['στο σουβλατζίδικο', 'the souvlaki shop']],
+    night: [['στης γιαγιάς', "Grandma's house"], ['σε ένα πάρτι', 'a party'], ['στην ταβέρνα', 'the taverna']]
+  };
+  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+  const hm = (h, m) => ({ h, m });
+
+  // Times stay out of the grey zone (12:00–13:59), where people say both.
+  const SLOT = {
+    arriveMorning: () => hm(rnd(6, 11), pick([0, 15, 30, 45])),
+    arriveAfternoon: () => hm(rnd(15, 18), pick([0, 15, 30, 45])),
+    arriveEvening: () => hm(rnd(19, 23), pick([0, 15, 30, 45])),
+    leaveMorning: () => hm(rnd(7, 11), pick([0, 15, 30, 45])),
+    leaveMidday: () => hm(rnd(13, 14), pick([0, 15, 30, 45])),
+    leaveAfternoon: () => hm(rnd(15, 18), pick([0, 15, 30])),
+    leaveEvening: () => hm(rnd(20, 21), pick([0, 15, 30, 45])),
+    leaveBed: () => hm(pick([23, 23, 0]), pick([0, 15, 30, 45]))
+  };
+  const part = h => h < 12 && h >= 5 ? 'morning' : h < 15 && h >= 12 ? 'midday' : h < 19 && h >= 15 ? 'afternoon' : h >= 19 && h < 22 ? 'evening' : 'night';
+
+  // A card: the time, coming or going, who, where, the right answer, three choices and why.
+  function card(kind, lvl) {
+    const c = { kind, who: pick(WHO), day: '', date: 0, extra: '' };
+    const T = {
+      am: ['arrive', 'km', SLOT.arriveMorning, ['ks', 'ka', 'kn'], 'Arriving before lunch: Καλημέρα. It works until about 1 pm.'],
+      aa: ['arrive', 'ks', SLOT.arriveAfternoon, ['ka', 'km', 'kn'], 'Arriving after lunch is Καλησπέρα, even in the middle of the afternoon. Καλό απόγευμα is only for leaving.'],
+      ae: ['arrive', 'ks', SLOT.arriveEvening, ['kn', 'kb', 'km'], 'Arriving in the evening: Καλησπέρα. Καληνύχτα and Καλό βράδυ are goodbyes.'],
+      lm: ['leave', 'kme', SLOT.leaveMorning, ['ks', 'kn', 'ka'], 'Leaving in the morning: Καλή μέρα, have a good day. Καλή συνέχεια works too.'],
+      ld: ['leave', 'kmes', SLOT.leaveMidday, ['ks', 'kn', 'kb'], 'Leaving around lunch: Καλό μεσημέρι, have a good midday.'],
+      la: ['leave', 'ka', SLOT.leaveAfternoon, ['ks', 'km', 'kn'], 'Leaving in the afternoon: Καλό απόγευμα. Καλησπέρα is only for arriving.'],
+      le: ['leave', 'kb', SLOT.leaveEvening, ['ks', 'kn', 'ka'], 'Leaving while the evening goes on: Καλό βράδυ. Καλησπέρα is only for arriving.'],
+      ln: ['leave', 'kn', SLOT.leaveBed, ['ks', 'kb', 'km'], 'The night is over and they are going to bed: Καληνύχτα. Never use it as a hello.']
+    }[kind];
+    const [way, ans, slot, wrong, why] = T;
+    Object.assign(c, { way, ans, why, root: ROOT[ans] || '' }, slot());
+    if (kind === 'ln') c.extra = 'They are off to bed.';
+    if (kind === 'le') c.extra = 'The night is still young.';
+    c.where = pick(WHERE[part(c.h)]);
+    c.right = P[ans].g; c.w = P[ans].w;
+    c.opts = shuffle([c.right, ...shuffle(wrong.slice()).slice(0, 2).map(k => P[k].g)]);
+    return c;
+  }
+  // Level 3: σου or σας, and the wishes for Monday, Friday and the 1st of the month.
+  function card3(kind) {
+    if (kind === 'pl') {
+      const base = card(pick(['am', 'aa', 'ae']));
+      const who = base.who, other = who.pl === 'σου' ? 'σας' : 'σου';
+      const wrongTime = base.ans === 'km' ? 'Καλησπέρα' : 'Καλημέρα';
+      base.right = `${P[base.ans].g} ${who.pl}`;
+      base.opts = shuffle([base.right, `${P[base.ans].g} ${other}`, `${wrongTime} ${who.pl}`]);
+      base.why = who.pl === 'σας' ? `σας for someone older, a stranger or a group. ${P[base.ans].g} σας.` : `σου for a friend or family. ${P[base.ans].g} σου.`;
+      base.root = ''; return base;
+    }
+    if (kind === 'mon') {
+      const c = card('am'); c.day = 'Monday';
+      c.right = 'Καλημέρα! Καλή εβδομάδα!'; c.w = 'εβδομάδα';
+      c.opts = shuffle([c.right, 'Καλημέρα! Καλό Σαββατοκύριακο!', 'Καλησπέρα! Καλή εβδομάδα!']);
+      c.why = 'On Monday, Greeks add Καλή εβδομάδα, have a good week. Before lunch the hello is Καλημέρα.'; c.root = ''; return c;
+    }
+    if (kind === 'fri') {
+      const c = card(pick(['la', 'le'])); c.day = 'Friday';
+      const t = P[c.ans].g; c.right = `${t}! Καλό Σαββατοκύριακο!`; c.w = 'Σαββατοκύριακο';
+      c.opts = shuffle([c.right, `${t}! Καλή εβδομάδα!`, `Καλησπέρα! Καλό Σαββατοκύριακο!`]);
+      c.why = 'A Friday goodbye adds Καλό Σαββατοκύριακο, have a good weekend. Καλησπέρα would be a hello.'; c.root = ''; return c;
+    }
+    if (kind === 'first') {
+      const c = card(pick(['am', 'aa'])); c.date = 1;
+      const t = P[c.ans].g; c.right = `${t}! Καλό μήνα!`; c.w = 'μήνας';
+      c.opts = shuffle([c.right, `${t}! Καλή χρονιά!`, `${t}! Καλή εβδομάδα!`]);
+      c.why = 'On the 1st of the month, Greeks wish each other Καλό μήνα, have a good month.'; c.root = ''; return c;
+    }
+    if (kind === 'sy') {
+      const c = card('lm'); c.right = P.ksy.g; c.w = P.ksy.w;
+      c.opts = shuffle([c.right, 'Καλησπέρα', 'Καληνύχτα']);
+      c.why = 'Καλή συνέχεια: enjoy the rest of your day. A handy goodbye any time before evening.'; c.root = ''; return c;
+    }
+    return card(kind);
+  }
+  const LEVELS = {
+    1: { name: 'Hello', blurb: 'Arriving: Καλημέρα or Καλησπέρα', kinds: ['am', 'am', 'aa', 'aa', 'ae', 'ae'] },
+    2: { name: 'Hello and goodbye', blurb: 'Leaving too: Καλό απόγευμα, Καλό βράδυ, Καληνύχτα', kinds: ['am', 'aa', 'ae', 'lm', 'la', 'la', 'le', 'le', 'ln', 'ln'] },
+    3: { name: 'Like a local', blurb: 'σου or σας, Καλή εβδομάδα, Καλό μήνα and more', kinds: ['pl', 'pl', 'mon', 'fri', 'first', 'sy', 'ld', 'la', 'le', 'ln', 'aa'] }
+  };
+  function buildRound(lvl) {
+    const L = LEVELS[lvl], out = [];
+    let bag = [];
+    while (out.length < 10) { if (!bag.length) bag = shuffle(L.kinds.slice()); const k = bag.pop(); out.push(lvl === 3 ? card3(k) : card(k)); }
+    return out;
+  }
+
+  // ---------- sound and speech ----------
+  let ac = null, elVoice = null;
+  function tone(f, d, type = 'sine', v = .16, when = 0) {
+    if (!ac || !S.sound) return;
+    const t = ac.currentTime + when, o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, t); g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.001, t + d);
+    o.connect(g).connect(ac.destination); o.start(t); o.stop(t + d);
+  }
+  const sfx = { right: () => { tone(660, .12, 'triangle'); tone(990, .2, 'triangle', .16, .1); }, wrong: () => tone(150, .28, 'square', .1) };
+  function pickVoice() { if ('speechSynthesis' in window) elVoice = speechSynthesis.getVoices().find(v => /^el/i.test(v.lang)) || null; }
+  if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  function say(text) {
+    if (!S.sound || !('speechSynthesis' in window)) return;
+    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(String(text)); u.lang = 'el-GR'; if (elVoice) u.voice = elVoice; u.rate = .85; speechSynthesis.speak(u); } catch (e) {}
+  }
+  const vibrate = p => { try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} };
+
+  // ---------- sky ----------
+  function skyFor(h) {
+    if (h >= 5 && h < 8) return 'linear-gradient(#f3a76b,#f7d9a6)';
+    if (h >= 8 && h < 12) return 'linear-gradient(#3d8fd6,#a9d4f5)';
+    if (h >= 12 && h < 17) return 'linear-gradient(#2f80c9,#8cc5ee)';
+    if (h >= 17 && h < 20) return 'linear-gradient(#d9774a,#f2c27d)';
+    if (h >= 20 && h < 22) return 'linear-gradient(#3b3f78,#b0607a)';
+    return 'linear-gradient(#0b1a33,#24365e)';
+  }
+  function paintSky(c) {
+    const h = c.h + c.m / 60, day = h >= 6 && h < 20.5;
+    $('#sky').style.background = skyFor(c.h);
+    // The sun (6:00 to 20:30) or the moon (the rest) rides the arc.
+    let t = day ? (h - 6) / 14.5 : ((h < 6 ? h + 24 : h) - 20.5) / 9.5; t = Math.max(.05, Math.min(.95, t));
+    const ck = document.querySelector('.clock'); ck.classList.toggle('right', t < .5);
+    const x = 400 * t, y = 150 - 4 * 95 * t * (1 - t);
+    $('#orb').innerHTML = day
+      ? `<circle cx="${x}" cy="${y}" r="16" fill="#ffd54a"/><circle cx="${x}" cy="${y}" r="24" fill="#ffd54a" opacity=".25"/>`
+      : `<circle cx="${x}" cy="${y}" r="13" fill="#f3f0e0"/><circle cx="${x + 6}" cy="${y - 4}" r="11" fill="rgba(20,37,74,.92)"/>` + [[40, 30], [120, 18], [300, 26], [360, 50], [200, 40]].map(([a, b]) => `<circle cx="${a}" cy="${b}" r="1.6" fill="#fff"/>`).join('');
+    const mm = String(c.m).padStart(2, '0'), h12 = c.h % 12 || 12, ap = c.h < 12 ? 'am' : 'pm';
+    $('#clock').textContent = `${c.h}:${mm}`;
+    $('#clock2').textContent = `${h12}:${mm} ${ap}`;
+    const d = $('#day'); const tag = c.day || (c.date ? 'the 1st of the month' : '');
+    d.hidden = !tag; d.textContent = tag;
+  }
+  const ARROW_IN = '<svg viewBox="0 0 48 48" fill="none" stroke="#0f2a44" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="26" y="6" width="16" height="36" rx="2"/><circle cx="31" cy="25" r="1.6" fill="#0f2a44"/><path d="M4 24h16M14 17l7 7-7 7"/></svg>';
+  const ARROW_OUT = '<svg viewBox="0 0 48 48" fill="none" stroke="#0f2a44" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="16" height="36" rx="2"/><circle cx="17" cy="25" r="1.6" fill="#0f2a44"/><path d="M28 24h16M38 17l7 7-7 7"/></svg>';
+
+  // ---------- game ----------
+  const G = { cards: [], i: 0, ok: 0, marks: [], missed: [], busy: false };
+  const show = id => { document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); };
+  function start() {
+    if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { ac = null; } }
+    if (ac && ac.state === 'suspended') ac.resume();
+    if ('speechSynthesis' in window) { try { speechSynthesis.speak(new SpeechSynthesisUtterance('')); } catch (e) {} }
+    G.cards = buildRound(S.lvl); G.i = 0; G.ok = 0; G.marks = []; G.missed = [];
+    show('game'); paint();
+  }
+  function dots() {
+    $('#dots').innerHTML = G.cards.map((_, k) => `<i class="${G.marks[k] || (k === G.i ? 'now' : '')}"></i>`).join('');
+  }
+  function paint() {
+    const c = G.cards[G.i]; G.busy = false; G.first = true;
+    paintSky(c); dots();
+    $('#way').innerHTML = c.way === 'arrive' ? ARROW_IN : ARROW_OUT;
+    $('#sceneT').textContent = c.way === 'arrive' ? 'You arrive' : 'You leave';
+    $('#sceneS').innerHTML = `${c.who.en} · ${c.where[1]}<br><em class="gr" lang="el">${c.who.gr}, ${c.where[0]}</em>${c.extra ? '<br>' + c.extra : ''}`;
+    $('#ask').textContent = G.i === 0 && S.lvl === 1 && !store.get('played', false) ? 'Coming or going? What time is it? Pick what you say.' : 'What do you say?';
+    const o = $('#opts'); o.innerHTML = '';
+    c.opts.forEach(t => { const b = document.createElement('button'); b.className = 'opt' + (t.length > 18 ? ' long' : ''); b.lang = 'el'; b.textContent = t; b.onclick = () => choose(b, t); o.appendChild(b); });
+    const w = $('#why'); w.className = 'why'; w.innerHTML = ''; $('#next').classList.remove('on');
+  }
+  function choose(b, t) {
+    if (G.busy) return; const c = G.cards[G.i];
+    if (t === c.right) {
+      G.busy = true; b.classList.add('right'); sfx.right(); vibrate(40); say(c.right);
+      [...document.querySelectorAll('.opt')].forEach(x => { if (x !== b) x.classList.add('dim'); });
+      if (G.first) { G.ok++; G.marks[G.i] = 'ok'; momo(c.w); } else G.marks[G.i] = 'bad';
+      explain(c, G.first);
+      $('#next').textContent = G.i + 1 < G.cards.length ? 'Next' : 'See how you did'; $('#next').classList.add('on');
+      dots();
+    } else {
+      b.classList.add('wrong'); b.disabled = true; sfx.wrong(); vibrate([30, 30, 30]); say(t);
+      if (G.first) { G.first = false; G.missed.push(c); }
+      explain(c, false, t);
+    }
+  }
+  function explain(c, ok, wrongT) {
+    const w = $('#why'); w.className = 'why on ' + (ok ? 'ok' : 'bad');
+    const lead = ok ? 'Right.' : wrongT ? `Not ${wrongT} here. Try again.` : 'Got it on the second try.';
+    w.innerHTML = `<b>${lead}</b> ${c.why}${c.root && (ok || !wrongT) ? `<span class="root" lang="el">${c.root}</span>` : ''}`;
+  }
+  function momo(w) { if (window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w }, '*'); } catch (e) {} }
+  $('#next').onclick = () => { G.i++; if (G.i >= G.cards.length) finish(); else paint(); };
+  $('#quit').onclick = () => { show('setup'); renderSetup(); };
+
+  function finish() {
+    store.set('played', true);
+    const n = G.cards.length, r = G.ok;
+    $('#score').textContent = `${r} of ${n} right`;
+    let v = r >= 9 ? 'Ready for more.' : r >= 7 ? 'Close. One more round and it will stick.' : 'Play this level once more. Read the reason after each one.';
+    const canUp = r >= 8 && S.lvl < 3;
+    if (canUp && S.open <= S.lvl) { S.open = S.lvl + 1; store.set('open', S.open); v += ` Level ${S.lvl + 1} is open.`; }
+    if (r >= 8 && S.lvl === 3) v = 'You greet like a local. Θα τα πούμε.';
+    $('#verdict').textContent = v;
+    $('#up').hidden = !(S.lvl < 3 && S.open > S.lvl);
+    const ms = [...new Map(G.missed.map(c => [c.right, c])).values()];
+    $('#missCard').hidden = !ms.length; $('#save').hidden = !ms.length;
+    $('#miss').innerHTML = ms.map(c => `<li><b class="say" lang="el" data-say="${c.right}">${c.right}</b><span>${c.way === 'arrive' ? 'arriving' : 'leaving'}, ${c.h % 12 || 12}${c.h < 12 ? ' am' : ' pm'}</span></li>`).join('');
+    show('end');
+  }
+  document.addEventListener('click', e => { const s = e.target.closest && e.target.closest('[data-say]'); if (s) say(s.dataset.say); });
+  $('#again').onclick = start;
+  $('#up').onclick = () => { S.lvl = Math.min(3, S.lvl + 1); store.set('lvl', S.lvl); start(); };
+  $('#menu').onclick = () => { show('setup'); renderSetup(); };
+  $('#save').onclick = () => {
+    const words = [...new Set(G.missed.map(c => c.w))];
+    const url = 'obsidian://greekquent?game=' + encodeURIComponent('Hello') + '&misses=' + encodeURIComponent(words.join(','));
+    if (window.parent !== window) window.parent.postMessage({ gq: 'obsidian', url }, '*'); else location.href = url;
+  };
+
+  // ---------- menu ----------
+  function renderSetup() {
+    const el = $('#levels'); el.innerHTML = '';
+    for (const k of [1, 2, 3]) {
+      const L = LEVELS[k], b = document.createElement('button'); b.className = 'lv';
+      b.setAttribute('aria-pressed', String(S.lvl === k)); b.disabled = k > S.open;
+      b.innerHTML = `<span class="n">${k}</span><div><b>${L.name}</b><span>${k > S.open ? `Get 8 of 10 on level ${k - 1} to open it` : L.blurb}</span></div>`;
+      b.onclick = () => { S.lvl = k; store.set('lvl', k); renderSetup(); };
+      el.appendChild(b);
+    }
+    $('#go').textContent = `Start level ${S.lvl}`;
+  }
+  const row = (g, w, n) => `<tr><td class="g say" lang="el" data-say="${g}">${g}</td><td>${w}</td><td>${n}</td></tr>`;
+  $('#rules').innerHTML = `
+    <table><tr><th>Say</th><th>When</th><th>Coming or going</th></tr>
+    ${row('Καλημέρα', 'until about 1 pm', 'coming')}
+    ${row('Καλησπέρα', 'after lunch, all evening', 'coming')}
+    ${row('Καλή μέρα', 'morning', 'going')}
+    ${row('Καλό μεσημέρι', 'about 1 to 3 pm', 'going')}
+    ${row('Καλό απόγευμα', 'afternoon', 'going')}
+    ${row('Καλό βράδυ', 'evening', 'going')}
+    ${row('Καληνύχτα', 'late, off to bed', 'going')}
+    ${row('Γεια σου / Γεια σας', 'any time', 'both')}</table>
+    <p>Καλησπέρα is only a hello. In English, "good afternoon" and "good evening" can be a goodbye; in Greek those are Καλό απόγευμα and Καλό βράδυ.</p>
+    <p>καλή + εσπέρα, the old word for evening. απόγευμα = από + γεύμα, after the meal.</p>
+    <p>Not sure? Γεια σας works any time, coming or going. σας for someone older, a stranger or a group; σου for a friend or family.</p>`;
+  $('#sound').checked = S.sound;
+  $('#sound').onchange = e => { S.sound = e.target.checked; store.set('sound', S.sound); };
+  $('#go').onclick = start;
+  // #lvl=2 opens a level directly (from a word note or the teacher); it never locks a level that is already open.
+  const hp = new URLSearchParams(String(window.GQ_HASH || location.hash || '').replace(/^#/, ''));
+  if (+hp.get('lvl') >= 1 && +hp.get('lvl') <= S.open) { S.lvl = +hp.get('lvl'); }
+  if (!window.GQ_HASH) window.addEventListener('hashchange', () => location.reload());
+  if (!store.get('played', false)) $('#cheat').open = false;
+  renderSetup();
+})();
+</script>
+</body>
+</html>

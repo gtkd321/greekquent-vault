@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19h · New game: Τι λέμε; (hello and goodbye)
+> Greek greetings depend on the time of day and on whether you are coming or going. Καλησπέρα is only a hello; leaving, you say Καλό απόγευμα or Καλό βράδυ, and Καληνύχτα only at bedtime. The new game shows a sky, a clock and a scene, and you pick what to say, in three levels. Open it from Games, or from More on the καλημέρα, καλησπέρα and καληνύχτα word notes. Those notes also have a short When to say it box.
+
 > [!tip]- 2026-11-19g · Leave out εσύ if you like
 > In the story puzzle, Greek lets you drop εγώ, εσύ, εμείς or εσείς at the start of a sentence, because the verb already says who. Build it without the word and it counts; the line then shows it in parentheses, like (Εσύ) είσαι ο Νίκος; Each solved line now shows its φόρα: +1 the first time, +3 on a later day. A replay the same day says it was already counted.
 

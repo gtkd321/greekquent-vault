@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19g';
+const VAULT_RELEASE = '2026-11-19h';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -433,7 +433,9 @@ class WordWebView extends ItemView {
 
 // ---------- Story Lines, Γιαγιά, Buzzer and Cousins live inside the vault and open here, offline, in the same page ----------
 const APPV = 'greekquent-app';
-const APPS = { story: { file: 'storylines.html', title: 'Story Lines', icon: 'clapperboard' }, giagia: { file: 'giagia.html', title: 'Γιαγιά', icon: 'gamepad-2' }, buzzer: { file: 'buzzer.html', title: 'Buzzer', icon: 'zap' }, cousins: { file: 'cousins.html', title: 'Cousins', icon: 'users' } };
+// Word notes that open Τι λέμε; (greetings by time of day) from More.
+const GREET_W = new Set(['καλημέρα', 'καλησπέρα', 'καληνύχτα', 'απόγευμα', 'βράδυ', 'πρωί', 'μέρα', 'νύχτα', 'γεια', 'αντίο', 'ώρα']);
+const APPS = { story: { file: 'storylines.html', title: 'Story Lines', icon: 'clapperboard' }, giagia: { file: 'giagia.html', title: 'Γιαγιά', icon: 'gamepad-2' }, buzzer: { file: 'buzzer.html', title: 'Buzzer', icon: 'zap' }, cousins: { file: 'cousins.html', title: 'Cousins', icon: 'users' }, hello: { file: 'hello.html', title: 'Τι λέμε;', icon: 'sun' } };
 class AppView extends ItemView {
   constructor(leaf, plugin) { super(leaf); this.plugin = plugin; this.which = 'story'; this.hash = ''; this.shown = ''; }
   getViewType() { return APPV; }
@@ -1250,7 +1252,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async openApp(which, hash) {
     if (which !== 'story') this.tourHit('game');
     const ws = this.app.workspace, leaf = this.mainLeaf(false);
-    const names = { giagia: 'the Γιαγιά game', buzzer: 'the buzzer game', cousins: 'the cousins game', story: 'the story cartoon', storylines: 'Story Lines' };
+    const names = { giagia: 'the Γιαγιά game', buzzer: 'the buzzer game', cousins: 'the cousins game', hello: 'Τι λέμε;', story: 'the story cartoon', storylines: 'Story Lines' };
     if (names[which]) this.whereSet({ kind: 'app', app: which, hash: hash || '', label: names[which] });
     await leaf.setViewState({ type: APPV, active: true, state: { app: which, hash: hash || '' } });
     ws.revealLeaf(leaf);
@@ -3947,6 +3949,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     else if (f.path.startsWith('Words/')) {
       btn('Build a sentence', () => this.openPair(f.basename));
       btn('Play Γιαγιά with this word', async () => this.openApp('giagia', '#w=' + encodeURIComponent((await this.webWords(f.path)).join(','))));
+      if (GREET_W.has(f.basename)) btn('Play Τι λέμε; (hello and goodbye)', () => this.openApp('hello', ''));
       btn('Games', () => this.openNote(this.gamesNote()));
       btn('Ask the group', () => this.ask(f));
     } else {

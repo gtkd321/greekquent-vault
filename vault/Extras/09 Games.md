@@ -2,7 +2,7 @@
 
 Links: [[Today]] · [[00 Greekquent Index]] · [[07 Fluent in a Year]]
 
-All four games are part of the vault. They open here in Obsidian, need no internet, and update with the vault.
+All five games are part of the vault. They open here in Obsidian, need no internet, and update with the vault.
 
 > [!summary]- Greekquent Buzzer (fastest fingers)
 > [Open the Greekquent Buzzer](obsidian://greekquent?open=buzzer) (works offline)
@@ -22,6 +22,16 @@ All four games are part of the vault. They open here in Obsidian, need no intern
 > - **Levels:** Twins (ιδέα, idea), Cousins (καρδιά, cardiac), Hidden cousins (σπίτι, hospital; γεια, hygiene). 157 pairs, all from the 1,500.
 > - **Letter rules:** the setup screen lists them (χ → ch, φ → ph, θ → th, ψ → ps, ξ → x, υ → y, κ → c, initial vowel → h), and you can play only the words for one rule. Every answer shows the rule and a one-line bridge, for example "Strategy was first the art of leading an army."
 > - 85% hit-rate check and a missed list at the end, like the Buzzer.
+
+> [!summary]- Greekquent Τι λέμε; (hello and goodbye through the day)
+> [Open Τι λέμε;](obsidian://greekquent?open=hello) (works offline)
+> - One player, 10 quick scenes. Each shows the time of day on a sky and a clock, who you meet, where, and whether you arrive or leave. Pick what a Greek would say.
+> - **Level 1, Hello:** Καλημέρα until about 1 pm, Καλησπέρα after lunch.
+> - **Level 2, Hello and goodbye:** leaving is different. Καλό απόγευμα, Καλό βράδυ, Καληνύχτα, Καλή μέρα. Καλησπέρα is never a goodbye, and Καληνύχτα is never a hello.
+> - **Level 3, Like a local:** σου or σας, Καλή εβδομάδα on Monday, Καλό Σαββατοκύριακο on Friday, Καλό μήνα on the 1st, Καλό μεσημέρι, Καλή συνέχεια.
+> - 8 of 10 opens the next level. Every answer gives the reason, and the roots: καλή + εσπέρα (old word for evening), απόγευμα = από + γεύμα (after the meal).
+> - Right on the first try earns φόρα for that word. Missed ones can go to Review.
+> - In class: put it on the screen and let the room call out the answer before anyone taps.
 
 > [!summary]- Greekquent Γιαγιά (find the notebooks, don't get fed)
 > [Open Greekquent Γιαγιά](obsidian://greekquent?open=giagia) (works offline)

@@ -1,5 +1,5 @@
 {
-"release": "2026-11-19g",
+"release": "2026-11-19h",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -25,6 +25,10 @@
 "sha256": "6fb91e2252e44def37f5aef00e9a3fc07335bc2476e5948e03f6c01d5e6aad4f",
 "size": 146339
 },
+".obsidian/plugins/greekquent-student-layout/apps/hello.html": {
+"sha256": "97e26ad1b810feee1686d19a412a4ab5d7871d6526e8056d1e636cfedfd2370c",
+"size": 29471
+},
 ".obsidian/plugins/greekquent-student-layout/apps/storylines.html": {
 "sha256": "ad9ecc84bcfca2d89bd4e07ef28be07296f182f26c97a4f48bb7820e716cf000",
 "size": 270169
@@ -34,11 +38,11 @@
 "size": 95488
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "d06adb7c40a344c96b6e15a7e0b2989b08b22ed3a355723f5c48d8368321e965",
-"size": 351622
+"sha256": "d69a8dc0b98c9674a3706b6912808dcb77bccc434d7a00ed224def5e86c06d9c",
+"size": 352108
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "e564002523aa7868d26af1068117aaf87fc357a5eeb59e9537b51489ef0b965d",
+"sha256": "f909d87a7f4aa6da11b667e8c7362ef5ea699cd8cebe87f922b80d89cae8e468",
 "size": 375
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -102,8 +106,8 @@
 "size": 6751
 },
 "Extras/09 Games.md": {
-"sha256": "ee6daaf98e84084e064e25cb857d02b17b835c7932e9b0399ae894ae15f152ec",
-"size": 4491
+"sha256": "7d52c20dcafeb264fea78f44903d83d0f489de28f8668089a59e6d31ac5d93ec",
+"size": 5706
 },
 "Extras/10 Greekquent Groups-student.md": {
 "sha256": "a8add3c67d6ee4045f8e730aea4f6af6265038e1378d68a1a464faa688fe2a70",
@@ -142,8 +146,8 @@
 "size": 2491
 },
 "Extras/What's New.md": {
-"sha256": "2440f7d7a21bf1b7f05368389c974469f703e3d7f3bf900434631877133d9cc2",
-"size": 32054
+"sha256": "e21f8f801d08906ba79fcaf2d599589fccffb3753ab28b127d9dded64282d999",
+"size": 32604
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",
@@ -1302,8 +1306,8 @@
 "size": 3724
 },
 "Words/απόγευμα.md": {
-"sha256": "120719478f14b64c36c01227b2fa5468cba09db9761445a014adbf4196b848cd",
-"size": 2132
+"sha256": "5406b00de0d02341e98440ae3c95304c020b1f5ed746724aba637f62641df800",
+"size": 2435
 },
 "Words/απόδειξη.md": {
 "sha256": "edb5e3d8537a501467fa697130f2088cddeef8d705749a2a40811a10b464d394",
@@ -1598,8 +1602,8 @@
 "size": 1774
 },
 "Words/βράδυ.md": {
-"sha256": "7ba5088b120456198d43b10194a2fe2dbebfeabcd09d0534790ec79cc99e2641",
-"size": 2452
+"sha256": "6ccca9722363dc6584b72f9b566354aca033baa1a5e44bc084dc134b56ada492",
+"size": 2689
 },
 "Words/βρέχει.md": {
 "sha256": "695c40ce7dd70e9dce425dacb7f878e115664b48bded21f76c3584a4b4a0febc",
@@ -1670,8 +1674,8 @@
 "size": 1341
 },
 "Words/γεια.md": {
-"sha256": "48333a296ed03efe3120a3d398373f97609a7889c57d6036d090dde6ee50e2a4",
-"size": 1992
+"sha256": "b2462be10e2a754148209fe5c426e8c6cf292c27ae8930f02227b064cb9bf49a",
+"size": 2249
 },
 "Words/γειτονιά.md": {
 "sha256": "027032d16c9dd59f995fb05369ef95097c24abb467a2f9213d67ebd5aee97d81",
@@ -3074,16 +3078,16 @@
 "size": 1075
 },
 "Words/καλημέρα.md": {
-"sha256": "04e0c68bedb551fe1294ba6ec4e73957f664873ce4375fca667fc84120a946ca",
-"size": 2136
+"sha256": "87cc5c3531f07a699d4423d5499b9f5c11942ccf34b764e26afa704cdbf3a034",
+"size": 2398
 },
 "Words/καληνύχτα.md": {
-"sha256": "d7e16fde9ce9208f8c2f7a5317a781bd1234fa1e3313ecd6f16dd576b3400e68",
-"size": 557
+"sha256": "78a59604adb4ddcb4a0fd8202a1a60ed4094a2fc1ad7a8611154e9831c256ed8",
+"size": 782
 },
 "Words/καλησπέρα.md": {
-"sha256": "432bf37bfb8f5feda43abbde6da7e56ab718c1bc86aa450012256dac617a630a",
-"size": 1008
+"sha256": "eef141cf4accff8dc7df97e2db3f3bfc3271911b5b874c001b90ab187dc9b1ad",
+"size": 1340
 },
 "Words/καλοκαίρι.md": {
 "sha256": "ee1137c05faa913801c0dcc0cc898429e2b54a6068cca94f6de9dfd58a2307ff",

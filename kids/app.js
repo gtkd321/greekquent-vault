@@ -7,6 +7,7 @@ const ICONS = {
   house: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/>',
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 14.6c2.6.2 4.4 1.9 5 5.1"/>',
+  list: '<path d="M9 6h11"/><path d="M9 12h11"/><path d="M9 18h11"/><circle cx="4.5" cy="6" r="1.3"/><circle cx="4.5" cy="12" r="1.3"/><circle cx="4.5" cy="18" r="1.3"/>',
   'more-horizontal': '<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>'
 };
 const icon = n => `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
@@ -77,14 +78,26 @@ function frame() {
     title.textContent = t || 'Greekquent';
     back.hidden = !ws.stack.length;
     document.title = (t && t !== 'Today' ? t + ' · ' : '') + 'Greekquent Kids';
+    if (G.navSync) G.navSync();
   };
   window.addEventListener('popstate', () => { G.app.workspace.back(); });
+  // Bottom bar: Today, Words, Class. More sits at the top right. Words and Class appear once they are unlocked;
+  // with only Today there is no bar at all.
   const nav = $('#gq-nav');
   for (const r of G.ribbon) {
-    const b = nav.createEl('button', { cls: 'gq-navbtn', attr: { 'aria-label': r.title } });
-    b.innerHTML = icon(r.icon) + `<span>${r.title === 'Look up a word' ? 'Look up' : r.title}</span>`;
-    b.onclick = e => r.cb(e);
+    const more = r.title === 'More';
+    const b = (more ? head : nav).createEl('button', { cls: more ? 'gq-headmore' : 'gq-navbtn', attr: { 'aria-label': r.title } });
+    b.innerHTML = icon(r.icon) + (more ? '' : `<span>${r.title === 'Look up a word' ? 'Look up' : r.title}</span>`);
+    b.onclick = e => r.cb(e); r.btn = b;
   }
+  G.navSync = () => {
+    let n = 0;
+    for (const r of G.ribbon) { if (!r.btn || r.title === 'More') continue; const off = r.el.classList.contains('gq-hide'); r.btn.hidden = off; if (r.el.dataset.tour) r.btn.dataset.tour = r.el.dataset.tour; if (!off) n++; }
+    document.body.classList.toggle('gq-nonav', n < 2); nav.hidden = n < 2;
+    const v = G.app.workspace.main.view, on = G.plugin && G.plugin.tabFor ? G.plugin.tabFor(v) : '';
+    for (const r of G.ribbon) if (r.btn && r.title !== 'More') { if (r.title === on) r.btn.setAttribute('aria-current', 'page'); else r.btn.removeAttribute('aria-current'); }
+  };
+  G.navSync();
   $('#gq-sheet-close').onclick = () => G.app.workspace.closeSheet();
   $('#gq-sheet-bg').onclick = () => G.app.workspace.closeSheet();
   // Links in notes: other notes open here; obsidian:// links go to the plugin; files open in a new tab.

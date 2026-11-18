@@ -140,3 +140,12 @@ details.callout[open] > summary .callout-fold::before { transform: rotate(45deg)
 .notice-container { position: fixed; z-index: 80; left: 50%; transform: translateX(-50%); bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 12px); width: min(440px, calc(100vw - 24px)); display: flex; flex-direction: column; gap: 6px; pointer-events: none; }
 .notice { pointer-events: auto; background: var(--text-normal); color: var(--background-primary); padding: 10px 14px; border-radius: var(--radius-m); box-shadow: 0 6px 20px rgba(0, 0, 0, .25); font-size: 15px; }
 .gq-hint { color: var(--text-muted); }
+
+/* 18t: tabs. More at the top right; the bar shows only once there are two tabs. */
+.gq-headmore { margin-left: auto; border: 0; background: transparent; min-height: 40px; min-width: 40px; padding: 0; display: grid; place-items: center; color: var(--text-muted); }
+.gq-headmore:hover { color: var(--text-normal); background: var(--background-modifier-hover); }
+body.gq-nonav #gq-main { bottom: env(safe-area-inset-bottom); }
+body.gq-nonav .notice-container { bottom: calc(env(safe-area-inset-bottom) + 12px); }
+.gq-navbtn[aria-current="page"] { color: var(--interactive-accent); font-weight: 650; }
+.gq-navbtn[hidden] { display: none; }
+#gq-nav[hidden] { display: none; }

@@ -555,3 +555,34 @@ button.gq-sayit-b.is-ok, button.gq-sayit-b.is-ok:disabled { background: #43a047;
 .gq-sayit-in { min-width: 220px; font-size: 16px; }
 @media (prefers-reduced-motion: reduce) { .gq-abc-card.is-no, button.gq-abc-tile.is-no, button.gq-sayit-b.is-live { animation: none; } }
 .gq-cv-pts { color: var(--text-accent); font-weight: 600; margin-top: 4px; }
+/* Letters: Sounds and Names tabs; letter names fill in when said */
+.gq-abc-tabs { gap: 6px; margin: 0 0 6px; }
+.gq-abc-tabs button.is-on { background: var(--interactive-accent); color: var(--text-on-accent); border-color: transparent; }
+.gq-abc-names { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 10px 0; }
+.gq-abc-nm { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 84px; padding: 8px 4px; border: 2px dashed var(--background-modifier-border); border-radius: 14px; cursor: pointer; user-select: none; -webkit-user-select: none; text-align: center; }
+.gq-abc-nl { font-size: 30px; font-weight: 600; line-height: 1.1; }
+.gq-abc-nn { font-size: 15px; color: var(--text-muted); min-height: 1.3em; }
+.gq-abc-nm.is-ok { border-style: solid; border-color: #43a047; background: #e8f5e9; cursor: default; }
+.gq-abc-nm.is-ok .gq-abc-nn { color: #1b5e20; font-weight: 600; }
+.theme-dark .gq-abc-nm.is-ok { background: rgba(67,160,71,.18); }
+.theme-dark .gq-abc-nm.is-ok .gq-abc-nn { color: #81c784; }
+.gq-abc-nctl { gap: 8px; align-items: center; }
+.gq-abc-nfb { min-height: 1.3em; }
+/* Class mode: dashboard tiles, the phrase cards and the small bar on every page */
+.gq-classdash .gq-classgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 10px 0 8px; }
+button.gq-classtile { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; min-height: 92px; padding: 12px 14px; border-radius: 16px; text-align: left; white-space: normal; height: auto; }
+.gq-classtile-t { font-size: 18px; font-weight: 650; line-height: 1.2; }
+.gq-classtile-s { font-size: 13px; opacity: .85; line-height: 1.25; }
+.gq-phr { justify-content: flex-start; gap: 8px; }
+button.gq-phr-row { display: block; width: 100%; text-align: left; padding: 10px 14px; border-radius: 14px; height: auto; white-space: normal; }
+.gq-phr-g { font-size: 20px; font-weight: 600; line-height: 1.3; }
+.gq-phr-e { font-size: 13px; color: var(--text-muted); line-height: 1.3; margin-top: 2px; }
+.gq-classbar { position: fixed; right: 10px; bottom: 76px; z-index: 30; display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--background-primary); border: 1px solid var(--background-modifier-border); box-shadow: 0 4px 14px rgba(0,0,0,.15); }
+.gq-web .gq-classbar { bottom: calc(var(--nav-h, 58px) + env(safe-area-inset-bottom) + 8px); }
+.gq-classbar button { min-height: 36px; padding: 4px 12px; border-radius: 999px; font-size: 14px; border: 0; background: transparent; }
+.gq-classbar button:hover { background: var(--background-modifier-hover); }
+.gq-classbar-x { color: var(--text-muted); }
+.gq-pop ~ .gq-classbar, body:has(.gq-pop) .gq-classbar { display: none; }
+.gq-vhelp details { margin: 6px 0; }
+.gq-vhelp summary { font-weight: 600; cursor: pointer; }
+.gq-vhelp ol { margin: 6px 0 4px; padding-left: 22px; }

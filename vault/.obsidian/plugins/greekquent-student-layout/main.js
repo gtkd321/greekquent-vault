@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19k';
+const VAULT_RELEASE = '2026-11-19m';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -69,11 +69,17 @@ const ttsFix = t => String(t).replace(/(^|[^\p{L}])([ΑΕΗΙΟΥΩΆΈΉΊΌΎ�
 // Speaking right after cancel() is dropped on some phones (iPhone, some Android), so wait a moment when something is still talking.
 // The utterance is kept in a variable so it is not cleaned up before it speaks.
 let sayU = null, sayVoice = null;
+const isGreekT = t => /[\u0370-\u03ff\u1f00-\u1fff]/.test(String(t));
 const greekVoice = () => { try { if (!sayVoice) sayVoice = (speechSynthesis.getVoices() || []).find(v => /^el/i.test(v.lang)) || null; } catch (e) {} return sayVoice; };
 // Greek voice off (this device): phones keep speaking in silent mode, because Android's ringer switch does not mute media.
 const gqQuiet = () => { try { return window.localStorage.getItem('gq-quiet') === '1'; } catch (e) { return false; } };
+// No Greek voice on this phone (common on Android with Samsung's engine, or Google's without Greek installed): the phone's
+// default voice then spells Greek out letter by letter. Stay quiet instead and show how to add a Greek voice, once per visit.
+// Only when the phone has listed its voices; an empty list just means they have not loaded yet.
+const noGreekVoice = () => { try { const v = speechSynthesis.getVoices() || []; return v.length > 0 && !v.some(x => /^el/i.test(x.lang)); } catch (e) { return false; } };
 const say = w => {
   const ss = window.speechSynthesis; if (!ss || !w || gqQuiet()) return;
+  if (noGreekVoice() && isGreekT(w)) { if (window.gqNoVoice) window.gqNoVoice(); return; }
   const u = new SpeechSynthesisUtterance(ttsFix(w)); u.lang = 'el-GR'; const v = greekVoice(); if (v) u.voice = v; sayU = u;
   const go = () => { try { ss.resume(); } catch (e) {} ss.speak(u); };
   if (ss.speaking || ss.pending) { ss.cancel(); setTimeout(go, 80); } else go();
@@ -177,8 +183,41 @@ const listenGreek = () => new Promise((res, rej) => {
 });
 // Kids start with the letters: each one's sound, a word that starts with it, and four sets of six. No two letters in a set share a sound.
 // [lower, upper, sound, like, word, English, syllable to say]
-const LETTERS = [["α", "Α", "a", "father", "άλογο", "horse", ""], ["ε", "Ε", "e", "egg", "ελέφαντας", "elephant", ""], ["ο", "Ο", "o", "octopus", "ομπρέλα", "umbrella", ""], ["μ", "Μ", "m", "moon", "μήλο", "apple", "μα"], ["π", "Π", "p", "pig", "πάπια", "duck", "πα"], ["τ", "Τ", "t", "top", "τυρί", "cheese", "τα"], ["ι", "Ι", "ee", "see", "ιππότης", "knight", ""], ["κ", "Κ", "k", "kite", "κότα", "hen", "κα"], ["λ", "Λ", "l", "lion", "λεμόνι", "lemon", "λα"], ["ν", "Ν", "n", "nose", "νερό", "water", "να"], ["σ", "Σ", "s", "sun", "σκύλος", "dog", "σα"], ["ρ", "Ρ", "r", "a quick tap of the tongue", "ρολόι", "clock", "ρα"], ["β", "Β", "v", "van", "βάρκα", "boat", "βα"], ["γ", "Γ", "gh", "a soft, breathy g", "γάτα", "cat", "γα"], ["δ", "Δ", "th", "this", "δέντρο", "tree", "δα"], ["φ", "Φ", "f", "fish", "φίδι", "snake", "φα"], ["χ", "Χ", "h", "a scratchy h, like clearing your throat", "χαρτί", "paper", "χα"], ["υ", "Υ", "ee", "see", "ύπνος", "sleep", ""], ["η", "Η", "ee", "see", "ήλιος", "sun", ""], ["ζ", "Ζ", "z", "zoo", "ζάχαρη", "sugar", "ζα"], ["θ", "Θ", "th", "thin", "θάλασσα", "sea", "θα"], ["ξ", "Ξ", "ks", "box", "ξύλο", "wood", "ξα"], ["ψ", "Ψ", "ps", "tops", "ψάρι", "fish", "ψα"], ["ω", "Ω", "o", "octopus", "ώρα", "time, hour", ""]].map(([l, u, s, h, w, en, syl]) => ({ l, u, s, h: h.includes(' ') ? h : 'like ' + h, w, en, say: syl ? syl + ', ' + w : w }));
-const LETTER_SETS = [0, 1, 2, 3].map(i => LETTERS.slice(i * 6, i * 6 + 6));
+const LETTERS = [["α", "Α", "a", "father", "άλογο", "horse", ""], ["ε", "Ε", "e", "egg", "ελέφαντας", "elephant", ""], ["ο", "Ο", "o", "octopus", "ομπρέλα", "umbrella", ""], ["μ", "Μ", "m", "moon", "μήλο", "apple", "μα"], ["π", "Π", "p", "pig", "πάπια", "duck", "πα"], ["τ", "Τ", "t", "top", "τυρί", "cheese", "τα"], ["ι", "Ι", "ee", "see", "ιππότης", "knight", ""], ["κ", "Κ", "k", "kite", "κότα", "hen", "κα"], ["λ", "Λ", "l", "lion", "λεμόνι", "lemon", "λα"], ["ν", "Ν", "n", "nose", "νερό", "water", "να"], ["σ", "Σ", "s", "sun", "σκύλος", "dog", "σα"], ["ρ", "Ρ", "r", "a quick tap of the tongue", "ρολόι", "clock", "ρα"], ["β", "Β", "v", "van", "βάρκα", "boat", "βα"], ["γ", "Γ", "gh", "a soft, breathy g", "γάτα", "cat", "γα"], ["δ", "Δ", "th", "this", "δέντρο", "tree", "δα"], ["φ", "Φ", "f", "fish", "φίδι", "snake", "φα"], ["χ", "Χ", "h", "a scratchy h, like clearing your throat", "χαρτί", "paper", "χα"], ["υ", "Υ", "ee", "see", "ύπνος", "sleep", ""], ["η", "Η", "ee", "see", "ήλιος", "sun", ""], ["ζ", "Ζ", "z", "zoo", "ζάχαρη", "sugar", "ζα"], ["θ", "Θ", "th", "thin", "θάλασσα", "sea", "θα"], ["ξ", "Ξ", "ks", "box", "ξύλο", "wood", "ξα"], ["ψ", "Ψ", "ps", "tops", "ψάρι", "fish", "ψα"], ["ω", "Ω", "o", "octopus", "ώρα", "time, hour", ""]].map(([l, u, s, h, w, en, syl]) => ({ l, u, s, h: h.includes(' ') ? h : 'like ' + h, w, en, syl, say: syl ? syl + ', ' + w : w }));
+const LETTER_SETS = [0, 1, 2, 3].map(i => LETTERS.slice(i * 6, i * 6 + 6)), LETTER_SETS_K = LETTER_SETS;
+// Adults get the same letters and sets with a word from the 1,500 for each one.
+const ADULT_W = { α: ['αγάπη', 'love'], ε: ['ελληνικά', 'Greek'], ο: ['όχι', 'no'], μ: ['μητέρα', 'mother'], π: ['παιδί', 'child'], τ: ['τώρα', 'now'], ι: ['ιδέα', 'idea'], κ: ['καφές', 'coffee'], λ: ['λεφτά', 'money'], ν: ['νερό', 'water'], σ: ['σπίτι', 'house'], ρ: ['ρούχα', 'clothes'], β: ['βιβλίο', 'book'], γ: ['γάλα', 'milk'], δ: ['δρόμος', 'street'], φ: ['φίλος', 'friend'], χ: ['χέρι', 'hand'], υ: ['ύπνος', 'sleep'], η: ['ήλιος', 'sun'], ζ: ['ζωή', 'life'], θ: ['θάλασσα', 'sea'], ξ: ['ξέρω', 'I know'], ψ: ['ψωμί', 'bread'], ω: ['ώρα', 'hour, time'] };
+const ADULT_SETS = LETTER_SETS.map(s => s.map(x => { const [w, en] = ADULT_W[x.l] || [x.w, x.en]; return { ...x, w, en, say: x.syl ? x.syl + ', ' + w : w }; }));
+// Letter names, in alphabet order, six at a time. Say a name and the phone (or the keyboard's microphone) fills in that letter.
+// [letter, name, other spellings a phone may write, English spellings]
+const LNAMES = [['α', 'άλφα', [], ['alpha', 'alfa']], ['β', 'βήτα', ['βίτα'], ['beta', 'vita']], ['γ', 'γάμμα', ['γάμα'], ['gamma', 'gama']], ['δ', 'δέλτα', [], ['delta']], ['ε', 'έψιλον', ['έψιλο'], ['epsilon', 'epsilo']], ['ζ', 'ζήτα', [], ['zeta', 'zita']],
+  ['η', 'ήτα', ['ίτα'], ['eta', 'ita']], ['θ', 'θήτα', [], ['theta', 'thita']], ['ι', 'γιώτα', ['ιώτα', 'γιότα'], ['iota', 'yota', 'giota']], ['κ', 'κάπα', ['κάππα'], ['kappa', 'kapa']], ['λ', 'λάμδα', ['λάμβδα', 'λάμντα'], ['lambda', 'lamda']], ['μ', 'μι', ['μυ'], ['mu', 'mi', 'me']],
+  ['ν', 'νι', ['νυ'], ['nu', 'ni', 'knee']], ['ξ', 'ξι', ['κσι'], ['xi', 'ksi']], ['ο', 'όμικρον', ['όμικρο'], ['omicron', 'omikron']], ['π', 'πι', [], ['pi', 'pee']], ['ρ', 'ρο', [], ['rho', 'ro']], ['σ', 'σίγμα', [], ['sigma']],
+  ['τ', 'ταυ', ['ταφ'], ['tau', 'taf']], ['υ', 'ύψιλον', ['ύψιλο'], ['upsilon', 'ypsilon', 'ipsilon']], ['φ', 'φι', [], ['phi', 'fi', 'fee']], ['χ', 'χι', [], ['chi', 'hi', 'khi']], ['ψ', 'ψι', [], ['psi']], ['ω', 'ωμέγα', [], ['omega']]]
+  .map(([l, n, alt, en]) => ({ l, u: l === 'σ' ? 'Σ' : l.toUpperCase(), n, alt, en }));
+const NAME_SETS = [0, 1, 2, 3].map(i => LNAMES.slice(i * 6, i * 6 + 6));
+// Spelled by sound, so a phone that writes βίτα for βήτα, or ταφ for ταυ, still counts.
+const phonG = t => foldG(t).replace(/αυ/g, 'αφ').replace(/ευ/g, 'εφ').replace(/ει|οι|υι|η|υ/g, 'ι').replace(/αι/g, 'ε').replace(/ω/g, 'ο').replace(/(.)\1/g, '$1').replace(/^γι(?=[αεο])/, 'ι');
+const latF = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z\s]/g, ' ').replace(/\s+/g, ' ').trim();
+// Which of these letters were named in what the phone heard (any of its guesses). A lone letter, like Β, counts too.
+const namesHeard = (set, alts) => {
+  const out = new Set();
+  for (const a of alts || []) {
+    const gw = foldG(a).split(' ').filter(Boolean), pw = gw.map(phonG), lw = latF(a).split(' ').filter(Boolean), raw = String(a).trim();
+    // A word counts for a letter when it is spelled (by sound) like its name. Off by one letter counts only when
+    // no other name is that close: βίτα, ζήτα and θήτα are one letter apart, so those must be exact.
+    for (const w of pw) {
+      const ex = LNAMES.filter(x => [x.n, ...x.alt].some(f => phonG(f) === w));
+      const nr = ex.length ? ex : LNAMES.filter(x => [x.n, ...x.alt].some(f => phonG(f).length >= 4 && near(w, phonG(f))));
+      if (nr.length === 1 || ex.length) for (const x of nr) if (set.includes(x)) out.add(x.l);
+    }
+    for (const x of set) {
+      if (lw.some(w => x.en.includes(w))) out.add(x.l);
+      else if (raw.length === 1 && foldG(raw) === foldG(x.l)) out.add(x.l);
+    }
+  }
+  return [...out];
+};
 const DESSERT = [["ο σούπερ ήρωας", "superhero", 1], ["ο Σπάιντερμαν", "Spider-Man", 1], ["η αράχνη", "spider", 0], ["ο ιστός", "web", 0], ["η κάπα", "cape", 0], ["η στολή", "costume, suit", 0], ["η υπερδύναμη", "superpower", 0], ["αόρατος", "invisible", 0], ["το ρομπότ", "robot", 1], ["ο δεινόσαυρος", "dinosaur", 1], ["ο δράκος", "dragon", 0], ["το φάντασμα", "ghost", 0], ["ο πειρατής", "pirate", 1], ["ο θησαυρός", "treasure", 0], ["ο πύραυλος", "rocket", 0], ["ο αστροναύτης", "astronaut", 1], ["ο εξωγήινος", "alien", 0], ["ο νίντζα", "ninja", 1], ["ο ιππότης", "knight", 0], ["το σπαθί", "sword", 0], ["η ασπίδα", "shield", 0], ["ο μονόκερος", "unicorn", 0], ["ο καρχαρίας", "shark", 0], ["το λιοντάρι", "lion", 0], ["ο ελέφαντας", "elephant", 1], ["η μαϊμού", "monkey", 0], ["το φίδι", "snake", 0], ["ο βάτραχος", "frog", 0], ["η πεταλούδα", "butterfly", 0], ["το παγωτό", "ice cream", 0], ["η καραμέλα", "candy", 1], ["η τούρτα", "birthday cake", 0], ["το μπαλόνι", "balloon", 1], ["το ποδήλατο", "bike", 0], ["το τρένο", "train", 1], ["το ελικόπτερο", "helicopter", 1], ["ο λουκουμάς", "honey doughnut", 0]];
 const DESSERT_FILE = 'My Work/My dessert words.md';
 // Momentum (φόρα): points for practice that builds memory, fading by 1/7 each day.
@@ -453,7 +492,7 @@ class AppView extends ItemView {
     let html = '';
     try { html = await this.app.vault.adapter.read(this.plugin.manifest.dir + '/apps/' + a.file); }
     catch (e) { c.createDiv({ cls: 'gq-hint', text: 'This one is still on its way. Tap More, then Update vault.' }); this.shown = ''; return; }
-    html = html.replace('<!--GQ_START-->', '<script>window.GQ_HASH=' + JSON.stringify(this.hash) + ';' + 'try{var ss=window.speechSynthesis,sp=ss.speak.bind(ss);ss.speak=function(u){var q=false;try{q=localStorage.getItem(\'gq-quiet\')===\'1\';}catch(e){}if(!q)sp(u);};}catch(e){}' + '</script>');
+    html = html.replace('<!--GQ_START-->', '<script>window.GQ_HASH=' + JSON.stringify(this.hash) + ';' + 'try{var ss=window.speechSynthesis,sp=ss.speak.bind(ss);ss.speak=function(u){var q=false;try{q=localStorage.getItem(\'gq-quiet\')===\'1\';}catch(e){}if(q)return;try{var vs=ss.getVoices()||[];if(vs.length&&!vs.some(function(v){return /^el/i.test(v.lang);})&&/[\\u0370-\\u03ff\\u1f00-\\u1fff]/.test(u.text||\'\')){parent.postMessage({gq:\'novoice\'},\'*\');return;}}catch(e){}sp(u);};}catch(e){}' + '</script>');
     const f = c.createEl('iframe', { cls: 'gq-appframe', attr: { title: a.title, allow: 'microphone; autoplay' } });
     f.srcdoc = html;
   }
@@ -1133,6 +1172,8 @@ class PairModal extends Modal {
 
 module.exports = class GreekquentStudentLayout extends Plugin {
   onload() {
+    window.gqNoVoice = () => this.voiceHelp(true);
+    try { speechSynthesis.getVoices(); speechSynthesis.addEventListener('voiceschanged', () => { sayVoice = null; }); } catch (e) {}
     this.busy = false; this.todayEls = new Set(); this.bars = new Set(); this.cardBoxes = new Set();
     document.body.classList.add('greekquent-student');
     this.registerView(WEB, leaf => new WordWebView(leaf, this));
@@ -1146,6 +1187,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // The in-vault games send results here instead of through an obsidian:// link.
     this.registerDomEvent(window, 'message', e => {
       const d = e.data; if (d && d.gq === 'said' && typeof d.w === 'string' && d.w) { this.moAdd('said', 'said:' + d.w.slice(0, 80)); return; }
+      if (d && d.gq === 'novoice') { this.voiceHelp(true); return; }
       if (d && d.gq === 'mo' && typeof d.w === 'string' && d.w) { this.moAdd('recall', d.w.split(',')[0].trim().replace(/^(ο|η|το|οι|τα) /, '').slice(0, 80)); return; }
       if (!d || d.gq !== 'obsidian' || typeof d.url !== 'string') return;
       try { const u = new URL(d.url); const p = {}; u.searchParams.forEach((v, k) => { p[k] = v; }); this.fromGame(p); } catch (err) {}
@@ -1214,6 +1256,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       setTimeout(() => this.fillBlankLookups().catch(() => {}), 4000);
       this.isTeacher = await this.app.vault.adapter.exists(TEACHER_MARK);
       this.isKids = !!(await this.kidsInfo()); document.body.classList.toggle('gq-kids', this.isKids);
+      setTimeout(() => this.classInit(), 1500);
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
       this.hideRibbon();
       try { this.edition = (JSON.parse(await this.app.vault.adapter.read(EDITION_MARK)) || {}).edition || 'intermediate'; } catch (e) { this.edition = 'intermediate'; }
@@ -1927,12 +1970,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addItem(i => i.setTitle('More on this page').setIcon('panel-right').onClick(() => this.showMore()));
     m.addItem(i => i.setTitle('Look up a word').setIcon('search').onClick(() => new LookupModal(this.app, this).open()));
     m.addItem(i => i.setTitle('Word web').setIcon('git-fork').onClick(() => this.openGraph()));
+    m.addItem(i => i.setTitle(this.classOn() ? 'Class mode: end' : 'Class mode: start').setIcon('users').onClick(() => this.setClass(!this.classOn())));
     m.addItem(i => i.setTitle('Ask about this note').setIcon('message-circle').onClick(() => this.ask()));
     m.addItem(i => i.setTitle('Send homework').setIcon('send').onClick(() => this.sendHomework()));
     m.addSeparator();
     m.addItem(i => i.setTitle('Share feedback').setIcon('message-square').onClick(() => this.feedback()));
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
     m.addItem(i => i.setTitle(gqQuiet() ? 'Greek voice: off (turn on)' : 'Greek voice: on (turn off)').setIcon(gqQuiet() ? 'volume-x' : 'volume-2').onClick(() => this.setQuiet(!gqQuiet())));
+    m.addItem(i => i.setTitle('Greek voice help').setIcon('help-circle').onClick(() => this.voiceHelp(false)));
     m.addItem(i => i.setTitle('Setting up').setIcon('help-circle').onClick(() => this.openNote(SETUP)));
     m.addItem(i => i.setTitle(this.tourLeft() ? 'Take the tour' : 'Take the tour again').setIcon('map').onClick(() => this.tourStart()));
     m.addItem(i => i.setTitle('Update vault').setIcon('refresh-cw').onClick(() => this.updateVault(false)));
@@ -2786,6 +2831,23 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (q) { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {} }
     new Notice(q ? 'Greek voice off on this device. Turn it back on in More.' : 'Greek voice on.');
   }
+  // How to add a Greek voice. auto: shown by itself when a Greek word could not be spoken, at most once per visit.
+  voiceHelp(auto) {
+    if (auto) { if (this.vhShown) return; this.vhShown = true; }
+    const ua = navigator.userAgent || '', android = /Android/i.test(ua), ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    const m = new Modal(this.app); m.titleEl.setText('Add a Greek voice');
+    const c = m.contentEl; c.addClass('gq-vhelp');
+    c.createEl('p', { text: noGreekVoice() ? 'This device has no Greek voice yet, so it would spell Greek words out letter by letter. The app stays quiet until one is added. It takes a minute and is free.' : 'If Greek words are read letter by letter, the device is using a voice for another language. Add a Greek voice:' });
+    const steps = (title, list, open) => { const d = c.createEl('details'); if (open) d.open = true; d.createEl('summary', { text: title }); const ol = d.createEl('ol'); for (const s of list) ol.createEl('li', { text: s }); };
+    steps('Android', ['Open Settings and search for Text-to-speech.', 'Tap Preferred engine and pick Speech Services by Google. (Samsung phones start with Samsung\'s engine, which may not have Greek.)', 'Tap the gear next to the engine, then Install voice data.', 'Pick Greek (Ελληνικά) and tap download.', 'Close Chrome or the app completely and open it again.', 'No Google engine? Install Speech Services by Google from the Play Store, then start again.'], android || !ios);
+    steps('iPhone or iPad', ['Open Settings, then Accessibility, then Spoken Content, then Voices.', 'Tap Greek and download a voice.', 'Close the app or Safari completely and open it again.'], ios);
+    steps('Computer', ['Windows: Settings, Time & language, Speech, Add voices, Greek.', 'Mac: System Settings, Accessibility, Spoken Content, System voice, Manage Voices, Greek.', 'Then reload this page.'], false);
+    const r = c.createDiv('gq-row'), fb = c.createDiv('gq-hint');
+    const tb = r.createEl('button', { text: 'Test the voice', cls: 'mod-cta' });
+    tb.onclick = () => { sayVoice = null; if (noGreekVoice()) { fb.setText('Still no Greek voice. After installing, close the app completely and open it again.'); return; } fb.setText('You should hear Καλημέρα.'); say('Καλημέρα'); };
+    const x = r.createEl('button', { text: 'Not now' }); x.onclick = () => m.close();
+    m.open();
+  }
   calmOn() { return this.calmNow !== undefined ? this.calmNow : this.progFm().calm === true; }
   applyCalm() { document.body.classList.toggle('gq-calm', this.calmOn()); }
   async setCalm(on) { this.calmNow = on; this.applyCalm(); const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (on) fm.calm = true; else delete fm.calm; }); this.moPaint(); this.paintMore(); }
@@ -2825,6 +2887,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const away = last && !(+days[today] > 0) ? Math.round((new Date(today + 'T12:00') - new Date(last + 'T12:00')) / 864e5) : 0;
     const steps = [], si = this.storyInfo, rev = ctx.rev || [];
     if (si && si.due && this.storyEl) steps.push({ label: `Story puzzle, part ${si.part}`, min: this.est('story', 2), go: () => this.focusCard(this.storyEl) });
+    const abcGo = { label: 'Alphabet, one set', min: 2, go: () => this.focusCard(this.abcEl) }, abcNew = !this.lettersDone().length && !this.namesDone().length;
+    if (this.abcEl && !this.doneToday('abc')) { if (abcNew) steps.unshift(abcGo); else steps.push(abcGo); }
     if (this.cbList && this.cbList.length && !this.doneToday('cb')) steps.push({ label: 'A comeback', min: 1, go: () => this.popComebacks(this.cbList.slice(0, 1)) });
     if (rev.length && this.revEl && !this.doneToday('rev')) { const n = Math.min(8, rev.length); steps.push({ label: `${n} review word${n === 1 ? '' : 's'}`, min: Math.max(1, Math.round(n * 12 / 60)), go: () => { this.markDone('rev'); this.focusCard(this.revEl); } }); }
     const head = c.createDiv('gq-thead'), line = c.createDiv('gq-next-line'), r = c.createDiv('gq-row'), s = steps[0];
@@ -2965,6 +3029,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (moFresh) this.moCard(box);
         // Comebacks bring back earlier parts of the story the student has finished.
         if (col.story_at) await this.comebackCard(box, beats, col, cal);
+        // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
+        this.abcEl = null; if (!this.abcAllDone()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
         if (!this.tabOn('class')) await this.classCard(box, wk, week);
         // Fluent in a Year is optional: its words show here only for students who turn it on.
         if (col.fiay) {
@@ -2997,6 +3063,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       await this.nextCard(box, { rev, fresh: moFresh });
       const foot = box.createDiv('gq-hint gq-tfoot');
       const mo = foot.createEl('button', { text: 'More: story, games, colors, tools ›', cls: 'gq-mini' }); mo.onclick = () => this.showMore();
+      if (this.abcAllDone()) { const ab = foot.createEl('button', { text: 'Alphabet', cls: 'gq-mini' }); ab.onclick = () => { ab.remove(); this.lettersCard(box); const k = box.lastElementChild; box.insertBefore(k, foot); k.scrollIntoView({ block: 'start', behavior: 'smooth' }); }; }
       if (!col.fiay && wk) { const fy = foot.createEl('button', { text: 'Doing Fluent in a Year? Show its words', cls: 'gq-mini' }); fy.onclick = () => this.setFiay(true); }
       if (this.updateReady && !this.updating) { const up = foot.createEl('button', { text: 'Install update', cls: 'gq-mini' }); up.onclick = () => this.updateVault(false); }
       // Slides are parked (deckify below) until they come back for specific moments, not all of Today.
@@ -3206,6 +3273,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     c.addEventListener('touchmove', e => { e.stopPropagation(); if (e.target && e.target.closest && e.target.closest('.gq-abc-tile')) e.preventDefault(); }, { passive: false });
     const draw = () => {
       c.empty(); clearTimeout(this.abcDemo);
+      // Two tabs: Sounds (drag each letter onto its sound) and Names (say άλφα, βήτα… and the letter fills in).
+      const mode = this.lsGet('abcmode', 'sounds');
+      const tabs = c.createDiv('gq-row gq-abc-tabs');
+      for (const [k, lab] of [['sounds', 'Sounds'], ['names', 'Names']]) { const b = tabs.createEl('button', { text: lab, cls: 'gq-mini' + (mode === k ? ' is-on' : ''), attr: { 'aria-pressed': String(mode === k) } }); b.onclick = () => { this.lsSet('abcmode', k); this.letterSet = 0; draw(); }; }
+      if (mode === 'names') { this.namesPane(c, draw); return; }
+      const LETTER_SETS = this.isKids ? LETTER_SETS_K : ADULT_SETS;
       const done = this.lettersDone(), all = LETTER_SETS.length;
       let n = this.letterSet; if (!n) { const i = LETTER_SETS.findIndex((x, k) => !done.includes(k + 1)); n = i < 0 ? 1 : i + 1; }
       const h = c.createDiv('gq-thead'); h.createEl('strong', { text: 'Letters and sounds' });
@@ -3267,7 +3340,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const f = await this.progressFile(); let list = [];
         await this.app.fileManager.processFrontMatter(f, fm => { list = Array.isArray(fm.letters) ? fm.letters.map(Number) : []; if (!list.includes(n)) list.push(n); list.sort(); fm.letters = list; });
         this.lettersNow = list; setTimeout(() => { this.lettersNow = null; }, 3000);
-        this.moAdd('did', 'letters:' + n, 2); this.tourHit('letters');
+        this.moAdd('did', 'letters:' + n, 2); this.tourHit('letters'); this.markDone('abc');
         demo.remove(); bank.style.display = 'none'; fin.empty(); fin.createDiv({ cls: 'gq-abc-yay', text: `Μπράβο. All ${set.length} letters in set ${n}.` });
         const fr = fin.createDiv('gq-row');
         const nx = LETTER_SETS.findIndex((x, k) => !list.includes(k + 1));
@@ -3311,6 +3384,80 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
     };
     return w;
+  }
+  // Letter names: the six letters of a set in alphabet order. Say one or more names and those letters fill in.
+  // Tap a letter to hear its name first (that one then counts as trying, 1, instead of remembering, like a word).
+  abcAllDone() { return this.lettersDone().length >= LETTER_SETS.length && this.namesDone().length >= NAME_SETS.length; }
+  namesDone() { const v = this.namesNow || this.progFm().letter_names; return Array.isArray(v) ? v.map(Number).filter(n => n >= 1 && n <= NAME_SETS.length) : []; }
+  namesPane(c, redraw) {
+    const done = this.namesDone(), all = NAME_SETS.length;
+    let n = this.letterSet; if (!n) { const i = NAME_SETS.findIndex((x, k) => !done.includes(k + 1)); n = i < 0 ? 1 : i + 1; }
+    const h = c.createDiv('gq-thead'); h.createEl('strong', { text: 'Letter names' });
+    h.createSpan({ cls: 'gq-hint', text: done.length >= all ? '  · all 24 names done' : `  · set ${n} of ${all}` });
+    c.createDiv({ cls: 'gq-hint', text: 'Say a letter\'s name, like άλφα or βήτα, and it fills in. You can say several at once. Tap a letter to hear its name.' });
+    const sets = c.createDiv('gq-row gq-abc-sets');
+    NAME_SETS.forEach((x, i) => { const b = sets.createEl('button', { cls: 'gq-mini' + (i + 1 === n ? ' is-on' : '') + (done.includes(i + 1) ? ' is-done' : ''), text: x.map(y => y.l).join(' '), attr: { lang: 'el', 'aria-label': `Names set ${i + 1}` + (done.includes(i + 1) ? ', done' : '') } }); b.onclick = () => { this.letterSet = i + 1; redraw(); }; });
+    const set = NAME_SETS[n - 1], heard = new Set(), got = new Set();
+    const grid = c.createDiv('gq-abc-names');
+    const tiles = new Map(set.map(x => {
+      const k = grid.createDiv({ cls: 'gq-abc-nm', attr: { role: 'button', tabindex: '0', 'aria-label': `Letter ${x.u} ${x.l}. Tap to hear its name.` } });
+      k.createDiv({ cls: 'gq-abc-nl', text: `${x.u} ${x.l}`, attr: { lang: 'el' } });
+      k.createDiv({ cls: 'gq-abc-nn', text: '?', attr: { lang: 'el' } });
+      const hear = () => { heard.add(x.l); say(x.n); };
+      k.onclick = hear; k.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hear(); } };
+      return [x.l, k];
+    }));
+    const fb = c.createDiv({ cls: 'gq-hint gq-abc-nfb' });
+    const fill = ls => {
+      const fresh = ls.filter(l => !got.has(l));
+      for (const l of fresh) {
+        const x = set.find(y => y.l === l), k = tiles.get(l); got.add(l);
+        k.addClass('is-ok'); k.querySelector('.gq-abc-nn').setText(x.n);
+        this.moAdd(heard.has(l) ? 'try' : 'recall', 'όνομα:' + l);
+      }
+      if (got.size >= set.length) finish();
+      return fresh;
+    };
+    const tell = (alts, fresh) => {
+      if (fresh.length) fb.setText(fresh.map(l => set.find(y => y.l === l).n).join(', ') + (got.size < set.length ? `. ${set.length - got.size} to go.` : '.'));
+      else fb.setText(alts && alts.length && alts[0] ? `Heard "${alts[0]}". Try again, or tap a letter to hear its name.` : 'Nothing heard. Try again, a little louder.');
+    };
+    const ctl = c.createDiv('gq-row gq-abc-nctl');
+    // The keyboard way: the keyboard's microphone (or typing άλφα, or alpha) fills letters in as you go.
+    const typed = () => {
+      if (ctl.querySelector('input')) { ctl.querySelector('input').focus(); return; }
+      const i = ctl.createEl('input', { cls: 'gq-sayit-in', attr: { type: 'text', lang: 'el', placeholder: 'Tap the mic on the keyboard, say a name', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': 'Letter names' } });
+      const chk = fin => { const v = i.value.trim(); if (!v) return; const f = fill(namesHeard(set, [v])); if (f.length) { tell([v], f); i.value = ''; } else if (fin) tell([v], f); };
+      i.oninput = () => chk(false); i.onchange = () => chk(true); i.onkeydown = e => { if (e.key === 'Enter') chk(true); };
+      i.focus();
+    };
+    if (SRec() && !this.lsGet('sroff', 0)) {
+      const b = ctl.createEl('button', { text: 'Say a name', cls: 'mod-cta gq-sayit-b', attr: { 'aria-label': 'Say a letter name out loud' } });
+      b.onclick = async () => {
+        if (b.hasClass('is-live')) return;
+        try { window.speechSynthesis && speechSynthesis.cancel(); } catch (e) {}
+        b.addClass('is-live'); b.setText('Listening…'); fb.setText('Say it now.');
+        try { const alts = await listenGreek(); b.removeClass('is-live'); b.setText('Say a name'); tell(alts, fill(namesHeard(set, alts))); }
+        catch (e) {
+          b.removeClass('is-live'); b.setText('Say a name');
+          if (e === 'no-speech' || e === 'aborted' || e === 'late') fb.setText('Nothing heard. Try again.');
+          else { this.lsSet('sroff', 1); b.remove(); typed(); if (e === 'not-allowed') fb.setText('The microphone is blocked for this site. Use the keyboard microphone here, or allow it in the browser settings.'); }
+        }
+      };
+      const k = ctl.createEl('button', { text: 'Use the keyboard', cls: 'gq-mini' }); k.onclick = () => { k.remove(); typed(); };
+    } else typed();
+    const fin = c.createDiv('gq-abc-fin');
+    const finish = async () => {
+      const f = await this.progressFile(); let list = [];
+      await this.app.fileManager.processFrontMatter(f, fm => { list = Array.isArray(fm.letter_names) ? fm.letter_names.map(Number) : []; if (!list.includes(n)) list.push(n); list.sort(); fm.letter_names = list; });
+      this.namesNow = list; setTimeout(() => { this.namesNow = null; }, 3000);
+      this.moAdd('did', 'names:' + n, 2); this.markDone('abc');
+      ctl.style.display = 'none'; fin.empty(); fin.createDiv({ cls: 'gq-abc-yay', text: `Μπράβο. All ${set.length} names in set ${n}.` });
+      const fr = fin.createDiv('gq-row'); const nx = NAME_SETS.findIndex((x, k) => !list.includes(k + 1));
+      if (nx >= 0) { const b = fr.createEl('button', { text: `Next: set ${nx + 1}`, cls: 'mod-cta' }); b.onclick = () => { this.letterSet = nx + 1; redraw(); }; }
+      const hb = fr.createEl('button', { text: 'Hear them in order', cls: 'gq-mini' }); hb.onclick = () => say(set.map(x => x.n).join(', '));
+      const a = fr.createEl('button', { text: 'Again', cls: 'gq-mini' }); a.onclick = () => redraw();
+    };
   }
   shuf(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
   // ---------- The tour: the fun first, the useful bits in between, on the real screens ----------
@@ -3481,6 +3628,96 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     ws.revealLeaf(leaf); ws.setActiveLeaf && ws.setActiveLeaf(leaf, { focus: true });
   }
   async openWords() { await this.tabReveal('words'); await this.openTab(WORDSV); }
+  // ---------- Class mode: Classroom Greek and this week's script one tap away during class ----------
+  // On for 2 hours (one class), on this device. The screen stays awake, the app opens on Class,
+  // and a small bar on every page jumps between the phrases and the script.
+  classOn() { return +this.lsGet('classmode', 0) > Date.now(); }
+  async setClass(on) {
+    this.lsSet('classmode', on ? Date.now() + 2 * 3600e3 : 0);
+    this.classWake(on); this.classBar();
+    if (on) { this.tourHit('class'); await this.openClass(); new Notice('Class mode on for 2 hours. The screen stays awake.'); }
+    else { new Notice('Class mode off.'); this.paintClass(); }
+  }
+  async classWake(on) {
+    try {
+      if (on && navigator.wakeLock && document.visibilityState === 'visible') { if (!this.wakeL) { this.wakeL = await navigator.wakeLock.request('screen'); this.wakeL.addEventListener('release', () => { this.wakeL = null; }); } }
+      else if (!on && this.wakeL) { await this.wakeL.release(); this.wakeL = null; }
+    } catch (e) {}
+  }
+  classInit() {
+    // A screen lock lapses when the app goes to the background; take it again on return, and end class mode when time is up.
+    this.registerDomEvent(document, 'visibilitychange', () => { if (document.visibilityState === 'visible') { this.classWake(this.classOn()); this.classBar(); } });
+    this.registerInterval(window.setInterval(() => { if (!this.classOn() && document.querySelector('.gq-classbar')) { this.classWake(false); this.classBar(); this.paintClass(); } }, 60e3));
+    if (this.classOn()) { this.classWake(true); this.classBar(); setTimeout(() => this.openClass(), 600); }
+  }
+  paintClass() { const v = this.app.workspace.getLeavesOfType(CLASSV)[0]; if (v && v.view && v.view.contentEl) this.renderClass(v.view.contentEl); }
+  classBar() {
+    let bar = document.querySelector('.gq-classbar');
+    if (!this.classOn()) { if (bar) bar.remove(); return; }
+    if (bar) return;
+    bar = document.body.createDiv({ cls: 'gq-classbar', attr: { role: 'toolbar', 'aria-label': 'Class mode' } });
+    const b = (t, fn, cls) => { const x = bar.createEl('button', { text: t, cls: cls || '' }); x.onclick = fn; return x; };
+    b('Phrases', () => this.popPhrases());
+    b('Script', () => this.openScript());
+    b('Class', () => this.openClass());
+    b('×', () => this.setClass(false), 'gq-classbar-x').setAttr('aria-label', 'End class mode');
+  }
+  // This week's lesson: the script students follow in class. No class this week: the next one.
+  async classLesson() {
+    if (this.isKids) { const info = await this.kidsInfo(), wk = info ? this.kidWeek(info) : null; return wk ? { n: wk.lesson, f: this.kidFile(wk.lesson), prev: wk.lesson > 1 ? this.kidFile(wk.lesson - 1) : null } : null; }
+    const now = new Date(); now.setHours(0, 0, 0, 0);
+    const dd = Math.floor((now - new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2])) / 864e5), week = dd < 0 ? 1 : Math.floor(dd / 7) + 1;
+    const wk = await this.weekNote(week); if (!wk) return null;
+    const n = Number(wk.fm.lesson) || Number(((await this.weekNote(week + 1)) || { fm: {} }).fm.lesson) || 0; if (!n) return null;
+    return { n, f: this.lessonPage(n), prev: n > 1 ? this.lessonPage(n - 1) : null, now: !!Number(wk.fm.lesson) };
+  }
+  async openScript() { const L = await this.classLesson(); if (L && L.f) this.openNote(L.f.path); else new Notice('No lesson script this week.'); }
+  // Classroom Greek as big tap-to-hear cards: your side, then the teacher's side. Kids get a short built-in set.
+  async classPhrases() {
+    const KID = [['Δεν κατάλαβα.', "I didn't understand."], ['Ξανά, παρακαλώ.', 'Again, please.'], ['Πιο αργά, παρακαλώ.', 'Slower, please.'], ['Ένα λεπτό…', 'One moment…'], ['Δεν ξέρω.', "I don't know."], ['Πώς λέμε «…» στα ελληνικά;', 'How do you say "…" in Greek?'], ['Μπορώ να πάω τουαλέτα;', 'Can I go to the bathroom?'], ['Τελείωσα!', 'I finished.']].map(([g, e]) => ({ g, e, x: '' }));
+    const f = this.app.vault.getAbstractFileByPath(EXTRAS + '11 Classroom Greek.md');
+    if (!f) return [{ title: 'Staying in Greek', rows: KID }];
+    const txt = await this.app.vault.cachedRead(f), out = [];
+    for (const sec of txt.split(/\n## /).slice(1)) {
+      const title = sec.split('\n')[0].replace(/:.*$/, '').trim(), m = sec.match(/```greekquent-say\n([\s\S]*?)```/); if (!m) continue;
+      const rows = m[1].split('\n').map(l => l.split('|').map(s => s.trim())).filter(a => a[0]).map(([g, e, x]) => ({ g, e: e || '', x: x || '' }));
+      if (rows.length) out.push({ title, rows });
+    }
+    return out.length ? out : [{ title: 'Staying in Greek', rows: KID }];
+  }
+  async popPhrases() {
+    const secs = await this.classPhrases();
+    this.pop('Classroom Greek', secs.map(s => ({ label: s.title, build: el => {
+      el.addClass('gq-phr'); el.createDiv({ cls: 'gq-hint', text: 'Tap a phrase to hear it. Do the gesture as you say it.' });
+      for (const p of s.rows) {
+        const r = el.createEl('button', { cls: 'gq-phr-row', attr: { lang: 'el' } });
+        r.createDiv({ cls: 'gq-phr-g', text: p.g }); r.createDiv({ cls: 'gq-phr-e', text: p.e + (p.x ? ' · ' + p.x : ''), attr: { lang: 'en' } });
+        r.onclick = () => say(p.g.replace(/«…»/g, ''));
+      }
+    } })));
+  }
+  // The dashboard at the top of Class.
+  async classDash(box) {
+    const c = box.createDiv('gq-tcard gq-classdash'), h = c.createDiv('gq-thead');
+    if (!this.classOn()) {
+      h.createEl('strong', { text: 'In class?' });
+      c.createDiv({ cls: 'gq-hint', text: 'Class mode puts Classroom Greek and this week\'s script one tap away, and keeps the screen awake. It turns off by itself after 2 hours.' });
+      const b = c.createDiv('gq-row').createEl('button', { text: 'Start class mode', cls: 'mod-cta' }); b.onclick = () => this.setClass(true);
+      return;
+    }
+    const L = await this.classLesson();
+    h.createEl('strong', { text: 'Class mode' }); h.createSpan({ cls: 'gq-hint', text: L ? `  · Lesson ${L.n}` : '' });
+    const g = c.createDiv('gq-classgrid');
+    const tile = (t, sub, fn, cta) => { const b = g.createEl('button', { cls: 'gq-classtile' + (cta ? ' mod-cta' : '') }); b.createDiv({ cls: 'gq-classtile-t', text: t }); if (sub) b.createDiv({ cls: 'gq-classtile-s', text: sub }); b.onclick = fn; return b; };
+    tile('Script', L && L.f ? L.f.basename.replace(/-(student|teacher)$/, '').replace(/^[LIK]\d+\s*/, '') : 'This week', () => this.openScript(), true);
+    tile('Classroom Greek', 'Tap to hear', () => this.popPhrases(), true);
+    if (L && L.f && !this.isKids) { const pairs = this.rallyPairs(await this.app.vault.cachedRead(L.f)); if (pairs.length) tile('Rally', `${pairs.length} pairs`, () => this.popRally(L.n, pairs)); }
+    if (L && L.prev) tile('Last week', L.prev.basename.replace(/-(student|teacher)$/, '').replace(/^[LIK]\d+\s*/, ''), () => this.openNote(L.prev.path));
+    const r = c.createDiv('gq-row');
+    if (this.app.vault.getAbstractFileByPath(EXTRAS + '11 Classroom Greek.md')) { const p = r.createEl('button', { text: 'Classroom Greek page', cls: 'gq-mini' }); p.onclick = () => this.openNote(EXTRAS + '11 Classroom Greek.md'); }
+    const lu = r.createEl('button', { text: 'Look up a word', cls: 'gq-mini' }); lu.onclick = () => new LookupModal(this.app, this).open();
+    const end = r.createEl('button', { text: 'End class mode', cls: 'gq-mini' }); end.onclick = () => this.setClass(false);
+  }
   async openClass() { await this.tabReveal('class'); await this.openTab(CLASSV); }
   // ---------- Words: find a word, then the list like a spreadsheet you color in ----------
   async renderWords(el) {
@@ -3544,6 +3781,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async renderClass(el) {
     el.empty(); el.addClass('gq-classv'); const box = el.createDiv('gq-today gq-class-in');
     box.createEl('h2', { text: 'Class' });
+    await this.classDash(box);
     if (this.isKids) {
       const info = await this.kidsInfo(), wk = info ? this.kidWeek(info) : null, f = wk ? this.kidFile(wk.lesson) : null;
       const c = box.createDiv('gq-tcard'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: wk ? `This week · Lesson ${wk.lesson}` : 'This week' });

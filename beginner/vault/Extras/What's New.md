@@ -2,6 +2,17 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19m · Class mode, and Greek words read letter by letter
+> - **Class mode.** On the Class tab, tap **Start class mode** (or More, then Class mode). Class then shows big buttons for this week's **Script** and **Classroom Greek**, where each phrase is a card you tap to hear. A small bar on every page jumps between Phrases, Script and Class. The screen stays awake, and it turns off by itself after 2 hours.
+> - **Greek read letter by letter?** That happens when a phone has no Greek voice, so it uses an English one. The app now stays quiet instead and shows how to add a free Greek voice. Find it any time under More, then Greek voice help.
+
+> [!tip]- 2026-11-19l · The alphabet: sounds and names
+> Today now has a **Letters** card from the first day, next to the story puzzle. Two tabs:
+> - **Sounds:** drag each letter onto the sound it makes. Each letter comes with a word from the 1,500 (kids keep their picture words).
+> - **Names:** say a letter's name, like άλφα, βήτα or γάμμα, and that letter fills in. You can say several at once. No microphone in the app? Tap **Use the keyboard** and use the keyboard's microphone, or type the name.
+>
+> Remembering a letter earns φόρα like a word, and each finished set earns 2. New students see it first under Next.
+
 > [!tip]- 2026-11-19k · Comebacks listen to you
 > Comebacks now have a **Say it** button, on Today and in Quiz me. Answer out loud in Greek and the phone checks you. When it hears your answer, the Greek shows, it counts as Had it and you get +2 φόρα for saying it. Close counts: about three words in four is enough on a long line. If your phone can't listen here, the button opens a box instead; tap the microphone on your keyboard and say it.
 

@@ -2,6 +2,15 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, late evening: steps, dances and a calmer start
+> - **Next** at the top of Today: one thing to do now, and about how long. After a few days away it asks for just one line.
+> - **Steps and dances:** every φόρα point is a step. 3 steps is a συρτός, 12 a καλαματιανός, then χασάπικο, τσάμικο and ζεϊμπέκικο. Dancers join your world, and dances collect. Sometimes a guest dance from another island shows up.
+> - **Your world grows sooner:** 3 green words for the first change, then 12, 26, 46, and further apart later.
+> - **Pick your moment:** "After coffee: today's line", with an optional daily calendar reminder.
+> - **Back to where you were** takes you to your last lesson section, game or Word web word.
+> - **Focus** in Today's side panel: Calm mode, Focus sound, and Walk mode for practicing hands-free on the move. See [[13 Focus tips]].
+> - **Make it stick:** one small idea a day for a red word. Reveal buttons wait a moment so you can guess out loud first.
+
 > [!info]- November 18, night: your world shows right away
 > - In Obsidian, picking a world or earning φόρα now updates the card you see straight away. Before, it could update a hidden copy of Today, so the world and the counter seemed stuck.
 

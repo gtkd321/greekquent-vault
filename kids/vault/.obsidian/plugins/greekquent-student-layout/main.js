@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18p';
+const VAULT_RELEASE = '2026-11-18q';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -338,7 +338,11 @@ class WordWebView extends ItemView {
       const d = this.chip.createDiv({ attr: { lang: 'el' } }); d.appendText(x.phrase); if (x.en) d.createSpan({ cls: 'gq-hint', text: '  (' + x.en + ')' });
       // The word first, then the phrase, so what you hear starts with what you see.
       const lab = this.label(m.k), same = wwFold(x.phrase) === wwFold(lab) || wwFold(x.phrase) === wwFold(lab.replace(/^(ο|η|το|οι|τα) /, ''));
-      if (same) d.remove(); say(same ? lab : lab + '. ' + x.phrase);
+      // Say the word on its own only when the phrase doesn't already contain it (εγώ → "Εγώ θέλω να πάω", not "εγώ. Εγώ θέλω…").
+      const bareF = wwFold(lab.replace(/^(ο|η|το|οι|τα) /, '')), inside = x.phrase.split(/[\s,.;!·?«»]+/).some(t => wwFold(t) === bareF);
+      // A changed form inside (μεγάλος → μεγάλο σπίτι) also plays just the phrase; otherwise the word leads into it (θέλω + να πάω).
+      const changed = !inside && !!wwForm(lab, x.phrase);
+      if (same) d.remove(); say(same || inside || changed ? x.phrase : lab + ' ' + x.phrase);
       const form = !same && (wwForm(lab, x.phrase) || (this.center && wwForm(this.label(this.center.k), x.phrase))); if (form) this.chip.createDiv({ cls: 'gq-hint', text: form });
       if (x.once) { const o = this.chip.createDiv({ cls: 'gq-hint' }); o.appendText('for one time: '); o.createSpan({ text: x.once, attr: { lang: 'el' } }); }
     }
@@ -1899,6 +1903,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       c.addClass('is-fresh'); const top = c.createDiv('gq-mo-top');
       const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πήρες φόρα;', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πήρες φόρα;');
       top.createDiv({ cls: 'gq-mo-n', text: '0', attr: { 'aria-label': 'Momentum 0' } });
+      this.worldDraw(c, 0, 0);
       c.createDiv({ cls: 'gq-hint', text: 'φόρα means momentum. Do the story puzzle to start your world.' });
       return;
     }

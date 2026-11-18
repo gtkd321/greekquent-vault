@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19b · A new world: Gyro
+> Pick Gyro in Change my world and build a γύρος, piece by piece: the spit and the fire, the cook, pita, tomato, onion, fries and τζατζίκι, the wrap in its paper, and at last your own souvlaki shop with a menu and a delivery scooter. Tap anything to hear its name. The web app also has a new address: gtkd321.github.io/frequent/greek/. Old links still work, and your progress comes with you.
+
 > [!tip]- 2026-11-19a · Tap the world to hear it
 > Tap anything in your world picture to hear its Greek name and see the English: the sun, clouds, moon and stars, the sea, every house, tree and olive, your pet and its toys, the dancers and the festival lights. The young olive grove now shows the soil, a watering can and a field fence.
 

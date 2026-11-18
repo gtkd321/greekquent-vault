@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18g';
+const VAULT_RELEASE = '2026-11-18h';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -202,6 +202,7 @@ class WordWebView extends ItemView {
     this.data.set(p, w); return w;
   }
   async partners(c) {
+    await this.plugin.loadVerbs();
     const w = await this.info(c); if (!w) return [];
     const groups = new Map();
     for (const x of w.pair) { if (!groups.has(x.cat)) groups.set(x.cat, []); groups.get(x.cat).push({ ...x }); }
@@ -213,7 +214,9 @@ class WordWebView extends ItemView {
     for (const x of out) {
       x.w = await this.info(x.k);
       if (!x.phrase && x.w) { const back = x.w.pair.find(p => p.k === c); if (back) { x.phrase = back.phrase; x.en = back.en; } }
-      if (x.phrase && w.t === 'v' && !fold(x.phrase).includes(stem)) x.phrase = name + ' ' + x.phrase;
+      // να + the form learners already know: μπορώ να δω becomes μπορώ να βλέπω (the one-time form is kept for the chip).
+      if (x.phrase) { const e = this.plugin.easyVerbs(x.phrase); if (e !== x.phrase) { x.once = x.phrase; x.phrase = e; } }
+      if (x.phrase && w.t === 'v' && !fold(x.phrase).includes(stem)) { x.phrase = name + ' ' + x.phrase; if (x.once) x.once = name + ' ' + x.once; }
     }
     return out.filter(x => x.w);
   }
@@ -314,7 +317,11 @@ class WordWebView extends ItemView {
     for (const o of this.nodes.values()) o.g.classList.toggle('is-dim', !near.has(o.k));
     const w = this.data.get(m.k) || {}, x = m.x0; this.chip.empty();
     this.chip.createEl('b', { text: this.label(m.k), attr: { lang: 'el' } }); this.chip.appendText(' · ' + (w.e || '') + (w.say ? ' · say it: ' + w.say : ''));
-    if (x && x.phrase && m !== this.center) { const d = this.chip.createDiv({ attr: { lang: 'el' } }); d.appendText(x.phrase); if (x.en) d.createSpan({ cls: 'gq-hint', text: '  (' + x.en + ')' }); say(x.phrase); }
+    if (x && x.phrase && m !== this.center) {
+      const d = this.chip.createDiv({ attr: { lang: 'el' } }); d.appendText(x.phrase); if (x.en) d.createSpan({ cls: 'gq-hint', text: '  (' + x.en + ')' }); say(x.phrase);
+      if (x.once) { const o = this.chip.createDiv({ cls: 'gq-hint' }); o.appendText('for one time: '); o.createSpan({ text: x.once, attr: { lang: 'el' } }); }
+    }
+
     else say(this.label(m.k));
     const others = [...near].filter(k => k !== m.k && k !== this.center.k).length;
     this.chip.createDiv({ cls: 'gq-hint', text: m === this.center ? `${this.nodes.size - 1} words go with it` : others ? `Also goes with ${others} of the words here` : 'Goes with the word in the middle' });
@@ -1771,6 +1778,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (w.en) li.appendText('  ' + w.en);
     }
   }
+  // Verb forms after να: the one-time form (δω) mapped to the form learners know (βλέπω). From Wiktionary data, in verbs.json.
+  loadVerbs() { if (!this.verbsP) this.verbsP = Promise.resolve().then(() => this.app.vault.adapter.read(this.manifest.dir + '/verbs.json')).then(t => { this.verbMap = JSON.parse(t); }).catch(() => { this.verbMap = {}; }); return this.verbsP; }
+  easyVerbs(s) { const M = this.verbMap || {}; return s.replace(/(^|\s)να (\S+?)([.,;!?…]?)(?=\s|$)/g, (all, a, w, p) => M[w] ? `${a}να ${M[w]}${p}` : all); }
   gamesNote() { return this.isKids ? 'Games.md' : GAMES; }
   // A word and the words it goes with (from its card), for a game round.
   async webWords(path) {

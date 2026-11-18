@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, late: Word web says μπορώ να βλέπω
+> - When you hold a word in the **Word web**, it now uses the verb form you already know after να: μπορώ να βλέπω (I can see). Before, it said βλέπω μπορώ να δω.
+> - The one-time form (μπορώ να δω) is shown in small letters under it, for when you are ready for it.
+
 > [!info]- November 18, night: Your level stays lit
 > - The **Beginner / Intermediate** switch keeps the level you picked lit in purple, on Today and on lesson pages.
 > - The top of Today now says which Greekquent you have (Greekquent Intermediate or Greekquent Beginner).

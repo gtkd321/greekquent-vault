@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-const VAULT_RELEASE = '2026-11-18u';
+const VAULT_RELEASE = '2026-11-18v';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -145,15 +145,20 @@ const heardIt = (target, alts) => {
   let tw = foldG(target).split(' ').filter(Boolean); const content = tw.filter(w => !SMALL_W.has(w)); if (content.length) tw = content;
   return (alts || []).some(a => { const hw = foldG(a).split(' ').filter(Boolean); const n = tw.filter(w => hw.some(h => near(w, h))).length; return tw.length <= 2 ? n === tw.length : n / tw.length >= 0.75; });
 };
+// Listening always ends: a hard stop after 7 seconds even when the phone never reports back (some phones and home-screen apps hang there).
+// A hang is reported as 'hang', and the caller switches that device to the keyboard microphone.
 const listenGreek = () => new Promise((res, rej) => {
   const R = SRec(); if (!R) { rej('none'); return; }
-  let r; try { r = new R(); } catch (e) { rej('none'); return; }
+  let r, out = null, over = false; try { r = new R(); } catch (e) { rej('none'); return; }
+  const end = (ok, v) => { if (over) return; over = true; clearTimeout(t1); clearTimeout(t2); r.onresult = r.onerror = r.onend = null; try { r.abort(); } catch (e) {} ok ? res(v) : rej(v); };
   r.lang = 'el-GR'; r.interimResults = false; r.maxAlternatives = 5; r.continuous = false;
-  let out = null; const t = setTimeout(() => { try { r.stop(); } catch (e) {} }, 7000);
-  r.onresult = e => { out = []; for (const x of e.results) for (const y of x) out.push(y.transcript); };
-  r.onerror = e => { clearTimeout(t); rej(e.error || 'error'); };
-  r.onend = () => { clearTimeout(t); res(out || []); };
-  try { r.start(); } catch (e) { clearTimeout(t); rej('busy'); }
+  const t1 = setTimeout(() => { try { r.stop(); } catch (e) {} }, 6000);
+  const t2 = setTimeout(() => end(false, out ? 'late' : 'hang'), 8000);
+  r.onresult = e => { out = []; for (const x of e.results) for (const y of x) out.push(y.transcript); end(true, out); };
+  r.onerror = e => end(false, e.error || 'error');
+  r.onend = () => end(true, out || []);
+  // Start a moment after any speaking stops, so the voice and the microphone don't fight over the audio.
+  setTimeout(() => { if (over) return; try { r.start(); } catch (e) { end(false, 'busy'); } }, 250);
 });
 // Kids start with the letters: each one's sound, a word that starts with it, and four sets of six. No two letters in a set share a sound.
 // [lower, upper, sound, like, word, English, syllable to say]
@@ -491,6 +496,8 @@ const WORLDS = {
     { name: 'First harvest', items: [['olives', 'οι ελιές'], ['basket', 'το καλάθι'], ['olives', 'το λιόδεντρο'], ['basket', 'το δίχτυ'], ['olives', 'η συγκομιδή'], ['donkey', 'το γαϊδουράκι']] },
     { name: 'The press', items: [['press', 'το λιοτρίβι'], ['olives', 'οι ελιές'], ['jar', 'το πιθάρι'], ['basket', 'το καλάθι'], ['jar', 'το λάδι'], ['donkey', 'το γαϊδουράκι']] },
     { name: 'The tasting', items: [['table', 'το τραπέζι'], ['bottle', 'το μπουκάλι'], ['olives', 'το λιόδεντρο'], ['bottle', 'το λάδι'], ['table', 'το ψωμί'], ['bottle', 'η γεύση']] }] },
+  // Dance: the easiest world. Every φόρα point is a step (not only green words), and the floor fills with the dances you learn.
+  dance: { name: 'Dance', eras: [{ name: 'Πανηγύρι', items: [] }] },
   pet: { name: 'Pet', eras: [
     { name: 'Little Φοράκι', items: [] }, { name: 'Φοράκι grows', items: [] }, { name: 'Φοράκι in a hat', items: [] }, { name: 'Φοράκι the great', items: [] }] },
 };
@@ -506,10 +513,25 @@ function worldStage(green, total) {
   const f = Math.max(0, Math.min(1, green / Math.max(1, total)));
   return { f, era: Math.floor((idx - 1) / 6), n: (idx - 1) % 6 + 1, idx, next: idx < W_STAGES ? worldNeed(idx, total) : 0 };
 }
-// Βήματα (steps): every φόρα point is also a step. Enough steps in a day and you dance; dances collect and stack (καλαματιανός x4).
-const DANCES = [[3, 'syrtos', 'ο συρτός'], [12, 'kalamatianos', 'ο καλαματιανός'], [20, 'hasapiko', 'το χασάπικο'], [30, 'tsamiko', 'το τσάμικο'], [40, 'zeibekiko', 'το ζεϊμπέκικο']];
+// Dance names, in the order you learn them. DANCE_PATH below has their real steps.
+const DANCES = [[0, 'syrtos', 'ο συρτός'], [0, 'kalamatianos', 'ο καλαματιανός'], [0, 'tsamiko', 'το τσάμικο'], [0, 'hasapiko', 'το χασάπικο'], [0, 'zeibekiko', 'το ζεϊμπέκικο']];
 // Now and then (about one day in four, after a first week) the καλαματιανός brings a guest dance from somewhere in Greece.
 const GUEST_DANCES = [['ikariotiko', 'το ικαριώτικο'], ['pentozali', 'η πεντοζάλη'], ['ballos', 'ο μπάλος'], ['hasaposerviko', 'το χασαποσέρβικο'], ['pontiako', 'το ποντιακό'], ['sousta', 'η σούστα'], ['tsakonikos', 'ο τσακώνικος']];
+// Learning a dance: every φόρα point is a step toward the dance you are learning, and a dance is learned after its real steps:
+// ο συρτός 6 (its walking steps), ο καλαματιανός 12, το τσάμικο 12, το χασάπικο 21, το ζεϊμπέκικο 9 (one 9/8 figure, made up as you go).
+// Points per step grow from 1 to 3 (1:1, 1:1, 2:1, 2:1, 3:1), so the first dances come within a day and later ones take longer.
+// After all five the round starts again at 3 points a step, and each dance you learn again stacks (καλαματιανός x2).
+// Total points: 6, 18, 42, 84, 111, then 180 more a round.
+const DANCE_PATH = [['syrtos', 6, 1], ['kalamatianos', 12, 1], ['tsamiko', 12, 2], ['hasapiko', 21, 2], ['zeibekiko', 9, 3]];
+function danceNow(total) {
+  let left = Math.max(0, Math.floor(+total || 0)), learned = 0;
+  for (let round = 0; round < 200; round++) for (let i = 0; i < DANCE_PATH.length; i++) {
+    const [k, n, r0] = DANCE_PATH[i], r = round ? 3 : r0, cost = n * r;
+    if (left < cost) return { k, n, r, steps: Math.floor(left / r), more: cost - left, learned, round };
+    left -= cost; learned++;
+  }
+  return { k: 'zeibekiko', n: 9, r: 3, steps: 9, more: 0, learned, round: 200 };
+}
 const DANCE_NAME = Object.fromEntries([...DANCES.map(d => [d[1], d[2]]), ...GUEST_DANCES]);
 const dayHash = t => { let h = 7; for (const ch of String(t)) h = (h * 31 + ch.charCodeAt(0)) % 100003; return h; };
 // Words that sound almost the same (η ώρα, η χώρα) are kept apart when they are new.
@@ -1903,7 +1925,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const obj = k => (fm[k] && typeof fm[k] === 'object' && !Array.isArray(fm[k])) ? fm[k] : {};
     const mem = this.moMem && Date.now() - this.moMem.t < 15000 ? this.moMem : null;
-    return { days: mem ? mem.days : obj('days'), got: obj('got'), up: obj('up'), met: obj('met'), dance: mem && mem.dance ? mem.dance : obj('dance'), firsts: mem && mem.firsts ? mem.firsts : obj('firsts') };
+    return { days: mem ? mem.days : obj('days'), got: obj('got'), up: obj('up'), met: obj('met'), dance: mem && mem.dance ? mem.dance : obj('dance'), steps: mem && mem.steps !== undefined ? +mem.steps : (fm.steps !== undefined && fm.steps !== null && Number.isFinite(+fm.steps) ? +fm.steps : Object.values(obj('days')).reduce((a, v) => a + (+v || 0), 0)), firsts: mem && mem.firsts ? mem.firsts : obj('firsts') };
   }
   // φόρα on a day = sum of each day's points x (6/7)^(days since).
   moScore(days, at) {
@@ -1944,15 +1966,18 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         // A new word explored in the Word web: 1, once per word, up to 5 a day.
         else if (kind === 'web') { const n = Object.values(fm.web).filter(d => d === today).length; if (!fm.web[key] && n < 5) { fm.web[key] = today; pts += 1; } }
       }
+      // Steps carry across days (fm.steps never resets). The first time, start from the points already in My momentum, quietly.
+      if (!Number.isFinite(+fm.steps) || fm.steps === null || fm.steps === '') fm.steps = Object.values(fm.days || {}).reduce((a, v) => a + (+v || 0), 0);
       const before = +fm.days[today] || 0, now = Math.min(MO_CAP, before + pts); gained = now - before;
       if (now) fm.days[today] = now;
       for (const d of Object.keys(fm.days)) if (gap(d) > 60) delete fm.days[d];
-      // Steps: crossing a dance's mark today adds that dance to the collection (once a day each) and dates the first time.
+      // Steps: finishing a dance's real steps adds it to the collection and dates the first time. A guest dance can still visit on a big day.
       for (const k of ['dance', 'firsts', 'danced']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
       const add = k => { if (fm.danced[k] === today) return; fm.danced[k] = today; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); };
-      for (const [th, k] of DANCES) if (now >= th) add(k);
+      const was = danceNow(fm.steps); fm.steps = (+fm.steps || 0) + gained; const is = danceNow(fm.steps);
+      for (let j = was.learned; j < is.learned; j++) { const k = DANCE_PATH[j % DANCE_PATH.length][0]; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); }
       if (now >= 12 && Object.keys(fm.days).length >= 7 && dayHash(today) % 4 === 0) add(GUEST_DANCES[dayHash(today + 'g') % GUEST_DANCES.length][0]);
-      this.moMem = { days: { ...fm.days }, dance: { ...fm.dance }, firsts: { ...fm.firsts }, t: Date.now() };
+      this.moMem = { days: { ...fm.days }, steps: fm.steps, dance: { ...fm.dance }, firsts: { ...fm.firsts }, t: Date.now() };
     });
     if (danced.length) this.danceAt = Date.now();
     if (gained) { this.moPaint(); this.moToast(gained, danced.length ? 'you danced ' + danced.join(' and ') : ''); }
@@ -1975,9 +2000,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const w = this.worldNow !== undefined ? this.worldNow : this.colors().world;
     if (!w || !WORLDS[w]) {
       const r = c.createDiv('gq-world-pick'); r.createSpan({ cls: 'gq-hint', text: 'Pick a world to grow: ' });
-      for (const k of ['village', 'grove', 'pet']) { const b = r.createEl('button', { text: WORLDS[k].name, cls: 'gq-mini' }); b.onclick = () => this.setWorld(k); }
+      for (const k of ['dance', 'village', 'grove', 'pet']) { const b = r.createEl('button', { text: WORLDS[k].name, cls: 'gq-mini' }); b.onclick = () => this.setWorld(k); }
       return;
     }
+    if (w === 'dance') { this.danceWorld(c, todayPts, score); return; }
     if (!this.words && !this.worldWait) { this.worldWait = true; this.wordIndex().then(() => this.moPaint()); }
     const total = this.words ? this.words.length : 1500, green = this.colors().green.length, st = worldStage(green, total), mood = worldMood(todayPts, score);
     const box = c.createDiv('gq-world'), cv = box.createEl('canvas', { cls: 'gq-world-cv', attr: { width: W_W, height: W_H, role: 'img', 'aria-label': `${WORLDS[w].eras[st.era].name}. ${MOODS[mood]}.` } });
@@ -2007,13 +2033,38 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     };
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
     // Today's dances step across the front of the world: two dancers, plus one for each dance done today.
-    const nd = DANCES.filter(d => todayPts >= d[0]).length, crew = nd ? Math.min(7, 2 + nd) : 0, long = Date.now() - (this.danceAt || 0) < 8000;
+    const nd = danceNow(this.moData().steps).learned, crew = nd ? Math.min(7, 2 + nd) : 0, long = Date.now() - (this.danceAt || 0) < 8000;
     const run = () => {
       cancelAnimationFrame(cv._raf); const t0 = performance.now(), dur = long && crew ? 6000 : 3000;
       const step = now => { const t = Math.min(1, (now - t0) / dur); worldPaint(ctx, w, st, mood, t); if (crew) drawDancers(ctx, crew, t * dur / 3000); if (t < 1 && cv.isConnected) cv._raf = requestAnimationFrame(step); };
       if (reduce) { worldPaint(ctx, w, st, mood, 1); if (crew) drawDancers(ctx, crew, 1); } else { step(t0); }
     };
     cv.onclick = () => { run(); speak(); };
+    run();
+  }
+  // The Dance world: a festival floor. One dancer for you, one more for each dance learned (up to 7).
+  // Under them, one mark for each step of the dance you are learning; tap and they dance the steps you have so far.
+  danceWorld(c, todayPts, score) {
+    const d = danceNow(this.moData().steps), mood = worldMood(todayPts, score), name = DANCE_NAME[d.k], crew = Math.min(7, 1 + d.learned);
+    const box = c.createDiv('gq-world'), cv = box.createEl('canvas', { cls: 'gq-world-cv', attr: { width: W_W, height: W_H, role: 'img', 'aria-label': `Πανηγύρι. Learning ${name}: step ${d.steps} of ${d.n}.` } });
+    const ctx = cv.getContext('2d'); if (!ctx) return; ctx.imageSmoothingEnabled = false;
+    const cap = box.createDiv({ cls: 'gq-hint gq-world-cap' }); cap.appendText('Learning ');
+    const nm = cap.createSpan({ cls: 'gq-say', text: name, attr: { lang: 'el' } }); nm.onclick = () => say(name);
+    cap.appendText(` · step ${d.steps} of ${d.n} · ${d.r === 1 ? 'every φόρα point is a step' : d.r + ' φόρα a step'} · ${d.more} more to learn it`);
+    if (d.learned) cap.appendText(` · ${d.learned} learned`);
+    const st = { era: 0, n: 0, idx: 1, f: 0 }, R = (x, y, ww, hh, col) => { ctx.fillStyle = col; ctx.fillRect(Math.round(x), Math.round(y), ww, hh); };
+    const marks = t => {
+      for (let x = 4; x < W_W; x += 10) R(x, 3 + (x % 20 ? 1 : 0), 2, 2, ['#ffd860', '#ff7a6b', '#8fd0ff'][(x / 10 | 0) % 3]);   // festival lights
+      const gap = Math.min(7, Math.floor((W_W - 8) / d.n)), x0 = Math.round((W_W - gap * d.n) / 2), lit = Math.round(d.steps * Math.min(1, t));
+      for (let i = 0; i < d.n; i++) R(x0 + i * gap, 52, gap - 2, 2, i < lit ? '#ffd860' : 'rgba(0,0,0,0.35)');
+    };
+    const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
+    const run = () => {
+      cancelAnimationFrame(cv._raf); const t0 = performance.now(), dur = Math.max(1200, d.steps * 420);
+      const frame = now => { const t = Math.min(1, (now - t0) / dur); worldPaint(ctx, 'dance', st, mood, 1); marks(t); drawDancers(ctx, crew, d.steps ? t * d.steps / 7 : 0); if (t < 1 && cv.isConnected) cv._raf = requestAnimationFrame(frame); };
+      if (reduce) { worldPaint(ctx, 'dance', st, mood, 1); marks(1); drawDancers(ctx, crew, 0); } else frame(t0);
+    };
+    cv.onclick = () => { run(); say(name); };
     run();
   }
   // The card at the top of Today. The same question the teacher asks in class.
@@ -2031,7 +2082,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πήρες φόρα;', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πήρες φόρα;');
       top.createDiv({ cls: 'gq-mo-n', text: '0', attr: { 'aria-label': 'Momentum 0' } });
       this.worldDraw(c, 0, 0);
-      c.createDiv({ cls: 'gq-hint', text: 'φόρα means momentum. Do the story puzzle to start your world. Every point is a step: 3 steps and you dance a συρτός.' });
+      c.createDiv({ cls: 'gq-hint', text: 'φόρα means momentum. Do the story puzzle to start your world. Every point is a step: 6 steps and you know ο συρτός.' });
       return;
     }
     c.removeClass('is-fresh');
@@ -2053,8 +2104,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       'Remembering a word on a later day earns the most.',
       'Everything else you finish adds a little: puzzles, sentences, songs, homework.',
       'A day off fades it a bit, so a little every day wins.',
-      'Every point is also a step (βήμα). 3, 12, 20, 30 and 40 steps in a day are dances you collect.']) ul.createEl('li', { text: t });
-    if (this.colors().world) { const li = ul.createEl('li'); li.appendText('Your world grows with green words and never shrinks. '); const ch = li.createEl('a', { text: 'Change my world', href: '#' }); ch.onclick = e => { e.preventDefault(); this.setWorld(''); }; }
+      'Every point is also a step (βήμα) toward the dance you are learning. Steps add up across days: ο συρτός has 6, ο καλαματιανός 12, and later dances take 2 or 3 points a step.']) ul.createEl('li', { text: t });
+    if (this.colors().world) { const li = ul.createEl('li'); li.appendText(this.colors().world === 'dance' ? 'Your dance floor grows with every point and never shrinks. ' : 'Your world grows with green words and never shrinks. '); const ch = li.createEl('a', { text: 'Change my world', href: '#' }); ch.onclick = e => { e.preventDefault(); this.setWorld(''); }; }
   }
   // ---------- Paper round: the app keeps the schedule, the paper cards do the work ----------
   // Red pile every day, yellow every other day, green on Sundays. A card with no color yet sits in the red pile.
@@ -2640,10 +2691,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   // Steps and dances on the φόρα card: how many steps today, the next dance, and the collection.
   stepsRow(c, todayPts) {
-    const nx = DANCES.find(d => todayPts < d[0]), row = c.createDiv('gq-hint gq-steps');
+    const d = danceNow(this.moData().steps), row = c.createDiv('gq-hint gq-steps');
     row.appendText(`Βήματα (steps) today: ${todayPts}`);
-    if (nx) { row.appendText(' · next: '); const n = row.createSpan({ cls: 'gq-say', text: nx[2], attr: { lang: 'el' } }); n.onclick = () => say(nx[2]); row.appendText(` in ${nx[0] - todayPts} more`); }
-    else row.appendText(' · every dance today. Μπράβο.');
+    const w = this.worldNow !== undefined ? this.worldNow : this.colors().world;
+    if (w !== 'dance') { row.appendText(' · learning '); const n = row.createSpan({ cls: 'gq-say', text: DANCE_NAME[d.k], attr: { lang: 'el' } }); n.onclick = () => say(DANCE_NAME[d.k]); row.appendText(`: step ${d.steps} of ${d.n}`); }
     const got = Object.entries(this.moData().dance || {}).filter(([k, v]) => DANCE_NAME[k] && +v > 0);
     if (!got.length) return;
     const order = [...DANCES.map(d => d[1]), ...GUEST_DANCES.map(d => d[0])]; got.sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0]));
@@ -3088,14 +3139,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     b.onclick = async () => {
       if (b.hasClass('is-live')) return;
       try { window.speechSynthesis && speechSynthesis.cancel(); } catch (e) {}
-      b.addClass('is-live'); b.setText('Listening…'); fb.setText('');
+      b.addClass('is-live'); b.setText('Listening…'); fb.setText('Say it now.');
       try {
         const alts = await listenGreek(); b.removeClass('is-live');
         if (heardIt(target, alts)) win();
         else { b.setText(label || 'Say it · +2'); fb.setText(alts.length ? ` Heard "${alts[0]}". Try again.` : ' Nothing heard. Try again, a little louder.'); }
       } catch (e) {
         b.removeClass('is-live'); b.setText(label || 'Say it · +2');
-        if (e === 'no-speech' || e === 'aborted') fb.setText(' Nothing heard. Try again.');
+        if (e === 'no-speech' || e === 'aborted' || e === 'late') fb.setText(' Nothing heard. Try again.');
         // Blocked or not working here (Obsidian on a computer blocks it): use the keyboard's microphone instead, from now on.
         else { this.lsSet('sroff', 1); typed(); if (e === 'not-allowed' && window.GQW) fb.setText(' The microphone is blocked for this site. A grown-up can allow it in the browser settings.'); }
       }

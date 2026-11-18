@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!info]- November 18, late night: learn a dance step by step, and a steadier Say it
+> - **Dances, step by step:** every φόρα point is a step toward the dance you are learning, and steps add up across days. ο συρτός has 6 steps, ο καλαματιανός 12, then το τσάμικο (12), το χασάπικο (21) and το ζεϊμπέκικο. The first two take 1 point a step, later ones 2 or 3. Dances you already collected stay.
+> - **New world: Dance.** The easiest world: every point counts, not only green words. A festival floor with a dancer for each dance you learn and a mark for each step. Tap it to watch the steps you have so far. To switch, open How φόρα works and tap Change my world.
+> - **Say it:** listening now always stops within 8 seconds. If your phone doesn't answer, the app switches to typing with the keyboard's microphone instead of waiting.
+
 > [!info]- November 18, night: say it out loud, and a clearer tour
 > - **Say it · +2:** next to Check in the story puzzle. Tap it and say the line in Greek. When your phone hears it right, you get 2 bonus φόρα (up to 8 times a day). If your phone can't listen in the app, a text box opens instead: tap the microphone on your keyboard and say it there.
 > - **Tour:** Next now skips steps you already did. A step you saw but didn't try turns yellow. Try it any time from its dot to turn it green and get its points.

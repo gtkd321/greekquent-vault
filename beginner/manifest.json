@@ -1,5 +1,5 @@
 {
-"release": "2026-11-18u",
+"release": "2026-11-18v",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -26,8 +26,8 @@
 "size": 51071
 },
 ".obsidian/plugins/greekquent-student-layout/apps/giagia.html": {
-"sha256": "3e0638b0be7f61ce71d451488532e5c51ef590f859061ba813b52de01a821889",
-"size": 145216
+"sha256": "24f783f033a52d4f244d823d531a15373049dcc5f05f7c6d1a86bce4138f4376",
+"size": 145843
 },
 ".obsidian/plugins/greekquent-student-layout/apps/storylines.html": {
 "sha256": "2a805ea6ec0e7311bb0cfd1c6f9d6a9948cc90fbedc6968cdc53dc282048b295",
@@ -38,11 +38,11 @@
 "size": 95488
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "1b1eccfb750ba2266192ca01c605b25b9809f73a73e51b3eadd26238b0853714",
-"size": 322776
+"sha256": "dd070f0c44548a013958c6566dea907a3811807dbf93895106e182aa3b1a3be0",
+"size": 328322
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "aeacfe0b990be77baef614599b15fb4dca19f4c02dbd0f9f7c3f90f7990a9bea",
+"sha256": "c4faedf38bf3c208a6c69643def6ba98c067b2dff1086db9f9c3846fa4e8f598",
 "size": 375
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -166,8 +166,8 @@
 "size": 2491
 },
 "Extras/What's New.md": {
-"sha256": "6ec59eeaaa71ec52608090eb7de8b6bd1fe1fe23ef1d7c5ade2109c000fbfe78",
-"size": 26030
+"sha256": "76c154ed9be95dd6cab865b39f1f09c0e28513a66f56d7830ba7abcb22201ffa",
+"size": 26923
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

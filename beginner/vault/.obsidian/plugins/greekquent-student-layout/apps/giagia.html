@@ -340,25 +340,36 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
   const SMALL = new Set(['ο', 'η', 'το', 'οι', 'τα', 'τον', 'την', 'ενασ', 'μια', 'ενα']);
   const near = (a, b) => { if (a === b) return true; if (Math.abs(a.length - b.length) > 1 || a.length < 4) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; };
   const heard = (target, alts) => { let tw = foldG(target).split(' ').filter(Boolean); const c = tw.filter(w => !SMALL.has(w)); if (c.length) tw = c; return alts.some(a => { const hw = foldG(a).split(' ').filter(Boolean); return tw.every(w => hw.some(h => near(w, h))); }); };
-  let srOff = false, bonusBank = 0;
+  let srOff = (() => { try { return localStorage.getItem('gq-sr-off') === '1'; } catch (e) { return false; } })(), bonusBank = 0;
   const sayTarget = w => w.L ? w.L.w : lemma(w.g);
+  // Listening always ends: a hard stop at 8 seconds even if the phone never reports back. A hang turns Say it off on this device.
+  let srLive = null;
+  const sayReset = () => { qSay.classList.remove('live'); if (!qSay.disabled) qSay.textContent = 'Say it · bonus'; };
   qSay.onclick = () => {
-    if (!qWord || qSay.disabled || !SRec) return; const w = qWord;
+    if (!qWord || qSay.disabled || !SRec || srLive) return; const w = qWord;
     try { speechSynthesis.cancel(); } catch (e) {}
     let r; try { r = new SRec(); } catch (e) { qSay.hidden = true; return; }
-    r.lang = 'el-GR'; r.maxAlternatives = 5; r.interimResults = false; let alts = [];
-    qSay.textContent = 'Listening…'; qSay.classList.add('live'); qSayFb.textContent = w.L ? `Say ${w.L.w}` : '';
-    const t = setTimeout(() => { try { r.stop(); } catch (e) {} }, 6000);
-    r.onresult = e => { for (const x of e.results) for (const y of x) alts.push(y.transcript); };
-    r.onerror = e => { clearTimeout(t); qSay.classList.remove('live'); qSay.textContent = 'Say it · bonus';
-      if (e.error === 'no-speech' || e.error === 'aborted') qSayFb.textContent = 'Nothing heard. Try again.';
-      else { srOff = true; qSay.hidden = true; qSayFb.textContent = ''; } };
-    r.onend = () => { clearTimeout(t); qSay.classList.remove('live'); if (qWord !== w) return;
-      if (heard(sayTarget(w), alts)) { qSay.textContent = 'Heard it'; qSay.disabled = true; qSayFb.textContent = 'Bonus: Γιαγιά waits 2 more seconds.'; bonusBank = 2; S.said = (S.said || 0) + 1; beep(988, .1);
-        if (window.parent !== window) try { window.parent.postMessage({ gq: 'said', w: w.L ? 'γράμμα:' + w.L.l : lemma(w.g) }, '*'); } catch (e) {} }
-      else if (qSay.textContent === 'Listening…') { qSay.textContent = 'Say it · bonus'; qSayFb.textContent = alts.length ? `Heard "${alts[0]}". Try again.` : 'Nothing heard. Try again.'; } };
-    try { r.start(); } catch (e) { clearTimeout(t); qSay.classList.remove('live'); qSay.textContent = 'Say it · bonus'; }
+    r.lang = 'el-GR'; r.maxAlternatives = 5; r.interimResults = false; let alts = null, over = false;
+    qSay.textContent = 'Listening…'; qSay.classList.add('live'); qSayFb.textContent = w.L ? `Say ${w.L.w}` : 'Say it now.';
+    const done = (kind, v) => {
+      if (over) return; over = true; srLive = null; clearTimeout(t1); clearTimeout(t2); r.onresult = r.onerror = r.onend = null; try { r.abort(); } catch (e) {}
+      sayReset(); if (qWord !== w) return;
+      if (kind === 'ok' && heard(sayTarget(w), v)) {
+        qSay.textContent = 'Heard it'; qSay.disabled = true; qSayFb.textContent = 'Bonus: Γιαγιά waits 2 more seconds.'; bonusBank = 2; S.said = (S.said || 0) + 1; beep(988, .1);
+        if (window.parent !== window) try { window.parent.postMessage({ gq: 'said', w: w.L ? 'γράμμα:' + w.L.l : lemma(w.g) }, '*'); } catch (e) {}
+      } else if (kind === 'ok') qSayFb.textContent = v.length ? `Heard "${v[0]}". Try again.` : 'Nothing heard. Try again.';
+      else if (v === 'no-speech' || v === 'aborted') qSayFb.textContent = 'Nothing heard. Try again.';
+      else { srOff = true; qSay.hidden = true; qSayFb.textContent = ''; try { localStorage.setItem('gq-sr-off', '1'); } catch (e) {} }
+    };
+    srLive = r;
+    const t1 = setTimeout(() => { try { r.stop(); } catch (e) {} }, 6000);
+    const t2 = setTimeout(() => done('err', 'hang'), 8000);
+    r.onresult = e => { alts = []; for (const x of e.results) for (const y of x) alts.push(y.transcript); done('ok', alts); };
+    r.onerror = e => done('err', e.error || 'error');
+    r.onend = () => done('ok', alts || []);
+    setTimeout(() => { if (over) return; try { r.start(); } catch (e) { done('err', 'busy'); } }, 250);
   };
+
   function openQuiz(n) {
     S.mode = 'quiz'; P.want = null; P.dir = null; clearPad();
     const w = n.w; qWord = w; qFb.textContent = ''; qOpts.innerHTML = ''; bonusBank = 0;

@@ -206,7 +206,7 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
   if (window.speechSynthesis) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
   function say(t) {
     if (muted || !window.speechSynthesis) return;
-    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(String(t).replace(/(^|[^\p{L}])([ΗΟ])(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase())); u.lang = 'el-GR'; if (elVoice) u.voice = elVoice; u.rate = .9; speechSynthesis.speak(u); } catch (e) {}
+    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(String(t).replace(/(^|[^\p{L}])([ΑΕΗΙΟΥΩΆΈΉΊΌΎΏ][βγδζθκλμνξπρστφχψς]{0,2})(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase()).replace(/^\s*([αεηιουωάέήίόύώ][βγδζθκλμνξπρστφχψς]{0,2})\s*$/u, '$1!')); u.lang = 'el-GR'; if (elVoice) u.voice = elVoice; u.rate = .9; speechSynthesis.speak(u); } catch (e) {}
   }
   function beep(f, d, type = 'sine', vol = .12) {
     if (muted) return;

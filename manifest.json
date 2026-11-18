@@ -1,5 +1,5 @@
 {
-"release": "2026-11-19c",
+"release": "2026-11-19d",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -14,31 +14,31 @@
 "size": 676
 },
 ".obsidian/plugins/greekquent-student-layout/apps/buzzer.html": {
-"sha256": "d4fdca9433ef1851e12f9473fae65b389a2cfeece0e73aac419801b412d8a0e6",
-"size": 129189
+"sha256": "e48dcc9a4b92d4b062c41a281e37685d830e194996f0aad5a430b37fe1679f73",
+"size": 129346
 },
 ".obsidian/plugins/greekquent-student-layout/apps/cousins.html": {
-"sha256": "5b3227530c5254ec5b78eac7f23830a73c4c7bd3f184fdd02d1074c9cd80eb65",
-"size": 51071
+"sha256": "d8c414d8f453e541d7d09c39311d0e1a228b384e046dbab547d4cbe7273b045d",
+"size": 51228
 },
 ".obsidian/plugins/greekquent-student-layout/apps/giagia.html": {
-"sha256": "fb03ea810d4fba27e8e36319dfe66610f686ba41d1b6206b69c51f653479318a",
-"size": 146169
+"sha256": "6fb91e2252e44def37f5aef00e9a3fc07335bc2476e5948e03f6c01d5e6aad4f",
+"size": 146339
 },
 ".obsidian/plugins/greekquent-student-layout/apps/storylines.html": {
-"sha256": "2a805ea6ec0e7311bb0cfd1c6f9d6a9948cc90fbedc6968cdc53dc282048b295",
-"size": 270102
+"sha256": "ad9ecc84bcfca2d89bd4e07ef28be07296f182f26c97a4f48bb7820e716cf000",
+"size": 270169
 },
 ".obsidian/plugins/greekquent-student-layout/lines.json": {
 "sha256": "32aa6eac014f88872617e47ed4b98fa6bf5acdb5ed2f14afaa5966fbf51fdd44",
 "size": 95488
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "be075c2fb37341a73e84a534234c19ade865e4429173787eeed4364fff4c5e57",
-"size": 346544
+"sha256": "88d71f041475268cb2fd71ad19dbb8b296d65e47f877cef3c9a7ffee51e47590",
+"size": 346858
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "15d96bdce97a163fbed02591d84db622c51d6f39ff2306fe3957f6f635abf8ac",
+"sha256": "805f9bba11d92cd2fbdc8c6418ec14800ec1ebe68636a5746e81b662a068066a",
 "size": 375
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -162,16 +162,16 @@
 "size": 528620
 },
 "Extras/Practice together.md": {
-"sha256": "69f017649dfaaef855f7ed04d3a9bd4a1fed5149ba7aa38f38b5bb085f57233f",
-"size": 600
+"sha256": "83a93b5959b8e9c02ed7e15c3528f0aa40351fbb1845068ac445b652dd2463eb",
+"size": 749
 },
 "Extras/Setting up.md": {
 "sha256": "4fafbd8380fea0bc8b0832f0e4892d668ef6cd52156ec3f7fcd31a7e68ebb318",
 "size": 2491
 },
 "Extras/What's New.md": {
-"sha256": "fe7651c8968b71ddcef990e054f164f53a1a73fa333e91dcbe271b2399afab12",
-"size": 30471
+"sha256": "35eb6365d48a1480fe0bba0b1f43477f63ab6d5e5679fd899025518c0c3a06e0",
+"size": 30830
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",

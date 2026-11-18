@@ -354,7 +354,7 @@ window.GQ_COUSINS=[["ιδέα", "idea", "idea", "Same word, same meaning.", 1, 1
     if ((!S.sound && !force) || !('speechSynthesis' in window)) return;
     try {
       speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
+      const u = new SpeechSynthesisUtterance(String(text).replace(/(^|[^\p{L}])([ΑΕΗΙΟΥΩΆΈΉΊΌΎΏ][βγδζθκλμνξπρστφχψς]{0,2})(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase()));
       u.lang = 'el-GR'; if (elVoice) u.voice = elVoice; u.rate = 0.85;
       speechSynthesis.speak(u);
     } catch (e) { /* speech not available */ }

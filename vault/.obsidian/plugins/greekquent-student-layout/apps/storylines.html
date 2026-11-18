@@ -322,7 +322,7 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
   // ---------- subtitles + speech ----------
   const norm = (w) => w.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[.,;!?;·«»()…:—–-]/g, '');
   // Speech engines read a capital Η or Ο on its own as a letter name ("ita", "omikron"). Articles get lowercased just for the voice.
-  const fixTTS = (t) => t.replace(/(^|[^\p{L}])([ΗΟ])(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase());
+  const fixTTS = (t) => t.replace(/(^|[^\p{L}])([ΑΕΗΙΟΥΩΆΈΉΊΌΎΏ][βγδζθκλμνξπρστφχψς]{0,2})(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase());
   window.GQ_fixTTS = fixTTS;
   let voice = null;
   function pickVoice() { const vs = window.speechSynthesis ? speechSynthesis.getVoices() : []; voice = vs.find((v) => /^el/i.test(v.lang)) || null; }

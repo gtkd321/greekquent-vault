@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19c';
+const VAULT_RELEASE = '2026-11-19d';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -63,8 +63,9 @@ const SCENE_DAYS = 300;
 const COLORS = [['red', "Don't have it"], ['yellow', 'Kind of'], ['green', 'Have it']];
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-// Voices read a capital Η or Ο standing alone as a letter name ("ita", "omikron"). It is always the article, so lowercase it for the voice only.
-const ttsFix = t => String(t).replace(/(^|[^\p{L}])([ΗΟ])(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase());
+// Voices read a capital vowel standing alone as a letter name ("κεφαλαίο άλφα", "ita", "omikron"). Alone it is a sound or a word
+// (Α! Ε; Η, Ο, Ω!). A short cry like Ωχ, Αχ or Ωπ is read letter by letter too. Lowercase these for the voice only: Α! is heard as "a!".
+const ttsFix = t => String(t).replace(/(^|[^\p{L}])([ΑΕΗΙΟΥΩΆΈΉΊΌΎΏ][βγδζθκλμνξπρστφχψς]{0,2})(?=[^\p{L}]|$)/gu, (m, a, b) => a + b.toLowerCase()).replace(/^\s*([αεηιουωάέήίόύώ][βγδζθκλμνξπρστφχψς]{0,2})\s*$/u, '$1!');
 // Speaking right after cancel() is dropped on some phones (iPhone, some Android), so wait a moment when something is still talking.
 // The utterance is kept in a variable so it is not cleaned up before it speaks.
 let sayU = null, sayVoice = null;

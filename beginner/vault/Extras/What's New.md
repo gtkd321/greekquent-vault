@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19j · Android: Words tab and full screen
+> Words is now always in the bottom bar, from the first day. Before, it appeared only after you colored your first word, so a new phone looked different. And if Chrome's Desktop site setting is on, which some Android phones and tablets do by default, the app used to look small with empty space around it. It now fills the screen either way.
+
 > [!tip]- 2026-11-19i · Greek voice off
 > On Android, the ringer switch silences calls and notifications but not the Greek voice. Now you can turn it off yourself: More, then **Greek voice: on (turn off)**. It stays off on this phone, games included, until you turn it back on the same way.
 

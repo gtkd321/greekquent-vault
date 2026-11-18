@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19i';
+const VAULT_RELEASE = '2026-11-19j';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3447,7 +3447,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   tourBye() { const left = this.tourLeft(); new Notice(left ? `Tour closed. ${left} step${left === 1 ? '' : 's'} still to try, any time: More, then Take the tour.` : 'Tour done. Θα τα πούμε.'); this.refreshToday(); }
   // ---------- Tabs: Today, Words, Class, More. Words and Class appear once there is something in them. ----------
-  tabOn(k) { const t = this.progFm().tabs; return (this.tabsNow || (Array.isArray(t) ? t : [])).includes(k); }
+  // Words is always there: it is the course itself, and a new phone should look like every other one.
+  tabOn(k) { if (k === 'words') return true; const t = this.progFm().tabs; return (this.tabsNow || (Array.isArray(t) ? t : [])).includes(k); }
   async tabReveal(k) {
     if (this.tabOn(k)) return; const t = this.progFm().tabs; this.tabsNow = [...new Set([...(this.tabsNow || (Array.isArray(t) ? t : [])), k])];
     const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.tabs = [...this.tabsNow]; });

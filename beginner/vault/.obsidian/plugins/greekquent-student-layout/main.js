@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zg';
+const VAULT_RELEASE = '2026-11-19zh';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -823,6 +823,31 @@ function footprint(parent, p, cls, size) {
   return g;
 }
 // The village square under the prints: warm stone, a few tiles, and the festival lights across the top.
+// The dancer in gray ASCII. Zeibekiko: arms out like wings, a spin (front, side, back, side) twice, down to slap the heel (*), then up.
+const ZEI = {
+  still: ['      o      ', '  ___/|\\___  ', '      |      ', '     / \\     ', '    /   \\    '],
+  front: ['      o      ', ' \\____|____/ ', '      |      ', '     / \\     ', '    /   |    '],
+  right: ['      o      ', '    --|--.   ', '      |      ', '      |\\     ', '      | \\    '],
+  back:  ['      @      ', ' \\____|____/ ', '      |      ', '     / \\     ', '    |   \\    '],
+  left:  ['      o      ', '   .--|--    ', '      |      ', '     /|      ', '    / |      '],
+  slap:  ['             ', '     o       ', '  __/|__     ', '     |  \\    ', '    /\\__/*   '],
+  up:    ['   \\  o  /   ', '    \\_|_/    ', '      |      ', '     / \\     ', '    /   \\    ']
+};
+const ZEI_SEQ = [['front', 150], ['right', 150], ['back', 150], ['left', 150], ['front', 150], ['right', 150], ['back', 150], ['left', 150], ['front', 260], ['slap', 650], ['up', 0]];
+// Draw the dancer, the floor and the steps in a <pre>. The steps row: # for a step you have, . for one still to come.
+const ZW = 27;
+function asciiPre(parent, cls) { return parent.createEl('pre', { cls: 'gq-ascii ' + (cls || ''), attr: { role: 'img' } }); }
+function asciiPose(pre, pose) {
+  let fig = pre.querySelector('.gq-ascii-fig'); if (!fig) { fig = createSpan('gq-ascii-fig'); pre.prepend(fig); }
+  const pad = ' '.repeat(Math.floor((ZW - 13) / 2));
+  fig.setText(ZEI[pose].map(l => pad + l).join('\n') + '\n' + '_'.repeat(ZW) + '\n');
+}
+function asciiSteps(pre, n, have, lit) {
+  const row = createSpan('gq-ascii-steps'), sp = n > 12 ? '' : ' ', w = n * (sp ? 2 : 1) - (sp ? 1 : 0), pad = ' '.repeat(Math.max(0, Math.floor((ZW - w) / 2)));
+  row.appendText(pad); const out = [];
+  for (let i = 0; i < n; i++) { const c = row.createSpan({ cls: i < lit ? 'is-on' : i < have ? 'is-on is-wait' : '', text: i < have ? '#' : '.' }); out.push(c); if (sp && i < n - 1) row.appendText(sp); }
+  pre.appendChild(row); return out;
+}
 function squareFloor(svg, W, H, night) {
   const id = 'gqsq' + Math.random().toString(36).slice(2, 7), d = svgA(svg, 'defs', {});
   const pt = svgA(d, 'pattern', { id, width: 28, height: 28, patternUnits: 'userSpaceOnUse' });
@@ -2573,28 +2598,27 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // in its real pattern. Each new step stamps its print, with a soft sound. Tap the square to walk the steps again.
   danceWorld(c, todayPts, score) {
     const d = danceNow(this.moData().steps), mood = worldMood(todayPts, score), name = DANCE_NAME[d.k];
-    const W = 320, H = 140, FS = d.n > 14 ? 0.95 : 1.5, prints = dancePrints(d.k, W, H, FS);
     const box = c.createDiv('gq-world gq-square');
-    const svg = svgA(box, 'svg', { viewBox: `0 0 ${W} ${H}`, class: 'gq-square-sv', role: 'img', 'aria-label': `Η πλατεία, the village square. Learning ${name}: step ${d.steps} of ${d.n}.` });
-    squareFloor(svg, W, H, mood === 0);
+    const pre = asciiPre(box); pre.setAttr('aria-label', `Η πλατεία, the village square. A dancer, still. Learning ${name}: step ${d.steps} of ${d.n}.`);
+    asciiPose(pre, 'still');
     const cap = box.createDiv({ cls: 'gq-hint gq-world-cap' }); cap.appendText('Learning ');
     const nm = cap.createSpan({ cls: 'gq-say', text: name, attr: { lang: 'el' } }); nm.onclick = () => say(name);
     cap.appendText(` · step ${d.steps} of ${d.n}`);
     if (d.learned) cap.appendText(` · ${d.learned} learned`);
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
-    // New steps since this card was last drawn get stamped; the rest are already there.
+    // New steps since this card was last drawn light up one by one; the rest are already there.
     const seen = this.stepSeen && this.stepSeen.k === d.k && this.stepSeen.learned === d.learned ? Math.min(this.stepSeen.n, d.steps) : d.steps;
     this.stepSeen = { k: d.k, learned: d.learned, n: d.steps };
-    const els = prints.map((p, i) => footprint(svg, p, i < seen ? 'is-done' : i === d.steps ? 'is-next' : i < d.steps ? 'is-done is-wait' : 'is-later', FS));
-    const stamp = (from, to, gap) => { for (let i = from; i < to; i++) setTimeout(() => { if (!svg.isConnected) return; els[i].classList.remove('is-wait'); if (!reduce) { els[i].classList.add('is-stamp'); } gqSound('step'); }, (i - from) * gap + 250); };
-    if (seen < d.steps) { if (reduce) els.forEach(e => e.classList.remove('is-wait')); stamp(seen, d.steps, 260); }
+    const els = asciiSteps(pre, d.n, d.steps, reduce ? d.steps : seen);
+    const stamp = (from, to, gap) => { for (let i = from; i < to; i++) setTimeout(() => { if (!pre.isConnected) return; els[i].classList.remove('is-wait'); els[i].classList.add('is-new'); gqSound('step'); }, (i - from) * gap + 250); };
+    if (seen < d.steps && !reduce) stamp(seen, d.steps, 260);
     const word = box.createDiv({ cls: 'gq-world-say', attr: { lang: 'el' } });
     worldTip(word);
-    svg.addEventListener('click', e => {
+    pre.addEventListener('click', e => {
       try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {}
-      const onPrint = e.target.closest && e.target.closest('.gq-print');
-      word.setAttribute('lang', 'el'); word.setText(onPrint ? `τα βήματα · steps · ${name}` : 'η πλατεία · village square'); say(onPrint ? name : 'η πλατεία');
-      if (!reduce && d.steps) { els.slice(0, d.steps).forEach(e => { e.classList.remove('is-stamp'); e.classList.add('is-wait'); }); stamp(0, d.steps, 200); }
+      const onStep = e.target.closest && e.target.closest('.gq-ascii-steps');
+      word.setAttribute('lang', 'el'); word.setText(onStep ? `τα βήματα · steps · ${name}` : 'ο χορευτής · the dancer'); say(onStep ? name : 'ο χορευτής');
+      if (!reduce && d.steps) { els.slice(0, d.steps).forEach(e => { e.classList.remove('is-new'); e.classList.add('is-wait'); }); stamp(0, d.steps, 200); }
     });
   }
   // The Gallery world: a hall of statues. The block in the middle loses chips with every φόρα point (instant feedback),
@@ -2695,18 +2719,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const k = big.k && DANCE_NAME[big.k] && (DANCE_FEET[big.k] !== undefined) ? big.k : big.k ? 'kalamatianos' : 'syrtos';
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
     const ov = document.body.createDiv({ cls: 'gq-fest' + (reduce ? ' is-still' : ''), attr: { role: 'dialog', 'aria-label': big.en, tabindex: '-1' } });
-    const W = 320, H = 200, svg = svgA(ov, 'svg', { viewBox: `0 0 ${W} ${H}`, class: 'gq-fest-sv', 'aria-hidden': 'true' });
-    squareFloor(svg, W, H, true);
-    const FS = k === 'hasapiko' ? 1.15 : 1.7, prints = dancePrints(k, W, H, FS), els = prints.map(p => footprint(svg, p, reduce ? 'is-lit' : 'is-later', FS));
-    // The dancer, from above: hair, shoulders in a red vest, arms out, a white handkerchief in the right hand.
-    const man = svgA(svg, 'g', { class: 'gq-fest-man' }), arms = svgA(man, 'g', { class: 'gq-fest-arms' });
-    svgA(arms, 'rect', { x: -22, y: -2.2, width: 44, height: 4.4, rx: 2.2, fill: '#f1c27d' });
-    svgA(arms, 'rect', { x: 19, y: -6, width: 9, height: 9, rx: 1.5, fill: '#ffffff', class: 'gq-fest-hk' });
-    svgA(man, 'ellipse', { cx: 0, cy: 0, rx: 15, ry: 8.5, fill: '#c0392b' });
-    svgA(man, 'ellipse', { cx: 0, cy: 1.5, rx: 6, ry: 7, fill: '#f6efe0' });
-    svgA(man, 'circle', { cx: 0, cy: -1, r: 6.8, fill: '#3a2a1a' });
-    const at = i => { const a = prints[i], b = prints[Math.max(0, i - 1)]; return [(a.x + b.x) / 2, (a.y + b.y) / 2 - 2]; };
-    const place = (x, y, r) => man.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${r.toFixed(0)}) scale(1.5)`);
+    ov.addClass('gq-fest-ascii'); const pre = asciiPre(ov, 'gq-ascii-big'); pre.setAttr('aria-hidden', 'true');
+    const n = Math.min(24, (DANCE_FEET[k] || []).length || 6); asciiPose(pre, reduce ? 'up' : 'still'); asciiSteps(pre, n, n, n);
     const txt = ov.createDiv('gq-fest-txt');
     txt.createDiv({ cls: 'gq-fest-gr', text: big.gr, attr: { lang: 'el' } });
     txt.createDiv({ cls: 'gq-fest-en', text: big.en });
@@ -2715,16 +2729,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const key = e => { if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') { e.preventDefault(); close(); } };
     ov.onclick = close; document.addEventListener('keydown', key, true); ov.focus();
     gqSound('sting'); setTimeout(() => { if (!done) say(big.gr); }, 700);
-    if (reduce) { const [x, y] = at(prints.length - 1); place(x, y, 0); setTimeout(close, 6000); return; }
-    const gap = Math.max(240, Math.min(420, 3600 / prints.length)), t0 = performance.now(), n = prints.length;
-    const frame = now => {
-      if (done || !ov.isConnected) return; const e = Math.max(0, (now - t0) / gap), i = Math.min(n - 1, Math.floor(e)), f = Math.min(1, e - Math.floor(e));
-      for (let j = 0; j <= i; j++) if (!els[j].classList.contains('is-lit')) { els[j].classList.remove('is-later'); els[j].classList.add('is-lit', 'is-stamp'); }
-      const [x1, y1] = at(i), [x2, y2] = at(Math.min(n - 1, i + 1)), x = x1 + (x2 - x1) * f, y = y1 + (y2 - y1) * f - Math.abs(Math.sin(e * Math.PI)) * 3;
-      place(x, y, Math.sin(e * Math.PI) * 14);
-      if (e < n + 2) raf = requestAnimationFrame(frame); else setTimeout(close, 1800);
-    };
-    raf = requestAnimationFrame(frame);
+    if (!reduce) txt.style.visibility = 'hidden';
+    if (reduce) { setTimeout(close, 6000); return; }
+    // A still beat, then the spin: each pose for its time, the slap with a step sound, and the words when the arms go up.
+    let t = 700; for (const [pose, ms] of ZEI_SEQ) { setTimeout(() => { if (done || !ov.isConnected) return; asciiPose(pre, pose); if (pose === 'slap') gqSound('step'); if (pose === 'up') { pre.addClass('is-up'); txt.style.visibility = ''; } }, t); t += ms; }
+    setTimeout(close, t + 5200);
   }
   // The card at the top of Today. The same question the teacher asks in class.
   moCard(box) {
@@ -4099,6 +4108,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const box = createDiv('gq-today gq-kids-today'), col = this.colors(), wk = this.kidWeek(info);
     const f = this.kidFile(wk.lesson);
     const now = new Date();
+    box.createDiv({ cls: 'gq-edition', text: 'Greekquent Kids' });
     box.createEl('h2', { text: `Today · ${now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}` });
     if (!col.setup_seen) {
       const s = box.createDiv('gq-hint gq-knew'); s.createSpan({ text: 'Grown-ups: ' });

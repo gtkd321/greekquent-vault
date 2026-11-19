@@ -779,3 +779,21 @@ body.gq-calm .gq-kcard.gq-kin, body.gq-calm .gq-knext.gq-pulse { animation: none
 .gq-cp-l { min-width: 4.6em; font-size: 0.9em; color: var(--text-muted); }
 .gq-cp-row .gq-mini { min-width: 44px; min-height: 40px; }
 .gq-cp-more { margin-top: 10px; }
+
+/* The Dance world in gray ASCII on black: a still dancer, the floor, and the steps (# you have, . to come) */
+.gq-ascii { margin: 0; padding: 14px 8px 12px; background: #000; color: #9a9a9a; border-radius: 10px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Roboto Mono", "Droid Sans Mono", monospace; font-size: 13px; line-height: 1.25; text-align: center; white-space: pre; overflow: hidden; cursor: pointer; user-select: none; -webkit-user-select: none; }
+
+.gq-ascii .gq-ascii-steps { color: #4a4a4a; letter-spacing: .05em; }
+.gq-ascii .gq-ascii-steps .is-on { color: #b5b5b5; }
+.gq-ascii .gq-ascii-steps .is-wait { color: #4a4a4a; }
+.gq-ascii .gq-ascii-steps .is-new { color: #ffffff; animation: gq-asc-new .6s ease-out; }
+@keyframes gq-asc-new { from { text-shadow: 0 0 8px #fff; } to { text-shadow: none; } }
+.gq-fest.gq-fest-ascii { background: #000; }
+.gq-ascii-big { font-size: clamp(15px, 4.6vw, 26px); background: transparent; padding: 0; cursor: inherit; }
+.gq-ascii-big.is-up .gq-ascii-fig { color: #e6e6e6; }
+body.gq-calm .gq-ascii .is-new { animation: none; }
+.gq-world.gq-square:has(.gq-ascii) { background: transparent; padding: 0; border: 0; }
+pre.gq-ascii { background: #000 !important; color: #9a9a9a !important; }
+.gq-ascii .gq-ascii-fig, .gq-ascii .gq-ascii-steps { display: block; width: 27ch; margin: 0 auto; text-align: left; color: #9a9a9a; }
+.gq-ascii .gq-ascii-steps { color: #4a4a4a; }
+.gq-ascii-big.is-up .gq-ascii-fig { color: #e6e6e6; }

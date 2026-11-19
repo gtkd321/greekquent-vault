@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!tip] The dancer (2026-11-19zh)
+> - The Dance world is gray ASCII on black: a still dancer, the floor, and your steps (# you have, . to come).
+> - Learn a dance and the dancer does a short ζεϊμπέκικο spin, slaps the heel, and throws the arms up. Calm mode shows the last pose, still.
+> - New app icon: a pixel Venus de Milo. To see it on your home screen, remove the old icon and add the app again.
+
 > [!tip] Card practice (2026-11-19zg)
 > - Paper round is now **Card practice**. Did 5, 10 or 20 cards? Tap how many cards and how many minutes, then **Log it**. 1 φόρα for every 5 cards and every 5 minutes, up to 10 a day. Log as often as you like.
 > - **Made new cards? Add the words**: type or say them all at once, no commas needed.

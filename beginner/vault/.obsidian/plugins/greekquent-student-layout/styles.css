@@ -851,3 +851,7 @@ body.gq-calm .gq-kcard.gq-khint, body.gq-calm .gq-kstack.gq-pulse .gq-kcard.is-t
 .gq-another { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--background-modifier-border); text-align: center; }
 .gq-another a { display: inline-block; min-height: 44px; line-height: 44px; padding: 0 16px; font-weight: 600; text-decoration: none; }
 .gq-kedge { display: none !important; }
+
+/* 2.20.75: letter practice can be turned off from its card */
+.gq-abc-off { margin-top: 10px; text-align: right; }
+.gq-abc-off a { font-size: .85em; }

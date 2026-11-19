@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zq';
+const VAULT_RELEASE = '2026-11-19zr';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -4088,7 +4088,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         // Spaced review brings back earlier story lines and red, yellow and old green words.
         await this.comebackCard(box, beats, col, cal);
         // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
-        this.abcEl = null; if (!this.abcAllDone()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
+        this.abcEl = null; if (!this.abcAllDone() && !this.abcOff()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
         if (!this.tabOn('class')) await this.classCard(box, wkCal, week);
         // Fluent in a Year is optional: its words show here only for students who turn it on.
         if (col.fiay) {
@@ -4124,7 +4124,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       this.cardStack(box, false);
       const foot = (box.querySelector('.gq-kdone') || box).createDiv('gq-hint gq-tfoot');
       const mo = foot.createEl('button', { text: 'More: story, games, colors, tools ›', cls: 'gq-mini' }); mo.onclick = () => this.showMore();
-      if (this.abcAllDone()) { const ab = foot.createEl('button', { text: 'Alphabet', cls: 'gq-mini' }); ab.onclick = () => { ab.remove(); this.lettersCard(box); const k = box.lastElementChild; box.appendChild(k); k.scrollIntoView({ block: 'start', behavior: 'smooth' }); }; }
+      if (this.abcOff()) { const ab = foot.createEl('button', { text: 'Letter practice', cls: 'gq-mini' }); ab.onclick = () => this.setAbcOff(false); }
+      else if (this.abcAllDone()) { const ab = foot.createEl('button', { text: 'Alphabet', cls: 'gq-mini' }); ab.onclick = () => { ab.remove(); this.lettersCard(box); const k = box.lastElementChild; box.appendChild(k); k.scrollIntoView({ block: 'start', behavior: 'smooth' }); }; }
       if (this.updateReady && !this.updating) { const up = foot.createEl('button', { text: 'Install update', cls: 'gq-mini' }); up.onclick = () => this.updateVault(false); }
       // Slides are parked (deckify below) until they come back for specific moments, not all of Today.
       if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.paintMore(); this.tabsSync(); this.tourShow(); }
@@ -4220,7 +4221,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Starting out: the song, the letters and φόρα only, until the first letter set is done (or a grown-up opens the rest).
     const lDone = this.lettersDone(), simple = false;
     this.kidSimpleOn = simple;
-    if (lDone.length < LETTER_SETS.length) this.lettersCard(box);
+    if (lDone.length < LETTER_SETS.length && !this.abcOff()) this.lettersCard(box);
     if (simple) {
       const c = box.createDiv('gq-tcard gq-kid gq-kidrest');
       c.createDiv({ cls: 'gq-hint', text: 'After the first letters, the rest of today opens: the lesson game, the story puzzle and this week\'s words.' });
@@ -4303,7 +4304,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     tool('Play Γιαγιά', () => this.openApp('giagia', '#k=' + wk.lesson), 'mod-cta'); tc.lastElementChild.dataset.tour = 'giagia';
     tool('All lessons', () => this.openNote('Lessons.md'));
     tool('Look up a word', () => new LookupModal(this.app, this).open());
-    if (lDone.length >= LETTER_SETS.length) this.lettersCard(box);
+    if (lDone.length >= LETTER_SETS.length && !this.abcOff()) this.lettersCard(box);
     this.cardStack(box, true);
     await this.kidFoot(box, el, tok, col, wk);
   }
@@ -4374,6 +4375,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const wn = foot.createEl('a', { text: "What's new", href: '#' }); wn.onclick = e => { e.preventDefault(); this.openNote(WHATS_NEW); };
     foot.appendText(` · vault ${rel} · `);
     if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
+    if (this.abcOff()) { const lp = foot.createEl('a', { text: 'Letter practice', href: '#' }); lp.onclick = e => { e.preventDefault(); this.setAbcOff(false); }; foot.appendText(' · '); }
     const gu = foot.createEl('a', { text: 'For grown-ups', href: '#' }); gu.onclick = e => { e.preventDefault(); this.openNote(SETUP); };
     // Slides parked here too: the kids Today is a plain list of cards.
     if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.tabsSync(); this.cornerSync(); this.kidLesson = wk.lesson; if (col.setup_seen) { if (this.tourState().at === undefined) this.tourState().at = 0; this.tourShow(); } }
@@ -4389,7 +4391,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const stopT = e => { if (e.target && e.target.closest && e.target.closest('.gq-abc-tile, .gq-abc-card, button')) e.stopPropagation(); };
     for (const ev of ['touchstart', 'touchend', 'pointerdown', 'pointermove', 'pointerup']) c.addEventListener(ev, stopT, { passive: true });
     c.addEventListener('touchmove', e => { e.stopPropagation(); if (e.target && e.target.closest && e.target.closest('.gq-abc-tile')) e.preventDefault(); }, { passive: false });
-    const draw = () => {
+    const draw1 = () => {
       c.empty(); clearTimeout(this.abcDemo);
       // Two tabs: Sounds (drag each letter onto its sound) and Names (say άλφα, βήτα… and the letter fills in).
       const mode = this.lsGet('abcmode', 'sounds');
@@ -4469,8 +4471,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       };
       if (done.length >= all) { const g = r.createEl('button', { text: 'Play Γιαγιά with all the letters', cls: 'gq-mini' }); g.onclick = () => this.openApp('giagia', '#L=all'); }
     };
+    // Letter practice is for the first weeks: a quiet link turns it off (the foot of Today brings it back).
+    const draw = () => { draw1(); const o = c.createDiv('gq-abc-off'); const a = o.createEl('a', { text: 'Turn off letter practice', href: '#', cls: 'gq-hint' }); a.onclick = e => { e.preventDefault(); this.setAbcOff(true); }; };
     draw();
   }
+  abcOff() { return !!this.lsGet('abcoff', 0); }
+  setAbcOff(v) { this.lsSet('abcoff', v ? 1 : 0); new Notice(v ? 'Letter practice is off. Letter practice at the bottom of Today turns it back on.' : 'Letter practice is back on Today.'); this.stackPick = null; this.refreshToday(); }
   // A "Say it" button: listen, then +2 φόρα when the phone hears the target. key keeps it to once a day.
   // onWin (optional): what the screen does once the phone hears it right, e.g. fill in the story puzzle.
   // other (optional): the lines around yours. Saying those instead of your line gets a hint, not a plain Try again.
@@ -4598,7 +4604,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // Each step is done by doing it (finish a line, pick a color, open a game), worth 2 φόρα once, ever.
   // Steps can be done in any order and on different days. Numbered dots let a teacher say "everyone on step 4" in class.
   // My progress: tour_at = the step showing (99 = closed), tour_done = the steps done.
-  tourSteps() {
+  tourSteps() { const s = this.tourSteps0(); return this.abcOff() ? s.filter(x => x.k !== 'letters') : s; }
+  tourSteps0() {
     if (this.isKids) {
       const k = this.kidLesson || 1;
       return [

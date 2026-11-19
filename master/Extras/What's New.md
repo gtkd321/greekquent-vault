@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zr · Letter practice off
+> Know your letters? Tap Turn off letter practice at the bottom of the letters card and it stops showing on Today. To bring it back, tap Letter practice at the bottom of Today. Your finished sets stay saved.
+
 > [!tip]- 2026-11-19zq · One card
 > Today shows one card, picked for you. Each time you open the app it is a different one: your words one time, the story puzzle the next, the letters after that. No stack to swipe through. Want something else? Tap Another one at the bottom of the card. When you have had them all, the done card says so.
 

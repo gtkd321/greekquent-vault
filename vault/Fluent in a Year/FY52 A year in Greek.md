@@ -18,8 +18,8 @@ One line a day, same people, one scene. Read it from the top each day, then add 
 > 2. Μαμά, το αποφάσισα: μετακομίζω στο χωριό. — Το ήξερα! Ακούω το χαμόγελό σου από εδώ! (Mom, I've decided: I'm moving to the village. — I knew it! I can hear your smile from here!)
 > 3. Τι σύμπτωση! Σήμερα ήρθαν όλα τα χαρτιά. — Τέλεια! Χωρίς άγχος, επιτέλους! (What a coincidence! All the papers came today. — Perfect! No more stress, at last!)
 > 4. Αφήνεις μια καλή δουλειά στην Αμερική. Σέβομαι την απόφασή σου. — Ευχαριστώ. Είμαι ευγνώμων για όλα. (You're leaving a good job in America. I respect your decision. — Thank you. I'm grateful for everything.)
-> 5. Υπογράψτε εδώ... Είναι νόμιμο! Το σπίτι, το χωράφι, όλα δικά σας. — Ο προπονητής μου στο σχολείο θα φώναζε: γκολ! (Sign here... It's legal! The house, the field, all yours. — My coach at school would shout: goal!)
-> 6. Μαρία, σου έχω μια δουλειά στην Αθήνα, με καλό μισθό! — Ευχαριστώ, αλλά όχι για μένα. Εγώ έχω μια φάρμα. Θα τα πούμε! (Maria, I have a job for you in Athens, with a good salary! — Thank you, but not for me. I have a farm. See you!)
+> 5. Υπογράψτε εδώ... Είναι νόμιμο! Το σπίτι, το χωράφι, όλα δικά σας. — Ο προπονητής μου στο σχολείο θα φώναζε: γκολ! (Sign here... It's legal! The house, the field, all yours. — My coach at school would be shouting: goal!)
+> 6. Μαρία, έχω μια δουλειά για σένα στην Αθήνα, με καλό μισθό! — Ευχαριστώ, αλλά όχι για μένα. Εγώ έχω μια φάρμα. Θα τα πούμε! (Maria, I have a job for you in Athens, with a good salary! — Thank you, but not for me. I have a farm. See you!)
 
 ## This week's words
 
@@ -58,7 +58,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ευγνώμων]] **grateful** (#1370): Θα 'πρεπε να 'σαι ευγνώμων.
 
 > [!todo]- Fri · day 299 of 300
-> **Today's line:** Υπογράψτε εδώ... Είναι νόμιμο! Το σπίτι, το χωράφι, όλα δικά σας. — Ο προπονητής μου στο σχολείο θα φώναζε: γκολ! (Sign here... It's legal! The house, the field, all yours. — My coach at school would shout: goal!)
+> **Today's line:** Υπογράψτε εδώ... Είναι νόμιμο! Το σπίτι, το χωράφι, όλα δικά σας. — Ο προπονητής μου στο σχολείο θα φώναζε: γκολ! (Sign here... It's legal! The house, the field, all yours. — My coach at school would be shouting: goal!)
 > - [[αποτελώ]] **I constitute** (#1371): Όλοι οι άνθρωποι αποτελούν έναν λαό.
 > - [[προπονητής|ο προπονητής]] **coach** (#1372): Είμαι ο προπονητής.
 > - [[νόμιμος]] **legal** (#1373): Είναι νόμιμα τα πυροτεχνήματα στην Αυστραλία;
@@ -66,7 +66,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[χειρουργείο|το χειρουργείο]] **operating room** (#1375): Απαγορεύεται η είσοδος στο χειρουργείο. (Entry to the operating room is prohibited.)
 
 > [!todo]- Sat · day 300 of 300
-> **Today's line:** Μαρία, σου έχω μια δουλειά στην Αθήνα, με καλό μισθό! — Ευχαριστώ, αλλά όχι για μένα. Εγώ έχω μια φάρμα. Θα τα πούμε! (Maria, I have a job for you in Athens, with a good salary! — Thank you, but not for me. I have a farm. See you!)
+> **Today's line:** Μαρία, έχω μια δουλειά για σένα στην Αθήνα, με καλό μισθό! — Ευχαριστώ, αλλά όχι για μένα. Εγώ έχω μια φάρμα. Θα τα πούμε! (Maria, I have a job for you in Athens, with a good salary! — Thank you, but not for me. I have a farm. See you!)
 > - [[παρεξήγηση|η παρεξήγηση]] **misunderstanding** (#1376): Προφανώς έχει γίνει κάποια παρεξήγηση.
 > - [[φάρμα|η φάρμα]] **farm** (#1377): Δούλεψα σε μία φάρμα.
 > - [[μισθός|ο μισθός]] **salary** (#1378): Αυτοί μείωσαν τον μισθό του. (They reduced his salary.)

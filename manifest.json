@@ -1,5 +1,5 @@
 {
-"release": "2026-11-19zt",
+"release": "2026-11-19zu",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -34,16 +34,16 @@
 "size": 29471
 },
 ".obsidian/plugins/greekquent-student-layout/apps/storylines.html": {
-"sha256": "5f177463770ce88d7176b968fed66311361c856f346b76c815b2c46d90de7b9f",
-"size": 270161
+"sha256": "9d8fe2626fba094b4d50e2d05119f54fe04a225504645df220f5ad3e32a5acf3",
+"size": 270176
 },
 ".obsidian/plugins/greekquent-student-layout/lines.json": {
-"sha256": "32aa6eac014f88872617e47ed4b98fa6bf5acdb5ed2f14afaa5966fbf51fdd44",
-"size": 95488
+"sha256": "92a98ff65b8f805d404f8794cb9d3e3d2821fea528486359134e839451782b67",
+"size": 95503
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "046d9085e066933b011f406ea953caf441f64873ae71041e0461d66f33f23bdd",
-"size": 535529
+"sha256": "a7aa611d40a41c2e4cf9f5c6a81f7ec87192c548ab682a138230f1ae187484a6",
+"size": 535614
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
 "sha256": "bc79a22ceae54a8a278755b2ade1f4f00515adcbd7e9a8f6749b7630ad022c0f",
@@ -150,8 +150,8 @@
 "size": 2494
 },
 "Extras/What's New.md": {
-"sha256": "db7e32ff68edf6aa70a5f6285d3dcba43a53c8e66d5e710674d64dcc28b58db0",
-"size": 48119
+"sha256": "3da47193ae9f9ddde91ff9f38b063b5227c4d1f9a7ddc0fef6db18a17f8eea92",
+"size": 48637
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",
@@ -398,8 +398,8 @@
 "size": 9386
 },
 "Fluent in a Year/FY52 A year in Greek.md": {
-"sha256": "82cb2ea59416cc2526849291c4ae5173f2121d3f2cc364654e202ebbb49a466e",
-"size": 9513
+"sha256": "d7c0418fb5bb8ea94357023eef513a16cae1d6ccf919e6ea00b3613b4bc8a356",
+"size": 9543
 },
 "Scripts/01 Lesson Scripts.md": {
 "sha256": "bf8c75680343c21a22c4268b4d0648aad06452cf0db9c944c07c45e16c6f408a",

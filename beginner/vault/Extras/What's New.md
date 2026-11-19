@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zu · The last two story lines
+> Day 299: the English now reads My coach at school would be shouting: goal! It means he would be shouting right now if he were here, so the Greek keeps θα: θα φώναζε. Without θα, φώναζε means he used to shout.
+> Day 300: the boss now says Μαρία, έχω μια δουλειά για σένα στην Αθήνα. It matches the English, and it sets up Maria's answer: όχι για μένα. Touch σένα in the puzzle to see what it means.
+
 > [!tip]- 2026-11-19zt · Drop a word in between
 > In the story puzzle, drag a word into the line and let go where it belongs, even between two words already there. A small blue bar shows where it will land. You can also drag a word that is already in the line to a new spot. Tapping still adds a word at the end.
 

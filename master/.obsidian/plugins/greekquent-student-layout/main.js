@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zt';
+const VAULT_RELEASE = '2026-11-19zu';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -263,7 +263,8 @@ function phScan(root) {
 const PH_FUNC = { ο: 'the', η: 'the', το: 'the', οι: 'the', τα: 'the', τον: 'the', την: 'the', τη: 'the', των: 'of the', τους: 'the, them, their', τις: 'the', του: 'the, his', της: 'the, her',
   ενασ: 'a, one', ενα: 'a, one', μια: 'a, one', και: 'and', κι: 'and', δεν: 'not', μην: 'don\u2019t', να: 'to', θα: 'will', σε: 'in, to, at', σ: 'in, to', στο: 'in the, to the', στη: 'in the, to the', στην: 'in the, to the', στον: 'in the, to the', στα: 'in the, to the', στουσ: 'in the, to the', στισ: 'in the, to the',
   με: 'with, me', για: 'for', απο: 'from', μου: 'my, me', σου: 'your, you', μασ: 'our, us', σασ: 'your, you all', ναι: 'yes', οχι: 'no', αλλα: 'but', τι: 'what', που: 'where, that', πωσ: 'how', ποιοσ: 'who', ποια: 'who, which', ποιο: 'which', ποτε: 'when', γιατι: 'why, because', ποσο: 'how much',
-  ειναι: 'is, are', ειμαι: 'I am', εισαι: 'you are', ειμαστε: 'we are', εγω: 'I', εσυ: 'you', εμεισ: 'we', εσεισ: 'you all', αυτοσ: 'he, this', αυτη: 'she, this', αυτο: 'it, this', εδω: 'here', εκει: 'there', τωρα: 'now', λιγο: 'a little', πολυ: 'very, a lot', οτι: 'that', αν: 'if', ετσι: 'like this, so' };
+  ειναι: 'is, are', ειμαι: 'I am', εισαι: 'you are', ειμαστε: 'we are', εγω: 'I', εσυ: 'you', εμεισ: 'we', εσεισ: 'you all', αυτοσ: 'he, this', αυτη: 'she, this', αυτο: 'it, this', εδω: 'here', εκει: 'there', τωρα: 'now', λιγο: 'a little', πολυ: 'very, a lot', οτι: 'that', αν: 'if', ετσι: 'like this, so',
+  σενα: 'you (after για, με, σαν)', εσενα: 'you', εμενα: 'me' };
 // Double-tap in the Word web means "more than one": a noun's plural, εγώ → εμείς, and a verb's "we" form (πάω → εμείς πάμε).
 const WW_PRON = { εγω: ['εμείς', 'we'], εσυ: ['εσείς', 'you all'], αυτοσ: ['αυτοί', 'they'], αυτη: ['αυτές', 'they'], αυτο: ['αυτά', 'they'],
   μου: ['μας', 'our, us'], σου: ['σας', 'your, you all'], του: ['τους', 'their, them'], της: ['τους', 'their, them'], με: ['μας', 'us'], σε: ['σας', 'you all'],

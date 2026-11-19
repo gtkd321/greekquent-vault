@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19s · The Gallery
+> A new world: Gallery (το μουσείο). Pick it with the world button on your φόρα card. Every φόρα point is a chisel stroke, so marble chips fly off the moment you practice. Finish a statue, from the Venus de Milo to The Thinker, and it gets a short funny scene, then joins the hall. Tap a finished statue to hear its name. Your other worlds are untouched.
+
 > [!tip]- 2026-11-19r · Ideas from the class
 > Five new ideas in Card ideas, from pages classmates shared in GroupMe: one color per language, a "how it sounds" column, a topic page that starts with Θέλω..., a verb grid, and stars on favorite pages.
 

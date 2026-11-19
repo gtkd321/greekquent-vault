@@ -625,3 +625,42 @@ body.gq-calm .gq-print.is-stamp, body.gq-calm .gq-light { animation: none; }
 .gq-card-help ul { padding-left: 1.2em; margin: 8px 0 10px; }
 .gq-card-help li { margin-bottom: 6px; }
 .gq-paper-m .gq-c.gq-yellow { border: 2px solid #d9a400; }
+
+/* Gallery world: chips fly off the marble block, the sculptor swings, finished statues do one trick when tapped. */
+.gq-gallery .gq-gal-sv { width: 100%; height: auto; display: block; cursor: pointer; }
+.gq-gallery .gq-chip { transform-box: fill-box; transform-origin: center; }
+.gq-gallery .gq-chip.is-gone { display: none; }
+.gq-gallery .gq-chip.is-fly { animation: gq-chip-fly .65s ease-in forwards; }
+@keyframes gq-chip-fly { 0% { transform: none; opacity: 1; } 30% { transform: translate(calc(var(--dx) * .5), -14px) rotate(calc(var(--rot) * .5)); } 100% { transform: translate(var(--dx), 40px) rotate(var(--rot)); opacity: 0; } }
+.gq-sc-arm { transform-box: view-box; transform-origin: 141px 90px; }
+.gq-sc-arm.is-hit { animation: gq-sc-hit .22s ease-out; }
+@keyframes gq-sc-hit { 0% { transform: rotate(0); } 45% { transform: rotate(-38deg); } 100% { transform: rotate(0); } }
+.gq-st-x { opacity: 0; }
+.gq-st.is-gag .gq-st-x { opacity: 1; transition: opacity .3s; }
+.gq-st [class^="gq-st-"] { transform-box: fill-box; }
+.gq-st.is-gag.gag-venus .gq-st-arms { animation: gq-g-wave 1.2s ease-in-out 2; transform-origin: center bottom; }
+@keyframes gq-g-wave { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-14deg); } }
+.gq-st.is-gag.gag-kouros .gq-st-legs { animation: gq-g-walk .5s ease-in-out 5; transform-origin: center top; }
+@keyframes gq-g-walk { 0%, 100% { transform: skewX(0); } 50% { transform: skewX(12deg); } }
+.gq-st.is-gag.gag-disc .gq-st-throw { animation: gq-g-throw .8s ease-out 1; transform-origin: left bottom; }
+.gq-st.is-gag.gag-disc .gq-st-disc { animation: gq-g-away 1.6s ease-in .5s forwards; }
+@keyframes gq-g-throw { 0% { transform: rotate(0); } 40% { transform: rotate(40deg); } 100% { transform: rotate(-30deg); } }
+@keyframes gq-g-away { to { transform: translate(140px, -80px) scale(.3); opacity: 0; } }
+.gq-st.is-gag.gag-kore .gq-st-roof { animation: gq-g-lift 2.2s ease-in-out 1; }
+@keyframes gq-g-lift { 0%, 100% { transform: translateY(0); } 30%, 70% { transform: translateY(-10px); } }
+.gq-st.is-gag.gag-nike .gq-st-wings { animation: gq-g-flap .3s ease-in-out 7; transform-origin: center bottom; }
+.gq-st.is-gag.gag-nike { animation: gq-g-hover 2.2s ease-in-out 1; transform-box: fill-box; }
+@keyframes gq-g-flap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.7); } }
+@keyframes gq-g-hover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.gq-st.is-gag.gag-driver .gq-st-chariot { animation: gq-g-roll 2.2s ease-in-out 1; }
+@keyframes gq-g-roll { 0% { transform: translateX(-30px); } 60%, 100% { transform: translateX(0); } }
+.gq-st.is-gag.gag-god .gq-st-fish { animation: gq-g-flop .35s ease-in-out 6; transform-origin: center; }
+@keyframes gq-g-flop { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(18deg); } }
+.gq-st.is-gag.gag-thinker .gq-st-bubble { animation: gq-g-pop .6s ease-out 1; transform-origin: left bottom; }
+@keyframes gq-g-pop { from { transform: scale(.2); opacity: 0; } }
+.gq-gal-scene .gq-fest-sv { width: min(92vw, 520px); height: auto; }
+.gq-gal-scene .gq-gal-spot { animation: gq-g-spot 3s ease-in-out infinite alternate; }
+@keyframes gq-g-spot { from { opacity: .1; } to { opacity: .2; } }
+.gq-gal-scene.is-still .gq-st-x { opacity: 1; }
+.gq-calm .gq-gallery .gq-chip.is-fly, .gq-calm .gq-st.is-gag * { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .gq-gallery .gq-chip.is-fly, .gq-st.is-gag *, .gq-gal-scene .gq-gal-spot, .gq-sc-arm.is-hit { animation: none !important; } }

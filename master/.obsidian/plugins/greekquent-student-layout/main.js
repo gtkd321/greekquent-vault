@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19r';
+const VAULT_RELEASE = '2026-11-19s';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -588,6 +588,8 @@ const WORLDS = {
     { name: 'The souvlaki shop', items: [['shop', 'το σουβλατζίδικο'], ['table', 'το τραπέζι'], ['chair', 'η καρέκλα'], ['customer', 'ο πελάτης'], ['menu', 'ο κατάλογος'], ['scooter', 'το μηχανάκι']] }] },
   // Dance: the quickest world. Every φόρα point is a step, and the floor fills with the dances you learn.
   dance: { name: 'Dance', eras: [{ name: 'Πανηγύρι', items: [] }] },
+  // Gallery: the second quick world. Every φόρα point is a chisel stroke on a famous statue.
+  gallery: { name: 'Gallery', eras: [{ name: 'Το μουσείο', items: [] }] },
   pet: { name: 'Pet', eras: [
     { name: 'Little Φοράκι', items: [] }, { name: 'Φοράκι grows', items: [] }, { name: 'Φοράκι in a hat', items: [] }, { name: 'Φοράκι the great', items: [] }] },
 };
@@ -701,8 +703,96 @@ function gqSound(kind) {
     const tone = (hz, at, dur, type, vol, to) => { const o = c.createOscillator(), g = c.createGain(); o.type = type; o.frequency.setValueAtTime(hz, at); if (to) o.frequency.exponentialRampToValueAtTime(to, at + dur); g.gain.setValueAtTime(0.0001, at); g.gain.exponentialRampToValueAtTime(vol, at + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, at + dur); o.connect(g); g.connect(c.destination); o.start(at); o.stop(at + dur + 0.02); };
     const t = c.currentTime + 0.02;
     if (kind === 'step') tone(150, t, 0.11, 'sine', 0.35, 70);
+    else if (kind === 'tink') { tone(2400, t, 0.05, 'triangle', 0.12, 1700); tone(3600, t + 0.01, 0.03, 'sine', 0.06); }
     else { [62, 63, 66, 67, 69, 74].forEach((m, i) => tone(440 * Math.pow(2, (m - 69) / 12), t + i * 0.09, i === 5 ? 0.6 : 0.16, 'triangle', 0.22)); tone(73.4, t, 0.7, 'sine', 0.25); }
   } catch (e) {}
+}
+// ---------- The gallery (το μουσείο): every φόρα point is a chisel stroke ----------
+// A little sculptor carves famous statues out of marble, one after another. Chips fly off with every point, so the
+// feedback is instant. A finished statue moves into the hall and does its one silly trick. Each statue costs a bit more.
+const STATUES = [
+  { k: 'venus', gr: 'η Αφροδίτη της Μήλου', en: 'the Venus de Milo', cost: 24, line: ['Η Αφροδίτη... με χέρια;', 'Venus... with arms?'] },
+  { k: 'kouros', gr: 'ο Κούρος', en: 'a kouros, a young man about to walk', cost: 36, line: ['Ο Κούρος περπατάει, επιτέλους.', 'The kouros walks, at last. He waited 2,600 years.'] },
+  { k: 'disc', gr: 'ο Δισκοβόλος', en: 'the Discus Thrower', cost: 48, line: ['Πού πήγε ο δίσκος;', 'Where did the discus go?'] },
+  { k: 'kore', gr: 'η Καρυάτιδα', en: 'a Caryatid, who holds up a roof', cost: 60, line: ['Ένα λεπτό διάλειμμα, παρακαλώ.', 'A one-minute break, please.'] },
+  { k: 'nike', gr: 'η Νίκη της Σαμοθράκης', en: 'the Winged Victory of Samothrace', cost: 72, line: ['Η Νίκη πετάει.', 'Victory takes off.'] },
+  { k: 'driver', gr: 'ο Ηνίοχος των Δελφών', en: 'the Charioteer of Delphi', cost: 84, line: ['Πάμε. Πού είναι τα άλογα;', 'Let\'s go. Where are the horses?'] },
+  { k: 'god', gr: 'ο Θεός του Αρτεμισίου', en: 'the bronze god from Artemision', cost: 96, line: ['Ψάρι; Ήθελα κεραυνό.', 'A fish? I wanted a thunderbolt.'] },
+  { k: 'thinker', gr: 'ο Σκεπτόμενος', en: 'The Thinker, a guest from Paris', cost: 108, line: ['Σκέφτομαι... στα ελληνικά.', 'I am thinking... in Greek.'] }
+];
+const BRONZE = { driver: 1, god: 1, thinker: 1 };
+function galleryNow(total) {
+  let left = Math.max(0, Math.floor(+total || 0)), done = 0;
+  for (let round = 0; round < 200; round++) for (let i = 0; i < STATUES.length; i++) {
+    const cost = round ? 108 : STATUES[i].cost;
+    if (left < cost) return { i, s: STATUES[i], strokes: left, cost, done, round, more: cost - left };
+    left -= cost; done++;
+  }
+  return { i: 7, s: STATUES[7], strokes: 108, cost: 108, done, round: 200, more: 0 };
+}
+function gqRand(seed) { let x = (seed * 9301 + 49297) % 233280 || 1; return () => (x = (x * 9301 + 49297) % 233280) / 233280; }
+// One statue in a 60 x 120 box: x from -30 to 30, the base at y 120. Props for its trick sit in .gq-st-x (hidden until the trick).
+function statueSvg(p, k) {
+  const g = svgA(p, 'g', { class: 'gq-st gq-st-' + k }), br = BRONZE[k];
+  const M = br ? '#9a6b3f' : '#f1ece3', S = br ? '#6e4a2a' : '#d6ccbc', L = br ? '#b98a5a' : '#ffffff';
+  const el = (t, a, q) => svgA(q || g, t, a), fill = { fill: M, stroke: S, 'stroke-width': 1 };
+  const limb = (pts, w, q) => el('polyline', { points: pts, fill: 'none', stroke: M, 'stroke-width': w, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, q);
+  const fold = (d, q) => el('path', { d, fill: 'none', stroke: S, 'stroke-width': 0.8 }, q);
+  const x = svgA(g, 'g', { class: 'gq-st-x' });
+  if (k !== 'nike' && k !== 'thinker') el('rect', { x: -15, y: 112, width: 30, height: 8, fill: S });
+  if (k === 'venus') {
+    const ar = svgA(x, 'g', { class: 'gq-st-arms' });
+    limb('-9,24 -18,36 -24,30', 4, ar); limb('9,24 18,34 24,26', 4, ar);
+    el('path', { d: 'M-9,21 Q0,18 9,21 L11,26 Q9,30 8,33 L7,50 Q0,54 -7,50 L-8,33 Q-10,30 -11,26 Z', ...fill });
+    el('path', { d: 'M-9,48 Q2,56 11,46 L14,112 Q0,116 -13,112 Z', ...fill }); fold('M-4,60 L-6,110 M3,58 L4,110 M9,54 L10,108');
+    el('circle', { cx: 0, cy: 12, r: 6, ...fill }); el('circle', { cx: 3, cy: 8, r: 3.2, fill: M, stroke: S });
+  } else if (k === 'kouros') {
+    const lg = svgA(g, 'g', { class: 'gq-st-legs' });
+    limb('-3,58 -4,85 -9,111', 6, lg); limb('3,58 4,85 6,111', 6, lg);
+    el('path', { d: 'M-11,20 L11,20 L8,60 L-8,60 Z', ...fill }); fold('M-6,34 Q0,37 6,34 M0,40 L0,54');
+    limb('-12,22 -14,40 -13,58', 4); limb('12,22 14,40 13,58', 4);
+    el('circle', { cx: 0, cy: 11, r: 6.5, ...fill }); fold('M-5,8 L5,8 M-6,11 L6,11'); el('path', { d: 'M-2.5,14 Q0,16 2.5,14', fill: 'none', stroke: S, 'stroke-width': 0.8 });
+  } else if (k === 'disc') {
+    limb('0,72 -12,90 -10,111', 6); limb('4,72 15,92 18,111', 6);
+    el('ellipse', { cx: 0, cy: 58, rx: 9, ry: 15, transform: 'rotate(-25 0 58)', ...fill });
+    limb('-3,52 -16,74', 4); const ar = svgA(g, 'g', { class: 'gq-st-throw' }); limb('5,50 22,32', 4, ar);
+    el('circle', { cx: 25, cy: 28, r: 6, fill: L, stroke: S, class: 'gq-st-disc' }, ar);
+    el('circle', { cx: 3, cy: 40, r: 6, ...fill });
+  } else if (k === 'kore') {
+    const top = svgA(g, 'g', { class: 'gq-st-roof' });
+    el('rect', { x: -14, y: 0, width: 28, height: 6, ...fill }, top); el('rect', { x: -9, y: 6, width: 18, height: 4, ...fill }, top);
+    el('path', { d: 'M-9,24 Q0,21 9,24 L12,112 L-12,112 Z', ...fill }); fold('M-6,40 L-8,110 M-2,40 L-3,110 M2,40 L3,110 M6,40 L8,110 M-8,34 Q0,38 8,34');
+    el('circle', { cx: 0, cy: 16, r: 6, ...fill });
+  } else if (k === 'nike') {
+    el('path', { d: 'M-22,108 L26,108 L32,120 L-22,120 Z', fill: S });
+    const wg = svgA(g, 'g', { class: 'gq-st-wings' });
+    el('path', { d: 'M2,32 Q-28,0 -28,38 Q-22,50 0,44 Z', fill: L, stroke: S }, wg); fold('M-4,34 L-22,16 M-6,40 L-25,30', wg);
+    el('path', { d: 'M-6,28 Q0,25 8,30 L10,60 Q14,88 20,108 L-12,108 Q-8,80 -6,60 Z', ...fill }); fold('M0,62 Q6,85 12,106 M-4,64 Q-2,86 -6,106 M4,40 Q2,50 6,58');
+  } else if (k === 'driver') {
+    el('path', { d: 'M-8,20 L8,20 L9,112 L-9,112 Z', ...fill }); fold('M-5,40 L-6,110 M-1,40 L-1,110 M3,40 L4,110');
+    limb('6,26 14,40 22,40', 4); el('line', { x1: 22, y1: 40, x2: 30, y2: 46, stroke: S, 'stroke-width': 0.8 });
+    el('circle', { cx: 0, cy: 11, r: 6, ...fill }); el('line', { x1: -6, y1: 9, x2: 6, y2: 9, stroke: L, 'stroke-width': 1.2 });
+    const ch = svgA(x, 'g', { class: 'gq-st-chariot' });
+    for (const hx of [20, 30]) { el('ellipse', { cx: hx, cy: 104, rx: 6, ry: 3, fill: '#7a5230' }, ch); el('line', { x1: hx - 3, y1: 106, x2: hx - 4, y2: 112, stroke: '#7a5230', 'stroke-width': 1.5 }, ch); el('line', { x1: hx + 3, y1: 106, x2: hx + 4, y2: 112, stroke: '#7a5230', 'stroke-width': 1.5 }, ch); el('circle', { cx: hx + 6, cy: 100, r: 2.2, fill: '#7a5230' }, ch); }
+    el('circle', { cx: 8, cy: 108, r: 4, fill: 'none', stroke: '#7a5230', 'stroke-width': 1.5 }, ch);
+  } else if (k === 'god') {
+    limb('-4,56 -18,111', 6); limb('4,56 17,111', 6);
+    el('path', { d: 'M-9,22 L9,22 L7,58 L-7,58 Z', ...fill });
+    limb('-8,25 -30,24', 4); limb('8,25 22,18 28,10', 4);
+    el('circle', { cx: 0, cy: 14, r: 6, ...fill }); el('path', { d: 'M-5,16 Q0,24 5,16', fill: S });
+    const fish = svgA(x, 'g', { class: 'gq-st-fish' }); el('ellipse', { cx: 30, cy: 6, rx: 5, ry: 2.5, fill: '#6fa8c8' }, fish); el('path', { d: 'M35,6 L39,3 L39,9 Z', fill: '#6fa8c8' }, fish);
+  } else if (k === 'thinker') {
+    el('path', { d: 'M-22,120 L-20,82 Q0,74 22,84 L26,120 Z', fill: '#8c8577' });
+    limb('-2,74 16,78 16,108', 6); limb('-6,76 10,84 8,110', 6);
+    el('ellipse', { cx: -2, cy: 58, rx: 10, ry: 16, transform: 'rotate(22 -2 58)', ...fill });
+    limb('4,52 10,74 9,46', 4);
+    el('circle', { cx: 8, cy: 40, r: 6.5, ...fill });
+    const b = svgA(x, 'g', { class: 'gq-st-bubble' });
+    el('circle', { cx: 16, cy: 28, r: 1.5, fill: '#fff' }, b); el('circle', { cx: 20, cy: 20, r: 2.5, fill: '#fff' }, b);
+    el('rect', { x: 2, y: -2, width: 40, height: 16, rx: 8, fill: '#fff' }, b);
+    const t = el('text', { x: 22, y: 9, 'text-anchor': 'middle', 'font-size': 7, fill: '#14263f' }, b); t.textContent = 'ελληνικά;';
+  }
+  return g;
 }
 // Everything drawn under mark() becomes a tap target: the canvas keeps a list of [x0, y0, x1, y1, Greek, English].
 function worldPaint(ctx, w, st, mood, t) {
@@ -2198,7 +2288,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const obj = k => (fm[k] && typeof fm[k] === 'object' && !Array.isArray(fm[k])) ? fm[k] : {};
     const mem = this.moMem && Date.now() - this.moMem.t < 15000 ? this.moMem : null;
-    return { days: mem ? mem.days : obj('days'), got: obj('got'), up: obj('up'), met: obj('met'), dance: mem && mem.dance ? mem.dance : obj('dance'), grow: mem && mem.grow !== undefined ? +mem.grow : (fm.grow !== undefined && fm.grow !== null && Number.isFinite(+fm.grow) ? +fm.grow : null), steps: mem && mem.steps !== undefined ? +mem.steps : (fm.steps !== undefined && fm.steps !== null && Number.isFinite(+fm.steps) ? +fm.steps : 0), firsts: mem && mem.firsts ? mem.firsts : obj('firsts') };
+    return { days: mem ? mem.days : obj('days'), got: obj('got'), up: obj('up'), met: obj('met'), dance: mem && mem.dance ? mem.dance : obj('dance'), grow: mem && mem.grow !== undefined ? +mem.grow : (fm.grow !== undefined && fm.grow !== null && Number.isFinite(+fm.grow) ? +fm.grow : null), steps: mem && mem.steps !== undefined ? +mem.steps : (fm.steps !== undefined && fm.steps !== null && Number.isFinite(+fm.steps) ? +fm.steps : 0), chisel: mem && mem.chisel !== undefined ? +mem.chisel : (Number.isFinite(+fm.chisel) && fm.chisel !== null && fm.chisel !== '' ? +fm.chisel : 0), firsts: mem && mem.firsts ? mem.firsts : obj('firsts') };
   }
   // φόρα on a day = sum of each day's points x (6/7)^(days since).
   moScore(days, at) {
@@ -2215,7 +2305,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠάρε φόρα. This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- Comebacks, today\'s line and the rally: Had it counts like a word. Not yet: 1 for trying.\n- A finished read-through, rally swap, song or kid card: 2. Homework sent: 3. A question to the class: 2. Once a day each.\n- Guess first in Look up: 1. A new word in the Word web: 1, up to 5 a day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
     }
     const today = ymd(new Date()), gap = d => { const [a, b, c] = String(d).split('-').map(Number); const n = new Date(); n.setHours(12, 0, 0, 0); return Math.round((n - new Date(a, b - 1, c, 12)) / 864e5); };
-    let gained = 0, big = null; const danced = [], dancedK = []; const dw = (this.worldNow !== undefined ? this.worldNow : this.colors().world) === 'dance';
+    let gained = 0, big = null; const danced = [], dancedK = []; const wNow = this.worldNow !== undefined ? this.worldNow : this.colors().world, dw = wNow === 'dance', gw = wNow === 'gallery'; const carved = [];
     await this.app.fileManager.processFrontMatter(f, fm => {
       for (const k of ['days', 'got', 'up', 'met', 'made', 'tried', 'did', 'web', 'said']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
       // tried and did only need today; yesterday's entries go.
@@ -2242,6 +2332,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       // Steps belong to the Dance world only, so there is one kind of progress at a time. They carry across days (fm.steps never resets).
       // Dance starts at step 0 the first time you pick it; in other worlds fm.steps waits untouched.
       if (dw && (!Number.isFinite(+fm.steps) || fm.steps === null || fm.steps === '')) fm.steps = 0;
+      // Chisel strokes belong to the Gallery world the same way, and also never reset.
+      if (gw && (!Number.isFinite(+fm.chisel) || fm.chisel === null || fm.chisel === '')) fm.chisel = 0;
       // World growth: a running total of φόρα points (fm.grow). The first time, start at least where green words had the world, so it never shrinks.
       if (fm.grow === undefined || fm.grow === null || !Number.isFinite(+fm.grow)) fm.grow = this.growSeed(fm.days);
       const before = +fm.days[today] || 0, now = Math.min(MO_CAP, before + pts); gained = now - before;
@@ -2254,17 +2346,19 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (dw) { const was = danceNow(fm.steps); fm.steps = (+fm.steps || 0) + gained; const is = danceNow(fm.steps);
       for (let j = was.learned; j < is.learned; j++) { const k = DANCE_PATH[j % DANCE_PATH.length][0]; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); dancedK.push(k); }
       if (now >= 12 && Object.keys(fm.days).length >= 7 && dayHash(today) % 4 === 0) add(GUEST_DANCES[dayHash(today + 'g') % GUEST_DANCES.length][0]); }
+      if (gw) { const was = galleryNow(fm.chisel); fm.chisel = (+fm.chisel || 0) + gained; const is = galleryNow(fm.chisel);
+        for (let j = was.done; j < is.done; j++) { const k = STATUES[j % STATUES.length].k; carved.push(k); if (!fm.firsts['statue ' + k]) { fm.firsts['statue ' + k] = today; if (!big) big = { statue: k }; } } }
       // One big moment at most per save, and each only once (dated in firsts, so it survives updates and other devices).
-      if (dancedK.length) { const kk = dancedK[dancedK.length - 1], guest = GUEST_DANCES.some(g => g[0] === kk); big = { k: kk, gr: guest ? `Μπράβο. Χόρεψες ${DANCE_ACC[kk]}.` : `Μπράβο. Έμαθες ${DANCE_ACC[kk]}.`, en: guest ? `Well done. A guest dance came by, and you danced the ${DANCE_EN[kk]}.` : `Well done. You learned the ${DANCE_EN[kk]}.` }; }
+      if (big && big.statue) {} else if (dancedK.length) { const kk = dancedK[dancedK.length - 1], guest = GUEST_DANCES.some(g => g[0] === kk); big = { k: kk, gr: guest ? `Μπράβο. Χόρεψες ${DANCE_ACC[kk]}.` : `Μπράβο. Έμαθες ${DANCE_ACC[kk]}.`, en: guest ? `Well done. A guest dance came by, and you danced the ${DANCE_EN[kk]}.` : `Well done. You learned the ${DANCE_EN[kk]}.` }; }
       else { const once = (key, v) => { if (big || fm.firsts[key]) return; fm.firsts[key] = today; big = v; };
         if (q.some(x => x[0] === 'did' && x[1] === 'homework')) { const s0 = new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2]), wn = Math.max(1, Math.floor((new Date() - s0) / 6048e5) + 1); once('big week ' + wn, { gr: 'Μπράβο. Τελείωσες την εβδομάδα.', en: 'Well done. You finished the week and sent your homework.' }); }
         if (this.abcAllDone()) once('big alphabet', { gr: 'Μπράβο. Ξέρεις όλο το αλφάβητο.', en: 'Well done. You know the whole alphabet, every sound and every name.' });
         if (this.colors().green.length >= 50) once('big green 50', { gr: 'Μπράβο. Πενήντα πράσινες λέξεις.', en: 'Well done. Fifty green words: fifty words you have.' }); }
-      this.moMem = { days: { ...fm.days }, grow: fm.grow, steps: fm.steps, dance: { ...fm.dance }, firsts: { ...fm.firsts }, t: Date.now() };
+      this.moMem = { days: { ...fm.days }, grow: fm.grow, steps: fm.steps, chisel: fm.chisel, dance: { ...fm.dance }, firsts: { ...fm.firsts }, t: Date.now() };
     });
     if (danced.length) this.danceAt = Date.now();
-    if (gained) { this.moPaint(); this.moToast(gained, danced.length ? 'you danced ' + danced.join(' and ') : ''); }
-    if (big) setTimeout(() => this.festScene(big), gained ? 1500 : 300);
+    if (gained) { this.moPaint(); this.moToast(gained, danced.length ? 'you danced ' + danced.join(' and ') : carved.length ? 'you finished ' + carved.map(k => STATUES.find(x => x.k === k).gr).join(' and ') : ''); }
+    if (big) setTimeout(() => big.statue ? this.galleryScene(big.statue) : this.festScene(big), gained ? (carved.length ? 2600 : 1500) : 300);
   }
   // A small "+3 φόρα" at the top for a moment, so the points are felt where the work happens.
   moToast(n, extra) {
@@ -2290,10 +2384,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const w = this.worldNow !== undefined ? this.worldNow : this.colors().world;
     if (!w || !WORLDS[w]) {
       const r = c.createDiv('gq-world-pick'); r.createSpan({ cls: 'gq-hint', text: 'Pick a world to grow: ' });
-      for (const k of ['dance', 'village', 'grove', 'gyro', 'pet']) { const b = r.createEl('button', { text: WORLDS[k].name, cls: 'gq-mini' }); b.onclick = () => this.setWorld(k); }
+      for (const k of ['dance', 'gallery', 'village', 'grove', 'gyro', 'pet']) { const b = r.createEl('button', { text: WORLDS[k].name, cls: 'gq-mini' }); b.onclick = () => this.setWorld(k); }
       return;
     }
     if (w === 'dance') { this.danceWorld(c, todayPts, score); return; }
+    if (w === 'gallery') { this.galleryWorld(c, todayPts, score); return; }
     if (!this.words && !this.worldWait) { this.worldWait = true; this.wordIndex().then(() => this.moPaint()); }
     const pts = this.growNow(), st = worldStage(pts, W_PTS), mood = worldMood(todayPts, score);
     const box = c.createDiv('gq-world'), cv = box.createEl('canvas', { cls: 'gq-world-cv', attr: { width: W_W, height: W_H, role: 'img', 'aria-label': `${WORLDS[w].eras[st.era].name}. ${MOODS[mood]}.` } });
@@ -2360,6 +2455,96 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       word.setAttribute('lang', 'el'); word.setText(onPrint ? `τα βήματα · steps · ${name}` : 'η πλατεία · village square'); say(onPrint ? name : 'η πλατεία');
       if (!reduce && d.steps) { els.slice(0, d.steps).forEach(e => { e.classList.remove('is-stamp'); e.classList.add('is-wait'); }); stamp(0, d.steps, 200); }
     });
+  }
+  // The Gallery world: a hall of statues. The block in the middle loses chips with every φόρα point (instant feedback),
+  // the sculptor swings his hammer, and finished statues stand along the hall. Tap a statue to hear its name and see its trick.
+  galleryWorld(c, todayPts, score) {
+    const g = galleryNow(this.moData().chisel), mood = worldMood(todayPts, score), night = mood === 0, s = g.s;
+    const W = 320, H = 150, box = c.createDiv('gq-world gq-gallery');
+    const svg = svgA(box, 'svg', { viewBox: `0 0 ${W} ${H}`, class: 'gq-gal-sv', role: 'img', 'aria-label': `Το μουσείο, the gallery. Carving ${s.en}: ${g.strokes} of ${g.cost} strokes.` });
+    svgA(svg, 'rect', { width: W, height: H, rx: 10, fill: night ? '#262b45' : '#7d3a33' });
+    svgA(svg, 'rect', { x: 0, y: 112, width: W, height: 10, fill: night ? '#2d3352' : '#6a2f29' });
+    for (const cx of [20, 300]) { svgA(svg, 'rect', { x: cx - 7, y: 10, width: 14, height: 112, fill: night ? '#31375a' : '#e4d8c2' }); svgA(svg, 'rect', { x: cx - 10, y: 6, width: 20, height: 6, fill: night ? '#3a4166' : '#efe6d6' }); }
+    for (let x = 0; x < W; x += 20) svgA(svg, 'rect', { x, y: 122, width: 20, height: 28, fill: ((x / 20) % 2) ? (night ? '#30365a' : '#e2d5bd') : (night ? '#2a3050' : '#d8c9ad') });
+    // Finished statues along the hall (this round), small, each on a plinth.
+    const hall = svgA(svg, 'g', {}), done = g.i, minis = [];
+    for (let j = 0; j < done; j++) {
+      const x0 = 186 + j * 18, mg = svgA(hall, 'g', { transform: `translate(${x0} 74) scale(0.36)`, class: 'gq-gal-mini', 'data-i': j });
+      svgA(mg, 'rect', { x: -30, y: 0, width: 60, height: 130, fill: 'transparent' }); statueSvg(mg, STATUES[j].k); minis.push(mg);
+      svgA(hall, 'rect', { x: x0 - 7, y: 117, width: 14, height: 5, fill: night ? '#3a4166' : '#cbbb9c' });
+    }
+    if (!done) { const t = svgA(hall, 'text', { x: 250, y: 100, 'text-anchor': 'middle', 'font-size': 9, fill: night ? '#8a90b8' : '#f3e6d0' }); t.textContent = 'η αίθουσα · the hall'; }
+    // The statue being carved, under a block of marble chips.
+    const cur = svgA(svg, 'g', { transform: 'translate(92 2)' }); statueSvg(cur, s.k);
+    const COLS = 6, ROWS = 12, x0 = -32, y0 = -2, cw = 64 / COLS, chh = 116 / ROWS, rnd = gqRand(g.i * 31 + g.round * 7 + 3), V = [];
+    for (let r = 0; r <= ROWS; r++) { V.push([]); for (let q = 0; q <= COLS; q++) { const edge = r === 0 || r === ROWS || q === 0 || q === COLS; V[r].push([x0 + q * cw + (edge ? 0 : (rnd() - 0.5) * cw * 0.6), y0 + r * chh + (edge ? 0 : (rnd() - 0.5) * chh * 0.6)]); } }
+    const cells = [];
+    for (let r = 0; r < ROWS; r++) for (let q = 0; q < COLS; q++) { const pts = [V[r][q], V[r][q + 1], V[r + 1][q + 1], V[r + 1][q]]; const cx = x0 + (q + 0.5) * cw; cells.push({ pts, o: Math.abs(cx) / 32 + (r === 0 || r === ROWS - 1 ? 0.3 : 0) + rnd() * 0.45 }); }
+    cells.sort((a, b) => b.o - a.o);
+    const N = cells.length, gone = Math.min(N, Math.floor(g.strokes / g.cost * N));
+    const blk = svgA(cur, 'g', { class: 'gq-gal-block' });
+    const els = cells.map((cl, i) => svgA(blk, 'polygon', { points: cl.pts.map(p => p.map(v => v.toFixed(1)).join(',')).join(' '), fill: (i % 3) ? '#d3c9b6' : '#c8bda8', stroke: '#b3a690', 'stroke-width': 0.6, class: 'gq-chip' + (i < gone ? ' is-gone' : '') }));
+    // The sculptor: a little man in an apron and a cap, hammer raised.
+    const man = svgA(svg, 'g', { transform: 'translate(146 78)', class: 'gq-sculptor' });
+    svgA(man, 'line', { x1: -3, y1: 30, x2: -5, y2: 44, stroke: '#3b3b3b', 'stroke-width': 3, 'stroke-linecap': 'round' }); svgA(man, 'line', { x1: 3, y1: 30, x2: 5, y2: 44, stroke: '#3b3b3b', 'stroke-width': 3, 'stroke-linecap': 'round' });
+    svgA(man, 'rect', { x: -7, y: 8, width: 14, height: 24, rx: 5, fill: '#2f5d8a' }); svgA(man, 'rect', { x: -5, y: 14, width: 10, height: 18, rx: 2, fill: '#efe3c8' });
+    svgA(man, 'circle', { cx: 0, cy: 2, r: 6, fill: '#f1c27d' }); svgA(man, 'path', { d: 'M-6,0 Q0,-8 7,-1 L9,0 Z', fill: '#c0392b' });
+    const arm = svgA(man, 'g', { class: 'gq-sc-arm' });
+    svgA(arm, 'line', { x1: -5, y1: 12, x2: -15, y2: 6, stroke: '#f1c27d', 'stroke-width': 3, 'stroke-linecap': 'round' });
+    svgA(arm, 'rect', { x: -20, y: 0, width: 4, height: 9, fill: '#6b4a2b', transform: 'rotate(-30 -18 4)' }); svgA(arm, 'rect', { x: -23, y: -1, width: 9, height: 4, rx: 1, fill: '#555', transform: 'rotate(-30 -18 1)' });
+    const cap = box.createDiv({ cls: 'gq-hint gq-world-cap' }); cap.appendText('Carving ');
+    const nm = cap.createSpan({ cls: 'gq-say', text: s.gr, attr: { lang: 'el' } }); nm.onclick = () => say(s.gr);
+    cap.appendText(` · ${g.strokes} of ${g.cost} strokes · every φόρα point is a stroke · ${g.more} more to finish`);
+    if (g.done) cap.appendText(` · ${g.done} finished`);
+    const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
+    // Chips knocked off since this card was last drawn fly away, one tap of the hammer each (at most 12, so it stays quick).
+    // chipSeen counts the chips already shown flying, so a redraw mid-flight carries on where it was. A new statue starts from its first chip.
+    const cs = this.chipSeen, seen = !cs ? gone : cs.i === g.i && cs.round === g.round ? Math.min(cs.n, gone) : 0;
+    const mine = this.chipSeen = { i: g.i, round: g.round, n: seen }; if (reduce) mine.n = gone;
+    const fly = (from, to, gap) => {
+      const list = []; for (let i = from; i < to; i++) list.push(i); const show = list.slice(-12); list.slice(0, -12).forEach(i => els[i].classList.add('is-gone')); if (show.length) mine.n = Math.max(mine.n, show[0]);
+      show.forEach((i, n) => setTimeout(() => {
+        if (!svg.isConnected) return; const e = els[i]; if (this.chipSeen === mine) mine.n = Math.max(mine.n, i + 1);
+        if (!reduce) { e.style.setProperty('--dx', ((i % 2 ? 1 : -1) * (14 + (i * 7) % 18)) + 'px'); e.style.setProperty('--rot', ((i * 47) % 160 - 80) + 'deg'); e.classList.remove('is-gone'); e.classList.add('is-fly'); arm.classList.remove('is-hit'); void arm.getBBox; arm.classList.add('is-hit'); gqSound('tink'); setTimeout(() => { e.classList.remove('is-fly'); e.classList.add('is-gone'); }, 650); }
+        else e.classList.add('is-gone');
+      }, n * gap + 250));
+    };
+    if (seen < gone) { for (let i = seen; i < gone; i++) els[i].classList.remove('is-gone'); fly(seen, gone, 220); }
+    const word = box.createDiv({ cls: 'gq-world-say', attr: { lang: 'el' } }); worldTip(word);
+    const trick = (gEl, k) => { if (reduce) return; gEl.classList.remove('is-gag'); void gEl.getBBox; gEl.classList.add('is-gag', 'gag-' + k); setTimeout(() => gEl.classList.remove('is-gag'), 2600); };
+    svg.addEventListener('click', e => {
+      try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {}
+      const m = e.target.closest && e.target.closest('.gq-gal-mini'); word.setAttribute('lang', 'el');
+      if (m) { const st = STATUES[+m.getAttribute('data-i')]; word.setText(`${st.gr} · ${st.en}`); say(st.gr); trick(m.querySelector('.gq-st'), st.k); return; }
+      if (e.target.closest && e.target.closest('.gq-sculptor')) { word.setText('ο γλύπτης · the sculptor'); say('ο γλύπτης'); arm.classList.remove('is-hit'); void arm.getBBox; arm.classList.add('is-hit'); gqSound('tink'); return; }
+      if (e.target.closest && e.target.closest('.gq-gal-block, .gq-st')) { word.setText(`${s.gr} · ${s.en}`); say(s.gr); return; }
+      word.setText('το μουσείο · the gallery'); say('το μουσείο');
+    });
+  }
+  // A statue finished for the first time: a short scene. The gallery at night, a spotlight, the statue does its trick, one Greek line.
+  // Tap to go on. Calm mode and reduced motion get the still picture.
+  galleryScene(k) {
+    if (document.querySelector('.gq-fest')) return;
+    const st = STATUES.find(x => x.k === k) || STATUES[0];
+    const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
+    const ov = document.body.createDiv({ cls: 'gq-fest gq-gal-scene' + (reduce ? ' is-still' : ''), attr: { role: 'dialog', 'aria-label': st.line[1], tabindex: '-1' } });
+    const W = 320, H = 200, svg = svgA(ov, 'svg', { viewBox: `0 0 ${W} ${H}`, class: 'gq-fest-sv', 'aria-hidden': 'true' });
+    svgA(svg, 'rect', { width: W, height: H, fill: '#1f2542' });
+    for (let x = 0; x < W; x += 24) svgA(svg, 'rect', { x, y: 168, width: 24, height: 32, fill: (x / 24) % 2 ? '#262c4c' : '#20263f' });
+    svgA(svg, 'path', { d: 'M150,0 L170,0 L230,175 L90,175 Z', fill: '#fff6d8', opacity: 0.16, class: 'gq-gal-spot' });
+    svgA(svg, 'ellipse', { cx: 160, cy: 172, rx: 62, ry: 7, fill: '#fff6d8', opacity: 0.22 });
+    const holder = svgA(svg, 'g', { transform: 'translate(160 26) scale(1.2)' }); const sg = statueSvg(holder, st.k);
+    const txt = ov.createDiv('gq-fest-txt');
+    txt.createDiv({ cls: 'gq-fest-gr', text: st.line[0], attr: { lang: 'el' } });
+    txt.createDiv({ cls: 'gq-fest-en', text: `${st.line[1]} You finished ${st.en}.` });
+    txt.createDiv({ cls: 'gq-fest-tap', text: 'Tap to go on' });
+    let done = false; const close = () => { if (done) return; done = true; ov.addClass('is-out'); setTimeout(() => ov.remove(), 350); document.removeEventListener('keydown', key, true); };
+    const key = e => { if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') { e.preventDefault(); close(); } };
+    ov.onclick = close; document.addEventListener('keydown', key, true); ov.focus();
+    gqSound('sting'); setTimeout(() => { if (!done) say(st.line[0]); }, 900);
+    if (reduce) { setTimeout(close, 6000); return; }
+    setTimeout(() => { if (!done) sg.classList.add('is-gag', 'gag-' + st.k); }, 700);
+    setTimeout(close, 7000);
   }
   // The big moment, kept rare: a dance learned, a week's homework sent, the whole alphabet, the first 50 green words.
   // The whole screen becomes the square at night, the prints light up one by one, a dancer (a placeholder until the mascots are chosen)
@@ -2437,6 +2622,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       'Remembering a word on a later day earns the most.',
       'Everything else you finish adds a little: puzzles, sentences, songs, homework.',
       'A day off fades it a bit, so a little every day wins.',
+      ...(this.colors().world === 'gallery' ? ['Every point is also a chisel stroke on the statue you are carving. Strokes add up across days, and each statue takes a few more than the last.'] : []),
       ...(this.colors().world === 'dance' ? ['Every point is also a step (βήμα) toward the dance you are learning. Steps add up across days: ο συρτός has 6, ο καλαματιανός 12, and later dances take 2 or 3 points a step.'] : [])]) ul.createEl('li', { text: t });
     if (this.colors().world) { const li = ul.createEl('li'); li.appendText(this.colors().world === 'dance' ? 'Your dance floor grows with every point and never shrinks. ' : 'Your world grows with every φόρα point and never shrinks. '); const ch = li.createEl('a', { text: 'Change my world', href: '#' }); ch.onclick = e => { e.preventDefault(); this.setWorld(''); }; }
   }

@@ -866,3 +866,11 @@ body.gq-nonav .gq-corner[data-mode="friend"] { bottom: auto; }
 /* 2.20.78: the olive tree sits in the page at the top right of Today, below the header line, and scrolls with it */
 .gq-corner.is-inline { position: static; display: flex; justify-content: flex-end; align-items: flex-end; margin: 0 2px 4px; pointer-events: auto; }
 .gq-corner.is-inline.is-hidden { display: none; }
+
+/* 2.20.79: first-launch setup, two questions */
+.gq-setup-opts { display: flex; flex-direction: column; gap: 10px; margin: 16px 0 4px; }
+.gq-setup-opt { display: block; width: 100%; height: auto; text-align: left; padding: 14px 16px; border-radius: 12px; white-space: normal; }
+.gq-setup-t { font-weight: 600; font-size: 1.1em; margin-bottom: 2px; }
+.gq-setup-sum { margin: 8px 0 12px; padding-left: 1.2em; }
+.gq-setup-sum li { margin: 6px 0; }
+.gq-setup-again { display: block; margin-top: 14px; }

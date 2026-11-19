@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zw · A two-question start
+> New students now answer two questions on first open. Casual or Fluent in a Year sets the pace (Fluent in a Year starts today as day one). Can you read the Greek alphabet? If not yet, letter practice and the sound of each word turn on. If yes, letter practice is gone entirely. Students already under way are not asked. Change it later: three dots, Options, Setup again.
+
 > [!tip]- 2026-11-19zv · Olive tree on the page
 > Your olive tree now sits at the top right of Today, below the header line, and scrolls with the page. It is no longer pinned to the screen. Tap it to see how it is growing.
 

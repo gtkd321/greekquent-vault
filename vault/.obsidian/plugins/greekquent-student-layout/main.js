@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zv';
+const VAULT_RELEASE = '2026-11-19zw';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -2839,7 +2839,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         b.createDiv({ cls: 'gq-friend-t', text: t }); b.createDiv({ cls: 'gq-hint', text: d });
         b.onclick = () => { this.setWorld(k); r.querySelectorAll('.gq-friend').forEach(x => x.removeClass('is-on')); b.addClass('is-on'); }; } };
     if (kids) return three(easy);
-    if (fm.fiay !== undefined || fm.world || this.friendAsked) return three(fm.fiay ? big : easy);
+    if (fm.fiay !== undefined || fm.pace || fm.world || this.friendAsked) return three(fm.fiay ? big : easy);
     box.createDiv({ cls: 'gq-tour-q', text: 'How far this year?' });
     const r = box.createDiv('gq-row');
     const c1 = r.createEl('button', { text: 'Casual: a little each day' }); c1.onclick = () => { this.friendAsked = true; three(easy); };
@@ -3997,6 +3997,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     ].filter(Boolean);
     this.pop('Options', [{ label: '', build: el => {
       const list = el.createDiv('gq-opts');
+      if (!this.isKids && !this.app.vault.getAbstractFileByPath('Teacher')) setTimeout(() => { const a = el.createEl('a', { text: 'Setup again: pace and alphabet', href: '#', cls: 'gq-hint gq-setup-again' }); a.onclick = e => { e.preventDefault(); this.setupAgain(); }; }, 0);
       for (const o of O) {
         const row = list.createDiv('gq-opt'), tx = row.createDiv('gq-opt-tx');
         tx.createDiv({ cls: 'gq-opt-t', text: o.t }); tx.createDiv({ cls: 'gq-hint', text: o.d });
@@ -4072,7 +4073,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.onClose = () => { alive = false; run = false; gen++; pay(); try { speechSynthesis.cancel(); if (lock) lock.release(); } catch (e) {} };
     m.open();
   }
-  async renderToday(el) { await this.renderToday0(el); if (el.isConnected) this.cornerSync(); }
+  async renderToday(el) { await this.renderToday0(el); if (el.isConnected) { this.cornerSync(); if (this.needSetup()) this.setupPop(); } }
   async renderToday0(el) {
     // Each render builds off-screen and swaps in at the end; only the newest render for a container wins.
     const tok = el.gqTok = (el.gqTok || 0) + 1;
@@ -4141,7 +4142,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       this.cardStack(box, false);
       const foot = (box.querySelector('.gq-kdone') || box).createDiv('gq-hint gq-tfoot');
       const mo = foot.createEl('button', { text: 'More: story, games, colors, tools ›', cls: 'gq-mini' }); mo.onclick = () => this.showMore();
-      if (this.abcOff()) { const ab = foot.createEl('button', { text: 'Letter practice', cls: 'gq-mini' }); ab.onclick = () => this.setAbcOff(false); }
+      if (this.abcKnown()) { /* reads the alphabet: no letter practice at all */ }
+      else if (this.abcOff()) { const ab = foot.createEl('button', { text: 'Letter practice', cls: 'gq-mini' }); ab.onclick = () => this.setAbcOff(false); }
       else if (this.abcAllDone()) { const ab = foot.createEl('button', { text: 'Alphabet', cls: 'gq-mini' }); ab.onclick = () => { ab.remove(); this.lettersCard(box); const k = box.lastElementChild; box.appendChild(k); k.scrollIntoView({ block: 'start', behavior: 'smooth' }); }; }
       if (this.updateReady && !this.updating) { const up = foot.createEl('button', { text: 'Install update', cls: 'gq-mini' }); up.onclick = () => this.updateVault(false); }
       // Slides are parked (deckify below) until they come back for specific moments, not all of Today.
@@ -4392,7 +4394,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const wn = foot.createEl('a', { text: "What's new", href: '#' }); wn.onclick = e => { e.preventDefault(); this.openNote(WHATS_NEW); };
     foot.appendText(` · vault ${rel} · `);
     if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
-    if (this.abcOff()) { const lp = foot.createEl('a', { text: 'Letter practice', href: '#' }); lp.onclick = e => { e.preventDefault(); this.setAbcOff(false); }; foot.appendText(' · '); }
+    if (this.abcOff() && !this.abcKnown()) { const lp = foot.createEl('a', { text: 'Letter practice', href: '#' }); lp.onclick = e => { e.preventDefault(); this.setAbcOff(false); }; foot.appendText(' · '); }
     const gu = foot.createEl('a', { text: 'For grown-ups', href: '#' }); gu.onclick = e => { e.preventDefault(); this.openNote(SETUP); };
     // Slides parked here too: the kids Today is a plain list of cards.
     if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.tabsSync(); this.cornerSync(); this.kidLesson = wk.lesson; if (col.setup_seen) { if (this.tourState().at === undefined) this.tourState().at = 0; this.tourShow(); } }
@@ -4492,7 +4494,55 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const draw = () => { draw1(); const o = c.createDiv('gq-abc-off'); const a = o.createEl('a', { text: 'Turn off letter practice', href: '#', cls: 'gq-hint' }); a.onclick = e => { e.preventDefault(); this.setAbcOff(true); }; };
     draw();
   }
-  abcOff() { return !!this.lsGet('abcoff', 0); }
+  abcOff() { return this.abcKnown() || !!this.lsGet('abcoff', 0); }
+  // Said at setup that they read the alphabet: letter practice is gone, with no way back in except Setup again.
+  abcKnown() { return this.progFm().knows_abc === true; }
+  // ---------- First launch: two questions build the beginner setup (pace, then the alphabet) ----------
+  needSetup() {
+    if (this.isKids || this.setupShown || this.app.vault.getAbstractFileByPath('Teacher')) return false;
+    const fm = this.progFm();
+    if (fm.setup_done) return false;
+    // Students already under way are not asked.
+    return !(parseInt(fm.story_at, 10) > 0) && !(Array.isArray(fm.tour_done) && fm.tour_done.length) && (fm.tour_at === undefined || fm.tour_at === null);
+  }
+  setupPop() {
+    this.setupShown = true; const ans = { pace: 'casual', abc: false }; let saved = false;
+    const save = async () => { if (saved) return; saved = true; await this.setupSave(ans); };
+    this.pop('Welcome', [{ label: '', build: (el, api) => {
+      const q = (title, sub, opts, pick) => { el.empty();
+        el.createDiv({ cls: 'gq-pop-big', text: title }); if (sub) el.createDiv({ cls: 'gq-hint', text: sub });
+        const col = el.createDiv('gq-setup-opts');
+        for (const [t, d, v] of opts) { const b = col.createEl('button', { cls: 'gq-setup-opt' }); b.createDiv({ cls: 'gq-setup-t', text: t }); b.createDiv({ cls: 'gq-hint', text: d }); b.onclick = () => pick(v); } };
+      const done = () => { el.empty();
+        el.createDiv({ cls: 'gq-pop-big', text: 'Θα τα πούμε.', attr: { lang: 'el' } });
+        el.createDiv({ cls: 'gq-tsub', text: 'Your setup' });
+        const ul = el.createEl('ul', { cls: 'gq-setup-sum' });
+        ul.createEl('li', { text: ans.pace === 'fiay' ? 'Fluent in a Year: today is day one. A short story part and the day\'s words each day.' : 'Casual: one short story part a day, at your own pace.' });
+        ul.createEl('li', { text: ans.abc ? 'You read the alphabet: plain Greek letters, no letter practice.' : 'Learning the alphabet: letter practice, and the sound of each word under it.' });
+        el.createDiv({ cls: 'gq-hint', text: 'Change it later in Options, under the three dots.' });
+        const r = el.createDiv('gq-row'); const go = r.createEl('button', { text: 'Start', cls: 'mod-cta' });
+        go.onclick = async () => { await save(); api.close(); setTimeout(() => { if (!this.tourOpen()) this.tourStart(); }, 500); }; };
+      q('How far do you want to go?', 'You can change this later.', [
+        ['Casual', 'A little each day, at your own pace.', 'casual'],
+        ['Fluent in a Year', 'About 20 minutes a day, every day, for a year.', 'fiay']
+      ], v => { ans.pace = v;
+        q('Can you read the Greek alphabet?', 'α β γ δ ε…', [
+          ['Not yet', 'The app teaches the letters and shows how each word sounds.', false],
+          ['Yes, I can read it', 'Just the Greek, no letter practice.', true]
+        ], v2 => { ans.abc = v2; done(); }); });
+    } }], () => { save(); });
+  }
+  async setupSave(ans) {
+    const fiay = ans.pace === 'fiay', now = new Date(), day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    this.phNow = !ans.abc; this.applyPh(); if (!ans.abc) this.lsSet('abcoff', 0);
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.setup_done = true; fm.pace = ans.pace; fm.knows_abc = !!ans.abc; fm.phonetics = !ans.abc; if (fiay) { fm.fiay = true; fm.fiay_from = day; } else { delete fm.fiay; delete fm.fiay_from; } });
+    this.stackPick = null; setTimeout(() => this.refreshToday(), 300);
+  }
+  async setupAgain() {
+    const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { delete fm.setup_done; });
+    this.setupShown = false; const old = document.querySelector('.gq-pop'); if (old) old.remove(); this.setupPop();
+  }
   setAbcOff(v) { this.lsSet('abcoff', v ? 1 : 0); new Notice(v ? 'Letter practice is off. Letter practice at the bottom of Today turns it back on.' : 'Letter practice is back on Today.'); this.stackPick = null; this.refreshToday(); }
   // A "Say it" button: listen, then +2 φόρα when the phone hears the target. key keeps it to once a day.
   // onWin (optional): what the screen does once the phone hears it right, e.g. fill in the story puzzle.

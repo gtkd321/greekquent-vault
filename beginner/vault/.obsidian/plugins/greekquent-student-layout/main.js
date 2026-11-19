@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zu';
+const VAULT_RELEASE = '2026-11-19zv';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -2794,19 +2794,20 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async tourEnd() { if (this.progFm().tour_end) return; const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (!fm.tour_end) fm.tour_end = ymd(new Date()); }); this.tourEndNow = true; setTimeout(() => this.cornerSync(), 400); }
   friendOn() { return !!(this.tourEndNow || this.progFm().tour_end || (this.tourState().at !== undefined && this.tourLeft() === 0)); }
   cornerSync() {
-    if (this.unloaded || this.cornerBusy) return;
+    if (this.unloaded) return;
+    if (this.cornerBusy) { clearTimeout(this.cornerRetry); this.cornerRetry = setTimeout(() => this.cornerSync(), 3300); return; }
     let el = document.querySelector('.gq-corner'); if (!el) el = document.body.createDiv({ cls: 'gq-corner' });
     // The tour card sits at the bottom of the screen; the corner steps aside while it is open.
     el.toggleClass('is-hidden', !!document.querySelector('.gq-tour'));
     if (!this.friendOn()) {
+      if (el.hasClass('is-inline')) { el.removeClass('is-inline'); document.body.appendChild(el); el.dataset.mode = ''; }
       if (el.dataset.mode !== 'tour') { el.empty(); el.dataset.mode = 'tour'; const b = el.createEl('button', { cls: 'gq-corner-tour', text: 'Tour', attr: { 'aria-label': 'Take the tour' } }); b.onclick = () => this.tourStart(); }
       return;
     }
     const last = this.cornerLast, firstTime = !this.lsGet('planted', 0);
     el.empty(); el.dataset.mode = 'friend';
-    // The olive tree sits top right, just under the three dots.
-    const pin = () => { const m = [...document.querySelectorAll('.gq-headmore, .view-header .view-actions')].map(x => x.getBoundingClientRect()).find(r => r.width); if (m) { el.style.setProperty('--gq-ctop', Math.round(m.bottom + 6) + 'px'); el.style.setProperty('--gq-cright', Math.max(8, Math.round(window.innerWidth - m.right - 6)) + 'px'); } };
-    pin(); if (!this.cornerPin) { this.cornerPin = () => { const c = document.querySelector('.gq-corner[data-mode="friend"]'); if (c) pin(); }; this.registerDomEvent(window, 'resize', this.cornerPin); }
+    // The olive tree sits at the top right of Today, below the header line, and scrolls with the page. Other screens leave it out.
+    { const td = [...document.querySelectorAll('.gq-today')].find(x => x.isConnected && x.getClientRects().length); if (td) { if (el.parentElement !== td || td.firstElementChild !== el) td.prepend(el); el.addClass('is-inline'); el.toggleClass('is-hidden', !!document.querySelector('.gq-tour')); } else el.addClass('is-hidden'); }
     const b = el.createEl('button', { cls: 'gq-corner-friend' }); const a = this.friendArt(b, 56);
     b.setAttr('aria-label', `${a.name[0]}, ${a.name[1]}. φόρα ${a.m}. Open`);
     b.onclick = () => { this.friendDance(a); say(a.name[0]); this.moPop(); };
@@ -4071,7 +4072,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.onClose = () => { alive = false; run = false; gen++; pay(); try { speechSynthesis.cancel(); if (lock) lock.release(); } catch (e) {} };
     m.open();
   }
-  async renderToday(el) {
+  async renderToday(el) { await this.renderToday0(el); if (el.isConnected) this.cornerSync(); }
+  async renderToday0(el) {
     // Each render builds off-screen and swaps in at the end; only the newest render for a container wins.
     const tok = el.gqTok = (el.gqTok || 0) + 1;
     const kids = await this.kidsInfo(); if (kids) return this.renderKidsToday(el, tok, kids);

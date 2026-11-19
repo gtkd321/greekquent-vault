@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zv · Olive tree on the page
+> Your olive tree now sits at the top right of Today, below the header line, and scrolls with the page. It is no longer pinned to the screen. Tap it to see how it is growing.
+
 > [!tip]- 2026-11-19zu · The last two story lines
 > Day 299: the English now reads My coach at school would be shouting: goal! It means he would be shouting right now if he were here, so the Greek keeps θα: θα φώναζε. Without θα, φώναζε means he used to shout.
 > Day 300: the boss now says Μαρία, έχω μια δουλειά για σένα στην Αθήνα. It matches the English, and it sets up Maria's answer: όχι για μένα. Touch σένα in the puzzle to see what it means.

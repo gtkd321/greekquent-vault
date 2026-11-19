@@ -341,7 +341,7 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
   const SMALL = new Set(['ο', 'η', 'το', 'οι', 'τα', 'τον', 'την', 'ενασ', 'μια', 'ενα']);
   const near = (a, b) => { if (a === b) return true; if (Math.abs(a.length - b.length) > 1 || a.length < 4) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; };
   const heard = (target, alts) => { let tw = foldG(target).split(' ').filter(Boolean); const c = tw.filter(w => !SMALL.has(w)); if (c.length) tw = c; return alts.some(a => { const hw = foldG(a).split(' ').filter(Boolean); return tw.every(w => hw.some(h => near(w, h))); }); };
-  let srOff = (() => { try { return localStorage.getItem('gq-sr-off') === '1'; } catch (e) { return false; } })(), bonusBank = 0;
+  let srOff = (() => { try { localStorage.removeItem('gq-sr-off'); return localStorage.getItem('gq-sr-off2') === '1'; } catch (e) { return false; } })(), bonusBank = 0;
   const sayTarget = w => w.L ? w.L.w : lemma(w.g);
   // Listening always ends: a hard stop at 8 seconds even if the phone never reports back. A hang turns Say it off on this device.
   let srLive = null;
@@ -360,7 +360,9 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
         if (window.parent !== window) try { window.parent.postMessage({ gq: 'said', w: w.L ? 'γράμμα:' + w.L.l : lemma(w.g) }, '*'); } catch (e) {}
       } else if (kind === 'ok') qSayFb.textContent = v.length ? `Heard "${v[0]}". Try again.` : 'Nothing heard. Try again.';
       else if (v === 'no-speech' || v === 'aborted') qSayFb.textContent = 'Nothing heard. Try again.';
-      else { srOff = true; qSay.hidden = true; qSayFb.textContent = ''; try { localStorage.setItem('gq-sr-off', '1'); } catch (e) {} }
+      // Blocked for good: hide Say it on this phone. Anything else (a stall, a busy microphone): say so and keep the button.
+      else if (v === 'not-allowed' || v === 'service-not-allowed') { srOff = true; qSay.hidden = true; qSayFb.textContent = 'The microphone is blocked for this site. A grown-up can allow it in the browser settings.'; try { localStorage.setItem('gq-sr-off2', '1'); } catch (e) {} }
+      else qSayFb.textContent = 'The microphone did not start. Tap Say it again.';
     };
     srLive = r;
     const t1 = setTimeout(() => { try { r.stop(); } catch (e) {} }, 6000);
@@ -368,7 +370,8 @@ window.GQ_KIDS=[[1, "Mystery bag", [17, 313, 546, 632, 738]], [2, "Teddy's tea p
     r.onresult = e => { alts = []; for (const x of e.results) for (const y of x) alts.push(y.transcript); done('ok', alts); };
     r.onerror = e => done('err', e.error || 'error');
     r.onend = () => done('ok', alts || []);
-    setTimeout(() => { if (over) return; try { r.start(); } catch (e) { done('err', 'busy'); } }, 250);
+    // Start inside the tap: iPhones refuse a microphone started later.
+    try { r.start(); } catch (e) { done('err', 'busy'); }
   };
 
   function openQuiz(n) {

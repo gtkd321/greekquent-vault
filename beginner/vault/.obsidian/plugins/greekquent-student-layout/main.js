@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zm';
+const VAULT_RELEASE = '2026-11-19zn';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -4499,9 +4499,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const i = w.createEl('input', { cls: 'gq-sayit-in', attr: { type: 'text', lang: 'el', placeholder: 'Tap the mic on the keyboard and say it', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' } });
       const chk = () => { if (!i.value.trim()) return; if (heardIt(target, [i.value])) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} } else fb.setText(miss([i.value]) || ' Not quite. Try again.'); };
       i.onchange = chk; i.onkeydown = e => { if (e.key === 'Enter') chk(); };
-      w.appendChild(fb);
+      w.appendChild(fb); fb.setText(' Switch the keyboard to Greek first (the globe key), so its mic writes Greek.');
+      // The app's own microphone was switched off on this phone after a failure: one tap tries it again.
+      if (SRec() && this.lsGet('sroff', 0)) { const a = w.createEl('a', { text: ' Try the app mic again', href: '#', cls: 'gq-hint' }); a.onclick = e => { e.preventDefault(); this.lsSet('sroff', 0); const p = w.parentElement; w.remove(); if (p) this.sayIt(p, target, key, label, onWin, other); }; }
+      i.focus();
     };
     if (!SRec() || this.lsGet('sroff', 0)) { b.onclick = typed; return w; }
+    // Two misses in a row with nothing heard, or a microphone that never starts: the keyboard's microphone takes over,
+    // and a stall (common in iPhone home-screen apps) switches this phone to it from now on.
+    let fails = 0;
+    const toKb = (off, note) => { if (off) this.lsSet('sroff', 1); typed(); fb.setText((note || ' Tap the mic on the keyboard and say it. It types what you say, and the app checks it.') + ' Switch the keyboard to Greek first (the globe key).'); };
     b.onclick = async () => {
       if (b.hasClass('is-live')) return;
       try { window.speechSynthesis && speechSynthesis.cancel(); } catch (e) {}
@@ -4509,15 +4516,17 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       try {
         const alts = await listenGreek(); b.removeClass('is-live');
         if (heardIt(target, alts)) win();
+        else if (!alts.length && ++fails >= 2) toKb(false);
         else { b.setText(label || 'Say it · +2'); fb.setText(miss(alts) || (alts.length ? ` Heard "${alts[0]}". Try again.` : ' Nothing heard. Try again, a little louder.')); }
       } catch (e) {
         b.removeClass('is-live'); b.setText(label || 'Say it · +2');
-        if (e === 'no-speech' || e === 'aborted' || e === 'late') fb.setText(' Nothing heard. Try again.');
+        if (e === 'no-speech' || e === 'aborted' || e === 'late') { if (++fails >= 2) toKb(false); else fb.setText(' Nothing heard. Try again.'); }
+        else if (e === 'hang' || e === 'busy' || e === 'audio-capture' || e === 'network') toKb(true, ' The microphone did not start here. Tap the mic on the keyboard and say it instead.');
         // Blocked or not working here (Obsidian on a computer blocks it): use the keyboard's microphone instead, from now on.
         // Blocked for good (permission, or no speech service): switch to the keyboard's microphone from now on.
         else if (e === 'not-allowed' || e === 'service-not-allowed' || e === 'none') { this.lsSet('sroff', 1); typed(); if (window.GQW) fb.setText(' The microphone is blocked for this site. Tap the mic on the keyboard instead, or a grown-up can allow it in the browser settings.'); }
         // A stall or a one-off error: say so and keep the button. Try again works most of the time.
-        else fb.setText(' The microphone did not start. Tap the button again.');
+        else if (++fails >= 2) toKb(false); else fb.setText(' The microphone did not start. Tap the button again.');
       }
     };
     return w;
@@ -4579,6 +4588,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
           b.removeClass('is-live'); b.setText('Say a name');
           if (e === 'no-speech' || e === 'aborted' || e === 'late') fb.setText('Nothing heard. Try again.');
           else if (e === 'not-allowed' || e === 'service-not-allowed' || e === 'none') { this.lsSet('sroff', 1); b.remove(); typed(); fb.setText('The microphone is blocked for this site. Tap the mic on the keyboard and say the name, or allow the microphone in the browser settings.'); }
+          else if (e === 'hang' || e === 'busy' || e === 'audio-capture' || e === 'network') { this.lsSet('sroff', 1); b.remove(); typed(); fb.setText('The microphone did not start here. Tap the mic on the keyboard and say the name.'); }
           else fb.setText('The microphone did not start. Tap Say a name again, or use the keyboard.');
         }
       };

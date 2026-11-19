@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zh';
+const VAULT_RELEASE = '2026-11-19zi';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -833,6 +833,29 @@ const ZEI = {
   slap:  ['             ', '     o       ', '  __/|__     ', '     |  \\    ', '    /\\__/*   '],
   up:    ['   \\  o  /   ', '    \\_|_/    ', '      |      ', '     / \\     ', '    /   \\    ']
 };
+// Pixel sprites for the corner and the φόρα card: one object, no frame, on the page's own background.
+// Rows of letters; each letter is a color in SPR_PAL, '.' is see-through. Drawn bottom-up so a reveal grows out of the ground.
+const SPR = {"tree":{"seed":["........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","............b...........","...........ss...........","..........ssss..........","........SSSSSSSS........"],"sprout":["........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","..........g...g.........","...........ggG..........","............t...........","............t...........","............t...........","..........ssss..........","........SSSSSSSS........"],"sapling":["........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","............g...........","...........gGg..........","..........gGdg..........","............tdG.........",".........Gg.t...........","............t.gG........","............tt..........","............t...........","............t...........","............t...........","............t...........","............t...........",".........ssssss.........",".......SSSSSSSSSS......."],"young":["........................","........................","........................","........................","........................","........................",".........GgGgGd.........","........GgGggggd........",".......GgGGGGgggd.......",".......GGgGgggggd.......",".......ggggGGggdd.......",".......dGgggggddd.......","........dddddddd........",".........dddddd.........","............tT..........","............tT..........","............tT..........","............tT..........","............tT..........","...........tT...........","..........tttTt.........","..........tttTt.........","........ssssssss........","......SSSSSSSSSSSS......"],"tree":["........................","........................","..........dddd..........","......gggGGgGgggdd......",".....ggGgGgGgGggggd.....","...dGGggGggGgGggGgGdd...","...GggggggGggggggggGd...","...GggggGgggGgggGgGgd...","...GGggGgGgggggGggGdd...","...dggGGggGGGggggGgdd...","...dddgggGgggGggGdddd...",".....dddggGgggddddd.....","......dddddddddddd......",".........tddddT.........","............ttT.........","............ttT.........","............ttT.........","............ttT.........","............ttT.........","............ttT.........",".........ttttTt.........",".........ttttTt.........","......ssssssssssss......","....SSSSSSSSSSSSSSSS...."],"olives":["........................","........................","..........dodd..........","......gggGGgGgggdd......",".....ggGgogGgGggggd.....","...dGGggoggGgGggGgGdo...","...GggggggGggggggggGd...","...GgoggGgggGgggGgGgd...","...GoogGgGggggoGggGdd...","...dggGGggGGGggggGgod...","...dddgggGgogGggGdddd...",".....dddogGgggddddd.....","......ddodoodddddd......",".........tddddT.........","............ttT.........","............ttT.........","............ttT.........","............ttT.........","............ttT.........","............ttT.........",".........ttttTt.........",".........ttttTt.........","......ssssssssssss......","....SSSSSSSSSSSSSSSS...."]},"dancer":{"still":["................","................","......hhhh......","......hkkh......","......kkkk......","......kkkk......",".......kk.......",".....vwwwwv.....","....kvwwwwvk....","....kvwwwwvk....","....kvwwwwvk....","...kwvwwwwvwk...","...k.vwwwwv.k...","...k.rrrrrr.k...","...w..pppp..w...","......pppp......","......pppp......","......pppp......","......pppp......","......pp.p......","......pp.p......","......pp.p......",".....ppp.pp.....","................"],"out":["................","................","......hhhh......","......hkkh......","......kkkk......","......kkkk......",".......kk.......","k....vwwwwv....k","kkkkkvwwwwvkkkkk","wwwwwvwwwwvwwwww",".....vwwwwv.....",".....vwwwwv.....",".....vwwwwv.....",".....rrrrrr.....","......pppp......","......pppp......","......pppp......","......pppp......","......pppp......","......pp.p......","......pp.p......","......pp.p......",".....ppp.pp.....","................"],"stepR":["................","................","......hhhh......","......hkkh......","......kkkk......","......kkkk......",".......kk.......","k....vwwwwv....k","kkkkkvwwwwvkkkkk","wwwwwvwwwwvwwwww",".....vwwwwv.....",".....vwwwwv.....",".....vwwwwv.....",".....rrrrrr.....","......pppp......","......pppp......","......ppp.p.....","......pp.pp.....","......p..pp.....",".....pp..pp.....",".....pp...p.....",".....pp...pp....","....ppp...ppp...","................"],"lift":["................","................","......hhhh......","......hkkh......","......kkkk......","......kkkk......",".......kk.......","k....vwwwwv....k","kkkkkvwwwwvkkkkk","wwwwwvwwwwvwwwww",".....vwwwwv.....",".....vwwwwv.....",".....vwwwwv.....",".....rrrrrr.....","......pppp......","......pp.pp.....","......pp..p.....","......pp..pp....","......pp...ppp..","......pp........","......pp........","......pp........",".....ppp........","................"],"back":["................","................","......hhhh......","......hhhh......","......hhhh......","......kkkk......",".......kk.......","k....vwwwwv....k","kkkkkvwwwwvkkkkk","wwwwwvwwwwvwwwww",".....vwwwwv.....",".....vwwwwv.....",".....vwwwwv.....",".....rrrrrr.....","......pppp......","......pppp......","......pppp......","......pppp......","......pppp......","......pp.p......","......pp.p......","......pp.p......",".....ppp.pp.....","................"],"slap":["................","................","......hhhh......","......hkkh......","......kkkk......","......kkkk......",".......kk.......",".....vwwwwv.....",".kkkkvwwwwvk....",".wwwwvwwwwvk....",".....vwwwwvk....",".....vwwwwvk....",".....vwwwwvk....",".....rrrrrrk....","......pp.p.k....","......pp..pk....","......pp..pw....","......pp...p....","......pp..p.....","......pp..p.....","......pp.pk.....","......pp..w.....",".....ppp........","................"],"up":["................","................",".k....hhhh....k.",".wk...hkkh...kw.","..k...kkkk...k..","..wk..kkkk..kw..","...k...kk...k...","...wkvwwwwvkw...","....wvwwwwvw....",".....vwwwwv.....",".....vwwwwv.....",".....vwwwwv.....",".....vwwwwv.....",".....rrrrrr.....","......pppp......","......pppp......","......pppp......","......pppp......","......pppp......","......pp.p......","......pp.p......","......pp.p......",".....ppp.pp.....","................"]},"house":{"0":["........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","....qqqqqqqqqqqqqqqq....","....qqqqqqqqqqqqqqqq...."],"1":["........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................","........................",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....","....qqqqqqqqqqqqqqqq....","....qqqqqqqqqqqqqqqq...."],"2":["........................","........................","........................","........................","........................","........................","........................","........................","........................","....qqqqqqqqqqqqqqqq....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....","....qqqqqqqqqqqqqqqq....","....qqqqqqqqqqqqqqqq...."],"3":["........................","........................","........................","........................","........................","........................","........................","........................","........................","....qqqqqqqqqqqqqqqq....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBByBWWWWq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBBBBWWWWq.....","....qqqqqqqqqqqqqqqq....","....qqqqqqqqqqqqqqqq...."],"4":["........................","........................","........................","........................","........................","........................","........................","........................","........................","....qqqqqqqqqqqqqqqq....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qBWBWWWWWWBWBq.....",".....qBWBWWWWWWBWBq.....",".....qBWBWWWWWWBWBq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBByBWWWWq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBBBBWWWWq.....",".....qWWWWBBBBWWWWq.....","....qqqqqqqqqqqqqqqq....","....qqqqqqqqqqqqqqqq...."],"5":["........................","........................","........................","...............y........","..............yyy.......","...............y........","...............B........","..............BBB.......",".............BBBBB......","....qqqqqqqqqqBBBqqq....",".....qWWWWWWWWWWWWq.....",".....qWWWWWWWWWWWWq.....",".....qBWBWWWWWWBWBq.....",".....qBWBWWWWWWBWBq.....",".....qBWBWWWWWWBWBq.....","....mqWWWWBBBBWWWWq.m...","...m.mWWWWBBBBWWWWqm.m..","..m.mqWWWWBBBBWWWWq.m...","...m.qWWWWBByBWWWWqm....","....mqWWWWBBBBWWWWq.....","...m.qWWWWBBBBWWWWq.....","...nnqWWWWBBBBWWWWqnn...","....qqqqqqqqqqqqqqqq....","....qqqqqqqqqqqqqqqq...."]},"gyro":{"0":["........................","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........","...........ii...........",".......qqqqqqqqqq.......",".......qqqqqqqqqq......."],"1":["........................","...........ii...........","...........ii...........","...........ii...........","...........ii...........",".........CCCCCC.........",".........cCcccC.........",".........CcccCc.........",".........CCCCCC.........",".........ccCccc.........",".........cCcccC.........",".........CCCCCC.........",".........cccCcc.........","..........cCcc..........","..........CCCC..........","..........cccC..........","..........ccCc..........","..........CCCC..........","..........Cccc..........","..........cccC..........","..........CCCC..........","...........ii...........",".......qqqqqqqqqq.......",".......qqqqqqqqqq......."],"2":["........................","...........ii...........","...........ii...........","...........ii...........","........CCCCCCCC........","........cccCcccC........","........ccCcccCc........","........CCCCCCCC........","........CcccCccc........",".........ccCccc.........",".........CCCCCC.........",".........CcccCc.........",".........cccCcc.........",".........CCCCCC.........",".........cCcccC.........",".........CcccCc.........",".........CCCCCC.........","..........cCcc..........","..........Cccc..........","..........CCCC..........","..........ccCc..........","..........cCcc..........",".......qqqqqqqqqq.......",".......qqqqqqqqqq......."],"3":["........................","...........ii...........","...........ii...........",".......CCCCCCCCCC.......",".......cCcccCcccC.......",".......CcccCcccCc.......",".......CCCCCCCCCC.......","........cCcccCcc........","........CcccCccc........","........CCCCCCCC........","........ccCcccCc........","........cCcccCcc........","........CCCCCCCC........",".........ccCccc.........",".........cCcccC.........",".........CCCCCC.........",".........cccCcc.........",".........ccCccc.........",".........CCCCCC.........","..........cccC..........","..........ccCc..........","..........CCCC..........",".......qqqCcccqqq.......",".......qqqqqqqqqq......."],"4":["........................","...........ii...........","...........ii...........",".......CCCCCCCCCC.......",".......cCcccCcccC.ff....",".......CcccCcccCc.Ff....",".......CCCCCCCCCC.ff....","........cCcccCcc..ff....","........CcccCccc..Ff....","........CCCCCCCC..ff....","........ccCcccCc..ff....","........cCcccCcc..Ff....","........CCCCCCCC..ff....",".........ccCccc...ff....",".........cCcccC...Ff....",".........CCCCCC...ff....",".........cccCcc...ff....",".........ccCccc...Ff....",".........CCCCCC...ff....","..........cccC....ff....","..........ccCc....ff....","..........CCCC..........",".......qqqCcccqqq.......",".......qqqqqqqqqq......."],"5":["........................","...........ii...........","...........ii...........",".......CCCCCCCCCC.......",".......cCcccCcccC.ff....",".......CcccCcccCc.Ff....",".......CCCCCCCCCC.ff....","........cCcccCcc..ff....","........CcccCccc..Ff....","........CCCCCCCC..ff....","........ccCcccCc..ff....","........cCcccCcc..Ff....","........CCCCCCCC..ff....",".........ccCccc...ff....",".........cCcccC...Ff....",".........CCCCCC...ff....",".........cccCcc...ff....",".........ccCccc...Ff....",".........CCCCCC...ff....","..PuOwRP..cccC....ff....",".PPPPPPPP.ccCc....ff....",".PPPPPPPP.CCCC..........",".......qqqCcccqqq.......",".......qqqqqqqqqq......."]}};
+const SPR_PAL = {"S":"#5a4022","s":"#7a5a32","t":"#7a5230","T":"#5a3a20","g":"#7f9a45","G":"#a9bb7a","d":"#56703a","o":"#3d2a4a","b":"#c8a56a","k":"#e2ac80","h":"#2b1b12","w":"#f4f0e4","v":"#2a2a2a","r":"#c0392b","p":"#33363d","q":"#b9b2a4","W":"#ffffff","B":"#2f6fbf","y":"#e0b030","m":"#c2307a","n":"#b0603a","i":"#8a8a8a","c":"#b8743a","C":"#8c5426","f":"#e0602a","F":"#f1c40f","P":"#e8c58a","u":"#d0392b","R":"#2e7d32","O":"#c99ac9"};
+const SPR_NAMES = {
+  grove: [['ο σπόρος', 'the seed'], ['το βλαστάρι', 'the sprout'], ['το δεντράκι', 'the little tree'], ['η ελιά', 'the olive tree'], ['το λιόδεντρο', 'the grown olive tree'], ['οι ελιές', 'the olives']],
+  village: [['τα θεμέλια', 'the foundation'], ['ο τοίχος', 'the wall'], ['οι τοίχοι', 'the walls'], ['η πόρτα', 'the door'], ['τα παράθυρα', 'the windows'], ['το σπίτι', 'the house']],
+  gyro: [['η σούβλα', 'the spit'], ['ο γύρος', 'the gyro'], ['ο γύρος', 'the gyro'], ['ο γύρος', 'the gyro'], ['η φωτιά', 'the fire'], ['η πίτα', 'the pita']]
+};
+const SPR_DANCE = [['out', 160], ['stepR', 160], ['lift', 160], ['back', 160], ['out', 160], ['slap', 320], ['up', 700], ['still', 0]];
+function sprRows(w, f, pose) {
+  if (w === 'grove') return SPR.tree[['seed', 'sprout', 'sapling', 'young', 'tree', 'olives'][f]];
+  if (w === 'village') return SPR.house[String(f)];
+  if (w === 'gyro') return SPR.gyro[String(f)];
+  return SPR.dancer[pose || 'still'] || SPR.dancer.still;
+}
+// reveal 0..1: how much of the sprite has come up out of the ground.
+function sprPaint(cv, rows, reveal) {
+  const H = rows.length, W = rows[0].length; if (cv.width !== W) cv.width = W; if (cv.height !== H) cv.height = H;
+  const ctx = cv.getContext('2d'); if (!ctx) return; ctx.clearRect(0, 0, W, H);
+  const from = Math.floor(H * (1 - Math.max(0, Math.min(1, reveal === undefined ? 1 : reveal))));
+  for (let y = from; y < H; y++) for (let x = 0; x < W; x++) { const c = SPR_PAL[rows[y][x]]; if (c) { ctx.fillStyle = c; ctx.fillRect(x, y, 1, 1); } }
+}
 const ZEI_SEQ = [['front', 150], ['right', 150], ['back', 150], ['left', 150], ['front', 150], ['right', 150], ['back', 150], ['left', 150], ['front', 260], ['slap', 650], ['up', 0]];
 // Draw the dancer, the floor and the steps in a <pre>. The steps row: # for a step you have, . for one still to come.
 const ZW = 27;
@@ -2557,8 +2580,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (w === 'gallery') { this.galleryWorld(c, todayPts, score); return; }
     if (!this.words && !this.worldWait) { this.worldWait = true; this.wordIndex().then(() => this.moPaint()); }
     const pts = this.growNow(), st = worldStage(pts, W_PTS), mood = worldMood(todayPts, score);
-    const box = c.createDiv('gq-world'), cv = box.createEl('canvas', { cls: 'gq-world-cv', attr: { width: W_W, height: W_H, role: 'img', 'aria-label': `${WORLDS[w].eras[st.era].name}. ${MOODS[mood]}.` } });
-    const ctx = cv.getContext('2d'); if (!ctx) return; ctx.imageSmoothingEnabled = false;
+    // One object, no scene: it sits on the page like the corner sprite, only bigger.
+    const box = c.createDiv('gq-world gq-world-one'), art = this.friendArt(box, 120), cv = art.el;
     const items = w === 'pet' ? [] : WORLDS[w].eras[st.era].items.slice(0, st.n);
     const cap = box.createDiv({ cls: 'gq-hint gq-world-cap' });
     const name = w === 'pet' ? (st.f === 0 ? 'An egg. Get your first φόρα to hatch it' : WORLDS.pet.eras[st.era].name) : WORLDS[w].eras[st.era].name;
@@ -2583,62 +2606,45 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (!list.length) return; const t = list[(k++ + Math.floor(Math.random() * list.length)) % list.length];
       word.setText(w === 'pet' ? `Φοράκι says: ${t}` : t); say(t);
     };
-    const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
-    // Dancers live in the Dance world only; the other worlds grow with φόρα and show no dances.
-    const crew = 0, long = Date.now() - (this.danceAt || 0) < 8000;
-    const run = () => {
-      cancelAnimationFrame(cv._raf); const t0 = performance.now(), dur = long && crew ? 6000 : 3000;
-      const step = now => { const t = Math.min(1, (now - t0) / dur); worldPaint(ctx, w, st, mood, t); if (crew) drawDancers(ctx, crew, t * dur / 3000); if (t < 1 && cv.isConnected) cv._raf = requestAnimationFrame(step); };
-      if (reduce) { worldPaint(ctx, w, st, mood, 1); if (crew) drawDancers(ctx, crew, 1); } else { step(t0); }
-    };
-    cv.onclick = e => { const h = worldHit(cv, e); try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {} run(); word.setAttribute('lang', 'el'); if (h) { word.setText(`${h[4]} · ${h[5]}`); say(h[4]); } else speak(); };
-    run();
+    cv.addEventListener('click', () => { try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {} word.setAttribute('lang', 'el'); word.setText(art.name.join(' · ')); say(art.name[0]); art.paint(0); this.friendGrow(art, 700); });
   }
   // The Dance world: the village square (η πλατεία) seen from above. One footprint for each step of the dance you are learning,
   // in its real pattern. Each new step stamps its print, with a soft sound. Tap the square to walk the steps again.
   danceWorld(c, todayPts, score) {
     const d = danceNow(this.moData().steps), mood = worldMood(todayPts, score), name = DANCE_NAME[d.k];
     const box = c.createDiv('gq-world gq-square');
-    const pre = asciiPre(box); pre.setAttr('aria-label', `Η πλατεία, the village square. A dancer, still. Learning ${name}: step ${d.steps} of ${d.n}.`);
-    asciiPose(pre, 'still');
+    box.addClass('gq-world-one'); const art = this.friendArt(box, 120), pre = art.el; pre.setAttr('aria-label', `A dancer. Learning ${name}: step ${d.steps} of ${d.n}.`);
     const cap = box.createDiv({ cls: 'gq-hint gq-world-cap' }); cap.appendText('Learning ');
     const nm = cap.createSpan({ cls: 'gq-say', text: name, attr: { lang: 'el' } }); nm.onclick = () => say(name);
     cap.appendText(` · step ${d.steps} of ${d.n}`);
     if (d.learned) cap.appendText(` · ${d.learned} learned`);
-    const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
+    const reduce = this.reduceOn();
     // New steps since this card was last drawn light up one by one; the rest are already there.
     const seen = this.stepSeen && this.stepSeen.k === d.k && this.stepSeen.learned === d.learned ? Math.min(this.stepSeen.n, d.steps) : d.steps;
     this.stepSeen = { k: d.k, learned: d.learned, n: d.steps };
-    const els = asciiSteps(pre, d.n, d.steps, reduce ? d.steps : seen);
-    const stamp = (from, to, gap) => { for (let i = from; i < to; i++) setTimeout(() => { if (!pre.isConnected) return; els[i].classList.remove('is-wait'); els[i].classList.add('is-new'); gqSound('step'); }, (i - from) * gap + 250); };
-    if (seen < d.steps && !reduce) stamp(seen, d.steps, 260);
+    const row = box.createDiv({ cls: 'gq-dsteps', attr: { 'aria-hidden': 'true' } }), els = [];
+    for (let i = 0; i < d.n; i++) els.push(row.createSpan('gq-dstep' + (i < (reduce ? d.steps : seen) ? ' is-on' : i < d.steps ? ' is-wait' : '')));
+    const stamp = (from, to, gap) => { for (let i = from; i < to; i++) setTimeout(() => { if (!row.isConnected) return; els[i].classList.remove('is-wait'); els[i].classList.add('is-on', 'is-new'); gqSound('step'); }, (i - from) * gap + 250); };
+    if (seen < d.steps && !reduce) { stamp(seen, d.steps, 260); this.friendDance(art); }
     const word = box.createDiv({ cls: 'gq-world-say', attr: { lang: 'el' } });
     worldTip(word);
-    pre.addEventListener('click', e => {
+    box.addEventListener('click', e => {
       try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {}
-      const onStep = e.target.closest && e.target.closest('.gq-ascii-steps');
+      const onStep = e.target.closest && e.target.closest('.gq-dsteps');
+      if (!onStep && e.target !== pre) return;
       word.setAttribute('lang', 'el'); word.setText(onStep ? `τα βήματα · steps · ${name}` : 'ο χορευτής · the dancer'); say(onStep ? name : 'ο χορευτής');
-      if (!reduce && d.steps) { els.slice(0, d.steps).forEach(e => { e.classList.remove('is-new'); e.classList.add('is-wait'); }); stamp(0, d.steps, 200); }
+      this.friendDance(art);
+      if (!reduce && d.steps) { els.slice(0, d.steps).forEach(e => { e.classList.remove('is-new', 'is-on'); e.classList.add('is-wait'); }); stamp(0, d.steps, 200); }
     });
   }
   // The Gallery world: a hall of statues. The block in the middle loses chips with every φόρα point (instant feedback),
   // the sculptor swings his hammer, and finished statues stand along the hall. Tap a statue to hear its name and see its trick.
   galleryWorld(c, todayPts, score) {
     const g = galleryNow(this.moData().chisel), mood = worldMood(todayPts, score), night = mood === 0, s = g.s;
-    const W = 320, H = 150, box = c.createDiv('gq-world gq-gallery');
-    const svg = svgA(box, 'svg', { viewBox: `0 0 ${W} ${H}`, class: 'gq-gal-sv', role: 'img', 'aria-label': `Το μουσείο, the gallery. Carving ${s.en}: ${g.strokes} of ${g.cost} strokes.` });
-    svgA(svg, 'rect', { width: W, height: H, rx: 10, fill: night ? '#262b45' : '#7d3a33' });
-    svgA(svg, 'rect', { x: 0, y: 112, width: W, height: 10, fill: night ? '#2d3352' : '#6a2f29' });
-    for (const cx of [20, 300]) { svgA(svg, 'rect', { x: cx - 7, y: 10, width: 14, height: 112, fill: night ? '#31375a' : '#e4d8c2' }); svgA(svg, 'rect', { x: cx - 10, y: 6, width: 20, height: 6, fill: night ? '#3a4166' : '#efe6d6' }); }
-    for (let x = 0; x < W; x += 20) svgA(svg, 'rect', { x, y: 122, width: 20, height: 28, fill: ((x / 20) % 2) ? (night ? '#30365a' : '#e2d5bd') : (night ? '#2a3050' : '#d8c9ad') });
-    // Finished statues along the hall (this round), small, each on a plinth.
+    const W = 320, H = 150, box = c.createDiv('gq-world gq-gallery gq-world-one');
+    const svg = svgA(box, 'svg', { viewBox: '52 -4 80 126', class: 'gq-gal-sv', role: 'img', 'aria-label': `Το μουσείο, the gallery. Carving ${s.en}: ${g.strokes} of ${g.cost} strokes.` });
+    // No hall and no floor: the statue alone on the page. Finished ones are counted in the caption.
     const hall = svgA(svg, 'g', {}), done = g.i, minis = [];
-    for (let j = 0; j < done; j++) {
-      const x0 = 186 + j * 18, mg = svgA(hall, 'g', { transform: `translate(${x0} 74) scale(0.36)`, class: 'gq-gal-mini', 'data-i': j });
-      svgA(mg, 'rect', { x: -30, y: 0, width: 60, height: 130, fill: 'transparent' }); statueSvg(mg, STATUES[j].k); minis.push(mg);
-      svgA(hall, 'rect', { x: x0 - 7, y: 117, width: 14, height: 5, fill: night ? '#3a4166' : '#cbbb9c' });
-    }
-    if (!done) { const t = svgA(hall, 'text', { x: 250, y: 100, 'text-anchor': 'middle', 'font-size': 9, fill: night ? '#8a90b8' : '#f3e6d0' }); t.textContent = 'η αίθουσα · the hall'; }
     // The statue being carved, under a block of marble chips.
     const cur = svgA(svg, 'g', { transform: 'translate(92 2)' }); statueSvg(cur, s.k);
     const COLS = 6, ROWS = 12, x0 = -32, y0 = -2, cw = 64 / COLS, chh = 116 / ROWS, rnd = gqRand(g.i * 31 + g.round * 7 + 3), V = [];
@@ -2650,7 +2656,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const blk = svgA(cur, 'g', { class: 'gq-gal-block' });
     const els = cells.map((cl, i) => svgA(blk, 'polygon', { points: cl.pts.map(p => p.map(v => v.toFixed(1)).join(',')).join(' '), fill: (i % 3) ? '#d3c9b6' : '#c8bda8', stroke: '#b3a690', 'stroke-width': 0.6, class: 'gq-chip' + (i < gone ? ' is-gone' : '') }));
     // The sculptor: a little man in an apron and a cap, hammer raised.
-    const man = svgA(svg, 'g', { transform: 'translate(146 78)', class: 'gq-sculptor' });
+    const man = svgA(svg, 'g', { transform: 'translate(146 78)', class: 'gq-sculptor', style: 'display:none' });
     svgA(man, 'line', { x1: -3, y1: 30, x2: -5, y2: 44, stroke: '#3b3b3b', 'stroke-width': 3, 'stroke-linecap': 'round' }); svgA(man, 'line', { x1: 3, y1: 30, x2: 5, y2: 44, stroke: '#3b3b3b', 'stroke-width': 3, 'stroke-linecap': 'round' });
     svgA(man, 'rect', { x: -7, y: 8, width: 14, height: 24, rx: 5, fill: '#2f5d8a' }); svgA(man, 'rect', { x: -5, y: 14, width: 10, height: 18, rx: 2, fill: '#efe3c8' });
     svgA(man, 'circle', { cx: 0, cy: 2, r: 6, fill: '#f1c27d' }); svgA(man, 'path', { d: 'M-6,0 Q0,-8 7,-1 L9,0 Z', fill: '#c0392b' });
@@ -2692,12 +2698,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (document.querySelector('.gq-fest')) return;
     const st = STATUES.find(x => x.k === k) || STATUES[0];
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
-    const ov = document.body.createDiv({ cls: 'gq-fest gq-gal-scene' + (reduce ? ' is-still' : ''), attr: { role: 'dialog', 'aria-label': st.line[1], tabindex: '-1' } });
+    const ov = document.body.createDiv({ cls: 'gq-fest gq-fest-page gq-gal-scene' + (reduce ? ' is-still' : ''), attr: { role: 'dialog', 'aria-label': st.line[1], tabindex: '-1' } });
     const W = 320, H = 200, svg = svgA(ov, 'svg', { viewBox: `0 0 ${W} ${H}`, class: 'gq-fest-sv', 'aria-hidden': 'true' });
-    svgA(svg, 'rect', { width: W, height: H, fill: '#1f2542' });
-    for (let x = 0; x < W; x += 24) svgA(svg, 'rect', { x, y: 168, width: 24, height: 32, fill: (x / 24) % 2 ? '#262c4c' : '#20263f' });
-    svgA(svg, 'path', { d: 'M150,0 L170,0 L230,175 L90,175 Z', fill: '#fff6d8', opacity: 0.16, class: 'gq-gal-spot' });
-    svgA(svg, 'ellipse', { cx: 160, cy: 172, rx: 62, ry: 7, fill: '#fff6d8', opacity: 0.22 });
     const holder = svgA(svg, 'g', { transform: 'translate(160 26) scale(1.2)' }); const sg = statueSvg(holder, st.k);
     const txt = ov.createDiv('gq-fest-txt');
     txt.createDiv({ cls: 'gq-fest-gr', text: st.line[0], attr: { lang: 'el' } });
@@ -2719,8 +2721,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const k = big.k && DANCE_NAME[big.k] && (DANCE_FEET[big.k] !== undefined) ? big.k : big.k ? 'kalamatianos' : 'syrtos';
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
     const ov = document.body.createDiv({ cls: 'gq-fest' + (reduce ? ' is-still' : ''), attr: { role: 'dialog', 'aria-label': big.en, tabindex: '-1' } });
-    ov.addClass('gq-fest-ascii'); const pre = asciiPre(ov, 'gq-ascii-big'); pre.setAttr('aria-hidden', 'true');
-    const n = Math.min(24, (DANCE_FEET[k] || []).length || 6); asciiPose(pre, reduce ? 'up' : 'still'); asciiSteps(pre, n, n, n);
+    ov.addClass('gq-fest-page'); const cv = ov.createEl('canvas', { cls: 'gq-spr gq-fest-spr', attr: { 'aria-hidden': 'true' } });
+    const pose = p => sprPaint(cv, sprRows('dance', 0, p)); pose(reduce ? 'up' : 'still');
     const txt = ov.createDiv('gq-fest-txt');
     txt.createDiv({ cls: 'gq-fest-gr', text: big.gr, attr: { lang: 'el' } });
     txt.createDiv({ cls: 'gq-fest-en', text: big.en });
@@ -2732,8 +2734,97 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!reduce) txt.style.visibility = 'hidden';
     if (reduce) { setTimeout(close, 6000); return; }
     // A still beat, then the spin: each pose for its time, the slap with a step sound, and the words when the arms go up.
-    let t = 700; for (const [pose, ms] of ZEI_SEQ) { setTimeout(() => { if (done || !ov.isConnected) return; asciiPose(pre, pose); if (pose === 'slap') gqSound('step'); if (pose === 'up') { pre.addClass('is-up'); txt.style.visibility = ''; } }, t); t += ms; }
+    const SPIN = [['out', 160], ['stepR', 160], ['lift', 160], ['back', 160], ['out', 160], ['stepR', 160], ['lift', 160], ['back', 160], ['out', 260], ['slap', 650], ['up', 0]];
+    let t = 700; for (const [p, ms] of SPIN) { setTimeout(() => { if (done || !ov.isConnected) return; pose(p); if (p === 'slap') gqSound('step'); if (p === 'up') txt.style.visibility = ''; }, t); t += ms; }
     setTimeout(close, t + 5200);
+  }
+  // ---------- Your friend: one small sprite in the corner of every screen ----------
+  // Before the tour is done the corner holds the Tour button. Finishing the tour plants your friend there as a treat,
+  // and from then on it grows (or dances) with every φόρα point. Tap it for the numbers.
+  reduceOn() { return (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn(); }
+  // The picture of your friend right now. h is its height in CSS pixels.
+  // preview: the grown picture, for choosing.
+  friendArt(parent, h, preview) {
+    const w = this.worldKey(), days = this.moData().days, m = this.moScore(days, new Date()), todayPts = +(days || {})[ymd(new Date())] || 0;
+    if (w === 'gallery') {
+      const g = galleryNow(this.moData().chisel), s = g.s, p = Math.min(1, g.strokes / Math.max(1, g.cost));
+      const svg = svgA(parent, 'svg', { viewBox: '-36 -6 72 124', class: 'gq-spr gq-spr-svg', role: 'img', 'aria-label': `${s.gr}, ${s.en}` }); svg.style.height = h + 'px';
+      const hold = svgA(svg, 'g', {}); statueSvg(hold, s.k);
+      const blk = svgA(svg, 'rect', { x: -32, y: -2, width: 64, height: preview ? 0 : Math.round(116 * (1 - p)), rx: 3, fill: '#d3c9b6', stroke: '#b3a690', 'stroke-width': 0.8 });
+      return { el: svg, key: 'g' + g.i + '.' + g.round, name: [s.gr, s.en], m, paint: r => { hold.style.clipPath = r < 1 ? `inset(${Math.round((1 - r) * 100)}% 0 0 0)` : ''; blk.style.clipPath = hold.style.clipPath; } };
+    }
+    const cv = parent.createEl('canvas', { cls: 'gq-spr', attr: { role: 'img' } }); cv.style.height = h + 'px';
+    if (w === 'pet') {
+      const st = preview ? { f: 0.5, era: 1 } : worldStage(this.growNow(), W_PTS), mood = preview ? 2 : worldMood(todayPts, m), nm = st.f === 0 ? ['το αυγό', 'the egg'] : ['το Φοράκι', 'Foraki, your pet'];
+      cv.width = 36; cv.height = 34; cv.setAttr('aria-label', nm.join(', '));
+      const paint = (r, t) => { const ctx = cv.getContext('2d'); if (!ctx) return; ctx.clearRect(0, 0, 36, 34); const top = Math.floor(34 * (1 - (r === undefined ? 1 : r)));
+        const R = (x, y, ww, hh, c) => { x -= 62; y -= 13; const y0 = Math.max(y, top); if (y0 >= y + hh) return; ctx.fillStyle = c === '#fff' ? '#8a8a8a' : c; ctx.fillRect(x, y0, ww, y + hh - y0); };
+        petPaint(R, st, mood, t || 0.3, (n, e, f) => f(), []); };
+      paint(1); return { el: cv, key: 'p' + st.era + (st.f ? 1 : 0), name: nm, m, paint };
+    }
+    let rows, nm, key;
+    if (w === 'dance') { rows = sprRows('dance'); nm = ['ο χορευτής', 'the dancer']; key = 'd'; }
+    else { const st = worldStage(this.growNow(), W_PTS), f = preview ? 4 : [2, 4, 8, 14, 20].filter(x => st.idx >= x).length; rows = sprRows(w, f); nm = SPR_NAMES[w][f]; key = w + f; }
+    cv.setAttr('aria-label', nm.join(', '));
+    const paint = (r, pose) => sprPaint(cv, pose ? sprRows('dance', 0, pose) : rows, r);
+    paint(1); return { el: cv, key, name: nm, m, paint, dance: w === 'dance' };
+  }
+  // A short dance: the steps, the slap, arms up.
+  friendDance(a) { if (!a.dance || this.reduceOn()) return; let t = 0; for (const [p, ms] of SPR_DANCE) { setTimeout(() => { if (a.el.isConnected) { a.paint(1, p); if (p === 'slap') gqSound('step'); } }, t); t += ms; } }
+  // Up out of the ground, a row at a time.
+  friendGrow(a, ms, done) {
+    if (this.reduceOn()) { a.paint(1); if (done) done(); return; }
+    const t0 = performance.now(); const step = now => { const r = Math.min(1, (now - t0) / ms); a.paint(r); if (r < 1 && a.el.isConnected) requestAnimationFrame(step); else if (done) done(); }; requestAnimationFrame(step);
+  }
+  async tourEnd() { if (this.progFm().tour_end) return; const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (!fm.tour_end) fm.tour_end = ymd(new Date()); }); this.tourEndNow = true; setTimeout(() => this.cornerSync(), 400); }
+  friendOn() { return !!(this.tourEndNow || this.progFm().tour_end || (this.tourState().at !== undefined && this.tourLeft() === 0)); }
+  cornerSync() {
+    if (this.unloaded || this.cornerBusy) return;
+    let el = document.querySelector('.gq-corner'); if (!el) el = document.body.createDiv({ cls: 'gq-corner' });
+    // The tour card sits at the bottom of the screen; the corner steps aside while it is open.
+    el.toggleClass('is-hidden', !!document.querySelector('.gq-tour'));
+    if (!this.friendOn()) {
+      if (el.dataset.mode !== 'tour') { el.empty(); el.dataset.mode = 'tour'; const b = el.createEl('button', { cls: 'gq-corner-tour', text: 'Tour', attr: { 'aria-label': 'Take the tour' } }); b.onclick = () => this.tourStart(); }
+      return;
+    }
+    const last = this.cornerLast, firstTime = !this.lsGet('planted', 0);
+    el.empty(); el.dataset.mode = 'friend';
+    const b = el.createEl('button', { cls: 'gq-corner-friend' }); const a = this.friendArt(b, 56);
+    b.setAttr('aria-label', `${a.name[0]}, ${a.name[1]}. φόρα ${a.m}. Open`);
+    b.onclick = () => { this.friendDance(a); say(a.name[0]); this.moPop(); };
+    this.cornerLast = { m: a.m, key: a.key, w: this.worldKey() };
+    if (firstTime) {
+      // The treat for finishing the tour: a little mound, then your friend comes up out of it.
+      this.lsSet('planted', 1); this.cornerBusy = true; setTimeout(() => { this.cornerBusy = false; }, 3200); el.addClass('is-plant'); a.paint(0); gqSound('tink');
+      setTimeout(() => this.friendGrow(a, 1300, () => { el.removeClass('is-plant'); gqSound('sting'); say(a.name[0]); this.friendDance(a); }), 500);
+      return;
+    }
+    if (!last || last.w !== this.cornerLast.w) return;
+    if (a.m > last.m) {
+      const up = el.createSpan({ cls: 'gq-corner-up', text: '+' + (a.m - last.m), attr: { 'aria-hidden': 'true' } }); setTimeout(() => up.remove(), 1500);
+      if (last.key !== a.key) { a.paint(0); this.friendGrow(a, 900, () => gqSound('sting')); }
+      else if (a.dance) this.friendDance(a);
+      else if (!this.reduceOn()) { b.addClass('is-up'); setTimeout(() => b.removeClass('is-up'), 700); }
+    }
+  }
+  // Tap your friend: φόρα in a card in front of the page.
+  moPop() { this.pop('Πάρε φόρα', [{ label: '', build: el => { const c = el.createDiv('gq-mo gq-mo-pop'); this.moDraw(c); } }]); }
+  // Choose your friend: one question, three answers, once. Grown-ups first say how far they want to go this year.
+  friendPick(tip, kids) {
+    const fm = this.progFm(), box = tip.createDiv('gq-friend-pick');
+    const easy = [['grove', 'A plant', 'grows with you'], ['pet', 'A pet', 'hatches and grows'], ['dance', 'A dancer', 'learns a dance']];
+    const big = [['gyro', 'A gyro shop', 'from the spit to the shop'], ['village', 'A house', 'built stone by stone'], ['gallery', 'A statue', 'carved stroke by stroke']];
+    const three = list => { box.empty(); const r = box.createDiv('gq-friend-row');
+      for (const [k, t, d] of list) { const b = r.createEl('button', { cls: 'gq-friend' + (this.worldKey() === k && fm.world ? ' is-on' : '') }); const pic = b.createDiv('gq-friend-pic');
+        const keep = this.worldNow; this.worldNow = k; this.friendArt(pic, 40, true); this.worldNow = keep;
+        b.createDiv({ cls: 'gq-friend-t', text: t }); b.createDiv({ cls: 'gq-hint', text: d });
+        b.onclick = () => { this.setWorld(k); r.querySelectorAll('.gq-friend').forEach(x => x.removeClass('is-on')); b.addClass('is-on'); }; } };
+    if (kids) return three(easy);
+    if (fm.fiay !== undefined || fm.world || this.friendAsked) return three(fm.fiay ? big : easy);
+    box.createDiv({ cls: 'gq-tour-q', text: 'How far this year?' });
+    const r = box.createDiv('gq-row');
+    const c1 = r.createEl('button', { text: 'Casual: a little each day' }); c1.onclick = () => { this.friendAsked = true; three(easy); };
+    const c2 = r.createEl('button', { text: 'Fluent in a Year', cls: 'mod-cta' }); c2.onclick = () => { this.friendAsked = true; this.setFiay(true); three(big); };
   }
   // The card at the top of Today. The same question the teacher asks in class.
   moCard(box) {
@@ -2741,7 +2832,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   // Redraw every φόρα card on screen. Obsidian can build Today twice at once, so a single saved element
   // may be the copy that was thrown away; points and a new world would then land where nobody sees them.
-  moPaint() { const els = new Set([...document.querySelectorAll('.gq-tcard.gq-mo')]); if (this.moEl && this.moEl.isConnected) els.add(this.moEl); for (const c of els) this.moDraw(c); }
+  moPaint() { const els = new Set([...document.querySelectorAll('.gq-mo')]); if (this.moEl && this.moEl.isConnected) els.add(this.moEl); for (const c of els) this.moDraw(c); this.cornerSync(); }
   moDraw(c) {
     c.empty(); const { days } = this.moData(), now = new Date(), m = this.moScore(days, new Date());
     // Before the first point: one quiet line. The full card (world, bars) arrives with the first φόρα.
@@ -3820,7 +3911,6 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // A good week shows; nothing resets and a missed day never counts against anyone.
     { const m = new Date(); m.setDate(m.getDate() - ((m.getDay() + 6) % 7)); const mon = ymd(m), wk = Object.keys(days || {}).filter(d => d >= mon && d <= today && +days[d] > 0).length;
       if (wk && !this.isKids) c.createDiv({ cls: 'gq-hint gq-week-line', text: wk >= 5 ? `This week: ${wk} days. That is the habit.` : `This week: ${wk} of 5 days` }); }
-    this.tourLine(c);
     const wh = this.whereGet();
     if (wh) { const d = c.createDiv('gq-hint gq-next-back'); d.appendText('Back to where you were: '); const a = d.createEl('a', { text: wh.label, href: '#' }); a.onclick = e => { e.preventDefault(); this.whereGo(wh); }; }
     if (!ctx.fresh || this.planNowGet() || this.tourIs('plan')) this.planRow(c);
@@ -3958,11 +4048,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const week = dd < 0 ? 1 : Math.floor(dd / 7) + 1, dow = now.getDay();
       // The story and Fluent in a Year can run from the student's own day one (fiay_from), not the class calendar. Class stays on the calendar.
       const own = this.fyOwn(col, now), fw = own ? own.week : week, fdow = own ? own.dow : dow, fdd = own ? own.dd : dd;
-      box.createDiv({ cls: 'gq-edition', text: 'Greekquent ' + this.editionName() });
-      box.createEl('h2', { text: `Today · ${now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}` });
       if (this.showSwitch()) this.scriptSwitch(box);
       const moFresh = !Object.keys(this.moData().days || {}).length;
-      if (!moFresh) this.moCard(box);
       this.paperCard(box, dd);
       if (!col.setup_seen && !this.tourLeft()) {
         const s = box.createDiv('gq-tcard gq-tnew'); s.createSpan({ text: 'New here? ' });
@@ -3976,7 +4063,6 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const cal = fdd < 0 ? 1 : (dayNow && dayNow.n) || Math.max(0, ...Object.keys(beats).map(Number).filter(k => beats[k].week < fw));
         this.todayBeat = null; this.storyEl = null; this.storyInfo = null; this.cbList = null;
         if (cal) await this.storyCard(box, beats, cal, fdd >= 0 && fdow === 0, col);
-        if (moFresh) this.moCard(box);
         // Spaced review brings back earlier story lines and red, yellow and old green words.
         await this.comebackCard(box, beats, col, cal);
         // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
@@ -4014,9 +4100,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       await this.nextCard(box, { rev, fresh: moFresh });
       this.stackOn = false; this.reportCard(box, true);
       this.cardStack(box, false);
-      const foot = box.createDiv('gq-hint gq-tfoot');
+      const foot = (box.querySelector('.gq-kdone') || box).createDiv('gq-hint gq-tfoot');
       const mo = foot.createEl('button', { text: 'More: story, games, colors, tools ›', cls: 'gq-mini' }); mo.onclick = () => this.showMore();
-      if (this.abcAllDone()) { const ab = foot.createEl('button', { text: 'Alphabet', cls: 'gq-mini' }); ab.onclick = () => { ab.remove(); this.lettersCard(box); const k = box.lastElementChild; box.insertBefore(k, foot); k.scrollIntoView({ block: 'start', behavior: 'smooth' }); }; }
+      if (this.abcAllDone()) { const ab = foot.createEl('button', { text: 'Alphabet', cls: 'gq-mini' }); ab.onclick = () => { ab.remove(); this.lettersCard(box); const k = box.lastElementChild; box.appendChild(k); k.scrollIntoView({ block: 'start', behavior: 'smooth' }); }; }
       if (this.updateReady && !this.updating) { const up = foot.createEl('button', { text: 'Install update', cls: 'gq-mini' }); up.onclick = () => this.updateVault(false); }
       // Slides are parked (deckify below) until they come back for specific moments, not all of Today.
       if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.paintMore(); this.tabsSync(); this.tourShow(); }
@@ -4108,19 +4194,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const box = createDiv('gq-today gq-kids-today'), col = this.colors(), wk = this.kidWeek(info);
     const f = this.kidFile(wk.lesson);
     const now = new Date();
-    box.createDiv({ cls: 'gq-edition', text: 'Greekquent Kids' });
-    box.createEl('h2', { text: `Today · ${now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}` });
-    if (!col.setup_seen) {
-      const s = box.createDiv('gq-hint gq-knew'); s.createSpan({ text: 'Grown-ups: ' });
-      const a = s.createEl('a', { text: 'read Setting up', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); };
-      s.createSpan({ text: ' first (2 minutes). ' }); const x = s.createEl('a', { text: 'Got it', href: '#' }); x.onclick = e => { e.preventDefault(); this.setupSeen(); };
-    }
     this.helloSong(box); if (box.lastElementChild) box.lastElementChild.dataset.tour = 'hello';
     // Starting out: the song, the letters and φόρα only, until the first letter set is done (or a grown-up opens the rest).
     const lDone = this.lettersDone(), simple = false;
     this.kidSimpleOn = simple;
     if (lDone.length < LETTER_SETS.length) this.lettersCard(box);
-    this.moCard(box);
     if (simple) {
       const c = box.createDiv('gq-tcard gq-kid gq-kidrest');
       c.createDiv({ cls: 'gq-hint', text: 'After the first letters, the rest of today opens: the lesson game, the story puzzle and this week\'s words.' });
@@ -4227,12 +4305,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const wrap = createDiv('gq-kwrap'), st = wrap.createDiv({ cls: 'gq-kstack', attr: { 'aria-roledescription': 'card stack' } });
     const e2 = st.createDiv('gq-kedge gq-kedge2'), e1 = st.createDiv('gq-kedge gq-kedge1');
     for (const c of list) { c.addClass('gq-kcard'); st.appendChild(c); }
-    const nav = wrap.createDiv('gq-knav');
-    const back = nav.createEl('button', { text: '‹', cls: 'gq-kback', attr: { 'aria-label': 'Back one card' } });
-    const count = nav.createSpan({ cls: 'gq-hint gq-kcount' });
-    const nx = nav.createEl('button', { cls: 'mod-cta gq-knext' });
+    // No buttons under the stack: swipe left for the next card (the last one comes round to the first), right to go back.
+    // Arrow keys do the same once the stack has focus.
+    st.setAttr('tabindex', '0'); st.setAttr('aria-label', 'Cards. Swipe left for the next one, right to go back.');
     if (nxc) { nxc.addClass('is-slim'); delete nxc.dataset.tour; if (!nxc.querySelector('.gq-tour-line, .gq-next-back, .gq-week-line')) nxc.hide(); }
-    wrap.dataset.tour = kids ? 'stack' : 'next'; this.stackOn = true; this.stackNx = nx;
+    wrap.dataset.tour = kids ? 'stack' : 'next'; this.stackOn = true; this.stackNx = st;
     const anchor = nxc || box.querySelector(':scope > .gq-knew') || box.querySelector(':scope > h2'); if (anchor) anchor.after(wrap); else box.prepend(wrap);
     const name = c => c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') && !kids ? 'Story puzzle' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
     const today = ymd(new Date()), saved = this.lsGet('kstack', null), sk = kids ? 'k' : 'a';
@@ -4240,22 +4317,23 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const paint = () => {
       list.forEach((c, k) => c.toggleClass('is-top', k === i));
       const left = list.length - 1 - i; e1.toggleClass('is-on', left >= 1); e2.toggleClass('is-on', left >= 2);
-      count.setText(`${i + 1} of ${list.length}`); back.disabled = i === 0;
-      nx.toggleClass('is-hidden', i === list.length - 1); if (i < list.length - 1) nx.setText(`Next: ${name(list[i + 1])} ›`);
+      st.setAttr('aria-label', `${name(list[i])}, card ${i + 1} of ${list.length}. Swipe left for the next one, right to go back.`);
     };
     // Your place is kept only when you move, so a redraw that adds a card never skips ahead.
     const keep = () => this.lsSet('kstack', { d: today, e: sk, n: name(list[i]) });
     const go = (k, dir) => {
       if (k < 0 || k >= list.length || k === i) return;
-      const cur = list[i], fwd = k > i; if (fwd) this.moAdd('did', 'kcard:' + i, 1);
+      const cur = list[i], fwd = dir < 0; if (fwd) this.moAdd('did', 'kcard:' + i, 1);
       if (this.songStop && cur.hasClass('gq-song')) try { this.songStop(); } catch (e) {}
       const land = () => { cur.style.transition = ''; cur.style.transform = ''; cur.style.opacity = ''; i = k; paint(); keep(); const t = list[i]; if (!this.calmOn()) { t.addClass('gq-kin'); setTimeout(() => t.removeClass('gq-kin'), 260); } wrap.scrollIntoView({ block: 'nearest' }); };
-      if (this.calmOn() || !fwd) return land();
+      if (this.calmOn()) return land();
       cur.style.transition = 'transform .22s ease-in, opacity .22s ease-in'; cur.style.transform = `translateX(${(dir || -1) * 115}%) rotate(${(dir || -1) * 9}deg)`; cur.style.opacity = '0';
       setTimeout(land, 220);
     };
     this.kidStackGo = c => { const k = list.indexOf(c); if (k >= 0) { i = k; paint(); } };
-    nx.onclick = () => go(i + 1, -1); back.onclick = () => go(i - 1, 1);
+    const fwdGo = () => go((i + 1) % list.length, -1), backGo = () => { if (i > 0) go(i - 1, 1); else bounce(1); };
+    const bounce = sg => { const c = list[i]; if (this.calmOn()) return; c.style.transition = 'transform .14s ease-out'; c.style.transform = `translateX(${sg * 18}px)`; setTimeout(() => { c.style.transform = ''; setTimeout(() => { c.style.transition = ''; }, 160); }, 140); };
+    st.addEventListener('keydown', e => { if (e.target !== st) return; if (e.key === 'ArrowRight') { e.preventDefault(); fwdGo(); } else if (e.key === 'ArrowLeft') { e.preventDefault(); backGo(); } });
     again.onclick = e => { e.preventDefault(); go(0, 1); };
     // Swipe only from the card itself, never from a button, a tile or the letters, so dragging still works inside the cards.
     const NO = 'button, a, input, textarea, select, label, .gq-tile, .gq-abc, .gq-cv, [draggable="true"], .gq-mo-pick';
@@ -4268,21 +4346,27 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     });
     const end = () => {
       if (!d) return; const c = d.c, dx = d.dx || 0, on = d.on; d = null; if (!on) return;
-      if (Math.abs(dx) > 90 && i < list.length - 1) go(i + 1, Math.sign(dx));
+      if (Math.abs(dx) > 90) this.stackSwiped = true;
+      if (dx < -90) fwdGo();
+      else if (dx > 90 && i > 0) go(i - 1, 1);
       else { c.style.transition = 'transform .18s ease-out'; c.style.transform = ''; setTimeout(() => { c.style.transition = ''; }, 200); }
     };
     st.addEventListener('pointerup', end); st.addEventListener('pointercancel', end);
     paint();
+    // The first time, the top card leans left once, so the swipe shows itself without a word.
+    if (!this.lsGet('swiped', 0) && !this.calmOn() && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) { setTimeout(() => { const c = list[i]; if (c && c.isConnected) { c.addClass('gq-khint'); setTimeout(() => c.removeClass('gq-khint'), 1400); } }, 900); }
+    st.addEventListener('pointerup', () => { if (!this.lsGet('swiped', 0) && this.stackSwiped) this.lsSet('swiped', 1); });
   }
   async kidFoot(box, el, tok, col, wk) {
     let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}
-    const foot = box.createDiv('gq-hint');
+    const foot = (box.querySelector('.gq-kdone') || box).createDiv('gq-hint gq-tfoot');
+    if (!col.setup_seen) { const a = foot.createEl('a', { text: 'Grown-ups: read Setting up first', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); }; foot.createEl('br'); }
     const wn = foot.createEl('a', { text: "What's new", href: '#' }); wn.onclick = e => { e.preventDefault(); this.openNote(WHATS_NEW); };
     foot.appendText(` · vault ${rel} · `);
     if (this.updateReady && !this.updating) { const up = foot.createEl('a', { text: 'Install update', href: '#' }); up.onclick = e => { e.preventDefault(); this.updateVault(false); }; foot.appendText(' · '); }
     const gu = foot.createEl('a', { text: 'For grown-ups', href: '#' }); gu.onclick = e => { e.preventDefault(); this.openNote(SETUP); };
     // Slides parked here too: the kids Today is a plain list of cards.
-    if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.tabsSync(); this.kidLesson = wk.lesson; if (col.setup_seen) { if (this.tourState().at === undefined) this.tourState().at = 0; this.tourShow(); } }
+    if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.tabsSync(); this.cornerSync(); this.kidLesson = wk.lesson; if (col.setup_seen) { if (this.tourState().at === undefined) this.tourState().at = 0; this.tourShow(); } }
   }
   moHasDays() { const f = this.app.vault.getAbstractFileByPath(MO_FILE); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return !!((this.moMem && Object.keys(this.moMem.days || {}).length) || (fm.days && typeof fm.days === 'object' && Object.keys(fm.days).length)); }
   async kidFull() { this.kidFullNow = true; const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.kid_full = true; }); this.refreshToday(); }
@@ -4501,7 +4585,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         { k: 'letters', at: ['letters'], t: 'Letters and sounds', b: 'Tap a sound to hear it. Drag each letter onto the sound it makes. Finish one set of six.', ev: 'letters' },
         { k: 'giagia', at: ['giagia'], t: 'Γιαγιά', b: 'Find 7 notebooks before Γιαγιά feeds you. Use the arrows or swipe. Come back here when you are done.', go: ['Play Γιαγιά', () => this.openApp('giagia', '#k=' + k)], ev: 'game' },
         { k: 'puzzle', at: ['puzzle'], t: 'Story puzzle', b: 'Drag the Greek words up to finish the line, or tap them. Finish one line.', ev: 'story' },
-        { k: 'mo', at: ['mo'], t: 'Πάρε φόρα', b: 'Right answers give you φόρα (momentum) and steps. Your dance floor grows with them. Another world is in Options.' },
+        { k: 'mo', at: [], t: 'Choose your friend', b: 'It lives in the corner and grows with everything you do.', pick: 'kids', ev: 'world' },
         { k: 'words', at: ['words'], t: "This week's words", b: 'Hear each word, then pick a color: red is not yet, yellow is kind of, green is got it.', ev: 'up' },
         { k: 'teacher', at: ['teacher'], t: 'Now you are the teacher', b: 'Swap. The kid asks. The grown-up gets one wrong on purpose. Catch it. Then tap We did it.', ev: 'teacher' },
         { k: 'web', at: ['tab-words'], t: 'Word web', b: 'Tap a word to go there, double-tap to hear more than one, hold to see what it goes with.', go: ['Open the Word web', () => this.openGraph()], ev: 'web' },
@@ -4511,7 +4595,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     return [
       { k: 'next', at: ['next'], t: 'Start here', b: 'Next always shows one thing to do now and about how long it takes. Tap Start.', ev: 'next' },
       { k: 'story', at: ['story'], t: 'Story puzzle', b: 'Finish one line: put the Greek words in order, then say it out loud.', ev: 'story' },
-      { k: 'world', at: ['mo'], t: 'Πάρε φόρα', b: 'Everything you do adds φόρα (momentum) and steps, and steps become dances. Green words make your world grow. You can change the world in Options.' },
+      { k: 'world', at: [], t: 'Choose your friend', b: 'It lives in the corner and grows with everything you do. Pick once; Options can change it later.', pick: 'adult', ev: 'world' },
       { k: 'words', at: ['tab-words'], t: 'Words', b: 'All the words in one list, most frequent first. Find one you know and tap its color: red, yellow or green.', go: ['Open Words', () => this.openWords()], ev: 'up', tab: 'words' },
       { k: 'web', at: ['tab-words'], t: 'Word web', b: 'See what a word goes with. Tap a word to go there. Hold it to hear a phrase.', go: ['Open the Word web', () => this.openGraph()], ev: 'web' },
       { k: 'game', at: [], t: 'Γιαγιά', b: 'A quick game with your words. Come back here when you are done.', go: ['Play Γιαγιά', () => this.openApp('giagia', '')], ev: 'game' },
@@ -4536,7 +4620,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   tourCatchUp() {
     const t = this.tourState(), steps = this.tourSteps(), col = this.colors(), fm = this.progFm();
     const evs = new Set(t.early || []);
-    if (this.worldNow || col.world) evs.add('world');
+    if (this.worldNow || fm.world) evs.add('world');
     if (this.planNow || fm.plan) evs.add('plan');
     if (col.red.length + col.yellow.length + col.green.length) evs.add('up');
     if (!this.isKids && this.cards().length) evs.add('card');
@@ -4586,7 +4670,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     else d.appendText(`Tour: ${all - left} of ${all} done. `);
     const a = d.createEl('a', { text: t.done.length ? 'Keep going' : 'Start the tour', href: '#' }); a.onclick = e => { e.preventDefault(); this.tourStart(); };
   }
-  tourShow() {
+  tourShow() { this.tourShow0(); this.cornerSync(); }
+  tourShow0() {
     document.querySelectorAll('.gq-tour-on').forEach(x => x.removeClass('gq-tour-on'));
     const old = document.querySelector('.gq-tour'); if (old) old.remove();
     const t = this.tourState(); if (!this.tourOpen()) return;
@@ -4616,7 +4701,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     steps.forEach((x, i) => { const d = dots.createEl('button', { text: String(i + 1), cls: 'gq-tour-dot' + (i === t.at ? ' is-at' : '') + (x.ev && done(x.k) ? ' is-done' : (t.seen.includes(x.k) && i !== t.at ? ' is-seen' : '')), attr: { 'aria-label': `Step ${i + 1}: ${x.t}` + (done(x.k) ? ', done' : t.seen.includes(x.k) ? ', seen, not tried yet' : '') } }); d.onclick = () => { t.at = i; this.tourSave(); this.tourShow(); }; });
     tip.createDiv({ cls: 'gq-tour-t', text: st.t + (st.ev && done(st.k) ? ' · done' : ''), attr: { lang: 'el' } });
     tip.createDiv({ text: st.b });
-    if (st.ev && !done(st.k)) tip.createDiv({ cls: 'gq-hint', text: 'Try it to finish this step: +2 φόρα.' });
+    if (st.pick) this.friendPick(tip, st.pick === 'kids');
+    if (st.ev && !done(st.k) && !st.pick) tip.createDiv({ cls: 'gq-hint', text: 'Try it to finish this step: +2 φόρα.' });
     if (this.tourSkipped) { tip.createDiv({ cls: 'gq-hint gq-tour-skipped', text: `Step ${this.tourSkipped} stays yellow until you try it. Tap its dot any time.` }); this.tourSkipped = 0; }
     if (t.seen.some(k => !done(k) && k !== st.k)) tip.createDiv({ cls: 'gq-hint gq-tour-key', text: 'Green: tried it · Yellow: seen, not tried yet' });
     const r = tip.createDiv('gq-row'), last = t.at === steps.length - 1;
@@ -4669,7 +4755,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const last = this.revAt === GQ_REVIEW.length - 1;
     r.createEl('button', { text: last ? 'Done' : 'Next', cls: 'mod-cta' }).onclick = () => { this.revAt = last ? -1 : this.revAt + 1; this.reviewShow(); };
   }
-  tourBye() { const left = this.tourLeft(); new Notice(left ? `Tour closed. ${left} step${left === 1 ? '' : 's'} still to try, any time: More, then Take the tour.` : 'Tour done. Θα τα πούμε.'); this.refreshToday(); }
+  tourBye() { this.tourEnd(); const left = this.tourLeft(); new Notice(left ? `Tour closed. ${left} step${left === 1 ? '' : 's'} still to try, any time: More, then Take the tour.` : 'Tour done. Θα τα πούμε.'); this.refreshToday(); }
   // ---------- Tabs: Today, Words, Class, More. Words and Class appear once there is something in them. ----------
   // Words is always there: it is the course itself, and a new phone should look like every other one.
   tabOn(k) { if (k === 'words') return true; const t = this.progFm().tabs; return (this.tabsNow || (Array.isArray(t) ? t : [])).includes(k); }
@@ -5371,6 +5457,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     return 1;
   }
   onunload() {
+    this.unloaded = true; { const cn = document.querySelector('.gq-corner'); if (cn) cn.remove(); }
     document.body.classList.remove('greekquent-student');
     for (const id of ['gq-layout-dim', 'gq-scripts-view']) { const st = document.getElementById(id); if (st) st.remove(); }
     const pp = document.querySelector('.gq-pop'); if (pp) pp.remove();

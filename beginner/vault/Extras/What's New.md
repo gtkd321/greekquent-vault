@@ -2,6 +2,13 @@
 
 Back to [[Today]].
 
+> [!tip] Your friend in the corner (2026-11-19zi)
+> - Today is just the cards. The date, the edition name and the line under the cards are gone. Swipe a card left for the next one (the last comes round to the first), right to go back.
+> - φόρα is no longer a card. Finish the tour and your friend is planted in the bottom-right corner, and stays there on every screen. It grows (or dances) with every point. Tap it for your φόρα.
+> - Choose your friend in the tour: a plant, a pet or a dancer. Going for Fluent in a Year? Pick a gyro shop, a house or a statue instead.
+> - Worlds are one pixel object on the page, no scene behind it.
+> - New app icon. To see it on your home screen, remove the old icon and add the app again.
+
 > [!tip] The dancer (2026-11-19zh)
 > - The Dance world is gray ASCII on black: a still dancer, the floor, and your steps (# you have, . to come).
 > - Learn a dance and the dancer does a short ζεϊμπέκικο spin, slaps the heel, and throws the arms up. Calm mode shows the last pose, still.

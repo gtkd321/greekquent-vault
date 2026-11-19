@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zp';
+const VAULT_RELEASE = '2026-11-19zq';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -4324,27 +4324,30 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     done.createDiv({ cls: 'gq-kbye', text: 'Θα τα πούμε.', attr: { lang: 'el' } }); done.createDiv({ cls: 'gq-hint', text: kids ? 'See you next time. Or play one more:' : 'See you next time. Or one more:' });
     if (tools) { tools.removeClass('gq-tcard'); done.appendChild(tools); }
     if (!kids) { const r = done.createDiv('gq-row'), d = r.createEl('button', { text: 'Roll the die', cls: 'mod-cta gq-die-btn' }); d.onclick = () => this.rollDie(); }
-    const again = done.createDiv('gq-row').createEl('a', { text: kids ? 'Start again from the song' : 'Back to the first card', href: '#', cls: 'gq-hint' });
+    const again = done.createDiv('gq-row').createEl('a', { text: 'Start over', href: '#', cls: 'gq-hint' });
     list.push(done);
     const wrap = createDiv('gq-kwrap'), st = wrap.createDiv({ cls: 'gq-kstack', attr: { 'aria-roledescription': 'card stack' } });
     const e2 = st.createDiv('gq-kedge gq-kedge2'), e1 = st.createDiv('gq-kedge gq-kedge1');
     for (const c of list) { c.addClass('gq-kcard'); st.appendChild(c); }
-    // No buttons under the stack: swipe left for the next card (the last one comes round to the first), right to go back.
-    // Arrow keys do the same once the stack has focus.
-    st.setAttr('tabindex', '0'); st.setAttr('aria-label', 'Cards. Swipe left for the next one, right to go back.');
+    // One card at a time, picked for you: each time the app opens it is a different one (your red and yellow words one time,
+    // the story puzzle the next, and so on). One quiet link inside the card, Another one, brings the next. No stack to sort through.
+    st.setAttr('aria-label', 'Today\'s card');
     if (nxc) { nxc.addClass('is-slim'); delete nxc.dataset.tour; if (!nxc.querySelector('.gq-tour-line, .gq-next-back, .gq-week-line')) nxc.hide(); }
     wrap.dataset.tour = kids ? 'stack' : 'next'; this.stackOn = true; this.stackNx = st;
     const anchor = nxc || box.querySelector(':scope > .gq-knew') || box.querySelector(':scope > h2'); if (anchor) anchor.after(wrap); else box.prepend(wrap);
     const name = c => c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') && !kids ? 'Story puzzle' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
-    const today = ymd(new Date()), saved = this.lsGet('kstack', null), sk = kids ? 'k' : 'a';
-    let i = saved && saved.d === today && saved.e === sk ? list.findIndex(c => name(c) === saved.n) : -1; if (i < 0) i = 0;
+    // A new turn each time the app opens (not on every redraw); within a visit the card stays put until you ask for another.
+    if (this.turnN === undefined) { this.turnN = (Number(this.lsGet('turn', 0)) || 0) + 1; this.lsSet('turn', this.turnN); }
+    const pool = list.filter(c => c !== done);
+    let i = this.stackPick ? list.findIndex(c => name(c) === this.stackPick) : -1;
+    if (i < 0) { const rep0 = pool.find(c => c.hasClass('gq-report')); i = list.indexOf(rep0 || pool[this.turnN % Math.max(1, pool.length)] || list[0]); }
+    const more = createDiv({ cls: 'gq-hint gq-another' }); const ma = more.createEl('a', { text: 'Another one', href: '#' });
     const paint = () => {
       list.forEach((c, k) => c.toggleClass('is-top', k === i));
-      const left = list.length - 1 - i; e1.toggleClass('is-on', left >= 1); e2.toggleClass('is-on', left >= 2);
-      st.setAttr('aria-label', `${name(list[i])}, card ${i + 1} of ${list.length}. Swipe left for the next one, right to go back.`);
+      if (list[i] !== done) list[i].appendChild(more); else more.remove();
+      st.setAttr('aria-label', `Today's card: ${name(list[i])}`);
     };
-    // Your place is kept only when you move, so a redraw that adds a card never skips ahead.
-    const keep = () => this.lsSet('kstack', { d: today, e: sk, n: name(list[i]) });
+    const keep = () => { this.stackPick = name(list[i]); };
     const go = (k, dir) => {
       if (k < 0 || k >= list.length || k === i) return;
       const cur = list[i], fwd = dir < 0; if (fwd) this.tourHit('next');
@@ -4355,31 +4358,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       setTimeout(land, 220);
     };
     this.kidStackGo = c => { const k = list.indexOf(c); if (k >= 0) { i = k; paint(); } };
-    const fwdGo = () => go((i + 1) % list.length, -1), backGo = () => { if (i > 0) go(i - 1, 1); else bounce(1); };
-    const bounce = sg => { const c = list[i]; if (this.calmOn()) return; c.style.transition = 'transform .14s ease-out'; c.style.transform = `translateX(${sg * 18}px)`; setTimeout(() => { c.style.transform = ''; setTimeout(() => { c.style.transition = ''; }, 160); }, 140); };
-    st.addEventListener('keydown', e => { if (e.target !== st) return; if (e.key === 'ArrowRight') { e.preventDefault(); fwdGo(); } else if (e.key === 'ArrowLeft') { e.preventDefault(); backGo(); } });
-    again.onclick = e => { e.preventDefault(); go(0, 1); };
-    // Swipe only from the card itself, never from a button, a tile or the letters, so dragging still works inside the cards.
-    const NO = 'button, a, input, textarea, select, label, .gq-tile, .gq-abc, .gq-cv, [draggable="true"], .gq-mo-pick';
-    let d = null;
-    st.addEventListener('pointerdown', e => { const c = list[i]; if (!c.contains(e.target)) return; const h = e.target.closest(NO); if (h && h !== c && c.contains(h)) return; d = { x: e.clientX, y: e.clientY, id: e.pointerId, on: false, c }; });
-    st.addEventListener('pointermove', e => {
-      if (!d || d.id !== e.pointerId) return; const dx = e.clientX - d.x, dy = e.clientY - d.y;
-      if (!d.on) { if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.4) { d.on = true; try { st.setPointerCapture(d.id); } catch (er) {} } else if (Math.abs(dy) > 12) { d = null; return; } else return; }
-      d.dx = dx; d.c.style.transition = 'none'; d.c.style.transform = `translateX(${dx}px) rotate(${dx / 28}deg)`;
-    });
-    const end = () => {
-      if (!d) return; const c = d.c, dx = d.dx || 0, on = d.on; d = null; if (!on) return;
-      if (Math.abs(dx) > 90) this.stackSwiped = true;
-      if (dx < -90) fwdGo();
-      else if (dx > 90 && i > 0) go(i - 1, 1);
-      else { c.style.transition = 'transform .18s ease-out'; c.style.transform = ''; setTimeout(() => { c.style.transition = ''; }, 200); }
-    };
-    st.addEventListener('pointerup', end); st.addEventListener('pointercancel', end);
+    // Another one: the next card you have not had this visit. When you have had them all, the done card says so.
+    const seen = this.stackSeen || (this.stackSeen = new Set());
+    const fwdGo = () => { seen.add(name(list[i])); const n = pool.length, p = pool.indexOf(list[i]); let nx = null;
+      for (let s2 = 1; s2 <= n; s2++) { const c = pool[(p + s2 + n) % n]; if (!seen.has(name(c))) { nx = c; break; } }
+      go(list.indexOf(nx || done), -1); };
+    ma.onclick = e => { e.preventDefault(); fwdGo(); };
+    again.onclick = e => { e.preventDefault(); seen.clear(); go(list.indexOf(pool[this.turnN % Math.max(1, pool.length)] || pool[0]), 1); };
     paint();
-    // The first time, the top card leans left once, so the swipe shows itself without a word.
-    if (!this.lsGet('swiped', 0) && !this.calmOn() && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) { setTimeout(() => { const c = list[i]; if (c && c.isConnected) { c.addClass('gq-khint'); setTimeout(() => c.removeClass('gq-khint'), 1400); } }, 900); }
-    st.addEventListener('pointerup', () => { if (!this.lsGet('swiped', 0) && this.stackSwiped) this.lsSet('swiped', 1); });
   }
   async kidFoot(box, el, tok, col, wk) {
     let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}
@@ -4628,7 +4614,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       ];
     }
     return [
-      { k: 'next', at: ['next'], t: 'Start here', b: 'Today is a stack of cards, one thing at a time. Swipe the top card to the left to see the next one.', ev: 'next' },
+      { k: 'next', at: ['next'], t: 'Start here', b: 'Today shows one card, picked for you. Each time you open the app it is a different one. Tap Another one at the bottom of the card for something else.', ev: 'next' },
       { k: 'story', at: ['story'], t: 'Story puzzle', b: 'Finish one line: put the Greek words in order, then say it out loud.', ev: 'story' },
       { k: 'world', at: [], t: 'Πάρε φόρα', b: 'Everything you do adds φόρα (momentum). Finish the tour and an olive tree is planted in the corner. It grows olives, the olives become oil, and the oil lights a lamp.' },
       { k: 'words', at: ['tab-words'], t: 'Words', b: 'All the words in one list, most frequent first. Find one you know and tap its color: red, yellow or green.', go: ['Open Words', () => this.openWords()], ev: 'up', tab: 'words' },

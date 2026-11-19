@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zq · One card
+> Today shows one card, picked for you. Each time you open the app it is a different one: your words one time, the story puzzle the next, the letters after that. No stack to swipe through. Want something else? Tap Another one at the bottom of the card. When you have had them all, the done card says so.
+
 > [!tip]- 2026-11-19zp · The tree moves left
 > Your olive tree now sits in the bottom-left corner, so it no longer covers the class bar. The × that ends class mode is easy to tap again.
 

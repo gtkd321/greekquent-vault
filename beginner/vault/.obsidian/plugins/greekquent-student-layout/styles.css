@@ -847,3 +847,7 @@ body.gq-calm .gq-kcard.gq-khint, body.gq-calm .gq-kstack.gq-pulse .gq-kcard.is-t
 .gq-kdone .gq-tfoot { justify-content: center; margin-top: 14px; }
 .gq-today { padding-bottom: 96px; }
 .gq-pop:has(.gq-mo-pop) .gq-pop-title { visibility: hidden; }
+/* 2.20.74: one card on Today, with one quiet link for another */
+.gq-another { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--background-modifier-border); text-align: center; }
+.gq-another a { display: inline-block; min-height: 44px; line-height: 44px; padding: 0 16px; font-weight: 600; text-decoration: none; }
+.gq-kedge { display: none !important; }

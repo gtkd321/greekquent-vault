@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19t';
+const VAULT_RELEASE = '2026-11-19u';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -283,8 +283,11 @@ const listenGreek = () => new Promise((res, rej) => {
   r.onresult = e => { out = []; for (const x of e.results) for (const y of x) out.push(y.transcript); end(true, out); };
   r.onerror = e => end(false, e.error || 'error');
   r.onend = () => end(true, out || []);
-  // Start a moment after any speaking stops, so the voice and the microphone don't fight over the audio.
-  setTimeout(() => { if (over) return; try { r.start(); } catch (e) { end(false, 'busy'); } }, 250);
+  // Start right away, inside the tap: iPhones can refuse a microphone started later. Only if the voice is still talking,
+  // wait a moment so the voice and the microphone don't fight over the audio.
+  const go = () => { if (over) return; try { r.start(); } catch (e) { end(false, 'busy'); } };
+  let busy = false; try { busy = !!(window.speechSynthesis && (speechSynthesis.speaking || speechSynthesis.pending)); } catch (e) {}
+  if (busy) setTimeout(go, 250); else go();
 });
 // Kids start with the letters: each one's sound, a word that starts with it, and four sets of six. No two letters in a set share a sound.
 // [lower, upper, sound, like, word, English, syllable to say]
@@ -299,7 +302,8 @@ const LNAMES = [['α', 'άλφα', [], ['alpha', 'alfa']], ['β', 'βήτα', ['
   ['η', 'ήτα', ['ίτα'], ['eta', 'ita']], ['θ', 'θήτα', [], ['theta', 'thita']], ['ι', 'γιώτα', ['ιώτα', 'γιότα'], ['iota', 'yota', 'giota']], ['κ', 'κάπα', ['κάππα'], ['kappa', 'kapa']], ['λ', 'λάμδα', ['λάμβδα', 'λάμντα'], ['lambda', 'lamda']], ['μ', 'μι', ['μυ'], ['mu', 'mi', 'me']],
   ['ν', 'νι', ['νυ'], ['nu', 'ni', 'knee']], ['ξ', 'ξι', ['κσι'], ['xi', 'ksi']], ['ο', 'όμικρον', ['όμικρο'], ['omicron', 'omikron']], ['π', 'πι', [], ['pi', 'pee']], ['ρ', 'ρο', [], ['rho', 'ro']], ['σ', 'σίγμα', [], ['sigma']],
   ['τ', 'ταυ', ['ταφ'], ['tau', 'taf']], ['υ', 'ύψιλον', ['ύψιλο'], ['upsilon', 'ypsilon', 'ipsilon']], ['φ', 'φι', [], ['phi', 'fi', 'fee']], ['χ', 'χι', [], ['chi', 'hi', 'khi']], ['ψ', 'ψι', [], ['psi']], ['ω', 'ωμέγα', [], ['omega']]]
-  .map(([l, n, alt, en]) => ({ l, u: l === 'σ' ? 'Σ' : l.toUpperCase(), n, alt, en }));
+  // sp: what the voice is given. A one-syllable name with no accent (ψι, ξι, μι...) can be read out as letters, so the voice gets it stressed (ψί).
+  .map(([l, n, alt, en]) => ({ l, u: l === 'σ' ? 'Σ' : l.toUpperCase(), n, alt, en, sp: /^[^αεηιουωάέήίόύώ]*[αεηιουω][^αεηιουωάέήίόύώ]*$/.test(n) ? n.replace(/([αεηιουω])/, m => ({ α: 'ά', ε: 'έ', η: 'ή', ι: 'ί', ο: 'ό', υ: 'ύ', ω: 'ώ' })[m]) : n }));
 const NAME_SETS = [0, 1, 2, 3].map(i => LNAMES.slice(i * 6, i * 6 + 6));
 // Spelled by sound, so a phone that writes βίτα for βήτα, or ταφ for ταυ, still counts.
 const phonG = t => foldG(t).replace(/αυ/g, 'αφ').replace(/ευ/g, 'εφ').replace(/ει|οι|υι|η|υ/g, 'ι').replace(/αι/g, 'ε').replace(/ω/g, 'ο').replace(/(.)\1/g, '$1').replace(/^γι(?=[αεο])/, 'ι');
@@ -3907,7 +3911,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         b.removeClass('is-live'); b.setText(label || 'Say it · +2');
         if (e === 'no-speech' || e === 'aborted' || e === 'late') fb.setText(' Nothing heard. Try again.');
         // Blocked or not working here (Obsidian on a computer blocks it): use the keyboard's microphone instead, from now on.
-        else { this.lsSet('sroff', 1); typed(); if (e === 'not-allowed' && window.GQW) fb.setText(' The microphone is blocked for this site. A grown-up can allow it in the browser settings.'); }
+        // Blocked for good (permission, or no speech service): switch to the keyboard's microphone from now on.
+        else if (e === 'not-allowed' || e === 'service-not-allowed' || e === 'none') { this.lsSet('sroff', 1); typed(); if (window.GQW) fb.setText(' The microphone is blocked for this site. Tap the mic on the keyboard instead, or a grown-up can allow it in the browser settings.'); }
+        // A stall or a one-off error: say so and keep the button. Try again works most of the time.
+        else fb.setText(' The microphone did not start. Tap the button again.');
       }
     };
     return w;
@@ -3930,7 +3937,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const k = grid.createDiv({ cls: 'gq-abc-nm', attr: { role: 'button', tabindex: '0', 'aria-label': `Letter ${x.u} ${x.l}. Tap to hear its name.` } });
       k.createDiv({ cls: 'gq-abc-nl', text: `${x.u} ${x.l}`, attr: { lang: 'el' } });
       k.createDiv({ cls: 'gq-abc-nn', text: '?', attr: { lang: 'el' } });
-      const hear = () => { heard.add(x.l); say(x.n); };
+      const hear = () => { heard.add(x.l); say(x.sp); };
       k.onclick = hear; k.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hear(); } };
       return [x.l, k];
     }));
@@ -3968,7 +3975,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         catch (e) {
           b.removeClass('is-live'); b.setText('Say a name');
           if (e === 'no-speech' || e === 'aborted' || e === 'late') fb.setText('Nothing heard. Try again.');
-          else { this.lsSet('sroff', 1); b.remove(); typed(); if (e === 'not-allowed') fb.setText('The microphone is blocked for this site. Use the keyboard microphone here, or allow it in the browser settings.'); }
+          else if (e === 'not-allowed' || e === 'service-not-allowed' || e === 'none') { this.lsSet('sroff', 1); b.remove(); typed(); fb.setText('The microphone is blocked for this site. Tap the mic on the keyboard and say the name, or allow the microphone in the browser settings.'); }
+          else fb.setText('The microphone did not start. Tap Say a name again, or use the keyboard.');
         }
       };
       const k = ctl.createEl('button', { text: 'Use the keyboard', cls: 'gq-mini' }); k.onclick = () => { k.remove(); typed(); };
@@ -3982,7 +3990,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       ctl.style.display = 'none'; fin.empty(); fin.createDiv({ cls: 'gq-abc-yay', text: `Μπράβο. All ${set.length} names in set ${n}.` });
       const fr = fin.createDiv('gq-row'); const nx = NAME_SETS.findIndex((x, k) => !list.includes(k + 1));
       if (nx >= 0) { const b = fr.createEl('button', { text: `Next: set ${nx + 1}`, cls: 'mod-cta' }); b.onclick = () => { this.letterSet = nx + 1; redraw(); }; }
-      const hb = fr.createEl('button', { text: 'Hear them in order', cls: 'gq-mini' }); hb.onclick = () => say(set.map(x => x.n).join(', '));
+      const hb = fr.createEl('button', { text: 'Hear them in order', cls: 'gq-mini' }); hb.onclick = () => say(set.map(x => x.sp).join(', '));
       const a = fr.createEl('button', { text: 'Again', cls: 'gq-mini' }); a.onclick = () => redraw();
     };
   }

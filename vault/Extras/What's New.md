@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19u · Letter names fixes
+> - **ψι, φι, χι and the other short names** are now said as names. Some phone voices were spelling them out letter by letter.
+> - **Say a name** starts the microphone right away when you tap it, which iPhones need. If the microphone does not start, the button stays and says so, so you can tap it again.
+
 > [!tip]- 2026-11-19t · Phonetics, and a story puzzle that teaches the words
 > - **Phonetics (on to start).** Every Greek word shows its sound in small letters underneath: καφές, kafés. The accent mark shows which part to say louder. Turn it off in More, or right on the Story puzzle card, once you can read the letters. A few letters to know: η, ι, υ, ει and οι all say "i". αι says "e". δ is "dh" as in "this". γ is "y" before e and i, and "gh" elsewhere. χ is a breathy "h".
 > - **Words first.** A new part of the story puzzle starts with its new words: hear them, see what they mean, then build.

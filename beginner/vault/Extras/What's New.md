@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19r · Ideas from the class
+> Five new ideas in Card ideas, from pages classmates shared in GroupMe: one color per language, a "how it sounds" column, a topic page that starts with Θέλω..., a verb grid, and stars on favorite pages.
+
 > [!tip]- 2026-11-19q · Paper cards, explained
 > - The first time you tap **On paper**, a short card shows how paper cards work: what goes on the card, the three piles, and when each pile comes up. After that, a quick note confirms which pile the card goes in.
 > - In **Paper round**, Got it now asks if the card moves up a pile, so your piles and your colors match. **Not here** is now **Not in my stack**.

@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zs';
+const VAULT_RELEASE = '2026-11-19zt';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3389,28 +3389,39 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (tiles.slice(0, target.length).every((tl, k) => tl.w === target[k])) tiles.push(tiles.shift());
       const ans = cur.createDiv({ cls: 'gq-cv-ans', attr: { 'aria-label': 'Your Greek', lang: 'el' } });
       const bank = cur.createDiv({ cls: 'gq-cv-bank', attr: { 'aria-label': 'Greek word tiles', lang: 'el' } });
-      cur.createDiv({ cls: 'gq-hint gq-cv-help', text: 'Build it in Greek. Touch a word to hear it, see what it means and add it. Touch it again to take it back.' });
+      cur.createDiv({ cls: 'gq-hint gq-cv-help', text: 'Build it in Greek. Touch a word to hear it, see what it means and add it. Drag a word to put it between two others. Touch it again to take it back.' });
       // What the last touched word means, so exploring the tiles teaches the words instead of guessing at them.
       const gl = cur.createDiv({ cls: 'gq-cv-gloss', attr: { 'aria-live': 'polite' } });
       const showGloss = w => { gl.empty(); gl.createSpan({ cls: 'gq-cv-glgr', text: w, attr: { lang: 'el' } }); const m = gloss(w); gl.createSpan({ cls: 'gq-cv-glen', text: m ? ' · ' + m : '' }); };
       const placed = [];
-      const place = (tl, quiet) => { if (tl.used) return; if (!quiet) { say(tl.w); showGloss(tl.w); } tl.used = true; tl.btn.addClass('gq-used'); const c = ans.createEl('button', { text: tl.w, cls: 'gq-tile' }); tl.clone = c; placed.push(tl); bindDrag(c, () => unplace(tl), bank); ans.removeClass('gq-bad'); };
+      // Where a dragged word would land in the line: before the first word it is left of (same row) or above.
+      const slotAt = (x, y, skip) => { const kids = [...ans.children].filter(q => q !== skip && !q.hasClass('gq-tile-gap')); for (let k = 0; k < kids.length; k++) { const r = kids[k].getBoundingClientRect(); if (y < r.top - 4 || (y <= r.bottom + 4 && x < r.left + r.width / 2)) return k; } return kids.length; };
+      const putAt = (c, at, skip) => { const kids = [...ans.children].filter(q => q !== skip && !q.hasClass('gq-tile-gap')); if (at < kids.length) ans.insertBefore(c, kids[at]); else ans.appendChild(c); };
+      const gap = createEl('span', { cls: 'gq-tile-gap', attr: { 'aria-hidden': 'true' } });
+      const showGap = (x, y, skip) => { if (x === null) { gap.remove(); return; } putAt(gap, slotAt(x, y, skip), skip); };
+      const place = (tl, quiet, at) => { if (tl.used) return; if (!quiet) { say(tl.w); showGloss(tl.w); } tl.used = true; tl.btn.addClass('gq-used'); const c = createEl('button', { text: tl.w, cls: 'gq-tile' }); tl.clone = c;
+        if (at === undefined || at >= placed.length) { ans.appendChild(c); placed.push(tl); } else { putAt(c, at); placed.splice(at, 0, tl); }
+        bindDrag(c, () => unplace(tl), bank, (x, y) => { const at2 = slotAt(x, y, c); placed.splice(placed.indexOf(tl), 1); placed.splice(at2, 0, tl); putAt(c, at2, c); ans.removeClass('gq-bad'); }); ans.removeClass('gq-bad'); };
       const unplace = tl => { if (!tl.used) return; tl.used = false; tl.btn.removeClass('gq-used'); tl.clone.remove(); placed.splice(placed.indexOf(tl), 1); ans.removeClass('gq-bad'); };
       // Tap moves a tile; dragging it onto the other area does the same (pointer events work with touch and mouse).
-      const bindDrag = (el, act, dest) => {
+      // Dropped into the line, a word goes where it is let go, so a missing word can go between two others; a word in the line can be dragged to a new spot.
+      const near = (el, e) => { const r = el.getBoundingClientRect(); return e.clientX >= r.left - 20 && e.clientX <= r.right + 20 && e.clientY >= r.top - 24 && e.clientY <= r.bottom + 24; };
+      const bindDrag = (el, act, dest, moveIn) => {
         let sx = 0, sy = 0, drag = false, id = null;
+        const inLine = () => dest === ans || moveIn;
         el.onpointerdown = e => { sx = e.clientX; sy = e.clientY; drag = false; id = e.pointerId; try { el.setPointerCapture(id); } catch (er) {} };
-        el.onpointermove = e => { if (id !== e.pointerId) return; const dx = e.clientX - sx, dy = e.clientY - sy; if (!drag && Math.hypot(dx, dy) > 8) { drag = true; el.addClass('gq-drag'); } if (drag) el.style.transform = `translate(${dx}px, ${dy}px)`; };
+        el.onpointermove = e => { if (id !== e.pointerId) return; const dx = e.clientX - sx, dy = e.clientY - sy; if (!drag && Math.hypot(dx, dy) > 8) { drag = true; el.addClass('gq-drag'); } if (!drag) return; el.style.transform = `translate(${dx}px, ${dy}px)`; if (inLine() && near(ans, e)) showGap(e.clientX, e.clientY, el); else showGap(null); };
         el.onpointerup = e => {
-          if (id !== e.pointerId) return; id = null;
+          if (id !== e.pointerId) return; id = null; showGap(null);
           if (!drag) { act(); return; }
-          el.removeClass('gq-drag'); el.style.transform = '';
-          const r = dest.getBoundingClientRect();
-          if (e.clientX >= r.left - 20 && e.clientX <= r.right + 20 && e.clientY >= r.top - 24 && e.clientY <= r.bottom + 24) act();
+          drag = false; el.removeClass('gq-drag'); el.style.transform = '';
+          if (dest === ans) { if (near(ans, e)) act(slotAt(e.clientX, e.clientY)); }
+          else if (moveIn && near(ans, e)) moveIn(e.clientX, e.clientY);
+          else if (near(dest, e)) act();
         };
-        el.onpointercancel = () => { id = null; drag = false; el.removeClass('gq-drag'); el.style.transform = ''; };
+        el.onpointercancel = () => { id = null; drag = false; showGap(null); el.removeClass('gq-drag'); el.style.transform = ''; };
       };
-      for (const tl of tiles) { tl.btn = bank.createEl('button', { text: tl.w, cls: 'gq-tile' }); bindDrag(tl.btn, () => place(tl), ans); }
+      for (const tl of tiles) { tl.btn = bank.createEl('button', { text: tl.w, cls: 'gq-tile' }); bindDrag(tl.btn, at => place(tl, false, at), ans); }
       const row = cur.createDiv('gq-row'); let misses = 0, showed = false;
       const chk = row.createEl('button', { text: 'Check', cls: 'mod-cta' });
       const hint = cur.createDiv({ cls: 'gq-hint gq-say', text: 'Touch here to hear the whole line in Greek.' }); hint.style.display = 'none'; hint.onclick = () => say(x[1]);

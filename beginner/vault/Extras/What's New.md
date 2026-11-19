@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zt · Drop a word in between
+> In the story puzzle, drag a word into the line and let go where it belongs, even between two words already there. A small blue bar shows where it will land. You can also drag a word that is already in the line to a new spot. Tapping still adds a word at the end.
+
 > [!tip]- 2026-11-19zs · Olive tree up top
 > Your olive tree now sits in the top right corner, just under the three dots. Tap it to see how it is growing. The Tour button stays at the bottom left.
 

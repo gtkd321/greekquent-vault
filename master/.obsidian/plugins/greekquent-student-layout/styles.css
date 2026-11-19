@@ -859,3 +859,6 @@ body.gq-calm .gq-kcard.gq-khint, body.gq-calm .gq-kstack.gq-pulse .gq-kcard.is-t
 /* 2.20.76: the olive tree sits top right, under the three dots (the Tour button stays bottom left) */
 .gq-corner[data-mode="friend"] { left: auto; bottom: auto; top: var(--gq-ctop, calc(56px + env(safe-area-inset-top))); right: var(--gq-cright, max(14px, env(safe-area-inset-right))); align-items: flex-start; }
 body.gq-nonav .gq-corner[data-mode="friend"] { bottom: auto; }
+
+/* 2.20.77: story puzzle, drop a word between two others; the gap shows where it will land */
+.gq-tile-gap { display: inline-block; width: 4px; min-height: 2em; align-self: stretch; margin: 0 2px; border-radius: 2px; background: var(--interactive-accent); vertical-align: middle; }

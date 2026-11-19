@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zm · Swipes and walk mode
+> The letters card swipes like the others. Drag a letter to move it; swipe anywhere else on the card for the next one. Swiping a card away no longer gives φόρα.
+> Walk mode talks on iPhone: it starts speaking right when you tap Start. It now plays this week's lines and words, not just one sentence.
+
 > [!tip]- 2026-11-19zl · The olive journey
 > Everyone now grows the same thing with φόρα: an olive tree, then green olives that turn purple, then a bottle of oil that fills, then a lamp whose wick lights and burns brighter. Tap the Greek name to hear it. If you picked a friend before, your points are kept and carry over to the olive.
 > The tour is fixed. Step 1 finishes when you swipe the top card left. Pick your moment happens inside the tour card. The Paper cards step now finds its card.

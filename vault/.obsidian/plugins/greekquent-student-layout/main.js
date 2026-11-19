@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zl';
+const VAULT_RELEASE = '2026-11-19zm';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3347,7 +3347,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     };
     const wrap = card.createDiv('gq-convo');
     // Keep drags and swipes on the tiles from opening Obsidian's side panels on phones.
-    const stopT = e => e.stopPropagation();
+    const stopT = e => { if (e.target && e.target.closest && e.target.closest('.gq-tile, .gq-cv-ans, .gq-cv-bank, button')) e.stopPropagation(); };
     for (const ev of ['touchstart', 'touchend', 'pointerdown', 'pointermove', 'pointerup']) wrap.addEventListener(ev, stopT, { passive: true });
     wrap.addEventListener('touchmove', e => { e.stopPropagation(); if (e.target && e.target.closest && e.target.closest('.gq-tile, .gq-cv-ans, .gq-cv-bank')) e.preventDefault(); }, { passive: false });
     const paint = () => {
@@ -4025,7 +4025,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const tb = this.todayBeat, out = [];
     if (tb) for (const x of [...tb.before, tb.b]) if (x && x.gr) out.push({ gr: x.gr.replace(/ — /g, ' '), en: x.en || '' });
     for (const w of [...(this.todayPlay || []), ...(this.reviewPlay || [])].slice(0, 20)) out.push({ gr: w.label || w.word, en: w.en || w.english || '' });
-    return out.slice(0, 30);
+    if (this.isKids && this.walkK) out.push(...this.walkK);
+    if (out.length < 8) for (const w of this.walkW || []) out.push({ gr: w.word, en: w.english || '' });
+    const seen = new Set(); return out.filter(x => x.gr && !seen.has(x.gr) && seen.add(x.gr)).slice(0, 30);
   }
   walkMode() {
     const items = this.walkItems(); if (!items.length) { new Notice('Open Today first, or do a story part, so walk mode has Greek to play.'); return; }
@@ -4044,9 +4046,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         await this.sayP(x.gr, 'el'); await wait(1500); i++; pay();
       }
     };
-    pb.onclick = async () => {
+    pb.onclick = () => {
       run = !run; pb.setText(run ? 'Pause' : 'Go on');
-      if (run) { if (!t0) t0 = Date.now(); try { if (navigator.wakeLock) lock = await navigator.wakeLock.request('screen'); } catch (e) {} loop(++gen); }
+      // Speak first, inside the tap: iPhones only let a page talk when the first words start from a tap.
+      if (run) { if (!t0) t0 = Date.now(); try { if (speechSynthesis.speaking) speechSynthesis.cancel(); } catch (e) {} loop(++gen); try { if (navigator.wakeLock && !lock) navigator.wakeLock.request('screen').then(l => { lock = l; }, () => {}); } catch (e) {} }
       else { gen++; try { speechSynthesis.cancel(); } catch (e) {} }
     };
     sb.onclick = () => m.close();
@@ -4115,7 +4118,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         this.wordList(rc, rev.slice(0, 8));
         if (rev.length > 8) rc.createDiv({ cls: 'gq-hint', text: `${rev.length - 8} more in the side panel.` });
       }
-      this.reviewPlay = rev.slice(0, 40); this.todayWeek = wk;
+      this.reviewPlay = rev.slice(0, 40); this.todayWeek = wk; try { const ln = wk && wk.fm && wk.fm.lesson; this.walkW = ln ? words.filter(w => (w.lessons || []).includes(ln)).slice(0, 24) : []; } catch (e) { this.walkW = []; }
       await this.nextCard(box, { rev, fresh: moFresh });
       this.stackOn = false; this.reportCard(box, true);
       this.cardStack(box, false);
@@ -4264,6 +4267,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }
     // 4. This week's words, nouns first, with the colors
     const words = (await this.wordIndex()).filter(w => (w.kid || []).includes(wk.lesson));
+    // Walk mode plays this week's lines and words.
+    this.walkK = [...sw.filter(l => l.gr), ...words.map(w => ({ gr: w.word, en: w.english || '' }))];
     if (words.length) {
       const c = box.createDiv('gq-tcard gq-kid'); c.dataset.tour = 'words'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `This week's words (${words.length})` });
       c.createDiv({ cls: 'gq-hint', text: 'Hear it, say it, then pick a color: red is not yet, yellow is kind of, green is got it.' });
@@ -4342,7 +4347,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const keep = () => this.lsSet('kstack', { d: today, e: sk, n: name(list[i]) });
     const go = (k, dir) => {
       if (k < 0 || k >= list.length || k === i) return;
-      const cur = list[i], fwd = dir < 0; if (fwd) { this.moAdd('did', 'kcard:' + i, 1); this.tourHit('next'); }
+      const cur = list[i], fwd = dir < 0; if (fwd) this.tourHit('next');
       if (this.songStop && cur.hasClass('gq-song')) try { this.songStop(); } catch (e) {}
       const land = () => { cur.style.transition = ''; cur.style.transform = ''; cur.style.opacity = ''; i = k; paint(); keep(); const t = list[i]; if (!this.calmOn()) { t.addClass('gq-kin'); setTimeout(() => t.removeClass('gq-kin'), 260); } wrap.scrollIntoView({ block: 'nearest' }); };
       if (this.calmOn()) return land();
@@ -4394,7 +4399,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // A right match on the first try is a recall (γράμμα:β), so a letter remembered on a later day is worth 3 like a word. A set done: 2 φόρα, once a day.
   lettersCard(box) {
     const c = box.createDiv('gq-tcard gq-kid gq-abc'); c.dataset.tour = 'letters';
-    const stopT = e => e.stopPropagation();
+    // Stop only drags on the letters themselves, so the rest of the card still swipes to the next one.
+    const stopT = e => { if (e.target && e.target.closest && e.target.closest('.gq-abc-tile, .gq-abc-card, button')) e.stopPropagation(); };
     for (const ev of ['touchstart', 'touchend', 'pointerdown', 'pointermove', 'pointerup']) c.addEventListener(ev, stopT, { passive: true });
     c.addEventListener('touchmove', e => { e.stopPropagation(); if (e.target && e.target.closest && e.target.closest('.gq-abc-tile')) e.preventDefault(); }, { passive: false });
     const draw = () => {

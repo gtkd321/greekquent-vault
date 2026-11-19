@@ -2,6 +2,13 @@
 
 Back to [[Today]].
 
+> [!tip] Today is a stack of cards (2026-11-19zf)
+> - One card at a time. Swipe it away or tap Next, and the next card comes up. ‹ goes back. Your place is kept for the day.
+> - Your world is picked for you: Dance. Want a different one? Options, then Your world. How φόρα works is folded away on the card.
+> - One-minute talk works without the app's microphone: tap the box, then the mic on your keyboard, and talk.
+> - Spaced review: if you say their line instead of yours, it tells you, and shows which reply to give.
+> - The voice no longer reads a lone Α! as "άλφα".
+
 > [!tip]- 2026-11-19ze · Cousins: παντελόνι
 > - **παντελόνι now means pants**, and its English cousin is **pantaloons**. It moved from Hidden cousins to Cousins. Pants is short for pantaloons, so the two have always been related.
 

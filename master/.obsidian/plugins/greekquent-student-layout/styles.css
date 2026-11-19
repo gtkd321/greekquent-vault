@@ -749,3 +749,27 @@ body.gq-ph-off rt.gq-prt { display: none; }
 .gq-switch.is-on::after { transform: translateX(20px); }
 .gq-opt-foot { margin-top: 14px; }
 body.gq-calm .gq-switch, body.gq-calm .gq-switch::after { transition: none; }
+
+/* Today as a stack of cards: the top card in full, the edges of the next two peeking out underneath */
+.gq-kwrap { margin: 6px 0 14px; }
+.gq-kstack { position: relative; touch-action: pan-y; padding-bottom: 0; margin-bottom: 18px; }
+.gq-kstack > .gq-kcard { display: none; position: relative; z-index: 3; margin: 0 !important; background: var(--background-primary); }
+.gq-kstack > .gq-kcard.is-top { display: block; box-shadow: 0 2px 10px rgba(40, 30, 20, .08); }
+.gq-kedge { display: none; position: absolute; left: 10px; right: 10px; bottom: -8px; height: 48px; border-radius: 14px; background: var(--background-primary); border: 1px solid var(--background-modifier-border); z-index: 2; box-shadow: 0 2px 6px rgba(40, 30, 20, .06); }
+.gq-kedge.gq-kedge2 { left: 20px; right: 20px; bottom: -16px; z-index: 1; opacity: .85; }
+.gq-kedge.is-on { display: block; }
+.gq-kcard.gq-kin { animation: gq-kin .26s ease-out; }
+@keyframes gq-kin { from { transform: translateY(10px) scale(.97); opacity: .6; } to { transform: none; opacity: 1; } }
+.gq-knav { display: flex; align-items: center; gap: 10px; margin-top: 26px; }
+.gq-knav .gq-kback { width: 44px; min-width: 44px; height: 44px; padding: 0; font-size: 22px; }
+.gq-knav .gq-kcount { min-width: 4.5em; text-align: center; }
+.gq-knav .gq-knext { flex: 1; min-height: 44px; font-size: 16px; }
+.gq-knav .gq-knext.is-hidden { visibility: hidden; }
+.gq-knext.gq-pulse { animation: gq-knp 0.8s ease-in-out 3; }
+@keyframes gq-knp { 50% { transform: scale(1.04); box-shadow: 0 0 0 4px rgba(26, 152, 80, .25); } }
+.gq-kdone .gq-kbye { font-size: 1.5em; font-weight: 700; margin: 6px 0 2px; }
+.gq-kdone .gq-ttools { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; padding: 0; border: 0; }
+.gq-knew { margin: 0 2px 8px; }
+body.gq-calm .gq-kcard.gq-kin, body.gq-calm .gq-knext.gq-pulse { animation: none; }
+.gq-opt.gq-opt-col { flex-direction: column; align-items: stretch; gap: 6px; }
+.gq-opt-worlds { display: flex; flex-wrap: wrap; gap: 6px; }

@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zf';
+const VAULT_RELEASE = '2026-11-19zg';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1051,7 +1051,7 @@ function worldTip(el) { let seen = '1'; try { seen = localStorage.getItem('gq-wo
 
 class PaperModal extends Modal {
   constructor(app, plugin, list) { super(app); this.plugin = plugin; this.list = list; this.i = 0; this.got = 0; this.miss = []; }
-  onOpen() { this.contentEl.addClass('gq-modal', 'gq-paper-m'); this.titleEl.setText('Paper round'); this.draw(); }
+  onOpen() { this.contentEl.addClass('gq-modal', 'gq-paper-m'); this.titleEl.setText('Card practice'); this.draw(); }
   draw() {
     const c = this.contentEl; c.empty(); const P = this.plugin;
     if (this.i >= this.list.length) {
@@ -2366,7 +2366,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const ul = c.createEl('ul');
     for (const t of ['The card: Greek on the front. A picture, a gesture or a real moment on the back, not only the English.',
       'The piles: keep red, yellow and green piles. A card goes in the pile of its color on the word note.',
-      'The schedule: red every day, yellow every other day, green on Sundays. Paper round on Today tells you which piles and starts the round.']) ul.createEl('li', { text: t });
+      'The schedule: red every day, yellow every other day, green on Sundays. Card practice on Today logs how many cards and minutes you did, and can call out today\'s piles.']) ul.createEl('li', { text: t });
     c.createEl('p', { cls: 'gq-hint', text: 'Want ideas, or to send a photo of your card to your teacher? Tap Card ideas.' });
     const row = c.createDiv('gq-row');
     const ok = row.createEl('button', { text: 'Got it', cls: 'mod-cta' }); ok.onclick = () => m.close();
@@ -2768,24 +2768,92 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       ...(this.colors().world === 'dance' ? ['Every point is also a step (βήμα) toward the dance you are learning. Steps add up across days: ο συρτός has 6, ο καλαματιανός 12, and later dances take 2 or 3 points a step.'] : [])]) ul.createEl('li', { text: t });
     if (this.colors().world) { const li = ul.createEl('li'); li.appendText(this.colors().world === 'dance' ? 'Your dance floor grows with every point and never shrinks. ' : 'Your world grows with every φόρα point and never shrinks. '); const ch = li.createEl('a', { text: 'Change my world', href: '#' }); ch.onclick = e => { e.preventDefault(); this.setWorld(''); }; }
   }
-  // ---------- Paper round: the app keeps the schedule, the paper cards do the work ----------
+  // ---------- Card practice (was Paper round): the app keeps the schedule, the paper cards do the work ----------
   // Red pile every day, yellow every other day, green on Sundays. A card with no color yet sits in the red pile.
   paperPiles(dd) {
     const dow = new Date().getDay(), piles = ['red']; if (((dd % 2) + 2) % 2 === 0) piles.push('yellow'); if (dow === 0) piles.push('green');
     const by = { red: [], yellow: [], green: [] }; for (const w of this.cards()) by[this.colorOf(w) || 'red'].push(w);
     return { piles, by, list: piles.flatMap(k => by[k].map(w => [w, k])) };
   }
+  // Log many paper cards at once: this week's words to tap, or the Greek typed or said (commas or one per line). No limit.
+  paperLog() {
+    this.pop('Log paper cards', [{ label: '', build: async (el, api) => {
+      el.createDiv({ cls: 'gq-hint', text: 'Made cards today? Log them all, as many as you made: 5, 10, 20.' });
+      const W = await this.wordIndex(), have = new Set(this.cards()), pick = new Set();
+      const wk = [...new Set((this.todayPlay || []).map(x => x.word || x.label).filter(w => w && !have.has(w)))];
+      let go = null; const count = () => { if (go) go.setText(`Log ${found().length || ''} card${found().length === 1 ? '' : 's'}`.replace('  ', ' ')); };
+      if (wk.length) { el.createDiv({ cls: 'gq-tsub', text: 'This week\'s words' }); const ch = el.createDiv('gq-chips');
+        for (const w of wk) { const b = ch.createEl('button', { text: w, cls: 'gq-mini', attr: { lang: 'el', 'aria-pressed': 'false' } }); b.onclick = () => { pick.has(w) ? pick.delete(w) : pick.add(w); b.toggleClass('mod-cta', pick.has(w)); b.setAttr('aria-pressed', String(pick.has(w))); count(); }; } }
+      el.createDiv({ cls: 'gq-tsub', text: 'Or type them, or tap the keyboard mic and say them' });
+      const ta = el.createEl('textarea', { cls: 'gq-input', attr: { rows: '3', lang: 'el', placeholder: 'νερό, καφές, ψωμί', autocapitalize: 'off', autocomplete: 'off', spellcheck: 'false' } });
+      const ART = /^(ο|η|το|οι|τα|ένας|μια|μία|ένα)\s+/i;
+      const match = t => { const k = fold(t.replace(ART, '')); return k ? W.find(w => w.k === k) || W.find(w => w.fk.includes(k)) : null; };
+      const parse = () => { const ok = [], miss = [];
+        for (const piece of ta.value.split(/[,;\n·]+/).map(x => x.trim().replace(/[.!?]+$/, '')).filter(Boolean)) {
+          const m = match(piece); if (m) { ok.push(m.word); continue; }
+          // Said without commas (the keyboard mic leaves them out): try each word on its own.
+          const toks = piece.split(/\s+/).filter(x => x && !/^(ο|η|το|οι|τα|και)$/i.test(x)); let any = false;
+          for (const x of toks) { const mm = match(x); if (mm) { ok.push(mm.word); any = true; } else if (toks.length > 1) miss.push(x); }
+          if (!any && toks.length <= 1) miss.push(piece);
+        }
+        return { ok, miss }; };
+      const found = () => [...new Set([...pick, ...parse().ok])];
+      ta.oninput = count;
+      const r = el.createDiv('gq-row'), out = el.createDiv('gq-hint');
+      go = r.createEl('button', { text: 'Log cards', cls: 'mod-cta' });
+      go.onclick = async () => {
+        const list = found(), miss = parse().miss; if (!list.length) { out.setText(miss.length ? `Not found in the words: ${miss.join(', ')}. Check the spelling.` : 'Tap a word or type one first.'); return; }
+        const f = await this.progressFile(), t = ymd(new Date()); let fresh = [];
+        await this.app.fileManager.processFrontMatter(f, fm => { const cur = Array.isArray(fm.cards) ? fm.cards.map(String) : []; fresh = list.filter(w => !cur.includes(w)); fm.cards = [...cur, ...fresh];
+          const lg = fm.cards_log && typeof fm.cards_log === 'object' ? fm.cards_log : {}; lg[t] = (+lg[t] || 0) + fresh.length; fm.cards_log = lg; });
+        this.cardsNow = null; for (const w of fresh) this.moAdd('card', w);
+        r.empty(); ta.remove(); el.querySelectorAll('.gq-chips, .gq-tsub').forEach(x => x.remove());
+        out.setText(`${fresh.length} logged${list.length > fresh.length ? ` (${list.length - fresh.length} already logged)` : ''}. Each goes in the pile of its color, red if it has none yet.${miss.length ? ` Not found: ${miss.join(', ')}.` : ''}`);
+        const d = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); d.onclick = () => { api.close(); this.refreshToday && this.refreshToday(); };
+        const more = r.createEl('button', { text: 'Log more', cls: 'gq-mini' }); more.onclick = () => { api.close(); this.paperLog(); };
+      };
+    } }]);
+  }
+  // Card practice: however many cards and minutes you did, logged with two taps. No timer, no limit.
+  // φόρα: 1 for every 5 cards and 1 for every 5 minutes, up to 10 a day from card practice.
+  cpToday() { const v = String((this.cpNow || this.progFm().card_practice || {})[ymd(new Date())] || '0|0|0').split('|').map(x => +x || 0); return { cards: v[0], min: v[1], pts: v[2] }; }
+  async cpLog(cards, min) {
+    const f = await this.progressFile(), t = ymd(new Date()); let gain = 0, now = null;
+    await this.app.fileManager.processFrontMatter(f, fm => {
+      const cp = fm.card_practice && typeof fm.card_practice === 'object' ? fm.card_practice : {};
+      const [c0, m0, p0] = String(cp[t] || '0|0|0').split('|').map(x => +x || 0), c1 = c0 + cards, m1 = m0 + min;
+      const p1 = Math.min(10, Math.floor(c1 / 5) + Math.floor(m1 / 5)); gain = Math.max(0, p1 - p0);
+      cp[t] = `${c1}|${m1}|${Math.max(p0, p1)}`; fm.card_practice = cp; now = { ...cp };
+    });
+    this.cpNow = now; setTimeout(() => { this.cpNow = null; }, 3000);
+    while (gain > 0) { const g = Math.min(5, gain); this.moAdd('did', 'cp:' + Date.now() + ':' + gain, g); gain -= g; }
+  }
   paperCard(box, dd) {
     const n = this.cards().length; if (!n && !this.colors().setup_seen) return;
     const c = box.createDiv('gq-tcard gq-paper'); c.dataset.tour = 'paper';
-    const h = c.createDiv('gq-thead'); h.createEl('strong', { text: 'Paper round' });
-    const how = () => { if (!this.app.vault.getAbstractFileByPath(CARD_IDEAS)) return; const a = c.createEl('a', { text: 'How paper cards work', href: '#', cls: 'gq-hint gq-paper-how' }); a.onclick = e => { e.preventDefault(); this.openNote(CARD_IDEAS); }; };
-    if (!n) { c.createDiv({ cls: 'gq-hint', text: 'Made a paper card? Tap On paper on that word\'s note. Then the app tells you which pile to pull each day.' }); how(); return; }
-    const { piles, by, list } = this.paperPiles(dd), pf = this.app.vault.getAbstractFileByPath(PROGRESS), done = (this.paperDone || String(((pf && this.app.metadataCache.getFileCache(pf)) || {}).frontmatter?.paper_done || '')) === ymd(new Date());
-    h.createSpan({ cls: 'gq-hint', text: ` · ${n} card${n === 1 ? '' : 's'}` });
-    c.createDiv({ cls: 'gq-hint', text: done ? 'Done for today. Θα τα πούμε.' : list.length ? `Today: your ${piles.filter(k => by[k].length).join(' and ')} pile${piles.filter(k => by[k].length).length > 1 ? 's' : ''}, ${list.length} card${list.length === 1 ? '' : 's'}.` : `Today is the ${piles.join(' and ')} pile, and it is empty. Nice.` });
-    if (list.length && !done) { const b = c.createEl('button', { text: 'Start', cls: 'mod-cta' }); b.onclick = () => new PaperModal(this.app, this, list).open(); }
-    how();
+    const h = c.createDiv('gq-thead'); h.createEl('strong', { text: 'Card practice' });
+    if (n) h.createSpan({ cls: 'gq-hint', text: ` · ${n} card${n === 1 ? '' : 's'} logged` });
+    const td = this.cpToday(), sum = () => { const x = this.cpToday(); return x.cards || x.min ? `Today: ${x.cards} cards, ${x.min} min.` : ''; };
+    const line = c.createDiv({ cls: 'gq-hint gq-cp-sum', text: sum() || 'Practiced with your paper cards? Tap how many, and for how long.' });
+    let pc = 0, pm = 0; const grp = (label, vals, unit, set) => {
+      const r = c.createDiv('gq-cp-row'); r.createSpan({ cls: 'gq-cp-l', text: label }); const bs = [];
+      for (const v of vals) { const b = r.createEl('button', { text: String(v), cls: 'gq-mini', attr: { 'aria-label': `${v} ${unit}`, 'aria-pressed': 'false' } });
+        b.onclick = () => { const on = !b.hasClass('mod-cta'); bs.forEach(x => { x.removeClass('mod-cta'); x.setAttr('aria-pressed', 'false'); }); if (on) { b.addClass('mod-cta'); b.setAttr('aria-pressed', 'true'); } set(on ? v : 0); paint(); }; bs.push(b); }
+      return bs; };
+    const cb = grp('Cards', [5, 10, 15, 20, 30], 'cards', v => { pc = v; }), mb = grp('Minutes', [5, 10, 15, 20, 30], 'minutes', v => { pm = v; });
+    const r = c.createDiv('gq-row'), go = r.createEl('button', { text: 'Log it', cls: 'mod-cta' });
+    const paint = () => { go.disabled = !pc && !pm; const p = Math.floor(pc / 5) + Math.floor(pm / 5); go.setText(pc || pm ? `Log it · +${Math.min(p, Math.max(0, 10 - this.cpToday().pts))} φόρα` : 'Log it'); };
+    go.onclick = async () => { await this.cpLog(pc, pm); pc = pm = 0; [...cb, ...mb].forEach(x => { x.removeClass('mod-cta'); x.setAttr('aria-pressed', 'false'); }); line.setText(sum() + ' Μπράβο.'); paint(); };
+    paint();
+    // The guided round stays, for anyone who wants the app to call out the cards.
+    const more = c.createDiv('gq-hint gq-cp-more');
+    if (n) {
+      const { piles, by, list } = this.paperPiles(dd), pf = this.app.vault.getAbstractFileByPath(PROGRESS), done = (this.paperDone || String(((pf && this.app.metadataCache.getFileCache(pf)) || {}).frontmatter?.paper_done || '')) === ymd(new Date());
+      const tp = piles.filter(k => by[k].length);
+      if (list.length && !done) { more.appendText(`Today's piles: ${tp.join(' and ')}, ${list.length} cards. `); const a = more.createEl('a', { text: 'Call them out for me', href: '#' }); a.onclick = e => { e.preventDefault(); new PaperModal(this.app, this, list).open(); }; more.appendText(' · '); }
+    }
+    const nw = more.createEl('a', { text: 'Made new cards? Add the words', href: '#' }); nw.onclick = e => { e.preventDefault(); this.paperLog(); };
+    if (this.app.vault.getAbstractFileByPath(CARD_IDEAS)) { more.appendText(' · '); const a = more.createEl('a', { text: 'How paper cards work', href: '#' }); a.onclick = e => { e.preventDefault(); this.openNote(CARD_IDEAS); }; }
   }
   async setColor(word, color) {
     const was = this.colorOf(word), R = { '': 0, red: 1, yellow: 2, green: 3 };
@@ -3383,7 +3451,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   statsLine() {
     const s = this.stats(); const out = [];
     if (s.r7 !== null) out.push(`back after a week ${s.r7}% (${s.r7n})`); if (s.rep !== null) out.push(`repeat ${s.rep} syllables`); if (s.talk !== null) out.push(`talk ${s.talk} words in 1 min`);
-    out.push(`green ${s.green}`); if (s.hours) out.push(`practice ${s.hours} h`); return out.join(' · ');
+    out.push(`green ${s.green}`); if (s.hours) out.push(`practice ${s.hours} h`);
+    { const cp = this.progFm().card_practice || {}, from = ymd(new Date(Date.now() - 13 * 864e5)); let c = 0, m = 0; for (const [d, v] of Object.entries(cp)) if (d >= from) { const [a, b] = String(v).split('|').map(x => +x || 0); c += a; m += b; } if (c || m) out.push(`card practice ${c} cards, ${m} min (2 weeks)`); }
+    return out.join(' · ');
   }
   // ---------- The report: every two weeks a card the student didn't ask for, with numbers to beat ----------
   reportCard(box) {
@@ -4438,7 +4508,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       { k: 'class', at: ['tab-class'], t: 'Class', b: "This week's lesson, the rally, homework, practice together and Ask the class, in one place.", go: ['Open Class', () => this.openClass()], ev: 'class', tab: 'class' },
       { k: 'plan', at: ['next'], t: 'Pick your moment', b: 'Choose when you practice: after coffee, after the bus. Doing it after something you already do makes it easy to start.', ev: 'plan' },
       { k: 'focus', at: [], t: 'Focus', b: 'The side panel has Calm mode, Focus sound, and Walk mode for practicing on the move.', go: ['Open the side panel', () => this.showMore()], ev: 'more' },
-      { k: 'paper', at: ['paper'], t: 'Paper cards', b: 'Make a paper card for a word: Greek on the front, a picture on the back. Open that word and tap On paper. Paper round on Today then tells you which pile to pull each day.', go: ['Open Words', () => this.openWords()], ev: 'card' }
+      { k: 'paper', at: ['paper'], t: 'Paper cards', b: 'Make a paper card for a word: Greek on the front, a picture on the back. Then Card practice on Today: tap how many cards and minutes you did. As many as you like.', go: ['Open Words', () => this.openWords()], ev: 'card' }
     ];
   }
   tourState() {

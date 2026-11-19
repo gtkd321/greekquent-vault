@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!tip] Card practice (2026-11-19zg)
+> - Paper round is now **Card practice**. Did 5, 10 or 20 cards? Tap how many cards and how many minutes, then **Log it**. 1 φόρα for every 5 cards and every 5 minutes, up to 10 a day. Log as often as you like.
+> - **Made new cards? Add the words**: type or say them all at once, no commas needed.
+> - **Call them out for me** still walks you through today's piles, if you want it.
+
 > [!tip] Today is a stack of cards (2026-11-19zf)
 > - One card at a time. Swipe it away or tap Next, and the next card comes up. ‹ goes back. Your place is kept for the day.
 > - Your world is picked for you: Dance. Want a different one? Options, then Your world. How φόρα works is folded away on the card.

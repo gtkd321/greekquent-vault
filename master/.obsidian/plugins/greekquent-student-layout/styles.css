@@ -773,3 +773,9 @@ body.gq-calm .gq-switch, body.gq-calm .gq-switch::after { transition: none; }
 body.gq-calm .gq-kcard.gq-kin, body.gq-calm .gq-knext.gq-pulse { animation: none; }
 .gq-opt.gq-opt-col { flex-direction: column; align-items: stretch; gap: 6px; }
 .gq-opt-worlds { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Card practice: two rows of numbers to tap, then Log it */
+.gq-cp-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 8px 0; }
+.gq-cp-l { min-width: 4.6em; font-size: 0.9em; color: var(--text-muted); }
+.gq-cp-row .gq-mini { min-width: 44px; min-height: 40px; }
+.gq-cp-more { margin-top: 10px; }

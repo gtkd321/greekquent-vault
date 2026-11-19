@@ -7,11 +7,12 @@ Ideas for paper cards that stick. Some come from the course. The rest come from 
 
 > [!info]- How paper cards work
 > 1. **Make the card.** Greek on the front (with ο, η or το). A picture, a gesture or a real moment on the back.
-> 2. **Log it.** Open that word's note and tap **On paper**. +1 φόρα, once per word.
+> 2. **Add the words.** On Today, Card practice, tap **Made new cards? Add the words** and type or say them all at once. Or tap **On paper** on a word's note. +1 φόρα per new card.
 > 3. **Pile it.** Keep three piles: red, yellow, green. A card goes in the pile of its color on the word note. No color yet means the red pile.
-> 4. **Pull the piles.** Red every day, yellow every other day, green on Sundays. **Paper round** on Today tells you which piles and walks you through them.
-> 5. **In the round.** Say the other side out loud, then flip. **Got it**: the app asks if the card moves up a pile. **Not yet**: back to red. **Not in my stack**: you haven't made that card yet, so it skips with no change.
-> 6. **Share it if you like.** Add a photo on the word note, then Send to teacher, and pick GroupMe so the whole class sees it right away. Notebook pages count too. Your teacher collects the best ideas here, without names.
+> 4. **Practice as much as you like.** 5, 10, 20 cards: all good. Then on Today, **Card practice**, tap how many cards and how many minutes, and **Log it**. 1 φόρα for every 5 cards and every 5 minutes, up to 10 a day.
+> 5. **Pull the piles.** Red every day, yellow every other day, green on Sundays. **Call them out for me** on Card practice tells you which piles and walks you through them, if you want it.
+> 6. **In the round.** Say the other side out loud, then flip. **Got it**: the app asks if the card moves up a pile. **Not yet**: back to red. **Not in my stack**: you haven't made that card yet, so it skips with no change.
+> 7. **Share it if you like.** Add a photo on the word note, then Send to teacher, and pick GroupMe so the whole class sees it right away. Notebook pages count too. Your teacher collects the best ideas here, without names.
 
 > [!tip]- Start here
 > - Put a picture, a gesture note or a real moment on the back, not only the English.

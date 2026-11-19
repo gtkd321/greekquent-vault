@@ -23,7 +23,7 @@ For grown-ups. Two minutes, once. Back to [[Today]].
 > They sit along the bottom of the screen.
 > - **Today** (house): this week's game.
 > - **Look up** (magnifying glass): any word in English or Greek.
-> - **More** (three dots): Send homework, Share feedback, What's new, Put it on my home screen.
+> - **More** (three dots): Ask the class, Send homework, What's new, Put it on my home screen.
 >
 > Under the cards on Today: **Play Γιαγιά** (a word game with this week's words), **All lessons**, and **Look up a word**.
 

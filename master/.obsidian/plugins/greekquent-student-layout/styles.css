@@ -586,3 +586,6 @@ button.gq-phr-row { display: block; width: 100%; text-align: left; padding: 10px
 .gq-vhelp details { margin: 6px 0; }
 .gq-vhelp summary { font-weight: 600; cursor: pointer; }
 .gq-vhelp ol { margin: 6px 0 4px; padding-left: 22px; }
+/* Object switch in the word web strip: ο καφές ↔ τον καφέ */
+.gq-agree .gq-caseseg button { min-height: 32px; padding: 0 10px; font-size: 13px; }
+.gq-agree .gq-casehint { flex-basis: 100%; }

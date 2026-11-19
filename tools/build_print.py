@@ -13,7 +13,7 @@ if os.path.exists(out): shutil.rmtree(out)
 os.makedirs(out)
 shutil.copytree(os.path.join(SRC, 'files'), os.path.join(out, 'files'))
 
-FOOT = ('<footer>Questions? Text the teacher at <a href="sms:+18033990665">+1 803 399 0665</a>.<br>'
+FOOT = ('<footer>Questions? Ask the class in the app: Class, then Ask the class.<br>'
         '© 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.</footer>')
 CSS = open(os.path.join(SRC, 'print.css'), encoding='utf-8').read()
 

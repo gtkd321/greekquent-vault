@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19n · τον καφέ, Γιάννη!, and Ask the class
+> - **ο καφές or τον καφέ?** In the Word web, tap a noun and use the new switch to see it after a verb: Θέλω τον καφέ, Βλέπω την πόλη. The words around it change too. More on the ο, η, το page and in Verb Tables.
+> - **Calling someone.** Classroom Greek has a new set: Γιάννη!, Κώστα!, Νίκο!, Κύριε!, with how names change when you call someone.
+> - **Ask the class.** Questions, by text or video, now go to the class group from Class or from More, so everyone learns from the answer. Spotted a mistake? Ask there too. Texts to the teacher are for homework.
+
 > [!tip]- 2026-11-19m · Class mode, and Greek words read letter by letter
 > - **Class mode.** On the Class tab, tap **Start class mode** (or More, then Class mode). Class then shows big buttons for this week's **Script** and **Classroom Greek**, where each phrase is a card you tap to hear. A small bar on every page jumps between Phrases, Script and Class. The screen stays awake, and it turns off by itself after 2 hours.
 > - **Greek read letter by letter?** That happens when a phone has no Greek voice, so it uses an English one. The app now stays quiet instead and shows how to add a free Greek voice. Find it any time under More, then Greek voice help.

@@ -28,7 +28,7 @@
 > - **Send homework** (More menu) texts the newest dated section of [[My Work/Homework|Homework]] to the teacher.
 > - Every look-up is saved in [[My Work/Words I looked up|Words I looked up]], with the Greek.
 > - Chunks and sentences you add to word notes are saved in [[My Work/My word cards|My word cards]].
-> - Spotted a mistake? [Text feedback to the teacher](sms:+18033990665?&body=Greekquent%20feedback%3A%20), or More, then Share feedback.
+> - Spotted a mistake or have a question? More, then **Ask the class**, by text or video. Texts to the teacher are for homework only.
 
 > [!info]- Where the data comes from
 > - "Often appears with" counts words found within four words of each other in 143,058 Greek sentences: about 43,000 everyday sentences from [Tatoeba](https://tatoeba.org) and 100,000 news sentences from the [Leipzig Corpora Collection](https://wortschatz.uni-leipzig.de/en/download/Greek), ranked by the logDice score.

@@ -45,6 +45,28 @@ The same phrases every class, all year. Learn your side once and you can stay in
 Τελειώσαμε. Θα τα πούμε! | We're done. See you. | Wave.
 ```
 
+## Calling someone
+
+Calling someone by name changes the end of some names. Use it every time you call on a classmate.
+
+```greekquent-say
+Γιάννη! | Giannis! (ο Γιάννης) | Wave toward the person.
+Κώστα! | Kostas! (ο Κώστας) | Wave toward the person.
+Νίκο! | Nikos! (ο Νίκος) | Wave toward the person.
+Μαρία! Ελένη! | Maria! Eleni! (women's names stay the same) | Wave toward the person.
+Κύριε! Κυρία! | Sir! Ma'am! (to the teacher or a stranger) | Raise your hand.
+Φίλε! | Hey, friend! (ο φίλος) | Hand on the shoulder.
+Γιαγιά! Παππού! | Grandma! Grandpa! (ο παππούς) | Open your arms for a hug.
+Σειρά σου, Γιάννη. | Your turn, Giannis. | Open hand toward one person.
+```
+
+> [!tip]- How the names change
+> - **-ης, -ας** drop the ς: Γιάννης → Γιάννη, Κώστας → Κώστα, Ηλίας → Ηλία.
+> - **-ος** becomes -ο in short names: Νίκος → Νίκο, Γιώργος → Γιώργο, Πέτρος → Πέτρο.
+> - **-ος** becomes -ε in longer names and in words for people: Αλέξανδρος → Αλέξανδρε, κύριος → κύριε, φίλος → φίλε.
+> - Women's names and the neuter stay the same: Μαρία, Ελένη, παιδί.
+> - Try it with your own name and your classmates' names.
+
 ## Thumbs mean colors
 
 When the teacher asks **Καταλάβατε;**, answer with your thumb. **Up** is green (got it), **sideways** is yellow (kind of), **down** is red (not yet). These are the same three colors as your word list.

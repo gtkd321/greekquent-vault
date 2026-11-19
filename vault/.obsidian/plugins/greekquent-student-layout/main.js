@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19m';
+const VAULT_RELEASE = '2026-11-19n';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -123,6 +123,26 @@ const agree = (lemma, g) => {
 };
 // The words that go in front of the article: αυτό το κινητό, όλη η μέρα.
 const AGREE_BEFORE_ARTICLE = new Set(['αυτός', 'εκείνος', 'όλος']);
+// The object form (after a verb: Θέλω τον καφέ). Only the singular. Neuter never changes, feminine changes only η → τη(ν).
+// τον and έναν always keep the ν; τη(ν) keeps it before a vowel or κ π τ ξ ψ μπ ντ γκ τσ τζ (Greek school grammar, §4.5).
+const keepN = next => { const f = fold(next || ''); return !f || /^([αεηιουω]|μπ|ντ|γκ|τσ|τζ|[κπτξψ])/.test(f); };
+const ACC_SPECIAL = { 'ο': 'τον', 'ένας': 'έναν', 'κανένας': 'κανέναν', 'κανείς': 'κανέναν', 'καθένας': 'καθέναν', 'πολύς': 'πολύ', 'δικός μου': 'δικό μου', 'ποιος': 'ποιον', 'αυτός': 'αυτόν', 'εκείνος': 'εκείνον' };
+// A describing word or article that already agrees (μεγάλος, η, μία) → its object form. next = the word after it, for τη(ν).
+const accWord = (form, g, next) => {
+  if (g === 'n' || !form) return form;
+  if (g === 'f') return form === 'η' ? (keepN(next) ? 'την' : 'τη') : form;
+  if (ACC_SPECIAL[form]) return ACC_SPECIAL[form];
+  const m = form.match(/^(.+?)(ος|ός|ής|ης)$/); if (!m) return form;
+  return m[1] + ({ 'ος': 'ο', 'ός': 'ό', 'ής': 'ή', 'ης': 'η' })[m[2]];
+};
+// A noun with its article (ο καφές, η πόλη) → τον καφέ, την πόλη. Masculine endings: -ος -ας -ης -ές -ούς lose the ς.
+const accNoun = (noun, g) => {
+  const m = (noun || '').match(/^(ο|η|το) (\S+)(.*)$/); if (!m || g === 'n') return noun;
+  let w = m[2];
+  if (g === 'm') w = w.replace(/(ος|ός|ας|άς|ης|ής|ές|ούς)$/, x => x.slice(0, -1));
+  else if (/(ος|ός)$/.test(w)) w = w.replace(/ς$/, '');
+  return accWord(m[1], g, w) + ' ' + w + m[3];
+};
 const smsLink = body => `sms:${FEEDBACK_SMS}?&body=${encodeURIComponent(body)}`;
 
 const HIDE_RIBBON_PREFIX = ['meld-encrypt:'];
@@ -275,6 +295,12 @@ class WordWebView extends ItemView {
   async onClose() { if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; if (this.ro) this.ro.disconnect(); }
   file() { return this.path ? this.app.vault.getAbstractFileByPath(this.path) : null; }
   label(p) { return this.plugin.agreeLabel(p, this.centerG || ''); }
+  // After the object switch: new labels on every word, the title and the strip.
+  relabel() {
+    for (const m of this.nodes.values()) if (!m.dead) m.t.textContent = this.label(m.k);
+    const s = this.titleEl.querySelector('span'); if (s && this.path) s.textContent = this.label(this.path);
+    if (this.path) this.plugin.paintAgreeBox(this.agree, this.path, () => this.relabel());
+  }
   // What a word note offers the web: kind, rank, meaning, and its partners with the phrase that joins them.
   async info(p) {
     if (this.data.has(p)) return this.data.get(p);
@@ -467,7 +493,7 @@ class WordWebView extends ItemView {
     const from = Math.max(0, this.pos - 6);
     this.hist.slice(from, this.pos + 1).forEach((h, i, a) => { const el = this.trail.createEl('a', { text: h.replace(/^Words\//, '').replace(/\.md$/, ''), href: '#', attr: { lang: 'el' } }); el.onclick = ev => { ev.preventDefault(); this.pos = from + i; this.go(h, false); }; if (i < a.length - 1) this.trail.appendText('  ›  '); });
     // The agreement strip: a noun shows the describing words in its gender, and the other way round.
-    this.plugin.paintAgreeBox(this.agree, this.path);
+    this.plugin.paintAgreeBox(this.agree, this.path, () => this.relabel());
     void name;
   }
 }
@@ -925,13 +951,13 @@ class CardModal extends Modal {
 class AskModal extends Modal {
   constructor(app, plugin, file) { super(app); this.plugin = plugin; this.file = file; }
   onOpen() {
-    const c = this.contentEl; c.addClass('gq-modal'); this.titleEl.setText('Ask the group');
+    const c = this.contentEl; c.addClass('gq-modal'); this.titleEl.setText('Ask the class');
     const head = this.plugin.askHeader(this.file);
     c.createDiv({ cls: 'gq-hit-main', text: head });
     this.box = c.createEl('textarea', { attr: { rows: 4, placeholder: 'Your question (English or Greek)' } }); this.box.addClass('gq-input');
     const row = c.createDiv('gq-row');
     const send = row.createEl('button', { text: 'Share to GroupMe', cls: 'mod-cta' });
-    send.onclick = async () => { this.plugin.moAdd('did', 'ask', 2); await this.plugin.shareQuestion(head + '\n' + this.box.value.trim() + '\n' + this.plugin.noteUrl(this.file)); this.close(); };
+    send.onclick = async () => { this.plugin.moAdd('did', 'ask', 2); await this.plugin.shareQuestion(head + '\n' + this.box.value.trim() + (this.file ? '\n' + this.plugin.noteUrl(this.file) : '')); this.close(); };
     const vid = row.createEl('button', { text: 'Ask on video instead' });
     vid.onclick = () => { const t = this.box.value.trim(); this.close(); new VideoAskModal(this.app, this.plugin, this.file, t).open(); };
     if (GROUPME_JOIN) { const j = row.createEl('button', { text: 'Join the class group' }); j.onclick = () => window.open(GROUPME_JOIN); }
@@ -951,7 +977,7 @@ class VideoAskModal extends Modal {
   constructor(app, plugin, file, text) { super(app); this.plugin = plugin; this.file = file; this.text = text || ''; this.stream = null; this.rec = null; this.clip = null; this.url = null; this.tick = null; }
   onOpen() {
     const c = this.contentEl; c.addClass('gq-modal'); c.addClass('gq-video-modal'); this.titleEl.setText('Ask on video');
-    this.head = this.plugin.askHeader(this.file).replace(/^Question about/, 'Video question about');
+    this.head = this.plugin.askHeader(this.file).replace(/^Question about/, 'Video question about').replace(/^Question for/, 'Video question for');
     c.createDiv({ cls: 'gq-hit-main', text: this.head });
     const stage = c.createDiv('gq-video-stage');
     this.vid = stage.createEl('video'); this.vid.setAttr('playsinline', ''); this.vid.muted = true; this.vid.autoplay = true;
@@ -1030,7 +1056,7 @@ class VideoAskModal extends Modal {
     try { if (name) localStorage.setItem(NAME_KEY, name); } catch (e) {}
     const yn = b => b ? 'yes' : 'no';
     const q = this.box.value.trim();
-    const text = [this.head, q, `${name || 'A student'} · public library: ${yn(this.pub.checked)} · promo: ${yn(this.promo.checked)}`, this.plugin.noteUrl(this.file)].filter(Boolean).join('\n');
+    const text = [this.head, q, `${name || 'A student'} · public library: ${yn(this.pub.checked)} · promo: ${yn(this.promo.checked)}`, this.file ? this.plugin.noteUrl(this.file) : ''].filter(Boolean).join('\n');
     const type = this.clip.type || 'video/mp4';
     const ext = /webm/.test(type) ? 'webm' : /quicktime/.test(type) ? 'mov' : 'mp4';
     const stamp = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '');
@@ -1199,11 +1225,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.tabsSync();
     this.addRibbonIcon('more-horizontal', 'More', evt => this.moreMenu(evt));
     this.addCommand({ id: 'open-today', name: 'Open Today', callback: () => this.openToday() });
-    this.addCommand({ id: 'share-feedback', name: 'Share feedback', callback: () => this.feedback() });
     this.addCommand({ id: 'send-homework', name: 'Send homework', callback: () => this.sendHomework() });
     this.addCommand({ id: 'update-vault', name: 'Update vault', callback: () => this.updateVault(false) });
     this.addCommand({ id: 'look-up-word', name: 'Look up a word', callback: () => new LookupModal(this.app, this).open() });
-    this.addCommand({ id: 'ask-group', name: 'Ask the group about this note', callback: () => this.ask() });
+    this.addCommand({ id: 'ask-group', name: 'Ask the class', callback: () => this.ask() });
     this.addCommand({ id: 'ask-video', name: 'Ask on video about this note', callback: () => this.askVideo() });
     // Today page, word color bar, and misses sent back from the games.
     this.registerMarkdownCodeBlockProcessor('greekquent-today', (src, el, ctx) => { this.todayEls.add(el); this.renderToday(el); });
@@ -1337,18 +1362,19 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   // How a word reads next to a noun of gender g: nouns keep their article, describing words take g.
   agreeLabel(path, g) {
-    const w = this.wordInfo(path);
-    if (w.g) return w.noun;
-    if (w.changes && g) return agree(w.name, g) || w.name;
+    const w = this.wordInfo(path), obj = this.caseObj;
+    if (w.g) return obj ? accNoun(w.noun, w.g) : w.noun;
+    if (w.changes && g) { const f = agree(w.name, g) || w.name; return obj ? accWord(f, g) : f; }
     return w.name;
   }
   // A short phrase for a describing word with a noun: μεγάλο σπίτι, ένα σπίτι, αυτό το σπίτι, το σπίτι.
   agreePhrase(adj, noun) {
     const a = this.wordInfo(adj), n = this.wordInfo(noun); if (!n.g) return '';
-    const form = agree(a.name, n.g); if (!form) return '';
-    const bare = n.noun.replace(/^(ο|η|το) /, '');
-    if (a.name === 'ο, η, το') return n.noun;
-    if (AGREE_BEFORE_ARTICLE.has(a.name)) return form + ' ' + n.noun;
+    let form = agree(a.name, n.g); if (!form) return '';
+    const obj = this.caseObj, full = obj ? accNoun(n.noun, n.g) : n.noun, bare = full.replace(/^(τον|την|τη|ο|η|το) /, '');
+    if (a.name === 'ο, η, το') return full;
+    if (obj) form = accWord(form, n.g, AGREE_BEFORE_ARTICLE.has(a.name) ? full : bare);
+    if (AGREE_BEFORE_ARTICLE.has(a.name)) return form + ' ' + full;
     if (a.name === 'ποιος') return form + ' ' + bare + ';';
     return form + ' ' + bare;
   }
@@ -1372,15 +1398,27 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     } catch (e) { /* labels are a bonus; the graph still works */ }
   }
   // The agreement strip under the graph title.
-  paintAgree(leaf, path) { const st = this.graphState(leaf); if (st.agree) this.paintAgreeBox(st.agree, path); }
-  paintAgreeBox(box, path) {
+  paintAgree(leaf, path) { const st = this.graphState(leaf); if (st.agree) this.paintAgreeBox(st.agree, path, () => { this.setGraphLabels(leaf, path); this.paintAgree(leaf, path); this.paintSpark(leaf, path); }); }
+  // onFlip: redraw the labels after the object switch changes.
+  paintAgreeBox(box, path, onFlip) {
     box.empty(); box.hide();
     const c = this.wordInfo(path), links = Object.keys((this.app.metadataCache.resolvedLinks || {})[path] || {}).filter(p => p.startsWith('Words/') && p !== path);
-    let head = '', items = [];
-    if (c.g) { head = 'Agrees with ' + c.noun + ':'; items = links.filter(p => this.wordInfo(p).changes).map(p => this.agreePhrase(p, path)); }
-    else if (c.changes) { head = c.name + ' changes with the noun:'; items = links.filter(p => this.wordInfo(p).g).map(p => this.agreePhrase(path, p)); }
-    items = [...new Set(items.filter(Boolean))].slice(0, 8); if (!items.length) return;
-    box.show(); box.createSpan({ cls: 'gq-agree-t', text: head });
+    const obj = this.caseObj; let head = '', items = [];
+    if (c.g) { head = (obj ? 'After a verb, with ' : 'Agrees with ') + this.agreeLabel(path, c.g) + ':'; items = links.filter(p => this.wordInfo(p).changes).map(p => this.agreePhrase(p, path)); }
+    else if (c.changes) { head = c.name + (obj ? ' after a verb:' : ' changes with the noun:'); items = links.filter(p => this.wordInfo(p).g).map(p => this.agreePhrase(path, p)); }
+    items = [...new Set(items.filter(Boolean))].slice(0, 8);
+    // The object switch: ο καφές ↔ τον καφέ. Shown for words that change (not neuter nouns, which look the same).
+    const flips = onFlip && (c.g === 'm' || c.g === 'f' || (c.changes && items.length));
+    if (!items.length && !flips) return;
+    box.show();
+    if (flips) {
+      const ex = c.g ? [c.noun, accNoun(c.noun, c.g)] : ['ο καφές', 'τον καφέ'];
+      const seg = box.createDiv({ cls: 'gq-seg gq-caseseg', attr: { role: 'group', 'aria-label': 'Who does it, or what gets it' } });
+      [[false, ex[0]], [true, ex[1]]].forEach(([v, t]) => { const b = seg.createEl('button', { text: t, cls: obj === v ? 'is-on' : '', attr: { lang: 'el', 'aria-pressed': String(obj === v) } }); b.onclick = () => { if (this.caseObj !== v) { this.caseObj = v; this.moAdd('try', 'case:' + (v ? 'obj' : 'subj')); } say(t); onFlip(); }; });
+      if (obj) box.createDiv({ cls: 'gq-hint gq-casehint', text: 'After a verb the word changes: Θέλω τον καφέ. Βλέπω την πόλη. Το σπίτι stays the same.' });
+    }
+    if (!items.length) return;
+    box.createSpan({ cls: 'gq-agree-t', text: head });
     for (const t of items) { const b = box.createEl('button', { text: t, cls: 'gq-mini' }); b.onclick = () => say(t); }
   }
   // A spark: the center word plus two of its partners that also link to each other. A closed triangle in the graph.
@@ -1545,7 +1583,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const open = bar.createEl('button', { text: 'Open note', attr: { 'aria-label': 'Open the word note' } });
       const pairb = bar.createEl('button', { text: 'Build a sentence', attr: { 'aria-label': 'Build a sentence with this word' } });
       pairb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.openPair(f.basename); };
-      const askb = bar.createEl('button', { text: 'Ask', attr: { 'aria-label': 'Ask the group about this word' } });
+      const askb = bar.createEl('button', { text: 'Ask', attr: { 'aria-label': 'Ask the class about this word' } });
       askb.onclick = () => { const f = this.app.vault.getAbstractFileByPath(st.hist[st.pos]); if (f) this.ask(f); };
       st.trail = wrap.createDiv('gq-web-trail'); st.agree = wrap.createDiv('gq-agree'); st.agree.hide(); st.spark = wrap.createDiv('gq-spark'); st.spark.hide(); st.bar = wrap;
       const key = wrap.createDiv('gq-web-key');
@@ -1675,9 +1713,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // ---------- Ask on video helpers ----------
   askVideo(file) {
     const f = file || this.app.workspace.getActiveFile();
-    if (!f || f.extension !== 'md') { new Notice('Open a word or lesson note first, then tap Ask on video.'); return; }
-    if (f.path.startsWith(MY_WORK)) { new Notice('My Work notes are private. Open a word or lesson note instead.'); return; }
-    new VideoAskModal(this.app, this, f).open();
+    const ok = f && f.extension === 'md' && f.path !== TODAY && !f.path.startsWith(MY_WORK);
+    new VideoAskModal(this.app, this, ok ? f : null).open();
   }
   async shareVideo(file, text, saveDir) {
     const mobile = document.body.classList.contains('is-mobile') || /Android|iPhone|iPad/.test(navigator.userAgent);
@@ -1759,12 +1796,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   // ---------- Ask the group helpers ----------
   ask(file) {
-    const f = file || this.app.workspace.getActiveFile();
-    if (!f || f.extension !== 'md' || f.path === TODAY) { new Notice('Open a word or lesson note first, then tap Ask.'); return; }
-    if (f.path.startsWith(MY_WORK)) { new Notice('My Work notes are private, so they cannot be linked. Open a word or lesson note instead.'); return; }
-    new AskModal(this.app, this, f).open();
+    const f = file === null ? null : (file || this.app.workspace.getActiveFile());
+    // No usable note (Today, Class, My Work): ask a general question instead of refusing.
+    const ok = f && f.extension === 'md' && f.path !== TODAY && !f.path.startsWith(MY_WORK);
+    new AskModal(this.app, this, ok ? f : null).open();
   }
   askHeader(f) {
+    if (!f) return 'Question for the class:';
     const fm = (this.app.metadataCache.getFileCache(f) || {}).frontmatter || {};
     const les = Array.isArray(fm.lessons) && fm.lessons.length ? `, first seen in Lesson ${fm.lessons[0]}` : '';
     return fm.english ? `Question about ${f.basename} (${fm.english}${les}):` : `Question about "${f.basename}":`;
@@ -1971,10 +2009,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addItem(i => i.setTitle('Look up a word').setIcon('search').onClick(() => new LookupModal(this.app, this).open()));
     m.addItem(i => i.setTitle('Word web').setIcon('git-fork').onClick(() => this.openGraph()));
     m.addItem(i => i.setTitle(this.classOn() ? 'Class mode: end' : 'Class mode: start').setIcon('users').onClick(() => this.setClass(!this.classOn())));
-    m.addItem(i => i.setTitle('Ask about this note').setIcon('message-circle').onClick(() => this.ask()));
+    m.addItem(i => i.setTitle('Ask the class').setIcon('message-circle').onClick(() => this.ask()));
     m.addItem(i => i.setTitle('Send homework').setIcon('send').onClick(() => this.sendHomework()));
     m.addSeparator();
-    m.addItem(i => i.setTitle('Share feedback').setIcon('message-square').onClick(() => this.feedback()));
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
     m.addItem(i => i.setTitle(gqQuiet() ? 'Greek voice: off (turn on)' : 'Greek voice: on (turn off)').setIcon(gqQuiet() ? 'volume-x' : 'volume-2').onClick(() => this.setQuiet(!gqQuiet())));
     m.addItem(i => i.setTitle('Greek voice help').setIcon('help-circle').onClick(() => this.voiceHelp(false)));
@@ -3476,7 +3513,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         { k: 'words', at: ['words'], t: "This week's words", b: 'Hear each word, then pick a color: red is not yet, yellow is kind of, green is got it.', ev: 'up' },
         { k: 'teacher', at: ['teacher'], t: 'Now you are the teacher', b: 'Swap. The kid asks. The grown-up gets one wrong on purpose. Catch it. Then tap We did it.', ev: 'teacher' },
         { k: 'web', at: ['tab-words'], t: 'Word web', b: 'Tap a word to go there, double-tap to hear more than one, hold to see what it goes with.', go: ['Open the Word web', () => this.openGraph()], ev: 'web' },
-        { k: 'class', at: ['tab-class'], t: 'Class', b: "This week's lesson and game, and a way to text the teacher.", go: ['Open Class', () => this.openClass()], ev: 'class', tab: 'class' }
+        { k: 'class', at: ['tab-class'], t: 'Class', b: "This week's lesson and game, homework, and Ask the class.", go: ['Open Class', () => this.openClass()], ev: 'class', tab: 'class' }
       ];
     }
     return [
@@ -3486,7 +3523,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       { k: 'words', at: ['tab-words'], t: 'Words', b: 'All the words in one list, most frequent first. Find one you know and tap its color: red, yellow or green.', go: ['Open Words', () => this.openWords()], ev: 'up', tab: 'words' },
       { k: 'web', at: ['tab-words'], t: 'Word web', b: 'See what a word goes with. Tap a word to go there. Hold it to hear a phrase.', go: ['Open the Word web', () => this.openGraph()], ev: 'web' },
       { k: 'game', at: [], t: 'Γιαγιά', b: 'A quick game with your words. Come back here when you are done.', go: ['Play Γιαγιά', () => this.openApp('giagia', '')], ev: 'game' },
-      { k: 'class', at: ['tab-class'], t: 'Class', b: "This week's lesson, the rally, homework, practice together and your teacher, in one place.", go: ['Open Class', () => this.openClass()], ev: 'class', tab: 'class' },
+      { k: 'class', at: ['tab-class'], t: 'Class', b: "This week's lesson, the rally, homework, practice together and Ask the class, in one place.", go: ['Open Class', () => this.openClass()], ev: 'class', tab: 'class' },
       { k: 'plan', at: ['next'], t: 'Pick your moment', b: 'Choose when you practice: after coffee, after the bus. Doing it after something you already do makes it easy to start.', ev: 'plan' },
       { k: 'focus', at: [], t: 'Focus', b: 'The side panel has Calm mode, Focus sound, and Walk mode for practicing on the move.', go: ['Open the side panel', () => this.showMore()], ev: 'more' }
     ];
@@ -3674,7 +3711,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async openScript() { const L = await this.classLesson(); if (L && L.f) this.openNote(L.f.path); else new Notice('No lesson script this week.'); }
   // Classroom Greek as big tap-to-hear cards: your side, then the teacher's side. Kids get a short built-in set.
   async classPhrases() {
-    const KID = [['Δεν κατάλαβα.', "I didn't understand."], ['Ξανά, παρακαλώ.', 'Again, please.'], ['Πιο αργά, παρακαλώ.', 'Slower, please.'], ['Ένα λεπτό…', 'One moment…'], ['Δεν ξέρω.', "I don't know."], ['Πώς λέμε «…» στα ελληνικά;', 'How do you say "…" in Greek?'], ['Μπορώ να πάω τουαλέτα;', 'Can I go to the bathroom?'], ['Τελείωσα!', 'I finished.']].map(([g, e]) => ({ g, e, x: '' }));
+    const KID = [['Δεν κατάλαβα.', "I didn't understand."], ['Ξανά, παρακαλώ.', 'Again, please.'], ['Πιο αργά, παρακαλώ.', 'Slower, please.'], ['Ένα λεπτό…', 'One moment…'], ['Δεν ξέρω.', "I don't know."], ['Πώς λέμε «…» στα ελληνικά;', 'How do you say "…" in Greek?'], ['Μπορώ να πάω τουαλέτα;', 'Can I go to the bathroom?'], ['Τελείωσα!', 'I finished.'], ['Γιαγιά! Παππού!', 'Grandma! Grandpa!'], ['Κυρία! Κύριε!', "Ma'am! Sir!"]].map(([g, e]) => ({ g, e, x: '' }));
     const f = this.app.vault.getAbstractFileByPath(EXTRAS + '11 Classroom Greek.md');
     if (!f) return [{ title: 'Staying in Greek', rows: KID }];
     const txt = await this.app.vault.cachedRead(f), out = [];
@@ -3792,14 +3829,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const wk = await this.weekNote(week);
       if (wk) await this.classCard(box, wk, week); else box.createDiv({ cls: 'gq-tcard gq-hint', text: 'The year is finished.' });
     }
-    const c = box.createDiv('gq-tcard'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Homework and your teacher' });
+    const c = box.createDiv('gq-tcard'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Homework and questions' });
     const r = c.createDiv('gq-row');
     const h = r.createEl('button', { text: 'Send homework' }); h.onclick = () => this.sendHomework();
-    const t = r.createEl('button', { text: 'Text your teacher' }); t.onclick = () => window.open('sms:' + TEACHER_SMS, '_self');
-    c.createDiv({ cls: 'gq-hint', text: 'To ask about a word or a lesson, open its note, then More, then Ask about this note.' });
+    const t = r.createEl('button', { text: 'Ask the class' }); t.onclick = () => this.ask(null);
+    c.createDiv({ cls: 'gq-hint', text: 'Questions go to the class group, by text or video, so everyone learns from the answer. Spotted a mistake? Ask there too. To ask about one word or lesson, open it and tap Ask.' });
     const pt = this.together(); if (this.isKids && !pt.when) return;
     const p = box.createDiv('gq-tcard'); p.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Practice together' });
-    p.createDiv({ cls: 'gq-hint', text: pt.when ? `Weekly drop-in · ${pt.when}` : 'Practicing next to someone makes it easier to start. Ask your teacher for a drop-in time.' });
+    p.createDiv({ cls: 'gq-hint', text: pt.when ? `Weekly drop-in · ${pt.when}` : 'Practicing next to someone makes it easier to start. Ask the class for a drop-in time.' });
     const pr = p.createDiv('gq-row');
     if (pt.link) { const j = pr.createEl('button', { text: 'Join', cls: 'mod-cta' }); j.onclick = () => window.open(pt.link, '_blank'); }
     if (this.app.vault.getAbstractFileByPath(EXTRAS + 'Practice together.md')) { const m = pr.createEl('button', { text: 'How it works', cls: 'gq-mini' }); m.onclick = () => this.openNote(EXTRAS + 'Practice together.md'); }
@@ -4209,9 +4246,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       btn('Play Γιαγιά with this word', async () => this.openApp('giagia', '#w=' + encodeURIComponent((await this.webWords(f.path)).join(','))));
       if (GREET_W.has(f.basename)) btn('Play Τι λέμε; (hello and goodbye)', () => this.openApp('hello', ''));
       btn('Games', () => this.openNote(this.gamesNote()));
-      btn('Ask the group', () => this.ask(f));
+      btn('Ask the class', () => this.ask(f));
     } else {
-      btn('Ask the group', () => this.ask(f));
+      btn('Ask the class', () => this.ask(f));
       if (this.isStudentScript(f.path)) btn('Send homework', () => this.sendHomework());
       btn('Look up a word', () => new LookupModal(this.app, this).open());
     }

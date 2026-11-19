@@ -14,6 +14,10 @@ Twelve core verbs, each conjugated in full on its own word note. "When you meet 
 - **Future:** θα + verb. θα + the "once" form is the everyday "will" (θα δω, I'll see). θα + the present form means "will be doing" or "will regularly" (θα βλέπω).
 - **The same "once" form follows να:** Θέλω να δω. Μπορώ να φάω; That's why these show up as chunks long before the future is taught.
 
+## After a verb: τον, την, το
+
+The verb's object takes a different article, and masculine nouns lose their final ς: ο καφές → Θέλω τον καφέ, ο φίλος → Βλέπω τον φίλο. Feminine nouns change only the article (η πόλη → την πόλη) and neuter nouns don't change (το σπίτι). The same goes for ένας → έναν. Write τον and έναν with the ν every time. τη(ν) keeps its ν before a vowel or κ, π, τ, ξ, ψ, μπ, ντ, γκ, τσ, τζ ([Greek school grammar](https://ebooks.edu.gr/ebooks/v/html/8547/2009/Grammatiki_E-ST-Dimotikou_html-apli/index_B4e.html)). In the Word web, tap a noun and switch ο καφές to τον καφέ to see it on any word.
+
 ## The anchor verbs
 
 - [[έχω]] — I have · έχω, είχα, θα έχω

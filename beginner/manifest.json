@@ -1,5 +1,5 @@
 {
-"release": "2026-11-19m",
+"release": "2026-11-19n",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -42,11 +42,11 @@
 "size": 95488
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "63c32dea71185c935dacbf043aacfdbd758f18f76f320c655607102ecd5e2920",
-"size": 377830
+"sha256": "e39b5056af291c4649aec0b6d35ea3d78ffade79c952d9aeddd02096f7f82d0f",
+"size": 381438
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "8de782300a1d818176800c26735c192c3edc756515172916cb5305d0f048c7b8",
+"sha256": "1f1846cd52983fc4f20b5f300e442ab5c42e093b84934a36e4981bc3101d3105",
 "size": 375
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -54,8 +54,8 @@
 "size": 272119
 },
 ".obsidian/plugins/greekquent-student-layout/styles.css": {
-"sha256": "d3ef9b2a2f634319209450ff323d77f3225484c4ce877720add03a3a64545888",
-"size": 48776
+"sha256": "ab9ceb8d6770e391cd3df89cadb432cd48cc80e07ef4391cddf3c816c1714d0b",
+"size": 48983
 },
 ".obsidian/plugins/greekquent-student-layout/verbs.json": {
 "sha256": "00e00b6ade1bfc6dc9bdc85b7daef690e8a4a0e3cbb2b57ae0c9e0596c27767d",
@@ -90,12 +90,12 @@
 "size": 20632
 },
 "Extras/00 Greekquent Index.md": {
-"sha256": "cc736d956143d8e6fe21ec524fa53816b6cb414d29e793e651c0a84d3bd94288",
-"size": 2727
+"sha256": "ecf94b8090289298e3a6dcab13bd27d92ed00bc60829a0e8236cb680b232714d",
+"size": 2724
 },
 "Extras/02 Verb Tables.md": {
-"sha256": "0e3902924a1e17e00f36c7be8af40bcd2b8c2c1b44e66b04fea8ede68fdd94af",
-"size": 2740
+"sha256": "7be5487d0944d6aae4715a205a54b8de153439b7b7ea25b15832d8d91c5dbc61",
+"size": 3477
 },
 "Extras/04 How Memory Works.md": {
 "sha256": "232b4898b5a65bc2ab42531bb4cf4edc69c30938c100bd1774a013b59641c0f8",
@@ -118,12 +118,12 @@
 "size": 2280
 },
 "Extras/11 Classroom Greek.md": {
-"sha256": "b978d43321232104363af9256f7e998dde1282e77eddf5bf5eca39f5e213b690",
-"size": 3166
+"sha256": "5bf57054331d0838f53fa1781a5f52c6c85c14f34719e7aca5b7c8301f261195",
+"size": 4527
 },
 "Extras/12 Student Questions.md": {
-"sha256": "463617efd5c319f2f2cbc962db9b7565860342cd5b8ba44789ee2ed38352d204",
-"size": 1264
+"sha256": "47798dd7a2e73d5fd2ee128d2afff1a7de02a410a9da0da56ada51e8f7e50aab",
+"size": 1273
 },
 "Extras/13 Focus tips.md": {
 "sha256": "66d5fdc6f992e35f208ae19a4124cc8dd9c1bd3b5cda87c107ff2e03a597cd76",
@@ -138,20 +138,20 @@
 "size": 627
 },
 "Extras/Practice together.md": {
-"sha256": "ee5f1fcf453f763cd4f09ad994c7b5640cf8a5848357305e2ff9d9446887a81d",
-"size": 785
+"sha256": "1bc15979419f5eb6f5388fdea1d0c3fec84b7bbdb756c6760e9403cc29f8cb6f",
+"size": 805
 },
 "Extras/Print and download.md": {
 "sha256": "52ef9178529c7ceb55805fbb40f5837ca441cd02f1e6497f152d409952365f63",
 "size": 603
 },
 "Extras/Setting up.md": {
-"sha256": "4fafbd8380fea0bc8b0832f0e4892d668ef6cd52156ec3f7fcd31a7e68ebb318",
-"size": 2491
+"sha256": "aa9456e52e3b1e92e05caf705bc94f631a0e22eb6dd7a5eb4c075f7f53a80738",
+"size": 2490
 },
 "Extras/What's New.md": {
-"sha256": "2d7e1215d6e6cc520ace0f4424afb215f99cb7316e74766462ae8061918aa2a7",
-"size": 34306
+"sha256": "988e68856940e62b971fc070ac30c5674892be71bc470a705984e57a7d23271b",
+"size": 35000
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",
@@ -706,8 +706,8 @@
 "size": 1191
 },
 "Words/ένας, μία, ένα.md": {
-"sha256": "585cab9c28ef94e6d11415be08609c57a8bb51554c84d5d66fa302a751497070",
-"size": 4312
+"sha256": "14f7aae5e5076a4c00bc6d49c05defdfd2e23be661fb3d0702dcef7878eb5203",
+"size": 4559
 },
 "Words/ένοχος.md": {
 "sha256": "72acf230cfa69a23b42d6f4b72b12259665d1c7f1ec41e35e22071ec5657ac74",
@@ -4134,8 +4134,8 @@
 "size": 1189
 },
 "Words/ο, η, το.md": {
-"sha256": "2326ebbb28f06f8e09ab9f813056d8d8b4f7c5b212af186ae71ecf3a722f78c5",
-"size": 4712
+"sha256": "e79dbe3517ab8958099fc7ca2b30a2b2208eaa911f860c801efcc6771214c0ab",
+"size": 5569
 },
 "Words/οδηγία.md": {
 "sha256": "594134ef72184b84e388cae2fe23fceb93c8294faba837e87013eecea2e12444",

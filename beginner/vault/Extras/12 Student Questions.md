@@ -13,7 +13,7 @@ Video questions from Greekquent students, each with the teacher's answer. Tap **
 >    - **Promo videos:** a few seconds of your clip, with your first name on screen, can appear in Greekquent promo videos.
 > 4. Tap **Share to GroupMe** and pick the class group. Everyone sees it right away, and your teacher answers there.
 >
-> Changed your mind? Tell your teacher and the clip comes out of the library.
+> Changed your mind? Tell your teacher in class and the clip comes out of the library.
 
 > [!question]- Good questions to ask
 > - When do I use this word, and when do I use a similar one?

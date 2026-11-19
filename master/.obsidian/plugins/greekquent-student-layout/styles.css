@@ -697,3 +697,20 @@ body.gq-ph-off rt.gq-prt { display: none; }
 .gq-tcard.gq-next.is-slim > .gq-thead, .gq-tcard.gq-next.is-slim > .gq-next-line, .gq-tcard.gq-next.is-slim > .gq-row, .gq-tcard.gq-next.is-slim > .gq-plan { display: none; }
 .gq-nextup { display: block; width: 100%; margin-top: 14px; min-height: 44px; }
 .gq-rest-link { display: block; margin: 4px 0 10px; }
+/* App review overlay (teacher) */
+.gq-rev-on { outline: 3px dashed var(--interactive-accent); outline-offset: 4px; border-radius: 10px; }
+.gq-rev { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(76px + env(safe-area-inset-bottom)); width: min(460px, calc(100vw - 24px)); max-height: calc(100vh - 120px); overflow-y: auto; z-index: 61; background: var(--background-primary); border: 2px solid var(--interactive-accent); border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.25); padding: 10px 14px 12px; line-height: 1.4; }
+.gq-rev .gq-row { margin-top: 10px; display: flex; gap: 8px; justify-content: flex-end; }
+.gq-rev-h { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.gq-rev-big { font-size: 2.4em; font-weight: 800; line-height: 1.1; margin: 4px 0; }
+.gq-rev-pct { font-weight: 800; font-variant-numeric: tabular-nums; }
+.gq-rev .is-r { color: #c62828; } .gq-rev .is-y { color: #a07800; } .gq-rev .is-g { color: #2e7d32; }
+.gq-rev-bar { position: relative; height: 8px; border-radius: 4px; background: var(--background-modifier-border); margin: 4px 0 8px; }
+.gq-rev-fill { height: 100%; border-radius: 4px; }
+.gq-rev-fill.is-r { background: #e53935; } .gq-rev-fill.is-y { background: #f9c80e; } .gq-rev-fill.is-g { background: #43a047; }
+.gq-rev-mark { position: absolute; top: -3px; bottom: -3px; left: 83.3%; width: 2px; background: var(--text-normal); }
+.gq-rev-sec { margin: 6px 0; font-size: .95em; }
+.gq-rev-move { padding: 6px 8px; border-radius: 8px; background: var(--background-secondary); }
+.gq-rev-list { display: grid; gap: 2px; margin: 8px 0; }
+.gq-rev-li { display: flex; justify-content: space-between; width: 100%; background: transparent; box-shadow: none; border: 0; padding: 6px 4px; min-height: 36px; text-align: left; }
+.gq-rev-li:hover { background: var(--background-secondary); }

@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19x';
+const VAULT_RELEASE = '2026-11-19y';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1370,6 +1370,8 @@ class VideoAskModal extends Modal {
 
 // ---------- Pair it: build a sentence from a word's partners (all from the 1,500) ----------
 const PAIRS_NOTE = MY_WORK + 'My pairs.md';
+// App review (teacher only): each area scored against what the leading language apps do. 100% matches them, more than 100% goes further.
+const GQ_REVIEW = [{"k": "first", "t": "The first minute", "p": 80, "at": ["next"], "lead": "Leaders get you learning within about a minute and ask two things first: your level and how much you want to do each week.", "src": [["Words on Repeat", "https://wordsonrepeat.com/blog/anki-vs-memrise"], ["Babbel", "https://www.babbel.com/how-babbel-works"]], "you": "The tour starts at once, rewards trying things, and Today shows one card. Nothing asks how much time the student has.", "move": "Ask one question on first open: 5, 10 or 15 minutes a day? Use the answer to size Next."}, {"k": "next", "t": "One clear next step", "p": 100, "at": ["next"], "lead": "Babbel lessons average about 6 minutes, each around one real situation.", "src": [["Babbel", "https://www.babbel.com/how-babbel-works"]], "you": "Today shows one big card with how long it takes, and Next up brings in the step after it.", "move": "Keep it this way. Any new feature goes behind Do something else, never onto Today."}, {"k": "habit", "t": "Coming back every day", "p": 35, "at": ["next"], "lead": "Learners on a 7-day streak are 2.4 times more likely to come back the next day. Letting a missed day not count raised daily learners.", "src": [["Duolingo blog", "https://blog.duolingo.com/improving-the-streak/"], ["Duolingo on streak freezes", "https://blog.duolingo.com/how-duolingo-streak-builds-habit/"], ["streak research summary", "https://www.shahzebspeaks.com/brand-psychology-audits/duolingo-psychology-audit-the-owl-the-streak-and-the-price-of-guilt/"]], "you": "Pick your moment and the calendar reminder are there. Nothing counts the days, so a good week is never visible.", "move": "Add one quiet line on Next: \"This week: 3 of 5 days.\" It counts weekly and nothing ever resets, so a broken streak never punishes anyone."}, {"k": "review", "t": "Bringing words back", "p": 70, "at": ["next"], "lead": "Leaders schedule reviews automatically. Spacing out recall clearly beats cramming (effect size g = 0.74).", "src": [["Babbel", "https://www.babbel.com/how-babbel-works"], ["Latimier et al. meta-analysis", "https://link.springer.com/article/10.1007/s10648-020-09572-8"]], "you": "Story comebacks return at 1, 3 and 7 days, and every word has a color. Red words do not come back on their own.", "move": "Feed red and yellow words into comebacks on the same 1, 3, 7 cycle. Green words come back once after a month."}, {"k": "scenes", "t": "Real scenes", "p": 110, "at": ["story"], "lead": "Babbel builds lessons around real-life situations. Memrise lets you choose your scenarios.", "src": [["Babbel", "https://www.babbel.com/how-babbel-works"], ["Memrise", "https://www.memrise.com/en/learn-spanish/spanish-course"]], "you": "Every one of the 1,500 words is tied to a scene, a story line and a weekly plan. That is frequency and context together, which neither does.", "move": "Let students choose which scene comes next. That gives them freedom without leaving the 1,500."}, {"k": "speak", "t": "Speaking out loud", "p": 75, "at": ["story"], "lead": "Duolingo now lets learners speak almost every answer. Babbel has you listen to a dialogue and then say one part.", "src": [["Duolingo Q1 2026 letter", "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029790/q1fy26duolingo3-31x26share.htm"], ["Babbel support", "https://support.babbel.com/hc/en-us/articles/19188554247186-Guided-Conversations"]], "you": "The story puzzle asks students to say the line and checks it. Hear it is on every word, and there is live practice on Tuesdays.", "move": "Add a two-voice mode to the story: the phone reads one character and the student says the other."}, {"k": "voices", "t": "Real voices", "p": 40, "at": ["story"], "lead": "Memrise is built around native speakers: every word comes with a real person saying it.", "src": [["Memrise", "https://www.memrise.com/en-us/"]], "you": "The phone voice reads everything, and the video questions library holds a few real clips.", "move": "Record the 100 most frequent words in your own voice, 2 to 3 seconds each. Play those where they exist and the phone voice everywhere else."}, {"k": "people", "t": "Learning with people", "p": 90, "at": ["tab-class"], "lead": "Learners with a Friend Streak are 22% more likely to finish their daily lesson.", "src": [["Duolingo blog", "https://blog.duolingo.com/product-lessons-friend-streak/"]], "you": "Ask the Class, video questions, GroupMe and a real teacher every Tuesday. Most apps cannot offer a teacher.", "move": "Pair students as practice buddies in GroupMe each month, with no new app needed."}, {"k": "progress", "t": "Seeing progress", "p": 95, "at": ["tab-words"], "lead": "Memrise tracks each word as learned, heard or used.", "src": [["Memrise", "https://www.memrise.com/en-us/"]], "you": "Every word is red, yellow or green, φόρα grows a world, and the weekly pages show the year.", "move": "Show one line at the top of Words: \"Green: 212 of 1,500.\""}, {"k": "free", "t": "Free and everywhere", "p": 120, "at": [], "lead": "Leaders are freemium: Duolingo has ads and limits, and Memrise keeps most native-speaker videos behind Pro.", "src": [["Duolingo Q1 2026 letter", "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029790/q1fy26duolingo3-31x26share.htm"], ["Memrise", "https://www.memrise.com/en-us/"]], "you": "Free, no ads, the same on Android and iPhone, works offline, and also in Obsidian.", "move": "Say this in the ads. It is the clearest edge over every leader."}];
 const PAIR_GOAL = 5;   // sentences a week
 const WHO = [['εγώ', 'I', 0], ['εσύ', 'you', 1], ['αυτός', 'he', 2], ['αυτή', 'she', 2], ['εμείς', 'we', 3], ['εσείς', 'you all', 4], ['αυτοί', 'they', 5],
   ['η μαμά μου', 'my mom', 2], ['ο φίλος μου', 'my friend', 2], ['τα παιδιά', 'the kids', 5]];
@@ -1580,6 +1582,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       this.isTeacher = await this.app.vault.adapter.exists(TEACHER_MARK);
       this.isKids = !!(await this.kidsInfo()); document.body.classList.toggle('gq-kids', this.isKids);
       setTimeout(() => this.classInit(), 1500);
+      const revHash = () => { if (/review/.test(location.hash || '')) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} this.reviewStart(); } };
+      setTimeout(revHash, 2500); this.registerDomEvent(window, 'hashchange', revHash);
       for (const id of HIDE_COMMANDS) { try { this.app.commands.removeCommand(id); } catch (e) {} }
       this.hideRibbon();
       try { this.edition = (JSON.parse(await this.app.vault.adapter.read(EDITION_MARK)) || {}).edition || 'intermediate'; } catch (e) { this.edition = 'intermediate'; }
@@ -2317,6 +2321,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addItem(i => i.setTitle('Greek voice help').setIcon('help-circle').onClick(() => this.voiceHelp(false)));
     m.addItem(i => i.setTitle('Setting up').setIcon('help-circle').onClick(() => this.openNote(SETUP)));
     m.addItem(i => i.setTitle(this.tourLeft() ? 'Take the tour' : 'Take the tour again').setIcon('map').onClick(() => this.tourStart()));
+    if (this.reviewOn()) m.addItem(i => i.setTitle('App review').setIcon('gauge').onClick(() => this.reviewStart()));
     m.addItem(i => i.setTitle('Update vault').setIcon('refresh-cw').onClick(() => this.updateVault(false)));
     if (this.isTeacher) m.addItem(i => i.setTitle('Teacher update key').setIcon('key').onClick(() => this.keyModal()));
     if (evt && evt.clientX !== undefined) m.showAtMouseEvent(evt); else m.showAtPosition({ x: 60, y: 200 });
@@ -4244,6 +4249,47 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (nxi < 0) nx.setText('Done');
     nx.onclick = () => { if (st.ev && !done(st.k)) this.tourSkipped = t.at + 1; t.at = nxi < 0 ? 99 : nxi; this.tourSave(); if (nxi < 0) { this.tourSkipped = 0; this.tourBye(); } this.tourShow(); };
     const sk = r.createEl('button', { text: last ? 'Close' : 'Later', cls: 'gq-mini gq-tour-skip' }); sk.onclick = () => { t.at = 99; this.lsSet('tourlater', Date.now() + 3 * 864e5); this.tourSave(); this.tourShow(); this.refreshToday(); };
+  }
+  // ---------- App review: an overlay tour for the teacher, opened from More or with #review on the web ----------
+  reviewOn() { return this.isTeacher || !!this.lsGet('review', 0); }
+  async reviewStart() { this.lsSet('review', 1); this.revAt = -1; document.querySelector('.gq-tour') && document.querySelector('.gq-tour').remove(); await this.openToday(); setTimeout(() => this.reviewShow(), 400); }
+  reviewShow() {
+    document.querySelectorAll('.gq-rev-on').forEach(x => x.removeClass('gq-rev-on'));
+    const old = document.querySelector('.gq-rev'); if (old) old.remove();
+    if (this.revAt === undefined || this.revAt === null || this.revAt >= GQ_REVIEW.length) return;
+    const tier = p => p >= 90 ? 'is-g' : p >= 50 ? 'is-y' : 'is-r';
+    const tip = document.body.createDiv({ cls: 'gq-rev', attr: { role: 'dialog', 'aria-label': 'App review' } });
+    const top = tip.createDiv('gq-tour-top');
+    const close = () => { this.revAt = null; this.reviewShow(); };
+    if (this.revAt < 0) {
+      const avg = Math.round(GQ_REVIEW.reduce((a, r) => a + r.p, 0) / GQ_REVIEW.length);
+      top.createSpan({ cls: 'gq-tour-step', text: 'App review' });
+      top.createEl('button', { cls: 'gq-tour-x', text: '×', attr: { 'aria-label': 'Close the review' } }).onclick = close;
+      tip.createDiv({ cls: 'gq-rev-big ' + tier(avg), text: `${avg}%` });
+      tip.createDiv({ text: 'of what the leading language apps do, across 10 areas. 100% means it matches them, and more than 100% means it goes further.' });
+      const ls = tip.createDiv('gq-rev-list');
+      GQ_REVIEW.forEach((r, i) => { const b = ls.createEl('button', { cls: 'gq-rev-li' }); b.createSpan({ text: r.t }); b.createSpan({ cls: 'gq-rev-pct ' + tier(r.p), text: r.p + '%' }); b.onclick = () => { this.revAt = i; this.reviewShow(); }; });
+      tip.createDiv({ cls: 'gq-hint', text: 'Scores are estimates from public sources. Red: under 50% · Yellow: 50 to 89% · Green: 90% and up.' });
+      const r = tip.createDiv('gq-row'); const go = r.createEl('button', { text: 'Start', cls: 'mod-cta' }); go.onclick = () => { this.revAt = 0; this.reviewShow(); };
+      return;
+    }
+    const st = GQ_REVIEW[this.revAt];
+    const vis = el => el && (el.offsetParent !== null || el.getClientRects().length);
+    let el = null; for (const k of st.at) { const all = [...document.querySelectorAll(`[data-tour="${k}"]`)]; el = all.find(vis) || all.find(e => e.closest('.gq-fold')); if (el) break; }
+    { const f = el && el.closest('.gq-fold'); if (f && !f.hasClass('is-open')) this.unfold(f, true); }
+    if (el) { el.addClass('gq-rev-on'); if (!el.closest('#gq-nav') && !el.closest('.side-dock-ribbon')) { el.style.scrollMarginTop = '12px'; setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60); } }
+    top.createSpan({ cls: 'gq-tour-step', text: `Area ${this.revAt + 1} of ${GQ_REVIEW.length}` });
+    top.createEl('button', { cls: 'gq-tour-x', text: '×', attr: { 'aria-label': 'Close the review' } }).onclick = close;
+    const h = tip.createDiv('gq-rev-h'); h.createDiv({ cls: 'gq-tour-t', text: st.t }); h.createDiv({ cls: 'gq-rev-pct ' + tier(st.p), text: st.p + '%' });
+    const bar = tip.createDiv('gq-rev-bar'); const fill = bar.createDiv('gq-rev-fill ' + tier(st.p)); fill.style.width = Math.min(100, st.p / 1.2) + '%'; bar.createDiv('gq-rev-mark');
+    const sec = (lab, txt) => { const d = tip.createDiv('gq-rev-sec'); d.createEl('strong', { text: lab + ' ' }); d.appendText(txt); return d; };
+    const ld = sec('Leaders:', st.lead + ' '); st.src.forEach(([n, u], i) => { if (i) ld.appendText(', '); ld.createEl('a', { text: n, href: u, attr: { target: '_blank', rel: 'noopener' } }); });
+    sec('Greekquent:', st.you);
+    sec('Next move:', st.move).addClass('gq-rev-move');
+    const r = tip.createDiv('gq-row');
+    r.createEl('button', { text: 'Back' }).onclick = () => { this.revAt -= 1; this.reviewShow(); };
+    const last = this.revAt === GQ_REVIEW.length - 1;
+    r.createEl('button', { text: last ? 'Done' : 'Next', cls: 'mod-cta' }).onclick = () => { this.revAt = last ? -1 : this.revAt + 1; this.reviewShow(); };
   }
   tourBye() { const left = this.tourLeft(); new Notice(left ? `Tour closed. ${left} step${left === 1 ? '' : 's'} still to try, any time: More, then Take the tour.` : 'Tour done. Θα τα πούμε.'); this.refreshToday(); }
   // ---------- Tabs: Today, Words, Class, More. Words and Class appear once there is something in them. ----------

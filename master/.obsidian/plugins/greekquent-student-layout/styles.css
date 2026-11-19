@@ -619,3 +619,9 @@ button.gq-phr-row { display: block; width: 100%; text-align: left; padding: 10px
 .gq-fest.is-still .gq-fest-hk, .gq-fest.is-still .gq-light { animation: none; }
 @media (prefers-reduced-motion: reduce) { .gq-print.is-stamp, .gq-light, .gq-fest, .gq-fest-hk { animation: none; } }
 body.gq-calm .gq-print.is-stamp, body.gq-calm .gq-light { animation: none; }
+/* 19q: paper cards explained */
+.gq-paper-how { display: inline-block; margin-top: 8px; }
+.gq-paper-skip { margin-top: 10px; text-align: center; font-size: .88em; }
+.gq-card-help ul { padding-left: 1.2em; margin: 8px 0 10px; }
+.gq-card-help li { margin-bottom: 6px; }
+.gq-paper-m .gq-c.gq-yellow { border: 2px solid #d9a400; }

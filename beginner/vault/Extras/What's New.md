@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19q · Paper cards, explained
+> - The first time you tap **On paper**, a short card shows how paper cards work: what goes on the card, the three piles, and when each pile comes up. After that, a quick note confirms which pile the card goes in.
+> - In **Paper round**, Got it now asks if the card moves up a pile, so your piles and your colors match. **Not here** is now **Not in my stack**.
+> - **How paper cards work** is at the top of Card ideas, with a link from Paper round on Today.
+> - New tour step: Paper cards, worth 2 φόρα.
+
 > [!tip]- 2026-11-19p · Footprints on the square, and the fridge
 > - **Dance world, from above.** The Dance world is now η πλατεία, the village square, seen from above like a dance diagram. Every step leaves a footprint in the real pattern of the dance you are learning, with a soft step sound. Tap the square to walk the steps again.
 > - **The big moment.** Learning a whole dance fills the screen: the prints light up, a dancer goes across them, and you hear "Μπράβο. Έμαθες τον συρτό." It also comes when you send a week's homework, finish the alphabet, and reach 50 green words. Tap to go on. In calm mode it is a still picture.

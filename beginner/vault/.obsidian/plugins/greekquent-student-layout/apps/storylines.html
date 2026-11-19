@@ -391,17 +391,20 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
 
   function stop() { run++; if (window.speechSynthesis) speechSynthesis.cancel(); document.querySelectorAll('#stage .char').forEach((c) => c.classList.remove('talk')); }
 
+  // Opened from the vault's Today: when the scene (or the week) has played, tell the vault so the day goes on.
+  const HASH = (window.GQ_HASH || location.hash) || '', TODAY = /[#&]today\b/.test(HASH), WEEK = /[#&]week\b/.test(HASH);
+  function tell(m) { try { if (window.parent !== window) window.parent.postMessage(m, '*'); } catch (e) {} }
   async function play(n) {
     stop(); const my = run;
     $('bigplay').hidden = true; $('hint').textContent = 'Listen and watch.';
     const ok = await playLine(n, my);
-    if (ok && my === run) { $('hint').textContent = 'Your turn: say the lines out loud. Tap Play to hear them again.'; $('bigplay').textContent = '↻'; $('bigplay').hidden = false; }
+    if (ok && my === run) { $('hint').textContent = TODAY ? 'Now the words. Back to Today…' : 'Your turn: say the lines out loud. Tap Play to hear them again.'; $('bigplay').textContent = '↻'; $('bigplay').hidden = false; tell({ gq: 'scene', d: n }); }
   }
   async function playWeek() {
     const days = weekOf(cur).days;
     stop(); const my = run; $('bigplay').hidden = true; $('hint').textContent = 'The whole week, Monday to Saturday.';
     for (const n of days) { if (!(await playLine(n, my))) return; await wait(900); }
-    if (my === run) { $('hint').textContent = 'Sunday: tell the whole story in your own words.'; $('bigplay').textContent = '↻'; $('bigplay').hidden = false; }
+    if (my === run) { $('hint').textContent = 'Sunday: tell the whole story in your own words.'; $('bigplay').textContent = '↻'; $('bigplay').hidden = false; tell({ gq: 'scene', d: cur, week: true }); }
   }
   function show(n) {
     if (!getLine(n)) n = 1;
@@ -409,7 +412,7 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
     stop(); cur = n; markDay(); const line = getLine(n); prep(line);
     const first = line.chunks[0]; subtitle(line, first).spans.forEach((sp) => sp.classList.add('on'));
     $('bigplay').textContent = '▶'; $('bigplay').hidden = false;
-    $('hint').textContent = "Watch, then say the lines with the characters. Gold words are today's words.";
+    $('hint').textContent = WEEK ? 'The whole week as one scene. Tap Play.' : TODAY ? "Today's scene. Tap Play and just listen." : "Watch, then say the lines with the characters. Gold words are today's words.";
     window.GQDay = n; if (window.onGQDay) window.onGQDay(n);
   }
   function markDay() { [...$('days').children].forEach((b) => b.classList.toggle('on', +b.dataset.n === cur)); }
@@ -425,7 +428,7 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
   STORY.weeks.filter((w) => w.days.length).forEach((w) => { const o = document.createElement('option'); o.value = w.n; o.textContent = `Week ${w.n} · ${w.title}`; $('wk').appendChild(o); });
   $('wk').onchange = () => setWeek(+$('wk').value);
   $('play').onclick = () => play(cur);
-  $('bigplay').onclick = () => play(cur);
+  $('bigplay').onclick = () => (WEEK ? playWeek() : play(cur));
   $('week').onclick = playWeek;
   $('slow').onclick = () => { slow = !slow; $('slow').setAttribute('aria-pressed', slow); };
   $('enbtn').onclick = () => { showEn = !showEn; $('enbtn').setAttribute('aria-pressed', showEn); $('en').hidden = !showEn; };

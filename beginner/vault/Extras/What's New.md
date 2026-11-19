@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zx · Today is one day of the story
+> Today now walks through one day of the Maria and Nikos story, in the same order every day. The story card shows the day, the week and a dot for each day of the week. Each day has four steps: watch the scene (just listen), hear and say the new words, build the lines, then say the whole part out loud. Next at the bottom of each card leads to review. On the last day of a week you can watch the whole week as one scene and play Γιαγιά with its words. Kids get a Listen first card: two small figures say this week's lines, then the words, the puzzle and Say it together. Your progress and saved work are not touched.
+
 > [!tip]- 2026-11-19zw · A two-question start
 > New students now answer two questions on first open. Casual or Fluent in a Year sets the pace (Fluent in a Year starts today as day one). Can you read the Greek alphabet? If not yet, letter practice and the sound of each word turn on. If yes, letter practice is gone entirely. Students already under way are not asked. Change it later: three dots, Options, Setup again.
 

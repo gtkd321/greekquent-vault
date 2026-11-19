@@ -874,3 +874,28 @@ body.gq-nonav .gq-corner[data-mode="friend"] { bottom: auto; }
 .gq-setup-sum { margin: 8px 0 12px; padding-left: 1.2em; }
 .gq-setup-sum li { margin: 6px 0; }
 .gq-setup-again { display: block; margin-top: 14px; }
+/* Today as one day of the story: the week's path, the four steps, the scene. */
+.gq-dpath { display: flex; align-items: center; gap: 6px; margin: 6px 0 4px; }
+.gq-dpath-d { width: 9px; height: 9px; border-radius: 50%; background: var(--background-modifier-border); flex: none; }
+.gq-dpath-d.is-done { background: #1a9850; }
+.gq-dpath-d.is-now { width: 12px; height: 12px; background: var(--background-primary); box-shadow: 0 0 0 2px #1a9850; }
+.gq-dpath-d.is-now.is-done { background: #1a9850; }
+.gq-dpath-n { margin-left: auto; }
+.gq-daysteps { display: flex; gap: 6px; margin: 8px 0 12px; }
+.gq-daystep { flex: 1 1 0; min-width: 0; text-align: center; padding: 2px 0 4px; font-size: var(--font-ui-smaller); line-height: 1.4; color: var(--text-faint); border-bottom: 3px solid var(--background-modifier-border); }
+.gq-daystep.is-done { color: #1a9850; border-bottom-color: #1a9850; }
+.gq-daystep.is-done::before { content: '✓ '; }
+.gq-daystep.is-now { color: var(--text-normal); font-weight: 600; border-bottom-color: var(--interactive-accent); }
+.gq-cv-scene { text-align: center; padding: 10px 0 4px; }
+.gq-cv-scenetext { margin-bottom: 10px; }
+.gq-cv-wsay { margin-left: auto; flex: none; }
+.gq-cv-lsay { display: block; margin: 2px 0 6px; }
+.gq-cv-sayall { margin-top: 10px; }
+.gq-cv-dayend { margin: 12px 0 4px; }
+.gq-cv-dayendt { font-weight: 600; font-size: 1.1em; margin-bottom: 6px; }
+.gq-another-n { display: block; font-size: var(--font-ui-smaller); color: var(--text-faint); line-height: 1.2; }
+.gq-ksc-stage { display: flex; justify-content: center; gap: 28px; margin: 6px 0 8px; }
+.gq-ksc-fig { width: 48px; height: 72px; image-rendering: pixelated; }
+.gq-ksc-fig.is-talk { animation: gq-ksc-talk .5s ease-in-out infinite alternate; }
+@keyframes gq-ksc-talk { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+@media (prefers-reduced-motion: reduce) { .gq-ksc-fig.is-talk { animation: none; outline: 2px solid #1a9850; outline-offset: 2px; border-radius: 4px; } }

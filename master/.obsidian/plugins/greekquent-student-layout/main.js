@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zw';
+const VAULT_RELEASE = '2026-11-19zx';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1574,6 +1574,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerDomEvent(window, 'message', e => {
       const d = e.data; if (d && d.gq === 'said' && typeof d.w === 'string' && d.w) { this.moAdd('said', 'said:' + d.w.slice(0, 80)); return; }
       if (d && d.gq === 'novoice') { this.voiceHelp(true); return; }
+      // Today's scene has played in Story Lines: the day goes on to the words, back on Today.
+      if (d && d.gq === 'scene' && Number.isInteger(d.d) && !d.week) {
+        try { window.localStorage.setItem('gq-convo-' + this.app.vault.getName() + '-' + d.d + '-s', '1'); } catch (er) {}
+        const w = this.sceneWait; if (w && w.n === d.d) { this.sceneWait = null; w.go(); setTimeout(() => this.openToday(), 1500); }
+        return;
+      }
       if (d && d.gq === 'mo' && typeof d.w === 'string' && d.w) { this.moAdd('recall', d.w.split(',')[0].trim().replace(/^(ο|η|το|οι|τα) /, '').slice(0, 80)); return; }
       if (!d || d.gq !== 'obsidian' || typeof d.url !== 'string') return;
       try { const u = new URL(d.url); const p = {}; u.searchParams.forEach((v, k) => { p[k] = v; }); this.fromGame(p); } catch (err) {}
@@ -3256,15 +3262,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const n = days[idx], b = beats[n], doneN = days.filter(k => k <= at).length;
     const card = box.createDiv('gq-tcard gq-story'); card.dataset.tour = 'story';
     const head = card.createDiv('gq-thead');
-    head.createEl('strong', { text: 'Story puzzle' });
-    head.createSpan({ cls: 'gq-hint', text: `  · part ${idx + 1} of ${days.length} · about ${this.est('story', 2)} min` });
+    const wk = this.storyWeeks(beats).find(w => w.week === b.week), wt = wk && wk.title ? wk.title.replace(/\bWhats\b/g, "What's") : '';
+    head.createEl('strong', { text: `Day ${idx + 1}` });
+    head.createSpan({ cls: 'gq-hint', text: `  · Week ${b.week}${wt ? ': ' + wt : ''}` });
     this.storyEl = card; this.storyInfo = { due: !finished && at < cal, part: idx + 1 };
     // How long a part really takes this student: from the first tap to the last sentence.
     card.addEventListener('pointerdown', () => { if (!this.tStory) this.tStory = Date.now(); }, true);
-    const bar = card.createDiv({ cls: 'gq-sbar', attr: { role: 'progressbar', 'aria-valuemin': '0', 'aria-valuemax': String(days.length), 'aria-valuenow': String(doneN) } });
-    bar.createDiv('gq-sbar-in').style.width = (100 * doneN / days.length).toFixed(1) + '%';
-    const wk = this.storyWeeks(beats).find(w => w.week === b.week);
-    card.createDiv({ cls: 'gq-hint', text: `${doneN} done · week ${b.week}${wk && wk.title ? ': ' + wk.title.replace(/\bWhats\b/g, "What's") : ''}` });
+    // The week as a short path: one dot a day, today's is the big one.
+    const wdays = days.filter(k => beats[k].week === b.week), path = card.createDiv({ cls: 'gq-dpath', attr: { 'aria-label': `${doneN} of ${days.length} days done` } });
+    for (const k of wdays) path.createSpan({ cls: 'gq-dpath-d' + (k <= at ? ' is-done' : '') + (k === n ? ' is-now' : '') });
+    path.createSpan({ cls: 'gq-hint gq-dpath-n', text: `${doneN} of ${days.length}` });
     if (col.story_at === null && col.last_beat > 1 && beats[col.last_beat + 1]) {
       const h = card.createDiv({ cls: 'gq-hint' }); h.appendText('Already in the story? ');
       const j = h.createEl('a', { text: `Continue from part ${days.indexOf(col.last_beat + 1) + 1}`, href: '#' }); j.onclick = async e => { e.preventDefault(); await this.setStory(col.last_beat); this.refreshToday(); };
@@ -3277,6 +3284,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.todayBeat = { b, n, before, done: at >= n };
     const next = finished ? null : () => this.refreshToday();
     this.convoGloss = this.storyGloss(beats); this.loadVerbs();
+    // The day in four steps: the scene, the words, build it, say it. The last day of a week also plays the whole week.
+    const wwords = [...new Set(wdays.flatMap(k => (beats[k].words || []).map(w => w.word)).filter(Boolean))];
+    this.cvSteps = { n, day: idx + 1, weekEnd: n === wdays[wdays.length - 1], wwords };
     this.convoGame(card, turns, n, b.words, at >= n, pool, () => { if (this.tStory) { this.timeRec('story', (Date.now() - this.tStory) / 1000); this.tStory = 0; } this.markDone('story'); return this.setStory(Math.max(n, this.colors().story_at || 0)); }, next, finished);
     const r = card.createDiv('gq-row gq-sstart');
     const st = r.createEl('a', { text: doneN ? 'Start somewhere else' : 'Know some Greek already? Start further in', href: '#', cls: 'gq-hint' }); st.onclick = e => { e.preventDefault(); this.startMenu(e, beats); };
@@ -3295,6 +3305,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const gloss = this.convoGloss || (() => '');
     // Words first: a fresh part opens with its new words (Greek, sound, meaning) before the first sentence.
     const wkey = key + '-w'; let wordsSeen = saved !== null || done; try { if (store && store.getItem(wkey)) wordsSeen = true; } catch (e) {}
+    // Today's story as a day (grown-ups): the scene first (listen only), then the words (hear each, say each), then build it,
+    // then say the whole part out loud. The part counts as done after the last step, so leaving halfway comes back to the same step.
+    const S = this.cvSteps && this.cvSteps.n === n ? this.cvSteps : null; this.cvSteps = null;
+    const has = k => { try { return !!(store && store.getItem(k)); } catch (e) { return false; } };
+    const put = k => { try { if (store) store.setItem(k, '1'); } catch (e) {} };
+    const skey = key + '-s', ykey = key + '-say';
+    let sceneSeen = !S || saved !== null || done || has(skey), said = !S || done || has(ykey);
+    if (S) this.sceneWait = { n, go: () => { put(skey); sceneSeen = true; if (wrap.isConnected) paint(); } };
+    const finish = () => { if (!S || said) onDone(); };
     const toks = s => String(s).replace(/[“”"«»]/g, '').split(/\s+/).map(w => w.replace(/^[^\p{L}\p{N}']+|[^\p{L}\p{N}']+$/gu, '')).filter(Boolean);
     const norm = w => w.toLowerCase().replace(/’/g, "'");
     let seed = n * 97 + 13; const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
@@ -3358,11 +3377,25 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const paint = () => {
       wrap.empty(); seed = n * 97 + 13 + i * 7;
       const nw = (words || []).filter(w => w.en);
+      if (S) {
+        const stepNow = !sceneSeen ? 0 : !wordsSeen && nw.length ? 1 : i < order().length ? 2 : !said ? 3 : 4;
+        const strip = wrap.createDiv({ cls: 'gq-daysteps', attr: { 'aria-label': 'Today\'s steps' } });
+        ['Scene', 'Words', 'Build', 'Say it'].forEach((t, k) => strip.createSpan({ cls: 'gq-daystep' + (k < stepNow ? ' is-done' : '') + (k === stepNow ? ' is-now' : ''), text: t }));
+      }
+      if (!sceneSeen) {
+        const sc = wrap.createDiv('gq-cv-scene');
+        sc.createDiv({ cls: 'gq-cv-scenetext', text: 'First, watch today\'s part of the story. Just listen.' });
+        const r = sc.createDiv('gq-row'), w = r.createEl('button', { text: 'Watch today\'s scene', cls: 'mod-cta' });
+        w.onclick = () => this.openApp('story', '#d=' + n + '&today');
+        const sk = sc.createDiv('gq-row').createEl('a', { text: 'Skip the scene', href: '#', cls: 'gq-hint' });
+        sk.onclick = e => { e.preventDefault(); sceneSeen = true; put(skey); paint(); };
+        return;
+      }
       if (!wordsSeen && nw.length) {
         const intro = wrap.createDiv('gq-cv-words');
-        intro.createDiv({ cls: 'gq-hint', text: `First, the ${nw.length === 1 ? 'new word' : nw.length + ' new words'} in this part. Touch each one to hear it.` });
-        for (const w of nw) { const row = intro.createDiv('gq-cv-wrow'); const g = row.createSpan({ cls: 'gq-cv-wgr gq-say', text: w.label || w.word, attr: { lang: 'el', role: 'button' } }); g.onclick = () => say(w.label || w.word); row.createSpan({ cls: 'gq-cv-wen', text: w.en }); }
-        const go = intro.createDiv('gq-row').createEl('button', { text: 'Start the puzzle', cls: 'mod-cta' });
+        intro.createDiv({ cls: 'gq-hint', text: S ? `The ${nw.length === 1 ? 'new word' : nw.length + ' new words'}. Touch each to hear it, then say it.` : `First, the ${nw.length === 1 ? 'new word' : nw.length + ' new words'} in this part. Touch each one to hear it.` });
+        for (const w of nw) { const row = intro.createDiv('gq-cv-wrow'); const g = row.createSpan({ cls: 'gq-cv-wgr gq-say', text: w.label || w.word, attr: { lang: 'el', role: 'button' } }); g.onclick = () => say(w.label || w.word); row.createSpan({ cls: 'gq-cv-wen', text: w.en }); if (S) { const sb = row.createSpan('gq-cv-wsay'); this.sayIt(sb, w.label || w.word, 'w:' + w.word, 'Say it'); } }
+        const go = intro.createDiv('gq-row').createEl('button', { text: S ? 'Build it ›' : 'Start the puzzle', cls: 'mod-cta' });
         go.onclick = () => { wordsSeen = true; try { if (store) store.setItem(wkey, '1'); } catch (e) {} paint(); };
         return;
       }
@@ -3370,11 +3403,29 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const x = turns[k], r = wrap.createDiv('gq-cv-done');
         if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' });
         const gl = this.lineEl(r, x[1], words); gl.addClass('gq-say'); gl.onclick = () => say(x[1]); r.createDiv({ cls: 'gq-hint', text: x[2] });
+        if (S && !said && i >= order().length) { const sb = r.createDiv('gq-cv-lsay'); this.sayIt(sb, x[1], 'day:' + n + ':' + k); }
+      }
+      if (S && !said && i >= order().length) {
+        const sy = wrap.createDiv('gq-cv-sayall');
+        sy.createDiv({ cls: 'gq-hint', text: 'Last step: say the whole part out loud, line by line. Touch a line to hear it first.' });
+        const dn = sy.createDiv('gq-row').createEl('button', { text: 'Done for today', cls: 'mod-cta' });
+        dn.onclick = async () => { said = true; put(ykey); try { await onDone(); } catch (e) {} paint(); };
+        return;
+      }
+      if (S && i >= order().length) {
+        const dd = wrap.createDiv('gq-cv-dayend');
+        dd.createDiv({ cls: 'gq-cv-dayendt', text: `Day ${S.day} done. Θα τα πούμε.` });
+        if (S.weekEnd) {
+          dd.createDiv({ cls: 'gq-hint', text: 'The end of the week: watch it all as one scene, then play Γιαγιά with the week\'s words.' });
+          const wr = dd.createDiv('gq-row');
+          wr.createEl('button', { text: 'Watch the week', cls: 'gq-mini' }).onclick = () => this.openApp('story', '#d=' + n + '&week');
+          if (S.wwords.length) wr.createEl('button', { text: 'Play Γιαγιά', cls: 'gq-mini' }).onclick = () => this.openApp('giagia', '#w=' + encodeURIComponent(S.wwords.join(',')));
+        }
       }
       if (i >= order().length) {
         const row = wrap.createDiv('gq-row');
-        if (next) { const nx = row.createEl('button', { text: 'Next part ›', cls: 'mod-cta' }); nx.onclick = next; }
-        row.createSpan({ cls: 'gq-hint', text: last ? 'You finished the whole story. Touch a line to listen.' : 'Touch a line to listen, then say it out loud. One or two parts a day is plenty.' });
+        if (next) { const nx = row.createEl('button', { text: S ? 'Tomorrow\'s day now ›' : 'Next part ›', cls: S ? 'gq-mini' : 'mod-cta' }); nx.onclick = next; }
+        row.createSpan({ cls: 'gq-hint', text: last ? 'You finished the whole story. Touch a line to listen.' : S ? 'One day at a time is plenty.' : 'Touch a line to listen, then say it out loud. One or two parts a day is plenty.' });
         const pa = row.createEl('button', { text: 'Play again', cls: 'gq-mini' }); pa.onclick = () => { i = 0; again = []; save(); paint(); };
         return;
       }
@@ -3453,14 +3504,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
             if (!again.includes(ti)) again.push(ti);
             fb.createDiv({ cls: 'gq-cv-pts', text: '+1 φόρα for trying. This one comes back at the end of the part, to lock it in.' });
             this.moAdd('try', pk);
-            setTimeout(() => { i++; save(); if (i >= order().length) onDone(); paint(); }, 2600);
+            setTimeout(() => { i++; save(); if (i >= order().length) finish(); paint(); }, 2600);
             return;
           }
           // Show what the line earned: 1 the first time, 3 on a later day, nothing for a replay the same day.
           let gain = 1; try { const mf = this.app.vault.getAbstractFileByPath(MO_FILE), fmm = mf && this.app.metadataCache.getFileCache(mf), last = fmm && fmm.frontmatter && fmm.frontmatter.got && fmm.frontmatter.got[pk]; gain = last === ymd(new Date()) ? 0 : last ? 3 : 1; } catch (e) {}
           fb.createDiv({ cls: 'gq-cv-pts', text: gain ? `+${gain} φόρα` : 'Already counted today. Come back tomorrow for +3 φόρα.' });
           this.moAdd('recall', pk);
-          setTimeout(() => { i++; save(); if (i >= order().length) onDone(); paint(); }, exact ? 900 : 2600);
+          setTimeout(() => { i++; save(); if (i >= order().length) finish(); paint(); }, exact ? 900 : 2600);
         } else { misses++; fb.empty(); if (got.length === target.length && [...got].sort().join(' ') === target.map(norm).sort().join(' ')) fb.setText('All the right words. Try another order: keep small words like ο, στο, να and δεν with the word after them.'); ans.removeClass('gq-bad'); void ans.offsetWidth; ans.addClass('gq-bad'); if (misses >= 1) hint.style.display = ''; if (misses >= 2) show.style.display = ''; }
       };
     };
@@ -4171,6 +4222,33 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   kidSection(txt, name) { const s = txt.split(/\n## /).find(x => x.startsWith(name)); return s ? s.slice(name.length) : ''; }
   kidLines(sec) { return [...sec.matchAll(/^- ([^:*]+):\s*\*\*(.+?)\*\*\s*(?:—\s*(.+))?$/gm)].map(m => ({ who: m[1].trim(), gr: m[2].trim(), en: (m[3] || '').trim() })); }
   // ---------- Kids: the hello song ----------
+  // Kids: listen first. Two small figures say the week's lines so far, one after the other; the line being said lights up.
+  kidScene(box, ls, sun) {
+    if (!ls.length) return;
+    const c = box.createDiv('gq-tcard gq-kid gq-kscene'); c.dataset.tour = 'scene';
+    c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Listen first' });
+    c.createDiv({ cls: 'gq-hint', text: sun ? 'Sunday: the whole week as one story. Just listen.' : 'Today\'s part of the story. Just listen.' });
+    const stage = c.createDiv({ cls: 'gq-ksc-stage', attr: { 'aria-hidden': 'true' } });
+    const who = [...new Set(ls.map(l => l.who))], figs = [0, 1].map(j => {
+      const cv = stage.createEl('canvas', { cls: 'gq-spr gq-ksc-fig' });
+      const rows = sprRows('dance', 0, 'still').map(row => j ? row.replace(/w/g, 'B').replace(/r/g, 'y').replace(/h/g, 'n') : row);
+      sprPaint(cv, rows); return cv; });
+    const ol = c.createEl('ol', { cls: 'gq-storylist gq-ksc-lines' });
+    const lis = ls.map(l => { const li = ol.createEl('li'); li.createSpan({ cls: 'gq-hint', text: l.who + ': ' }); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); return li; });
+    const b = c.createDiv('gq-row').createEl('button', { text: 'Play', cls: 'mod-cta' });
+    let run = 0;
+    b.onclick = async () => {
+      const my = ++run; b.setText('Playing…'); b.disabled = true;
+      for (let j = 0; j < ls.length; j++) {
+        if (my !== run || !c.isConnected) return;
+        lis.forEach((li, q) => li.toggleClass('gq-now', q === j));
+        const f = figs[Math.max(0, who.indexOf(ls[j].who)) % 2]; f.addClass('is-talk');
+        try { await this.sayP(ls[j].gr, 'el'); } catch (e) {}
+        f.removeClass('is-talk'); await new Promise(res => setTimeout(res, 450));
+      }
+      b.setText('Again'); b.disabled = false;
+    };
+  }
   helloSong(box) {
     const c = box.createDiv('gq-tcard gq-kid gq-song'), h = c.createDiv('gq-thead');
     h.createEl('strong', { text: 'Hello song' }); h.createSpan({ cls: 'gq-hint', text: '  · sing it together to start, and do the moves' });
@@ -4250,7 +4328,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!f) { box.createDiv({ cls: 'gq-tcard', text: 'This lesson is not in the vault yet. Tap More, then Update vault.' }); if (tok === el.gqTok) { el.empty(); el.appendChild(box); } return; }
     const txt = await this.app.vault.cachedRead(f), title = f.basename.replace(/^K\d+\s*/, '').replace(/-student$/, '');
     // 1. The game
-    const g = box.createDiv('gq-tcard gq-kid'), gh = g.createDiv('gq-thead'); g.dataset.tour = 'game';
+    const g = box.createDiv('gq-tcard gq-kid gq-kgame'), gh = g.createDiv('gq-thead'); g.dataset.tour = 'game';
     gh.createEl('strong', { text: `This week's game: ${title}` });
     gh.createSpan({ cls: 'gq-hint', text: `  · lesson ${wk.lesson}` + (wk.before ? ' · class starts Oct 26' : '') });
     const game = (txt.match(/\*\*The game:\*\*\s*(.+)/) || [])[1]; if (game) g.createDiv({ cls: 'gq-kidgame', text: game });
@@ -4259,8 +4337,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // 2. Say it: one more line each day of the week (Sunday shows them all)
     const lines = this.kidLines(this.kidSection(txt, 'Say it'));
     if (lines.length) {
-      const c = box.createDiv('gq-tcard gq-kid'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Say it together' });
       const k = wk.dow === 0 ? lines.length - 1 : (Math.max(1, wk.dow) - 1) % lines.length;
+      this.kidScene(box, lines.slice(0, k + 1), wk.dow === 0);
+      const c = box.createDiv('gq-tcard gq-kid gq-ksay'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Say it together' });
       c.createDiv({ cls: 'gq-hint', text: wk.dow === 0 ? 'Sunday: say the whole game, top to bottom.' : 'One new line today. Say the ones before it too.' });
       const ol = c.createEl('ol', { cls: 'gq-storylist' });
       lines.slice(0, k + 1).forEach((l, i) => { const li = ol.createEl('li', { cls: i === k ? 'gq-now' : '' }); li.createSpan({ cls: 'gq-hint', text: l.who + ': ' }); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); if (l.en) li.createDiv({ cls: 'gq-hint', text: l.en }); });
@@ -4279,7 +4358,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // 3. Swap: the kid is the teacher
     const sw = this.kidLines(this.kidSection(txt, 'You are the teacher'));
     if (sw.length) {
-      const c = box.createDiv('gq-tcard gq-kid'); c.dataset.tour = 'teacher'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Now you are the teacher' });
+      const c = box.createDiv('gq-tcard gq-kid gq-kteach'); c.dataset.tour = 'teacher'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Now you are the teacher' });
       c.createDiv({ cls: 'gq-hint', text: 'Swap. The kid asks the questions. The grown-up gets one wrong on purpose. Catch it.' });
       const ol = c.createEl('ol', { cls: 'gq-storylist gq-plain' });
       for (const l of sw) { const li = ol.createEl('li'); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); if (l.en) li.createDiv({ cls: 'gq-hint', text: l.en }); }
@@ -4290,7 +4369,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Walk mode plays this week's lines and words.
     this.walkK = [...sw.filter(l => l.gr), ...words.map(w => ({ gr: w.word, en: w.english || '' }))];
     if (words.length) {
-      const c = box.createDiv('gq-tcard gq-kid'); c.dataset.tour = 'words'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `This week's words (${words.length})` });
+      const c = box.createDiv('gq-tcard gq-kid gq-kwordsc'); c.dataset.tour = 'words'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `This week's words (${words.length})` });
       c.createDiv({ cls: 'gq-hint', text: 'Hear it, say it, then pick a color: red is not yet, yellow is kind of, green is got it.' });
       const ul = c.createEl('ul', { cls: 'gq-kidwords' });
       words.forEach((w, i) => {
@@ -4309,7 +4388,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // 5. Moves
     const mv = [...this.kidSection(txt, 'Do the moves').matchAll(/^- \*\*(.+?)\*\*:\s*(.+)$/gm)];
     if (mv.length) {
-      const c = box.createDiv('gq-tcard gq-kid'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Do the moves' });
+      const c = box.createDiv('gq-tcard gq-kid gq-kmoves'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Do the moves' });
       c.createDiv({ cls: 'gq-hint', text: 'Do the move every time you say it.' });
       const ul = c.createEl('ul', { cls: 'gq-storylist gq-plain' });
       if (mv.length > 8) c.createDiv({ cls: 'gq-hint', text: `The first 8 of ${mv.length}. The rest are on the lesson page.` });
@@ -4332,42 +4411,44 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   cardStack(box, kids) {
     const all = [...box.querySelectorAll(':scope > .gq-tcard')], nxc = box.querySelector(':scope > .gq-next');
     const tools = all.find(c => c.hasClass('gq-ttools')), mo = all.find(c => c.hasClass('gq-mo') && (kids || c.hasClass('is-fresh')));
-    let list = all.filter(c => c !== tools && c !== mo && c !== nxc && !(c.hasClass('gq-mo') && !c.hasClass('is-fresh')));
-    if (!kids) {
-      // Grown-up editions: the report first when it is due, then the steps Next would give, in order, then everything else.
-      const steps = (this.nextSteps || []).map(x => x.el).filter(c => c && list.includes(c)), rep = list.filter(c => c.hasClass('gq-report'));
-      list = [...rep, ...steps.filter(c => !rep.includes(c)), ...list.filter(c => !rep.includes(c) && !steps.includes(c))];
-    }
+    let list = all.filter(c => c !== tools && c !== mo && c !== nxc && !c.hasClass('gq-mo'));
+    // One path through the day, always in the same order. Grown-ups: the report when due, letters in the first weeks,
+    // today's story (scene, words, build, say it), spaced review, Fluent in a Year. Kids: letters, listen first, the week's words,
+    // the puzzle, say it together, then the song, the game, the swap and the moves.
+    // The separate review word list is not on the path; spaced review is the day's review step.
+    if (!kids) { const rv = list.filter(c => c.hasClass('gq-review')); rv.forEach(c => c.remove()); list = list.filter(c => !rv.includes(c)); }
+    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : ['gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
+    const rk = c => { const k = rank.findIndex(x => c.hasClass(x)); return k < 0 ? rank.length : k; };
+    list = list.map((c, k) => [c, k]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map(x => x[0]);
     if (mo) list.push(mo);
     const done = createDiv('gq-tcard gq-kid gq-kdone');
     done.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: kids ? 'All done for today' : 'Done for today' });
     done.createDiv({ cls: 'gq-kbye', text: 'Θα τα πούμε.', attr: { lang: 'el' } }); done.createDiv({ cls: 'gq-hint', text: kids ? 'See you next time. Or play one more:' : 'See you next time. Or one more:' });
     if (tools) { tools.removeClass('gq-tcard'); done.appendChild(tools); }
     if (!kids) { const r = done.createDiv('gq-row'), d = r.createEl('button', { text: 'Roll the die', cls: 'mod-cta gq-die-btn' }); d.onclick = () => this.rollDie(); }
-    const again = done.createDiv('gq-row').createEl('a', { text: 'Start over', href: '#', cls: 'gq-hint' });
+    const again = done.createDiv('gq-row').createEl('a', { text: 'Back to the start', href: '#', cls: 'gq-hint' });
     list.push(done);
     const wrap = createDiv('gq-kwrap'), st = wrap.createDiv({ cls: 'gq-kstack', attr: { 'aria-roledescription': 'card stack' } });
     const e2 = st.createDiv('gq-kedge gq-kedge2'), e1 = st.createDiv('gq-kedge gq-kedge1');
     for (const c of list) { c.addClass('gq-kcard'); st.appendChild(c); }
-    // One card at a time, picked for you: each time the app opens it is a different one (your red and yellow words one time,
-    // the story puzzle the next, and so on). One quiet link inside the card, Another one, brings the next. No stack to sort through.
-    st.setAttr('aria-label', 'Today\'s card');
+    st.setAttr('aria-label', 'Today');
     if (nxc) { nxc.addClass('is-slim'); delete nxc.dataset.tour; if (!nxc.querySelector('.gq-tour-line, .gq-next-back, .gq-week-line')) nxc.hide(); }
     wrap.dataset.tour = kids ? 'stack' : 'next'; this.stackOn = true; this.stackNx = st;
     const anchor = nxc || box.querySelector(':scope > .gq-knew') || box.querySelector(':scope > h2'); if (anchor) anchor.after(wrap); else box.prepend(wrap);
-    const name = c => c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') && !kids ? 'Story puzzle' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
-    // A new turn each time the app opens (not on every redraw); within a visit the card stays put until you ask for another.
-    if (this.turnN === undefined) { this.turnN = (Number(this.lsGet('turn', 0)) || 0) + 1; this.lsSet('turn', this.turnN); }
-    const pool = list.filter(c => c !== done);
+    const name = c => c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'This week\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
+    // Where you are today is kept, so leaving and coming back lands on the same step. A new day starts at the top.
+    const today = ymd(new Date()), at = this.lsGet('dayat', null);
     let i = this.stackPick ? list.findIndex(c => name(c) === this.stackPick) : -1;
-    if (i < 0) { const rep0 = pool.find(c => c.hasClass('gq-report')); i = list.indexOf(rep0 || pool[this.turnN % Math.max(1, pool.length)] || list[0]); }
-    const more = createDiv({ cls: 'gq-hint gq-another' }); const ma = more.createEl('a', { text: 'Another one', href: '#' });
+    if (i < 0 && at && at.d === today) i = list.findIndex(c => name(c) === at.n);
+    if (i < 0) i = 0;
+    const steps = list.length - 1;
+    const more = createDiv({ cls: 'gq-hint gq-another' }); const ma = more.createEl('a', { href: '#' }); const cnt = more.createSpan({ cls: 'gq-another-n' });
     const paint = () => {
       list.forEach((c, k) => c.toggleClass('is-top', k === i));
-      if (list[i] !== done) list[i].appendChild(more); else more.remove();
-      st.setAttr('aria-label', `Today's card: ${name(list[i])}`);
+      if (list[i] !== done) { list[i].appendChild(more); ma.setText(i + 1 < steps ? `Next: ${name(list[i + 1])} ›` : 'Finish today ›'); cnt.setText(steps > 1 ? `${i + 1} of ${steps}` : ''); } else more.remove();
+      st.setAttr('aria-label', `Today: ${name(list[i])}`);
     };
-    const keep = () => { this.stackPick = name(list[i]); };
+    const keep = () => { this.stackPick = name(list[i]); this.lsSet('dayat', { d: today, n: name(list[i]) }); };
     const go = (k, dir) => {
       if (k < 0 || k >= list.length || k === i) return;
       const cur = list[i], fwd = dir < 0; if (fwd) this.tourHit('next');
@@ -4378,13 +4459,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       setTimeout(land, 220);
     };
     this.kidStackGo = c => { const k = list.indexOf(c); if (k >= 0) { i = k; paint(); } };
-    // Another one: the next card you have not had this visit. When you have had them all, the done card says so.
-    const seen = this.stackSeen || (this.stackSeen = new Set());
-    const fwdGo = () => { seen.add(name(list[i])); const n = pool.length, p = pool.indexOf(list[i]); let nx = null;
-      for (let s2 = 1; s2 <= n; s2++) { const c = pool[(p + s2 + n) % n]; if (!seen.has(name(c))) { nx = c; break; } }
-      go(list.indexOf(nx || done), -1); };
-    ma.onclick = e => { e.preventDefault(); fwdGo(); };
-    again.onclick = e => { e.preventDefault(); seen.clear(); go(list.indexOf(pool[this.turnN % Math.max(1, pool.length)] || pool[0]), 1); };
+    // A step that finishes moves on by itself (the story's Done, a finished review).
+    this.dayNext = from => { if (!from || list[i] === from || list[i].contains(from)) go(i + 1, -1); };
+    ma.onclick = e => { e.preventDefault(); go(i + 1, -1); };
+    again.onclick = e => { e.preventDefault(); go(0, 1); };
     paint();
   }
   async kidFoot(box, el, tok, col, wk) {
@@ -4688,7 +4766,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       ];
     }
     return [
-      { k: 'next', at: ['next'], t: 'Start here', b: 'Today shows one card, picked for you. Each time you open the app it is a different one. Tap Another one at the bottom of the card for something else.', ev: 'next' },
+      { k: 'next', at: ['next'], t: 'Start here', b: 'Today is one path, the same every day: today\'s story, then review. Tap Next at the bottom of a card to go on.', ev: 'next' },
       { k: 'story', at: ['story'], t: 'Story puzzle', b: 'Finish one line: put the Greek words in order, then say it out loud.', ev: 'story' },
       { k: 'world', at: [], t: 'Πάρε φόρα', b: 'Everything you do adds φόρα (momentum). Finish the tour and an olive tree is planted in the corner. It grows olives, the olives become oil, and the oil lights a lamp.' },
       { k: 'words', at: ['tab-words'], t: 'Words', b: 'All the words in one list, most frequent first. Find one you know and tap its color: red, yellow or green.', go: ['Open Words', () => this.openWords()], ev: 'up', tab: 'words' },

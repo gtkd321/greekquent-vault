@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19z';
+const VAULT_RELEASE = '2026-11-19zb';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1371,7 +1371,7 @@ class VideoAskModal extends Modal {
 // ---------- Pair it: build a sentence from a word's partners (all from the 1,500) ----------
 const PAIRS_NOTE = MY_WORK + 'My pairs.md';
 // App review (teacher only): each area scored against what the leading language apps do. 100% matches them, more than 100% goes further.
-const GQ_REVIEW = [{"k": "first", "t": "The first minute", "p": 80, "at": ["next"], "lead": "Leaders get you learning within about a minute and ask two things first: your level and how much you want to do each week.", "src": [["Words on Repeat", "https://wordsonrepeat.com/blog/anki-vs-memrise"], ["Babbel", "https://www.babbel.com/how-babbel-works"]], "you": "The tour starts at once, rewards trying things, and Today shows one card. Nothing asks how much time the student has.", "move": "Ask one question on first open: 5, 10 or 15 minutes a day? Use the answer to size Next."}, {"k": "next", "t": "One clear next step", "p": 100, "at": ["next"], "lead": "Babbel lessons average about 6 minutes, each around one real situation.", "src": [["Babbel", "https://www.babbel.com/how-babbel-works"]], "you": "Today shows one big card with how long it takes, and Next up brings in the step after it.", "move": "Keep it this way. Any new feature goes behind Do something else, never onto Today."}, {"k": "habit", "t": "Coming back every day", "p": 35, "at": ["next"], "lead": "Learners on a 7-day streak are 2.4 times more likely to come back the next day. Letting a missed day not count raised daily learners.", "src": [["Duolingo blog", "https://blog.duolingo.com/improving-the-streak/"], ["Duolingo on streak freezes", "https://blog.duolingo.com/how-duolingo-streak-builds-habit/"], ["streak research summary", "https://www.shahzebspeaks.com/brand-psychology-audits/duolingo-psychology-audit-the-owl-the-streak-and-the-price-of-guilt/"]], "you": "Pick your moment and the calendar reminder are there. Nothing counts the days, so a good week is never visible.", "move": "Add one quiet line on Next: \"This week: 3 of 5 days.\" It counts weekly and nothing ever resets, so a broken streak never punishes anyone."}, {"k": "review", "t": "Bringing words back", "p": 70, "at": ["next"], "lead": "Leaders schedule reviews automatically. Spacing out recall clearly beats cramming (effect size g = 0.74).", "src": [["Babbel", "https://www.babbel.com/how-babbel-works"], ["Latimier et al. meta-analysis", "https://link.springer.com/article/10.1007/s10648-020-09572-8"]], "you": "Spaced review brings story lines back at 1, 3 and 7 days, and every word has a color. Red words do not come back on their own.", "move": "Feed red and yellow words into spaced review on the same 1, 3, 7 cycle. Green words come back once after a month."}, {"k": "scenes", "t": "Real scenes", "p": 110, "at": ["story"], "lead": "Babbel builds lessons around real-life situations. Memrise lets you choose your scenarios.", "src": [["Babbel", "https://www.babbel.com/how-babbel-works"], ["Memrise", "https://www.memrise.com/en/learn-spanish/spanish-course"]], "you": "Every one of the 1,500 words is tied to a scene, a story line and a weekly plan. That is frequency and context together, which neither does.", "move": "Let students choose which scene comes next. That gives them freedom without leaving the 1,500."}, {"k": "speak", "t": "Speaking out loud", "p": 75, "at": ["story"], "lead": "Duolingo now lets learners speak almost every answer. Babbel has you listen to a dialogue and then say one part.", "src": [["Duolingo Q1 2026 letter", "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029790/q1fy26duolingo3-31x26share.htm"], ["Babbel support", "https://support.babbel.com/hc/en-us/articles/19188554247186-Guided-Conversations"]], "you": "The story puzzle asks students to say the line and checks it. Hear it is on every word, and there is live practice on Tuesdays.", "move": "Add a two-voice mode to the story: the phone reads one character and the student says the other."}, {"k": "voices", "t": "Real voices", "p": 40, "at": ["story"], "lead": "Memrise is built around native speakers: every word comes with a real person saying it.", "src": [["Memrise", "https://www.memrise.com/en-us/"]], "you": "The phone voice reads everything, and the video questions library holds a few real clips.", "move": "Record the 100 most frequent words in your own voice, 2 to 3 seconds each. Play those where they exist and the phone voice everywhere else."}, {"k": "people", "t": "Learning with people", "p": 90, "at": ["tab-class"], "lead": "Learners with a Friend Streak are 22% more likely to finish their daily lesson.", "src": [["Duolingo blog", "https://blog.duolingo.com/product-lessons-friend-streak/"]], "you": "Ask the Class, video questions, GroupMe and a real teacher every Tuesday. Most apps cannot offer a teacher.", "move": "Pair students as practice buddies in GroupMe each month, with no new app needed."}, {"k": "progress", "t": "Seeing progress", "p": 95, "at": ["tab-words"], "lead": "Memrise tracks each word as learned, heard or used.", "src": [["Memrise", "https://www.memrise.com/en-us/"]], "you": "Every word is red, yellow or green, φόρα grows a world, and the weekly pages show the year.", "move": "Show one line at the top of Words: \"Green: 212 of 1,500.\""}, {"k": "free", "t": "Free and everywhere", "p": 120, "at": [], "lead": "Leaders are freemium: Duolingo has ads and limits, and Memrise keeps most native-speaker videos behind Pro.", "src": [["Duolingo Q1 2026 letter", "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029790/q1fy26duolingo3-31x26share.htm"], ["Memrise", "https://www.memrise.com/en-us/"]], "you": "Free, no ads, the same on Android and iPhone, works offline, and also in Obsidian.", "move": "Say this in the ads. It is the clearest edge over every leader."}];
+const GQ_REVIEW = [{"k": "first", "t": "The first minute", "p": 80, "at": ["next"], "lead": "Leaders get you learning within about a minute and ask two things first: your level and how much you want to do each week.", "src": [["Words on Repeat", "https://wordsonrepeat.com/blog/anki-vs-memrise"], ["Babbel", "https://www.babbel.com/how-babbel-works"]], "you": "The tour starts at once, rewards trying things, and Today shows one card. Nothing asks how much time the student has.", "move": "Ask one question on first open: 5, 10 or 15 minutes a day? Use the answer to size Next."}, {"k": "next", "t": "One clear next step", "p": 100, "at": ["next"], "lead": "Babbel lessons average about 6 minutes, each around one real situation.", "src": [["Babbel", "https://www.babbel.com/how-babbel-works"]], "you": "Today shows one big card with how long it takes, and Next up brings in the step after it.", "move": "Keep it this way. Any new feature goes behind Do something else, never onto Today."}, {"k": "habit", "t": "Coming back every day", "p": 55, "at": ["next"], "lead": "Learners on a 7-day streak are 2.4 times more likely to come back the next day. Letting a missed day not count raised daily learners.", "src": [["Duolingo blog", "https://blog.duolingo.com/improving-the-streak/"], ["Duolingo on streak freezes", "https://blog.duolingo.com/how-duolingo-streak-builds-habit/"], ["streak research summary", "https://www.shahzebspeaks.com/brand-psychology-audits/duolingo-psychology-audit-the-owl-the-streak-and-the-price-of-guilt/"]], "you": "Next shows a quiet line: \"This week: 3 of 5 days.\" It counts weekly, nothing resets, and a missed day never counts against anyone. There is no daily nudge yet beyond Pick your moment.", "move": "Keep it quiet. If the weekly line holds attendance, add a gentle Tuesday GroupMe check-in rather than app notifications."}, {"k": "review", "t": "Bringing words back", "p": 95, "at": ["next"], "lead": "Leaders schedule reviews automatically. Spacing out recall clearly beats cramming (effect size g = 0.74).", "src": [["Babbel", "https://www.babbel.com/how-babbel-works"], ["Latimier et al. meta-analysis", "https://link.springer.com/article/10.1007/s10648-020-09572-8"]], "you": "Spaced review now brings back story lines and red and yellow words at 1, 3 and 7 days, then weekly. Green words come back once after a month. A miss starts the word over.", "move": "Watch the 7-day recall number in the report. If it stays under 70%, shorten the gaps."}, {"k": "scenes", "t": "Real scenes", "p": 110, "at": ["story"], "lead": "Babbel builds lessons around real-life situations. Memrise lets you choose your scenarios.", "src": [["Babbel", "https://www.babbel.com/how-babbel-works"], ["Memrise", "https://www.memrise.com/en/learn-spanish/spanish-course"]], "you": "Every one of the 1,500 words is tied to a scene, a story line and a weekly plan. That is frequency and context together, which neither does.", "move": "Let students choose which scene comes next. That gives them freedom without leaving the 1,500."}, {"k": "speak", "t": "Speaking out loud", "p": 90, "at": ["story"], "lead": "Duolingo now lets learners speak almost every answer. Babbel has you listen to a dialogue and then say one part.", "src": [["Duolingo Q1 2026 letter", "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029790/q1fy26duolingo3-31x26share.htm"], ["Babbel support", "https://support.babbel.com/hc/en-us/articles/19188554247186-Guided-Conversations"]], "you": "The story puzzle checks spoken lines. Two new checks sit behind the die: Repeat after me (lines get longer) and a One-minute talk that counts words.", "move": "Add a two-voice mode to the story: the phone reads one character and the student says the other."}, {"k": "voices", "t": "Real voices", "p": 40, "at": ["story"], "lead": "Memrise is built around native speakers: every word comes with a real person saying it.", "src": [["Memrise", "https://www.memrise.com/en-us/"]], "you": "The phone voice reads everything, and the video questions library holds a few real clips.", "move": "Record the 100 most frequent words in your own voice, 2 to 3 seconds each. Play those where they exist and the phone voice everywhere else."}, {"k": "people", "t": "Learning with people", "p": 90, "at": ["tab-class"], "lead": "Learners with a Friend Streak are 22% more likely to finish their daily lesson.", "src": [["Duolingo blog", "https://blog.duolingo.com/product-lessons-friend-streak/"]], "you": "Ask the Class, video questions, GroupMe and a real teacher every Tuesday. Most apps cannot offer a teacher.", "move": "Pair students as practice buddies in GroupMe each month, with no new app needed."}, {"k": "progress", "t": "Seeing progress", "p": 110, "at": ["tab-words"], "lead": "Memrise tracks each word as learned, heard or used.", "src": [["Memrise", "https://www.memrise.com/en-us/"]], "you": "Every word is red, yellow or green, Words shows green out of 1,500, and every two weeks a report card shows the student's own numbers to beat: recall after a week, longest line said back, words in a minute, green words and hours.", "move": "Bring the report numbers to the quarterly speaking check so the app numbers sit next to a real conversation rating."}, {"k": "free", "t": "Free and everywhere", "p": 120, "at": [], "lead": "Leaders are freemium: Duolingo has ads and limits, and Memrise keeps most native-speaker videos behind Pro.", "src": [["Duolingo Q1 2026 letter", "https://www.sec.gov/Archives/edgar/data/1562088/000162828026029790/q1fy26duolingo3-31x26share.htm"], ["Memrise", "https://www.memrise.com/en-us/"]], "you": "Free, no ads, the same on Android and iPhone, works offline, and also in Obsidian.", "move": "Say this in the ads. It is the clearest edge over every leader."}];
 const PAIR_GOAL = 5;   // sentences a week
 const WHO = [['εγώ', 'I', 0], ['εσύ', 'you', 1], ['αυτός', 'he', 2], ['αυτή', 'she', 2], ['εμείς', 'we', 3], ['εσείς', 'you all', 4], ['αυτοί', 'they', 5],
   ['η μαμά μου', 'my mom', 2], ['ο φίλος μου', 'my friend', 2], ['τα παιδιά', 'the kids', 5]];
@@ -2135,7 +2135,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (body.length > 3000) { body = body.slice(0, 3000); new Notice('Homework is long, so only the first 3,000 characters were added. Send the rest in a second text.'); }
     const md = this.moData().days, mo = this.moScore(md), w7 = new Date(); w7.setDate(w7.getDate() - 7);
     this.moAdd('did', 'homework', 3); this.moFlush();
-    window.open(smsLink(`Greekquent homework (${f.basename}):\n${body}\n\nΦόρα ${mo} (${mo - this.moScore(md, w7) >= 0 ? '+' : ''}${mo - this.moScore(md, w7)} this week)`));
+    const nums = this.statsLine();
+    window.open(smsLink(`Greekquent homework (${f.basename}):\n${body}\n\nΦόρα ${mo} (${mo - this.moScore(md, w7) >= 0 ? '+' : ''}${mo - this.moScore(md, w7)} this week)${nums ? '\nNumbers: ' + nums : ''}`));
   }
   async sha(buf) { const h = await crypto.subtle.digest('SHA-256', buf); return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join(''); }
   // Fallback for devices where the key box is awkward: a note "My Work/Teacher key.md" holding the key is moved into settings and deleted.
@@ -2514,9 +2515,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // "We did it" on a kid card: 2 φόρα, once a day.
   didBtn(c, key) { const b = c.createDiv('gq-row').createEl('button', { text: 'We did it', cls: 'gq-mini' }); b.onclick = () => { this.moAdd('did', key, 2); b.setText('Done today'); b.disabled = true; }; }
   // After a reveal: did you have it? Had it counts as recall; Not yet still earns a point for trying.
-  hadIt(r, key, after) {
+  hadIt(r, key, after, res) {
     const y = r.createEl('button', { text: 'Had it', cls: 'mod-cta' }); const n = r.createEl('button', { text: 'Not yet' });
-    y.onclick = () => { this.moAdd('recall', key); after(); }; n.onclick = () => { this.moAdd('try', key); after(); };
+    y.onclick = () => { this.moAdd('recall', key); if (res) res(true); after(); }; n.onclick = () => { this.moAdd('try', key); if (res) res(false); after(); };
   }
   async setWorld(w) { this.worldNow = w; if (w) this.tourHit('world'); const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { if (w) fm.world = w; else delete fm.world; }); this.moPaint(); }
   growSeed(days) {
@@ -2797,6 +2798,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     await this.app.fileManager.processFrontMatter(f, fm => {
       for (const [k] of COLORS) { fm[k] = (Array.isArray(fm[k]) ? fm[k] : []).map(String).filter(w => w !== word); }
       if (color) fm[color].push(word);
+      // Spaced review for words: a new color restarts the word's schedule from today.
+      const on = fm.color_on && typeof fm.color_on === 'object' ? fm.color_on : {}; on[word] = ymd(new Date()); fm.color_on = on;
+      if (fm.word_review && typeof fm.word_review === 'object') delete fm.word_review[word];
     });
     // The metadata cache catches up a moment later; repaint after it does.
     setTimeout(() => { this.paintBars(); this.refreshToday(); }, 300);
@@ -3365,12 +3369,196 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const y = el.createDiv(big ? 'gq-pop-big gq-pop-en' : 'gq-cbyou');
     if (c.who) y.createSpan({ cls: 'gq-cbwho', text: (c.ctx.length ? 'You, as ' + c.who : c.who) + ': ' });
     y.appendText(c.en);
+    if (c.col) y.createSpan({ cls: 'gq-dot gq-' + c.col, attr: { 'aria-label': c.col + ' word' } });
+  }
+  // ---------- Checks: the numbers behind the report. Each is the student's own, compared only with their own earlier numbers. ----------
+  checkPush(fm, kind, val) { const c = fm.checks && typeof fm.checks === 'object' && !Array.isArray(fm.checks) ? fm.checks : {}; const a = Array.isArray(c[kind]) ? c[kind].map(String) : []; a.push(ymd(new Date()) + '|' + val); c[kind] = a.slice(-80); fm.checks = c; }
+  async checkLog(kind, val) { const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => this.checkPush(fm, kind, val)); }
+  async addPractice(secs) { const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.practice_s = Math.round((+fm.practice_s || 0) + secs); }); }
+  stats(from, to) {
+    const fm = this.progFm(), c = fm.checks && typeof fm.checks === 'object' ? fm.checks : {}, L = k => (Array.isArray(c[k]) ? c[k] : []).map(x => String(x).split('|')).filter(x => (!from || x[0] >= from) && (!to || x[0] < to));
+    const r7 = L('r7'), rep = L('rep'), talk = L('talk');
+    return {
+      r7n: r7.length, r7: r7.length ? Math.round(100 * r7.filter(x => x[1] === '1').length / r7.length) : null,
+      rep: rep.some(x => +x[3] > 0) ? Math.max(...rep.map(x => +x[3] || 0)) : null,
+      talk: talk.some(x => +x[1] > 0) ? Math.max(...talk.map(x => +x[1] || 0)) : null,
+      green: this.colors().green.length, hours: Math.round((+fm.practice_s || 0) / 360) / 10
+    };
+  }
+  statsLine() {
+    const s = this.stats(); const out = [];
+    if (s.r7 !== null) out.push(`back after a week ${s.r7}% (${s.r7n})`); if (s.rep !== null) out.push(`repeat ${s.rep} syllables`); if (s.talk !== null) out.push(`talk ${s.talk} words in 1 min`);
+    out.push(`green ${s.green}`); if (s.hours) out.push(`practice ${s.hours} h`); return out.join(' · ');
+  }
+  // ---------- The report: every two weeks a card the student didn't ask for, with numbers to beat ----------
+  reportCard(box) {
+    if (this.isKids) return; const fm = this.progFm(), today = ymd(new Date());
+    if (!fm.report_start) { this.progressFile().then(f => this.app.fileManager.processFrontMatter(f, x => { if (!x.report_start) x.report_start = today; })); return; }
+    const since = String(fm.report_last || fm.report_start), days = Math.round((new Date(today + 'T12:00:00') - new Date(since + 'T12:00:00')) / 864e5);
+    if (!(days >= 14) && !this.reportForce) return;
+    const hist = (Array.isArray(fm.report_hist) ? fm.report_hist : []).map(x => String(x).split('|'));
+    const now = this.stats(since), all = this.stats(), prev = hist.length ? hist[hist.length - 1] : null;
+    const best = i => { const v = hist.map(h => +h[i]).filter(x => !isNaN(x) && x > 0); return v.length ? Math.max(...v) : null; };
+    const c = createDiv('gq-tcard gq-report'); c.dataset.tour = 'report';
+    c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: hist.length ? 'Your two weeks in numbers' : 'Your first numbers' });
+    c.createDiv({ cls: 'gq-hint', text: 'Only you see these, and they compare you with yourself. Each one is a number to beat.' });
+    const tb = c.createDiv('gq-rep-rows');
+    const row = (name, val, unit, i, help) => {
+      const r = tb.createDiv('gq-rep-row'), b = best(i), up = b === null || val > b;
+      r.createDiv({ cls: 'gq-rep-n', text: name });
+      const v = r.createDiv({ cls: 'gq-rep-v' + (up ? ' is-up' : ''), text: `${val}${unit}` });
+      r.createDiv({ cls: 'gq-hint gq-rep-b', text: b === null ? help : up ? `New best (was ${b}${unit})` : `To beat: ${b}${unit}` });
+    };
+    const s = { r7: now.r7, rep: now.rep, talk: now.talk };
+    if (now.r7 !== null) row('Words back after a week', now.r7, '%', 1, `${now.r7n} checked in Spaced review`);
+    if (now.rep !== null) row('Repeat after me, longest line', now.rep, ' syllables', 2, 'Longer lines mean more Greek held at once');
+    if (now.talk !== null) row('One-minute talk', now.talk, ' words', 3, 'Words in one minute of Greek');
+    { const pg = prev ? +prev[4] : null, r = tb.createDiv('gq-rep-row'), d = pg === null ? null : all.green - pg; r.createDiv({ cls: 'gq-rep-n', text: 'Green words' }); r.createDiv({ cls: 'gq-rep-v' + (d > 0 ? ' is-up' : ''), text: String(all.green) }); r.createDiv({ cls: 'gq-hint gq-rep-b', text: d === null ? 'Words you have' : d > 0 ? `+${d} in two weeks` : 'Turn a yellow word green to move this' }); }
+    if (all.hours) { const ph = prev ? +prev[5] : 0; const r = tb.createDiv('gq-rep-row'); r.createDiv({ cls: 'gq-rep-n', text: 'Practice' }); r.createDiv({ cls: 'gq-rep-v', text: `${Math.round((all.hours - ph) * 10) / 10} h` }); r.createDiv({ cls: 'gq-hint gq-rep-b', text: `${all.hours} h in all` }); }
+    const miss = [now.rep === null && 'Repeat after me', now.talk === null && 'One-minute talk'].filter(Boolean);
+    if (miss.length) c.createDiv({ cls: 'gq-hint', text: `${miss.join(' and ')} ${miss.length > 1 ? 'add' : 'adds'} a number here. Roll the die to find ${miss.length > 1 ? 'them' : 'it'}.` });
+    const r = c.createDiv('gq-row'); const k = r.createEl('button', { text: 'Keep my numbers', cls: 'mod-cta' });
+    k.onclick = async () => {
+      const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, x => { const h = Array.isArray(x.report_hist) ? x.report_hist.map(String) : []; h.push([today, s.r7 === null ? '' : s.r7, s.rep === null ? '' : s.rep, s.talk === null ? '' : s.talk, all.green, all.hours].join('|')); x.report_hist = h.slice(-40); x.report_last = today; });
+      this.reportForce = false; this.moAdd('did', 'report', 2); setTimeout(() => this.refreshToday(), 300);
+    };
+    // It is the one big card while it is here: it sits under Next, and the card Next opened folds until it is kept.
+    const nx = box.querySelector(':scope > .gq-next'); if (nx) nx.after(c); else box.prepend(c);
+    const open = box.querySelector(':scope > .gq-fold.is-open'); if (open) { open.removeClass('is-open'); const h = open.querySelector(':scope > .gq-fold-h'); if (h) h.setAttr('aria-expanded', 'false'); }
+  }
+  // ---------- Roll the die: one of six things, picked for the student. Now and then a lucky roll adds φόρα. ----------
+  dieFaces() {
+    return [
+      { t: 'Spaced review', b: 'Earlier lines and your red and yellow words.', go: () => this.cbList && this.cbList.length ? this.popComebacks(this.cbList) : this.popRepeat() },
+      { t: 'Repeat after me', b: 'Hear a line, say it back. They get longer.', go: () => this.popRepeat() },
+      { t: 'One-minute talk', b: 'Talk for one minute. The phone counts your words.', go: () => this.popTalk() },
+      { t: 'Γιαγιά', b: 'A quick game with your words.', go: () => this.openApp('giagia', '') },
+      { t: 'Word web', b: 'Follow one word to the words it goes with.', go: () => this.openGraph() },
+      { t: 'Story puzzle', b: 'One line of the story.', go: () => this.storyEl && this.storyEl.isConnected ? this.focusCard(this.storyEl) : this.openApp('story', '') }
+    ];
+  }
+  rollDie() {
+    const F = this.dieFaces(), PIPS = [[4], [0, 8], [0, 4, 8], [0, 2, 6, 8], [0, 2, 4, 6, 8], [0, 2, 3, 5, 6, 8]];
+    let rerolled = false;
+    this.pop('Roll the die', [{ label: '', build: (el, api) => {
+      const die = el.createDiv({ cls: 'gq-die', attr: { role: 'img', 'aria-label': 'Die' } }); const cells = []; for (let i = 0; i < 9; i++) cells.push(die.createDiv('gq-pip'));
+      const face = n => { cells.forEach((x, i) => x.toggleClass('is-on', PIPS[n].includes(i))); die.setAttr('aria-label', `Die showing ${n + 1}`); };
+      const t = el.createDiv({ cls: 'gq-pop-big gq-die-t' }), b = el.createDiv({ cls: 'gq-hint gq-die-b' }), luck = el.createDiv('gq-die-luck'), r = el.createDiv('gq-row');
+      const roll = () => {
+        r.empty(); t.setText(''); b.setText(''); luck.setText(''); let k = 0, last = this.lastRoll;
+        let n = Math.floor(Math.random() * 6); if (n === last) n = (n + 1 + Math.floor(Math.random() * 5)) % 6; this.lastRoll = n;
+        const calm = this.calmOn(), ticks = calm ? 1 : 12;
+        const step = () => {
+          if (k < ticks - 1) { face(Math.floor(Math.random() * 6)); die.addClass('is-rolling'); k++; setTimeout(step, 40 + k * k * 1.2); return; }
+          die.removeClass('is-rolling'); face(n); t.setText(F[n].t); b.setText(F[n].b);
+          if (Math.random() < 0.25) { luck.setText('Lucky roll: +3 φόρα'); this.moAdd('did', 'lucky', 3); }
+          const go = r.createEl('button', { text: 'Go', cls: 'mod-cta' }); go.onclick = () => { api.close(); this.moAdd('did', 'die', 1); setTimeout(() => F[n].go(), 220); };
+          if (!rerolled) { const a = r.createEl('button', { text: 'Roll again' }); a.onclick = () => { rerolled = true; roll(); }; }
+        };
+        step();
+      };
+      roll();
+    } }]);
+  }
+  // ---------- Repeat after me: hear a line, say it back, longer each time (an elicited-imitation check) ----------
+  syl(t) { return (String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().match(/αι|ει|οι|ου|υι|αυ|ευ|[αεηιουω]/g) || []).length; }
+  async repeatLines() {
+    const beats = await this.beatIndex(), col = this.colors(), far = Math.max(12, (+col.last_beat || 0) + 3);
+    const pool = []; for (const b of Object.values(beats)) if (b.gr && b.n <= far && !/[—–]/.test(b.gr)) { const parts = b.gr.match(/[^.!;·]+[.!;·]?/g) || [b.gr]; for (const g of new Set([b.gr, ...parts.map(x => x.trim())])) { const n = this.syl(g); if (n >= 4 && n <= 24) pool.push({ gr: g, en: b.en, s: n }); } }
+    const used = new Set(), out = [];
+    for (const want of [5, 8, 11, 14, 17, 20]) {
+      const best = pool.filter(x => ![...used].some(u => u.includes(x.gr) || x.gr.includes(u))).sort((a, b) => Math.abs(a.s - want) - Math.abs(b.s - want))[0];
+      if (best && (!out.length || best.s >= out[out.length - 1].s)) { used.add(best.gr); out.push(best); }
+    }
+    return out;
+  }
+  async popRepeat() {
+    const L = await this.repeatLines(); if (!L.length) { new Notice('Repeat after me needs a few story lines first.'); return; }
+    const st = { got: 0, max: 0 };
+    const steps = L.map((x, k) => ({ label: 'Repeat after me', build: (el, api) => {
+      el.createDiv({ cls: 'gq-hint', text: k ? `Line ${k + 1} of ${L.length} · ${x.s} syllables` : `Listen, then say it back in Greek. ${L.length} lines, each a little longer. Line 1 · ${x.s} syllables.` });
+      const g = el.createDiv({ cls: 'gq-pop-big gq-pop-hide', text: x.gr, attr: { lang: 'el' } });
+      setTimeout(() => say(x.gr), 300);
+      const r = el.createDiv('gq-row'); let again = 1;
+      const h = r.createEl('button', { text: 'Hear it again' }); h.onclick = () => { say(x.gr); if (--again <= 0) h.remove(); };
+      const nextB = () => { r.empty(); this.hearBtn(r, x.gr, 'Hear it'); const nx = r.createEl('button', { text: k === L.length - 1 ? 'See my score' : 'Next', cls: 'mod-cta' }); nx.onclick = api.next; };
+      this.sayIt(el.createDiv('gq-row'), x.gr, 'said:rep:' + x.gr.slice(0, 60), 'Say it back', () => { st.got++; st.max = Math.max(st.max, x.s); g.removeClass('gq-pop-hide'); nextB(); });
+      const sk = el.createDiv('gq-row').createEl('button', { text: 'Show me, next', cls: 'gq-mini' }); sk.onclick = () => { g.removeClass('gq-pop-hide'); sk.remove(); nextB(); };
+    } }));
+    steps.push({ label: 'Repeat after me', build: (el, api) => {
+      el.createDiv({ cls: 'gq-pop-big', text: `${st.got} of ${L.length}` });
+      el.createDiv({ text: st.max ? `Longest line said back: ${st.max} syllables.` : 'Next time, try the first line twice.' });
+      const all = this.stats(); if (all.rep !== null && st.max) el.createDiv({ cls: 'gq-hint', text: st.max > all.rep ? `New best. It was ${all.rep}.` : `Your best: ${all.rep} syllables.` });
+      if (st.got) { this.checkLog('rep', `${st.got}|${L.length}|${st.max}`); this.moAdd('did', 'repeat', 3); }
+      const r = el.createDiv('gq-row'); const d = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); d.onclick = () => api.close();
+    } });
+    this.pop('Repeat after me', steps);
+  }
+  // ---------- One-minute talk: speak for a minute, the phone counts the words (a fluency check) ----------
+  popTalk() {
+    const P = [['Πες μου για τη μέρα σου.', 'Tell me about your day.'], ['Πες μου για την οικογένειά σου.', 'Tell me about your family.'], ['Τι έχεις στην τσάντα σου;', 'What is in your bag?'], ['Τι έφαγες σήμερα;', 'What did you eat today?'], ['Πες μου για το σπίτι σου.', 'Tell me about your home.'], ['Τι θα κάνεις αύριο;', 'What will you do tomorrow?'], ['Πες μου για έναν φίλο σου.', 'Tell me about a friend.']];
+    const q = P[Math.floor(Math.random() * P.length)];
+    this.pop('One-minute talk', [{ label: '', build: (el, api) => {
+      el.createDiv({ cls: 'gq-pop-big', text: q[0], attr: { lang: 'el' } }); el.createDiv({ cls: 'gq-hint', text: q[1] + ' Talk in Greek for one minute. Simple is fine: keep going, even with single words.' });
+      const clock = el.createDiv({ cls: 'gq-pop-big gq-talk-n', text: '1:00' }), live = el.createDiv({ cls: 'gq-hint gq-talk-live' }), r = el.createDiv('gq-row');
+      const R = SRec(); if (!R || this.lsGet('sroff', 0)) { live.setText('This needs the phone\'s speech recognition: Chrome on Android or Safari on iPhone.'); return; }
+      const go = r.createEl('button', { text: 'Start', cls: 'mod-cta' });
+      go.onclick = () => {
+        go.remove(); let words = 0, interim = '', on = true, rec = null; const t0 = Date.now(); const cnt = t => String(t).trim().split(/\s+/).filter(Boolean).length;
+        const paint = () => { const left = Math.max(0, 60 - Math.floor((Date.now() - t0) / 1000)); clock.setText(`0:${String(left).padStart(2, '0')}`); live.setText(`${words + cnt(interim)} words`); };
+        const run = () => { if (!on) return; try { rec = new R(); } catch (e) { return; } rec.lang = 'el-GR'; rec.continuous = true; rec.interimResults = true;
+          rec.onresult = e => { interim = ''; for (let i = e.resultIndex; i < e.results.length; i++) { const t = e.results[i][0].transcript; if (e.results[i].isFinal) words += cnt(t); else interim = t; } paint(); };
+          rec.onerror = e => { if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { on = false; live.setText('The microphone is blocked for this site.'); } };
+          rec.onend = () => { if (on && Date.now() - t0 < 60000) setTimeout(run, 80); };
+          try { rec.start(); } catch (e) {} };
+        try { window.speechSynthesis && speechSynthesis.cancel(); } catch (e) {}
+        run(); const tick = setInterval(paint, 250);
+        setTimeout(() => {
+          on = false; try { rec && rec.stop(); } catch (e) {}
+          setTimeout(() => {
+            clearInterval(tick); const n = words + cnt(interim), b = this.stats().talk; clock.setText(`${n} words`);
+            live.setText(b === null ? 'Your first number. Beat it next time.' : n > b ? `New best. It was ${b}.` : `Your best: ${b} words.`);
+            if (n > 0) { this.checkLog('talk', n); this.moAdd('did', 'talk', 3); }
+            const d = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); d.onclick = () => api.close();
+          }, 900);
+        }, 60000);
+      };
+    } }]);
+  }
+  // ---------- Spaced review for words: red and yellow words come back 1, 3 and 7 days after their color, then weekly. Green words come back once after 30 days. ----------
+  wordsDue() {
+    const fm = this.progFm(), on = fm.color_on && typeof fm.color_on === 'object' ? fm.color_on : {}, rv = fm.word_review && typeof fm.word_review === 'object' ? fm.word_review : {};
+    const today = new Date(ymd(new Date()) + 'T12:00:00'), age = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || '')) ? Math.round((today - new Date(d + 'T12:00:00')) / 864e5) : 999;
+    const GAP = [1, 2, 4, 7], c = this.colors(), out = [];
+    for (const [col, list] of [['red', c.red], ['yellow', c.yellow], ['green', c.green]]) for (const w of list) {
+      const [n0, last] = String(rv[w] || '0|').split('|'), n = parseInt(n0, 10) || 0, since = age(last || on[w]);
+      const due = col === 'green' ? n === 0 && since >= 30 : since >= GAP[Math.min(n, GAP.length - 1)];
+      if (due) out.push({ w, col, since });
+    }
+    const R = { red: 0, yellow: 1, green: 2 };
+    out.sort((a, b) => R[a.col] - R[b.col] || b.since - a.since);
+    return out.slice(0, 5).map(x => {
+      const f = this.app.metadataCache.getFirstLinkpathDest(x.w, '') || this.app.vault.getAbstractFileByPath('Words/' + x.w + '.md');
+      const wf = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+      return wf.english ? { ctx: [], who: '', gr: x.w, en: String(wf.english), word: x.w, col: x.col } : null;
+    }).filter(Boolean);
+  }
+  async wordReviewed(w, ok) {
+    const f = await this.progressFile(), t = ymd(new Date());
+    await this.app.fileManager.processFrontMatter(f, fm => {
+      const rv = fm.word_review && typeof fm.word_review === 'object' ? fm.word_review : {};
+      const [n0, last] = String(rv[w] || '0|').split('|'), n = parseInt(n0, 10) || 0;
+      const on = fm.color_on && typeof fm.color_on === 'object' ? fm.color_on[w] : '', from = /^\d{4}-\d{2}-\d{2}$/.test(last || on || '') ? (last || on) : '';
+      const gap = from ? Math.round((new Date(t + 'T12:00:00') - new Date(from + 'T12:00:00')) / 864e5) : 0;
+      rv[w] = `${ok ? n + 1 : 0}|${t}`; fm.word_review = rv;
+      if (gap >= 7) this.checkPush(fm, 'r7', ok ? 1 : 0);
+    });
   }
   async comebackCard(box, beats, col, cal) {
-    const last = col.story_at !== null ? col.story_at : Math.min(col.last_beat, (cal || 1e9) - 1); if (last < 1) return;
-    const due = [last, last - 2, last - 6].filter(k => k >= 1 && beats[k]).map(k => beats[k]);
-    if (!due.length) return;
-    const T = await this.storyTurns(), cbs = due.map(b => this.comebackTurns(b, T));
+    const last = col.story_at !== null ? col.story_at : Math.min(col.last_beat, (cal || 1e9) - 1);
+    const due = last >= 1 ? [last, last - 2, last - 6].filter(k => k >= 1 && beats[k]).map(k => beats[k]) : [];
+    const T = due.length ? await this.storyTurns() : null, cbs = due.map(b => Object.assign(this.comebackTurns(b, T), { gap: last - b.n + 1 })).concat(this.wordsDue());
+    if (!cbs.length) return;
     const card = box.createDiv('gq-tcard gq-comeback'); this.cbList = cbs;
     const ch = card.createDiv('gq-thead'); ch.createEl('strong', { text: 'Spaced review' }); ch.createSpan({ cls: 'gq-hint', text: `  · about ${Math.max(1, Math.round(cbs.length * 0.5))} min` });
     card.createDiv({ cls: 'gq-hint', text: cbs.some(c => c.ctx.length) ? 'Read or hear the line, then answer it in Greek. Tap Say it and the phone checks you.' : 'Say it in Greek. Tap Say it and the phone checks you.' });
@@ -3383,7 +3571,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const s = row.createEl('button', { text: 'Show my answer', cls: 'gq-mini' }); s.onclick = () => { g.style.display = ''; s.remove(); say(c.gr); };
       if (!c.ctx.length) { s.setText('Show Greek'); this.hearBtn(row, c.gr, 'Hear'); }
       // Say it: the phone listens, and when it hears the answer the Greek shows.
-      this.sayIt(r.createDiv('gq-row'), c.gr, 'said:cb:' + c.gr.slice(0, 80), 'Say it · +2', () => { g.style.display = ''; s.remove(); });
+      this.sayIt(r.createDiv('gq-row'), c.gr, 'said:cb:' + c.gr.slice(0, 80), 'Say it · +2', () => { g.style.display = ''; s.remove(); if (c.word) this.wordReviewed(c.word, true); });
     }
     const qr = card.createDiv('gq-row'); this.popBtn(qr, cbs.length > 1 ? `Quiz me (${cbs.length})` : 'Quiz me', () => this.popComebacks(cbs));
   }
@@ -3394,7 +3582,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   lsSet(k, v) { try { window.localStorage.setItem(this.lsKey(k), JSON.stringify(v)); } catch (e) {} }
   // Minutes: the middle of this student's last few times, or a starting guess.
   est(kind, def) { const a = (this.lsGet('mins', {})[kind] || []).slice().sort((x, y) => x - y); return a.length < 2 ? def : Math.max(1, Math.round(a[Math.floor(a.length / 2)] / 60)); }
-  timeRec(kind, secs) { if (!(secs > 15 && secs < 900)) return; const L = this.lsGet('mins', {}); L[kind] = [...(L[kind] || []), Math.round(secs)].slice(-7); this.lsSet('mins', L); }
+  timeRec(kind, secs) { if (!(secs > 15 && secs < 900)) return; const L = this.lsGet('mins', {}); L[kind] = [...(L[kind] || []), Math.round(secs)].slice(-7); this.lsSet('mins', L); this.addPractice(secs); }
   doneToday(k) { return this.lsGet('done', {})[k] === ymd(new Date()); }
   markDone(k) { const d = this.lsGet('done', {}); d[k] = ymd(new Date()); this.lsSet('done', d); this.nextUp(k); }
   // Finishing the open card's step puts one button at its foot: the next step, or done for today.
@@ -3402,6 +3590,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const st = this.nextSteps || [], c = this.nextOpen; if (!c || !c.isConnected || !st.length || st[0].key !== k || c.querySelector('.gq-nextup')) return;
     const n = st[1], b = c.createEl('button', { cls: 'mod-cta gq-nextup', text: n ? `Next up: ${n.label} ›` : 'Done for today ›' });
     b.onclick = () => { this.keepOpen = null; this.refreshToday(); };
+    if (!n && !this.isKids) { const d = c.createEl('button', { cls: 'gq-nextup gq-die-btn', text: 'Or roll the die for one more' }); d.onclick = () => this.rollDie(); }
   }
   whereSet(w) { this.lsSet('where', { ...w, t: Date.now() }); }
   whereGet() { const w = this.lsGet('where', null); return w && Date.now() - w.t < 4 * 864e5 ? w : null; }
@@ -3438,6 +3627,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     box.addClass('gq-rest-off'); const foot = box.querySelector(':scope > .gq-tfoot');
     const a = createEl('a', { text: 'Do something else ›', href: '#', cls: 'gq-rest-link' }); a.onclick = e => { e.preventDefault(); box.toggleClass('gq-rest-off', !box.hasClass('gq-rest-off')); a.setText(box.hasClass('gq-rest-off') ? 'Do something else ›' : 'Fewer options'); };
     if (foot) foot.prepend(a); else box.appendChild(a);
+    if (this.isKids) return;
+    const d = createEl('button', { cls: 'gq-mini gq-die-btn', text: 'Roll the die', attr: { 'aria-label': 'Roll the die for something to do' } }); d.onclick = () => this.rollDie(); a.before(d);
   }
   unfold(c, quiet) {
     const box = c.parentElement; if (box) for (const o of box.querySelectorAll(':scope > .gq-fold.is-open')) if (o !== c) { o.removeClass('is-open'); const b = o.querySelector(':scope > .gq-fold-h'); if (b) b.setAttr('aria-expanded', 'false'); }
@@ -3541,6 +3732,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     else { head.createEl('strong', { text: 'Done for today' }); line.setText('Θα τα πούμε. One more? Pick one.'); line.setAttr('lang', 'el'); }
     if (s) { const b = r.createEl('button', { text: away >= 2 ? 'One line' : 'Start', cls: 'mod-cta' }); b.onclick = () => { this.tourHit('next'); s.go(); }; }
     else for (const [t, fn] of this.choiceTwo(rev)) { const b = r.createEl('button', { text: t }); b.onclick = () => { this.tourHit('next'); fn(); }; }
+    // A good week shows; nothing resets and a missed day never counts against anyone.
+    { const m = new Date(); m.setDate(m.getDate() - ((m.getDay() + 6) % 7)); const mon = ymd(m), wk = Object.keys(days || {}).filter(d => d >= mon && d <= today && +days[d] > 0).length;
+      if (wk && !this.isKids) c.createDiv({ cls: 'gq-hint gq-week-line', text: wk >= 5 ? `This week: ${wk} days. That is the habit.` : `This week: ${wk} of 5 days` }); }
     this.tourLine(c);
     const wh = this.whereGet();
     if (wh) { const d = c.createDiv('gq-hint gq-next-back'); d.appendText('Back to where you were: '); const a = d.createEl('a', { text: wh.label, href: '#' }); a.onclick = e => { e.preventDefault(); this.whereGo(wh); }; }
@@ -3674,8 +3868,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         this.todayBeat = null; this.storyEl = null; this.storyInfo = null; this.cbList = null;
         if (cal) await this.storyCard(box, beats, cal, fdd >= 0 && fdow === 0, col);
         if (moFresh) this.moCard(box);
-        // Comebacks bring back earlier parts of the story the student has finished.
-        if (col.story_at) await this.comebackCard(box, beats, col, cal);
+        // Spaced review brings back earlier story lines and red, yellow and old green words.
+        await this.comebackCard(box, beats, col, cal);
         // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
         this.abcEl = null; if (!this.abcAllDone()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
         if (!this.tabOn('class')) await this.classCard(box, wkCal, week);
@@ -3710,6 +3904,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       this.reviewPlay = rev.slice(0, 40); this.todayWeek = wk;
       await this.nextCard(box, { rev, fresh: moFresh });
       this.foldToday(box);
+      this.reportCard(box);
       const foot = box.createDiv('gq-hint gq-tfoot');
       const mo = foot.createEl('button', { text: 'More: story, games, colors, tools ›', cls: 'gq-mini' }); mo.onclick = () => this.showMore();
       if (this.abcAllDone()) { const ab = foot.createEl('button', { text: 'Alphabet', cls: 'gq-mini' }); ab.onclick = () => { ab.remove(); this.lettersCard(box); const k = box.lastElementChild; box.insertBefore(k, foot); k.scrollIntoView({ block: 'start', behavior: 'smooth' }); }; }
@@ -4665,13 +4860,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const s = r.createEl('button', { text: c.ctx.length ? 'Show my answer' : 'Show Greek', cls: 'mod-cta' });
       this.thinkBeat(s, 'Say it out loud first');
       const after = k === due.length - 1 ? () => { this.markDone('cb'); api.close(); this.refreshToday(); } : api.next;
+      const got = ok => { if (c.word) this.wordReviewed(c.word, ok); else if (c.gap >= 7) this.checkLog('r7', ok ? 1 : 0); };
       // Say it: when the phone hears the answer, the Greek shows and it counts as Had it, so one tap moves on.
       const sr = el.createDiv('gq-row');
       this.sayIt(sr, c.gr, 'said:cb:' + c.gr.slice(0, 80), 'Say it · +2', () => {
-        g.removeClass('gq-pop-hide'); s.remove(); r.empty(); this.moAdd('recall', 'cb:' + c.gr.slice(0, 80));
+        g.removeClass('gq-pop-hide'); s.remove(); r.empty(); this.moAdd('recall', 'cb:' + c.gr.slice(0, 80)); got(true);
         this.hearBtn(r, c.gr, 'Hear it'); const nx = r.createEl('button', { text: k === due.length - 1 ? 'Done' : 'Next', cls: 'mod-cta' }); nx.onclick = after;
       });
-      s.onclick = () => { g.removeClass('gq-pop-hide'); say(c.gr); s.remove(); sr.remove(); this.hearBtn(r, c.gr, 'Hear again'); this.hadIt(r, 'cb:' + c.gr.slice(0, 80), after); };
+      s.onclick = () => { g.removeClass('gq-pop-hide'); say(c.gr); s.remove(); sr.remove(); this.hearBtn(r, c.gr, 'Hear again'); this.hadIt(r, 'cb:' + c.gr.slice(0, 80), after, got); };
     } }));
     this.pop('Spaced review', steps);
   }

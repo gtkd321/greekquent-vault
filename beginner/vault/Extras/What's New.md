@@ -2,6 +2,13 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zb · Roll the die, and your numbers
+> - **Roll the die.** Next to **Do something else**, one tap picks something for you: Spaced review, Repeat after me, a One-minute talk, Γιαγιά, the Word web or the story puzzle. Some rolls are lucky and add φόρα.
+> - **Repeat after me.** Hear a line, then say it back. Each line is a little longer.
+> - **One-minute talk.** Talk in Greek for one minute, and the phone counts your words.
+> - **Your red and yellow words come back** in Spaced review 1, 3 and 7 days after you color them. Green words come back once a month later.
+> - Now and then, Today will show you some numbers. They compare you only with yourself.
+
 > [!tip]- 2026-11-19z · Spaced review, and more room on screen
 > - **Comebacks are now called Spaced review.** They work the same way: lines from earlier parts come back 1, 3 and 7 days later, and you say the reply.
 > - **The Today, Words and Class tabs sit lower** on phones with a home bar, so the page has more room.

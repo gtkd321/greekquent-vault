@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19t · Phonetics, and a story puzzle that teaches the words
+> - **Phonetics (on to start).** Every Greek word shows its sound in small letters underneath: καφές, kafés. The accent mark shows which part to say louder. Turn it off in More, or right on the Story puzzle card, once you can read the letters. A few letters to know: η, ι, υ, ει and οι all say "i". αι says "e". δ is "dh" as in "this". γ is "y" before e and i, and "gh" elsewhere. χ is a breathy "h".
+> - **Words first.** A new part of the story puzzle starts with its new words: hear them, see what they mean, then build.
+> - **Tiles say what they mean.** Touch a tile to hear it and see its meaning under the puzzle.
+> - **Guessing does not count as a win.** If a line takes two misses, or you use Show me, you get 1 φόρα for trying and the line comes back once at the end of the part.
+
 > [!tip]- 2026-11-19s · The Gallery
 > A new world: Gallery (το μουσείο). Pick it with the world button on your φόρα card. Every φόρα point is a chisel stroke, so marble chips fly off the moment you practice. Finish a statue, from the Venus de Milo to The Thinker, and it gets a short funny scene, then joins the hall. Tap a finished statue to hear its name. Your other worlds are untouched.
 

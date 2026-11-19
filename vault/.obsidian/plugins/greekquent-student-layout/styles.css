@@ -664,3 +664,20 @@ body.gq-calm .gq-print.is-stamp, body.gq-calm .gq-light { animation: none; }
 .gq-gal-scene.is-still .gq-st-x { opacity: 1; }
 .gq-calm .gq-gallery .gq-chip.is-fly, .gq-calm .gq-st.is-gag * { animation: none !important; }
 @media (prefers-reduced-motion: reduce) { .gq-gallery .gq-chip.is-fly, .gq-st.is-gag *, .gq-gal-scene .gq-gal-spot, .gq-sc-arm.is-hit { animation: none !important; } }
+
+/* Phonetics: the sound of each Greek word, small, under the word. Hidden (not removed) when switched off. */
+ruby.gq-pr { ruby-position: under; -webkit-ruby-position: after; ruby-align: center; }
+rt.gq-prt { font-size: max(0.55em, 10px); font-weight: 400; font-style: normal; letter-spacing: 0; color: var(--text-muted); font-family: var(--font-interface, system-ui, sans-serif); text-transform: none; line-height: 1.1; user-select: none; -webkit-user-select: none; }
+rt.gq-prt::before { content: attr(data-ph); }
+body.gq-ph-off rt.gq-prt { display: none; }
+.gq-tile rt.gq-prt, .gq-mini rt.gq-prt { color: inherit; opacity: .7; }
+.gq-ph-link { margin-left: auto; }
+/* Story puzzle: new words first, and the meaning of the last touched tile. */
+.gq-cv-words { display: flex; flex-direction: column; gap: 8px; }
+.gq-cv-wrow { display: flex; align-items: baseline; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--background-modifier-border); }
+.gq-cv-wgr { font-size: 1.25em; font-weight: 600; min-width: 7em; cursor: pointer; }
+.gq-cv-wen { color: var(--text-muted); }
+.gq-cv-gloss { min-height: 2.4em; margin: 6px 0 2px; font-size: 1.05em; }
+.gq-cv-glgr { font-weight: 600; }
+.gq-cv-glen { color: var(--text-muted); }
+.gq-cv-wchips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0; }

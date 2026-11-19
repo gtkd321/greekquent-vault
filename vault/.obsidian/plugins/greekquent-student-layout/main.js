@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zb';
+const VAULT_RELEASE = '2026-11-19zc';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -479,7 +479,7 @@ class WordWebView extends ItemView {
       // Either way round: εσύ's web shows εσύ χαίρεσαι, and πιστεύω's web shows εσύ πιστεύεις on the εσύ link.
       const xn = x.k.replace(/^Words\//, '').replace(/\.md$/, ''), vw = WW_WHO[name] ? x.w : WW_WHO[xn] ? w : null, pn = WW_WHO[name] ? name : xn;
       const pf = vw && vw.t === 'v' && vw.who && vw.who[WW_WHO[pn]];
-      if (pf) { const ph = pn + ' ' + pf; if (x.phrase && wwFold(x.phrase) !== wwFold(ph) && wwFold(x.phrase) !== wwFold(vw === w ? name : xn)) { const pre = vw === w && !hasVerb(name, x.phrase); x.also = { phrase: pre ? name + ' ' + x.phrase : x.phrase, en: pre && x.en ? String(w.e || '').split(/[;,]/)[0].trim() + ' ' + x.en : x.en }; } x.phrase = ph; x.en = wwPersonEn(pn, vw.e); x.once = ''; continue; }
+      if (pf) { const ph = pn + ' ' + pf; if (x.phrase && wwFold(x.phrase) !== wwFold(ph) && wwFold(x.phrase) !== wwFold(vw === w ? name : xn)) { const pre = vw === w && !hasVerb(name, x.phrase); x.also = { phrase: pre ? name + ' ' + x.phrase : x.phrase, en: pre && x.en ? String(w.e || '').split(/[;,]/)[0].trim() + ' ' + x.en : x.en }; } x.phrase = ph; x.en = wwPersonEn(pn, vw.e); x.once = ''; x.who = { pn, pf, verb: vw === w ? name : xn }; continue; }
       if (x.phrase && w.t === 'v' && !hasVerb(name, x.phrase)) { x.phrase = name + ' ' + x.phrase; if (x.once) x.once = name + ' ' + x.once; }
     }
     return out.filter(x => x.w);
@@ -590,9 +590,10 @@ class WordWebView extends ItemView {
       // Say the word on its own only when the phrase doesn't already contain it (εγώ → "Εγώ θέλω να πάω", not "εγώ. Εγώ θέλω…").
       const bareF = wwFold(lab.replace(/^(ο|η|το|οι|τα) /, '')), inside = x.phrase.split(/[\s,.;!·?«»]+/).some(t => wwFold(t) === bareF);
       // A changed form inside (μεγάλος → μεγάλο σπίτι) also plays just the phrase; otherwise the word leads into it (θέλω + να πάω).
-      const changed = !inside && !!wwForm(lab, x.phrase);
+      // A person's form of the verb (λέω → εσύ λες) is the verb already, so the phrase plays on its own.
+      const wv = x.who && wwFold(x.who.verb) === wwFold(lab), changed = !inside && (!!wwForm(lab, x.phrase) || wv || (w.t === 'v' && hasVerb(lab, x.phrase)));
       if (same) d.remove(); say(same || inside || changed ? x.phrase : lab + ' ' + x.phrase);
-      const form = !same && (wwForm(lab, x.phrase) || (this.center && wwForm(this.label(this.center.k), x.phrase))); if (form) this.chip.createDiv({ cls: 'gq-hint', text: form });
+      const form = !same && (wv && wwFold(x.who.pf) !== wwFold(lab) ? `With ${x.who.pn}, ${lab} becomes ${x.who.pf}.` : (wwForm(lab, x.phrase) || (this.center && wwForm(this.label(this.center.k), x.phrase)))); if (form) this.chip.createDiv({ cls: 'gq-hint', text: form });
       if (x.also) { const o = this.chip.createDiv({ cls: 'gq-hint' }); o.appendText('also: '); o.createSpan({ text: x.also.phrase, attr: { lang: 'el' } }); if (x.also.en) o.appendText('  (' + x.also.en + ')'); }
       if (x.once) { const o = this.chip.createDiv({ cls: 'gq-hint' }); o.appendText('for one time: '); o.createSpan({ text: x.once, attr: { lang: 'el' } }); }
     }

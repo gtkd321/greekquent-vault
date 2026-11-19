@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zc · Word web: the verb form on its own
+> - **Hold a verb on a person's web** and you hear just that person's form: on the εσύ web, λέω says **εσύ λες**, not "λέω εσύ λες". A line underneath tells you the form, such as "With εσύ, λέω becomes λες."
+
 > [!tip]- 2026-11-19zb · Roll the die, and your numbers
 > - **Roll the die.** Next to **Do something else**, one tap picks something for you: Spaced review, Repeat after me, a One-minute talk, Γιαγιά, the Word web or the story puzzle. Some rolls are lucky and add φόρα.
 > - **Repeat after me.** Hear a line, then say it back. Each line is a little longer.

@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip] Focus helpers in one place (2026-11-19zj)
+> - Calm mode, Focus sound and Walk mode are all in Options: tap ⋯ at the top right, then Options. Walk mode has a Start button there.
+> - Options calls your world "Your friend": Plant, Pet, Dancer, Gyro shop, House or Statue.
+
 > [!tip] Your friend in the corner (2026-11-19zi)
 > - Today is just the cards. The date, the edition name and the line under the cards are gone. Swipe a card left for the next one (the last comes round to the first), right to go back.
 > - φόρα is no longer a card. Finish the tour and your friend is planted in the bottom-right corner, and stays there on every screen. It grows (or dances) with every point. Tap it for your φόρα.

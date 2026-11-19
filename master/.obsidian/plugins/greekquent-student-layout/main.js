@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zi';
+const VAULT_RELEASE = '2026-11-19zj';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3949,13 +3949,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   focusSec(s) {
     const r = s.createDiv('gq-row');
     const wk = r.createEl('button', { text: 'Walk mode', cls: 'gq-mini' }); wk.onclick = () => this.walkMode();
-    s.createDiv({ cls: 'gq-hint', text: 'Walk mode plays your Greek hands-free. Calm mode and Focus sound are under Options at the top.' });
+    s.createDiv({ cls: 'gq-hint', text: 'Walk mode plays your Greek hands-free. It is also in Options (⋯ at the top right), with Calm mode and Focus sound.' });
     const plan = this.planNowGet(); if (plan) s.createDiv({ cls: 'gq-hint', text: `Your plan: after ${plan}, today's line.` });
     if (!this.app.vault.getAbstractFileByPath(EXTRAS + '13 Focus tips.md')) return;
     const tip = s.createEl('a', { text: 'Focus tips', href: '#', cls: 'gq-hint' }); tip.onclick = e => { e.preventDefault(); this.openNote(EXTRAS + '13 Focus tips.md'); };
   }
   // ---------- Options: every on/off switch in one place, opened from the side panel or the ⋯ menu ----------
   optionsPop() {
+    this.tourHit('more');
     const O = [
       { t: 'Greek voice', d: 'Off keeps the app quiet on this device, for class or a shared room.', on: () => !gqQuiet(), set: v => this.setQuiet(!v) },
       { t: 'Phonetics', d: 'Shows how to say each Greek word in Latin letters.', on: () => this.phOn(), set: v => this.setPh(v) },
@@ -3972,12 +3973,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const sw = row.createEl('button', { cls: 'gq-switch', attr: { role: 'switch', 'aria-label': o.t } });
         const paint = () => { const on = !!o.on(); sw.setAttr('aria-checked', String(on)); sw.toggleClass('is-on', on); };
         sw.onclick = async () => { await o.set(!o.on()); setTimeout(paint, 60); }; paint();
+        // Walk mode sits with the other focus helpers, right after Focus sound.
+        if (o.t === 'Focus sound') { const wr = list.createDiv('gq-opt'), wt = wr.createDiv('gq-opt-tx');
+          wt.createDiv({ cls: 'gq-opt-t', text: 'Walk mode' }); wt.createDiv({ cls: 'gq-hint', text: 'Plays your Greek hands-free: the Greek, a pause to say it, the English, the Greek again.' });
+          const go = wr.createEl('button', { text: 'Start', cls: 'gq-mini' }); go.onclick = () => { const p = document.querySelector('.gq-pop'); if (p) p.remove(); this.walkMode(); }; }
       }
       { const row = list.createDiv('gq-opt gq-opt-col'), tx = row.createDiv('gq-opt-tx');
-        tx.createDiv({ cls: 'gq-opt-t', text: 'Your world' }); tx.createDiv({ cls: 'gq-hint', text: 'What your φόρα grows. Dance is the quickest.' });
+        tx.createDiv({ cls: 'gq-opt-t', text: 'Your friend' }); tx.createDiv({ cls: 'gq-hint', text: 'Who lives in the corner and grows with your φόρα.' });
         const ch = row.createDiv('gq-chips gq-opt-worlds'), bs = [];
         const paint = () => bs.forEach(([k, b]) => { const on = k === this.worldKey(); b.toggleClass('mod-cta', on); b.setAttr('aria-pressed', String(on)); });
-        for (const k of ['dance', 'gallery', 'village', 'grove', 'gyro', 'pet']) { const b = ch.createEl('button', { text: WORLDS[k].name, cls: 'gq-mini' }); b.onclick = async () => { await this.setWorld(k); paint(); }; bs.push([k, b]); }
+        for (const [k, nm] of [['grove', 'Plant'], ['pet', 'Pet'], ['dance', 'Dancer'], ['gyro', 'Gyro shop'], ['village', 'House'], ['gallery', 'Statue']]) { const b = ch.createEl('button', { text: nm, cls: 'gq-mini' }); b.onclick = async () => { await this.setWorld(k); paint(); }; bs.push([k, b]); }
         paint(); }
       const h = el.createDiv('gq-hint gq-opt-foot'), a = h.createEl('a', { text: 'Greek voice help', href: '#' }); a.onclick = e => { e.preventDefault(); this.voiceHelp(false); };
     } }]);
@@ -4601,7 +4606,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       { k: 'game', at: [], t: 'Γιαγιά', b: 'A quick game with your words. Come back here when you are done.', go: ['Play Γιαγιά', () => this.openApp('giagia', '')], ev: 'game' },
       { k: 'class', at: ['tab-class'], t: 'Class', b: "This week's lesson, the rally, homework, practice together and Ask the class, in one place.", go: ['Open Class', () => this.openClass()], ev: 'class', tab: 'class' },
       { k: 'plan', at: ['next'], t: 'Pick your moment', b: 'Choose when you practice: after coffee, after the bus. Doing it after something you already do makes it easy to start.', ev: 'plan' },
-      { k: 'focus', at: [], t: 'Focus', b: 'The side panel has Calm mode, Focus sound, and Walk mode for practicing on the move.', go: ['Open the side panel', () => this.showMore()], ev: 'more' },
+      { k: 'focus', at: [], t: 'Focus', b: 'Calm mode, Focus sound and Walk mode (your Greek, hands-free, for practicing on the move) are in Options: tap ⋯ at the top right.', go: ['Open Options', () => this.optionsPop()], ev: 'more' },
       { k: 'paper', at: ['paper'], t: 'Paper cards', b: 'Make a paper card for a word: Greek on the front, a picture on the back. Then Card practice on Today: tap how many cards and minutes you did. As many as you like.', go: ['Open Words', () => this.openWords()], ev: 'card' }
     ];
   }

@@ -261,7 +261,7 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
       { who: 'maria', gr: 'Όχι!', en: 'No!', start: () => S.once('maria', 'shake') },
       { who: 'nikos', gr: 'Ναι!', en: 'Yes!', start: () => { S.once('nikos', 'hop'); S.phoneAt(262, 150); S.hide('phone'); S.show('nbag'); } } ] },
     { day: 3, label: 'Wed', keys: ['πώς', 'σας', 'λένε', 'παρακαλώ', 'ευχαριστώ'], base: { board: 'Μάθημα 1' }, chunks: [
-      { who: 'teacher', gr: 'Πώς σας λένε, παρακαλώ;', en: "What's your name, please?", start: () => S.teacherIn(true) },
+      { who: 'teacher', gr: 'Πώς σε λένε, παρακαλώ;', en: "What's your name, please?", start: () => S.teacherIn(true) },
       { who: 'maria', gr: 'Μαρία.', en: 'Maria.' },
       { who: 'teacher', gr: 'Ευχαριστώ.', en: 'Thank you.', start: () => S.board('Μάθημα 1 · Μαρία') } ] },
     { day: 4, label: 'Thu', keys: ['γεια', 'ορίστε', 'νερό', 'βιβλίο', 'κλειδί'], base: { board: 'Μάθημα 1 · Μαρία', teacher: true }, chunks: [
@@ -454,11 +454,11 @@ window.GQ_STORY={"weeks":[{"n":1,"title":"What's in your bag","days":[1,2,3,4,5,
       { see: 'Say "No!"', help: 'no = όχι', ans: ['όχι'], ok: 'He nods slowly.' },
       { see: 'What does his nod mean? Say "yes".', help: 'yes = ναι', ans: ['ναι'], ok: 'line' } ],
       line: 'Τι έχεις; — Έχω το κινητό σου. — Όχι! — Ναι!' },
-    { title: 'DAY 3 · THE TEACHER', look: 'The teacher stops at your desk. She asks something fast: Πώς σας λένε;', steps: [
-      { see: 'Too fast. Politely ask her to repeat: "Please?"', help: 'please = παρακαλώ', ans: ['παρακαλώ'], ok: 'She smiles and says it slowly: Πώς σας λένε;' },
+    { title: 'DAY 3 · THE TEACHER', look: 'The teacher stops at your desk. She asks something fast: Πώς σε λένε;', steps: [
+      { see: 'Too fast. Politely ask her to repeat: "Please?"', help: 'please = παρακαλώ', ans: ['παρακαλώ'], ok: 'She smiles and says it slowly: Πώς σε λένε;' },
       { see: 'She wants your name. Type it.', help: 'Any name works. Try Μαρία.', any: true, ok: 'She writes it on the board.' },
       { see: 'Say "thank you".', help: 'thank you = ευχαριστώ', ans: ['ευχαριστώ'], ok: 'line' } ],
-      line: 'Πώς σας λένε, παρακαλώ; — Μαρία. — Ευχαριστώ.' },
+      line: 'Πώς σε λένε, παρακαλώ; — Μαρία. — Ευχαριστώ.' },
     { title: 'DAY 4 · THE ERRAND', look: 'The teacher needs three things from your desk: water, a book and a key.', steps: [
       { see: 'Greet her first.', help: 'hi = γεια', ans: ['γεια'], ok: 'She waves.' },
       { see: 'Hand them over: "Here you are."', help: 'here you are = ορίστε', ans: ['ορίστε'], ok: 'She takes the water and the book.' },

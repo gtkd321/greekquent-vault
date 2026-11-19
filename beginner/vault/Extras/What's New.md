@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zo · Πώς σε λένε;
+> In week 1, the teacher now asks Πώς σε λένε, παρακαλώ; instead of Πώς σας λένε. Teachers in Greece say εσύ to their pupils, and the students say εσείς back. σας comes later, with strangers and older people.
+
 > [!tip]- 2026-11-19zn · Say it, again
 > Say it in Spaced review and in Γιαγιά starts listening the moment you tap, which iPhones need. In Γιαγιά, one failed try no longer hides Say it for good; it comes back on phones where it had gone.
 > If the phone's microphone still won't start, the app switches to the keyboard's mic. Switch the keyboard to Greek first (the globe key) so it writes Greek. Try the app mic again brings the app's microphone back.

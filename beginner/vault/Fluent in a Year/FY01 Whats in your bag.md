@@ -18,7 +18,7 @@ One line a day, same people, one scene. Read it from the top each day, then add 
 > [!quote]- The week in six lines
 > 1. Εσύ κι εγώ είμαστε σε ένα μάθημα. (You and I are in a class.)
 > 2. Τι έχεις; — Έχω το κινητό σου. — Όχι! — Ναι! (What do you have? — I have your phone. — No! — Yes!)
-> 3. Πώς σας λένε, παρακαλώ; — Μαρία. — Ευχαριστώ. (What's your name, please? — Maria. — Thank you.)
+> 3. Πώς σε λένε, παρακαλώ; — Μαρία. — Ευχαριστώ. (What's your name, please? — Maria. — Thank you.)
 > 4. Γεια! Ορίστε το νερό, το βιβλίο και το κλειδί. (Hi! Here are the water, the book and the key.)
 > 5. Στην τσάντα έχω τετράδιο και στυλό. Το κινητό; Τι κάνω; (In my bag I have a notebook and a pen. The phone? What do I do?)
 > 6. Θέλω το κινητό μου. Νομίζω ότι το βλέπω. Μπορώ; (I want my phone. I think I see it. May I?)
@@ -44,7 +44,7 @@ Five a day. The words are the next most frequent on the list, pulled toward the 
 > - [[ναι]] **yes** (#23): Α ναι, θυμάμαι.
 
 > [!todo]- Wed · day 3 of 300
-> **Today's line:** Πώς σας λένε, παρακαλώ; — Μαρία. — Ευχαριστώ. (What's your name, please? — Maria. — Thank you.)
+> **Today's line:** Πώς σε λένε, παρακαλώ; — Μαρία. — Ευχαριστώ. (What's your name, please? — Maria. — Thank you.)
 > - [[λέω]] **I say, I tell** (#38): Δεν ξέρω τι να πω. (I just don't know what to say.)
 > - [[σας]] **you, your (pl./formal)** (#55): Μπορώ να σας ρωτήσω κάτι; (May I ask you something?)
 > - [[ευχαριστώ]] **thank you** (#56): Ευχαριστώ για την εξήγησή σας. (Thanks for your explanation.)

@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19v · Word web: more than one, and the right verb form
+> - **Double-tap for more than one** now works on more words. εγώ gives εμείς, and verbs give the "we" form: πάω gives εμείς πάμε, είμαι gives εμείς είμαστε. Nouns still give their plural.
+> - **Person words fit the verb.** Hold χαίρομαι on the εσύ web and you hear εσύ χαίρεσαι (you are glad), not "I am glad for you". This works both ways, so on the πιστεύω web, εσύ gives εσύ πιστεύεις. The other use, χαίρομαι για σένα, is still shown under "also".
+
 > [!tip]- 2026-11-19u · Letter names fixes
 > - **ψι, φι, χι and the other short names** are now said as names. Some phone voices were spelling them out letter by letter.
 > - **Say a name** starts the microphone right away when you tap it, which iPhones need. If the microphone does not start, the button stays and says so, so you can tap it again.

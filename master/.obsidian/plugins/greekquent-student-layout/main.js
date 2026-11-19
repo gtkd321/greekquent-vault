@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19u';
+const VAULT_RELEASE = '2026-11-19v';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -263,6 +263,46 @@ const PH_FUNC = { ο: 'the', η: 'the', το: 'the', οι: 'the', τα: 'the', �
   ενασ: 'a, one', ενα: 'a, one', μια: 'a, one', και: 'and', κι: 'and', δεν: 'not', μην: 'don\u2019t', να: 'to', θα: 'will', σε: 'in, to, at', σ: 'in, to', στο: 'in the, to the', στη: 'in the, to the', στην: 'in the, to the', στον: 'in the, to the', στα: 'in the, to the', στουσ: 'in the, to the', στισ: 'in the, to the',
   με: 'with, me', για: 'for', απο: 'from', μου: 'my, me', σου: 'your, you', μασ: 'our, us', σασ: 'your, you all', ναι: 'yes', οχι: 'no', αλλα: 'but', τι: 'what', που: 'where, that', πωσ: 'how', ποιοσ: 'who', ποια: 'who, which', ποιο: 'which', ποτε: 'when', γιατι: 'why, because', ποσο: 'how much',
   ειναι: 'is, are', ειμαι: 'I am', εισαι: 'you are', ειμαστε: 'we are', εγω: 'I', εσυ: 'you', εμεισ: 'we', εσεισ: 'you all', αυτοσ: 'he, this', αυτη: 'she, this', αυτο: 'it, this', εδω: 'here', εκει: 'there', τωρα: 'now', λιγο: 'a little', πολυ: 'very, a lot', οτι: 'that', αν: 'if', ετσι: 'like this, so' };
+// Double-tap in the Word web means "more than one": a noun's plural, εγώ → εμείς, and a verb's "we" form (πάω → εμείς πάμε).
+const WW_PRON = { εγω: ['εμείς', 'we'], εσυ: ['εσείς', 'you all'], αυτοσ: ['αυτοί', 'they'], αυτη: ['αυτές', 'they'], αυτο: ['αυτά', 'they'],
+  μου: ['μας', 'our, us'], σου: ['σας', 'your, you all'], του: ['τους', 'their, them'], της: ['τους', 'their, them'], με: ['μας', 'us'], σε: ['σας', 'you all'],
+  τον: ['τους', 'them'], την: ['τις', 'them'], ο: ['οι', 'the'], η: ['οι', 'the'], το: ['τα', 'the'], ποιοσ: ['ποιοι', 'who'], ποια: ['ποιες', 'who'], ποιο: ['ποια', 'which'],
+  μονοσ: ['μόνοι', 'alone'], ολοσ: ['όλοι', 'all, everyone'], καθενασ: ['όλοι', 'everyone'] };
+// Verbs whose "we" form doesn't follow the ending rules.
+const WW_WE = { ειμαι: 'είμαστε', παω: 'πάμε', λεω: 'λέμε', τρωω: 'τρώμε', ακουω: 'ακούμε', κλαιω: 'κλαίμε', φταιω: 'φταίμε', ζω: 'ζούμε', ξερω: 'ξέρουμε', βλεπω: 'βλέπουμε', πρεπει: '', αρεσει: '' };
+const wwStrip = t => t.normalize('NFD').replace(/[\u0301]/g, '').normalize('NFC');
+const wwWe = lab => {
+  const f = fold(lab); if (/\s/.test(lab)) return '';
+  if (f in WW_WE) return WW_WE[f];
+  if (/αμαι$/.test(f)) return wwStrip(lab).replace(/άμαι$|αμαι$/, '') + 'όμαστε';                 // θυμάμαι → θυμόμαστε
+  if (/ιεμαι$/.test(f)) return wwStrip(lab).replace(/ιέμαι$|ιεμαι$/, '') + 'ιόμαστε';             // χαιρετιέμαι → χαιρετιόμαστε
+  if (/ουμαι$/.test(f)) return wwStrip(lab).replace(/ούμαι$|ουμαι$/, '') + 'ούμαστε';             // ευχαριστιούμαι
+  if (/ομαι$/.test(f)) return wwStrip(lab).replace(/ομαι$/, '') + 'όμαστε';                      // έρχομαι → ερχόμαστε
+  if (/άω$/.test(lab)) return lab.replace(/άω$/, 'άμε');                                          // αγαπάω → αγαπάμε
+  if (/ώ$/.test(lab)) return lab.replace(/ώ$/, 'ούμε');                                           // μπορώ → μπορούμε
+  if (/ω$/.test(lab)) return lab.replace(/ω$/, 'ουμε');                                           // έχω → έχουμε
+  return '';
+};
+// "I go" → "we go", "I am" → "we are".
+const wwWeEn = e => { const s = String(e || '').split(/[;,]/)[0].trim(); if (!/^I\b/.test(s)) return 'we'; return s.replace(/^I am\b/, 'we are').replace(/^I'm\b/, "we're").replace(/^I was\b/, 'we were').replace(/^I\b/, 'we'); };
+const wwMany = (lab, w) => {
+  const f = fold(lab), pr = WW_PRON[f]; if (pr) return { gr: pr[0], en: pr[1] };
+  if (!w || w.t !== 'v') return null;
+  const we = (w.who && w.who.εμείς) || wwWe(lab); if (!we) return null;
+  return { gr: 'εμείς ' + we, en: wwWeEn(w.e) };
+};
+// A verb note's Who line ([[εγώ]] πάω · [[εσύ]] πας · …) as { εγώ: 'πάω', εσύ: 'πας', … }.
+const wwWho = txt => { const o = {}, l = (txt.match(/^- \*\*Who:\*\*\s*(.*)$/m) || [])[1]; if (!l) return o;
+  for (const part of l.split(/\s+·\s+/)) { const m = part.match(/^\[\[([^\]|#]+)(?:\|[^\]]+)?\]\]\s*(.+)$/); if (m) o[m[1].trim()] = m[2].trim(); } return o; };
+// On a pronoun's web, a verb link is that person's form: εσύ → εσύ χαίρεσαι, not χαίρομαι για σένα.
+const WW_WHO = { εγώ: 'εγώ', εσύ: 'εσύ', αυτός: 'αυτός', αυτή: 'αυτός', αυτό: 'αυτός', εμείς: 'εμείς', εσείς: 'εσείς', αυτοί: 'αυτοί', αυτές: 'αυτοί', αυτά: 'αυτοί' };
+const WW_WHO_EN = { εγώ: 'I', εσύ: 'you', αυτός: 'he', αυτή: 'she', αυτό: 'it', εμείς: 'we', εσείς: 'you all', αυτοί: 'they', αυτές: 'they', αυτά: 'they' };
+const wwThird = v => v === 'have' ? 'has' : v === 'do' ? 'does' : v === 'can' || v === 'must' || v === 'will' ? v : /(s|sh|ch|x|z|o)$/.test(v) ? v + 'es' : /[^aeiou]y$/.test(v) ? v.slice(0, -1) + 'ies' : v + 's';
+const wwPersonEn = (who, e) => { const s = String(e || '').split(/[;,]/)[0].trim(), sub = WW_WHO_EN[who] || who; if (!/^I\b/.test(s)) return sub + ' …';
+  const one = /^(he|she|it)$/.test(sub), rest = s.replace(/^I\b\s*/, '');
+  if (/^am\b/.test(rest)) return sub + ' ' + (one ? 'is' : 'are') + rest.slice(2);
+  if (/^was\b/.test(rest)) return sub + ' ' + (one ? 'was' : 'were') + rest.slice(3);
+  if (!one) return sub + ' ' + rest; const v = rest.split(' '); v[0] = wwThird(v[0]); return sub + ' ' + v.join(' '); };
 const foldG = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').replace(/[^\p{L}\s]/gu, ' ').replace(/\s+/g, ' ').trim();
 const SMALL_W = new Set(['ο', 'η', 'το', 'οι', 'τα', 'τον', 'την', 'του', 'τησ', 'των', 'ενασ', 'μια', 'μια', 'ενα', 'εγω', 'εσυ', 'εμεισ', 'εσεισ']);
 const near = (a, b) => { if (a === b) return true; if (Math.abs(a.length - b.length) > 1 || a.length < 4) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; };
@@ -366,7 +406,7 @@ class WordWebView extends ItemView {
     const askb = bar.createEl('button', { text: 'Ask' }); askb.onclick = () => { const f = this.file(); if (f) this.plugin.ask(f); };
     this.trail = box.createDiv('gq-web-trail');
     this.agree = box.createDiv('gq-agree'); this.agree.hide();
-    box.createDiv({ cls: 'gq-hint gq-ww-help', text: 'Tap a word to move there. Double-tap a thing to hear more than one. Hold a word to see its links. Drag to play.' });
+    box.createDiv({ cls: 'gq-hint gq-ww-help', text: 'Tap a word to move there. Double-tap a word to hear more than one. Hold a word to see its links. Drag to play.' });
     this.stage = box.createDiv('gq-ww-stage');
     this.svg = svgEl(this.stage, 'svg', '', { 'aria-label': 'Word web' });
     this.gE = svgEl(this.svg, 'g'); this.gN = svgEl(this.svg, 'g');
@@ -418,7 +458,7 @@ class WordWebView extends ItemView {
         if (hit) { x.phrase = hit.ph; x.en = x.en || hit.en; } } }
     const cm = txt.match(/## Often appears with\n([\s\S]*?)(?:\n## |$)/);
     if (cm) for (const x of cm[1].matchAll(/\[\[([^\]|#]+)/g)) { const q = res(x[1]); if (q && !co.includes(q)) co.push(q); }
-    const w = { p, t, r: +fm.rank || 9999, e: String(fm.english || ''), say: fm.pronunciation || '', pl: String(fm.plural || ''), already: /noun-pl/.test(tags), pair, co };
+    const w = { p, t, r: +fm.rank || 9999, e: String(fm.english || ''), say: fm.pronunciation || '', pl: String(fm.plural || ''), who: wwWho(txt), already: /noun-pl/.test(tags), pair, co };
     this.data.set(p, w); return w;
   }
   async partners(c) {
@@ -436,6 +476,10 @@ class WordWebView extends ItemView {
       if (!x.phrase && x.w) { const back = x.w.pair.find(p => p.k === c); if (back) { x.phrase = back.phrase; x.en = back.en; } }
       // να + the form learners already know: μπορώ να δω becomes μπορώ να βλέπω (the one-time form is kept for the chip).
       if (x.phrase) { const e = this.plugin.easyVerbs(x.phrase); if (e !== x.phrase) { x.once = x.phrase; x.phrase = e; } }
+      // Either way round: εσύ's web shows εσύ χαίρεσαι, and πιστεύω's web shows εσύ πιστεύεις on the εσύ link.
+      const xn = x.k.replace(/^Words\//, '').replace(/\.md$/, ''), vw = WW_WHO[name] ? x.w : WW_WHO[xn] ? w : null, pn = WW_WHO[name] ? name : xn;
+      const pf = vw && vw.t === 'v' && vw.who && vw.who[WW_WHO[pn]];
+      if (pf) { const ph = pn + ' ' + pf; if (x.phrase && wwFold(x.phrase) !== wwFold(ph) && wwFold(x.phrase) !== wwFold(vw === w ? name : xn)) { const pre = vw === w && !hasVerb(name, x.phrase); x.also = { phrase: pre ? name + ' ' + x.phrase : x.phrase, en: pre && x.en ? String(w.e || '').split(/[;,]/)[0].trim() + ' ' + x.en : x.en }; } x.phrase = ph; x.en = wwPersonEn(pn, vw.e); x.once = ''; continue; }
       if (x.phrase && w.t === 'v' && !hasVerb(name, x.phrase)) { x.phrase = name + ' ' + x.phrase; if (x.once) x.once = name + ' ' + x.once; }
     }
     return out.filter(x => x.w);
@@ -549,6 +593,7 @@ class WordWebView extends ItemView {
       const changed = !inside && !!wwForm(lab, x.phrase);
       if (same) d.remove(); say(same || inside || changed ? x.phrase : lab + ' ' + x.phrase);
       const form = !same && (wwForm(lab, x.phrase) || (this.center && wwForm(this.label(this.center.k), x.phrase))); if (form) this.chip.createDiv({ cls: 'gq-hint', text: form });
+      if (x.also) { const o = this.chip.createDiv({ cls: 'gq-hint' }); o.appendText('also: '); o.createSpan({ text: x.also.phrase, attr: { lang: 'el' } }); if (x.also.en) o.appendText('  (' + x.also.en + ')'); }
       if (x.once) { const o = this.chip.createDiv({ cls: 'gq-hint' }); o.appendText('for one time: '); o.createSpan({ text: x.once, attr: { lang: 'el' } }); }
     }
 
@@ -559,12 +604,14 @@ class WordWebView extends ItemView {
   }
   // The card's bottom edge sits just above the web: it covers the instructions, never the words.
   chipPlace() { const c = this.chip; if (!c || !this.stage) return; c.style.top = Math.max(4, this.stage.offsetTop - c.offsetHeight - 4) + 'px'; }
-  // Plural of a noun: spoken, and shown in the chip for a moment.
+  // More than one: a noun's plural, εγώ → εμείς, πάω → εμείς πάμε. Spoken, and shown in the chip for a moment.
   plural(m) {
     const w = this.data.get(m.k) || {}; this.chip.empty(); clearTimeout(this.plTimer);
     if (w.pl) { this.chip.createEl('b', { text: w.pl, attr: { lang: 'el' } }); this.chip.appendText('  · more than one'); say(w.pl); }
     else if (w.already) { this.chip.createEl('b', { text: this.label(m.k), attr: { lang: 'el' } }); this.chip.appendText('  · already plural'); say(this.label(m.k)); }
-    else this.chip.appendText(w.t === 'n' ? 'This one usually has no plural.' : 'Double-tap a thing or a person (a purple word) to hear its plural.');
+    else { const mm = wwMany(this.label(m.k), w);
+      if (mm) { this.chip.createEl('b', { text: mm.gr, attr: { lang: 'el' } }); this.chip.appendText(`  · more than one: ${mm.en}`); say(mm.gr); }
+      else this.chip.appendText(w.t === 'n' ? 'This one usually has no plural.' : 'Double-tap a thing, a person, a doing word or εγώ to hear more than one.'); }
     this.chipPlace(); this.chip.addClass('is-on'); this.plTimer = setTimeout(() => { if (!this.held) this.chip.removeClass('is-on'); }, 2200);
   }
   unhold() {

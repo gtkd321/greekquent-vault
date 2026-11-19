@@ -855,3 +855,7 @@ body.gq-calm .gq-kcard.gq-khint, body.gq-calm .gq-kstack.gq-pulse .gq-kcard.is-t
 /* 2.20.75: letter practice can be turned off from its card */
 .gq-abc-off { margin-top: 10px; text-align: right; }
 .gq-abc-off a { font-size: .85em; }
+
+/* 2.20.76: the olive tree sits top right, under the three dots (the Tour button stays bottom left) */
+.gq-corner[data-mode="friend"] { left: auto; bottom: auto; top: var(--gq-ctop, calc(56px + env(safe-area-inset-top))); right: var(--gq-cright, max(14px, env(safe-area-inset-right))); align-items: flex-start; }
+body.gq-nonav .gq-corner[data-mode="friend"] { bottom: auto; }

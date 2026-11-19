@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zs · Olive tree up top
+> Your olive tree now sits in the top right corner, just under the three dots. Tap it to see how it is growing. The Tour button stays at the bottom left.
+
 > [!tip]- 2026-11-19zr · Letter practice off
 > Know your letters? Tap Turn off letter practice at the bottom of the letters card and it stops showing on Today. To bring it back, tap Letter practice at the bottom of Today. Your finished sets stay saved.
 

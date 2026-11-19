@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zr';
+const VAULT_RELEASE = '2026-11-19zs';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -2803,6 +2803,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     }
     const last = this.cornerLast, firstTime = !this.lsGet('planted', 0);
     el.empty(); el.dataset.mode = 'friend';
+    // The olive tree sits top right, just under the three dots.
+    const pin = () => { const m = [...document.querySelectorAll('.gq-headmore, .view-header .view-actions')].map(x => x.getBoundingClientRect()).find(r => r.width); if (m) { el.style.setProperty('--gq-ctop', Math.round(m.bottom + 6) + 'px'); el.style.setProperty('--gq-cright', Math.max(8, Math.round(window.innerWidth - m.right - 6)) + 'px'); } };
+    pin(); if (!this.cornerPin) { this.cornerPin = () => { const c = document.querySelector('.gq-corner[data-mode="friend"]'); if (c) pin(); }; this.registerDomEvent(window, 'resize', this.cornerPin); }
     const b = el.createEl('button', { cls: 'gq-corner-friend' }); const a = this.friendArt(b, 56);
     b.setAttr('aria-label', `${a.name[0]}, ${a.name[1]}. φόρα ${a.m}. Open`);
     b.onclick = () => { this.friendDance(a); say(a.name[0]); this.moPop(); };

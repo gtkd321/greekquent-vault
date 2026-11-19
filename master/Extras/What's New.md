@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zd · Options
+> - **Every on/off switch is in one place now: Options.** Tap **Options** at the top of the side panel, or in the ⋯ menu. Greek voice, Phonetics, Calm mode, Focus sound, Fluent in a Year and Class mode each have a switch and one line about what they do. Your settings stay as they were.
+
 > [!tip]- 2026-11-19zc · Word web: the verb form on its own
 > - **Hold a verb on a person's web** and you hear just that person's form: on the εσύ web, λέω says **εσύ λες**, not "λέω εσύ λες". A line underneath tells you the form, such as "With εσύ, λέω becomes λες."
 

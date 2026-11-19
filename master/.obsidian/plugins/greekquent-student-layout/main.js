@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zc';
+const VAULT_RELEASE = '2026-11-19zd';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -2312,15 +2312,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addItem(i => i.setTitle('More on this page').setIcon('panel-right').onClick(() => this.showMore()));
     m.addItem(i => i.setTitle('Look up a word').setIcon('search').onClick(() => new LookupModal(this.app, this).open()));
     m.addItem(i => i.setTitle('Word web').setIcon('git-fork').onClick(() => this.openGraph()));
-    m.addItem(i => i.setTitle(this.classOn() ? 'Class mode: end' : 'Class mode: start').setIcon('users').onClick(() => this.setClass(!this.classOn())));
     m.addItem(i => i.setTitle('Ask the class').setIcon('message-circle').onClick(() => this.ask()));
     m.addItem(i => i.setTitle('Send homework').setIcon('send').onClick(() => this.sendHomework()));
     m.addSeparator();
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
-    m.addItem(i => i.setTitle(gqQuiet() ? 'Greek voice: off (turn on)' : 'Greek voice: on (turn off)').setIcon(gqQuiet() ? 'volume-x' : 'volume-2').onClick(() => this.setQuiet(!gqQuiet())));
-    if (!this.isKids) m.addItem(i => i.setTitle(this.colors().fiay ? 'Fluent in a Year on Today: on (turn off)' : 'Fluent in a Year on Today: off (turn on)').setIcon('calendar').onClick(() => this.setFiay(!this.colors().fiay)));
-    m.addItem(i => i.setTitle(this.phOn() ? 'Phonetics: on (turn off)' : 'Phonetics: off (turn on)').setIcon('type').onClick(() => this.setPh(!this.phOn())));
-    m.addItem(i => i.setTitle('Greek voice help').setIcon('help-circle').onClick(() => this.voiceHelp(false)));
+    m.addItem(i => i.setTitle('Options').setIcon('sliders-horizontal').onClick(() => this.optionsPop()));
     m.addItem(i => i.setTitle('Setting up').setIcon('help-circle').onClick(() => this.openNote(SETUP)));
     m.addItem(i => i.setTitle(this.tourLeft() ? 'Take the tour' : 'Take the tour again').setIcon('map').onClick(() => this.tourStart()));
     if (this.reviewOn()) m.addItem(i => i.setTitle('App review').setIcon('gauge').onClick(() => this.reviewStart()));
@@ -3098,8 +3094,6 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.convoGame(card, turns, n, b.words, at >= n, pool, () => { if (this.tStory) { this.timeRec('story', (Date.now() - this.tStory) / 1000); this.tStory = 0; } this.markDone('story'); return this.setStory(Math.max(n, this.colors().story_at || 0)); }, next, finished);
     const r = card.createDiv('gq-row gq-sstart');
     const st = r.createEl('a', { text: doneN ? 'Start somewhere else' : 'Know some Greek already? Start further in', href: '#', cls: 'gq-hint' }); st.onclick = e => { e.preventDefault(); this.startMenu(e, beats); };
-    // Phonetics can be switched right here, where the reading happens.
-    const pl = r.createEl('a', { text: this.phOn() ? 'Phonetics: on · turn off' : 'Phonetics: off · turn on', href: '#', cls: 'gq-hint gq-ph-link' }); pl.onclick = e => { e.preventDefault(); this.setPh(!this.phOn()); pl.setText(this.phOn() ? 'Phonetics: on · turn off' : 'Phonetics: off · turn on'); };
     return b;
   }
   // One sentence at a time: the Greek on top, the English built underneath from word tiles (tap or drag). Then the next sentence opens.
@@ -3774,15 +3768,33 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // Focus, in Today's side panel: calm mode, an optional sound, walk mode, the plan and the tips.
   focusSec(s) {
     const r = s.createDiv('gq-row');
-    const calm = r.createEl('button', { text: this.calmOn() ? 'Calm mode: on' : 'Calm mode: off', cls: 'gq-mini' + (this.calmOn() ? ' is-on' : '') }); calm.onclick = () => this.setCalm(!this.calmOn());
-    const snd = r.createEl('button', { text: this.noise ? 'Focus sound: on' : 'Focus sound: off', cls: 'gq-mini' + (this.noise ? ' is-on' : '') }); snd.onclick = () => { const on = this.toggleNoise(); snd.setText(on ? 'Focus sound: on' : 'Focus sound: off'); snd.toggleClass('is-on', on); };
-    const vo = r.createEl('button', { text: gqQuiet() ? 'Greek voice: off' : 'Greek voice: on', cls: 'gq-mini' + (gqQuiet() ? '' : ' is-on') }); vo.onclick = () => { this.setQuiet(!gqQuiet()); vo.setText(gqQuiet() ? 'Greek voice: off' : 'Greek voice: on'); vo.toggleClass('is-on', !gqQuiet()); };
-    const ph = r.createEl('button', { text: this.phOn() ? 'Phonetics: on' : 'Phonetics: off', cls: 'gq-mini' + (this.phOn() ? ' is-on' : '') }); ph.onclick = () => { this.setPh(!this.phOn()); ph.setText(this.phOn() ? 'Phonetics: on' : 'Phonetics: off'); ph.toggleClass('is-on', this.phOn()); };
     const wk = r.createEl('button', { text: 'Walk mode', cls: 'gq-mini' }); wk.onclick = () => this.walkMode();
-    s.createDiv({ cls: 'gq-hint', text: 'Calm mode stops the moving parts. Focus sound is a soft hiss (pink noise) that helps some people and bothers others, so it is off until you turn it on. Walk mode plays your Greek hands-free. Greek voice off keeps the app quiet on this device, for class or a silent phone: Android\'s ringer switch does not mute it.' });
+    s.createDiv({ cls: 'gq-hint', text: 'Walk mode plays your Greek hands-free. Calm mode and Focus sound are under Options at the top.' });
     const plan = this.planNowGet(); if (plan) s.createDiv({ cls: 'gq-hint', text: `Your plan: after ${plan}, today's line.` });
     if (!this.app.vault.getAbstractFileByPath(EXTRAS + '13 Focus tips.md')) return;
     const tip = s.createEl('a', { text: 'Focus tips', href: '#', cls: 'gq-hint' }); tip.onclick = e => { e.preventDefault(); this.openNote(EXTRAS + '13 Focus tips.md'); };
+  }
+  // ---------- Options: every on/off switch in one place, opened from the side panel or the ⋯ menu ----------
+  optionsPop() {
+    const O = [
+      { t: 'Greek voice', d: 'Off keeps the app quiet on this device, for class or a shared room.', on: () => !gqQuiet(), set: v => this.setQuiet(!v) },
+      { t: 'Phonetics', d: 'Shows how to say each Greek word in Latin letters.', on: () => this.phOn(), set: v => this.setPh(v) },
+      { t: 'Calm mode', d: 'Stops the moving parts.', on: () => this.calmOn(), set: v => this.setCalm(v) },
+      { t: 'Focus sound', d: 'A soft hiss (pink noise). It helps some people and bothers others.', on: () => !!this.noise, set: v => { if (!!this.noise !== v) this.toggleNoise(); } },
+      !this.isKids && { t: 'Fluent in a Year on Today', d: 'Adds the day\'s Fluent in a Year words to Today.', on: () => !!this.colors().fiay, set: v => this.setFiay(v) },
+      { t: 'Class mode', d: 'For live class: opens Class and keeps the screen awake for 2 hours.', on: () => this.classOn(), set: v => this.setClass(v) }
+    ].filter(Boolean);
+    this.pop('Options', [{ label: '', build: el => {
+      const list = el.createDiv('gq-opts');
+      for (const o of O) {
+        const row = list.createDiv('gq-opt'), tx = row.createDiv('gq-opt-tx');
+        tx.createDiv({ cls: 'gq-opt-t', text: o.t }); tx.createDiv({ cls: 'gq-hint', text: o.d });
+        const sw = row.createEl('button', { cls: 'gq-switch', attr: { role: 'switch', 'aria-label': o.t } });
+        const paint = () => { const on = !!o.on(); sw.setAttr('aria-checked', String(on)); sw.toggleClass('is-on', on); };
+        sw.onclick = async () => { await o.set(!o.on()); setTimeout(paint, 60); }; paint();
+      }
+      const h = el.createDiv('gq-hint gq-opt-foot'), a = h.createEl('a', { text: 'Greek voice help', href: '#' }); a.onclick = e => { e.preventDefault(); this.voiceHelp(false); };
+    } }]);
   }
   // A soft pink-noise loop, made on the device (no file, no download). Off by default; it stops when you turn it off or close the app.
   toggleNoise() {
@@ -5110,6 +5122,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (this.isStudentScript(f.path)) btn('Send homework', () => this.sendHomework());
       btn('Look up a word', () => new LookupModal(this.app, this).open());
     }
+    // Every on/off switch lives behind this one button, on every page.
+    btn('Options', () => this.optionsPop());
     const rules = f && f.extension === 'md' && this.sideRules(f.path);
     if (rules) {
       const parts = this.sideMap(await this.app.vault.cachedRead(f), rules).parts;

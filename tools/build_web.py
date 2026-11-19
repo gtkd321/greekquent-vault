@@ -20,6 +20,7 @@ ED = sys.argv[4] if len(sys.argv) > 4 else 'beginner'
 EDS = {
     'beginner': dict(name='Greekquent Beginner', short='Greekquent', key='gqw', desc='Greek through the most frequent words, five a day, with games and real scenes.', skip=['intermediate/', 'kids/']),
     'intermediate': dict(name='Greekquent Intermediate', short='Greekquent+', key='gqi', desc='Greek through the most frequent words, with Beginner and Intermediate stories, games and real scenes.', skip=[]),
+    'teacher': dict(name='Greekquent Teacher', short='GQ Teacher', key='gqt', desc='Greekquent teacher copy: lessons, scripts and release notes.', skip=[]),
     'kids': dict(name='Greekquent Kids', short='Kids Greek', key='gqk', desc='Greek for kids and their grown-ups: one game a week, a song, and the words kids use.', skip=[]),
 }
 E_ = EDS[ED]
@@ -29,6 +30,7 @@ def brand(t):
     t = t.replace("Greek through the most frequent words, five a day, with games and real scenes.", E_['desc'])
     t = t.replace('Greekquent Beginner', E_['name']).replace('"short_name": "Greekquent"', '"short_name": "' + E_['short'] + '"')
     t = t.replace("'gqw:", "'" + E_['key'] + ":").replace("'gqw-", "'" + E_['key'] + "-").replace('greekquent-beginner-', 'greekquent-' + ED + '-')
+    if ED == 'teacher': t = t.replace('<head>', '<head>\n<meta name="robots" content="noindex, nofollow">', 1)
     return t
 PLUG = '.obsidian/plugins/greekquent-student-layout'
 if os.path.exists(out): shutil.rmtree(out)
@@ -38,7 +40,7 @@ for root, dirs, files in os.walk(src):
     dirs[:] = [d for d in dirs if not (d.startswith('.') and d != '.obsidian')]
     for f in files:
         p = os.path.relpath(os.path.join(root, f), src).replace(os.sep, '/')
-        if p.startswith('.obsidian/') and not (p.startswith(PLUG + '/') or p in ('.obsidian/greekquent-edition.json', '.obsidian/greekquent-kids.json')): continue
+        if p.startswith('.obsidian/') and not (p.startswith(PLUG + '/') or p in ('.obsidian/greekquent-edition.json', '.obsidian/greekquent-kids.json') + (('.obsidian/greekquent-teacher.json',) if ED == 'teacher' else ())): continue
         if p.endswith('.md') and not p.startswith('.'):
             notes[p] = open(os.path.join(root, f), encoding='utf-8').read()
         else:

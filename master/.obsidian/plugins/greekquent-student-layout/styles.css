@@ -384,7 +384,7 @@ button.gq-wdot.is-on { outline: 2px solid var(--interactive-accent); outline-off
 .gq-mo-how ul { margin: 4px 0 0; padding-left: 1.2em; }
 /* Kids tour: the card being shown glows; the tip sits at the bottom, above Obsidian's own bar */
 .gq-tour-on { outline: 3px solid var(--interactive-accent); outline-offset: 4px; border-radius: 10px; transition: outline-color .3s; }
-.gq-tour { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(76px + env(safe-area-inset-bottom)); width: min(440px, calc(100vw - 24px)); z-index: 60; background: var(--background-primary); border: 2px solid var(--interactive-accent); border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.25); padding: 12px 14px; }
+.gq-tour { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(66px + var(--gq-nav-pad, env(safe-area-inset-bottom))); width: min(440px, calc(100vw - 24px)); z-index: 60; background: var(--background-primary); border: 2px solid var(--interactive-accent); border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.25); padding: 12px 14px; }
 .gq-tour-step { font-size: .8em; color: var(--text-muted); }
 .gq-tour-t { font-weight: 700; margin: 2px 0 4px; }
 .gq-tour .gq-row { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
@@ -699,7 +699,7 @@ body.gq-ph-off rt.gq-prt { display: none; }
 .gq-rest-link { display: block; margin: 4px 0 10px; }
 /* App review overlay (teacher) */
 .gq-rev-on { outline: 3px dashed var(--interactive-accent); outline-offset: 4px; border-radius: 10px; }
-.gq-rev { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(76px + env(safe-area-inset-bottom)); width: min(460px, calc(100vw - 24px)); max-height: calc(100vh - 120px); overflow-y: auto; z-index: 61; background: var(--background-primary); border: 2px solid var(--interactive-accent); border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.25); padding: 10px 14px 12px; line-height: 1.4; }
+.gq-rev { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(66px + var(--gq-nav-pad, env(safe-area-inset-bottom))); width: min(460px, calc(100vw - 24px)); max-height: calc(100vh - 120px); overflow-y: auto; z-index: 61; background: var(--background-primary); border: 2px solid var(--interactive-accent); border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.25); padding: 10px 14px 12px; line-height: 1.4; }
 .gq-rev .gq-row { margin-top: 10px; display: flex; gap: 8px; justify-content: flex-end; }
 .gq-rev-h { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 .gq-rev-big { font-size: 2.4em; font-weight: 800; line-height: 1.1; margin: 4px 0; }

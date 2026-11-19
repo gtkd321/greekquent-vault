@@ -7,7 +7,7 @@ Two minutes, once. Back to [[Today]].
 
 > [!tip]- 2. The four tool buttons (Today, Look up, Ask, More)
 > These are small icons, not the colored buttons on word notes. On a computer they sit in the thin strip of icons along the far left edge of the window. On a phone, tap the menu button (three lines) at the bottom right of the screen, when you are not typing in a note.
-> - **Today** (house): the Story puzzle, one sentence at a time from part 1 at your own pace (read the English, then build it in Greek from word tiles; touch a tile to hear it), comebacks, this week's class, and words to review. Doing Fluent in a Year? Tap **Show its words** at the bottom once and its five words appear, one at a time. Kids use their own vault, **Greekquent Kids**.
+> - **Today** (house): the Story puzzle, one sentence at a time from part 1 at your own pace (read the English, then build it in Greek from word tiles; touch a tile to hear it), spaced review, this week's class, and words to review. Doing Fluent in a Year? Tap **Show its words** at the bottom once and its five words appear, one at a time. Kids use their own vault, **Greekquent Kids**.
 > - **Look up** (magnifying glass): any word in English or Greek. Words outside the 1,500 are translated right in the box. Tick Guess first to try before you see the answer.
 > - **Ask** (two people): a question about the note you are on, ready to share in the class GroupMe. You can also ask on video from there.
 > - **More** (three dots): More on this page, Word web, Ask the class, Send homework, What's new, Update vault.

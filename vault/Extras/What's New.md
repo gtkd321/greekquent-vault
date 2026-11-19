@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19z · Spaced review, and more room on screen
+> - **Comebacks are now called Spaced review.** They work the same way: lines from earlier parts come back 1, 3 and 7 days later, and you say the reply.
+> - **The Today, Words and Class tabs sit lower** on phones with a home bar, so the page has more room.
+
 > [!tip]- 2026-11-19x · Today shows one thing at a time
 > - **One card.** Today shows only what is next, such as one alphabet set or the story puzzle. When you finish it, a **Next up** button at the bottom brings in the next step.
 > - **Everything else** is one tap away under **Do something else**. A card you open stays open while you use it.

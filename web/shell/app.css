@@ -24,7 +24,7 @@
   --color-red: #c0392b; --color-yellow: #d4a017; --color-green: #2e8b57; --color-blue: #1f5fa8; --color-orange: #d9822b; --color-purple: #7d5ba6;
   --layer-modal: 50;
   --radius-s: 6px; --radius-m: 10px; --radius-l: 14px;
-  --head-h: 52px; --nav-h: 62px;
+  --head-h: 52px; --nav-h: 54px; --gq-nav-pad: max(4px, calc(env(safe-area-inset-bottom) - 22px));
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -54,7 +54,7 @@ a.internal-link:hover { text-decoration: underline; }
 #gq-head { position: fixed; top: 0; left: 0; right: 0; z-index: 20; height: calc(var(--head-h) + env(safe-area-inset-top)); padding: env(safe-area-inset-top) 12px 0; display: flex; align-items: center; gap: 6px; background: var(--background-primary); border-bottom: 1px solid var(--background-modifier-border); }
 #gq-back { border: 0; background: transparent; min-height: 40px; min-width: 40px; padding: 0; display: grid; place-items: center; }
 #gq-title { font-weight: 650; font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#gq-main { position: fixed; left: 0; right: 0; top: calc(var(--head-h) + env(safe-area-inset-top)); bottom: calc(var(--nav-h) + env(safe-area-inset-bottom)); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+#gq-main { position: fixed; left: 0; right: 0; top: calc(var(--head-h) + env(safe-area-inset-top)); bottom: calc(var(--nav-h) + var(--gq-nav-pad)); overflow-y: auto; -webkit-overflow-scrolling: touch; }
 #gq-main > .workspace-leaf, #gq-main .workspace-leaf-content { min-height: 100%; display: flex; flex-direction: column; }
 #gq-main .view-content { flex: 1; width: 100%; max-width: 760px; margin: 0 auto; padding: 14px 16px 28px; }
 #gq-main .workspace-leaf-content[data-type="greekquent-app"], #gq-main .workspace-leaf-content[data-type="greekquent-word-web"] { height: 100%; }
@@ -63,7 +63,7 @@ a.internal-link:hover { text-decoration: underline; }
 /* Games fill the space between the top bar and the buttons (a % height has nothing to measure against here). */
 #gq-main .workspace-leaf-content[data-type="greekquent-app"] { position: absolute; inset: 0; height: auto; min-height: 0; }
 #gq-main .workspace-leaf-content[data-type="greekquent-word-web"] .view-content { max-width: none; padding: 0; height: 100%; display: flex; flex-direction: column; }
-#gq-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; height: calc(var(--nav-h) + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); display: flex; justify-content: center; background: var(--background-primary); border-top: 1px solid var(--background-modifier-border); }
+#gq-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; height: calc(var(--nav-h) + var(--gq-nav-pad)); padding-bottom: var(--gq-nav-pad); display: flex; justify-content: center; background: var(--background-primary); border-top: 1px solid var(--background-modifier-border); }
 .gq-navbtn { flex: 1; max-width: 140px; border: 0; background: transparent; border-radius: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: var(--text-muted); padding: 4px 0; }
 .gq-navbtn:hover { background: var(--background-modifier-hover); color: var(--text-normal); }
 #gq-boot { position: fixed; inset: 0; z-index: 100; display: grid; place-content: center; text-align: center; gap: 10px; background: var(--background-primary); }
@@ -137,7 +137,7 @@ details.callout[open] > summary .callout-fold::before { transform: rotate(45deg)
 .gq-w-menu .menu-item:hover { background: var(--background-modifier-hover); }
 .gq-w-menu .menu-separator { height: 1px; background: var(--background-modifier-border); margin: 4px 8px; }
 .gq-w-menu .gq-w-menuclose { color: var(--text-muted); text-align: center; }
-.notice-container { position: fixed; z-index: 80; left: 50%; transform: translateX(-50%); bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 12px); width: min(440px, calc(100vw - 24px)); display: flex; flex-direction: column; gap: 6px; pointer-events: none; }
+.notice-container { position: fixed; z-index: 80; left: 50%; transform: translateX(-50%); bottom: calc(var(--nav-h) + var(--gq-nav-pad) + 12px); width: min(440px, calc(100vw - 24px)); display: flex; flex-direction: column; gap: 6px; pointer-events: none; }
 .notice { pointer-events: auto; background: var(--text-normal); color: var(--background-primary); padding: 10px 14px; border-radius: var(--radius-m); box-shadow: 0 6px 20px rgba(0, 0, 0, .25); font-size: 15px; }
 .gq-hint { color: var(--text-muted); }
 

@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19ze · Cousins: παντελόνι
+> - **παντελόνι now means pants**, and its English cousin is **pantaloons**. It moved from Hidden cousins to Cousins. Pants is short for pantaloons, so the two have always been related.
+
 > [!tip]- 2026-11-19zd · Options
 > - **Every on/off switch is in one place now: Options.** Tap **Options** at the top of the side panel, or in the ⋯ menu. Greek voice, Phonetics, Calm mode, Focus sound, Fluent in a Year and Class mode each have a switch and one line about what they do. Your settings stay as they were.
 

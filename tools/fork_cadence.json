@@ -1,6 +1,6 @@
 {
   "every": 50,
-  "greek_releases_since_fork_build": 20,
+  "greek_releases_since_fork_build": 21,
   "forks": [
     "german",
     "arabic"

@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zl · The olive journey
+> Everyone now grows the same thing with φόρα: an olive tree, then green olives that turn purple, then a bottle of oil that fills, then a lamp whose wick lights and burns brighter. Tap the Greek name to hear it. If you picked a friend before, your points are kept and carry over to the olive.
+> The tour is fixed. Step 1 finishes when you swipe the top card left. Pick your moment happens inside the tour card. The Paper cards step now finds its card.
+
 > [!tip] Focus helpers in one place (2026-11-19zj)
 > - Calm mode, Focus sound and Walk mode are all in Options: tap ⋯ at the top right, then Options. Walk mode has a Start button there.
 > - Options calls your world "Your friend": Plant, Pet, Dancer, Gyro shop, House or Statue.

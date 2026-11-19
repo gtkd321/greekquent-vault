@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zp · The tree moves left
+> Your olive tree now sits in the bottom-left corner, so it no longer covers the class bar. The × that ends class mode is easy to tap again.
+
 > [!tip]- 2026-11-19zo · Πώς σε λένε;
 > In week 1, the teacher now asks Πώς σε λένε, παρακαλώ; instead of Πώς σας λένε. Teachers in Greece say εσύ to their pupils, and the students say εσείς back. σας comes later, with strangers and older people.
 

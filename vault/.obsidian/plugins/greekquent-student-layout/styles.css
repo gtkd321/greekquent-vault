@@ -800,7 +800,7 @@ pre.gq-ascii { background: #000 !important; color: #9a9a9a !important; }
 
 /* ---------- 2.20.66: your friend in the corner, one-object worlds, swipe-only stack ---------- */
 .gq-spr { display: block; width: auto; image-rendering: pixelated; image-rendering: crisp-edges; background: transparent; }
-.gq-corner { position: fixed; right: max(14px, env(safe-area-inset-right)); bottom: calc(66px + var(--gq-nav-pad, env(safe-area-inset-bottom))); z-index: 40; display: flex; align-items: flex-end; pointer-events: none; }
+.gq-corner { position: fixed; left: max(14px, env(safe-area-inset-left)); bottom: calc(66px + var(--gq-nav-pad, env(safe-area-inset-bottom))); z-index: 40; display: flex; align-items: flex-end; pointer-events: none; }
 body.gq-nonav .gq-corner { bottom: calc(14px + env(safe-area-inset-bottom)); }
 .gq-corner.is-hidden { display: none; }
 .gq-corner > * { pointer-events: auto; }

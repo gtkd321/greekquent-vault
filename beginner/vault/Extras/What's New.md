@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19w · Start Fluent in a Year at day one, and smoother updates
+> - **Your own day one.** On the Fluent in a Year card, tap **Start at day one?** and slide to the week you want, then **Start here today**. Today becomes day one of that week, and the words go on from there. Class stays on the calendar, and your colors stay as they are. **Back to the class calendar** undoes it.
+> - **Updates no longer make you wait.** A new version now downloads quietly while you use the app, and switches in only once it is all on your phone. Opening the app or a word note no longer stalls while it downloads.
+
 > [!tip]- 2026-11-19v · Word web: more than one, and the right verb form
 > - **Double-tap for more than one** now works on more words. εγώ gives εμείς, and verbs give the "we" form: πάω gives εμείς πάμε, είμαι gives εμείς είμαστε. Nouns still give their plural.
 > - **Person words fit the verb.** Hold χαίρομαι on the εσύ web and you hear εσύ χαίρεσαι (you are glad), not "I am glad for you". This works both ways, so on the πιστεύω web, εσύ gives εσύ πιστεύεις. The other use, χαίρομαι για σένα, is still shown under "also".

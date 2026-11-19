@@ -681,3 +681,5 @@ body.gq-ph-off rt.gq-prt { display: none; }
 .gq-cv-glgr { font-weight: 600; }
 .gq-cv-glen { color: var(--text-muted); }
 .gq-cv-wchips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0; }
+.gq-fy-pick { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--background-modifier-border); }
+.gq-fy-pick input[type=range] { width: 100%; margin: 8px 0 10px; accent-color: var(--interactive-accent); min-height: 32px; }

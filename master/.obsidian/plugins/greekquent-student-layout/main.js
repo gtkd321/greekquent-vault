@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19v';
+const VAULT_RELEASE = '2026-11-19w';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -2339,7 +2339,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, world: typeof fm.world === 'string' ? fm.world : '', fiay: fm.fiay === true || fm.fiay === 'on', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '' };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, world: typeof fm.world === 'string' ? fm.world : '', fiay: fm.fiay === true || fm.fiay === 'on', fiay_from: /^\d{4}-\d{2}-\d{2}$/.test(String(fm.fiay_from || '')) ? String(fm.fiay_from) : '', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '' };
   }
   cards() { const f = this.app.vault.getAbstractFileByPath(PROGRESS); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return this.cardsNow || (Array.isArray(fm.cards) ? fm.cards.map(String) : []); }
   async setCard(word, on) {
@@ -3305,6 +3305,33 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const pt = this.together();
     if (pt.when) { const t = c.createDiv('gq-row gq-together'); t.createSpan({ cls: 'gq-hint', text: `Practice together · ${pt.when}` }); if (pt.link) { const j = t.createEl('button', { text: 'Join', cls: 'gq-mini' }); j.onclick = () => window.open(pt.link, '_blank'); } }
   }
+  // Own pace: fiay_from is the student's day one. Day 1 is a Monday, day 7 the review day, then the next week starts.
+  fyOwn(col, now) {
+    if (!col.fiay_from) return null; const [y, m, d] = col.fiay_from.split('-').map(Number);
+    const dd = Math.round((now - new Date(y, m - 1, d)) / 864e5); if (dd < 0) return null;
+    const i = dd % 7; return { dd, week: Math.floor(dd / 7) + 1, dow: i === 6 ? 0 : i + 1 };
+  }
+  // A slider over the weeks: day one, the calendar week, or anywhere between. Words already colored stay colored.
+  fyPicker(card, fw, own) {
+    const old = card.querySelector('.gq-fy-pick'); if (old) { old.remove(); return; }
+    const box = card.createDiv('gq-fy-pick'), now = new Date(); now.setHours(0, 0, 0, 0);
+    const calDd = Math.floor((now - new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2])) / 864e5), calWeek = calDd < 0 ? 1 : Math.floor(calDd / 7) + 1;
+    const max = Math.max(1, ...this.app.vault.getMarkdownFiles().filter(f => f.path.startsWith('Fluent in a Year/')).map(f => +(((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}).fiay_week) || 0));
+    const lab = box.createDiv({ cls: 'gq-tsub' }), sl = box.createEl('input', { attr: { type: 'range', min: '1', max: String(max), step: '1', 'aria-label': 'Week' } });
+    sl.value = String(fw);
+    const show = () => { const n = +sl.value; lab.setText(`Start at week ${n} · day ${(n - 1) * 6 + 1} of 300` + (n === calWeek ? ' (the class calendar)' : '')); };
+    sl.oninput = show; show();
+    const r = box.createDiv('gq-row');
+    const go = r.createEl('button', { text: 'Start here today', cls: 'mod-cta' }); go.onclick = () => this.setFyFrom(+sl.value);
+    if (own) { const back = r.createEl('button', { text: 'Back to the class calendar', cls: 'gq-mini' }); back.onclick = () => this.setFyFrom(0); }
+    box.createDiv({ cls: 'gq-hint', text: 'Today becomes day one of that week. Class stays on the calendar, and your colors stay as they are.' });
+  }
+  async setFyFrom(n) {
+    const f = await this.progressFile(), now = new Date(); now.setHours(0, 0, 0, 0);
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (Math.max(1, n) - 1) * 7), s = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    await this.app.fileManager.processFrontMatter(f, fm => { if (n) fm.fiay_from = s; else delete fm.fiay_from; });
+    setTimeout(() => this.refreshToday(), 300);
+  }
   async setFiay(on) {
     const f = await this.progressFile();
     await this.app.fileManager.processFrontMatter(f, fm => { if (on) fm.fiay = true; else delete fm.fiay; });
@@ -3586,6 +3613,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const start = new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2]);
       const dd = Math.floor((now - start) / 864e5);
       const week = dd < 0 ? 1 : Math.floor(dd / 7) + 1, dow = now.getDay();
+      // The story and Fluent in a Year can run from the student's own day one (fiay_from), not the class calendar. Class stays on the calendar.
+      const own = this.fyOwn(col, now), fw = own ? own.week : week, fdow = own ? own.dow : dow, fdd = own ? own.dd : dd;
       box.createDiv({ cls: 'gq-edition', text: 'Greekquent ' + this.editionName() });
       box.createEl('h2', { text: `Today · ${now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}` });
       if (this.showSwitch()) this.scriptSwitch(box);
@@ -3597,31 +3626,32 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const a = s.createEl('a', { text: 'Read Setting up', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); };
         s.createSpan({ text: ' (2 minutes). ' }); const x = s.createEl('button', { text: 'Got it' }); x.onclick = () => this.setupSeen();
       }
-      const wk = await this.weekNote(week);
+      const wk = await this.weekNote(fw), wkCal = own ? await this.weekNote(week) : wk;
       if (wk) {
         const days = await this.weekDays(wk.file);
-        const beats = await this.beatIndex(), dayNow = days[DAYS[dd < 0 ? 1 : (dow || 6)]];
-        const cal = dd < 0 ? 1 : (dayNow && dayNow.n) || Math.max(0, ...Object.keys(beats).map(Number).filter(k => beats[k].week < week));
+        const beats = await this.beatIndex(), dayNow = days[DAYS[fdd < 0 ? 1 : (fdow || 6)]];
+        const cal = fdd < 0 ? 1 : (dayNow && dayNow.n) || Math.max(0, ...Object.keys(beats).map(Number).filter(k => beats[k].week < fw));
         this.todayBeat = null; this.storyEl = null; this.storyInfo = null; this.cbList = null;
-        if (cal) await this.storyCard(box, beats, cal, dd >= 0 && dow === 0, col);
+        if (cal) await this.storyCard(box, beats, cal, fdd >= 0 && fdow === 0, col);
         if (moFresh) this.moCard(box);
         // Comebacks bring back earlier parts of the story the student has finished.
         if (col.story_at) await this.comebackCard(box, beats, col, cal);
         // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
         this.abcEl = null; if (!this.abcAllDone()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
-        if (!this.tabOn('class')) await this.classCard(box, wk, week);
+        if (!this.tabOn('class')) await this.classCard(box, wkCal, week);
         // Fluent in a Year is optional: its words show here only for students who turn it on.
         if (col.fiay) {
           const card = box.createDiv('gq-tcard gq-fiay'), head = card.createDiv('gq-thead');
           const title = (wk.file.basename.replace(/^FY\d+\s*/, '') || '').replace(/ no class this week$/, '');
-          head.createEl('strong', { text: `Fluent in a Year · week ${week}` }); head.createSpan({ cls: 'gq-hint', text: '  · ' + title.replace(/\bWhats\b/g, "What's") + (dd < 0 ? ' · starts Monday, Oct 26' : '') });
+          head.createEl('strong', { text: `Fluent in a Year · week ${fw}` }); head.createSpan({ cls: 'gq-hint', text: '  · ' + title.replace(/\bWhats\b/g, "What's") + (fdd < 0 ? ' · starts Monday, Oct 26' : '') });
           let list = [], label = '';
-          if (dd >= 0 && dow === 0) { list = Object.values(days).flatMap(d => d.words); label = `Sunday review: this week's ${list.length} words`; }
-          else { const d = days[DAYS[dd < 0 ? 1 : dow]]; if (d) { list = d.words; label = `Today's words · ${d.label}`; } }
+          if (fdd >= 0 && fdow === 0) { list = Object.values(days).flatMap(d => d.words); label = `${own ? 'Review day' : 'Sunday review'}: this week's ${list.length} words`; }
+          else { const d = days[DAYS[fdd < 0 ? 1 : fdow]]; if (d) { list = d.words; label = `Today's words · ${own ? d.label.replace(/^\w+ · /, '') : d.label}`; } }
           if (list.length) { card.createDiv({ cls: 'gq-tsub', text: label }); this.wordStep(card, list, ymd(now) + ':' + list.length); this.todayPlay = list; }
           else card.createDiv({ cls: 'gq-hint', text: 'No new words today.' });
           const r = card.createDiv('gq-row');
           const wl = r.createEl('button', { text: 'This week\'s page', cls: 'gq-mini' }); wl.onclick = () => this.openNote(wk.file.path);
+          const ch = r.createEl('button', { text: own ? 'Your week' : 'Start at day one?', cls: 'gq-mini' }); ch.onclick = () => this.fyPicker(card, fw, own);
           const off = r.createEl('a', { text: 'Hide on Today', href: '#', cls: 'gq-hint' }); off.onclick = e => { e.preventDefault(); this.setFiay(false); };
         }
       } else box.createDiv({ cls: 'gq-tcard gq-hint', text: 'The year is finished. Keep reviewing your red and yellow words below.' });

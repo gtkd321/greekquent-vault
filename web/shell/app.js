@@ -62,13 +62,33 @@ function installHelp() {
 }
 
 let loaded = '';
+// A new version downloads in full first (notes and plugin, into the offline cache), then switches in.
+// Until it's all on the phone, the app keeps running the version it has, so opening it never waits on the download.
+const NOTES_URL = v => 'notes.json?v=' + encodeURIComponent(v), PLUG_URL = v => 'vault/.obsidian/plugins/greekquent-student-layout/main.js?v=' + encodeURIComponent(v);
+let fetching = null;
+function prefetch(v) {
+  if (localStorage.getItem('gqw:ready') === v) return Promise.resolve(true);
+  if (fetching && fetching.v === v) return fetching.p;
+  const p = Promise.all([fetch(NOTES_URL(v)).then(r => { if (!r.ok) throw 0; return r.arrayBuffer(); }), fetch(PLUG_URL(v)).then(r => { if (!r.ok) throw 0; return r.text(); })])
+    .then(() => new Promise(r => setTimeout(r, 1500))).then(() => { try { localStorage.setItem('gqw:ready', v); } catch (e) {} return true; }).catch(() => false);
+  fetching = { v, p }; return p;
+}
+// Old versions' notes leave the cache once a newer one is in use.
+function tidyCache() {
+  if (!window.caches) return;
+  const keep = new Set([loaded, localStorage.getItem('gqw:ready')].filter(Boolean)), bases = [new URL('notes.json', location.href).href, new URL(PLUG_URL('x').split('?')[0], location.href).href];
+  caches.keys().then(ks => ks.forEach(k => caches.open(k).then(c => c.keys().then(rs => rs.forEach(rq => {
+    const [b, q] = rq.url.split('?'); if (!bases.includes(b) || !q) return; const v = new URLSearchParams(q).get('v'); if (v && !keep.has(v)) c.delete(rq);
+  }))))).catch(() => {});
+}
 async function checkUpdate(loud, wait) {
   try {
     const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }); const v = (await r.json()).version;
     if (v && v !== loaded) {
       if (loud) new Notice('Updating. Your work stays as it is.');
       try { const reg = navigator.serviceWorker && await navigator.serviceWorker.getRegistration(); if (reg) await reg.update(); } catch (e) {}
-      if (wait) return true; // ready for the next break; nothing changes on screen
+      const ok = await prefetch(v);
+      if (wait || (!loud && !ok)) return true; // ready for the next break; nothing changes on screen
       sessionStorage.setItem('gqw-updated', v);
       setTimeout(() => location.reload(), loud ? 700 : 0);
       return true;
@@ -139,15 +159,18 @@ async function boot() {
   const status = $('#gq-boot-msg');
   try {
     const vr = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null);
-    let v = vr && vr.version;
-    if (!v) v = localStorage.getItem('gqw:lastver');
+    const net = vr && vr.version, have = localStorage.getItem('gqw:ready') || localStorage.getItem('gqw:lastver');
+    // A newer version that isn't on the phone yet: start with the one that is, and fetch the new one quietly.
+    let v = net && have && net !== have && navigator.serviceWorker && navigator.serviceWorker.controller ? have : (net || have);
     if (!v) throw new Error('offline before the first visit');
-    loaded = v;
-    const [bundle, src] = await Promise.all([
-      fetch('notes.json?v=' + encodeURIComponent(v)).then(r => { if (!r.ok) throw new Error('notes ' + r.status); return r.json(); }),
-      fetch('vault/.obsidian/plugins/greekquent-student-layout/main.js?v=' + encodeURIComponent(v)).then(r => r.text())
+    const get = v => Promise.all([
+      fetch(NOTES_URL(v)).then(r => { if (!r.ok) throw new Error('notes ' + r.status); return r.json(); }),
+      fetch(PLUG_URL(v)).then(r => { if (!r.ok) throw new Error('plugin ' + r.status); return r.text(); })
     ]);
-    try { localStorage.setItem('gqw:lastver', v); } catch (e) {}
+    let got; try { got = await get(v); } catch (e) { if (!net || v === net) throw e; v = net; got = await get(v); }
+    const [bundle, src] = got; loaded = v;
+    try { localStorage.setItem('gqw:lastver', v); localStorage.setItem('gqw:ready', v); } catch (e) {}
+    if (net && net !== v) setTimeout(() => prefetch(net), 4000); else setTimeout(tidyCache, 8000);
     bundle.version = v;
     const app = await G.start(bundle, src);
     G.ModalClass = window.GQW_obs.Modal; G.MenuItemClass = window.GQW_obs.MenuItem;

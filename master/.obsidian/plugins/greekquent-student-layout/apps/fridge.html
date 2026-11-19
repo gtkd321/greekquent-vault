@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!--GQ_START-->
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="obsidian://"]');
+  if (a && window.parent !== window) { e.preventDefault(); window.parent.postMessage({ gq: 'obsidian', url: a.href }, '*'); }
+}, true);
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f2a44">
+<title>Greekquent Τι βλέπεις στο ψυγείο;</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f2a44%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22%3E%CE%93%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f2a44; --paper:#f6f1e7; --muted:#5f6873; --line:#d9d2c3;
+  --ok:#2f7d4f; --ok-soft:#d7eedf; --bad:#b3261e; --bad-soft:#f6dcd9;
+  --cold:#e6f3fb; --steel:#c9dbe6;
+  --font:'Commissioner', 'Noto Sans', system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--paper);color:var(--ink);font-family:var(--font)}
+body{overflow-y:auto;touch-action:manipulation}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit;background:none}
+.screen{display:none;min-height:100%}
+.screen.on{display:block}
+.wrap{width:100%;max-width:520px;margin:0 auto;padding:max(14px,env(safe-area-inset-top)) 14px max(24px,env(safe-area-inset-bottom))}
+
+/* start */
+.brand{margin:6px 0 4px}
+.brand h1{font-size:28px;font-weight:800;line-height:1.15}
+.brand .slogan{display:block;font-style:italic;color:var(--muted);font-size:15px;margin-top:2px}
+.lede{color:var(--muted);font-size:16px;line-height:1.45;margin:8px 0 14px}
+.hero{display:flex;justify-content:center;margin:4px 0 12px}
+.hero svg{width:150px;height:auto}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.card h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px;font-weight:600}
+.levels{display:grid;gap:8px}
+.lv{display:flex;align-items:center;gap:12px;text-align:left;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--paper);min-height:56px}
+.lv b{font-size:16px} .lv span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.lv[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)} .lv[aria-pressed="true"] span{color:#cfd8e3}
+.lv:disabled{opacity:.45}
+.lv .n{flex:0 0 30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;border:2px solid currentColor}
+.start{width:100%;background:var(--ink);color:#fff;font-size:19px;font-weight:700;border-radius:14px;padding:18px;margin:4px 0 12px}
+.check{display:flex;align-items:center;gap:10px;font-size:15px;min-height:40px}
+.check input{width:22px;height:22px;accent-color:var(--ink)}
+details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:12px}
+details summary{font-weight:700;cursor:pointer;min-height:28px;list-style-position:inside}
+.rules{margin-top:10px;font-size:15px;line-height:1.45}
+.rules p{margin-top:8px}
+.rules .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px;margin-top:8px}
+.rules .grid button{display:flex;align-items:center;gap:6px;text-align:left;font-size:15px;padding:4px;border-radius:8px;border:1px solid var(--line);background:var(--paper)}
+.rules .grid svg{width:32px;height:32px;flex:0 0 32px}
+
+/* game */
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.top button{font-size:14px;font-weight:600;padding:8px 12px;border:1px solid var(--line);border-radius:10px;min-height:40px;background:#fff}
+.dots{display:flex;gap:5px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dots i.ok{background:var(--ok)} .dots i.bad{background:var(--bad)} .dots i.now{background:var(--ink)}
+.prompt{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--ink);border-radius:16px;padding:10px 14px;margin-bottom:10px;min-height:64px}
+.prompt .q{font-size:clamp(22px,6.4vw,30px);font-weight:800;line-height:1.15;flex:1}
+.prompt .en{display:block;font-size:14px;font-weight:600;color:var(--muted);margin-top:2px}
+.hear{flex:0 0 48px;height:48px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center}
+.hear svg{width:24px;height:24px}
+
+/* the fridge */
+.fridge{position:relative;width:min(100%,400px);aspect-ratio:4/4.6;margin:0 auto;perspective:1400px}
+.body{position:absolute;inset:0;border-radius:26px;background:#fff;border:5px solid var(--ink);box-shadow:0 8px 0 rgba(15,42,68,.18)}
+.inside{position:absolute;inset:14px;border-radius:16px;background:linear-gradient(#f4fbff,var(--cold));border:3px solid var(--steel);display:grid;grid-template-rows:repeat(3,1fr);overflow:hidden}
+.shelf{position:relative;display:grid;grid-template-columns:repeat(3,1fr);align-items:end;padding:0 6px 7px;border-bottom:6px solid var(--steel)}
+.shelf:last-child{border-bottom:0}
+.slot{position:relative;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-top:4px}
+.item{width:92%;max-width:110px;aspect-ratio:1;display:block;transition:transform .2s;transform-origin:50% 90%}
+.item svg{width:100%;height:100%;display:block;overflow:visible}
+.item:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:12px}
+.item.glow{animation:bob 1s ease-in-out infinite}
+.item.glow svg{filter:drop-shadow(0 0 7px #ffd54a) drop-shadow(0 0 3px #ffb300)}
+.item.right{animation:hop .6s ease-out}
+.item.wrong{animation:shake .4s}
+.item.dim{opacity:.35}
+.crumbs{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:60%;opacity:0;transition:opacity .3s}
+.crumbs.on{opacity:1}
+@keyframes bob{0%,100%{transform:translateY(0) scale(1.05)}50%{transform:translateY(-8px) scale(1.12)}}
+@keyframes hop{0%{transform:scale(1)}35%{transform:translateY(-22px) scale(1.25)}70%{transform:translateY(0) scale(.95)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-6deg)}75%{transform:translateX(8px) rotate(6deg)}}
+.door{position:absolute;inset:0;border-radius:26px;background:linear-gradient(90deg,#fdfefe,#eef4f8);border:5px solid var(--ink);transform-origin:0 50%;transition:transform .7s cubic-bezier(.3,.7,.3,1);z-index:5;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;cursor:pointer;backface-visibility:hidden}
+.door .handle{position:absolute;right:20px;top:28%;width:14px;height:34%;border-radius:8px;background:var(--steel);border:4px solid var(--ink)}
+.door .tap{font-size:20px;font-weight:800;background:var(--ink);color:#fff;padding:10px 18px;border-radius:30px}
+.door .face{width:46%}
+.fridge.open .door{transform:rotateY(-108deg)}
+.mist{position:absolute;inset:14px;border-radius:16px;pointer-events:none;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.9),rgba(255,255,255,0) 70%);opacity:0;z-index:4}
+.fridge.puff .mist{animation:mist 1s ease-out}
+@keyframes mist{0%{opacity:.95}100%{opacity:0}}
+.cat{position:absolute;bottom:-6px;right:-10px;width:34%;z-index:6;transform:translateX(130%);transition:transform .5s ease-out;pointer-events:none}
+.cat.on{transform:translateX(0)}
+.peek{height:6px;border-radius:3px;background:var(--line);margin:8px auto 0;width:min(100%,400px);overflow:hidden}
+.peek i{display:block;height:100%;width:100%;background:var(--ink);transform-origin:0 50%}
+
+.opts{display:grid;gap:10px;margin-top:12px}
+.opt{min-height:60px;border-radius:14px;background:#fff;font-size:clamp(20px,5.6vw,25px);font-weight:700;padding:10px 14px;border:2px solid var(--ink);box-shadow:0 2px 0 rgba(15,42,68,.15);text-align:center}
+.opt.right{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.wrong{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt.dim{opacity:.35}
+.mic{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:50px;margin-top:10px;border-radius:14px;border:2px dashed var(--ink);font-size:17px;font-weight:700;background:#fff}
+.mic.on{background:var(--bad-soft);border-style:solid}
+.mic svg{width:22px;height:22px}
+.why{display:none;margin-top:12px;border-radius:14px;padding:12px 14px;font-size:16px;line-height:1.45}
+.why.on{display:block}
+.why.ok{background:var(--ok-soft)} .why.bad{background:var(--bad-soft)}
+.why .g{font-weight:800}
+.why .root{display:block;margin-top:6px;font-size:14px;color:var(--muted)}
+.next{display:none;width:100%;margin-top:12px;background:var(--ink);color:#fff;font-size:18px;font-weight:700;border-radius:14px;padding:16px}
+.next.on{display:block}
+
+/* end */
+.big{font-size:34px;font-weight:800;margin:10px 0 4px}
+.sub{color:var(--muted);font-size:16px;margin-bottom:14px;line-height:1.4}
+.miss{list-style:none;margin:4px 0}
+.miss li{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:17px}
+.miss li svg{width:36px;height:36px;flex:0 0 36px}
+.miss li span{color:var(--muted);font-size:14px;margin-left:auto}
+.btns{display:grid;gap:10px;margin:12px 0}
+.btn{min-height:50px;border-radius:12px;font-size:17px;font-weight:700;border:1px solid var(--ink);background:#fff}
+.btn.pri{background:var(--ink);color:#fff}
+.foot{font-size:12px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.4}
+@media (prefers-reduced-motion: reduce){
+  .door{transition:opacity .3s} .fridge.open .door{transform:none;opacity:0;pointer-events:none}
+  .item.glow,.item.right,.item.wrong{animation:none} .fridge.puff .mist{animation:none} .cat{transition:none}
+}
+</style>
+</head>
+<body>
+
+<section class="screen on" id="setup"><div class="wrap">
+  <div class="brand"><h1>Τι βλέπεις στο ψυγείο;</h1><span class="slogan">What do you see in the fridge?</span></div>
+  <div class="hero" id="hero"></div>
+  <p class="lede">Open the fridge. Find the food, say what you see, and spot what the cat ate.</p>
+  <button class="start" id="go">Start</button>
+  <div class="card"><h2>Level</h2><div class="levels" id="levels"></div></div>
+  <details id="cheat"><summary>What's in the fridge</summary><div class="rules" id="rules"></div></details>
+  <label class="check"><input type="checkbox" id="sound" checked> Sound and Greek voice</label>
+  <p class="foot">© 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.</p>
+</div></section>
+
+<section class="screen" id="game"><div class="wrap">
+  <div class="top"><button id="quit">‹ Menu</button><div class="dots" id="dots" aria-label="Progress"></div></div>
+  <div class="prompt"><div class="q" id="q" lang="el"></div><button class="hear" id="hear" aria-label="Hear it again"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg></button></div>
+  <div class="fridge" id="fridge">
+    <div class="body"></div>
+    <div class="inside" id="inside"></div>
+    <div class="mist"></div>
+    <div class="door" id="door" role="button" aria-label="Open the fridge"><div class="handle"></div><div class="face" id="doorFace"></div><div class="tap" id="doorTap">Άνοιξέ το</div></div>
+    <div class="cat" id="cat" aria-hidden="true"></div>
+  </div>
+  <div class="peek" id="peek" hidden><i id="peekBar"></i></div>
+  <div class="opts" id="opts"></div>
+  <button class="mic" id="mic" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span id="micT">Say it instead</span></button>
+  <div class="why" id="why" role="status" aria-live="polite"></div>
+  <button class="next" id="next">Next</button>
+</div></section>
+
+<section class="screen" id="end"><div class="wrap">
+  <div class="big" id="score"></div>
+  <p class="sub" id="verdict"></p>
+  <div class="card" id="missCard" hidden><h2>Say these again</h2><ul class="miss" id="miss"></ul></div>
+  <div class="btns">
+    <button class="btn pri" id="again">Play again</button>
+    <button class="btn" id="up" hidden>Next level</button>
+    <button class="btn" id="save" hidden>Send missed ones to Review</button>
+    <button class="btn" id="menu">Menu</button>
+  </div>
+</div></section>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const KEY = 'gq-fridge';
+  const store = (() => { let o = {}; try { o = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {} return { get: (k, d) => (k in o ? o[k] : d), set: (k, v) => { o[k] = v; try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} } }; })();
+  const S = { lvl: store.get('lvl', 1), open: store.get('open', 1), sound: store.get('sound', true) };
+
+  // ---------- the food: big, flat cartoons with a thick outline ----------
+  const K = '#0f2a44', O = `stroke="${K}" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"`;
+  const ART = {
+    'γάλα': `<path d="M30 30 L50 16 L70 30 V90 H30 Z" fill="#fff" ${O}/><path d="M30 30 H70" ${O}/><path d="M42 16 H58 V9 H42 Z" fill="#4a90d9" ${O}/><rect x="30" y="48" width="40" height="22" fill="#4a90d9" stroke="none"/><path d="M30 48 H70 M30 70 H70" ${O}/><circle cx="50" cy="59" r="6" fill="#fff"/><path d="M30 30 V90 H70 V30" fill="none" ${O}/>`,
+    'νερό': `<path d="M42 8 H58 V18 Q68 24 68 36 V86 Q68 92 62 92 H38 Q32 92 32 86 V36 Q32 24 42 18 Z" fill="#bfe3fb" ${O}/><rect x="40" y="2" width="20" height="9" rx="2" fill="#2b6cb0" ${O}/><path d="M32 50 H68" stroke="#2b6cb0" stroke-width="10"/><path d="M40 62 Q44 70 40 80" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+    'αυγό': `<ellipse cx="50" cy="58" rx="27" ry="34" fill="#fffaf0" ${O}/><ellipse cx="41" cy="45" rx="6" ry="10" fill="#fff" stroke="none"/>`,
+    'τυρί': `<path d="M12 72 L88 72 L88 46 L20 30 Z" fill="#ffd54a" ${O}/><path d="M20 30 L12 72" ${O}/><circle cx="40" cy="58" r="6" fill="#f2b705"/><circle cx="66" cy="54" r="5" fill="#f2b705"/><circle cx="76" cy="64" r="3.5" fill="#f2b705"/><circle cx="56" cy="65" r="3" fill="#f2b705"/>`,
+    'μήλο': `<path d="M50 32 C34 18 12 30 16 56 C20 80 36 92 50 86 C64 92 80 80 84 56 C88 30 66 18 50 32 Z" fill="#e53935" ${O}/><path d="M50 32 Q50 18 56 10" fill="none" ${O}/><path d="M54 22 Q70 8 80 18 Q66 30 54 22 Z" fill="#43a047" ${O}/><ellipse cx="32" cy="48" rx="5" ry="9" fill="#ff8a80" stroke="none"/>`,
+    'ντομάτα': `<ellipse cx="50" cy="58" rx="38" ry="32" fill="#f4511e" ${O}/><path d="M50 30 L40 20 L48 28 L36 30 L50 34 L64 30 L52 28 L60 20 Z" fill="#43a047" ${O}/><path d="M50 30 V20" ${O}/><path d="M28 54 Q30 44 38 40" stroke="#ffab91" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+    'κρέας': `<path d="M18 50 C14 28 44 18 66 26 C88 34 90 62 74 76 C58 90 26 84 18 50 Z" fill="#ef7c8e" ${O}/><path d="M30 52 C30 38 50 32 64 38 C76 44 74 62 62 68 C48 74 32 66 30 52 Z" fill="#c2185b" stroke="none" opacity=".35"/><circle cx="62" cy="52" r="8" fill="#fff" ${O}/>`,
+    'ψάρι': `<path d="M14 50 C28 26 62 24 78 50 C62 76 28 74 14 50 Z" fill="#4fc3f7" ${O}/><path d="M78 50 L94 34 L92 66 Z" fill="#4fc3f7" ${O}/><circle cx="30" cy="46" r="4.5" fill="${K}"/><path d="M48 38 Q54 50 48 62 M58 38 Q64 50 58 62" fill="none" stroke="#0288d1" stroke-width="3.5" stroke-linecap="round"/>`,
+    'γιαούρτι': `<path d="M22 34 H78 L70 88 H30 Z" fill="#fff" ${O}/><rect x="18" y="24" width="64" height="12" rx="4" fill="#90caf9" ${O}/><path d="M28 56 H72" stroke="#90caf9" stroke-width="10"/><text x="50" y="76" font-size="13" font-weight="800" text-anchor="middle" fill="${K}" font-family="sans-serif">ΓΙΑΟΥΡΤΙ</text>`,
+    'πορτοκάλι': `<circle cx="50" cy="56" r="34" fill="#fb8c00" ${O}/><path d="M50 22 Q48 14 52 10" fill="none" ${O}/><path d="M52 18 Q64 8 74 16 Q62 26 52 18 Z" fill="#43a047" ${O}/><circle cx="36" cy="50" r="2.5" fill="#ffcc80"/><circle cx="60" cy="66" r="2.5" fill="#ffcc80"/><circle cx="64" cy="44" r="2.5" fill="#ffcc80"/><circle cx="44" cy="72" r="2.5" fill="#ffcc80"/>`,
+    'σαλάτα': `<path d="M8 54 H92 Q88 88 50 90 Q12 88 8 54 Z" fill="#fff" ${O}/><path d="M14 54 Q18 34 32 40 Q38 26 52 34 Q64 22 72 36 Q86 32 86 54 Z" fill="#7cb342" ${O}/><circle cx="36" cy="48" r="6" fill="#e53935" ${O}/><circle cx="62" cy="46" r="5" fill="#e53935" ${O}/><path d="M8 54 H92" ${O}/>`,
+    'κοτόπουλο': `<path d="M38 66 C14 70 10 36 30 24 C50 12 78 26 72 50 C68 62 58 64 52 62 Z" fill="#d38b3c" ${O}/><path d="M52 62 L70 80" stroke="${K}" stroke-width="14" stroke-linecap="round"/><path d="M52 62 L70 80" stroke="#fff6e5" stroke-width="7" stroke-linecap="round"/><circle cx="74" cy="80" r="7" fill="#fff6e5" ${O}/><circle cx="68" cy="86" r="7" fill="#fff6e5" ${O}/><path d="M28 38 Q34 30 44 30" stroke="#f0b26a" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+    'σοκολάτα': `<rect x="20" y="16" width="60" height="72" rx="6" fill="#6d4c41" ${O}/><path d="M40 16 V88 M60 16 V88 M20 40 H80 M20 64 H80" stroke="#4e342e" stroke-width="4"/><path d="M20 58 H80 V82 Q80 88 74 88 H26 Q20 88 20 82 Z" fill="#c62828" ${O}/><text x="50" y="78" font-size="11" font-weight="800" text-anchor="middle" fill="#fff" font-family="sans-serif">ΣΟΚΟΛΑΤΑ</text>`,
+    'φέτα': `<path d="M14 44 L56 30 L88 42 L88 70 L46 84 L14 72 Z" fill="#fbfaf3" ${O}/><path d="M14 44 L46 56 L88 42 M46 56 V84" fill="none" ${O}/><circle cx="30" cy="62" r="2.5" fill="#d7d2bd"/><circle cx="66" cy="64" r="2.5" fill="#d7d2bd"/><circle cx="74" cy="56" r="2" fill="#d7d2bd"/>`,
+    'μέλι': `<path d="M24 34 H76 V82 Q76 90 68 90 H32 Q24 90 24 82 Z" fill="#ffb300" ${O}/><rect x="20" y="20" width="60" height="16" rx="4" fill="#8d6e63" ${O}/><path d="M24 34 Q32 46 38 36 Q44 48 50 36 Q58 46 64 36 Q70 44 76 36" fill="#ffca28" ${O}/><text x="50" y="72" font-size="16" font-weight="800" text-anchor="middle" fill="${K}" font-family="sans-serif">ΜΕΛΙ</text>`,
+    'καφές': `<path d="M26 22 H74 L68 88 H32 Z" fill="#fff" ${O}/><path d="M29 40 H71 L68 88 H32 Z" fill="#a1887f" stroke="none"/><path d="M28 34 H72 L71 42 H29 Z" fill="#f5e6d3" stroke="none"/><path d="M26 22 H74 L68 88 H32 Z" fill="none" ${O}/><path d="M58 6 L52 70" stroke="#e53935" stroke-width="6" stroke-linecap="round"/><path d="M58 6 L52 70" fill="none" ${O} stroke-width="2"/>`
+  };
+  // Each food: the word in the 1,500, its gender, English, and the forms for "Where is", "I see" and "is missing".
+  const keepN = w => /^([αεηιουωάέήίόύώ]|μπ|ντ|γκ|τσ|τζ|[κπτξψ])/.test(w);
+  const FOOD = [
+    ['γάλα', 'n', 'milk'], ['νερό', 'n', 'water'], ['αυγό', 'n', 'egg'], ['τυρί', 'n', 'cheese'], ['μήλο', 'n', 'apple'],
+    ['ντομάτα', 'f', 'tomato'], ['κρέας', 'n', 'meat'], ['ψάρι', 'n', 'fish'], ['γιαούρτι', 'n', 'yogurt'], ['πορτοκάλι', 'n', 'orange'],
+    ['σαλάτα', 'f', 'salad'], ['κοτόπουλο', 'n', 'chicken'], ['σοκολάτα', 'f', 'chocolate'], ['φέτα', 'f', 'feta'], ['μέλι', 'n', 'honey'],
+    ['καφές', 'm', 'iced coffee']
+  ].map(([w, g, en]) => {
+    const art = { m: 'ο', f: 'η', n: 'το' }[g], nom = art + ' ' + w;
+    const accW = g === 'm' ? w.replace(/ς$/, '') : w, accA = g === 'm' ? 'τον' : g === 'f' ? (keepN(w) ? 'την' : 'τη') : 'το';
+    return { w, g, en, nom, acc: accA + ' ' + accW };
+  });
+  const art = (w, size) => `<svg viewBox="0 0 100 100" width="${size || 100}" height="${size || 100}" aria-hidden="true">${ART[w]}</svg>`;
+  const CAT = `<svg viewBox="0 0 120 110" aria-hidden="true"><path d="M20 104 Q14 60 36 46 L30 14 L52 34 Q60 32 68 34 L90 14 L84 46 Q106 60 100 104 Z" fill="#ffa726" ${O}/><circle cx="46" cy="60" r="6" fill="${K}"/><circle cx="74" cy="60" r="6" fill="${K}"/><path d="M56 72 L60 76 L64 72" fill="none" ${O}/><path d="M60 76 Q54 86 46 82 M60 76 Q66 86 74 82" fill="none" ${O}/><path d="M24 74 H40 M22 82 H40 M80 74 H96 M80 82 H98" ${O}/><path d="M36 46 L44 62 M84 46 L76 62" stroke="#e65100" stroke-width="5" stroke-linecap="round"/></svg>`;
+  const CRUMBS = `<svg viewBox="0 0 60 14" aria-hidden="true"><circle cx="8" cy="9" r="3" fill="#bca"/><circle cx="20" cy="7" r="2" fill="#bca"/><circle cx="31" cy="10" r="3.5" fill="#bca"/><circle cx="44" cy="8" r="2" fill="#bca"/><circle cx="54" cy="10" r="2.5" fill="#bca"/></svg>`;
+  const SNOW = `<svg viewBox="0 0 100 100" aria-hidden="true"><g stroke="#90caf9" stroke-width="6" stroke-linecap="round"><path d="M50 12 V88 M17 31 L83 69 M17 69 L83 31"/><path d="M40 18 L50 26 L60 18 M40 82 L50 74 L60 82" fill="none"/></g></svg>`;
+
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const fold = t => (t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ');
+
+  // ---------- levels ----------
+  const LEVELS = {
+    1: { name: 'Βρες το', blurb: 'Find it: Πού είναι το γάλα;' },
+    2: { name: 'Τι βλέπεις;', blurb: 'Say what you see: Βλέπω το γάλα. Βλέπω τη φέτα.' },
+    3: { name: 'Τι λείπει;', blurb: 'Look, then spot what the cat ate: Λείπει το τυρί.' }
+  };
+  // A round: 6 foods on 9 shelf spots, and one target. Targets don't repeat until every food has had a turn.
+  let bag = [];
+  function buildRound() {
+    const out = [];
+    for (let i = 0; i < 10; i++) {
+      if (!bag.length) bag = shuffle(FOOD.slice());
+      const t = bag.pop(), rest = shuffle(FOOD.filter(f => f !== t)).slice(0, 5), items = shuffle([t, ...rest]);
+      const spots = shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8]).slice(0, 6), place = new Map(items.map((f, k) => [spots[k], f]));
+      out.push({ t, items, place });
+    }
+    return out;
+  }
+
+  // ---------- sound and speech ----------
+  let ac = null, elVoice = null;
+  function tone(f, d, type = 'sine', v = .16, when = 0) {
+    if (!ac || !S.sound) return;
+    const t = ac.currentTime + when, o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, t); g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.001, t + d);
+    o.connect(g).connect(ac.destination); o.start(t); o.stop(t + d);
+  }
+  const sfx = {
+    right: () => { tone(660, .12, 'triangle'); tone(990, .2, 'triangle', .16, .1); },
+    wrong: () => tone(150, .28, 'square', .1),
+    door: () => { tone(90, .25, 'sawtooth', .05); tone(1400, .5, 'sine', .03, .1); },
+    meow: () => { tone(700, .15, 'triangle', .08); tone(520, .3, 'triangle', .08, .12); }
+  };
+  function pickVoice() { if ('speechSynthesis' in window) elVoice = speechSynthesis.getVoices().find(v => /^el/i.test(v.lang)) || null; }
+  if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  function say(text) {
+    if (!S.sound || !('speechSynthesis' in window)) return;
+    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(String(text)); u.lang = 'el-GR'; if (elVoice) u.voice = elVoice; u.rate = .85; speechSynthesis.speak(u); } catch (e) {}
+  }
+  const vibrate = p => { try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} };
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  // ---------- game ----------
+  const G = { cards: [], i: 0, ok: 0, marks: [], missed: [], busy: false, first: true, timer: 0 };
+  const show = id => { document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id)); window.scrollTo(0, 0); };
+  const fridge = $('#fridge');
+  function start() {
+    if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { ac = null; } }
+    if (ac && ac.state === 'suspended') ac.resume();
+    if ('speechSynthesis' in window) { try { speechSynthesis.speak(new SpeechSynthesisUtterance('')); } catch (e) {} }
+    G.cards = buildRound(); G.i = 0; G.ok = 0; G.marks = []; G.missed = [];
+    show('game'); paint();
+  }
+  function dots() { $('#dots').innerHTML = G.cards.map((_, k) => `<i class="${G.marks[k] || (k === G.i ? 'now' : '')}"></i>`).join(''); }
+  function setQ(gr, en) { $('#q').innerHTML = `${gr}<span class="en" lang="en">${en}</span>`; G.say = gr; }
+  function fill(c, hide) {
+    const box = $('#inside'); box.innerHTML = '';
+    for (let s = 0; s < 3; s++) {
+      const sh = document.createElement('div'); sh.className = 'shelf';
+      for (let k = 0; k < 3; k++) {
+        const spot = s * 3 + k, f = c.place.get(spot), sl = document.createElement('div'); sl.className = 'slot';
+        if (f && f !== hide) { const b = document.createElement('button'); b.className = 'item'; b.dataset.w = f.w; b.setAttribute('aria-label', f.nom); b.innerHTML = art(f.w); b.onclick = () => tapItem(b, f); sl.appendChild(b); }
+        if (f && f === hide) { const cr = document.createElement('div'); cr.className = 'crumbs'; cr.innerHTML = CRUMBS; sl.appendChild(cr); }
+        sh.appendChild(sl);
+      }
+      box.appendChild(sh);
+    }
+  }
+  function openDoor(then) {
+    fridge.classList.add('open', 'puff'); sfx.door();
+    setTimeout(() => fridge.classList.remove('puff'), 1000);
+    if (then) setTimeout(then, 650);
+  }
+  function closeDoor() { fridge.classList.remove('open'); }
+  function paint() {
+    const c = G.cards[G.i]; G.busy = false; G.first = true; clearTimeout(G.timer);
+    dots(); closeDoor(); $('#cat').classList.remove('on'); $('#peek').hidden = true;
+    $('#opts').innerHTML = ''; $('#mic').hidden = true; const w = $('#why'); w.className = 'why'; w.innerHTML = ''; $('#next').classList.remove('on');
+    const firstEver = G.i === 0;
+    $('#doorTap').textContent = 'Άνοιξέ το'; $('#doorTap').hidden = false;
+    setQ('Άνοιξε το ψυγείο.', 'Open the fridge. Tap the door.');
+    if (firstEver) say('Άνοιξε το ψυγείο.');
+    fill(c);
+    $('#door').onclick = () => {
+      if (fridge.classList.contains('open')) return;
+      $('#door').onclick = null;
+      if (S.lvl === 1) { setQ(`Πού είναι ${c.t.nom};`, `Where is the ${c.t.en}? Tap it.`); openDoor(() => say(G.say)); }
+      else if (S.lvl === 2) { openDoor(() => askSee(c)); }
+      else openDoor(() => peekPhase(c));
+    };
+    // After the first round the door opens by itself, so the round keeps moving.
+    if (!firstEver) setTimeout(() => $('#door').onclick && $('#door').onclick(), 500);
+  }
+  // Level 2: one food glows. Pick (or say) the sentence.
+  function askSee(c) {
+    setQ('Τι βλέπεις;', 'What do you see? The bright one.'); say('Τι βλέπεις;');
+    const el = document.querySelector(`.item[data-w="${c.t.w}"]`); if (el) el.classList.add('glow');
+    document.querySelectorAll('.item').forEach(b => { b.onclick = () => say(b.getAttribute('aria-label')); });
+    const others = shuffle(c.items.filter(f => f !== c.t)).slice(0, 2);
+    options(shuffle([c.t, ...others]).map(f => ({ t: 'Βλέπω ' + f.acc + '.', f })), c.t, c);
+    if (SR) { $('#mic').hidden = false; $('#micT').textContent = 'Say it instead: Βλέπω…'; }
+  }
+  // Level 3: look for a few seconds, the cat sneaks in, one food is gone.
+  function peekPhase(c) {
+    setQ('Κοίτα καλά.', 'Look closely. Remember what is there.'); say('Κοίτα καλά.');
+    const ms = 4500; $('#peek').hidden = false; const bar = $('#peekBar');
+    bar.style.transition = 'none'; bar.style.transform = 'scaleX(1)'; void bar.offsetWidth; bar.style.transition = `transform ${ms}ms linear`; bar.style.transform = 'scaleX(0)';
+    G.timer = setTimeout(() => {
+      $('#peek').hidden = true; closeDoor(); $('#doorTap').hidden = true;
+      setTimeout(() => { $('#cat').innerHTML = CAT; $('#cat').classList.add('on'); sfx.meow(); setQ('Η γάτα έφαγε κάτι.', 'The cat ate something.'); say('Η γάτα έφαγε κάτι.'); }, 700);
+      setTimeout(() => {
+        $('#cat').classList.remove('on'); fill(c, c.t); openDoor(() => {
+          document.querySelectorAll('.crumbs').forEach(x => x.classList.add('on'));
+          setQ('Τι λείπει;', 'What is missing?'); say('Τι λείπει;');
+          document.querySelectorAll('.item').forEach(b => { b.onclick = () => say(b.getAttribute('aria-label')); });
+          const pool = shuffle(FOOD.filter(f => f !== c.t && !c.items.includes(f))).slice(0, 1), inFr = shuffle(c.items.filter(f => f !== c.t)).slice(0, 1);
+          options(shuffle([c.t, ...pool, ...inFr]).map(f => ({ t: 'Λείπει ' + f.nom + '.', f })), c.t, c);
+          if (SR) { $('#mic').hidden = false; $('#micT').textContent = 'Say it instead: Λείπει…'; }
+        });
+      }, 2600);
+    }, ms);
+  }
+  function options(list, right, c) {
+    const o = $('#opts'); o.innerHTML = '';
+    list.forEach(x => { const b = document.createElement('button'); b.className = 'opt'; b.lang = 'el'; b.textContent = x.t; b.onclick = () => chooseOpt(b, x, right, c); o.appendChild(b); });
+  }
+  function tapItem(b, f) {
+    if (G.busy || S.lvl !== 1) return; const c = G.cards[G.i];
+    if (f === c.t) {
+      G.busy = true; b.classList.add('right'); sfx.right(); vibrate(40); say(`Εδώ είναι ${f.nom}.`);
+      document.querySelectorAll('.item').forEach(x => { if (x !== b) x.classList.add('dim'); });
+      win(c, `<b>Right.</b> <span class="g" lang="el">Εδώ είναι ${f.nom}.</span> Here is the ${f.en}.`);
+    } else {
+      b.classList.add('wrong'); setTimeout(() => b.classList.remove('wrong'), 450); sfx.wrong(); vibrate([30, 30, 30]); say(`Αυτό είναι ${f.nom}.`);
+      miss(c, `<b>That's <span class="g" lang="el">${f.nom}</span></b> (${f.en}). Find <span class="g" lang="el">${c.t.nom}</span>.`);
+    }
+  }
+  function chooseOpt(b, x, right, c) {
+    if (G.busy) return;
+    if (x.f === right) {
+      G.busy = true; b.classList.add('right'); sfx.right(); vibrate(40); say(x.t);
+      document.querySelectorAll('.opt').forEach(y => { if (y !== b) y.classList.add('dim'); });
+      const el = document.querySelector(`.item[data-w="${right.w}"]`); if (el) { el.classList.remove('glow'); el.classList.add('right'); }
+      win(c, explain(right, true));
+    } else {
+      b.classList.add('wrong'); b.disabled = true; sfx.wrong(); vibrate([30, 30, 30]);
+      miss(c, `<b>Not ${x.f.en} here.</b> Try again.`);
+    }
+  }
+  // The why: "I see" changes the word (Βλέπω τον καφέ), "is missing" does not (Λείπει ο καφές).
+  function explain(f, ok) {
+    if (S.lvl === 2) {
+      const ch = f.nom !== f.acc ? ` After Βλέπω, <span class="g" lang="el">${f.nom}</span> becomes <span class="g" lang="el">${f.acc}</span>.` : ' The neuter (το) never changes.';
+      return `<b>${ok ? 'Right.' : 'Got it.'}</b> <span class="g" lang="el">Βλέπω ${f.acc}.</span> I see the ${f.en}.${ch}`;
+    }
+    return `<b>${ok ? 'Right.' : 'Got it.'}</b> <span class="g" lang="el">Λείπει ${f.nom}.</span> The ${f.en} is missing.<span class="root">Λείπει keeps ο, η, το: Λείπει ο καφές. Βλέπω changes it: Βλέπω τον καφέ.</span>`;
+  }
+  function win(c, html) {
+    if (G.first) { G.ok++; G.marks[G.i] = 'ok'; momo(c.t.w); } else G.marks[G.i] = 'bad';
+    $('#mic').hidden = true; stopMic();
+    const w = $('#why'); w.className = 'why on ' + (G.first ? 'ok' : 'bad'); w.innerHTML = html;
+    $('#next').textContent = G.i + 1 < G.cards.length ? 'Next' : 'See how you did'; $('#next').classList.add('on');
+    dots();
+  }
+  function miss(c, html) {
+    if (G.first) { G.first = false; G.missed.push(c.t); }
+    const w = $('#why'); w.className = 'why on bad'; w.innerHTML = html;
+  }
+  function momo(w) { if (window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w }, '*'); } catch (e) {} }
+
+  // ---------- say it instead (Android Chrome and others that support it) ----------
+  let rec = null;
+  function stopMic() { if (rec) { try { rec.abort(); } catch (e) {} rec = null; } $('#mic').classList.remove('on'); }
+  $('#mic').onclick = () => {
+    if (rec) { stopMic(); return; }
+    const c = G.cards[G.i]; if (!SR || G.busy) return;
+    rec = new SR(); rec.lang = 'el-GR'; rec.interimResults = false; rec.maxAlternatives = 5;
+    $('#mic').classList.add('on'); $('#micT').textContent = 'Listening…';
+    rec.onresult = e => {
+      const heard = [...e.results[0]].map(a => a.transcript), all = fold(heard.join(' '));
+      const stem = fold(c.t.w).replace(/σ$/, '').slice(0, Math.max(3, fold(c.t.w).length - 1));
+      const verb = S.lvl === 2 ? /βλεπ/.test(all) : /λειπ/.test(all);
+      const okw = all.split(/\s+/).some(t => t.startsWith(stem));
+      stopMic();
+      if (okw) { const b = [...document.querySelectorAll('.opt')].find(x => x.textContent.includes(c.t.w.replace(/ς$/, ''))); if (b) chooseOpt(b, { f: c.t, t: b.textContent }, c.t, c); if (!verb) $('#why').insertAdjacentHTML('beforeend', `<span class="root">Next time say the whole line: ${S.lvl === 2 ? 'Βλέπω' : 'Λείπει'}…</span>`); }
+      else { $('#micT').textContent = 'Try again, or tap an answer'; miss(c, `<b>I heard <span lang="el">${heard[0] || '…'}</span>.</b> Try again, or tap an answer.`); }
+    };
+    rec.onerror = () => { stopMic(); $('#micT').textContent = 'No mic here. Tap an answer.'; };
+    rec.onend = () => { if (rec) stopMic(); };
+    try { rec.start(); } catch (e) { stopMic(); }
+  };
+
+  $('#hear').onclick = () => say(G.say || '');
+  $('#next').onclick = () => { G.i++; if (G.i >= G.cards.length) finish(); else paint(); };
+  $('#quit').onclick = () => { clearTimeout(G.timer); stopMic(); show('setup'); renderSetup(); };
+
+  function finish() {
+    store.set('played', true);
+    const n = G.cards.length, r = G.ok;
+    $('#score').textContent = `${r} of ${n} right`;
+    let v = r >= 9 ? 'Ready for more.' : r >= 7 ? 'Close. One more round and it will stick.' : 'Play this level once more. Say each one out loud.';
+    if (r >= 8 && S.lvl < 3 && S.open <= S.lvl) { S.open = S.lvl + 1; store.set('open', S.open); v += ` Level ${S.lvl + 1} is open.`; }
+    if (r >= 8 && S.lvl === 3) v = 'Nothing gets past you. Θα τα πούμε.';
+    $('#verdict').textContent = v;
+    $('#up').hidden = !(S.lvl < 3 && S.open > S.lvl);
+    const ms = [...new Set(G.missed)];
+    $('#missCard').hidden = !ms.length; $('#save').hidden = !ms.length;
+    $('#miss').innerHTML = ms.map(f => `<li>${art(f.w, 36)}<b class="say" lang="el" data-say="${f.nom}">${f.nom}</b><span>${f.en}</span></li>`).join('');
+    show('end');
+  }
+  document.addEventListener('click', e => { const s = e.target.closest && e.target.closest('[data-say]'); if (s) say(s.dataset.say); });
+  $('#again').onclick = start;
+  $('#up').onclick = () => { S.lvl = Math.min(3, S.lvl + 1); store.set('lvl', S.lvl); start(); };
+  $('#menu').onclick = () => { show('setup'); renderSetup(); };
+  $('#save').onclick = () => {
+    const words = [...new Set(G.missed.map(f => f.w))];
+    const url = 'obsidian://greekquent?game=' + encodeURIComponent('Fridge') + '&misses=' + encodeURIComponent(words.join(','));
+    if (window.parent !== window) window.parent.postMessage({ gq: 'obsidian', url }, '*'); else location.href = url;
+  };
+
+  // ---------- menu ----------
+  function renderSetup() {
+    const el = $('#levels'); el.innerHTML = '';
+    for (const k of [1, 2, 3]) {
+      const L = LEVELS[k], b = document.createElement('button'); b.className = 'lv';
+      b.setAttribute('aria-pressed', String(S.lvl === k)); b.disabled = k > S.open;
+      b.innerHTML = `<span class="n">${k}</span><div><b lang="el">${L.name}</b><span>${k > S.open ? `Get 8 of 10 on level ${k - 1} to open it` : L.blurb}</span></div>`;
+      b.onclick = () => { S.lvl = k; store.set('lvl', k); renderSetup(); };
+      el.appendChild(b);
+    }
+    $('#go').textContent = `Start level ${S.lvl}`;
+  }
+  $('#hero').innerHTML = `<svg viewBox="0 0 120 140" aria-hidden="true"><rect x="10" y="6" width="100" height="128" rx="16" fill="#fff" ${O}/><path d="M10 52 H110" ${O}/><rect x="90" y="20" width="8" height="22" rx="4" fill="#c9dbe6" ${O}/><rect x="90" y="64" width="8" height="34" rx="4" fill="#c9dbe6" ${O}/><g transform="translate(26 70) scale(.5)">${SNOW}</g></svg>`;
+  $('#doorFace').innerHTML = SNOW;
+  $('#rules').innerHTML = `<p>Tap a food to hear it.</p><div class="grid">${FOOD.map(f => `<button data-say="${f.nom}">${art(f.w, 32)}<span><b lang="el">${f.nom}</b><br>${f.en}</span></button>`).join('')}</div>
+    <p><b lang="el">Βλέπω</b> (I see) changes the word after it: <span lang="el">ο καφές → Βλέπω τον καφέ. η φέτα → Βλέπω τη φέτα.</span> The neuter stays: <span lang="el">Βλέπω το γάλα.</span></p>
+    <p><b lang="el">Λείπει</b> (is missing) keeps it as it is: <span lang="el">Λείπει ο καφές.</span></p>`;
+  $('#sound').checked = S.sound;
+  $('#sound').onchange = e => { S.sound = e.target.checked; store.set('sound', S.sound); };
+  $('#go').onclick = start;
+  const hp = new URLSearchParams(String(window.GQ_HASH || location.hash || '').replace(/^#/, ''));
+  if (+hp.get('lvl') >= 1 && +hp.get('lvl') <= S.open) { S.lvl = +hp.get('lvl'); }
+  if (!window.GQ_HASH) window.addEventListener('hashchange', () => location.reload());
+  renderSetup();
+})();
+</script>
+</body>
+</html>

@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19o';
+const VAULT_RELEASE = '2026-11-19p';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -501,8 +501,10 @@ class WordWebView extends ItemView {
 // ---------- Story Lines, Γιαγιά, Buzzer and Cousins live inside the vault and open here, offline, in the same page ----------
 const APPV = 'greekquent-app';
 // Word notes that open Τι λέμε; (greetings by time of day) from More.
+// The foods in the fridge game. A word card for one of them offers the game.
+const FRIDGE_W = new Set(['γάλα', 'νερό', 'αυγό', 'τυρί', 'μήλο', 'ντομάτα', 'κρέας', 'ψάρι', 'γιαούρτι', 'πορτοκάλι', 'σαλάτα', 'κοτόπουλο', 'σοκολάτα', 'φέτα', 'μέλι', 'καφές']);
 const GREET_W = new Set(['καλημέρα', 'καλησπέρα', 'καληνύχτα', 'απόγευμα', 'βράδυ', 'πρωί', 'μέρα', 'νύχτα', 'γεια', 'αντίο', 'ώρα']);
-const APPS = { story: { file: 'storylines.html', title: 'Story Lines', icon: 'clapperboard' }, giagia: { file: 'giagia.html', title: 'Γιαγιά', icon: 'gamepad-2' }, buzzer: { file: 'buzzer.html', title: 'Buzzer', icon: 'zap' }, cousins: { file: 'cousins.html', title: 'Cousins', icon: 'users' }, hello: { file: 'hello.html', title: 'Τι λέμε;', icon: 'sun' } };
+const APPS = { story: { file: 'storylines.html', title: 'Story Lines', icon: 'clapperboard' }, giagia: { file: 'giagia.html', title: 'Γιαγιά', icon: 'gamepad-2' }, buzzer: { file: 'buzzer.html', title: 'Buzzer', icon: 'zap' }, cousins: { file: 'cousins.html', title: 'Cousins', icon: 'users' }, hello: { file: 'hello.html', title: 'Τι λέμε;', icon: 'sun' }, fridge: { file: 'fridge.html', title: 'Τι βλέπεις στο ψυγείο;', icon: 'refrigerator' } };
 class AppView extends ItemView {
   constructor(leaf, plugin) { super(leaf); this.plugin = plugin; this.which = 'story'; this.hash = ''; this.shown = ''; }
   getViewType() { return APPV; }
@@ -642,6 +644,65 @@ function drawDancers(ctx, n, t) {
     if (i < n - 1) R(x + 4, y + 3, 5, 1, '#f1c27d');
   }
   R(x0 - 2, 44 - (Math.floor(t * 14) % 2), 2, 1, '#ffffff');   // the leader's handkerchief
+}
+// The Dance world seen from above, like a dance diagram: one footprint for each step, no dancer.
+// Each step is [foot, dx, y, touch]: dx is how far along the line from the other foot, y is in front (minus, toward the middle of the circle) or behind.
+// A touch (or a lift) leaves a light print and the weight stays where it was. They are simplified, but the counts and the shape are the real ones.
+const DANCE_FEET = {
+  syrtos: [['R', 24, 0], ['L', 18, -14], ['R', 22, 0], ['L', 14, -20], ['R', -2, 14], ['L', 12, 0]],
+  kalamatianos: [['R', 24, 0], ['L', 18, -14], ['R', 22, 0], ['L', 18, -14], ['R', 22, 0], ['L', 18, -14], ['R', 22, 0], ['L', 16, -22], ['R', -4, 18], ['L', 20, 0], ['R', 18, -22], ['L', -6, 18]],
+  tsamiko: [['R', 26, 0], ['L', 18, -14], ['R', 24, 0], ['L', 18, -14], ['R', 24, 0], ['L', 10, -22, 1], ['L', -8, 0], ['R', 12, -22, 1], ['R', 14, 0], ['L', 10, -22, 1], ['L', 16, 0], ['R', 24, 0]],
+  hasapiko: [0, 1, 2].flatMap(() => [['R', 24, 0], ['L', 18, -14], ['R', 22, 0], ['L', 14, -28, 1], ['L', 12, 0], ['R', 12, -28, 1], ['R', 12, 0]]),
+  zeibekiko: null
+};
+const DANCE_ACC = { syrtos: 'τον συρτό', kalamatianos: 'τον καλαματιανό', tsamiko: 'το τσάμικο', hasapiko: 'το χασάπικο', zeibekiko: 'το ζεϊμπέκικο', ikariotiko: 'το ικαριώτικο', pentozali: 'την πεντοζάλη', ballos: 'τον μπάλο', hasaposerviko: 'το χασαποσέρβικο', pontiako: 'το ποντιακό', sousta: 'τη σούστα', tsakonikos: 'τον τσακώνικο' };
+const DANCE_EN = { syrtos: 'syrtos', kalamatianos: 'kalamatianos', tsamiko: 'tsamiko', hasapiko: 'hasapiko', zeibekiko: 'zeibekiko', ikariotiko: 'ikariotiko', pentozali: 'pentozali', ballos: 'ballos', hasaposerviko: 'hasaposerviko', pontiako: 'pontic dance', sousta: 'sousta', tsakonikos: 'tsakonikos' };
+// Prints for a dance, fitted into a W x H box: [{ x, y, f, t, rot }].
+function dancePrints(k, W, H, size) {
+  const m = 30 * (size || 1);
+  let raw = [];
+  if (!DANCE_FEET[k]) {   // ο ζεϊμπέκικος: one dancer, alone, turning on a small circle, made up as you go
+    for (let i = 0; i < 9; i++) { const a = -Math.PI / 2 + i * 0.72, r = i === 8 ? 12 : 40, f = i % 2 ? 'L' : 'R', o = f === 'R' ? 5 : -5; raw.push({ x: Math.cos(a) * (r + o), y: Math.sin(a) * (r + o), f, t: i === 4, rot: a * 180 / Math.PI + 90 }); }
+  } else {
+    const pos = { R: [12, 0], L: [0, 0] };
+    for (const [f, dx, dy0, t] of DANCE_FEET[k]) {
+      const dy = dy0, o = pos[f === 'R' ? 'L' : 'R'], p = [o[0] + dx, dy]; if (!t) pos[f] = p;
+      raw.push({ x: p[0], y: p[1], f, t: !!t, rot: (f === 'R' ? 8 : -8) + (dy0 < -8 ? (f === 'L' ? 14 : -14) : 0) });
+    }
+  }
+  const xs = raw.map(p => p.x), ys = raw.map(p => p.y), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const s = Math.min(2, (W - m) / Math.max(1, x1 - x0), (H - m - 34) / Math.max(1, y1 - y0));
+  return raw.map(p => ({ ...p, x: W / 2 + (p.x - (x0 + x1) / 2) * s, y: H / 2 + 8 + (p.y - (y0 + y1) / 2) * s }));
+}
+const svgA = (parent, tag, a) => { const e = document.createElementNS(SVGNS, tag); for (const k in a) e.setAttribute(k, a[k]); if (parent) parent.appendChild(e); return e; };
+// One footprint: a sole and a heel, the right foot as drawn, the left one mirrored.
+function footprint(parent, p, cls, size) {
+  const g = svgA(parent, 'g', { class: 'gq-print ' + cls + (p.t ? ' is-touch' : ''), transform: `translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) rotate(${p.rot.toFixed(0)}) scale(${(p.f === 'L' ? -1 : 1) * size} ${size}) translate(-6 -14)` });
+  svgA(g, 'path', { d: 'M6 0C10.5 0 12 5 11.5 10C11 14.5 9.5 16 8.8 16.5L3.2 16.5C2.5 16 1 14 .8 10C.5 4 2.5 0 6 0Z' });
+  svgA(g, 'ellipse', { cx: 6, cy: 22.6, rx: 3.9, ry: 4.3 });
+  return g;
+}
+// The village square under the prints: warm stone, a few tiles, and the festival lights across the top.
+function squareFloor(svg, W, H, night) {
+  const id = 'gqsq' + Math.random().toString(36).slice(2, 7), d = svgA(svg, 'defs', {});
+  const pt = svgA(d, 'pattern', { id, width: 28, height: 28, patternUnits: 'userSpaceOnUse' });
+  svgA(pt, 'rect', { width: 28, height: 28, fill: night ? '#2d3352' : '#ecdfc6' }); svgA(pt, 'path', { d: 'M0 .5H28M.5 0V28', stroke: night ? '#3a4166' : '#dccbab', 'stroke-width': 1, fill: 'none' });
+  svgA(svg, 'rect', { width: W, height: H, fill: `url(#${id})`, rx: night ? 0 : 10 });
+  const cols = ['#ffd860', '#ff7a6b', '#8fd0ff', '#9be08f']; svgA(svg, 'path', { d: `M0 6Q${W / 2} 26 ${W} 6`, stroke: night ? '#8088aa' : '#a89a80', 'stroke-width': 1, fill: 'none' });
+  for (let i = 1; i < 14; i++) { const t = i / 14, x = W * t, y = 6 + 40 * t * (1 - t); svgA(svg, 'circle', { cx: x, cy: y + 3, r: 3.2, fill: cols[i % 4], class: 'gq-light', style: `animation-delay:${(i % 5) * .3}s` }); }
+}
+// Short sounds made on the spot, no files: a soft step, and a little Greek-sounding run for the big moments.
+// They follow the Greek voice switch (quiet means no sound at all).
+let gqAC = null;
+function gqSound(kind) {
+  if (gqQuiet()) return; const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+  try {
+    gqAC = gqAC || new AC(); const c = gqAC; if (c.state !== 'running') c.resume();
+    const tone = (hz, at, dur, type, vol, to) => { const o = c.createOscillator(), g = c.createGain(); o.type = type; o.frequency.setValueAtTime(hz, at); if (to) o.frequency.exponentialRampToValueAtTime(to, at + dur); g.gain.setValueAtTime(0.0001, at); g.gain.exponentialRampToValueAtTime(vol, at + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, at + dur); o.connect(g); g.connect(c.destination); o.start(at); o.stop(at + dur + 0.02); };
+    const t = c.currentTime + 0.02;
+    if (kind === 'step') tone(150, t, 0.11, 'sine', 0.35, 70);
+    else { [62, 63, 66, 67, 69, 74].forEach((m, i) => tone(440 * Math.pow(2, (m - 69) / 12), t + i * 0.09, i === 5 ? 0.6 : 0.16, 'triangle', 0.22)); tone(73.4, t, 0.7, 'sine', 0.25); }
+  } catch (e) {}
 }
 // Everything drawn under mark() becomes a tap target: the canvas keeps a list of [x0, y0, x1, y1, Greek, English].
 function worldPaint(ctx, w, st, mood, t) {
@@ -2126,7 +2187,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠάρε φόρα. This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- Comebacks, today\'s line and the rally: Had it counts like a word. Not yet: 1 for trying.\n- A finished read-through, rally swap, song or kid card: 2. Homework sent: 3. A question to the class: 2. Once a day each.\n- Guess first in Look up: 1. A new word in the Word web: 1, up to 5 a day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
     }
     const today = ymd(new Date()), gap = d => { const [a, b, c] = String(d).split('-').map(Number); const n = new Date(); n.setHours(12, 0, 0, 0); return Math.round((n - new Date(a, b - 1, c, 12)) / 864e5); };
-    let gained = 0; const danced = []; const dw = (this.worldNow !== undefined ? this.worldNow : this.colors().world) === 'dance';
+    let gained = 0, big = null; const danced = [], dancedK = []; const dw = (this.worldNow !== undefined ? this.worldNow : this.colors().world) === 'dance';
     await this.app.fileManager.processFrontMatter(f, fm => {
       for (const k of ['days', 'got', 'up', 'met', 'made', 'tried', 'did', 'web', 'said']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
       // tried and did only need today; yesterday's entries go.
@@ -2160,15 +2221,22 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       for (const d of Object.keys(fm.days)) if (gap(d) > 60) delete fm.days[d];
       // Steps: finishing a dance's real steps adds it to the collection and dates the first time. A guest dance can still visit on a big day.
       for (const k of ['dance', 'firsts', 'danced']) if (!fm[k] || typeof fm[k] !== 'object' || Array.isArray(fm[k])) fm[k] = {};
-      const add = k => { if (fm.danced[k] === today) return; fm.danced[k] = today; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); };
+      const add = k => { if (fm.danced[k] === today) return; fm.danced[k] = today; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); dancedK.push(k); };
       fm.grow = (+fm.grow || 0) + gained;
       if (dw) { const was = danceNow(fm.steps); fm.steps = (+fm.steps || 0) + gained; const is = danceNow(fm.steps);
-      for (let j = was.learned; j < is.learned; j++) { const k = DANCE_PATH[j % DANCE_PATH.length][0]; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); }
+      for (let j = was.learned; j < is.learned; j++) { const k = DANCE_PATH[j % DANCE_PATH.length][0]; fm.dance[k] = (+fm.dance[k] || 0) + 1; if (!fm.firsts[k]) fm.firsts[k] = today; danced.push(DANCE_NAME[k]); dancedK.push(k); }
       if (now >= 12 && Object.keys(fm.days).length >= 7 && dayHash(today) % 4 === 0) add(GUEST_DANCES[dayHash(today + 'g') % GUEST_DANCES.length][0]); }
+      // One big moment at most per save, and each only once (dated in firsts, so it survives updates and other devices).
+      if (dancedK.length) { const kk = dancedK[dancedK.length - 1], guest = GUEST_DANCES.some(g => g[0] === kk); big = { k: kk, gr: guest ? `Μπράβο. Χόρεψες ${DANCE_ACC[kk]}.` : `Μπράβο. Έμαθες ${DANCE_ACC[kk]}.`, en: guest ? `Well done. A guest dance came by, and you danced the ${DANCE_EN[kk]}.` : `Well done. You learned the ${DANCE_EN[kk]}.` }; }
+      else { const once = (key, v) => { if (big || fm.firsts[key]) return; fm.firsts[key] = today; big = v; };
+        if (q.some(x => x[0] === 'did' && x[1] === 'homework')) { const s0 = new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2]), wn = Math.max(1, Math.floor((new Date() - s0) / 6048e5) + 1); once('big week ' + wn, { gr: 'Μπράβο. Τελείωσες την εβδομάδα.', en: 'Well done. You finished the week and sent your homework.' }); }
+        if (this.abcAllDone()) once('big alphabet', { gr: 'Μπράβο. Ξέρεις όλο το αλφάβητο.', en: 'Well done. You know the whole alphabet, every sound and every name.' });
+        if (this.colors().green.length >= 50) once('big green 50', { gr: 'Μπράβο. Πενήντα πράσινες λέξεις.', en: 'Well done. Fifty green words: fifty words you have.' }); }
       this.moMem = { days: { ...fm.days }, grow: fm.grow, steps: fm.steps, dance: { ...fm.dance }, firsts: { ...fm.firsts }, t: Date.now() };
     });
     if (danced.length) this.danceAt = Date.now();
     if (gained) { this.moPaint(); this.moToast(gained, danced.length ? 'you danced ' + danced.join(' and ') : ''); }
+    if (big) setTimeout(() => this.festScene(big), gained ? 1500 : 300);
   }
   // A small "+3 φόρα" at the top for a moment, so the points are felt where the work happens.
   moToast(n, extra) {
@@ -2237,34 +2305,72 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     cv.onclick = e => { const h = worldHit(cv, e); try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {} run(); word.setAttribute('lang', 'el'); if (h) { word.setText(`${h[4]} · ${h[5]}`); say(h[4]); } else speak(); };
     run();
   }
-  // The Dance world: a festival floor. One dancer for you, one more for each dance learned (up to 7).
-  // Under them, one mark for each step of the dance you are learning; tap and they dance the steps you have so far.
+  // The Dance world: the village square (η πλατεία) seen from above. One footprint for each step of the dance you are learning,
+  // in its real pattern. Each new step stamps its print, with a soft sound. Tap the square to walk the steps again.
   danceWorld(c, todayPts, score) {
-    const d = danceNow(this.moData().steps), mood = worldMood(todayPts, score), name = DANCE_NAME[d.k], crew = Math.min(7, 1 + d.learned);
-    const box = c.createDiv('gq-world'), cv = box.createEl('canvas', { cls: 'gq-world-cv', attr: { width: W_W, height: W_H, role: 'img', 'aria-label': `Πανηγύρι. Learning ${name}: step ${d.steps} of ${d.n}.` } });
-    const ctx = cv.getContext('2d'); if (!ctx) return; ctx.imageSmoothingEnabled = false;
+    const d = danceNow(this.moData().steps), mood = worldMood(todayPts, score), name = DANCE_NAME[d.k];
+    const W = 320, H = 140, FS = d.n > 14 ? 0.95 : 1.5, prints = dancePrints(d.k, W, H, FS);
+    const box = c.createDiv('gq-world gq-square');
+    const svg = svgA(box, 'svg', { viewBox: `0 0 ${W} ${H}`, class: 'gq-square-sv', role: 'img', 'aria-label': `Η πλατεία, the village square. Learning ${name}: step ${d.steps} of ${d.n}.` });
+    squareFloor(svg, W, H, mood === 0);
     const cap = box.createDiv({ cls: 'gq-hint gq-world-cap' }); cap.appendText('Learning ');
     const nm = cap.createSpan({ cls: 'gq-say', text: name, attr: { lang: 'el' } }); nm.onclick = () => say(name);
     cap.appendText(` · step ${d.steps} of ${d.n} · ${d.r === 1 ? 'every φόρα point is a step' : d.r + ' φόρα a step'} · ${d.more} more to learn it`);
     if (d.learned) cap.appendText(` · ${d.learned} learned`);
-    const st = { era: 0, n: 0, idx: 1, f: 0 }, R = (x, y, ww, hh, col) => { ctx.fillStyle = col; ctx.fillRect(Math.round(x), Math.round(y), ww, hh); };
-    const marks = t => {
-      for (let x = 4; x < W_W; x += 10) R(x, 3 + (x % 20 ? 1 : 0), 2, 2, ['#ffd860', '#ff7a6b', '#8fd0ff'][(x / 10 | 0) % 3]);   // festival lights
-      const gap = Math.min(7, Math.floor((W_W - 8) / d.n)), x0 = Math.round((W_W - gap * d.n) / 2), lit = Math.round(d.steps * Math.min(1, t));
-      for (let i = 0; i < d.n; i++) R(x0 + i * gap, 52, gap - 2, 2, i < lit ? '#ffd860' : 'rgba(0,0,0,0.35)');
-    };
     const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
-    const danceHits = () => { const hs = cv._hits || [], x0 = Math.round((W_W - crew * 9) / 2) - 5;
-      hs.push([0, 2, W_W, 7, 'τα φωτάκια', 'festival lights'], [4, 50, W_W - 4, 56, 'τα βήματα', 'steps'], [x0, 40, x0 + crew * 9 + 6, 54, crew > 1 ? 'οι χορευτές' : 'ο χορευτής', crew > 1 ? 'dancers' : 'dancer'], [x0 - 2, 40, x0 + 3, 46, 'το μαντήλι', 'handkerchief']); };
-    const run = () => {
-      cancelAnimationFrame(cv._raf); const t0 = performance.now(), dur = Math.max(1200, d.steps * 420);
-      const frame = now => { const t = Math.min(1, (now - t0) / dur); worldPaint(ctx, 'dance', st, mood, 1); danceHits(); marks(t); drawDancers(ctx, crew, d.steps ? t * d.steps / 7 : 0); if (t < 1 && cv.isConnected) cv._raf = requestAnimationFrame(frame); };
-      if (reduce) { worldPaint(ctx, 'dance', st, mood, 1); danceHits(); marks(1); drawDancers(ctx, crew, 0); } else frame(t0);
-    };
+    // New steps since this card was last drawn get stamped; the rest are already there.
+    const seen = this.stepSeen && this.stepSeen.k === d.k && this.stepSeen.learned === d.learned ? Math.min(this.stepSeen.n, d.steps) : d.steps;
+    this.stepSeen = { k: d.k, learned: d.learned, n: d.steps };
+    const els = prints.map((p, i) => footprint(svg, p, i < seen ? 'is-done' : i === d.steps ? 'is-next' : i < d.steps ? 'is-done is-wait' : 'is-later', FS));
+    const stamp = (from, to, gap) => { for (let i = from; i < to; i++) setTimeout(() => { if (!svg.isConnected) return; els[i].classList.remove('is-wait'); if (!reduce) { els[i].classList.add('is-stamp'); } gqSound('step'); }, (i - from) * gap + 250); };
+    if (seen < d.steps) { if (reduce) els.forEach(e => e.classList.remove('is-wait')); stamp(seen, d.steps, 260); }
     const word = box.createDiv({ cls: 'gq-world-say', attr: { lang: 'el' } });
     worldTip(word);
-    cv.onclick = e => { const h = worldHit(cv, e); try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {} run(); word.setAttribute('lang', 'el'); if (h) { word.setText(`${h[4]} · ${h[5]}`); say(h[4]); } else say(name); };
-    run();
+    svg.addEventListener('click', e => {
+      try { localStorage.setItem('gq-world-tap', '1'); } catch (x) {}
+      const onPrint = e.target.closest && e.target.closest('.gq-print');
+      word.setAttribute('lang', 'el'); word.setText(onPrint ? `τα βήματα · steps · ${name}` : 'η πλατεία · village square'); say(onPrint ? name : 'η πλατεία');
+      if (!reduce && d.steps) { els.slice(0, d.steps).forEach(e => { e.classList.remove('is-stamp'); e.classList.add('is-wait'); }); stamp(0, d.steps, 200); }
+    });
+  }
+  // The big moment, kept rare: a dance learned, a week's homework sent, the whole alphabet, the first 50 green words.
+  // The whole screen becomes the square at night, the prints light up one by one, a dancer (a placeholder until the mascots are chosen)
+  // dances across them, and one Greek line is said. Tap anywhere to go on. Calm mode and reduced motion get the finished picture, still.
+  festScene(big) {
+    if (document.querySelector('.gq-fest')) return;
+    const k = big.k && DANCE_NAME[big.k] && (DANCE_FEET[big.k] !== undefined) ? big.k : big.k ? 'kalamatianos' : 'syrtos';
+    const reduce = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) || this.calmOn();
+    const ov = document.body.createDiv({ cls: 'gq-fest' + (reduce ? ' is-still' : ''), attr: { role: 'dialog', 'aria-label': big.en, tabindex: '-1' } });
+    const W = 320, H = 200, svg = svgA(ov, 'svg', { viewBox: `0 0 ${W} ${H}`, class: 'gq-fest-sv', 'aria-hidden': 'true' });
+    squareFloor(svg, W, H, true);
+    const FS = k === 'hasapiko' ? 1.15 : 1.7, prints = dancePrints(k, W, H, FS), els = prints.map(p => footprint(svg, p, reduce ? 'is-lit' : 'is-later', FS));
+    // The dancer, from above: hair, shoulders in a red vest, arms out, a white handkerchief in the right hand.
+    const man = svgA(svg, 'g', { class: 'gq-fest-man' }), arms = svgA(man, 'g', { class: 'gq-fest-arms' });
+    svgA(arms, 'rect', { x: -22, y: -2.2, width: 44, height: 4.4, rx: 2.2, fill: '#f1c27d' });
+    svgA(arms, 'rect', { x: 19, y: -6, width: 9, height: 9, rx: 1.5, fill: '#ffffff', class: 'gq-fest-hk' });
+    svgA(man, 'ellipse', { cx: 0, cy: 0, rx: 15, ry: 8.5, fill: '#c0392b' });
+    svgA(man, 'ellipse', { cx: 0, cy: 1.5, rx: 6, ry: 7, fill: '#f6efe0' });
+    svgA(man, 'circle', { cx: 0, cy: -1, r: 6.8, fill: '#3a2a1a' });
+    const at = i => { const a = prints[i], b = prints[Math.max(0, i - 1)]; return [(a.x + b.x) / 2, (a.y + b.y) / 2 - 2]; };
+    const place = (x, y, r) => man.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${r.toFixed(0)}) scale(1.5)`);
+    const txt = ov.createDiv('gq-fest-txt');
+    txt.createDiv({ cls: 'gq-fest-gr', text: big.gr, attr: { lang: 'el' } });
+    txt.createDiv({ cls: 'gq-fest-en', text: big.en });
+    txt.createDiv({ cls: 'gq-fest-tap', text: 'Tap to go on' });
+    let done = false, raf = 0; const close = () => { if (done) return; done = true; cancelAnimationFrame(raf); ov.addClass('is-out'); setTimeout(() => ov.remove(), 350); document.removeEventListener('keydown', key, true); };
+    const key = e => { if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') { e.preventDefault(); close(); } };
+    ov.onclick = close; document.addEventListener('keydown', key, true); ov.focus();
+    gqSound('sting'); setTimeout(() => { if (!done) say(big.gr); }, 700);
+    if (reduce) { const [x, y] = at(prints.length - 1); place(x, y, 0); setTimeout(close, 6000); return; }
+    const gap = Math.max(240, Math.min(420, 3600 / prints.length)), t0 = performance.now(), n = prints.length;
+    const frame = now => {
+      if (done || !ov.isConnected) return; const e = Math.max(0, (now - t0) / gap), i = Math.min(n - 1, Math.floor(e)), f = Math.min(1, e - Math.floor(e));
+      for (let j = 0; j <= i; j++) if (!els[j].classList.contains('is-lit')) { els[j].classList.remove('is-later'); els[j].classList.add('is-lit', 'is-stamp'); }
+      const [x1, y1] = at(i), [x2, y2] = at(Math.min(n - 1, i + 1)), x = x1 + (x2 - x1) * f, y = y1 + (y2 - y1) * f - Math.abs(Math.sin(e * Math.PI)) * 3;
+      place(x, y, Math.sin(e * Math.PI) * 14);
+      if (e < n + 2) raf = requestAnimationFrame(frame); else setTimeout(close, 1800);
+    };
+    raf = requestAnimationFrame(frame);
   }
   // The card at the top of Today. The same question the teacher asks in class.
   moCard(box) {
@@ -4245,6 +4351,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       btn('Build a sentence', () => this.openPair(f.basename));
       btn('Play Γιαγιά with this word', async () => this.openApp('giagia', '#w=' + encodeURIComponent((await this.webWords(f.path)).join(','))));
       if (GREET_W.has(f.basename)) btn('Play Τι λέμε; (hello and goodbye)', () => this.openApp('hello', ''));
+      if (FRIDGE_W.has(f.basename)) btn('Play Τι βλέπεις στο ψυγείο;', () => this.openApp('fridge', ''));
       btn('Games', () => this.openNote(this.gamesNote()));
       btn('Ask the class', () => this.ask(f));
     } else {

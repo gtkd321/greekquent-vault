@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19p · Footprints on the square, and the fridge
+> - **Dance world, from above.** The Dance world is now η πλατεία, the village square, seen from above like a dance diagram. Every step leaves a footprint in the real pattern of the dance you are learning, with a soft step sound. Tap the square to walk the steps again.
+> - **The big moment.** Learning a whole dance fills the screen: the prints light up, a dancer goes across them, and you hear "Μπράβο. Έμαθες τον συρτό." It also comes when you send a week's homework, finish the alphabet, and reach 50 green words. Tap to go on. In calm mode it is a still picture.
+> - **Τι βλέπεις στο ψυγείο;** A new game in Games: open the fridge, find the food, say what you see (Βλέπω τον καφέ) and spot what the cat ate (Λείπει ο καφές).
+
 > [!tip]- 2026-11-19o · Πάρε φόρα
 > The momentum card now says **Πάρε φόρα** (get going, build up speed) instead of Πήρες φόρα;.
 

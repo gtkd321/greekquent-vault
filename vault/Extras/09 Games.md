@@ -33,6 +33,15 @@ All five games are part of the vault. They open here in Obsidian, need no intern
 > - Right on the first try earns φόρα for that word. Missed ones can go to Review.
 > - In class: put it on the screen and let the room call out the answer before anyone taps.
 
+> [!summary]- Greekquent Τι βλέπεις στο ψυγείο; (what's in the fridge)
+> [Open Τι βλέπεις στο ψυγείο;](obsidian://greekquent?open=fridge) (works offline)
+> - A big cartoon fridge with 16 foods from the 1,500. Tap the door to open it.
+> - **Level 1, Βρες το:** Πού είναι το γάλα; Tap the right food.
+> - **Level 2, Τι βλέπεις;:** one food glows. Pick or say the line: Βλέπω το γάλα, Βλέπω τη φέτα, Βλέπω τον καφέ.
+> - **Level 3, Τι λείπει;:** look for a few seconds, the cat sneaks in, and one food is gone. Λείπει το τυρί.
+> - Levels 2 and 3 show the difference: after Βλέπω the word changes (τον καφέ), after Λείπει it stays (ο καφές). On Android you can say the answer instead of tapping.
+> - 8 of 10 opens the next level. Right on the first try earns φόρα. Missed ones can go to Review.
+
 > [!summary]- Greekquent Γιαγιά (find the notebooks, don't get fed)
 > [Open Greekquent Γιαγιά](obsidian://greekquent?open=giagia) (works offline)
 > - One player, made for kids and remote students. Works on iPhone and Android (d-pad or swipe) and with arrow keys on a computer.

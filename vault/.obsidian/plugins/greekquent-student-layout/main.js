@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19w';
+const VAULT_RELEASE = '2026-11-19x';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -233,7 +233,7 @@ function gqPh(word) {
 // Each Greek word on screen gets its sound spelling underneath, as a ruby. The rt is empty and shows the spelling through CSS,
 // so the page text (and everything that reads it) stays plain Greek. Only Greek marked lang="el" and rendered notes are touched;
 // editors, inputs and pictures never are.
-const PH_SKIP = 'input, textarea, select, script, style, svg, code, pre, .cm-editor, [contenteditable="true"], .gq-noph, ruby.gq-pr, .gq-tour-tip';
+const PH_SKIP = 'input, textarea, select, script, style, svg, code, pre, .cm-editor, [contenteditable="true"], .gq-noph, .gq-abc, ruby.gq-pr, .gq-tour-tip';
 const PH_SCOPE = '[lang="el"], .markdown-rendered, .markdown-preview-view';
 const PH_RE = /[\u0370-\u03ff\u1f00-\u1fff]+(?:['’][\u0370-\u03ff\u1f00-\u1fff]*)?/g;
 const PH_HAS = /[\u0370-\u03ff\u1f00-\u1fff]/;
@@ -2312,6 +2312,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addSeparator();
     m.addItem(i => i.setTitle("What's new").setIcon('sparkles').onClick(() => this.openNote(WHATS_NEW)));
     m.addItem(i => i.setTitle(gqQuiet() ? 'Greek voice: off (turn on)' : 'Greek voice: on (turn off)').setIcon(gqQuiet() ? 'volume-x' : 'volume-2').onClick(() => this.setQuiet(!gqQuiet())));
+    if (!this.isKids) m.addItem(i => i.setTitle(this.colors().fiay ? 'Fluent in a Year on Today: on (turn off)' : 'Fluent in a Year on Today: off (turn on)').setIcon('calendar').onClick(() => this.setFiay(!this.colors().fiay)));
     m.addItem(i => i.setTitle(this.phOn() ? 'Phonetics: on (turn off)' : 'Phonetics: off (turn on)').setIcon('type').onClick(() => this.setPh(!this.phOn())));
     m.addItem(i => i.setTitle('Greek voice help').setIcon('help-circle').onClick(() => this.voiceHelp(false)));
     m.addItem(i => i.setTitle('Setting up').setIcon('help-circle').onClick(() => this.openNote(SETUP)));
@@ -3390,7 +3391,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   est(kind, def) { const a = (this.lsGet('mins', {})[kind] || []).slice().sort((x, y) => x - y); return a.length < 2 ? def : Math.max(1, Math.round(a[Math.floor(a.length / 2)] / 60)); }
   timeRec(kind, secs) { if (!(secs > 15 && secs < 900)) return; const L = this.lsGet('mins', {}); L[kind] = [...(L[kind] || []), Math.round(secs)].slice(-7); this.lsSet('mins', L); }
   doneToday(k) { return this.lsGet('done', {})[k] === ymd(new Date()); }
-  markDone(k) { const d = this.lsGet('done', {}); d[k] = ymd(new Date()); this.lsSet('done', d); }
+  markDone(k) { const d = this.lsGet('done', {}); d[k] = ymd(new Date()); this.lsSet('done', d); this.nextUp(k); }
+  // Finishing the open card's step puts one button at its foot: the next step, or done for today.
+  nextUp(k) {
+    const st = this.nextSteps || [], c = this.nextOpen; if (!c || !c.isConnected || !st.length || st[0].key !== k || c.querySelector('.gq-nextup')) return;
+    const n = st[1], b = c.createEl('button', { cls: 'mod-cta gq-nextup', text: n ? `Next up: ${n.label} ›` : 'Done for today ›' });
+    b.onclick = () => { this.keepOpen = null; this.refreshToday(); };
+  }
   whereSet(w) { this.lsSet('where', { ...w, t: Date.now() }); }
   whereGet() { const w = this.lsGet('where', null); return w && Date.now() - w.t < 4 * 864e5 ? w : null; }
   async whereGo(w) {
@@ -3405,8 +3412,35 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const t = b.textContent; b.disabled = true; b.addClass('is-think'); b.setText(label + '…');
     setTimeout(() => { if (!b.isConnected) return; b.disabled = false; b.removeClass('is-think'); b.setText(t); }, 1800);
   }
+  // One thing at a time: the card Next points to stays open, the rest are one-line rows. Tap a row to open it (the open one folds).
+  // The φόρα meter stays as it is once a world is picked: it is the feedback, not a task.
+  foldToday(box) {
+    const cards = [...box.querySelectorAll(':scope > .gq-tcard')].filter(c => !c.hasClass('gq-next') && !c.hasClass('gq-tnew') && !(c.hasClass('gq-mo') && !c.hasClass('is-fresh')));
+    for (const c of cards) {
+      const strong = c.querySelector('.gq-thead strong'), t = (strong ? strong.textContent : (c.textContent || '').split('\n')[0]).trim();
+      const min = ((c.textContent || '').match(/about \d+ min/) || [])[0];
+      const h = createEl('button', { cls: 'gq-fold-h', attr: { type: 'button', 'aria-expanded': 'false' } });
+      h.createSpan({ cls: 'gq-fold-t', text: c.hasClass('gq-mo') ? 'Πάρε φόρα · pick a world' : c.hasClass('gq-abc') ? 'Alphabet · ' + t : t }); if (min && !t.includes(min)) h.createSpan({ cls: 'gq-hint', text: ' · ' + min });
+      h.createSpan({ cls: 'gq-fold-chev', text: '›' });
+      h.onclick = () => this.unfold(c); c.prepend(h); c.addClass('gq-fold');
+    }
+    const nx = box.querySelector(':scope > .gq-next');
+    // A card the student opened stays open when Today redraws (a color, a setting); Next up moves on.
+    const kept = this.keepOpen && cards.find(c => c.hasClass(this.keepOpen)); if (kept) this.nextOpen = kept;
+    if (this.nextOpen && cards.includes(this.nextOpen)) { if (nx) { nx.after(this.nextOpen); nx.addClass('is-slim'); if (!nx.querySelector('.gq-tour-line, .gq-next-back')) nx.hide(); } this.unfold(this.nextOpen, true); }
+    // Everything else waits behind one small link.
+    const rest = cards.filter(c => c !== this.nextOpen); if (!rest.length) return;
+    box.addClass('gq-rest-off'); const foot = box.querySelector(':scope > .gq-tfoot');
+    const a = createEl('a', { text: 'Do something else ›', href: '#', cls: 'gq-rest-link' }); a.onclick = e => { e.preventDefault(); box.toggleClass('gq-rest-off', !box.hasClass('gq-rest-off')); a.setText(box.hasClass('gq-rest-off') ? 'Do something else ›' : 'Fewer options'); };
+    if (foot) foot.prepend(a); else box.appendChild(a);
+  }
+  unfold(c, quiet) {
+    const box = c.parentElement; if (box) for (const o of box.querySelectorAll(':scope > .gq-fold.is-open')) if (o !== c) { o.removeClass('is-open'); const b = o.querySelector(':scope > .gq-fold-h'); if (b) b.setAttr('aria-expanded', 'false'); }
+    c.addClass('is-open'); c.addClass('gq-chosen'); const b = c.querySelector(':scope > .gq-fold-h'); if (b) b.setAttr('aria-expanded', 'true');
+    if (!quiet) { this.keepOpen = [...c.classList].find(t => t.startsWith('gq-') && !['gq-tcard', 'gq-kid', 'gq-fold', 'gq-chosen'].includes(t)) || null; c.scrollIntoView({ behavior: this.calmOn() ? 'auto' : 'smooth', block: 'start' }); }
+  }
   focusCard(el) {
-    if (!el) return; el.scrollIntoView({ behavior: this.calmOn() ? 'auto' : 'smooth', block: 'start' });
+    if (!el) return; if (el.hasClass('gq-fold')) this.unfold(el); el.scrollIntoView({ behavior: this.calmOn() ? 'auto' : 'smooth', block: 'start' });
     el.removeClass('gq-pulse'); void el.offsetWidth; el.addClass('gq-pulse'); setTimeout(() => el.removeClass('gq-pulse'), 1800);
   }
   // The phone's ringer switch can't be read from an app, so the Greek voice has its own switch, kept on this device.
@@ -3490,12 +3524,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const past = Object.keys(days || {}).filter(d => d !== today && +days[d] > 0).sort(), last = past[past.length - 1];
     const away = last && !(+days[today] > 0) ? Math.round((new Date(today + 'T12:00') - new Date(last + 'T12:00')) / 864e5) : 0;
     const steps = [], si = this.storyInfo, rev = ctx.rev || [];
-    if (si && si.due && this.storyEl) steps.push({ label: `Story puzzle, part ${si.part}`, min: this.est('story', 2), go: () => this.focusCard(this.storyEl) });
-    const abcGo = { label: 'Alphabet, one set', min: 2, go: () => this.focusCard(this.abcEl) }, abcNew = !this.lettersDone().length && !this.namesDone().length;
+    if (si && si.due && this.storyEl) steps.push({ label: `Story puzzle, part ${si.part}`, min: this.est('story', 2), el: this.storyEl, key: 'story', go: () => this.focusCard(this.storyEl) });
+    const abcGo = { label: 'Alphabet, one set', min: 2, el: this.abcEl, key: 'abc', go: () => this.focusCard(this.abcEl) }, abcNew = !this.lettersDone().length && !this.namesDone().length;
     if (this.abcEl && !this.doneToday('abc')) { if (abcNew) steps.unshift(abcGo); else steps.push(abcGo); }
-    if (this.cbList && this.cbList.length && !this.doneToday('cb')) steps.push({ label: 'A comeback', min: 1, go: () => this.popComebacks(this.cbList.slice(0, 1)) });
-    if (rev.length && this.revEl && !this.doneToday('rev')) { const n = Math.min(8, rev.length); steps.push({ label: `${n} review word${n === 1 ? '' : 's'}`, min: Math.max(1, Math.round(n * 12 / 60)), go: () => { this.markDone('rev'); this.focusCard(this.revEl); } }); }
+    if (this.cbList && this.cbList.length && !this.doneToday('cb')) steps.push({ label: 'A comeback', min: 1, key: 'cb', go: () => this.popComebacks(this.cbList.slice(0, 1)) });
+    if (rev.length && this.revEl && !this.doneToday('rev')) { const n = Math.min(8, rev.length); steps.push({ label: `${n} review word${n === 1 ? '' : 's'}`, key: 'rev', el: this.revEl, min: Math.max(1, Math.round(n * 12 / 60)), go: () => { this.markDone('rev'); this.focusCard(this.revEl); } }); }
     const head = c.createDiv('gq-thead'), line = c.createDiv('gq-next-line'), r = c.createDiv('gq-row'), s = steps[0];
+    this.nextOpen = (s && s.el) || null; this.nextSteps = steps;
     if (s && away >= 2) { head.createEl('strong', { text: 'Welcome back' }); line.setText('Just one line today?'); }
     else if (s) { head.createEl('strong', { text: 'Next' }); line.setText(`${s.label} · about ${s.min} min`); }
     else { head.createEl('strong', { text: 'Done for today' }); line.setText('Θα τα πούμε. One more? Pick one.'); line.setAttr('lang', 'el'); }
@@ -3621,7 +3656,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const moFresh = !Object.keys(this.moData().days || {}).length;
       if (!moFresh) this.moCard(box);
       this.paperCard(box, dd);
-      if (!col.setup_seen) {
+      if (!col.setup_seen && !this.tourLeft()) {
         const s = box.createDiv('gq-tcard gq-tnew'); s.createSpan({ text: 'New here? ' });
         const a = s.createEl('a', { text: 'Read Setting up', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); };
         s.createSpan({ text: ' (2 minutes). ' }); const x = s.createEl('button', { text: 'Got it' }); x.onclick = () => this.setupSeen();
@@ -3669,10 +3704,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
       this.reviewPlay = rev.slice(0, 40); this.todayWeek = wk;
       await this.nextCard(box, { rev, fresh: moFresh });
+      this.foldToday(box);
       const foot = box.createDiv('gq-hint gq-tfoot');
       const mo = foot.createEl('button', { text: 'More: story, games, colors, tools ›', cls: 'gq-mini' }); mo.onclick = () => this.showMore();
       if (this.abcAllDone()) { const ab = foot.createEl('button', { text: 'Alphabet', cls: 'gq-mini' }); ab.onclick = () => { ab.remove(); this.lettersCard(box); const k = box.lastElementChild; box.insertBefore(k, foot); k.scrollIntoView({ block: 'start', behavior: 'smooth' }); }; }
-      if (!col.fiay && wk) { const fy = foot.createEl('button', { text: 'Doing Fluent in a Year? Show its words', cls: 'gq-mini' }); fy.onclick = () => this.setFiay(true); }
       if (this.updateReady && !this.updating) { const up = foot.createEl('button', { text: 'Install update', cls: 'gq-mini' }); up.onclick = () => this.updateVault(false); }
       // Slides are parked (deckify below) until they come back for specific moments, not all of Today.
       if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.paintMore(); this.tabsSync(); this.tourShow(); }
@@ -4180,7 +4215,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!t.seen) t.seen = []; if (!t.seen.includes(st.k)) { t.seen.push(st.k); this.tourSave(); }
     if (st.tab) this.tabReveal(st.tab);
     const vis = el => el && (el.offsetParent !== null || el.getClientRects().length);
-    let el = null; for (const k of st.at || []) { el = [...document.querySelectorAll(`[data-tour="${k}"]`)].find(vis); if (el) break; }
+    let el = null; for (const k of st.at || []) { const all = [...document.querySelectorAll(`[data-tour="${k}"]`)]; el = all.find(vis) || all.find(e => e.closest('.gq-fold')); if (el) break; }
+    { const f = el && el.closest('.gq-fold'); if (f && !f.hasClass('is-open')) this.unfold(f, true); }
     // Kids starting out see only the first cards; a step further down opens the rest of today.
     if (!el && this.isKids && this.kidSimpleOn && (st.at || []).some(k => !k.startsWith('tab-'))) { this.kidSimpleOn = false; this.kidFull(); return; }
     if (el) { el.addClass('gq-tour-on'); if (!el.closest('#gq-nav') && !el.closest('.side-dock-ribbon')) { el.style.scrollMarginTop = '12px'; setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60); } }

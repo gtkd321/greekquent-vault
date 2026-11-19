@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19x · Today shows one thing at a time
+> - **One card.** Today shows only what is next, such as one alphabet set or the story puzzle. When you finish it, a **Next up** button at the bottom brings in the next step.
+> - **Everything else** is one tap away under **Do something else**. A card you open stays open while you use it.
+> - The Fluent in a Year switch has moved to the More menu (⋯).
+
 > [!tip]- 2026-11-19w · Start Fluent in a Year at day one, and smoother updates
 > - **Your own day one.** On the Fluent in a Year card, tap **Start at day one?** and slide to the week you want, then **Start here today**. Today becomes day one of that week, and the words go on from there. Class stays on the calendar, and your colors stay as they are. **Back to the class calendar** undoes it.
 > - **Updates no longer make you wait.** A new version now downloads quietly while you use the app, and switches in only once it is all on your phone. Opening the app or a word note no longer stalls while it downloads.

@@ -683,3 +683,17 @@ body.gq-ph-off rt.gq-prt { display: none; }
 .gq-cv-wchips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0; }
 .gq-fy-pick { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--background-modifier-border); }
 .gq-fy-pick input[type=range] { width: 100%; margin: 8px 0 10px; accent-color: var(--interactive-accent); min-height: 32px; }
+/* Today, one thing at a time: folded cards are one-line rows. */
+.gq-tcard.gq-fold:not(.is-open) { padding: 0; margin-bottom: 8px; }
+.gq-tcard.gq-fold:not(.is-open) > :not(.gq-fold-h) { display: none !important; }
+.gq-tcard.gq-fold.is-open > .gq-fold-h { display: none; }
+.gq-fold-h { all: unset; box-sizing: border-box; display: flex; align-items: center; gap: 4px; width: 100%; min-height: 48px; padding: 10px 14px; cursor: pointer; font-size: 15px; }
+.gq-fold-h:focus-visible { outline: 2px solid var(--interactive-accent); border-radius: 10px; }
+.gq-fold-t { font-weight: 600; }
+.gq-fold-chev { margin-left: auto; font-size: 20px; color: var(--text-muted); }
+/* One big card: the rest of Today hides until "Do something else". */
+.gq-today.gq-rest-off > .gq-fold:not(.is-open) { display: none; }
+.gq-tcard.gq-next.is-slim { border: 0; padding: 0 2px; margin-bottom: 8px; }
+.gq-tcard.gq-next.is-slim > .gq-thead, .gq-tcard.gq-next.is-slim > .gq-next-line, .gq-tcard.gq-next.is-slim > .gq-row, .gq-tcard.gq-next.is-slim > .gq-plan { display: none; }
+.gq-nextup { display: block; width: 100%; margin-top: 14px; min-height: 44px; }
+.gq-rest-link { display: block; margin: 4px 0 10px; }

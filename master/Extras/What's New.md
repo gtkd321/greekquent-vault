@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19o · Πάρε φόρα
+> The momentum card now says **Πάρε φόρα** (get going, build up speed) instead of Πήρες φόρα;.
+
 > [!tip]- 2026-11-19n · τον καφέ, Γιάννη!, and Ask the class
 > - **ο καφές or τον καφέ?** In the Word web, tap a noun and use the new switch to see it after a verb: Θέλω τον καφέ, Βλέπω την πόλη. The words around it change too. More on the ο, η, το page and in Verb Tables.
 > - **Calling someone.** Classroom Greek has a new set: Γιάννη!, Κώστα!, Νίκο!, Κύριε!, with how names change when you call someone.

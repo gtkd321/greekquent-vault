@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19n';
+const VAULT_RELEASE = '2026-11-19o';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -2123,7 +2123,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     let f = this.app.vault.getAbstractFileByPath(MO_FILE);
     if (!f) {
       if (!this.app.vault.getAbstractFileByPath(MY_WORK.slice(0, -1))) await this.app.vault.createFolder(MY_WORK.slice(0, -1));
-      f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠήρες φόρα; This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- Comebacks, today\'s line and the rally: Had it counts like a word. Not yet: 1 for trying.\n- A finished read-through, rally swap, song or kid card: 2. Homework sent: 3. A question to the class: 2. Once a day each.\n- Guess first in Look up: 1. A new word in the Word web: 1, up to 5 a day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
+      f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠάρε φόρα. This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- Comebacks, today\'s line and the rally: Had it counts like a word. Not yet: 1 for trying.\n- A finished read-through, rally swap, song or kid card: 2. Homework sent: 3. A question to the class: 2. Once a day each.\n- Guess first in Look up: 1. A new word in the Word web: 1, up to 5 a day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
     }
     const today = ymd(new Date()), gap = d => { const [a, b, c] = String(d).split('-').map(Number); const n = new Date(); n.setHours(12, 0, 0, 0); return Math.round((n - new Date(a, b - 1, c, 12)) / 864e5); };
     let gained = 0; const danced = []; const dw = (this.worldNow !== undefined ? this.worldNow : this.colors().world) === 'dance';
@@ -2278,7 +2278,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Before the first point: one quiet line. The full card (world, bars) arrives with the first φόρα.
     if (!Object.keys(days || {}).length) {
       c.addClass('is-fresh'); const top = c.createDiv('gq-mo-top');
-      const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πήρες φόρα;', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πήρες φόρα;');
+      const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πάρε φόρα', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πάρε φόρα');
       top.createDiv({ cls: 'gq-mo-n', text: '0', attr: { 'aria-label': 'Momentum 0' } });
       this.worldDraw(c, 0, 0);
       c.createDiv({ cls: 'gq-hint', text: 'φόρα means momentum. Pick one world. Dance is the quickest: every point is a step, and 6 steps is ο συρτός. Village, Olive grove and Pet grow a little with every φόρα point.' });
@@ -2287,7 +2287,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     c.removeClass('is-fresh');
     const wk = new Date(); wk.setDate(wk.getDate() - 7); const gain = m - this.moScore(days, wk), todayPts = +days[ymd(now)] || 0;
     const top = c.createDiv('gq-mo-top');
-    const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πήρες φόρα;', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πήρες φόρα;');
+    const q = top.createDiv({ cls: 'gq-mo-q gq-say', text: 'Πάρε φόρα', attr: { lang: 'el', role: 'button', 'aria-label': 'Hear it' } }); q.onclick = () => say('Πάρε φόρα');
     top.createDiv({ cls: 'gq-mo-n', text: String(m), attr: { 'aria-label': `Momentum ${m}` } });
     this.worldDraw(c, todayPts, m);
     c.createDiv({ cls: 'gq-hint', text: `Did you get going? · ${todayPts ? '+' + todayPts + ' today' : 'nothing yet today'} · ${gain >= 0 ? '+' : ''}${gain} this week` });
@@ -3509,7 +3509,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         { k: 'letters', at: ['letters'], t: 'Letters and sounds', b: 'Tap a sound to hear it. Drag each letter onto the sound it makes. Finish one set of six.', ev: 'letters' },
         { k: 'giagia', at: ['giagia'], t: 'Γιαγιά', b: 'Find 7 notebooks before Γιαγιά feeds you. Use the arrows or swipe. Come back here when you are done.', go: ['Play Γιαγιά', () => this.openApp('giagia', '#k=' + k)], ev: 'game' },
         { k: 'puzzle', at: ['puzzle'], t: 'Story puzzle', b: 'Drag the Greek words up to finish the line, or tap them. Finish one line.', ev: 'story' },
-        { k: 'mo', at: ['mo'], t: 'Πήρες φόρα;', b: 'Right answers give you φόρα (momentum) and steps. Pick a world. Green words make it grow.', ev: 'world' },
+        { k: 'mo', at: ['mo'], t: 'Πάρε φόρα', b: 'Right answers give you φόρα (momentum) and steps. Pick a world. Green words make it grow.', ev: 'world' },
         { k: 'words', at: ['words'], t: "This week's words", b: 'Hear each word, then pick a color: red is not yet, yellow is kind of, green is got it.', ev: 'up' },
         { k: 'teacher', at: ['teacher'], t: 'Now you are the teacher', b: 'Swap. The kid asks. The grown-up gets one wrong on purpose. Catch it. Then tap We did it.', ev: 'teacher' },
         { k: 'web', at: ['tab-words'], t: 'Word web', b: 'Tap a word to go there, double-tap to hear more than one, hold to see what it goes with.', go: ['Open the Word web', () => this.openGraph()], ev: 'web' },
@@ -3519,7 +3519,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     return [
       { k: 'next', at: ['next'], t: 'Start here', b: 'Next always shows one thing to do now and about how long it takes. Tap Start.', ev: 'next' },
       { k: 'story', at: ['story'], t: 'Story puzzle', b: 'Finish one line: put the Greek words in order, then say it out loud.', ev: 'story' },
-      { k: 'world', at: ['mo'], t: 'Πήρες φόρα;', b: 'Everything you do adds φόρα (momentum) and steps, and steps become dances. Pick a world. Green words make it grow.', ev: 'world' },
+      { k: 'world', at: ['mo'], t: 'Πάρε φόρα', b: 'Everything you do adds φόρα (momentum) and steps, and steps become dances. Pick a world. Green words make it grow.', ev: 'world' },
       { k: 'words', at: ['tab-words'], t: 'Words', b: 'All the words in one list, most frequent first. Find one you know and tap its color: red, yellow or green.', go: ['Open Words', () => this.openWords()], ev: 'up', tab: 'words' },
       { k: 'web', at: ['tab-words'], t: 'Word web', b: 'See what a word goes with. Tap a word to go there. Hold it to hear a phrase.', go: ['Open the Word web', () => this.openGraph()], ev: 'web' },
       { k: 'game', at: [], t: 'Γιαγιά', b: 'A quick game with your words. Come back here when you are done.', go: ['Play Γιαγιά', () => this.openApp('giagia', '')], ev: 'game' },

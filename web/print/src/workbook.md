@@ -102,7 +102,7 @@ Extra tiles: δεν · ; · .
 - Read the main scene aloud once a day.
 - Say today's phrases with their gestures to someone at home.
 - Spot today's letters on Greek signs, menus, or labels online.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 1 Γεια σου! Τι κάνεις; (greetings): 01.01–01.03 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.01 Alphabet**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 1 and read the sections listed next (and the alphabet pages). Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 1 Γεια σου! Τι κάνεις; (greetings): 01.01–01.03 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.01 Alphabet**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: σχολείο](https://news.google.com/search?q=%CF%83%CF%87%CE%BF%CE%BB%CE%B5%CE%AF%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20objects) · [Super Easy Greek videos](http://bit.ly/SuperEasyGreekPlaylist2)
 
 **Can you do this without the page?** Say two of today's phrases with the gesture, and one true sentence about yourself.
@@ -231,7 +231,7 @@ Extra tiles: δεν · ; · . · νερό · τσάι · καφέ · κρασί
 - Read the main scene aloud once a day.
 - Say today's phrases with their gestures to someone at home.
 - Spot today's letters on Greek signs, menus, or labels online.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 6 Καλώς ορίσατε! (welcome, drinks): 06.01–06.06 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.02 Alphabet 2**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 6 and read the sections listed next (and the alphabet pages). Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 6 Καλώς ορίσατε! (welcome, drinks): 06.01–06.06 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.02 Alphabet 2**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: φιλοξενία](https://news.google.com/search?q=%CF%86%CE%B9%CE%BB%CE%BF%CE%BE%CE%B5%CE%BD%CE%AF%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20hospitality) · [Super Easy Greek videos](http://bit.ly/SuperEasyGreekPlaylist2)
 
 **Can you do this without the page?** Say two of today's phrases with the gesture, and one true sentence about yourself.
@@ -363,7 +363,7 @@ Extra tiles: δεν · ; · . · σήμερα · σήμερα το βράδυ ·
 - Read the main scene aloud once a day.
 - Say today's phrases with their gestures to someone at home.
 - Spot today's letters on Greek signs, menus, or labels online.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 3 Τι δουλειά κάνεις; (jobs): 03.01–03.04 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.03 Alphabet 3**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 3 and read the sections listed next (and the alphabet pages). Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 3 Τι δουλειά κάνεις; (jobs): 03.01–03.04 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.03 Alphabet 3**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: Σαββατοκύριακο](https://news.google.com/search?q=%CE%A3%CE%B1%CE%B2%CE%B2%CE%B1%CF%84%CE%BF%CE%BA%CF%8D%CF%81%CE%B9%CE%B1%CE%BA%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20plans) · [Super Easy Greek videos](http://bit.ly/SuperEasyGreekPlaylist2)
 
 **Can you do this without the page?** Say two of today's phrases with the gesture, and one true sentence about yourself.
@@ -498,7 +498,8 @@ Extra tiles: δεν · ; · . · τη θάλασσα · τον ήλιο · έν�
 - Read the main scene aloud once a day.
 - Say today's phrases with their gestures to someone at home.
 - Spot today's letters on Greek signs, menus, or labels online.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 3 Τι δουλειά κάνεις; (jobs): 03.05–03.08 (New Words and Expressions 2, Conversation 2, Conversation 3, Listen Again Conversation 2) · 0.04 Alphabet 4**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 3 and read the sections listed next (and the alphabet pages). Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 3 Τι δουλειά κάνεις; (jobs): 03.05–03.08 (New Words and Expressions 2, Conversation 2, Conversation 3, Listen Again Conversation 2) · 0.04 Alphabet 4**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 3 Έλα να πιούμε ένα ουζάκι!** (page 32), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 - Greek out there (these pages change every week): [Headlines: καφετέρια](https://news.google.com/search?q=%CE%BA%CE%B1%CF%86%CE%B5%CF%84%CE%AD%CF%81%CE%B9%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20coffee) · [Super Easy Greek videos](http://bit.ly/SuperEasyGreekPlaylist2)
 
 **Can you do this without the page?** Say two of today's phrases with the gesture, and one true sentence about yourself.
@@ -645,7 +646,7 @@ Extra tiles: δεν · ; · . · το κινητό μου · τα κλειδιά
 - Read the main scene aloud once a day.
 - Say today's phrases with their gestures to someone at home.
 - Spot today's letters on Greek signs, menus, or labels online.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 7 Τι ωραία πολυθρόνα! (likes, colours, furniture): 07.01–07.06 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.05 Alphabet 5**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 7 and read the sections listed next (and the alphabet pages). Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 7 Τι ωραία πολυθρόνα! (likes, colours, furniture): 07.01–07.06 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.05 Alphabet 5**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: περίπτερο](https://news.google.com/search?q=%CF%80%CE%B5%CF%81%CE%AF%CF%80%CF%84%CE%B5%CF%81%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20shopping) · [Super Easy Greek videos](http://bit.ly/SuperEasyGreekPlaylist2)
 
 **Can you do this without the page?** Say two of today's phrases with the gesture, and one true sentence about yourself.
@@ -785,7 +786,7 @@ Extra tiles: δεν · ; · . · καφέ · τσάι · νερό · κρασί
 - Read the main scene aloud once a day.
 - Say today's phrases with their gestures to someone at home.
 - Spot today's letters on Greek signs, menus, or labels online.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 6 Καλώς ορίσατε! (welcome, drinks): 06.07–06.09 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2) · 0.06 Alphabet 6 · 0.07 Pronunciation**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 6 and read the sections listed next (and the alphabet pages). Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 6 Καλώς ορίσατε! (welcome, drinks): 06.07–06.09 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2) · 0.06 Alphabet 6 · 0.07 Pronunciation**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: καφενείο](https://news.google.com/search?q=%CE%BA%CE%B1%CF%86%CE%B5%CE%BD%CE%B5%CE%AF%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20kafeneio) · [Super Easy Greek videos](http://bit.ly/SuperEasyGreekPlaylist2)
 
 **Can you do this without the page?** Say two of today's phrases with the gesture, and one true sentence about yourself.
@@ -937,7 +938,7 @@ Extra tiles: δεν · ; · .
 - Say your introduction aloud once a day, and record it on day 1.
 - Learn the first two lines of the κάλαντα with a recording.
 - Write three sentences: Η μητέρα μου είναι από…, Ο πατέρας μου είναι από…, Είμαι από…
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 1 Γεια σου! Τι κάνεις; (greetings): 01.04–01.06 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 1 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 1 Γεια σου! Τι κάνεις; (greetings): 01.04–01.06 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: Χριστούγεννα](https://news.google.com/search?q=%CE%A7%CF%81%CE%B9%CF%83%CF%84%CE%BF%CF%8D%CE%B3%CE%B5%CE%BD%CE%BD%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20Christmas) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 
 **Can you do this without the page?** Είμαι ο/η ___ από ___.
@@ -1078,7 +1079,7 @@ Extra tiles: δεν · ; · . · ένα · δύο · τρία · τέσσερα
 - Count objects at home in Greek (stairs, plates, shoes).
 - Say your phone number digit by digit in Greek.
 - Wish three people Καλή χρονιά! this week.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 5 Μια μεγάλη οικογένεια (family, 11-100): 05.01–05.04 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 5 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 5 Μια μεγάλη οικογένεια (family, 11-100): 05.01–05.04 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: βασιλόπιτα](https://news.google.com/search?q=%CE%B2%CE%B1%CF%83%CE%B9%CE%BB%CF%8C%CF%80%CE%B9%CF%84%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20vasilopita) · [WeeGreek podcast](https://podcasts.apple.com/us/podcast/weegreek-short-stories-and-news-in-easy-and-simple-greek/id1534532179)
 
 **Can you do this without the page?** Count from δέκα down to ένα, then ask one Ποιος έχει…; question.
@@ -1229,7 +1230,7 @@ Extra tiles: δεν · ; · . · η μητέρα · ο πατέρας · ο αδ
 - Label 5 family photos: η γιαγιά μου, ο αδελφός μου…
 - Copy the plural grid from the board and say it aloud daily.
 - Write 2 sentences: Τι θέλουν τα παιδιά; Τι θέλουμε εμείς;
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 5 Μια μεγάλη οικογένεια (family, 11-100): 05.05–05.11 (New Words and Expressions 2, Conversation 2, Language Discovery, Practice, Listen Again Conversation 2)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 5 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 5 Μια μεγάλη οικογένεια (family, 11-100): 05.05–05.11 (New Words and Expressions 2, Conversation 2, Language Discovery, Practice, Listen Again Conversation 2)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: οικογένεια](https://news.google.com/search?q=%CE%BF%CE%B9%CE%BA%CE%BF%CE%B3%CE%AD%CE%BD%CE%B5%CE%B9%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20family) · [News in Easy Greek](https://www.audible.com/podcast/News-In-Easy-Greek/B0H57W535N)
 
 **Can you do this without the page?** One sentence with έχουμε and one with θέλουν.
@@ -1386,7 +1387,7 @@ Extra tiles: δεν · ; · . · το πρωί · το μεσημέρι · το 
 - Read the main scene aloud once a day.
 - Each morning, say your day in 3 sentences: Το πρωί…, Μετά…, Το βράδυ….
 - Make one card with πρωί / μεσημέρι / βράδυ and something you do at each time.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 8 Πώς περνάς την ημέρα σου; (daily routine, time): 08.01–08.05 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 8 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 8 Πώς περνάς την ημέρα σου; (daily routine, time): 08.01–08.05 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: πρωινό](https://news.google.com/search?q=%CF%80%CF%81%CF%89%CE%B9%CE%BD%CF%8C&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20daily%20routine) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 
 **Can you do this without the page?** Θέλω να ___, αλλά ___.
@@ -1540,7 +1541,8 @@ Extra tiles: δεν · ; · . · στο σπίτι · στο σούπερ μάρ
 - Read the main scene aloud once a day.
 - Every time you leave the house this week, say where you're going: Πάω στ___.
 - Make a flashcard for σε + article and quiz yourself with five places.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 2 Μιλάτε Ελληνικά; (where from, languages): 02.01–02.06 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 2 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 2 Μιλάτε Ελληνικά; (where from, languages): 02.01–02.06 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 6 Καλό ταξίδι!** (page 88), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 - Greek out there (these pages change every week): [Headlines: μετρό Αθήνα](https://news.google.com/search?q=%CE%BC%CE%B5%CF%84%CF%81%CF%8C%20%CE%91%CE%B8%CE%AE%CE%BD%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20public%20transport) · [WeeGreek podcast](https://podcasts.apple.com/us/podcast/weegreek-short-stories-and-news-in-easy-and-simple-greek/id1534532179)
 
 **Can you do this without the page?** Say where you go on Sunday: Την Κυριακή πάω στ___.
@@ -1684,7 +1686,8 @@ Extra tiles: δεν · ; · . · ντομάτες · πατάτες · ελιέ�
 - Read the main scene aloud once a day.
 - Read the prices on a grocery receipt aloud in Greek.
 - Count by tens to εκατό every day.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.01–10.05 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 10 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.01–10.05 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 8 Θέλετε τίποτα;** (page 118), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 - Greek out there (these pages change every week): [Headlines: λαϊκή αγορά](https://news.google.com/search?q=%CE%BB%CE%B1%CF%8A%CE%BA%CE%AE%20%CE%B1%CE%B3%CE%BF%CF%81%CE%AC&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20laiki%20market) · [News in Easy Greek](https://www.audible.com/podcast/News-In-Easy-Greek/B0H57W535N)
 
 **Can you do this without the page?** Say a price between 20 and 100 euros, and your partner writes it.
@@ -1845,7 +1848,8 @@ Extra tiles: δεν · ; · . · ένα ποτήρι κρασί · νερό · �
 - Read the main scene aloud once a day.
 - At each meal this week, say what you're eating and drinking: Τρώω…, Πίνω….
 - Read a real Greek taverna menu online and pick three dishes.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.06–10.09 (New Words and Expressions 2, Conversation 2, Language Discovery, Practice)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 10 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.06–10.09 (New Words and Expressions 2, Conversation 2, Language Discovery, Practice)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 4 Καλή όρεξη!** (page 46), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 - Greek out there (these pages change every week): [Headlines: ταβέρνα](https://news.google.com/search?q=%CF%84%CE%B1%CE%B2%CE%AD%CF%81%CE%BD%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20taverna%20food) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 
 **Can you do this without the page?** Order a full meal with Θα ήθελα….
@@ -1983,7 +1987,7 @@ Extra tiles: δεν · ; · . · Δευτέρα · Τρίτη · Τετάρτη 
 - Read the main scene aloud once a day.
 - Each time you check your phone, say the time in Greek.
 - Write your week's schedule in Greek: Τη Δευτέρα στις… .
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 8 Πώς περνάς την ημέρα σου; (daily routine, time): 08.06–08.13 (Language Discovery, New Words and Expressions 2, Conversation 2, Practice)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 8 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 8 Πώς περνάς την ημέρα σου; (daily routine, time): 08.06–08.13 (Language Discovery, New Words and Expressions 2, Conversation 2, Practice)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: ωράριο καταστημάτων](https://news.google.com/search?q=%CF%89%CF%81%CE%AC%CF%81%CE%B9%CE%BF%20%CE%BA%CE%B1%CF%84%CE%B1%CF%83%CF%84%CE%B7%CE%BC%CE%AC%CF%84%CF%89%CE%BD&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20telling%20the%20time) · [WeeGreek podcast](https://podcasts.apple.com/us/podcast/weegreek-short-stories-and-news-in-easy-and-simple-greek/id1534532179)
 
 **Can you do this without the page?** Say what time it is now, and one day and time you can meet.
@@ -2143,7 +2147,7 @@ Extra tiles: δεν · ; · . · ελληνικά · αγγλικά · ισπα�
 - Read the main scene aloud once a day.
 - Use one survival phrase every day, with a Greek speaker or out loud to a Greek video.
 - Write two sentences: Γιατί θέλω να μάθω ελληνικά.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 2 Μιλάτε Ελληνικά; (where from, languages): 02.07–02.10 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2, Conversation 3)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 2 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 2 Μιλάτε Ελληνικά; (where from, languages): 02.07–02.10 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2, Conversation 3)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: ελληνική γλώσσα](https://news.google.com/search?q=%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AE%20%CE%B3%CE%BB%CF%8E%CF%83%CF%83%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20learning%20Greek) · [News in Easy Greek](https://www.audible.com/podcast/News-In-Easy-Greek/B0H57W535N)
 
 **Can you do this without the page?** Say two survival phrases from memory.
@@ -2281,7 +2285,7 @@ Extra tiles: δεν · ; · . · σήμερα · αύριο στις δέκα ·
 - Read the main scene aloud once a day.
 - Re-read the reading card every day this week.
 - Pick 5 red words from your packet and make them yellow by next week.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **01.06 Listen Again Conversation 2 · 05.11 Listen Again Conversation 2 · 06.09 Listen Again Conversation 2 (mid-year review: replay three Listen Again tracks)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Units 1, 5 and 6 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **01.06 Listen Again Conversation 2 · 05.11 Listen Again Conversation 2 · 06.09 Listen Again Conversation 2 (mid-year review: replay three Listen Again tracks)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: Ελλάδα](https://news.google.com/search?q=%CE%95%CE%BB%CE%BB%CE%AC%CE%B4%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20street%20interviews) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 
 **Can you do this without the page?** Each student says one thing they can do now: Μπορώ να ___ στα ελληνικά.
@@ -2433,7 +2437,8 @@ Extra tiles: δεν · ; · . · το Σάββατο · την Κυριακή ·
 - Read the main scene aloud once a day.
 - Every evening, say 3 things you'll do tomorrow: Αύριο θα….
 - Write your weekend plan in 4 sentences.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 9 Έχεις χόμπι; (free time, music, films): 09.01–09.04 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 9 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 9 Έχεις χόμπι; (free time, music, films): 09.01–09.04 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 7 Έχετε δωμάτια;** (page 104), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 - Greek out there (these pages change every week): [Headlines: εκδρομή](https://news.google.com/search?q=%CE%B5%CE%BA%CE%B4%CF%81%CE%BF%CE%BC%CE%AE&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20weekend) · [Greek films on ERT this week](https://www.ert.gr/tv/tainies/ellinikes-tainies/)
 
 **Can you do this without the page?** Say two θα plans for this weekend.
@@ -2572,7 +2577,7 @@ Extra tiles: δεν · ; · . · κάνει · κρύο · ζέστη · βρέ�
 - Read the main scene aloud once a day.
 - Every morning, give a one-line weather report in Greek.
 - Look up the weather in Athens, Thessaloniki, and Heraklion and say it aloud.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 7 Τι ωραία πολυθρόνα! (likes, colours, furniture): 07.07–07.11 (New Words and Expressions 2, Conversation 2, Language Discovery, Listen Again Conversation 2, Practice)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 7 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 7 Τι ωραία πολυθρόνα! (likes, colours, furniture): 07.07–07.11 (New Words and Expressions 2, Conversation 2, Language Discovery, Listen Again Conversation 2, Practice)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: καιρός](https://news.google.com/search?q=%CE%BA%CE%B1%CE%B9%CF%81%CF%8C%CF%82&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20Clean%20Monday) · [ERTnews](https://www.ertnews.gr)
 
 **Can you do this without the page?** Say today's weather in one sentence.
@@ -2718,7 +2723,8 @@ Extra tiles: δεν · ; · . · η πλατεία · η εκκλησία · τ�
 - Read the main scene aloud once a day.
 - Draw and label a map of your neighborhood in Greek.
 - Practice the polite request with three places: Μπορείτε να μου πείτε πού είναι…;
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **02.06 Conversation 1 · 02.08 Conversation 2 (replay Unit 2: where people come from and live, then give directions)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 2 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **02.06 Conversation 1 · 02.08 Conversation 2 (replay Unit 2: where people come from and live, then give directions)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 5 Πού είναι η Ακρόπολη;** (page 70), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 - Greek out there (these pages change every week): [Headlines: 25η Μαρτίου](https://news.google.com/search?q=25%CE%B7%20%CE%9C%CE%B1%CF%81%CF%84%CE%AF%CE%BF%CF%85&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%2025th%20of%20March) · [ERTflix](https://www.ertflix.gr/)
 
 **Can you do this without the page?** Give directions from the classroom to the front door or the kitchen.
@@ -2861,7 +2867,7 @@ Extra tiles: δεν · ; · .
 - Read the main scene aloud once a day.
 - Put sticky notes on 5 things at home, each with a color and an adjective: η μεγάλη πόρτα, το κόκκινο βιβλίο.
 - Play I spy (Βλέπω κάτι…) with someone at home.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 4 Μένω σε διαμέρισμα (home, 0-10): 04.01–04.09 (Vocab Builder, New Words and Expressions 1, Conversation 1, Language Discovery, New Words and Expressions 2, Conversation 2, Listen Again Conversation 2)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 4 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 4 Μένω σε διαμέρισμα (home, 0-10): 04.01–04.09 (Vocab Builder, New Words and Expressions 1, Conversation 1, Language Discovery, New Words and Expressions 2, Conversation 2, Listen Again Conversation 2)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: σπίτι ενοίκιο](https://news.google.com/search?q=%CF%83%CF%80%CE%AF%CF%84%CE%B9%20%CE%B5%CE%BD%CE%BF%CE%AF%CE%BA%CE%B9%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20my%20house) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 
 **Can you do this without the page?** Describe one room in your home with two adjectives.
@@ -3000,7 +3006,7 @@ Extra tiles: δεν · ; · . · η μουσική · ο καφές · το ψά
 - Read the main scene aloud once a day.
 - Write 5 likes and 5 dislikes.
 - Ask a family member three Σου αρέσει…; questions.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Unit 9 Έχεις χόμπι; (free time, music, films): 09.05–09.09 (New Words and Expressions 2, Conversation 2, Practice)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 9 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 9 Έχεις χόμπι; (free time, music, films): 09.05–09.09 (New Words and Expressions 2, Conversation 2, Practice)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: συναυλία](https://news.google.com/search?q=%CF%83%CF%85%CE%BD%CE%B1%CF%85%CE%BB%CE%AF%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20hobbies) · [Greek films on ERT this week](https://www.ert.gr/tv/tainies/ellinikes-tainies/)
 
 **Can you do this without the page?** One Μου αρέσει… sentence and one Δεν μου αρέσουν… sentence.
@@ -3166,7 +3172,7 @@ Extra tiles: δεν · ; · . · χθες · χθες το βράδυ · πέρ�
 - Read the main scene aloud once a day.
 - Every night, say 3 sentences about your day with είχα, ήθελα, μπορούσα, ήμουν.
 - Read the past columns of the verb sheet aloud once a day.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **03.04 Conversation 1 · 03.06 Conversation 2 (replay Unit 3, then retell it in the past with ήθελα and είχα)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 3 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **03.04 Conversation 1 · 03.06 Conversation 2 (replay Unit 3, then retell it in the past with ήθελα and είχα)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: αναμνήσεις](https://news.google.com/search?q=%CE%B1%CE%BD%CE%B1%CE%BC%CE%BD%CE%AE%CF%83%CE%B5%CE%B9%CF%82&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20childhood) · [ERTnews](https://www.ertnews.gr)
 
 **Can you do this without the page?** One true sentence: Χθες ήθελα να ___, αλλά δεν μπορούσα.
@@ -3327,7 +3333,7 @@ Extra tiles: δεν · ; · . · πήγα · στη θάλασσα · στην �
 - Read the main scene aloud once a day.
 - Every Monday, write a 5-sentence diary of your weekend.
 - Tell someone at home what you did today in 3 "did once" sentences.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **09.04 Conversation 1 · 09.06 Conversation 2 (replay Unit 9, then retell it as last weekend)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 9 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **09.04 Conversation 1 · 09.06 Conversation 2 (replay Unit 9, then retell it as last weekend)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: παραλία](https://news.google.com/search?q=%CF%80%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20what%20did%20you%20do%20weekend) · [ERTflix](https://www.ertflix.gr/)
 
 **Can you do this without the page?** Say three things you did last weekend.
@@ -3469,7 +3475,7 @@ Extra tiles: δεν · ; · . · μια λαμπάδα · κόκκινα αυγ�
 - Read the main scene aloud once a day.
 - Tell a family member in Greek what happens on each day of Holy Week.
 - If you dye eggs, name the colors in Greek as you go.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **06.06 Conversation 1 · 06.08 Conversation 2 (replay Unit 6: welcoming guests, as at an Easter visit)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 6 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **06.06 Conversation 1 · 06.08 Conversation 2 (replay Unit 6: welcoming guests, as at an Easter visit)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: Πάσχα](https://news.google.com/search?q=%CE%A0%CE%AC%CF%83%CF%87%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20Easter) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 
 **Can you do this without the page?** One Holy Week greeting and one sentence about a custom.
@@ -3611,7 +3617,8 @@ Extra tiles: δεν · ; · . · το κεφάλι · ο λαιμός · η κο
 - Read the main scene aloud once a day.
 - Point to 5 body parts at home and say Με πονάει… for each.
 - Greet three people with Χριστός Ανέστη! this week.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **05.04 Conversation 1 · 05.06 Conversation 2 (replay Unit 5 and shadow it)**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to Unit 5 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **05.04 Conversation 1 · 05.06 Conversation 2 (replay Unit 5 and shadow it)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 10 Είχα ένα τρομερό πονοκέφαλο!** (page 160), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 - Greek out there (these pages change every week): [Headlines: φαρμακείο](https://news.google.com/search?q=%CF%86%CE%B1%CF%81%CE%BC%CE%B1%CE%BA%CE%B5%CE%AF%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20pharmacy) · [Greek films on ERT this week](https://www.ert.gr/tv/tainies/ellinikes-tainies/)
 
 **Can you do this without the page?** One Με πονάει… sentence, then the Easter greeting and its answer.
@@ -3745,7 +3752,7 @@ Extra tiles: δεν · ; · . · καφέ · τσάι · νερό · γλυκό
 - Over the summer, re-read one main scene a week.
 - Keep using the Anki deck, even 5 minutes a day.
 - Record your reading card now, then again in September.
-- Listen: open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app, then choose **Student's choice: replay a favourite conversation from Units 1-10 and perform it**. Play each dialogue twice: once just listening, once saying it along with them.
+- Read and listen: open **Beginners' Greek** to the conversation you picked and read it. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Student's choice: replay a favourite conversation from Units 1-10 and perform it**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 - Greek out there (these pages change every week): [Headlines: τουρισμός Ελλάδα](https://news.google.com/search?q=%CF%84%CE%BF%CF%85%CF%81%CE%B9%CF%83%CE%BC%CF%8C%CF%82%20%CE%95%CE%BB%CE%BB%CE%AC%CE%B4%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20travel) · [ERTnews](https://www.ertnews.gr)
 
 **Can you do this without the page?** Each student says one sentence: Φέτος έμαθα ___. Το καλοκαίρι θα ___.

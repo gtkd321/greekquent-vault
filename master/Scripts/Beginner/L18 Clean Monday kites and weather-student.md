@@ -147,7 +147,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Every morning, give a one-line weather report in Greek.
 > - Look up the weather in Athens, Thessaloniki, and Heraklion and say it aloud.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 7 Τι ωραία πολυθρόνα! (likes, colours, furniture): 07.07–07.11 (New Words and Expressions 2, Conversation 2, Language Discovery, Listen Again Conversation 2, Practice)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 7 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 7 Τι ωραία πολυθρόνα! (likes, colours, furniture): 07.07–07.11 (New Words and Expressions 2, Conversation 2, Language Discovery, Listen Again Conversation 2, Practice)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: καιρός](https://news.google.com/search?q=%CE%BA%CE%B1%CE%B9%CF%81%CF%8C%CF%82&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20Clean%20Monday) · [ERTnews](https://www.ertnews.gr)
 >
 > **Can you do this without the page?** Say today's weather in one sentence.

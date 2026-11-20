@@ -159,7 +159,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Say your introduction aloud once a day, and record it on day 1.
 > - Learn the first two lines of the κάλαντα with a recording.
 > - Write three sentences: Η μητέρα μου είναι από…, Ο πατέρας μου είναι από…, Είμαι από…
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 1 Γεια σου! Τι κάνεις; (greetings): 01.04–01.06 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 1 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 1 Γεια σου! Τι κάνεις; (greetings): 01.04–01.06 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: Χριστούγεννα](https://news.google.com/search?q=%CE%A7%CF%81%CE%B9%CF%83%CF%84%CE%BF%CF%8D%CE%B3%CE%B5%CE%BD%CE%BD%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20Christmas) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 >
 > **Can you do this without the page?** Είμαι ο/η ___ από ___.

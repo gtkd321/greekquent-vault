@@ -45,10 +45,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Write a real postcard in Greek, three sentences with Βλέπω…, and mail it or hand it to someone. If you know someone in Greece, send it there.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 3 Έλα να πιούμε ένα ουζάκι!** (ordering drinks and appetizers, page 32).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[κοίτα]] · [[αυτός]] · [[φωτογραφία|η φωτογραφία]] · [[τι]] · [[βλέπω]] · [[μικρός]] · [[λιμάνι|το λιμάνι]] · [[και]] · [[πίσω]] · [[βουνό|το βουνό]] · [[πού]] · [[είμαι]] · [[εκείνος]] · [[άσπρος]] · [[σπίτι|το σπίτι]] · [[πάνω]] · [[σε]] · [[ναι]] · [[δίπλα]] · [[εκκλησία|η εκκλησία]] · [[ακριβώς]] · [[εκεί]] · [[μένω]] · [[γιαγιά|η γιαγιά]] · [[μου]] · [[από]] · [[παράθυρο|το παράθυρο]] · [[όλος]] · [[θάλασσα|η θάλασσα]] · [[ωραία]] · [[ήλιος|ο ήλιος]] · [[κάθε]] · [[πρωί|το πρωί]] · [[με]] · [[καφές|ο καφές]] · [[της]] · [[καλησπέρα]] · [[σας]] · [[θα]] · [[ελληνικός]] · [[παρακαλώ]] · [[ποτήρι|το ποτήρι]] · [[νερό|το νερό]] · [[για]] · [[εγώ]] · [[έχω]] · [[κάτι]] · [[θέλω]] · [[να]] · [[μπορώ]] · [[τίποτα]] · [[άλλος]] · [[όχι]] · [[σου]] · [[ποιο]] · [[μέρος|το μέρος]] · [[Ελλάδα|η Ελλάδα]]

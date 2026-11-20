@@ -172,7 +172,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Every night, say 3 sentences about your day with είχα, ήθελα, μπορούσα, ήμουν.
 > - Read the past columns of the verb sheet aloud once a day.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **03.04 Conversation 1 · 03.06 Conversation 2 (replay Unit 3, then retell it in the past with ήθελα and είχα)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 3 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **03.04 Conversation 1 · 03.06 Conversation 2 (replay Unit 3, then retell it in the past with ήθελα and είχα)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: αναμνήσεις](https://news.google.com/search?q=%CE%B1%CE%BD%CE%B1%CE%BC%CE%BD%CE%AE%CF%83%CE%B5%CE%B9%CF%82&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20childhood) · [ERTnews](https://www.ertnews.gr)
 >
 > **Can you do this without the page?** One true sentence: Χθες ήθελα να ___, αλλά δεν μπορούσα.

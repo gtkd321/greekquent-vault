@@ -143,7 +143,8 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Say today's phrases with their gestures to someone at home.
 > - Spot today's letters on Greek signs, menus, or labels online.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 3 Τι δουλειά κάνεις; (jobs): 03.05–03.08 (New Words and Expressions 2, Conversation 2, Conversation 3, Listen Again Conversation 2) · 0.04 Alphabet 4**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 3 and read the sections listed next (and the alphabet pages). Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 3 Τι δουλειά κάνεις; (jobs): 03.05–03.08 (New Words and Expressions 2, Conversation 2, Conversation 3, Listen Again Conversation 2) · 0.04 Alphabet 4**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+> - Trip reading: in **Complete Greek**, read the first dialogue of **Unit 3 Έλα να πιούμε ένα ουζάκι!** (page 32), then play it in the [Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources) once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 > - Greek out there (these pages change every week): [Headlines: καφετέρια](https://news.google.com/search?q=%CE%BA%CE%B1%CF%86%CE%B5%CF%84%CE%AD%CF%81%CE%B9%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20coffee) · [Super Easy Greek videos](http://bit.ly/SuperEasyGreekPlaylist2)
 >
 > **Can you do this without the page?** Say two of today's phrases with the gesture, and one true sentence about yourself.

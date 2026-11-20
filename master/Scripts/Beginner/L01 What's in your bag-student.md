@@ -119,7 +119,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Say today's phrases with their gestures to someone at home.
 > - Spot today's letters on Greek signs, menus, or labels online.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 1 Γεια σου! Τι κάνεις; (greetings): 01.01–01.03 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.01 Alphabet**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 1 and read the sections listed next (and the alphabet pages). Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 1 Γεια σου! Τι κάνεις; (greetings): 01.01–01.03 (Vocab Builder, New Words and Expressions 1, Conversation 1) · 0.01 Alphabet**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: σχολείο](https://news.google.com/search?q=%CF%83%CF%87%CE%BF%CE%BB%CE%B5%CE%AF%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20objects) · [Super Easy Greek videos](http://bit.ly/SuperEasyGreekPlaylist2)
 >
 > **Can you do this without the page?** Say two of today's phrases with the gesture, and one true sentence about yourself.

@@ -143,7 +143,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Over the summer, re-read one main scene a week.
 > - Keep using the Anki deck, even 5 minutes a day.
 > - Record your reading card now, then again in September.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Student's choice: replay a favourite conversation from Units 1-10 and perform it**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to the conversation you picked and read it. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Student's choice: replay a favourite conversation from Units 1-10 and perform it**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: τουρισμός Ελλάδα](https://news.google.com/search?q=%CF%84%CE%BF%CF%85%CF%81%CE%B9%CF%83%CE%BC%CF%8C%CF%82%20%CE%95%CE%BB%CE%BB%CE%AC%CE%B4%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20travel) · [ERTnews](https://www.ertnews.gr)
 >
 > **Can you do this without the page?** Each student says one sentence: Φέτος έμαθα ___. Το καλοκαίρι θα ___.

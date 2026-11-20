@@ -151,7 +151,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Put sticky notes on 5 things at home, each with a color and an adjective: η μεγάλη πόρτα, το κόκκινο βιβλίο.
 > - Play I spy (Βλέπω κάτι…) with someone at home.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 4 Μένω σε διαμέρισμα (home, 0-10): 04.01–04.09 (Vocab Builder, New Words and Expressions 1, Conversation 1, Language Discovery, New Words and Expressions 2, Conversation 2, Listen Again Conversation 2)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 4 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 4 Μένω σε διαμέρισμα (home, 0-10): 04.01–04.09 (Vocab Builder, New Words and Expressions 1, Conversation 1, Language Discovery, New Words and Expressions 2, Conversation 2, Listen Again Conversation 2)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: σπίτι ενοίκιο](https://news.google.com/search?q=%CF%83%CF%80%CE%AF%CF%84%CE%B9%20%CE%B5%CE%BD%CE%BF%CE%AF%CE%BA%CE%B9%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20my%20house) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 >
 > **Can you do this without the page?** Describe one room in your home with two adjectives.

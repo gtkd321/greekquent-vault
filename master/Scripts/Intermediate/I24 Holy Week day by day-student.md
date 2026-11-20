@@ -41,10 +41,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Dye eggs red, visit a Greek Orthodox church service if you can, or cook one Easter dish (τσουρέκι, μαγειρίτσα). Write down three words you heard or read.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 12 Πού πήγατε για Πάσχα;** (social occasions, wishes, opinions, past events).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[τι]] · [[κάνω]] · [[οικογένεια|η οικογένεια]] · [[σου]] · [[μεγάλος]] · [[εβδομάδα|η εβδομάδα]] · [[πολύς]] · [[πράγμα|το πράγμα]] · [[Πέμπτη|η Πέμπτη]] · [[αυγό|το αυγό]] · [[και]] · [[μητέρα|η μητέρα]] · [[μου]] · [[όλο]] · [[σπίτι|το σπίτι]] · [[μυρίζω]] · [[Παρασκευή|η Παρασκευή]] · [[πρωί|το πρωί]] · [[με]] · [[σε]] · [[εκκλησία|η εκκλησία]] · [[βράδυ|το βράδυ]] · [[δρόμος|ο δρόμος]] · [[όλος]] · [[γονείς|οι γονείς]] · [[εγώ]] · [[μόνο]] · [[Σάββατο|το Σάββατο]] · [[πάμε]] · [[δώδεκα]] · [[λέω]] · [[από]] · [[φως|το φως]] · [[μετά]] · [[τρώω]] · [[Κυριακή|η Κυριακή]] · [[πώς]] · [[Πάσχα|το Πάσχα]] · [[ποιο]] · [[μου αρέσει]] · [[πολύ]] · [[φαγητό|το φαγητό]]

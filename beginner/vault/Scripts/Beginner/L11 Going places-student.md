@@ -161,7 +161,8 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Every time you leave the house this week, say where you're going: Πάω στ___.
 > - Make a flashcard for σε + article and quiz yourself with five places.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 2 Μιλάτε Ελληνικά; (where from, languages): 02.01–02.06 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 2 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 2 Μιλάτε Ελληνικά; (where from, languages): 02.01–02.06 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+> - Trip reading: in **Complete Greek**, read the first dialogue of **Unit 6 Καλό ταξίδι!** (page 88), then play it in the [Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources) once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 > - Greek out there (these pages change every week): [Headlines: μετρό Αθήνα](https://news.google.com/search?q=%CE%BC%CE%B5%CF%84%CF%81%CF%8C%20%CE%91%CE%B8%CE%AE%CE%BD%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20public%20transport) · [WeeGreek podcast](https://podcasts.apple.com/us/podcast/weegreek-short-stories-and-news-in-easy-and-simple-greek/id1534532179)
 >
 > **Can you do this without the page?** Say where you go on Sunday: Την Κυριακή πάω στ___.

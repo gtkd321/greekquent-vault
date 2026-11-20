@@ -41,10 +41,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Fly a kite, or make a paper one, and say the weather in Greek before you go out each day this week: Σήμερα κάνει…
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 11 Τι καιρό έκανε;** (weather, time expressions, months, page 178).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[βλέπω]] · [[για]] · [[Δευτέρα|η Δευτέρα]] · [[ναι]] · [[λέω]] · [[ότι]] · [[θα]] · [[έχω]] · [[ήλιος|ο ήλιος]] · [[πρωί|το πρωί]] · [[αλλά]] · [[απόγευμα|το απόγευμα]] · [[μπορώ]] · [[να]] · [[τότε]] · [[πρέπει]] · [[νωρίς]] · [[πού]] · [[πάω]] · [[εσείς]] · [[συνήθως]] · [[πάμε]] · [[σε]] · [[πολύ]] · [[κόσμος|ο κόσμος]] · [[φέτος]] · [[παραλία|η παραλία]] · [[έξω]] · [[από]] · [[πόλη|η πόλη]] · [[θάλασσα|η θάλασσα]] · [[δεν]] · [[κάνω]] · [[κρύο|το κρύο]] · [[λίγο]] · [[πάντα]] · [[αέρας|ο αέρας]] · [[εκεί]] · [[και]] · [[αυτός]] · [[θέλω]] · [[τι]] · [[τρώω]] · [[όλος]] · [[οικογένεια|η οικογένεια]] · [[ελιά|η ελιά]] · [[ωραία]] · [[εδώ]] · [[ήδη]] · [[ζέστη|η ζέστη]] · [[μερικοί]] · [[μέρα|η μέρα]] · [[Αθήνα|η Αθήνα]] · [[καιρός|ο καιρός]] · [[αλλάζω]] · [[κάθε]] · [[ώρα|η ώρα]] · [[σήμερα]] · [[που]] · [[εποχή|η εποχή]] · [[σου]] · [[μου αρέσει]] · [[γιατί]]

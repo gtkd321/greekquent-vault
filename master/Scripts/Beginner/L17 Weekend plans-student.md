@@ -159,7 +159,8 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Every evening, say 3 things you'll do tomorrow: Αύριο θα….
 > - Write your weekend plan in 4 sentences.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 9 Έχεις χόμπι; (free time, music, films): 09.01–09.04 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 9 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 9 Έχεις χόμπι; (free time, music, films): 09.01–09.04 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+> - Trip reading: in **Complete Greek**, read the first dialogue of **Unit 7 Έχετε δωμάτια;** (page 104), then play it in the [Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources) once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 > - Greek out there (these pages change every week): [Headlines: εκδρομή](https://news.google.com/search?q=%CE%B5%CE%BA%CE%B4%CF%81%CE%BF%CE%BC%CE%AE&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20weekend) · [Greek films on ERT this week](https://www.ert.gr/tv/tainies/ellinikes-tainies/)
 >
 > **Can you do this without the page?** Say two θα plans for this weekend.

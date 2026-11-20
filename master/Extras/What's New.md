@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Read along in your books (2026-11-19zzb)
+> Each lesson's homework now names what to read in Beginners' Greek before you play the tracks. Play each one twice: once reading along, once with the book closed. Seven lessons add a trip dialogue from Complete Greek, and the next class acts it out.
+
 > [!tip]- Quiz me on a color (2026-11-19zza)
 > On Words, tap Red, Yellow or Green, then Quiz me on these. Up to 10 words: pick the meaning, hear it and pick the Greek, or say it. A right answer moves the word up a color, a miss moves it down one.
 

@@ -164,7 +164,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Each morning, say your day in 3 sentences: Το πρωί…, Μετά…, Το βράδυ….
 > - Make one card with πρωί / μεσημέρι / βράδυ and something you do at each time.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 8 Πώς περνάς την ημέρα σου; (daily routine, time): 08.01–08.05 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 8 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 8 Πώς περνάς την ημέρα σου; (daily routine, time): 08.01–08.05 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: πρωινό](https://news.google.com/search?q=%CF%80%CF%81%CF%89%CE%B9%CE%BD%CF%8C&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20daily%20routine) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 >
 > **Can you do this without the page?** Θέλω να ___, αλλά ___.

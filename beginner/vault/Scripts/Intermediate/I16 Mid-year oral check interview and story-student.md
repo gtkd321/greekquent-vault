@@ -43,7 +43,7 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Record yourself, or say it to a friend: a two-minute talk in Greek about you, your family, and your day. Write the outline by hand first, with keywords only.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Mid-year check: do **Revision test 1** (units 1–4, page 62) and **Revision test 2** (units 5–8, page 136). Check with the answer key on page 220. Circle the questions you missed and bring them to class.
 
 > [!abstract]- Word links

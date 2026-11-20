@@ -43,10 +43,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Make a real weekend plan with someone and write it in Greek on paper: Το Σάββατο θα… Check it off on Monday.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 7 Έχετε δωμάτια;** (rooms and hotels, page 104) and **Unit 6 Καλό ταξίδι!** (travel, tickets, telling the time, page 88).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[τι]] · [[σχέδιο|το σχέδιο]] · [[έχω]] · [[για]] · [[καλοκαίρι|το καλοκαίρι]] · [[αν]] · [[όλος]] · [[πάω]] · [[καλά]] · [[θα]] · [[σε]] · [[Ελλάδα|η Ελλάδα]] · [[μήνας|ο μήνας]] · [[πού]] · [[πρώτος]] · [[δύο]] · [[εβδομάδα|η εβδομάδα]] · [[μένω]] · [[χωριό|το χωριό]] · [[με]] · [[θεία|η θεία]] · [[μου]] · [[βοηθάω]] · [[κήπος|ο κήπος]] · [[κάθε]] · [[πρωί|το πρωί]] · [[και]] · [[μετά]] · [[παίρνω]] · [[πλοίο|το πλοίο]] · [[βλέπω]] · [[που]] · [[δεν]] · [[ποτέ]] · [[ωραία]] · [[κάποιος]] · [[πανηγύρι|το πανηγύρι]] · [[φυσικά]] · [[βράδυ|το βράδυ]] · [[χορεύω]] · [[μέχρι]] · [[εγώ]] · [[φέτος]] · [[εδώ]] · [[αλλά]] · [[κάνω]] · [[μάθημα|το μάθημα]] · [[ελληνικός]] · [[ναι]] · [[όταν]] · [[σου]] · [[συμφωνία|η συμφωνία]] · [[αυτός]] · [[Σαββατοκύριακο|το Σαββατοκύριακο]] · [[διαφορετικά]] · [[χρόνος|ο χρόνος]]

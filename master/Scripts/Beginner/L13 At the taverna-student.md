@@ -168,7 +168,8 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - At each meal this week, say what you're eating and drinking: Τρώω…, Πίνω….
 > - Read a real Greek taverna menu online and pick three dishes.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.06–10.09 (New Words and Expressions 2, Conversation 2, Language Discovery, Practice)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 10 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.06–10.09 (New Words and Expressions 2, Conversation 2, Language Discovery, Practice)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+> - Trip reading: in **Complete Greek**, read the first dialogue of **Unit 4 Καλή όρεξη!** (page 46), then play it in the [Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources) once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 > - Greek out there (these pages change every week): [Headlines: ταβέρνα](https://news.google.com/search?q=%CF%84%CE%B1%CE%B2%CE%AD%CF%81%CE%BD%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20taverna%20food) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 >
 > **Can you do this without the page?** Order a full meal with Θα ήθελα….

@@ -150,7 +150,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Tell a family member in Greek what happens on each day of Holy Week.
 > - If you dye eggs, name the colors in Greek as you go.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **06.06 Conversation 1 · 06.08 Conversation 2 (replay Unit 6: welcoming guests, as at an Easter visit)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 6 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **06.06 Conversation 1 · 06.08 Conversation 2 (replay Unit 6: welcoming guests, as at an Easter visit)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: Πάσχα](https://news.google.com/search?q=%CE%A0%CE%AC%CF%83%CF%87%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20Easter) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 >
 > **Can you do this without the page?** One Holy Week greeting and one sentence about a custom.

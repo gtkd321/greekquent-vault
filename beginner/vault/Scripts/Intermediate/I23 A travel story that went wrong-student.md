@@ -41,10 +41,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Write a short diary entry by hand about last weekend, in Greek, five sentences. Read it to someone, even if they don't understand it.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 12 Πού πήγατε για Πάσχα;** (social occasions, wishes, opinions, past events) and **Unit 6 Καλό ταξίδι!** (travel, tickets, telling the time, page 88).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[πώς]] · [[είμαι]] · [[ταξίδι|το ταξίδι]] · [[σε]] · [[υπέροχος]] · [[αλλά]] · [[έχω]] · [[και]] · [[τι]] · [[γίνομαι]] · [[δεύτερος]] · [[μέρα|η μέρα]] · [[αυτοκίνητο|το αυτοκίνητο]] · [[πάω]] · [[ξαφνικά]] · [[κάνω]] · [[δεν]] · [[να]] · [[σήμα|το σήμα]] · [[κινητό|το κινητό]] · [[μετά]] · [[από]] · [[μισός]] · [[ώρα|η ώρα]] · [[με]] · [[μας]] · [[καλός]] · [[άνθρωπος|ο άνθρωπος]] · [[ναι]] · [[καλώ]] · [[σπίτι|το σπίτι]] · [[του]] · [[γυναίκα|η γυναίκα]] · [[αυτός]] · [[πραγματικός]] · [[τελικά]] · [[επόμενος]] · [[πιο]] · [[όμορφος]] · [[παραλία|η παραλία]] · [[που]] · [[βλέπω]] · [[ποτέ]] · [[περασμένος]] · [[Σαββατοκύριακο|το Σαββατοκύριακο]] · [[λέω]] · [[ιστορία|η ιστορία]] · [[όπως]] · [[θέλω]] · [[ποιο]] · [[καλύτερος]] · [[φαγητό|το φαγητό]]

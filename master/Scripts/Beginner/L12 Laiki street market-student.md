@@ -152,7 +152,8 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Read the prices on a grocery receipt aloud in Greek.
 > - Count by tens to εκατό every day.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.01–10.05 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 10 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.01–10.05 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+> - Trip reading: in **Complete Greek**, read the first dialogue of **Unit 8 Θέλετε τίποτα;** (page 118), then play it in the [Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources) once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 > - Greek out there (these pages change every week): [Headlines: λαϊκή αγορά](https://news.google.com/search?q=%CE%BB%CE%B1%CF%8A%CE%BA%CE%AE%20%CE%B1%CE%B3%CE%BF%CF%81%CE%AC&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20laiki%20market) · [News in Easy Greek](https://www.audible.com/podcast/News-In-Easy-Greek/B0H57W535N)
 >
 > **Can you do this without the page?** Say a price between 20 and 100 euros, and your partner writes it.

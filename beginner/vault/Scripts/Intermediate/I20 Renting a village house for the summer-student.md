@@ -43,10 +43,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Walk through your home and stick hand-written Greek labels on five things (η κουζίνα, το παράθυρο, το τραπέζι…). Leave them up all week.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 7 Έχετε δωμάτια;** (rooms and hotels, page 104).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[καλημέρα]] · [[τηλεφωνώ]] · [[για]] · [[σπίτι|το σπίτι]] · [[που]] · [[σε]] · [[χωριό|το χωριό]] · [[είμαι]] · [[ακόμα]] · [[ναι]] · [[τι]] · [[θέλω]] · [[να]] · [[πόσο]] · [[μεγάλος]] · [[με]] · [[δύο]] · [[και]] · [[κουζίνα|η κουζίνα]] · [[παλιός]] · [[αλλά]] · [[μπάνιο|το μπάνιο]] · [[έχω]] · [[θέα|η θέα]] · [[από]] · [[βλέπω]] · [[όλος]] · [[υπέροχος]] · [[κάνω]] · [[πολύς]] · [[ζέστη|η ζέστη]] · [[πιο]] · [[γιατί]] · [[τοίχος|ο τοίχος]] · [[μήνας|ο μήνας]] · [[πενήντα]] · [[ευρώ|το ευρώ]] · [[ρεύμα|το ρεύμα]] · [[νερό|το νερό]] · [[διαμέρισμα|το διαμέρισμα]] · [[πόλη|η πόλη]] · [[πολύ]] · [[ήσυχος]] · [[μπορώ]] · [[Παρασκευή|η Παρασκευή]] · [[βεβαίως]] · [[έρχομαι]] · [[έντεκα]] · [[πώς]] · [[σου]] · [[ποιο]] · [[αγαπημένος]] · [[δωμάτιο|το δωμάτιο]]

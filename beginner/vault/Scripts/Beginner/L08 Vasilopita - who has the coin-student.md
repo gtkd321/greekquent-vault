@@ -149,7 +149,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Count objects at home in Greek (stairs, plates, shoes).
 > - Say your phone number digit by digit in Greek.
 > - Wish three people Καλή χρονιά! this week.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 5 Μια μεγάλη οικογένεια (family, 11-100): 05.01–05.04 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 5 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 5 Μια μεγάλη οικογένεια (family, 11-100): 05.01–05.04 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: βασιλόπιτα](https://news.google.com/search?q=%CE%B2%CE%B1%CF%83%CE%B9%CE%BB%CF%8C%CF%80%CE%B9%CF%84%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20vasilopita) · [WeeGreek podcast](https://podcasts.apple.com/us/podcast/weegreek-short-stories-and-news-in-easy-and-simple-greek/id1534532179)
 >
 > **Can you do this without the page?** Count from δέκα down to ένα, then ask one Ποιος έχει…; question.

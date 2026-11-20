@@ -150,7 +150,8 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Point to 5 body parts at home and say Με πονάει… for each.
 > - Greet three people with Χριστός Ανέστη! this week.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **05.04 Conversation 1 · 05.06 Conversation 2 (replay Unit 5 and shadow it)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 5 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **05.04 Conversation 1 · 05.06 Conversation 2 (replay Unit 5 and shadow it)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+> - Trip reading: in **Complete Greek**, read the first dialogue of **Unit 10 Είχα ένα τρομερό πονοκέφαλο!** (page 160), then play it in the [Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources) once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 > - Greek out there (these pages change every week): [Headlines: φαρμακείο](https://news.google.com/search?q=%CF%86%CE%B1%CF%81%CE%BC%CE%B1%CE%BA%CE%B5%CE%AF%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20pharmacy) · [Greek films on ERT this week](https://www.ert.gr/tv/tainies/ellinikes-tainies/)
 >
 > **Can you do this without the page?** One Με πονάει… sentence, then the Easter greeting and its answer.

@@ -158,7 +158,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Label 5 family photos: η γιαγιά μου, ο αδελφός μου…
 > - Copy the plural grid from the board and say it aloud daily.
 > - Write 2 sentences: Τι θέλουν τα παιδιά; Τι θέλουμε εμείς;
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 5 Μια μεγάλη οικογένεια (family, 11-100): 05.05–05.11 (New Words and Expressions 2, Conversation 2, Language Discovery, Practice, Listen Again Conversation 2)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 5 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 5 Μια μεγάλη οικογένεια (family, 11-100): 05.05–05.11 (New Words and Expressions 2, Conversation 2, Language Discovery, Practice, Listen Again Conversation 2)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: οικογένεια](https://news.google.com/search?q=%CE%BF%CE%B9%CE%BA%CE%BF%CE%B3%CE%AD%CE%BD%CE%B5%CE%B9%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20family) · [News in Easy Greek](https://www.audible.com/podcast/News-In-Easy-Greek/B0H57W535N)
 >
 > **Can you do this without the page?** One sentence with έχουμε and one with θέλουν.

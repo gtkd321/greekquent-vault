@@ -39,7 +39,7 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Plan a real outing in Greek for the summer: a Greek festival, a Greek restaurant, or a trip. Write the plan by hand, and keep your word list. It shows how far you've come.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Year-end check: do **Revision test 3** (units 9–12, page 200). Check with the answer key on page 220. Circle the questions you missed and bring them to class.
 
 > [!abstract]- Word links

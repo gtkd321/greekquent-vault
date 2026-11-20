@@ -9,9 +9,10 @@ Two ways the course reaches outside the classroom: the Teach Yourself audio for 
 > The class book is **Beginners' Greek** by Aristarhos Matsukas (Teach Yourself, 2025, ISBN 9781399821438), previously published as Get Started in Greek ([book page](https://us.teachyourself.com/products/beginners-greek)). The audio is free in the **Teach Yourself Library** app ([iPhone/iPad](https://apps.apple.com/us/app/teach-yourself-library/id1143087176) · [Android](https://play.google.com/store/apps/details?id=net.trellisys.papertrell.shelf9ec79a53123947bea89b912e71161bfd)) or streamed on the [Teach Yourself audio page](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio). Files can't be saved to a computer, and there are no links to individual tracks, so every lesson gives one stable link plus a line of text naming the exact track numbers to choose (for example 03.04 Conversation 1).
 >
 > 1. Students install the app once, in week 1, and add the free Beginners' Greek audio.
-> 2. Each lesson note has an **Assign audio** line, and the student page and textbook repeat it.
-> 3. Routine: listen once without the book, once with the book, once saying it along (shadowing). About 10 minutes.
-> 4. Don't copy or re-upload the audio. Point students to the app.
+> 2. Each lesson note has an **Assign reading and audio** line, and the student page and textbook repeat it: the book sections to read and the tracks to play.
+> 3. Routine: read the sections in the book, then play each track twice, once reading along and once with the book closed, saying it along (shadowing). About 10 minutes.
+> 4. Next class, a 3-minute "From the homework" box in the warm-up replays one conversation from it, and pairs read it aloud with one detail swapped.
+> 5. Don't copy or re-upload the audio or the book pages. Point students to the book and the app.
 >
 > Track numbers match the web player list: 0.01–0.07 alphabet and pronunciation, then Units 1–10. Units are matched to lessons by topic from the book's contents page (for example Unit 10 Στη λαϊκή αγορά with Lesson 12 Laiki, Unit 8 daily routine with Lessons 10 and 14). Most units are split over two lessons: Vocab Builder to Conversation 1, then the rest. Lessons without a matching unit replay earlier conversations and retell them. To change a lesson, edit `PLAN` in `audio.py`.
 
@@ -45,11 +46,24 @@ Two ways the course reaches outside the classroom: the Teach Yourself audio for 
 > | [[L25 Christ is risen and the pharmacy-student|L25 Christ is risen and the pharmacy]] | 05.04 Conversation 1 · 05.06 Conversation 2 (replay Unit 5 and shadow it) |
 > | [[L26 Capstone and celebration-student|L26 Capstone and celebration]] | Student's choice: replay a favourite conversation from Units 1-10 and perform it |
 
-> [!note]- Intermediate: Complete Greek (optional, if you have the book)
+> [!note]- Intermediate: Complete Greek (more reading)
 > **Complete Greek** by Aristarhos Matsukas (Teach Yourself, 2019) is the next book after Beginners' Greek: 12 units, A1 to about B1/B2. The book is sold separately; its audio is free in the same Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)).
 > - Each intermediate lesson has a Complete Greek box naming the unit with the same theme.
 > - Lesson 16 points to revision tests 1 and 2, and lesson 26 to revision test 3. The answer key is on page 220.
-> - No book? Skip the box, or just play the audio.
+> - The box shows on the longer scene (More on a lesson page).
+
+> [!note]- Trip reading: Complete Greek (7 lessons)
+> Everyone has both books. Seven beginner lessons add one trip dialogue from **Complete Greek** to the homework, in trip order across the year. Students read the unit's first dialogue and play it twice. Next class, the teacher plays it once and pairs act it out with their own details, inside the warm-up (the "From the homework" box). The lesson scene stays the core.
+>
+> | Lesson | Complete Greek unit | Trip moment |
+> |---|---|---|
+> | 4 | Unit 3 Έλα να πιούμε ένα ουζάκι! (page 32) | Café, drinks, meze |
+> | 11 | Unit 6 Καλό ταξίδι! (page 88) | Tickets and times |
+> | 12 | Unit 8 Θέλετε τίποτα; (page 118) | Shopping and prices |
+> | 13 | Unit 4 Καλή όρεξη! (page 46) | Ordering in a taverna |
+> | 17 | Unit 7 Έχετε δωμάτια; (page 104) | A room for the night |
+> | 19 | Unit 5 Πού είναι η Ακρόπολη; (page 70) | Directions |
+> | 25 | Unit 10 Είχα ένα τρομερό πονοκέφαλο! (page 160) | The pharmacy |
 
 > [!tip]- News minute: Greek in the news (5 minutes, optional)
 > Once a week, at the start of the warm-up:

@@ -42,10 +42,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Find a Greek speaker (a neighbor, a church member, a restaurant owner, or an online language exchange) and ask Μιλάτε ελληνικά; Then try one more sentence.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 2 Τι κάνεις;** (small talk, page 18).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[πόσο]] · [[καιρός|ο καιρός]] · [[ελληνικά|τα ελληνικά]] · [[περίπου]] · [[δύο]] · [[χρόνος|ο χρόνος]] · [[αλλά]] · [[με]] · [[διακοπές|οι διακοπές]] · [[καταλαβαίνω]] · [[πολύς]] · [[όταν]] · [[μιλάω]] · [[τι]] · [[σημαίνει]] · [[ότι]] · [[δεν]] · [[λέξη|η λέξη]] · [[και]] · [[εσύ]] · [[απόλυτα]] · [[για]] · [[εγώ]] · [[πιο]] · [[δύσκολος]] · [[είμαι]] · [[σε]] · [[παρελθόν|το παρελθόν]] · [[προφορά|η προφορά]] · [[Έλληνας|ο Έλληνας]] · [[πολύ]] · [[γρήγορα]] · [[ναι]] · [[λέω]] · [[μπορώ]] · [[να]] · [[λίγο]] · [[σιγά]] · [[συνήθως]] · [[καλός]] · [[ιδέα|η ιδέα]] · [[πώς]] · [[βλέπω]] · [[ελληνικός]] · [[θεία|η θεία]] · [[μου]] · [[τηλέφωνο|το τηλέφωνο]] · [[κάθε]] · [[Κυριακή|η Κυριακή]] · [[ακούω]] · [[μουσική|η μουσική]] · [[αυτοκίνητο|το αυτοκίνητο]] · [[ξέρω]] · [[κάποιος]] · [[τραγούδι|το τραγούδι]] · [[καθαρά]] · [[της]] · [[υπέροχα]] · [[κάνω]] · [[σπίτι|το σπίτι]]

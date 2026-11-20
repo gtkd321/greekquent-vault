@@ -154,7 +154,8 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Draw and label a map of your neighborhood in Greek.
 > - Practice the polite request with three places: Μπορείτε να μου πείτε πού είναι…;
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **02.06 Conversation 1 · 02.08 Conversation 2 (replay Unit 2: where people come from and live, then give directions)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 2 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **02.06 Conversation 1 · 02.08 Conversation 2 (replay Unit 2: where people come from and live, then give directions)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
+> - Trip reading: in **Complete Greek**, read the first dialogue of **Unit 5 Πού είναι η Ακρόπολη;** (page 70), then play it in the [Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources) once reading along and once with the book closed. Understanding half is fine; we act it out in class.
 > - Greek out there (these pages change every week): [Headlines: 25η Μαρτίου](https://news.google.com/search?q=25%CE%B7%20%CE%9C%CE%B1%CF%81%CF%84%CE%AF%CE%BF%CF%85&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%2025th%20of%20March) · [ERTflix](https://www.ertflix.gr/)
 >
 > **Can you do this without the page?** Give directions from the classroom to the front door or the kitchen.

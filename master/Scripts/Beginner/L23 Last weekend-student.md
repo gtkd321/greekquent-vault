@@ -167,7 +167,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Every Monday, write a 5-sentence diary of your weekend.
 > - Tell someone at home what you did today in 3 "did once" sentences.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **09.04 Conversation 1 · 09.06 Conversation 2 (replay Unit 9, then retell it as last weekend)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 9 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **09.04 Conversation 1 · 09.06 Conversation 2 (replay Unit 9, then retell it as last weekend)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: παραλία](https://news.google.com/search?q=%CF%80%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20what%20did%20you%20do%20weekend) · [ERTflix](https://www.ertflix.gr/)
 >
 > **Can you do this without the page?** Say three things you did last weekend.

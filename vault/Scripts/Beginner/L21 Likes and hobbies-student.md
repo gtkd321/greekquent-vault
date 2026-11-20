@@ -147,7 +147,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Write 5 likes and 5 dislikes.
 > - Ask a family member three Σου αρέσει…; questions.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 9 Έχεις χόμπι; (free time, music, films): 09.05–09.09 (New Words and Expressions 2, Conversation 2, Practice)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 9 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 9 Έχεις χόμπι; (free time, music, films): 09.05–09.09 (New Words and Expressions 2, Conversation 2, Practice)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: συναυλία](https://news.google.com/search?q=%CF%83%CF%85%CE%BD%CE%B1%CF%85%CE%BB%CE%AF%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20hobbies) · [Greek films on ERT this week](https://www.ert.gr/tv/tainies/ellinikes-tainies/)
 >
 > **Can you do this without the page?** One Μου αρέσει… sentence and one Δεν μου αρέσουν… sentence.

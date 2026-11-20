@@ -41,10 +41,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Look at an old photo of yourself as a kid and write three sentences by hand: Όταν ήμουν παιδί, είχα… ήθελα… έβλεπα…
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 12 Πού πήγατε για Πάσχα;** (social occasions, wishes, opinions, past events) and **Unit 11 Τι καιρό έκανε;** (weather, time expressions, months, page 178).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[πώς]] · [[είμαι]] · [[σου]] · [[όταν]] · [[παιδί|το παιδί]] · [[κάθε]] · [[καλοκαίρι|το καλοκαίρι]] · [[σε]] · [[χωριό|το χωριό]] · [[πατέρας|ο πατέρας]] · [[μου]] · [[τρία]] · [[μήνας|ο μήνας]] · [[τι]] · [[κάνω]] · [[όλος]] · [[μέρα|η μέρα]] · [[πρωί|το πρωί]] · [[με]] · [[ζώο|το ζώο]] · [[και]] · [[απόγευμα|το απόγευμα]] · [[πλατεία|η πλατεία]] · [[άλλος]] · [[δεν]] · [[έχω]] · [[τηλεόραση|η τηλεόραση]] · [[αλλά]] · [[μας]] · [[εγώ]] · [[πόλη|η πόλη]] · [[βλέπω]] · [[πολύς]] · [[θέλω]] · [[πάντα]] · [[να]] · [[σκυλί|το σκυλί]] · [[μητέρα|η μητέρα]] · [[μπορώ]] · [[κοιτάζω]] · [[αεροπλάνο|το αεροπλάνο]] · [[για]] · [[ώρα|η ώρα]] · [[τελικά]] · [[μπράβο]] · [[λείπω]] · [[εκείνος]] · [[χρόνος|ο χρόνος]] · [[πού]] · [[μου αρέσει]] · [[τρώω]] · [[ή]]

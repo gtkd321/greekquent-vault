@@ -167,7 +167,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Use one survival phrase every day, with a Greek speaker or out loud to a Greek video.
 > - Write two sentences: Γιατί θέλω να μάθω ελληνικά.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 2 Μιλάτε Ελληνικά; (where from, languages): 02.07–02.10 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2, Conversation 3)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 2 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 2 Μιλάτε Ελληνικά; (where from, languages): 02.07–02.10 (New Words and Expressions 2, Conversation 2, Listen Again Conversation 2, Conversation 3)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: ελληνική γλώσσα](https://news.google.com/search?q=%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AE%20%CE%B3%CE%BB%CF%8E%CF%83%CF%83%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20learning%20Greek) · [News in Easy Greek](https://www.audible.com/podcast/News-In-Easy-Greek/B0H57W535N)
 >
 > **Can you do this without the page?** Say two survival phrases from memory.

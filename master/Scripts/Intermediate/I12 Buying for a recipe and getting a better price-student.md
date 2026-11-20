@@ -41,10 +41,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** At a farmers market or produce aisle, ask yourself in Greek Πόσο κάνει; for three items and say the price in Greek. Write a shopping list in Greek by hand.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 8 Θέλετε τίποτα;** (shopping, prices, colours, page 118).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[καλημέρα]] · [[είμαι]] · [[από]] · [[εδώ]] · [[ντομάτα|η ντομάτα]] · [[ή]] · [[μας]] · [[κυρία|η κυρία]] · [[μου]] · [[χωράφι|το χωράφι]] · [[πολύ]] · [[πόσο]] · [[δίνω]] · [[κιλό|το κιλό]] · [[θα]] · [[παίρνω]] · [[δύο]] · [[αν]] · [[και]] · [[πατάτα|η πατάτα]] · [[κάνω]] · [[καλός]] · [[τιμή|η τιμή]] · [[για]] · [[σας]] · [[όλος]] · [[μαζί]] · [[ευρώ|το ευρώ]] · [[βάζω]] · [[λίγο]] · [[δώρο|το δώρο]] · [[ευχαριστώ]] · [[θέλω]] · [[να]] · [[τι]] · [[άλλος]] · [[χρειάζομαι]] · [[λάδι|το λάδι]] · [[έχω]] · [[σε]] · [[τότε]] · [[τέσσερις]] · [[ορίστε]] · [[δέκα]] · [[καλή όρεξη]] · [[πού]] · [[φρούτο|το φρούτο]] · [[φαγητό|το φαγητό]] · [[ξέρω]] · [[εκεί]] · [[που]]

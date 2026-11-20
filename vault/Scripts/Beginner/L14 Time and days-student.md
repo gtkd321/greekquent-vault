@@ -146,7 +146,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Each time you check your phone, say the time in Greek.
 > - Write your week's schedule in Greek: Τη Δευτέρα στις… .
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **Unit 8 Πώς περνάς την ημέρα σου; (daily routine, time): 08.06–08.13 (Language Discovery, New Words and Expressions 2, Conversation 2, Practice)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Unit 8 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **Unit 8 Πώς περνάς την ημέρα σου; (daily routine, time): 08.06–08.13 (Language Discovery, New Words and Expressions 2, Conversation 2, Practice)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: ωράριο καταστημάτων](https://news.google.com/search?q=%CF%89%CF%81%CE%AC%CF%81%CE%B9%CE%BF%20%CE%BA%CE%B1%CF%84%CE%B1%CF%83%CF%84%CE%B7%CE%BC%CE%AC%CF%84%CF%89%CE%BD&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Super%20Easy%20Greek%20telling%20the%20time) · [WeeGreek podcast](https://podcasts.apple.com/us/podcast/weegreek-short-stories-and-news-in-easy-and-simple-greek/id1534532179)
 >
 > **Can you do this without the page?** Say what time it is now, and one day and time you can meet.

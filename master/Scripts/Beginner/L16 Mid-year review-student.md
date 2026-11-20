@@ -147,7 +147,7 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 > - Read the main scene aloud once a day.
 > - Re-read the reading card every day this week.
 > - Pick 5 red words from your packet and make them yellow by next week.
-> - Listen: open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app, then choose **01.06 Listen Again Conversation 2 · 05.11 Listen Again Conversation 2 · 06.09 Listen Again Conversation 2 (mid-year review: replay three Listen Again tracks)**. Play each dialogue twice: once just listening, once saying it along with them.
+> - Read and listen: open **Beginners' Greek** to Units 1, 5 and 6 and read the sections listed next. Then open [Beginners' Greek audio](https://library.teachyourself.com/id007706138/Beginners-Greek-Audio) or the free Teach Yourself app and choose **01.06 Listen Again Conversation 2 · 05.11 Listen Again Conversation 2 · 06.09 Listen Again Conversation 2 (mid-year review: replay three Listen Again tracks)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
 > - Greek out there (these pages change every week): [Headlines: Ελλάδα](https://news.google.com/search?q=%CE%95%CE%BB%CE%BB%CE%AC%CE%B4%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20street%20interviews) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 >
 > **Can you do this without the page?** Each student says one thing they can do now: Μπορώ να ___ στα ελληνικά.

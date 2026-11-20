@@ -42,10 +42,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** On a printed or hand-drawn map of your town, label five places in Greek (το σπίτι, η εκκλησία, η θάλασσα…). Say Πάω στο… as you pass each one this week.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 6 Καλό ταξίδι!** (travel, tickets, telling the time, page 88).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[τι]] · [[λέω]] · [[πάμε]] · [[ταξίδι|το ταξίδι]] · [[σε]] · [[καλός]] · [[ιδέα|η ιδέα]] · [[πώς]] · [[θα]] · [[με]] · [[αυτοκίνητο|το αυτοκίνητο]] · [[ή]] · [[λεωφορείο|το λεωφορείο]] · [[είμαι]] · [[πιο]] · [[εύκολος]] · [[μπορώ]] · [[να]] · [[όπου]] · [[θέλω]] · [[πρώτα]] · [[πάω]] · [[πολύ]] · [[όμορφος]] · [[εντάξει]] · [[και]] · [[μετά]] · [[τρία]] · [[ώρα|η ώρα]] · [[πού]] · [[ξάδερφος|ο ξάδερφος]] · [[μου]] · [[έχω]] · [[σπίτι|το σπίτι]] · [[χωριό|το χωριό]] · [[κοντά]] · [[εκεί]] · [[δύο]] · [[βραδιά|η βραδιά]] · [[τέλεια]] · [[θάλασσα|η θάλασσα]] · [[έτσι]] · [[φυσικά]] · [[κάθε]] · [[μέρα|η μέρα]] · [[από]] · [[τώρα]] · [[ναι]] · [[κλείνω]] · [[απόψε]] · [[εβδομάδα|η εβδομάδα]] · [[Ελλάδα|η Ελλάδα]] · [[γιατί]] · [[δουλειά|η δουλειά]]

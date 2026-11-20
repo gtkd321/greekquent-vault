@@ -44,10 +44,10 @@ tags: [greek-student, intermediate]
 
 **Out in the world this week:** Eat at a Greek restaurant if there's one nearby, and order one thing in Greek (Θα ήθελα…). If not, read a real Greek menu online and write your order by hand.
 
-> [!note]- Complete Greek (optional, if you have the book)
+> [!note]- Complete Greek (more reading)
 > - Same theme as this lesson: **Unit 4 Καλή όρεξη!** (ordering food in a restaurant, page 46).
 > - Read the dialogues, then play them in the free Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)): once just listening, once saying them along.
-> - No book? The audio alone still works. Words from the unit that are not in the 1,500 are bonus words.
+> - Words from the unit that are not in the 1,500 are bonus words.
 
 > [!abstract]- Word links
 > [[καλησπέρα]] · [[σας]] · [[έχω]] · [[κράτηση|η κράτηση]] · [[όχι]] · [[δυστυχώς]] · [[τραπέζι|το τραπέζι]] · [[για]] · [[τέσσερις]] · [[έξω]] · [[αν]] · [[γίνομαι]] · [[βεβαίως]] · [[από]] · [[εδώ]] · [[ορίστε]] · [[τι]] · [[μας]] · [[σήμερα]] · [[και]] · [[σε]] · [[φούρνος|ο φούρνος]] · [[φίλη|η φίλη]] · [[μου]] · [[είμαι]] · [[χωρίς]] · [[κρέας|το κρέας]] · [[φυσικά]] · [[τέλεια]] · [[θα]] · [[μισό]] · [[κιλό|το κιλό]] · [[λευκός]] · [[κρασί|το κρασί]] · [[αμέσως]] · [[όλος]] · [[μπορώ]] · [[να]] · [[λογαριασμός|ο λογαριασμός]] · [[λίγο]] · [[πληρώνω]] · [[ποιο]] · [[αγαπημένος]] · [[σου]] · [[ελληνικός]] · [[φαγητό|το φαγητό]] · [[πάντα]] · [[ταβέρνα|η ταβέρνα]] · [[τρώω]] · [[κάτι]] · [[που]] · [[δεν]] · [[μου αρέσει]]

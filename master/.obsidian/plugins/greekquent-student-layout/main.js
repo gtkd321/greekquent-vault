@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zx';
+const VAULT_RELEASE = '2026-11-19zy';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -71,7 +71,34 @@ const ttsFix = t => String(t).replace(/(^|[^\p{L}])([ΑαΆάΕεΈέ])(?=\s*[!,
 // The utterance is kept in a variable so it is not cleaned up before it speaks.
 let sayU = null, sayVoice = null;
 const isGreekT = t => /[\u0370-\u03ff\u1f00-\u1fff]/.test(String(t));
-const greekVoice = () => { try { if (!sayVoice) sayVoice = (speechSynthesis.getVoices() || []).find(v => /^el/i.test(v.lang)) || null; } catch (e) {} return sayVoice; };
+// Greek voice: one on the phone itself first (works offline and starts faster), Google's next, then any Greek voice.
+const greekVoice = () => { try { if (!sayVoice) { const el = (speechSynthesis.getVoices() || []).filter(v => /^el/i.test(v.lang)); sayVoice = el.find(v => v.localService && /google/i.test(v.name)) || el.find(v => v.localService) || el.find(v => /google/i.test(v.name)) || el[0] || null; } } catch (e) {} return sayVoice; };
+const gqUA = () => { try { return navigator.userAgent || ''; } catch (e) { return ''; } };
+const gqAndroid = () => /Android/i.test(gqUA());
+// An app's built-in browser on Android (Obsidian, GroupMe, Facebook, Instagram, Gmail): Android's WebView has no speech,
+// so the page goes quiet. Spotted by "; wv)" in the browser name, or no speech at all.
+const gqWebView = () => /; wv\)|FBAN|FBAV|Instagram|GroupMe|Line\//i.test(gqUA());
+let gqVoicesSeen = false;
+const noSpeech = () => { try { if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === 'undefined') return true; if (gqWebView() && !gqVoicesSeen && !(speechSynthesis.getVoices() || []).length && Date.now() - gqT0 > 2500) return true; } catch (e) { return true; } return false; };
+const gqT0 = Date.now();
+// What the voice did last time, for the sound check: started, an error, or nothing at all.
+let sayLast = null;
+// Speak one utterance, the same way everywhere. Android fixes: a longer gap after cancel() (a quick speak after it is dropped),
+// and a watchdog: Chrome on Android can get stuck after the app was in the background (it says it is speaking, nothing plays).
+// If a fresh line has not started after 2.5 s, cancel and say it once more.
+const speakU = u => {
+  const ss = window.speechSynthesis; if (!ss) return;
+  let started = false; sayU = u; sayLast = { at: Date.now(), ok: null, err: '' };
+  u.addEventListener('start', () => { started = true; if (sayU === u) sayLast = { at: Date.now(), ok: true, err: '' }; });
+  u.addEventListener('error', e => { if (sayU === u && e && e.error !== 'interrupted' && e.error !== 'canceled') sayLast = { at: Date.now(), ok: false, err: String(e.error || 'error') }; });
+  const go = retry => {
+    try { ss.resume(); } catch (e) {}
+    try { ss.speak(u); } catch (e) { sayLast = { at: Date.now(), ok: false, err: 'speak failed' }; return; }
+    if (!retry) setTimeout(() => { if (!started && sayU === u) { try { ss.cancel(); } catch (e) {} setTimeout(() => { if (sayU === u) go(true); }, 200); } }, 2500);
+  };
+  let busy = false; try { busy = ss.speaking || ss.pending; } catch (e) {}
+  if (busy) { try { ss.cancel(); } catch (e) {} setTimeout(() => { if (sayU === u) go(false); }, gqAndroid() ? 250 : 80); } else go(false);
+};
 // Greek voice off (this device): phones keep speaking in silent mode, because Android's ringer switch does not mute media.
 const gqQuiet = () => { try { return window.localStorage.getItem('gq-quiet') === '1'; } catch (e) { return false; } };
 // No Greek voice on this phone (common on Android with Samsung's engine, or Google's without Greek installed): the phone's
@@ -79,12 +106,30 @@ const gqQuiet = () => { try { return window.localStorage.getItem('gq-quiet') ===
 // Only when the phone has listed its voices; an empty list just means they have not loaded yet.
 const noGreekVoice = () => { try { const v = speechSynthesis.getVoices() || []; return v.length > 0 && !v.some(x => /^el/i.test(x.lang)); } catch (e) { return false; } };
 const say = w => {
-  const ss = window.speechSynthesis; if (!ss || !w || gqQuiet()) return;
+  if (!w || gqQuiet()) return;
+  if (noSpeech()) { if (window.gqNoVoice) window.gqNoVoice(); return; }
   if (noGreekVoice() && isGreekT(w)) { if (window.gqNoVoice) window.gqNoVoice(); return; }
-  const u = new SpeechSynthesisUtterance(ttsFix(w)); u.lang = 'el-GR'; const v = greekVoice(); if (v) u.voice = v; sayU = u;
-  const go = () => { try { ss.resume(); } catch (e) {} ss.speak(u); };
-  if (ss.speaking || ss.pending) { ss.cancel(); setTimeout(go, 80); } else go();
+  const u = new SpeechSynthesisUtterance(ttsFix(w)); u.lang = 'el-GR'; const v = greekVoice(); if (v) try { u.voice = v; } catch (e) {}
+  speakU(u);
 };
+// The same voice rules inside the games (Γιαγιά, Story Lines, buzzer, cousins): runs in the game's frame.
+// Greek voice off means quiet; no Greek voice tells the vault (it shows how to add one); a stuck Android voice gets one retry.
+function gqFrameVoice() {
+  try {
+    var ss = window.speechSynthesis; if (!ss) { try { parent.postMessage({ gq: 'novoice' }, '*'); } catch (e) {} return; }
+    var sp = ss.speak.bind(ss), cur = null, android = /Android/i.test(navigator.userAgent || '');
+    var pickV = function () { var el = (ss.getVoices() || []).filter(function (v) { return /^el/i.test(v.lang); }); return el.filter(function (v) { return v.localService && /google/i.test(v.name); })[0] || el.filter(function (v) { return v.localService; })[0] || el.filter(function (v) { return /google/i.test(v.name); })[0] || el[0] || null; };
+    ss.speak = function (u) {
+      var q = false; try { q = localStorage.getItem('gq-quiet') === '1'; } catch (e) {} if (q) return;
+      var greek = /[\u0370-\u03ff\u1f00-\u1fff]/.test(u.text || '');
+      try { var vs = ss.getVoices() || []; if (vs.length && greek && !vs.some(function (v) { return /^el/i.test(v.lang); })) { parent.postMessage({ gq: 'novoice' }, '*'); return; } if (greek && (!u.voice || !/^el/i.test(u.voice.lang))) { var gv = pickV(); if (gv) try { u.voice = gv; } catch (e) {} u.lang = 'el-GR'; } } catch (e) {}
+      var started = false, fresh = !(ss.speaking || ss.pending); cur = u;
+      u.addEventListener('start', function () { started = true; });
+      sp(u);
+      if (fresh) setTimeout(function () { if (!started && cur === u) { try { ss.cancel(); } catch (e) {} setTimeout(function () { if (cur === u) sp(u); }, android ? 250 : 120); } }, 2500);
+    };
+  } catch (e) {}
+}
 // In a phrase a word can change: σε + το = στο, μεγάλος → μεγάλο. Say so, so a new student isn't puzzled.
 const wwFold = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/ς/g, 'σ');
 const wwForm = (lab, phrase) => {
@@ -659,7 +704,7 @@ class AppView extends ItemView {
     let html = '';
     try { html = await this.app.vault.adapter.read(this.plugin.manifest.dir + '/apps/' + a.file); }
     catch (e) { c.createDiv({ cls: 'gq-hint', text: 'This one is still on its way. Tap More, then Update vault.' }); this.shown = ''; return; }
-    html = html.replace('<!--GQ_START-->', '<script>window.GQ_HASH=' + JSON.stringify(this.hash) + ';' + 'try{var ss=window.speechSynthesis,sp=ss.speak.bind(ss);ss.speak=function(u){var q=false;try{q=localStorage.getItem(\'gq-quiet\')===\'1\';}catch(e){}if(q)return;try{var vs=ss.getVoices()||[];if(vs.length&&!vs.some(function(v){return /^el/i.test(v.lang);})&&/[\\u0370-\\u03ff\\u1f00-\\u1fff]/.test(u.text||\'\')){parent.postMessage({gq:\'novoice\'},\'*\');return;}}catch(e){}sp(u);};}catch(e){}' + '</script>');
+    html = html.replace('<!--GQ_START-->', '<script>window.GQ_HASH=' + JSON.stringify(this.hash) + ';(' + gqFrameVoice.toString() + ')();</script>');
     const f = c.createEl('iframe', { cls: 'gq-appframe', attr: { title: a.title, allow: 'microphone; autoplay' } });
     f.srcdoc = html;
   }
@@ -1559,7 +1604,9 @@ class PairModal extends Modal {
 module.exports = class GreekquentStudentLayout extends Plugin {
   onload() {
     window.gqNoVoice = () => this.voiceHelp(true);
-    try { speechSynthesis.getVoices(); speechSynthesis.addEventListener('voiceschanged', () => { sayVoice = null; }); } catch (e) {}
+    try { if ((speechSynthesis.getVoices() || []).length) gqVoicesSeen = true; speechSynthesis.addEventListener('voiceschanged', () => { sayVoice = null; if ((speechSynthesis.getVoices() || []).length) gqVoicesSeen = true; }); } catch (e) {}
+    // Coming back to the app (Android keeps it in the background): clear a stuck voice so the next tap speaks.
+    this.registerDomEvent(document, 'visibilitychange', () => { if (document.visibilityState === 'visible') try { const ss = window.speechSynthesis; if (ss && (ss.speaking || ss.pending) && !(sayU && sayLast && sayLast.ok)) ss.cancel(); if (ss) ss.resume(); } catch (e) {} });
     this.busy = false; this.todayEls = new Set(); this.bars = new Set(); this.cardBoxes = new Set();
     document.body.classList.add('greekquent-student');
     this.registerView(WEB, leaf => new WordWebView(leaf, this));
@@ -3905,18 +3952,45 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // How to add a Greek voice. auto: shown by itself when a Greek word could not be spoken, at most once per visit.
   voiceHelp(auto) {
     if (auto) { if (this.vhShown) return; this.vhShown = true; }
-    const ua = navigator.userAgent || '', android = /Android/i.test(ua), ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
-    const m = new Modal(this.app); m.titleEl.setText('Add a Greek voice');
+    const ua = gqUA(), android = gqAndroid(), ios = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    const web = !!window.GQW, wv = gqWebView() || noSpeech();
+    const m = new Modal(this.app); m.titleEl.setText(wv ? 'No sound in this browser' : 'Sound help');
     const c = m.contentEl; c.addClass('gq-vhelp');
-    c.createEl('p', { text: noGreekVoice() ? 'This device has no Greek voice yet, so it would spell Greek words out letter by letter. The app stays quiet until one is added. It takes a minute and is free.' : 'If Greek words are read letter by letter, the device is using a voice for another language. Add a Greek voice:' });
+    if (wv) c.createEl('p', { text: web ? 'This looks like an app\'s built-in browser (GroupMe, Facebook, Gmail and others open links this way). It cannot speak. Open the page in Chrome or Safari instead: tap the three dots or the share button, then Open in Chrome (or Open in browser).' : 'Obsidian on this phone has no voice. For sound, open the Greekquent web app in Chrome or Safari.' });
+    else c.createEl('p', { text: noGreekVoice() ? 'This device has no Greek voice yet, so it would spell Greek words out letter by letter. The app stays quiet until one is added. It takes a minute and is free.' : 'Run the sound check first. It shows what this device is doing.' });
+    // Sound check: what this device has, and what happened when it tried to speak.
+    const ck = c.createDiv('gq-vcheck'); ck.createEl('strong', { text: 'Sound check' });
+    const out = ck.createEl('ul', { cls: 'gq-vcheck-list' }), rows = [];
+    const line = (t, bad) => { rows.push(t); out.createEl('li', { text: t, cls: bad ? 'is-bad' : '' }); };
+    const report = () => {
+      out.empty(); rows.length = 0;
+      const ss = window.speechSynthesis, vs = ss ? (ss.getVoices() || []) : [], el = vs.filter(v => /^el/i.test(v.lang)); sayVoice = null; const gv = greekVoice();
+      const br = /SamsungBrowser/i.test(ua) ? 'Samsung Internet' : /Firefox/i.test(ua) ? 'Firefox' : /EdgA?\//i.test(ua) ? 'Edge' : /CriOS|Chrome/i.test(ua) ? 'Chrome' : /Safari/i.test(ua) ? 'Safari' : 'another browser';
+      line(`Device: ${android ? 'Android' : ios ? 'iPhone or iPad' : 'computer'}, ${gqWebView() ? 'an app\'s built-in browser' : web ? br : 'Obsidian'}${window.matchMedia && matchMedia('(display-mode: standalone)').matches ? ', installed app' : ''}.`, gqWebView());
+      if (!ss) { line('Speech: not available here.', true); return; }
+      line(`Voices on this device: ${vs.length}${vs.length ? '' : ' (none listed yet)'}.`, !vs.length);
+      line(el.length ? `Greek voice: ${gv ? gv.name : el[0].name}${gv && gv.localService ? ', on the device' : gv ? ', over the internet' : ''}.` : 'Greek voice: none.', !el.length);
+      line(`Greek voice in the app: ${gqQuiet() ? 'turned off (Options, Greek voice)' : 'on'}.`, gqQuiet());
+      if (sayLast) line(sayLast.ok ? 'Last try: the voice started.' : sayLast.err ? `Last try: the voice reported an error (${sayLast.err}).` : 'Last try: the voice never started.', !sayLast.ok);
+    };
+    report();
+    const r0 = ck.createDiv('gq-row'), fb = ck.createDiv('gq-hint');
+    const tv = r0.createEl('button', { text: 'Test the Greek voice', cls: 'mod-cta' });
+    tv.onclick = () => {
+      if (gqQuiet()) { fb.setText('The Greek voice is off in Options. Turn it on, then test again.'); return; }
+      if (noSpeech()) { fb.setText('This browser cannot speak. See above.'); report(); return; }
+      if (noGreekVoice()) { fb.setText('No Greek voice yet. Follow the steps below, then close the app completely and open it again.'); report(); return; }
+      fb.setText('You should hear Καλημέρα now…'); say('Καλημέρα');
+      setTimeout(() => { report(); fb.setText(sayLast && sayLast.ok ? 'The voice started. Heard nothing? Turn up the media volume (press volume up while it talks, not the ringer), and check Bluetooth earbuds are not connected somewhere else.' : sayLast && sayLast.err ? 'The voice gave an error. Follow the steps below, then close the app completely and open it again.' : 'The voice did not start. Close the browser completely (swipe it away from recent apps) and open it again, then test once more.'); }, 3200);
+    };
+    const tb = r0.createEl('button', { text: 'Test a beep' }); tb.onclick = () => { gqSound('tink'); fb.setText(gqQuiet() ? 'Sound is off in Options.' : 'Heard the beep but not the voice? The speaker works; the voice needs the steps below.'); };
+    const cp = r0.createEl('button', { text: 'Copy the details' });
+    cp.onclick = async () => { report(); const t = ['Greekquent sound check', ...rows, ua].join('\n'); try { await navigator.clipboard.writeText(t); fb.setText('Copied. Paste it in Ask the class if you need help.'); } catch (e) { fb.setText(t); } };
     const steps = (title, list, open) => { const d = c.createEl('details'); if (open) d.open = true; d.createEl('summary', { text: title }); const ol = d.createEl('ol'); for (const s of list) ol.createEl('li', { text: s }); };
-    steps('Android', ['Open Settings and search for Text-to-speech.', 'Tap Preferred engine and pick Speech Services by Google. (Samsung phones start with Samsung\'s engine, which may not have Greek.)', 'Tap the gear next to the engine, then Install voice data.', 'Pick Greek (Ελληνικά) and tap download.', 'Close Chrome or the app completely and open it again.', 'No Google engine? Install Speech Services by Google from the Play Store, then start again.'], android || !ios);
-    steps('iPhone or iPad', ['Open Settings, then Accessibility, then Spoken Content, then Voices.', 'Tap Greek and download a voice.', 'Close the app or Safari completely and open it again.'], ios);
+    steps('Android', ['Use Chrome. Links opened inside GroupMe, Facebook or Gmail can\'t speak: tap the three dots, then Open in Chrome.', 'Turn up the media volume: press volume up while the app talks. The ringer and silent mode don\'t control it.', 'Open Settings and search for Text-to-speech.', 'Tap Preferred engine and pick Speech Services by Google. (Samsung phones start with Samsung\'s engine, which may not have Greek.)', 'Tap the gear next to the engine, then Install voice data.', 'Pick Greek (Ελληνικά) and tap download.', 'Close Chrome completely (swipe it away from recent apps) and open it again.', 'No Google engine? Install Speech Services by Google from the Play Store, then start again.', 'Still quiet? Turn off Battery saver for Chrome, and check Bluetooth earbuds are not connected.'], (android || !ios) && !wv);
+    steps('iPhone or iPad', ['Open Settings, then Accessibility, then Spoken Content, then Voices.', 'Tap Greek and download a voice.', 'Close the app or Safari completely and open it again.'], ios && !wv);
     steps('Computer', ['Windows: Settings, Time & language, Speech, Add voices, Greek.', 'Mac: System Settings, Accessibility, Spoken Content, System voice, Manage Voices, Greek.', 'Then reload this page.'], false);
-    const r = c.createDiv('gq-row'), fb = c.createDiv('gq-hint');
-    const tb = r.createEl('button', { text: 'Test the voice', cls: 'mod-cta' });
-    tb.onclick = () => { sayVoice = null; if (noGreekVoice()) { fb.setText('Still no Greek voice. After installing, close the app completely and open it again.'); return; } fb.setText('You should hear Καλημέρα.'); say('Καλημέρα'); };
-    const x = r.createEl('button', { text: 'Not now' }); x.onclick = () => m.close();
+    const r = c.createDiv('gq-row'); const x = r.createEl('button', { text: 'Close' }); x.onclick = () => m.close();
     m.open();
   }
   // Phonetics: on unless the student turned it off. The teacher vault starts with it off.
@@ -4066,7 +4140,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const paint = () => bs.forEach(([k, b]) => { const on = k === this.worldKey(); b.toggleClass('mod-cta', on); b.setAttr('aria-pressed', String(on)); });
         for (const [k, nm] of [['grove', 'Plant'], ['pet', 'Pet'], ['dance', 'Dancer'], ['gyro', 'Gyro shop'], ['village', 'House'], ['gallery', 'Statue']]) { const b = ch.createEl('button', { text: nm, cls: 'gq-mini' }); b.onclick = async () => { await this.setWorld(k); paint(); }; bs.push([k, b]); }
         paint(); }
-      const h = el.createDiv('gq-hint gq-opt-foot'), a = h.createEl('a', { text: 'Greek voice help', href: '#' }); a.onclick = e => { e.preventDefault(); this.voiceHelp(false); };
+      const h = el.createDiv('gq-hint gq-opt-foot'), a = h.createEl('a', { text: 'Sound help', href: '#' }); a.onclick = e => { e.preventDefault(); this.voiceHelp(false); };
     } }]);
   }
   // A soft pink-noise loop, made on the device (no file, no download). Off by default; it stops when you turn it off or close the app.
@@ -4082,10 +4156,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   sayP(t, lang) {
     return new Promise(res => {
-      const ss = window.speechSynthesis; if (!ss || !t) return res();
-      const u = new SpeechSynthesisUtterance(lang === 'el' ? ttsFix(t) : t); u.lang = lang === 'el' ? 'el-GR' : 'en-US'; if (lang === 'el') { const v = greekVoice(); if (v) u.voice = v; } sayU = u;
-      let done = false; const fin = () => { if (!done) { done = true; res(); } }; u.onend = fin; u.onerror = fin; setTimeout(fin, 1800 + String(t).length * 110);
-      try { ss.resume(); ss.speak(u); } catch (e) { fin(); }
+      const ss = window.speechSynthesis; if (!ss || !t || gqQuiet()) return res();
+      if (noSpeech() || (lang === 'el' && noGreekVoice())) { if (window.gqNoVoice) window.gqNoVoice(); return res(); }
+      const u = new SpeechSynthesisUtterance(lang === 'el' ? ttsFix(t) : t); u.lang = lang === 'el' ? 'el-GR' : 'en-US'; if (lang === 'el') { const v = greekVoice(); if (v) try { u.voice = v; } catch (e) {} }
+      // onend can go missing on Android, so a line never waits longer than it could take to say (plus the 2.5 s watchdog).
+      let done = false; const fin = () => { if (!done) { done = true; res(); } }; u.onend = fin; u.onerror = fin; setTimeout(fin, 4300 + String(t).length * 110);
+      speakU(u);
     });
   }
   // Walk mode: hands-free. The Greek, a pause to say it yourself, the English, the Greek again. This week's story and your review words.

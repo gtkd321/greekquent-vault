@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zy · Sound help and Android fixes
+> Sound is more reliable on Android. If the voice gets stuck after the app was in the background, it now tries once more on its own. The app picks a Greek voice that lives on the phone first, so it works offline and starts faster. Links opened inside GroupMe, Facebook or Gmail can't speak, and the app now says so and shows how to open the page in Chrome. Options, then Sound help, has a sound check: it shows whether this phone has a Greek voice, tests the voice and a beep, and copies the details to paste in Ask the class.
+
 > [!tip]- 2026-11-19zx · Today is one day of the story
 > Today now walks through one day of the Maria and Nikos story, in the same order every day. The story card shows the day, the week and a dot for each day of the week. Each day has four steps: watch the scene (just listen), hear and say the new words, build the lines, then say the whole part out loud. Next at the bottom of each card leads to review. On the last day of a week you can watch the whole week as one scene and play Γιαγιά with its words. Kids get a Listen first card: two small figures say this week's lines, then the words, the puzzle and Say it together. Your progress and saved work are not touched.
 

@@ -899,3 +899,7 @@ body.gq-nonav .gq-corner[data-mode="friend"] { bottom: auto; }
 .gq-ksc-fig.is-talk { animation: gq-ksc-talk .5s ease-in-out infinite alternate; }
 @keyframes gq-ksc-talk { from { transform: translateY(0); } to { transform: translateY(-5px); } }
 @media (prefers-reduced-motion: reduce) { .gq-ksc-fig.is-talk { animation: none; outline: 2px solid #1a9850; outline-offset: 2px; border-radius: 4px; } }
+.gq-vcheck { border: 1px solid var(--background-modifier-border); border-radius: 8px; padding: 10px 12px; margin: 8px 0 12px; }
+.gq-vcheck-list { margin: 6px 0 8px; padding-left: 20px; font-size: var(--font-ui-small); }
+.gq-vcheck-list li.is-bad { color: #d73027; }
+.gq-vcheck .gq-row { flex-wrap: wrap; gap: 6px; }

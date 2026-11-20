@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- A crossword (2026-11-20m)
+> New in Games: Σταυρόλεξο, a small crossword made from the words you have met in the story. The clues play with meaning, like a newspaper crossword, so "Yesterday's tomorrow" (6) is σήμερα. Greek letter keys are on the screen. Hint shows the plain meaning, and Show a letter fills a square. The Games page also lost a line about Obsidian that didn't belong in the web app.
+
 > [!tip]- Fluent in a Year is now a pace (2026-11-20l)
 > Fluent in a Year no longer adds a second card with its own words. It is a pace for the same story: one day each day, so the 1,500 words take a year. The story card shows a quiet line, such as Fluent in a Year · on pace, or 2 days behind. Change lets you pick your week. Turn it on or off in Options.
 

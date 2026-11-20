@@ -2,8 +2,6 @@
 
 Links: [[Today]] · [[00 Greekquent Index]] · [[07 Fluent in a Year]]
 
-All five games are part of the vault. They open here in Obsidian, need no internet, and update with the vault.
-
 > [!summary]- Greekquent Buzzer (fastest fingers)
 > [Open the Greekquent Buzzer](obsidian://greekquent?open=buzzer) (works offline)
 > - Lay the phone flat between two students sitting face to face. The screen is split, so each student reads their own half the right way up.
@@ -58,6 +56,14 @@ All five games are part of the vault. They open here in Obsidian, need no intern
 > - **Text adventure:** the same scene as an 80s-style text game. It only moves on when you type the right Greek word. Greeklish works too (nero = νερό), so no Greek keyboard is needed. HELP gives a clue; after two misses, three word buttons appear.
 > - Works on iPhone and Android.
 > - On Today, tap **Watch it** or **Play it as a text adventure** under the day's line.
+
+> [!summary]- Greekquent Σταυρόλεξο (crossword)
+> [Open Σταυρόλεξο](obsidian://greekquent?open=crossword) (works offline)
+> - A small crossword built from the words you have met in the story so far. Every puzzle is new.
+> - The clues play with meaning, like a newspaper crossword: "Yesterday's tomorrow" (6) is σήμερα, and "Cell with no prisoner" (6) is κινητό. Work out the English, then write the Greek.
+> - Capital letters, no accents. The Greek letter keys are on the screen, so no Greek keyboard is needed.
+> - Stuck? **Hint** shows the plain meaning, then **Show a letter** fills one square. A solved word turns green and says itself aloud.
+> - Words that needed a letter can go to Review at the end.
 
 > [!summary]- Run it in class
 > 1. Pick the current lesson, play to 5.

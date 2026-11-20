@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20l';
+const VAULT_RELEASE = '2026-11-20m';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -707,7 +707,7 @@ const APPV = 'greekquent-app';
 // The foods in the fridge game. A word card for one of them offers the game.
 const FRIDGE_W = new Set(['γάλα', 'νερό', 'αυγό', 'τυρί', 'μήλο', 'ντομάτα', 'κρέας', 'ψάρι', 'γιαούρτι', 'πορτοκάλι', 'σαλάτα', 'κοτόπουλο', 'σοκολάτα', 'φέτα', 'μέλι', 'καφές']);
 const GREET_W = new Set(['καλημέρα', 'καλησπέρα', 'καληνύχτα', 'απόγευμα', 'βράδυ', 'πρωί', 'μέρα', 'νύχτα', 'γεια', 'αντίο', 'ώρα']);
-const APPS = { story: { file: 'storylines.html', title: 'Story Lines', icon: 'clapperboard' }, giagia: { file: 'giagia.html', title: 'Γιαγιά', icon: 'gamepad-2' }, buzzer: { file: 'buzzer.html', title: 'Buzzer', icon: 'zap' }, cousins: { file: 'cousins.html', title: 'Cousins', icon: 'users' }, hello: { file: 'hello.html', title: 'Τι λέμε;', icon: 'sun' }, fridge: { file: 'fridge.html', title: 'Τι βλέπεις στο ψυγείο;', icon: 'refrigerator' } };
+const APPS = { story: { file: 'storylines.html', title: 'Story Lines', icon: 'clapperboard' }, giagia: { file: 'giagia.html', title: 'Γιαγιά', icon: 'gamepad-2' }, buzzer: { file: 'buzzer.html', title: 'Buzzer', icon: 'zap' }, cousins: { file: 'cousins.html', title: 'Cousins', icon: 'users' }, hello: { file: 'hello.html', title: 'Τι λέμε;', icon: 'sun' }, fridge: { file: 'fridge.html', title: 'Τι βλέπεις στο ψυγείο;', icon: 'refrigerator' }, crossword: { file: 'crossword.html', title: 'Σταυρόλεξο', icon: 'grid-3x3' } };
 class AppView extends ItemView {
   constructor(leaf, plugin) { super(leaf); this.plugin = plugin; this.which = 'story'; this.hash = ''; this.shown = ''; }
   getViewType() { return APPV; }
@@ -1791,10 +1791,17 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async openApp(which, hash) {
     if (which !== 'story') this.tourHit('game');
     const ws = this.app.workspace, leaf = this.mainLeaf(false);
-    const names = { giagia: 'the Γιαγιά game', buzzer: 'the buzzer game', cousins: 'the cousins game', hello: 'Τι λέμε;', story: 'the story cartoon', storylines: 'Story Lines' };
+    const names = { giagia: 'the Γιαγιά game', buzzer: 'the buzzer game', cousins: 'the cousins game', hello: 'Τι λέμε;', story: 'the story cartoon', storylines: 'Story Lines', crossword: 'the crossword' };
+    // The crossword uses the words the student has met: story days so far plus any colored word.
+    if (which === 'crossword' && !hash) hash = '#w=' + encodeURIComponent((await this.metWords()).join(','));
     if (names[which]) this.whereSet({ kind: 'app', app: which, hash: hash || '', label: names[which] });
     await leaf.setViewState({ type: APPV, active: true, state: { app: which, hash: hash || '' } });
     ws.revealLeaf(leaf);
+  }
+  async metWords() {
+    const col = this.colors(), beats = await this.beatIndex(), at = Math.max(col.story_at || 0, 1), out = new Set([...col.red, ...col.yellow, ...col.green]);
+    for (const b of Object.values(beats)) if (b.n <= at + 1) for (const w of b.words || []) out.add(w.word);
+    return [...out];
   }
   // "Often appears with" links of a word note, as note paths. Read once, then remembered.
   async coList(path) {

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!--GQ_START-->
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="obsidian://"]');
+  if (a && window.parent !== window) { e.preventDefault(); window.parent.postMessage({ gq: 'obsidian', url: a.href }, '*'); }
+}, true);
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0f2a44">
+<title>Greekquent Σταυρόλεξο</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f2a44; --paper:#f6f1e7; --muted:#5f6873; --line:#d9d2c3;
+  --ok:#2f7d4f; --ok-soft:#d7eedf; --sel:#dbe7f3; --cur:#a9c6e4;
+  --font:'Commissioner', 'Noto Sans', system-ui, sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--font)}
+body{touch-action:manipulation}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit;background:none}
+.wrap{width:100%;max-width:520px;margin:0 auto;padding:max(12px,env(safe-area-inset-top)) 12px max(20px,env(safe-area-inset-bottom))}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 2px 8px}
+.top h1{font-size:24px;font-weight:800}
+.top .sub{color:var(--muted);font-size:15px;font-weight:600}
+.btn{font-size:14px;font-weight:600;padding:8px 12px;border:1px solid var(--line);border-radius:10px;min-height:40px;background:#fff}
+.btn.cta{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;gap:2px;margin:0 auto;background:var(--ink);border:2px solid var(--ink);border-radius:6px;width:max-content;max-width:100%}
+.c{position:relative;width:var(--cs);height:var(--cs);background:var(--ink)}
+.c.w{background:#fff;cursor:pointer}
+.c.w.sel{background:var(--sel)} .c.w.cur{background:var(--cur)}
+.c.w.ok{background:var(--ok-soft)} .c.w.ok.cur{background:#bfe3cc}
+.c .n{position:absolute;left:2px;top:1px;font-size:calc(var(--cs) * .26);color:var(--muted);line-height:1;font-weight:600}
+.c .l{position:absolute;inset:0;display:grid;place-items:center;font-size:calc(var(--cs) * .55);font-weight:700;padding-top:2px}
+.c.ok .l{color:var(--ok)}
+.c .l.given{color:var(--muted)}
+.bar{background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px 12px;margin:8px 0 6px;min-height:64px}
+.bar .k{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.bar .q{font-size:17px;font-weight:700;line-height:1.3;margin-top:2px}
+.bar .h{font-size:15px;color:var(--muted);margin-top:4px;line-height:1.35}
+.bar .h b{color:var(--ink)}
+.bar .row{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.say{cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+.kb{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;margin:4px 0 12px}
+.kb button{min-height:44px;padding:0;border-radius:9px;background:#fff;border:1px solid var(--line);font-size:19px;font-weight:700;box-shadow:0 1px 0 rgba(15,42,68,.12)}
+.kb button:active{background:var(--sel)}
+.kb .wide{grid-column:span 3;font-size:15px}
+.done{background:var(--ok-soft);border:1px solid #b9dcc6;border-radius:14px;padding:12px 14px;margin:10px 0}
+.done b{font-size:18px}
+.done p{margin-top:4px;font-size:15px;line-height:1.4}
+.done .row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:10px}
+details summary{font-weight:700;cursor:pointer;min-height:28px}
+.cl{margin-top:6px}
+.cl h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:8px 0 2px;font-weight:600}
+.cl button{display:block;width:100%;text-align:left;padding:7px 6px;border-radius:8px;font-size:15px;line-height:1.35}
+.cl button.on{background:var(--sel)}
+.cl button.ok{color:var(--muted)}
+.cl button .g{color:var(--ok);font-weight:700}
+.note{color:var(--muted);font-size:14px;line-height:1.4;margin:4px 2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span class="sub">Crossword</span><button class="btn" id="new">New puzzle</button></div>
+  <div class="grid" id="grid"></div>
+  <div id="doneBox"></div>
+  <div class="bar" id="bar"></div>
+  <div class="kb" id="kb"></div>
+  <details id="all"><summary>All clues</summary><div class="cl" id="clues"></div></details>
+  <p class="note">The clues play with meaning, like a newspaper crossword. Work out the English, then write the Greek. Accents don't go in the squares.</p>
+</div>
+<script>window.CW_BANK=[["ευχαριστώ", "thank you", "What a good guest leaves at the door"], ["παρακαλώ", "please; you're welcome", "Magic word, or the answer to one"], ["γεια", "hi, bye", "Coming or going, it works either way"], ["ορίστε", "here you are; pardon?", "Said while handing something over, or when you missed what was said"], ["νερό", "water", "It runs without legs"], ["βιβλίο", "book", "It has a spine and many leaves, but it is not a tree"], ["κλειδί", "key", "A lock's one true love"], ["τσάντα", "bag", "Where the phone never is when it rings"], ["κινητό", "mobile phone", "Cell with no prisoner"], ["τετράδιο", "notebook", "Lined pages, waiting for homework"], ["στυλό", "pen", "Mightier than the sword, they say"], ["κάνω", "I do, I make", "Make or do, whatever you make of it"], ["μπορώ", "I can", "The \"can\" in \"I can do it\""], ["θέλω", "I want", "The start of every wish list"], ["ξέρω", "I know", "\"Don't tell me, I already ___\""], ["νομίζω", "I think", "Hedge before an opinion"], ["βλέπω", "I see", "\"Oh, I ___,\" said the blind man"], ["ναι", "yes", "Sounds like \"nay,\" means the opposite"], ["όχι", "no", "Greece's famous answer of October 28, 1940"], ["έχω", "I have", "\"I ___ a dream\""], ["λέω", "I say, I tell", "Say, in a word"], ["αλλά", "but", "Word that undoes everything before it"], ["λίγο", "a little", "Just a pinch"], ["καφές", "coffee", "It's ground every day, then gets into hot water"], ["κρασί", "wine", "Grapes, after a long rest"], ["τσάι", "tea", "It was dumped at Boston's famous party"], ["ψωμί", "bread", "It's broken at the table on purpose"], ["εντάξει", "okay", "Two letters in English, seven in Greek"], ["καλός", "good", "Not bad at all"], ["παιδί", "child", "Kid, but not a goat"], ["σπίτι", "house, home", "Where the heart is"], ["πράγμα", "thing", "Whatchamacallit, in general"], ["δουλειά", "work, job", "Nine to five"], ["φίλος", "friend", "One in need is one indeed"], ["κοίτα", "look", "\"Hey, check this out\""], ["ωραία", "nice(ly), great", "\"Lovely,\" said with a smile"], ["μαμά", "mom", "A first word for many babies, in either language"], ["λυπάμαι", "I'm sorry", "Words of regret, or of sympathy"], ["πάμε", "let's go", "\"Shall we?\""], ["έλα", "come (on)", "\"Come on,\" in every Greek mother's mouth"], ["φαίνομαι", "I seem", "How I come across"], ["γίνομαι", "I become", "What a caterpillar does with a butterfly"], ["υπάρχω", "I exist", "\"I think, therefore I ___\""], ["πολύς", "much, many", "The \"poly\" in polygon"], ["απλά", "simply", "Without frills"], ["πάω", "I go", "\"I'm off\""], ["σήμερα", "today", "Yesterday's tomorrow"], ["αύριο", "tomorrow", "It never comes, they say"], ["βράδυ", "evening", "When the day calls it a night"], ["πρωί", "morning", "When the early bird is up"], ["ώρα", "hour, time", "Sixty minutes, or the right moment"], ["χρόνος", "time, year", "It flies, though it has no wings"], ["φορά", "time (occasion)", "Once upon a ___"], ["ζωή", "life", "What happens while you're busy making other plans"], ["αλήθεια", "truth", "Nothing but the ___"], ["μέρα", "day", "It breaks every morning"], ["γυναίκα", "woman, wife", "The \"gyn\" in gynecology"], ["στιγμή", "moment", "A blink, give or take"], ["πιστεύω", "I believe", "First word of the Creed"], ["προσπαθώ", "I try", "If at first you don't succeed, do this again"], ["μιλάω", "I speak, I talk", "What a parrot does without meaning it"], ["βοηθάω", "I help", "Lend a hand"], ["φεύγω", "I leave", "Make an exit"], ["περιμένω", "I wait", "What the patient do"], ["έρχομαι", "I come", "\"Just a second,\" from the other room"], ["παίρνω", "I take", "Give's opposite"], ["πηγαίνω", "I go", "Go, the long way"], ["τέλεια", "perfect(ly)", "Ten out of ten"], ["βέβαια", "of course", "\"Sure thing\""], ["πόσο", "how much", "The price tag question"], ["ποιος", "who, which", "\"Knock knock.\" \"___'s there?\""], ["γιατί", "why, because", "A small child's favorite question"], ["εμείς", "we", "You and I, together"], ["τώρα", "now", "Not later, not earlier"], ["τίποτα", "nothing", "Much ado about this"], ["καλημέρα", "good morning", "Said before noon, never after dark"], ["εκκλησία", "church", "Where the bells ring on Sunday"], ["ήλιος", "sun", "Star of the show every day"], ["θάλασσα", "sea", "Xenophon's men shouted it twice"], ["βουνό", "mountain", "Olympus, for one"], ["βάρκα", "boat", "We're all in the same one"], ["άνθρωπος", "person, human", "The \"anthrop\" in anthropology"], ["μεγάλος", "big, old (age)", "Mega, more or less"], ["σωστά", "correctly, right", "\"Exactly\""], ["μπαμπάς", "dad", "Pop, to some"], ["μικρός", "small, young", "Micro, more or less"], ["άντρας", "man, husband", "A husband, or any guy"], ["κόσμος", "world, people", "The cosmos next door, or everybody in it"], ["φυσικά", "of course", "As nature would have it"], ["χέρι", "hand, arm", "It may be given in marriage"], ["δίνω", "I give", "Take's partner"], ["καιρός", "weather, time", "The first topic of small talk"], ["κορίτσι", "girl", "\"It's a ___\" on pink balloons"], ["βρέχει", "it is raining", "Cats and dogs, say the English"], ["χιονίζει", "it is snowing", "Weather for building a man"], ["σίγουρα", "surely", "\"No doubt about it\""], ["σημαίνει", "it means", "What a dictionary tells you a word does"], ["σταματάω", "I stop", "What a red light asks of you"], ["ακούω", "I hear, I listen", "Lend an ear"], ["βρίσκω", "I find", "Seek, and you will ___"], ["πρέπει", "must, it is necessary", "Must, no matter what"], ["μέρος", "place, part", "A part, or a spot on the map"], ["πρόβλημα", "problem", "Houston had one"], ["όνομα", "name", "\"What's in a ___?\" asked Juliet"], ["συγγνώμη", "sorry, excuse me", "What to say after stepping on toes"], ["κυρία", "Mrs., lady", "Madam"], ["ιδέα", "idea", "Light bulb over the head"], ["μητέρα", "mother", "Necessity is the ___ of invention"], ["χειμώνας", "winter", "It's coming, the Starks kept saying"], ["λεφτά", "money", "It doesn't grow on trees"], ["πόλη", "city, town", "Constantinople, to a Greek, in one word"], ["αγάπη", "love", "All you need, said the Beatles"], ["μωρό", "baby", "A bundle of joy"], ["χαρά", "joy", "Beethoven wrote an ode to it"], ["όλος", "all, whole", "The whole thing"], ["εδώ", "here", "Not there"], ["εκεί", "there", "Not here"], ["λεπτό", "minute", "Sixty seconds"], ["πέντε", "five", "Fingers on one hand"], ["δύο", "two", "Company, not a crowd"], ["μισό", "half", "Fifty percent"], ["ευρώ", "euro", "Greece's money since 2002"], ["κάτι", "something", "It's better than nothing"], ["κάποιος", "someone", "Somebody, but who?"], ["μαζί", "together", "Like peas and carrots"], ["μόνο", "only", "Nothing but"], ["έτσι", "so, like this", "Like so"], ["όταν", "when", "\"___ in Rome...\""], ["ακόμα", "still, yet, even", "Still, or even yet"], ["αρχίζω", "I begin", "Get the ball rolling"], ["μένω", "I stay, I live", "Stay put"], ["γνωρίζω", "I know, I meet", "Get acquainted"], ["ελπίζω", "I hope", "Keep my fingers crossed"], ["φέρνω", "I bring", "What a good dog does with a stick"], ["χαίρομαι", "I am glad", "I'm glad"], ["γυρίζω", "I return, I turn", "Come back, or spin around"], ["φτάνω", "I arrive, I reach", "Make it, finally"], ["δουλεύω", "I work", "Clock in"], ["κανένας", "nobody, no one", "The name Odysseus gave the Cyclops"], ["κύριος", "Mr., sir, gentleman", "The \"Kyrie\" in Kyrie eleison"], ["ποτέ", "never", "Not in a million years"], ["λοιπόν", "so, well", "\"So...\" to start a story"], ["μέσα", "inside", "Where an inside job happens"], ["ίσως", "maybe", "Maybe, maybe not"], ["μετά", "after", "Not before"], ["λόγος", "reason, speech", "\"In the beginning was the ___\""], ["τρόπος", "way, manner", "Where there's a will, there's a ___"], ["λάθος", "mistake", "What to err is to make"], ["αργά", "slowly, late", "Better ___ than never"], ["έτοιμος", "ready", "\"___ or not, here I come\""], ["μάτι", "eye", "Beauty is in it, they say"], ["δίκιο", "right (being right)", "What you have when you're right"], ["σίγουρος", "sure", "Certain, as a person"], ["αγαπάω", "I love", "The verb of every love song"], ["ωραίος", "beautiful, nice", "Good-looking"], ["εννοώ", "I mean", "\"I ___ it,\" said seriously"], ["αφήνω", "I leave, I let", "Let it go, said Elsa"], ["θυμάμαι", "I remember", "Elephants are said to do this well"], ["ψάχνω", "I look for", "Look high and low"], ["Ελλάδα", "Greece", "Hellas, today"], ["Αμερική", "America", "Land of the free"], ["πριν", "before", "Not after"], ["πάντα", "always", "Never's opposite"], ["πίσω", "back, behind", "Where hindsight looks"], ["ίδιος", "same", "Same old, same old"], ["έξω", "out, outside", "The \"exo\" in exoskeleton"], ["νέος", "new, young", "The \"neo\" in neon"], ["μέχρι", "until", "Up to, as far as"], ["πάνω", "on, up, above", "Up, not down"], ["μόνος", "alone", "Home ___ (Kevin's movie)"], ["άνοιξη", "spring", "The season that opens up"], ["πατέρας", "father", "\"Our ___, who art in heaven\""], ["θέση", "position, seat", "A seat, or where you stand on things"], ["φθινόπωρο", "autumn", "Fall, but nobody trips"], ["ιστορία", "story, history", "It repeats itself, they say"], ["ομάδα", "team, group", "There's no \"I\" in it"], ["γιος", "son", "The prodigal one came home"], ["αγόρι", "boy", "\"It's a ___\" on blue balloons"], ["δύσκολος", "difficult", "Hard, but not like a rock"], ["ευκαιρία", "opportunity", "It knocks, they say"], ["κόρη", "daughter", "Persephone, to Demeter"], ["εκείνος", "that (one)", "That one, over there"], ["επειδή", "because", "Because, and that's why"]];</script>
+<script>
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const BANK = window.CW_BANK.map(([g, en, clue]) => ({ g, en, clue, a: norm(g) }));
+  function norm(w) { return w.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/ς/g, 'Σ'); }
+  const H = String(window.GQ_HASH || location.hash || '').replace(/^#/, '');
+  const hp = new URLSearchParams(H);
+  const MINE = (hp.get('w') || '').split(',').map(s => s.trim()).filter(Boolean);
+  const mineSet = new Set(MINE);
+  const MAXW = 9, MAXH = 9, WANT = 8;
+  const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  function poolNow() {
+    let p = BANK.filter(x => x.a.length >= 3 && x.a.length <= MAXW && (!MINE.length || mineSet.has(x.g)));
+    if (p.length < 10) { // Too few words met yet: add the next words of the story, in story order.
+      const more = BANK.filter(x => !p.includes(x) && x.a.length >= 3 && x.a.length <= MAXW); p = p.concat(more.slice(0, 24 - p.length)); }
+    return p;
+  }
+  // ---------- build a grid ----------
+  function build(pool) {
+    let best = null;
+    for (let t = 0; t < 160; t++) {
+      const words = shuffle(pool.slice()).sort((a, b) => (b.a.length - a.a.length) * (Math.random() < .5 ? 1 : 0));
+      const cells = new Map(), placed = [];
+      const key = (r, c) => r + ',' + c;
+      const at = (r, c) => cells.get(key(r, c));
+      let r0 = 0, r1 = -1, c0 = 0, c1 = -1;
+      const fits = (w, r, c, d) => {
+        const dr = d ? 1 : 0, dc = d ? 0 : 1, L = w.a.length;
+        const nr0 = Math.min(r0, r), nr1 = Math.max(r1, r + dr * (L - 1)), nc0 = Math.min(c0, c), nc1 = Math.max(c1, c + dc * (L - 1));
+        if (placed.length && (nr1 - nr0 + 1 > MAXH || nc1 - nc0 + 1 > MAXW)) return -1;
+        if (at(r - dr, c - dc) || at(r + dr * L, c + dc * L)) return -1;
+        let cross = 0;
+        for (let i = 0; i < L; i++) {
+          const rr = r + dr * i, cc = c + dc * i, x = at(rr, cc);
+          if (x) { if (x.ch !== w.a[i] || x[d ? 'dn' : 'ac']) return -1; cross++; continue; }
+          if (at(rr + dc, cc + dr) || at(rr - dc, cc - dr)) return -1;
+        }
+        return placed.length && !cross ? -1 : cross;
+      };
+      const put = (w, r, c, d) => {
+        const dr = d ? 1 : 0, dc = d ? 0 : 1;
+        for (let i = 0; i < w.a.length; i++) {
+          const k = key(r + dr * i, c + dc * i); const x = cells.get(k) || { ch: w.a[i] };
+          x[d ? 'dn' : 'ac'] = w; cells.set(k, x);
+        }
+        placed.push({ w, r, c, d });
+        r0 = Math.min(r0, r); r1 = Math.max(r1, r + dr * (w.a.length - 1)); c0 = Math.min(c0, c); c1 = Math.max(c1, c + dc * (w.a.length - 1));
+      };
+      let cross = 0;
+      for (const w of words) {
+        if (placed.length >= WANT) break;
+        if (placed.some(p => p.w.a === w.a)) continue;
+        if (!placed.length) { put(w, 0, 0, 0); continue; }
+        const opts = [];
+        for (const [k, x] of cells) {
+          const [rr, cc] = k.split(',').map(Number);
+          for (let i = 0; i < w.a.length; i++) {
+            if (w.a[i] !== x.ch) continue;
+            for (const d of [0, 1]) {
+              const r = d ? rr - i : rr, c = d ? cc : cc - i;
+              const s = fits(w, r, c, d); if (s > 0) opts.push({ r, c, d, s: s + Math.random() * .5 });
+            }
+          }
+        }
+        if (!opts.length) continue;
+        opts.sort((a, b) => b.s - a.s); const o = opts[0]; cross += Math.floor(o.s); put(w, o.r, o.c, o.d);
+      }
+      const score = placed.length * 10 + cross * 3 - Math.abs((r1 - r0) - (c1 - c0));
+      if (!best || score > best.score) best = { score, placed, r0, r1, c0, c1 };
+      if (placed.length >= WANT && t > 40) break;
+    }
+    return best;
+  }
+  // ---------- state ----------
+  let P = null, cur = null, dir = 0, hinted = new Set(), helped = new Set(), sent = false;
+  const fill = new Map();
+  function start() {
+    const b = build(poolNow());
+    const H = b.r1 - b.r0 + 1, W = b.c1 - b.c0 + 1;
+    const grid = Array.from({ length: H }, () => Array(W).fill(null));
+    const ents = b.placed.map(p => ({ w: p.w, r: p.r - b.r0, c: p.c - b.c0, d: p.d, cells: [] }));
+    for (const e of ents) for (let i = 0; i < e.w.a.length; i++) {
+      const r = e.r + (e.d ? i : 0), c = e.c + (e.d ? 0 : i);
+      grid[r][c] = grid[r][c] || { r, c, ch: e.w.a[i], ents: [] }; grid[r][c].ents[e.d] = e; e.cells.push(grid[r][c]);
+    }
+    let n = 0;
+    for (let r = 0; r < H; r++) for (let c = 0; c < W; c++) {
+      const g = grid[r][c]; if (!g) continue;
+      const starts = ents.filter(e => e.r === r && e.c === c);
+      if (starts.length) { n++; g.n = n; starts.forEach(e => { e.n = n; }); }
+    }
+    ents.sort((a, b) => a.d - b.d || a.n - b.n);
+    P = { H, W, grid, ents };
+    fill.clear(); hinted = new Set(); helped = new Set(); sent = false;
+    cur = ents[0].cells[0]; dir = ents[0].d;
+    draw();
+  }
+  const ent = () => cur && (cur.ents[dir] || cur.ents[1 - dir]);
+  const solved = e => e.cells.every(g => fill.get(g) === g.ch);
+  // ---------- draw ----------
+  function draw() {
+    // Small enough that the grid, the clue and the letter keys fit on one phone screen.
+    const cs = Math.max(24, Math.min(42, Math.floor((Math.min(window.innerWidth, 520) - 32) / P.W) - 2, Math.floor((window.innerHeight - 330) / P.H) - 2));
+    const gEl = $('#grid'); gEl.style.setProperty('--cs', cs + 'px'); gEl.style.gridTemplateColumns = `repeat(${P.W}, ${cs}px)`;
+    gEl.innerHTML = '';
+    const e = ent(); if (e && dir !== e.d) dir = e.d;
+    for (let r = 0; r < P.H; r++) for (let c = 0; c < P.W; c++) {
+      const g = P.grid[r][c], d = document.createElement('div');
+      if (!g) { d.className = 'c'; gEl.appendChild(d); continue; }
+      const ok = g.ents.some(x => x && solved(x));
+      d.className = 'c w' + (e && e.cells.includes(g) ? ' sel' : '') + (g === cur ? ' cur' : '') + (ok ? ' ok' : '');
+      d.setAttribute('role', 'button'); d.setAttribute('aria-label', `Square ${r + 1}, ${c + 1}`);
+      if (g.n) d.insertAdjacentHTML('beforeend', `<span class="n">${g.n}</span>`);
+      const l = document.createElement('span'); l.className = 'l'; l.textContent = fill.get(g) || ''; d.appendChild(l);
+      d.onclick = () => { if (g === cur && g.ents[0] && g.ents[1]) dir = 1 - dir; else if (!g.ents[dir]) dir = 1 - dir; cur = g; draw(); };
+      gEl.appendChild(d);
+    }
+    drawBar(); drawClues(); drawDone();
+  }
+  const lbl = e => `${e.n} ${e.d ? 'Down' : 'Across'}`;
+  function drawBar() {
+    const e = ent(), b = $('#bar'); if (!e) { b.innerHTML = ''; return; }
+    const ok = solved(e);
+    b.innerHTML = `<div class="k">${lbl(e)}</div><div class="q">${esc(e.w.clue)} (${e.w.a.length})</div>` +
+      (ok ? `<div class="h"><b class="say" lang="el">${esc(e.w.g)}</b> · ${esc(e.w.en)}</div>` : hinted.has(e) ? `<div class="h">Means: <b>${esc(e.w.en)}</b></div>` : '') +
+      (!ok && e.cells.every(g => fill.get(g)) ? `<div class="h">Not quite yet.</div>` : '') +
+      `<div class="row">${ok ? '<button class="btn" id="hear">Hear it</button>' : hinted.has(e) ? '<button class="btn" id="letter">Show a letter</button>' : '<button class="btn" id="hint">Hint</button>'}</div>`;
+    const h = $('#hint'); if (h) h.onclick = () => { hinted.add(e); drawBar(); };
+    const L = $('#letter'); if (L) L.onclick = () => {
+      const g = e.cells.find(x => fill.get(x) !== x.ch); if (!g) return;
+      fill.set(g, g.ch); helped.add(e.w.g); cur = g; after(e);
+    };
+    const s = b.querySelector('.say'); if (s) s.onclick = () => say(e.w.g);
+    const hr = $('#hear'); if (hr) hr.onclick = () => say(e.w.g);
+  }
+  function drawClues() {
+    const e = ent(); let h = '';
+    for (const d of [0, 1]) {
+      const list = P.ents.filter(x => x.d === d); if (!list.length) continue;
+      h += `<h3>${d ? 'Down' : 'Across'}</h3>`;
+      for (const x of list) {
+        const ok = solved(x);
+        h += `<button data-i="${P.ents.indexOf(x)}" class="${x === e ? 'on' : ''} ${ok ? 'ok' : ''}"><b>${x.n}</b> ${esc(x.w.clue)} (${x.w.a.length})${ok ? ` · <span class="g" lang="el">${esc(x.w.g)}</span>` : ''}</button>`;
+      }
+    }
+    const el = $('#clues'); el.innerHTML = h;
+    el.querySelectorAll('button').forEach(b => b.onclick = () => { const x = P.ents[+b.dataset.i]; dir = x.d; cur = x.cells.find(g => fill.get(g) !== g.ch) || x.cells[0]; draw(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  }
+  function drawDone() {
+    const box = $('#doneBox');
+    if (!P.ents.every(solved)) { box.innerHTML = ''; return; }
+    const miss = [...helped];
+    box.innerHTML = `<div class="done"><b>Solved.</b><p>${P.ents.length} words${miss.length ? `, ${miss.length} with a letter shown` : ', no letters shown'}.</p><div class="row">${miss.length && !sent ? `<button class="btn" id="rev">Send ${miss.length === 1 ? 'it' : 'them'} to review</button>` : ''}<button class="btn cta" id="again">New puzzle</button></div></div>`;
+    $('#again').onclick = start;
+    const rv = $('#rev'); if (rv) rv.onclick = () => {
+      sent = true; const url = 'obsidian://greekquent?game=' + encodeURIComponent('Crossword') + '&misses=' + encodeURIComponent(miss.join(','));
+      if (window.parent !== window) window.parent.postMessage({ gq: 'obsidian', url }, '*'); else location.href = url;
+      drawDone();
+    };
+  }
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  // ---------- typing ----------
+  function after(e) {
+    if (solved(e)) {
+      if (!helped.has(e.w.g) && window.parent !== window) try { window.parent.postMessage({ gq: 'mo', w: e.w.g }, '*'); } catch (x) {}
+      say(e.w.g);
+      const next = P.ents.find(x => !solved(x) && x.cells.some(g => !fill.get(g))) || P.ents.find(x => !solved(x));
+      if (next) { dir = next.d; cur = next.cells.find(g => fill.get(g) !== g.ch) || next.cells[0]; }
+    }
+    draw();
+  }
+  function type(ch) {
+    const e = ent(); if (!e || !cur) return;
+    if (cur.ents.some(x => x && solved(x)) && fill.get(cur) === cur.ch) {
+      const nx = e.cells.slice(e.cells.indexOf(cur) + 1).find(g => fill.get(g) !== g.ch); if (!nx) return; cur = nx;
+    }
+    fill.set(cur, ch);
+    const i = e.cells.indexOf(cur);
+    const nx = e.cells.slice(i + 1).find(g => !(fill.get(g) === g.ch && g.ents.some(x => x && solved(x))));
+    if (nx) cur = nx;
+    after(e);
+  }
+  function back() {
+    const e = ent(); if (!e || !cur) return;
+    const locked = g => fill.get(g) === g.ch && g.ents.some(x => x && solved(x));
+    if (fill.get(cur) && !locked(cur)) { fill.delete(cur); draw(); return; }
+    const i = e.cells.indexOf(cur);
+    for (let j = i - 1; j >= 0; j--) if (!locked(e.cells[j])) { cur = e.cells[j]; fill.delete(cur); break; }
+    draw();
+  }
+  const KB = 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ';
+  { const kb = $('#kb'); for (const ch of KB) { const b = document.createElement('button'); b.textContent = ch; b.setAttribute('lang', 'el'); b.onclick = () => type(ch); kb.appendChild(b); }
+    const bs = document.createElement('button'); bs.className = 'wide'; bs.textContent = 'Delete'; bs.onclick = back; kb.appendChild(bs); }
+  // A computer keyboard works too, in Greek or with the usual Greek layout on English keys.
+  const LAT = { a: 'Α', b: 'Β', g: 'Γ', d: 'Δ', e: 'Ε', z: 'Ζ', h: 'Η', u: 'Θ', i: 'Ι', k: 'Κ', l: 'Λ', m: 'Μ', n: 'Ν', j: 'Ξ', o: 'Ο', p: 'Π', r: 'Ρ', s: 'Σ', w: 'Σ', t: 'Τ', y: 'Υ', f: 'Φ', x: 'Χ', c: 'Ψ', v: 'Ω' };
+  document.addEventListener('keydown', ev => {
+    if (ev.metaKey || ev.ctrlKey || ev.altKey) return;
+    if (ev.key === 'Backspace') { ev.preventDefault(); back(); return; }
+    if (/^Arrow/.test(ev.key)) {
+      ev.preventDefault(); const d = { ArrowLeft: [0, -1], ArrowRight: [0, 1], ArrowUp: [-1, 0], ArrowDown: [1, 0] }[ev.key];
+      let r = cur.r + d[0], c = cur.c + d[1];
+      while (r >= 0 && c >= 0 && r < P.H && c < P.W && !P.grid[r][c]) { r += d[0]; c += d[1]; }
+      if (r >= 0 && c >= 0 && r < P.H && c < P.W) { cur = P.grid[r][c]; dir = d[0] ? 1 : 0; if (!cur.ents[dir]) dir = 1 - dir; draw(); }
+      return;
+    }
+    if (ev.key.length !== 1) return;
+    const k = ev.key.toLowerCase(), g = norm(ev.key);
+    const ch = KB.includes(g) ? g : LAT[k];
+    if (ch) { ev.preventDefault(); type(ch); }
+  });
+  // ---------- voice ----------
+  let elVoice = null;
+  function pickVoice() { if ('speechSynthesis' in window) elVoice = speechSynthesis.getVoices().find(v => /^el/i.test(v.lang)) || null; }
+  if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  function say(text) {
+    if (!('speechSynthesis' in window)) return;
+    try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(String(text).split(',')[0]); u.lang = 'el-GR'; if (elVoice) u.voice = elVoice; u.rate = .85; speechSynthesis.speak(u); } catch (e) {}
+  }
+  $('#new').onclick = start;
+  window.addEventListener('resize', () => P && draw());
+  if (!window.GQ_HASH) window.addEventListener('hashchange', () => location.reload());
+  window.CW_TEST = { get P() { return P; }, fill, type, start };
+  start();
+})();
+</script>
+</body>
+</html>

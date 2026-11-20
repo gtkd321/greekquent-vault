@@ -52,7 +52,6 @@ WEBNOTES = os.path.join(os.path.dirname(os.path.abspath(shell)), 'notes-kids' if
 for f in os.listdir(WEBNOTES) if os.path.isdir(WEBNOTES) else []:
     for k in [k for k in notes if k.rsplit('/', 1)[-1] == f]: notes[k] = open(os.path.join(WEBNOTES, f), encoding='utf-8').read()
 NOTE_FIX = [
-    ('All four games are part of the vault. They open here in Obsidian, need no internet, and update with the vault.', 'All four games are part of Greekquent. They open right here, work without internet, and update by themselves.'),
     ('(Feedly, Inoreader, or the Obsidian RSS Dashboard plugin)', '(Feedly or Inoreader)'),
     ('tap More, then Update vault', 'it arrives with the next update'), ('Tap More, then Update vault', 'It arrives with the next update'),
     ('Update vault', 'Check for updates'),

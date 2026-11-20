@@ -498,6 +498,17 @@ body.gq-calm .gq-pulse { animation: none; outline: 2px solid var(--interactive-a
 .gq-cell.gq-green { background: #43a047; color: #fff; border-color: #43a047; }
 .gq-cell.gq-new { background: transparent; color: var(--text-muted); }
 .gq-sheet-had { display: inline-flex; gap: 4px; flex-wrap: wrap; }
+.gq-quiz-go { margin: 0 0 8px; }
+.gq-quiz { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.gq-quiz-q { font-size: 1.9em; font-weight: 600; line-height: 1.2; cursor: default; }
+.gq-quiz-opts { display: grid; grid-template-columns: 1fr; gap: 8px; width: 100%; max-width: 360px; }
+.gq-quiz-opt { min-height: 48px; font-size: 1.05em; white-space: normal; height: auto; padding: 8px 12px; }
+.gq-quiz-opt.is-ok { background: #2e7d32; color: #fff; }
+.gq-quiz-opt.is-miss { background: #c62828; color: #fff; }
+.gq-quiz-fb { font-weight: 600; }
+.gq-quiz-fb.is-ok { color: #2e7d32; }
+.gq-quiz-fb.is-miss { color: #c62828; }
+.gq-quiz-say { justify-content: center; gap: 8px; }
 .gq-words-more { justify-content: center; gap: 12px; align-items: center; margin: 10px 0; }
 .gq-words-foot { margin-top: 12px; }
 .gq-class-in h2 { margin-top: 0; }

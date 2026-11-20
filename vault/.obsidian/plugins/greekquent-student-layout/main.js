@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zz';
+const VAULT_RELEASE = '2026-11-19zza';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -5142,7 +5142,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const bw = seg.createEl('button', { text: 'Web' }); bw.onclick = () => { const h = st.q ? this.findWords(st.q)[0] : null; this.openGraph(h ? h.path : (this.lastWebPath || '')); };
     bl.onclick = () => {};
     const sum = box.createDiv('gq-words-sum'), bar = box.createDiv({ cls: 'gq-words-bar', attr: { 'aria-hidden': 'true' } });
-    const filt = box.createDiv('gq-row gq-words-filt'), list = box.createDiv('gq-words-list'), more = box.createDiv('gq-row gq-words-more');
+    const filt = box.createDiv('gq-row gq-words-filt'), qz = box.createDiv('gq-row gq-quiz-go'), list = box.createDiv('gq-words-list'), more = box.createDiv('gq-row gq-words-more');
     const count = () => {
       const c = this.colors(), g = c.green.length, y = c.yellow.length, r = c.red.length;
       sum.empty(); sum.createSpan({ cls: 'gq-g', text: `${g} green` }); sum.appendText(' · '); sum.createSpan({ cls: 'gq-y', text: `${y} yellow` }); sum.appendText(' · '); sum.createSpan({ cls: 'gq-r', text: `${r} red` }); sum.appendText(` · of ${total.toLocaleString('en-US')}`);
@@ -5154,8 +5154,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     cb.onchange = () => { st.cover = cb.checked; draw(); };
     const ORDER = ['red', 'yellow', 'green'];
     const draw = () => {
-      count(); list.empty(); more.empty();
+      count(); list.empty(); more.empty(); qz.empty();
       const c = this.colors(), of = w => this.colorOf(w.word);
+      // Quiz me: one button for the color you picked. Up to 10 of its words, in a pop.
+      if (c[st.show] && c[st.show].length) { const pool = words.filter(w => of(w) === st.show), n = Math.min(10, pool.length); const b = qz.createEl('button', { text: `Quiz me on these (${n})`, cls: 'mod-cta' }); b.onclick = () => this.quizMe(pool, words, st.show, () => this.renderWords(el)); }
       let rows = st.q ? this.findWords(st.q) : words;
       if (st.show !== 'all') rows = rows.filter(w => (of(w) || 'none') === st.show);
       const pages = Math.max(1, Math.ceil(rows.length / BL)); if (st.block >= pages) st.block = 0;
@@ -5187,6 +5189,48 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     let tm = 0; q.oninput = () => { clearTimeout(tm); tm = setTimeout(() => { st.q = q.value.trim(); st.block = 0; draw(); }, 200); };
     draw();
     box.createDiv({ cls: 'gq-hint gq-words-foot', text: 'Red: don\'t have it. Yellow: kind of. Green: have it. A color you move up that still holds two days later earns φόρα.' });
+  }
+  // Quiz me (Words list): up to 10 words of one color. See it and pick the meaning, hear it and pick the Greek, say it.
+  // The first answer to each word counts: right moves it up a color, a miss moves it down one. Same colors as everywhere else.
+  quizMe(pool, all, color, done) {
+    const mix = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const qs = mix(pool).slice(0, 10), UP = { red: 'yellow', yellow: 'green', green: 'green' }, DOWN = { red: 'red', yellow: 'red', green: 'yellow' };
+    const canHear = !gqQuiet() && !noSpeech(), res = new Map();
+    const kinds = canHear ? ['meaning', 'listen', 'say'] : ['meaning', 'say'];
+    const four = (w, key) => { const seen = new Set([w[key]]), out = [w]; for (const o of mix(all)) { if (out.length >= 4) break; if (o[key] && !seen.has(o[key])) { seen.add(o[key]); out.push(o); } } return mix(out); };
+    const mark = async (w, ok) => { if (res.has(w.word)) return; res.set(w.word, ok); this.moAdd(ok ? 'recall' : 'try', w.word); const nx = (ok ? UP : DOWN)[color]; if (nx !== color) await this.setColor(w.word, nx); };
+    const steps = qs.map((w, i) => ({ label: 'Quiz', build: (el, api) => {
+      const kind = kinds[i % kinds.length]; el.addClass('gq-quiz');
+      const fb = () => el.querySelector('.gq-quiz-fb') || el.createDiv({ cls: 'gq-quiz-fb' });
+      const after = ok => { const f = fb(); f.empty(); f.addClass(ok ? 'is-ok' : 'is-miss'); f.appendText(ok ? 'Right. ' : 'Not yet. '); f.createSpan({ text: w.word, attr: { lang: 'el' } }); f.appendText(' · ' + w.english); if (!ok && canHear) say(w.word); setTimeout(() => { if (el.isConnected) api.next(); }, ok ? 900 : 1800); };
+      if (kind === 'say') {
+        el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek' }); el.createDiv({ cls: 'gq-quiz-q', text: w.english });
+        const r = el.createDiv('gq-row gq-quiz-say');
+        this.sayIt(r, w.word, w.word, 'Say it', () => { mark(w, true); after(true); });
+        const n = r.createEl('button', { text: 'Not yet', cls: 'gq-mini' }); n.onclick = () => { if (res.has(w.word)) return; mark(w, false); after(false); };
+        return;
+      }
+      const listen = kind === 'listen', key = listen ? 'word' : 'english';
+      el.createDiv({ cls: 'gq-hint', text: listen ? 'Listen, then pick the Greek' : 'Pick the meaning' });
+      if (listen) { const h = el.createEl('button', { text: 'Hear it again', cls: 'gq-mini gq-quiz-hear' }); h.onclick = () => say(w.word); setTimeout(() => say(w.word), 250); }
+      else { const q = el.createDiv({ cls: 'gq-quiz-q', text: w.word, attr: { lang: 'el' } }); q.onclick = () => canHear && say(w.word); }
+      const box = el.createDiv('gq-quiz-opts');
+      for (const o of four(w, key)) {
+        const b = box.createEl('button', { text: o[key], cls: 'gq-quiz-opt', attr: listen ? { lang: 'el' } : {} });
+        b.onclick = () => { if (res.has(w.word)) return; const ok = o.word === w.word; b.addClass(ok ? 'is-ok' : 'is-miss'); if (!ok) box.querySelectorAll('button').forEach(x => { if (x.textContent === w[key]) x.addClass('is-ok'); }); mark(w, ok); after(ok); };
+      }
+    } }));
+    steps.push({ label: 'Done', build: (el, api) => {
+      el.addClass('gq-quiz'); const right = [...res.values()].filter(Boolean).length, tried = res.size;
+      el.createDiv({ cls: 'gq-quiz-q', text: tried ? `${right} of ${tried}` : 'No answers yet' });
+      const name = { red: 'Red', yellow: 'Yellow', green: 'Green' };
+      const up = color === 'green' ? 0 : right, down = color === 'red' ? 0 : tried - right;
+      const t = []; if (up) t.push(`${up} moved up to ${name[UP[color]]}`); if (down) t.push(`${down} moved down to ${name[DOWN[color]]}`);
+      el.createDiv({ cls: 'gq-hint', text: t.length ? t.join('. ') + '.' : (tried ? 'Your colors stay the same.' : 'Go back to answer, or close.') });
+      const r = el.createDiv('gq-row'); const a = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); a.onclick = () => api.close();
+    } });
+    this.tourHit && this.tourHit('quiz');
+    this.pop(`Quiz · ${{ red: 'Red', yellow: 'Yellow', green: 'Green' }[color]}`, steps, () => setTimeout(done, 400));
   }
   // ---------- Class: the latest lesson, practice and the teacher ----------
   async renderClass(el) {

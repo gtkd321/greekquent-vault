@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Quiz me on a color (2026-11-19zza)
+> On Words, tap Red, Yellow or Green, then Quiz me on these. Up to 10 words: pick the meaning, hear it and pick the Greek, or say it. A right answer moves the word up a color, a miss moves it down one.
+
 > [!tip]- 2026-11-19zz · One app, with a More button
 > Greekquent is one app now. There is no Beginner or Intermediate switch. Every lesson opens at its usual length, and the blue More: longer scene button at the top opens the same lesson with more Greek (the Complete Greek dialogues are there too). Shorter scene brings you back. The old Intermediate web address sends you to this app and brings your work along on the same phone and browser. The lesson's side panel button is now called Extras.
 

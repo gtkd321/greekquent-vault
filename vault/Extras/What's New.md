@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Clearer English, and word families (2026-11-20p)
+> A few words shared one English meaning without being the same, so they now say how they differ: πότε is "when? (asking)" and όταν is "when, whenever"; νομίζω is "I think (that)" and σκέφτομαι is "I think about." In the Word web, many words now have a Family button. It shows the words built on the same root, like μένω, περιμένω and παραμένω. Hold one to see how it is built: περι- (around) + μένω. Tap it again for Goes with.
+
 > [!tip]- Words that mean the same thing both count (2026-11-20o)
 > Some of the 1,500 share one English meaning: ότι and πως both mean "that," and αμάξι and αυτοκίνητο both mean "car." When a quiz asks you to say the Greek, either one counts. If you already know the other word, it shows after your answer, for example "also πως."
 

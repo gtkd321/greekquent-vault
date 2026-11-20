@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20o';
+const VAULT_RELEASE = '2026-11-20p';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -221,6 +221,9 @@ const LOCAL_OPTIONS = {
 // No endless physics: once nothing moves for a moment the web is perfectly still until touched.
 const WEB = 'greekquent-word-web';
 const WEB_MAX = 9;
+// Word families (Word web, Family): words built on one root, hand-checked. A | marks where a prefix ends, for "περι (around) + μένω".
+const FAMILIES = [["stay",["μένω","περι|μένω","παρα|μένω"]],["carry, bring",["φέρνω","κατα|φέρνω","ανα|φέρω","μετα|φέρω","προσ|φέρω","προ|φέρω","υπο|φέρω","φορά","ανα|φορά","δια|φορά","μετα|φορά","προσ|φορά","προ|φορά"]],["put, place",["θέση","υπο|θέτω","υπό|θεση","έκ|θεση","διά|θεση","επί|θεση","επί|θετο","απο|θήκη","συν|θήκη"]],["stand",["στάση","στέκομαι","από|σταση","κατά|σταση","παρά|σταση","κατά|στημα","σύ|στημα","διά|στημα","προ|στατεύω","προ|στασία","εργοστάσιο"]],["way, road",["οδός","είσ|οδος","έξ|οδος","περί|οδος","οδηγώ","οδηγία"]],["being",["ουσία","παρ|ουσία","περι|ουσία","εξ|ουσία"]],["call",["καλώ","παρα|καλώ","προ|καλώ","απο|καλώ","καλεσμένος","κλήση","εκ|κλησία"]],["take",["λαμβάνω","ανα|λαμβάνω","επανα|λαμβάνω","κατα|λαβαίνω"]],["have, hold",["έχω","προσ|έχω","αντ|έχω","συν|έχεια","συν|εχίζω","σχέση","υπό|σχεση","υπό|σχομαι","έν|οχος"]],["come",["έρχομαι","προ|έρχομαι"]],["follow",["ακολουθώ","εξ|ακολουθώ","παρα|κολουθώ"]],["write, draw",["γράφω","γράμμα","γραμμή","πρό|γραμμα","γραφείο","έγ|γραφο","αντί|γραφο","φωτογραφία","δημοσιογράφος","συγ|γραφέας","ζωγραφική"]],["step, put",["βάζω","δια|βάζω"]],["know",["γνωρίζω","ανα|γνωρίζω","γνωστός","γνώμη","συγ|γνώμη"]],["seek, ask for",["ζητάω","ζήτημα","συ|ζητάω","συ|ζήτηση"]],["ask",["ρωτάω","ερώτηση","ανα|ρωτιέμαι"]],["luck, chance",["τύχη","τυχερός","α|τύχημα","επι|τυχία","πετυχαίνω","ευ|τυχία","ευ|τυχώς","δυσ|τυχώς","ευ|τυχισμένος"]],["voice, sound",["φωνή","φωνάζω","συμ|φωνώ","συμ|φωνία","σύμ|φωνα με","τηλέ|φωνο","τηλε|φωνώ","τηλε|φώνημα"]],["common, shared",["κοινός","κοινωνία","κοινωνικός","κοινότητα","επι|κοινωνία","επι|κοινωνώ"]],["danger",["κίνδυνος","επι|κίνδυνος"]],["law",["νόμος","νόμιμος","νομικός","παρά|νομος"]],["foreign, guest",["ξένος","παρά|ξενος","ξενοδοχείο"]],["sleep",["ύπνος","ξυπνάω","έξ|υπνος"]],["middle",["μέσα","μέσος","μέσω","ανά|μεσα","αμέσως"]],["other",["άλλος","αλλού","εξ|άλλου"]],["show",["δείχνω","δείγμα","παρά|δειγμα"]],["give",["δίνω","δόση","παρά|δοση"]],["send",["στέλνω","στολή","απο|στολή"]],["sign, mark",["σήμα","σημάδι","σημείο","σημείωμα","σημαίνει","σημασία","σημαντικός","διά|σημος","επί|σημος"]],["appear, show",["φαίνομαι","εμ|φανίζομαι","εξ|αφανίζομαι","επι|φάνεια","προ|φανώς","φαντάζομαι","φαντασία","φανταστικός"]],["space, place",["χώρος","χώρα","χωριό","χωράφι","χωρίζω","χωρίς","ξεχωριστός","προ|χωράω"]],["friend, love",["φίλος","φίλη","φιλί","φιλία"]],["light",["φως","φώτα","φωτιά","φωτογραφία"]],["joy, grace",["χαρά","χαρούμενος","χάρη","χαριτωμένος","ευ|χαριστώ","ευ|χαρίστηση","συγ|χαρητήρια"]],["sibling",["αδερφός","αδερφή","αδέρφια"]],["look, think",["σκέφτομαι","σκέψη","επί|σκεψη","επι|σκέπτης"]],["spirit, mind",["θυμάμαι","θυμίζω","θυμωμένος","επι|θυμία"]],["trust, faith",["πίστη","πιστεύω","πιστός","α|πίστευτος","εμ|πιστεύομαι","εμ|πιστοσύνη"]],["turn",["επι|στρέφω","επι|στροφή","κατα|στρέφω","κατα|στροφή"]],["value, honor",["τιμή","πολύ|τιμος","προ|τιμώ","εκ|τιμώ","τιμωρία"]],["begin, lead",["αρχή","αρχίζω","αρχαίος","αρχηγός","δήμαρχος","υπ|άρχω"]],["facing",["απ|αντάω","απ|άντηση","συν|αντάω","συν|άντηση","εν|άντια","εν|αντίον","απ|έναντι"]],["run, way",["δρόμος","διά|δρομος","αεροδρόμιο"]],["ground",["πεδίο","επί|πεδο"]],["taste, meal",["γεύμα","από|γευμα"]],["feel, suffer",["παθαίνω","συμ|παθώ","προσ|παθώ","προσ|πάθεια"]],["cause, claim",["αιτία","απ|αιτώ"]],["decide",["απόφαση","αποφασίζω"]],["word, reason",["λόγος","λόγω","λογικός","λογική","επι|λογή","δικαιολογία","λογαριασμός","υπο|λογιστής"]],["more",["πλέον","επι|πλέον"]],["up",["πάνω","παρα|πάνω"]],["little",["λίγο","παρα|λίγο"]],["accuse",["κατηγορώ","κατηγορία"]],["direct",["δι|εύθυνση","κατ|εύθυνση"]],["advise",["συμβουλή","συμβούλιο"]],["fall",["περί|πτωση","σύμ|πτωση"]],["quiet",["ησυχία","αν|ησυχώ"]],["patience",["υπομονή","αν|υπομονώ"]],["turn, around",["γύρω","γυρίζω"]],["eye",["μάτι","ματιά"]],["measure",["μέτρο","μετράω"]],["love",["αγάπη","αγαπάω"]],["help",["βοήθεια","βοηθάω"]],["work",["δουλειά","δουλεύω"]],["wish",["ευχή","εύχομαι"]],["heat",["ζέστη","ζεσταίνω"]],["theory, view",["θεωρία","θεωρώ"]],["hunt",["κυνήγι","κυνηγάω"]],["function",["λειτουργία","λειτουργώ"]],["win",["νίκη","νικάω"]],["travel",["ταξίδι","ταξιδεύω"]],["sing",["τραγούδι","τραγουδάω"]],["clean",["καθαρά","καθαρίζω","καθαρός"]],["calm",["ήρεμα","ηρεμώ"]],["gather",["μαζί","μαζεύω"]]];
+const PREFIX_EN = { περι: 'around', παρα: 'beside', παρ: 'beside', κατα: 'down', κατ: 'down', μετα: 'after, across', αντι: 'against', αντ: 'against', προσ: 'toward', προ: 'before, forth', δια: 'through', δι: 'through', απο: 'from, away', απ: 'from, away', ανα: 'up, again', επανα: 'again', επι: 'on', υπο: 'under', υπ: 'under', συν: 'with', συμ: 'with', συγ: 'with', συ: 'with', εισ: 'into', εκ: 'out', εξ: 'out', εν: 'in', εμ: 'in', εγ: 'in', ευ: 'well', δυσ: 'badly', α: 'not', αν: 'not', πολυ: 'much', τηλε: 'far' };
 const WEB_ORDER = { v: 0, n: 1, d: 2, o: 3, a: 4 };
 const SVGNS = 'http://www.w3.org/2000/svg';
 // Split a pairing line at ' · ', but not inside the English in parentheses, e.g. (arrive · almost).
@@ -460,6 +463,10 @@ const HELLO_SONG = [
 ];
 // SVG made with plain DOM calls, so the web draws the same on every Obsidian version and phone.
 const svgEl = (parent, tag, cls, attrs) => { const el = document.createElementNS(SVGNS, tag); if (cls) el.setAttribute('class', cls); for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, String(v)); parent.appendChild(el); return el; };
+const WW_HELP = 'Tap a word to move there. Double-tap a word to hear more than one. Hold a word to see its links. Drag to play.';
+// The families a word belongs to, and how a member is built: { gloss, members: [{ w, pre, rest }] }.
+const famOf = w => FAMILIES.filter(f => f[1].some(m => m.replace('|', '') === w));
+const famSplit = m => { const i = m.indexOf('|'); return { w: m.replace('|', ''), pre: i > 0 ? m.slice(0, i) : '', rest: i > 0 ? m.slice(i + 1) : '' }; };
 class WordWebView extends ItemView {
   constructor(leaf, plugin) { super(leaf); this.plugin = plugin; this.path = ''; this.hist = []; this.pos = -1; this.nodes = new Map(); this.edges = []; this.raf = 0; this.data = new Map(); }
   getViewType() { return WEB; }
@@ -478,9 +485,12 @@ class WordWebView extends ItemView {
     const open = bar.createEl('button', { text: 'Word card' }); open.onclick = () => { const f = this.file(); if (!f) return; const ws = this.app.workspace; const l = ws.getLeavesOfType('markdown').find(x => x.getRoot && x.getRoot() === ws.rootSplit) || this.plugin.mainLeaf(true); l.openFile(f); ws.setActiveLeaf(l, { focus: true }); };
     const pairb = bar.createEl('button', { text: 'Build a sentence' }); pairb.onclick = () => { const f = this.file(); if (f) this.plugin.openPair(f.basename); };
     const askb = bar.createEl('button', { text: 'Ask' }); askb.onclick = () => { const f = this.file(); if (f) this.plugin.ask(f); };
+    // Family: the same web, but the words around the middle share its root (μένω, περιμένω, παραμένω). Shown only when there are some.
+    this.famb = bar.createEl('button', { text: 'Family', cls: 'gq-ww-famb' }); this.famb.style.display = 'none';
+    this.famb.onclick = () => { this.mode = this.mode === 'family' ? '' : 'family'; if (this.path) this.go(this.path, false); };
     this.trail = box.createDiv('gq-web-trail');
     this.agree = box.createDiv('gq-agree'); this.agree.hide();
-    box.createDiv({ cls: 'gq-hint gq-ww-help', text: 'Tap a word to move there. Double-tap a word to hear more than one. Hold a word to see its links. Drag to play.' });
+    this.help = box.createDiv({ cls: 'gq-hint gq-ww-help', text: WW_HELP });
     this.stage = box.createDiv('gq-ww-stage');
     this.svg = svgEl(this.stage, 'svg', '', { 'aria-label': 'Word web' });
     this.gE = svgEl(this.svg, 'g'); this.gN = svgEl(this.svg, 'g');
@@ -538,6 +548,11 @@ class WordWebView extends ItemView {
   async partners(c) {
     await this.plugin.loadVerbs();
     const w = await this.info(c); if (!w) return [];
+    if (this.mode === 'family') {
+      const name = c.replace(/^Words\//, '').replace(/\.md$/, ''), out = [], seen = new Set([name]);
+      for (const f of famOf(name)) for (const m of f[1]) { const x = famSplit(m); if (seen.has(x.w)) continue; seen.add(x.w); const k = 'Words/' + x.w + '.md'; const iw = await this.info(k); if (iw) out.push({ k, w: iw, phrase: '', en: '', fam: { ...x, gloss: f[0] } }); }
+      return out.slice(0, 14);
+    }
     const groups = new Map();
     for (const x of w.pair) { if (!groups.has(x.cat)) groups.set(x.cat, []); groups.get(x.cat).push({ ...x }); }
     const lists = [...groups.entries()].map(([cat, l]) => cat === 'Who' ? l.slice(0, 1) : l); lists.push(w.co.map(k => ({ k, phrase: '', en: '' })));
@@ -563,6 +578,10 @@ class WordWebView extends ItemView {
   async go(p, push = true) {
     if (!p || !this.stage) { this.path = p || this.path; return; }
     const w = await this.info(p); if (!w) return;
+    const fams = famOf(p.replace(/^Words\//, '').replace(/\.md$/, ''));
+    if (!fams.length) this.mode = '';
+    if (this.famb) { this.famb.style.display = fams.length ? '' : 'none'; this.famb.setText(this.mode === 'family' ? 'Goes with' : 'Family'); this.famb.toggleClass('is-on', this.mode === 'family'); }
+    if (this.help) this.help.setText(this.mode === 'family' ? `Family · ${fams.map(f => f[0]).join(' · ')}. Words built on one root. Hold a word to see how it is built.` : WW_HELP);
     if (push && this.hist[this.pos] !== p) { this.hist = this.hist.slice(0, this.pos + 1); this.hist.push(p); this.pos = this.hist.length - 1; if (this.hist.length > 1) this.plugin.moAdd('web', p); }
     this.path = p; this.centerG = this.plugin.wordInfo(p).g;
     const r = this.stage.getBoundingClientRect(); this.Wd = r.width || 360; this.Ht = r.height || 480;
@@ -573,6 +592,8 @@ class WordWebView extends ItemView {
     const R = Math.min(this.Wd * 0.40, this.Ht * 0.38, 260), n = list.length || 1, nv = list.filter(x => x.w.t === 'v').length;
     const rot = -Math.PI / 2 - (nv ? (nv - 1) / 2 : 0) * (2 * Math.PI / n);
     list.forEach((x, i) => { const a = rot + i * 2 * Math.PI / n, rr = R * (i % 2 ? 0.86 : 1); x.tx = Math.cos(a) * rr; x.ty = Math.sin(a) * rr * (this.Ht > this.Wd ? 1.08 : 0.9); });
+    // A big family (φέρνω has 12) gets two rings and the full height of the stage, so the names don't sit on each other.
+    if (this.mode === 'family' && n > 8) { const Rx = this.Wd * 0.40, Ry = Math.min(this.Ht / 2 - 44, 300); list.forEach((x, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n, k = i % 2 ? 0.56 : 1; x.tx = Math.cos(a) * Rx * k; x.ty = Math.sin(a) * Ry * k; }); }
     const keep = new Set([p, ...list.map(x => x.k)]), from = this.nodes.get(p);
     const ox = from ? from.x : cx, oy = from ? from.y : cy;
     for (const m of this.nodes.values()) if (!keep.has(m.k)) { m.dead = true; m.top = 0; const dx = m.x - ox, dy = m.y - oy, d = Math.hypot(dx, dy) || 1; m.free = true; m.tx = m.x + dx / d * 120 - cx; m.ty = m.y + dy / d * 120 - cy; }
@@ -585,7 +606,7 @@ class WordWebView extends ItemView {
     }
     for (const m of this.nodes.values()) { m.g.classList.toggle('is-center', m === this.center); if (!m.dead) m.t.textContent = this.label(m.k); }
     this.edges = list.map(x => ({ a: p, b: x.k, inter: false }));
-    for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) if (this.linked(list[i].k, list[j].k)) this.edges.push({ a: list[i].k, b: list[j].k, inter: true });
+    if (this.mode !== 'family') for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) if (this.linked(list[i].k, list[j].k)) this.edges.push({ a: list[i].k, b: list[j].k, inter: true });
     while (this.gE.firstChild) this.gE.firstChild.remove(); for (const e of this.edges) e.el = svgEl(this.gE, 'line', 'gq-ww-edge' + (e.inter ? ' is-inter' : ''));
     this.paintTop(w); this.unhold(); this.kick();
     this.leaf.updateHeader && this.leaf.updateHeader(); this.app.workspace.requestSaveLayout();
@@ -657,6 +678,13 @@ class WordWebView extends ItemView {
     for (const o of this.nodes.values()) o.g.classList.toggle('is-dim', !near.has(o.k));
     const w = this.data.get(m.k) || {}, x = m.x0; this.chip.empty();
     this.chip.createEl('b', { text: this.label(m.k), attr: { lang: 'el' } }); this.chip.appendText(' · ' + (w.e || '') + (w.say ? ' · say it: ' + w.say : ''));
+    if (this.mode === 'family') {
+      // How it is built: περι (around) + μένω. The prefix meaning is the clue; the root is the family's.
+      const name = m.k.replace(/^Words\//, '').replace(/\.md$/, ''), fs = famOf(name), sp = fs.length ? famSplit(fs[0][1].find(z => z.replace('|', '') === name)) : null;
+      if (sp && sp.pre) { const g = PREFIX_EN[foldG(sp.pre)] || ''; const d = this.chip.createDiv({ attr: { lang: 'el' } }); d.appendText(sp.pre + '- '); if (g) d.createSpan({ cls: 'gq-hint', text: '(' + g + ') ' }); d.appendText('+ ' + sp.rest); }
+      if (fs.length) this.chip.createDiv({ cls: 'gq-hint', text: 'Root: ' + fs.map(f => f[0]).join(' · ') });
+      say(this.label(m.k)); this.chipPlace(); this.chip.addClass('is-on'); return;
+    }
     if (x && x.phrase && m !== this.center) {
       const d = this.chip.createDiv({ attr: { lang: 'el' } }); d.appendText(x.phrase); if (x.en) d.createSpan({ cls: 'gq-hint', text: '  (' + x.en + ')' });
       // The word first, then the phrase, so what you hear starts with what you see.

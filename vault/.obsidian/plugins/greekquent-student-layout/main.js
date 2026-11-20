@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20a';
+const VAULT_RELEASE = '2026-11-20b';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3947,7 +3947,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   setQuiet(q) {
     try { window.localStorage.setItem('gq-quiet', q ? '1' : '0'); } catch (e) {}
     if (q) { try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {} }
-    new Notice(q ? 'Greek voice off on this device. Turn it back on in More.' : 'Greek voice on.');
+    new Notice(q ? 'Greek voice off on this device. Turn it back on in Class, Options.' : 'Greek voice on.');
   }
   // How to add a Greek voice. auto: shown by itself when a Greek word could not be spoken, at most once per visit.
   voiceHelp(auto) {
@@ -4104,7 +4104,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   focusSec(s) {
     const r = s.createDiv('gq-row');
     const wk = r.createEl('button', { text: 'Walk mode', cls: 'gq-mini' }); wk.onclick = () => this.walkMode();
-    s.createDiv({ cls: 'gq-hint', text: 'Walk mode plays your Greek hands-free. It is also in Options (⋯ at the top right), with Calm mode and Focus sound.' });
+    s.createDiv({ cls: 'gq-hint', text: 'Walk mode plays your Greek hands-free. It is also in Options, at the bottom of Class, with Calm mode and Focus sound.' });
     const plan = this.planNowGet(); if (plan) s.createDiv({ cls: 'gq-hint', text: `Your plan: after ${plan}, today's line.` });
     if (!this.app.vault.getAbstractFileByPath(EXTRAS + '13 Focus tips.md')) return;
     const tip = s.createEl('a', { text: 'Focus tips', href: '#', cls: 'gq-hint' }); tip.onclick = e => { e.preventDefault(); this.openNote(EXTRAS + '13 Focus tips.md'); };
@@ -4850,7 +4850,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       { k: 'game', at: [], t: 'Γιαγιά', b: 'A quick game with your words. Come back here when you are done.', go: ['Play Γιαγιά', () => this.openApp('giagia', '')], ev: 'game' },
       { k: 'class', at: ['tab-class'], t: 'Class', b: "This week's lesson, the rally, homework, practice together and Ask the class, in one place.", go: ['Open Class', () => this.openClass()], ev: 'class', tab: 'class' },
       { k: 'plan', at: [], plan: true, t: 'Pick your moment', b: 'Choose when you practice: after coffee, after the bus. Doing it after something you already do makes it easy to start.', ev: 'plan' },
-      { k: 'focus', at: [], t: 'Focus', b: 'Calm mode, Focus sound and Walk mode (your Greek, hands-free, for practicing on the move) are in Options: tap ⋯ at the top right.', go: ['Open Options', () => this.optionsPop()], ev: 'more' },
+      { k: 'focus', at: [], t: 'Focus', b: 'Calm mode, Focus sound and Walk mode (your Greek, hands-free, for practicing on the move) are in Options, at the bottom of Class.', go: ['Open Options', () => this.optionsPop()], ev: 'more' },
       { k: 'paper', at: ['paper'], t: 'Paper cards', b: 'Make a paper card for a word: Greek on the front, a picture on the back. Then Card practice on Today: tap how many cards and minutes you did. As many as you like.', go: ['Open Words', () => this.openWords()], ev: 'card' }
     ];
   }
@@ -5005,10 +5005,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const last = this.revAt === GQ_REVIEW.length - 1;
     r.createEl('button', { text: last ? 'Done' : 'Next', cls: 'mod-cta' }).onclick = () => { this.revAt = last ? -1 : this.revAt + 1; this.reviewShow(); };
   }
-  tourBye() { this.tourEnd(); const left = this.tourLeft(); new Notice(left ? `Tour closed. ${left} step${left === 1 ? '' : 's'} still to try, any time: More, then Take the tour.` : 'Tour done. Θα τα πούμε.'); this.refreshToday(); }
+  tourBye() { this.tourEnd(); const left = this.tourLeft(); new Notice(left ? `Tour closed. ${left} step${left === 1 ? '' : 's'} still to try, any time: Class, then Take the tour.` : 'Tour done. Θα τα πούμε.'); this.refreshToday(); }
   // ---------- Tabs: Today, Words, Class, More. Words and Class appear once there is something in them. ----------
   // Words is always there: it is the course itself, and a new phone should look like every other one.
-  tabOn(k) { if (k === 'words') return true; const t = this.progFm().tabs; return (this.tabsNow || (Array.isArray(t) ? t : [])).includes(k); }
+  tabOn(k) { if (k === 'words' || k === 'class') return true; const t = this.progFm().tabs; return (this.tabsNow || (Array.isArray(t) ? t : [])).includes(k); }
   async tabReveal(k) {
     if (this.tabOn(k)) return; const t = this.progFm().tabs; this.tabsNow = [...new Set([...(this.tabsNow || (Array.isArray(t) ? t : [])), k])];
     const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.tabs = [...this.tabsNow]; });
@@ -5162,7 +5162,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (st.show !== 'all') rows = rows.filter(w => (of(w) || 'none') === st.show);
       const pages = Math.max(1, Math.ceil(rows.length / BL)); if (st.block >= pages) st.block = 0;
       const page = rows.slice(st.block * BL, st.block * BL + BL);
-      if (!page.length) { list.createDiv({ cls: 'gq-hint', text: st.q ? 'Not in the list. Try Look up in More for any other word.' : 'No words here yet.' }); }
+      if (!page.length) { const h = list.createDiv({ cls: 'gq-hint', text: st.q ? 'Not in the list. ' : 'No words here yet.' }); if (st.q) { const b = h.createEl('button', { text: 'Look up any word', cls: 'gq-mini' }); b.onclick = () => new LookupModal(this.app, this).open(); } }
       if (st.cover && page.length) list.createDiv({ cls: 'gq-hint', text: 'Say the English out loud, then tap to check. Had it or Not yet counts like any recall.' });
       const tb = list.createEl('table', { cls: 'gq-sheet' });
       const hr = tb.createEl('thead').createEl('tr'); for (const h of ['#', 'Greek', 'English', 'Color']) hr.createEl('th', { text: h });
@@ -5252,12 +5252,25 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const h = r.createEl('button', { text: 'Send homework' }); h.onclick = () => this.sendHomework();
     const t = r.createEl('button', { text: 'Ask the class' }); t.onclick = () => this.ask(null);
     c.createDiv({ cls: 'gq-hint', text: 'Questions go to the class group, by text or video, so everyone learns from the answer. Spotted a mistake? Ask there too. To ask about one word or lesson, open it and tap Ask.' });
-    const pt = this.together(); if (this.isKids && !pt.when) return;
+    const pt = this.together(); if (this.isKids && !pt.when) { this.helpCard(box); return; }
     const p = box.createDiv('gq-tcard'); p.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Practice together' });
     p.createDiv({ cls: 'gq-hint', text: pt.when ? `Weekly drop-in · ${pt.when}` : 'Practicing next to someone makes it easier to start. Ask the class for a drop-in time.' });
     const pr = p.createDiv('gq-row');
     if (pt.link) { const j = pr.createEl('button', { text: 'Join', cls: 'mod-cta' }); j.onclick = () => window.open(pt.link, '_blank'); }
     if (this.app.vault.getAbstractFileByPath(EXTRAS + 'Practice together.md')) { const m = pr.createEl('button', { text: 'How it works', cls: 'gq-mini' }); m.onclick = () => this.openNote(EXTRAS + 'Practice together.md'); }
+    this.helpCard(box);
+  }
+  // Settings and help: everything the old ⋯ menu held, at the bottom of Class. Settings first, then help, then your work.
+  helpCard(box) {
+    const c = box.createDiv('gq-tcard gq-helpcard'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Settings and help' });
+    const row = (items) => { const r = c.createDiv('gq-row'); for (const [t, fn, cta] of items) { const b = r.createEl('button', { text: t, cls: cta ? 'mod-cta' : 'gq-mini' }); b.onclick = fn; } };
+    row([['Options', () => this.optionsPop(), true], ['Sound help', () => this.voiceHelp()]]);
+    const help = [[this.tourLeft() ? 'Take the tour' : 'Take the tour again', () => this.tourStart()], ['Setting up', () => this.openNote(SETUP)], ["What's new", () => this.openNote(WHATS_NEW)]];
+    if (this.reviewOn()) help.push(['App review', () => this.reviewStart()]);
+    row(help);
+    const G = window.GQW, mine = G && G.helpExtras ? G.helpExtras() : [['Update vault', () => this.updateVault(false)]];
+    if (this.isTeacher && !G) mine.push(['Teacher update key', () => this.keyModal()]);
+    if (mine.length) { c.createDiv({ cls: 'gq-hint', text: G ? 'Your work saves itself on this phone. Save a copy to move it to another phone.' : 'Updates download only the files that changed.' }); row(mine); }
   }
   // ---------- Pop-out card: one big card in front of the page, for a few focused moments ----------
   // Used for today's line, comebacks, the Sunday read-through and the kid lines. Everything else stays in the list.

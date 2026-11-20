@@ -21,7 +21,7 @@ Greekquent is built so the app holds the plan, the time and your place, and you 
 > Not yet still earns φόρα, and a day off only fades it a little. Nothing resets to zero, and there are no rankings.
 
 > [!tip]- When things get noisy
-> Calm mode stops the moving parts. Focus sound is a soft hiss (both are under Options, in the side panel or the ⋯ menu) that helps some people and bothers others, so try it and keep it only if it helps.
+> Calm mode stops the moving parts. Focus sound is a soft hiss (both are in Options, at the bottom of Class) that helps some people and bothers others, so try it and keep it only if it helps.
 
 > [!tip]- Practice next to someone
 > Working beside another person, even on a video call with both of you quiet, makes it easier to start and keep going. See [[Practice together]].

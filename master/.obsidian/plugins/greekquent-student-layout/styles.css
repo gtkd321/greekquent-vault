@@ -914,3 +914,4 @@ body.gq-nonav .gq-corner[data-mode="friend"] { bottom: auto; }
 .gq-vcheck-list { margin: 6px 0 8px; padding-left: 20px; font-size: var(--font-ui-small); }
 .gq-vcheck-list li.is-bad { color: #d73027; }
 .gq-vcheck .gq-row { flex-wrap: wrap; gap: 6px; }
+.gq-helpcard .gq-row { flex-wrap: wrap; gap: 8px; margin-top: 8px; }

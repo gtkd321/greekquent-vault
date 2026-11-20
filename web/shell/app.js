@@ -31,6 +31,8 @@ if (window.top !== window) {
 
 // More menu: updates happen on their own and work saves itself, so neither needs a button. Backups do.
 // "Put it on my home screen" shows only in a browser tab, where it matters most.
+// The same three, for Settings and help on Class.
+G.helpExtras = () => [...(G.home ? [] : [['Put it on my home screen', () => installHelp()]]), ['Save a copy of my work', () => G.backup()], ['Restore my work', () => G.restore()]];
 G.menuHook = menu => {
   const i = menu.items.findIndex(x => x && x.title === 'Update vault');
   if (i < 0) return;
@@ -52,7 +54,7 @@ function installHelp() {
     const ol = c.createEl('ol');
     for (const t of ['Open this page in Safari.', 'Tap Share (the square with the arrow).', 'Tap Add to Home Screen, then Add.']) ol.createEl('li', { text: t });
     c.createEl('p', { cls: 'gq-hint', text: 'Use it from the home screen icon. In a Safari tab, an iPhone can clear your colors and φόρα after a week away.' });
-    c.createEl('p', { cls: 'gq-hint', text: 'Replacing an old icon? In the old one, tap ⋯ then Save a copy of my work. In the new one, tap ⋯ then Restore my work.' });
+    c.createEl('p', { cls: 'gq-hint', text: 'Replacing an old icon? In the old one, tap Class, then Save a copy of my work. In the new one, tap Class, then Restore my work.' });
   } else {
     const ol = c.createEl('ol');
     for (const t of ['Open this page in Chrome.', 'Tap the menu (three dots).', 'Tap Install app or Add to Home screen.']) ol.createEl('li', { text: t });
@@ -115,6 +117,8 @@ function frame() {
   const nav = $('#gq-nav');
   for (const r of G.ribbon) {
     const more = r.title === 'More';
+    // Everything that was in ⋯ now lives in the three tabs (Settings and help is at the bottom of Class).
+    if (more) continue;
     const b = (more ? head : nav).createEl('button', { cls: more ? 'gq-headmore' : 'gq-navbtn', attr: { 'aria-label': r.title } });
     b.innerHTML = icon(r.icon) + (more ? '' : `<span>${r.title === 'Look up a word' ? 'Look up' : r.title}</span>`);
     b.onclick = e => r.cb(e); r.btn = b;

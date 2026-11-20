@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Everything in three tabs (2026-11-20b)
+> The ⋯ button is gone. Options, Sound help, the tour, Setting up, What's new, and Save a copy or Restore my work are now at the bottom of Class, under Settings and help. Class is always in the bottom bar.
+
 > [!tip]- Read along in your books (2026-11-19zzb)
 > Each lesson's homework now names what to read in Beginners' Greek before you play the tracks. Play each one twice: once reading along, once with the book closed. Seven lessons add a trip dialogue from Complete Greek, and the next class acts it out.
 

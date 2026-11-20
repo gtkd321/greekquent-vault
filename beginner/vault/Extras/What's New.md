@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Close words: find the word you mean (2026-11-20r)
+> Search in Words now shows close words: Greek words that mean nearly the same thing, and how each one differs. Type a word (think), what you mean (thinking about my trip) or paste your own Greek sentence. νομίζω is your opinion, σκέφτομαι is the act of thinking. When one fits what you typed best, it says Best fit. Tap a word to hear it.
+
 > [!tip]- New to Greek? Start by ear (2026-11-20q)
 > The first setup question is now "Where are you starting?" If you pick New to Greek, Today starts with Language Transfer, a free audio course: listen to a track or two a day and tap "I listened." After track 30, six short sessions teach the letters with words you have already heard: hear it, read it, then build it. Then the story starts, with a line on the story card for your next track. Already know some Greek? Turn on Language Transfer in Options to keep the track line next to your story.
 

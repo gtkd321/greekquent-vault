@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Hear it taught, read it in your book (2026-11-20t)
+> Word cards that come up in Language Transfer now have one quiet line under the color buttons: "Hear it taught: Language Transfer, track N." Tap it to play that free track. In More, under Appears in scripts, each lesson now shows which unit of Beginners' Greek or Complete Greek goes with it, so you know where to read next.
+
 > [!tip]- Close words and Language Transfer tracks (2026-11-20s)
 > If Language Transfer is on in Options, each close word in Words search shows its track: "Heard in Language Transfer, track 32" once you have passed it, or "Language Transfer track 106" if it is still ahead. You can also search for a track, like track 33, to see the words first heard there and their close words.
 

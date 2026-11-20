@@ -499,7 +499,7 @@ Extra tiles: δεν · ; · . · τη θάλασσα · τον ήλιο · έν�
 - Say today's phrases with their gestures to someone at home.
 - Spot today's letters on Greek signs, menus, or labels online.
 - Read and listen: open **Beginners' Greek** to Unit 3 and read the sections listed next (and the alphabet pages). Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 3 Τι δουλειά κάνεις; (jobs): 03.05–03.08 (New Words and Expressions 2, Conversation 2, Conversation 3, Listen Again Conversation 2) · 0.04 Alphabet 4**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
-- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 3 Έλα να πιούμε ένα ουζάκι!** (page 32), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 3 Έλα να πιούμε ένα ουζάκι!** (page 32), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine. We act it out at the start of next class (Lesson 5).
 - Greek out there (these pages change every week): [Headlines: καφετέρια](https://news.google.com/search?q=%CE%BA%CE%B1%CF%86%CE%B5%CF%84%CE%AD%CF%81%CE%B9%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20coffee) · [Super Easy Greek videos](http://bit.ly/SuperEasyGreekPlaylist2)
 
 **Can you do this without the page?** Say two of today's phrases with the gesture, and one true sentence about yourself.
@@ -1542,7 +1542,7 @@ Extra tiles: δεν · ; · . · στο σπίτι · στο σούπερ μάρ
 - Every time you leave the house this week, say where you're going: Πάω στ___.
 - Make a flashcard for σε + article and quiz yourself with five places.
 - Read and listen: open **Beginners' Greek** to Unit 2 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 2 Μιλάτε Ελληνικά; (where from, languages): 02.01–02.06 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
-- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 6 Καλό ταξίδι!** (page 88), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 6 Καλό ταξίδι!** (page 88), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine. We act it out at the start of next class (Lesson 12).
 - Greek out there (these pages change every week): [Headlines: μετρό Αθήνα](https://news.google.com/search?q=%CE%BC%CE%B5%CF%84%CF%81%CF%8C%20%CE%91%CE%B8%CE%AE%CE%BD%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20public%20transport) · [WeeGreek podcast](https://podcasts.apple.com/us/podcast/weegreek-short-stories-and-news-in-easy-and-simple-greek/id1534532179)
 
 **Can you do this without the page?** Say where you go on Sunday: Την Κυριακή πάω στ___.
@@ -1687,7 +1687,7 @@ Extra tiles: δεν · ; · . · ντομάτες · πατάτες · ελιέ�
 - Read the prices on a grocery receipt aloud in Greek.
 - Count by tens to εκατό every day.
 - Read and listen: open **Beginners' Greek** to Unit 10 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.01–10.05 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
-- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 8 Θέλετε τίποτα;** (page 118), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 8 Θέλετε τίποτα;** (page 118), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine. We act it out at the start of next class (Lesson 13).
 - Greek out there (these pages change every week): [Headlines: λαϊκή αγορά](https://news.google.com/search?q=%CE%BB%CE%B1%CF%8A%CE%BA%CE%AE%20%CE%B1%CE%B3%CE%BF%CF%81%CE%AC&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20laiki%20market) · [News in Easy Greek](https://www.audible.com/podcast/News-In-Easy-Greek/B0H57W535N)
 
 **Can you do this without the page?** Say a price between 20 and 100 euros, and your partner writes it.
@@ -1849,7 +1849,7 @@ Extra tiles: δεν · ; · . · ένα ποτήρι κρασί · νερό · �
 - At each meal this week, say what you're eating and drinking: Τρώω…, Πίνω….
 - Read a real Greek taverna menu online and pick three dishes.
 - Read and listen: open **Beginners' Greek** to Unit 10 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 10 Στη λαϊκή αγορά (market, prices): 10.06–10.09 (New Words and Expressions 2, Conversation 2, Language Discovery, Practice)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
-- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 4 Καλή όρεξη!** (page 46), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 4 Καλή όρεξη!** (page 46), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine. We act it out at the start of next class (Lesson 14).
 - Greek out there (these pages change every week): [Headlines: ταβέρνα](https://news.google.com/search?q=%CF%84%CE%B1%CE%B2%CE%AD%CF%81%CE%BD%CE%B1&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20taverna%20food) · [Greek Learner News](https://www.lets-learn.eu/greek/news)
 
 **Can you do this without the page?** Order a full meal with Θα ήθελα….
@@ -2438,7 +2438,7 @@ Extra tiles: δεν · ; · . · το Σάββατο · την Κυριακή ·
 - Every evening, say 3 things you'll do tomorrow: Αύριο θα….
 - Write your weekend plan in 4 sentences.
 - Read and listen: open **Beginners' Greek** to Unit 9 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **Unit 9 Έχεις χόμπι; (free time, music, films): 09.01–09.04 (Vocab Builder, New Words and Expressions 1, Conversation 1)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
-- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 7 Έχετε δωμάτια;** (page 104), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 7 Έχετε δωμάτια;** (page 104), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine. We act it out at the start of next class (Lesson 18).
 - Greek out there (these pages change every week): [Headlines: εκδρομή](https://news.google.com/search?q=%CE%B5%CE%BA%CE%B4%CF%81%CE%BF%CE%BC%CE%AE&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20weekend) · [Greek films on ERT this week](https://www.ert.gr/tv/tainies/ellinikes-tainies/)
 
 **Can you do this without the page?** Say two θα plans for this weekend.
@@ -2724,7 +2724,7 @@ Extra tiles: δεν · ; · . · η πλατεία · η εκκλησία · τ�
 - Draw and label a map of your neighborhood in Greek.
 - Practice the polite request with three places: Μπορείτε να μου πείτε πού είναι…;
 - Read and listen: open **Beginners' Greek** to Unit 2 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **02.06 Conversation 1 · 02.08 Conversation 2 (replay Unit 2: where people come from and live, then give directions)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
-- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 5 Πού είναι η Ακρόπολη;** (page 70), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 5 Πού είναι η Ακρόπολη;** (page 70), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine. We act it out at the start of next class (Lesson 20).
 - Greek out there (these pages change every week): [Headlines: 25η Μαρτίου](https://news.google.com/search?q=25%CE%B7%20%CE%9C%CE%B1%CF%81%CF%84%CE%AF%CE%BF%CF%85&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%2025th%20of%20March) · [ERTflix](https://www.ertflix.gr/)
 
 **Can you do this without the page?** Give directions from the classroom to the front door or the kitchen.
@@ -3618,7 +3618,7 @@ Extra tiles: δεν · ; · . · το κεφάλι · ο λαιμός · η κο
 - Point to 5 body parts at home and say Με πονάει… for each.
 - Greet three people with Χριστός Ανέστη! this week.
 - Read and listen: open **Beginners' Greek** to Unit 5 and read the sections listed next. Then open Beginners' Greek audio (library.teachyourself.com) or the free Teach Yourself app and choose **05.04 Conversation 1 · 05.06 Conversation 2 (replay Unit 5 and shadow it)**. Play each one twice: once reading along in the book, once with the book closed, saying it along.
-- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 10 Είχα ένα τρομερό πονοκέφαλο!** (page 160), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine; we act it out in class.
+- Trip reading: in **Complete Greek**, read the first dialogue of **Unit 10 Είχα ένα τρομερό πονοκέφαλο!** (page 160), then play it in the Complete Greek audio once reading along and once with the book closed. Understanding half is fine. We act it out at the start of next class (Lesson 26).
 - Greek out there (these pages change every week): [Headlines: φαρμακείο](https://news.google.com/search?q=%CF%86%CE%B1%CF%81%CE%BC%CE%B1%CE%BA%CE%B5%CE%AF%CE%BF&hl=el&gl=GR&ceid=GR:el) · [Watch](https://www.youtube.com/results?search_query=Easy%20Greek%20pharmacy) · [Greek films on ERT this week](https://www.ert.gr/tv/tainies/ellinikes-tainies/)
 
 **Can you do this without the page?** One Με πονάει… sentence, then the Easter greeting and its answer.

@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Search finds any part of a word (2026-11-20u)
+> Words search now finds letters anywhere in a word: μένω also brings up περιμένω and παραμένω. Spell it how it sounds and it still finds the word (σκεψι finds σκέψη). Missing letters? Type * for the gap, like *ξη or _μεν_. Not in the 1,500? The translation shows right there under the search, and if you misspelled it, it shows the closest spelling (κατάψηξη becomes κατάψυξη, freezing).
+
 > [!tip]- Hear it taught, read it in your book (2026-11-20t)
 > Word cards that come up in Language Transfer now have one quiet line under the color buttons: "Hear it taught: Language Transfer, track N." Tap it to play that free track. In More, under Appears in scripts, each lesson now shows which unit of Beginners' Greek or Complete Greek goes with it, so you know where to read next.
 

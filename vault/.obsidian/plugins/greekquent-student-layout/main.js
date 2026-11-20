@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20t';
+const VAULT_RELEASE = '2026-11-20u';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -372,6 +372,8 @@ const wwPersonEn = (who, e) => { const s = String(e || '').split(/[;,]/)[0].trim
   if (/^am\b/.test(rest)) return sub + ' ' + (one ? 'is' : 'are') + rest.slice(2);
   if (/^was\b/.test(rest)) return sub + ' ' + (one ? 'was' : 'were') + rest.slice(3);
   if (!one) return sub + ' ' + rest; const v = rest.split(' '); v[0] = wwThird(v[0]); return sub + ' ' + v.join(' '); };
+// Sounds-alike key for Greek spelling: the five ways to write "i", o/ω, αι/ε and double letters all match (ψηξη finds ψύξη).
+const sndG = t => fold(t).replace(/ου/g, '0').replace(/ει|οι|υι/g, 'ι').replace(/[ηυ]/g, 'ι').replace(/ω/g, 'ο').replace(/αι/g, 'ε').replace(/([^\sαειο0])\1/g, '$1').replace(/0/g, 'ου');
 const foldG = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ς/g, 'σ').replace(/[^\p{L}\s]/gu, ' ').replace(/\s+/g, ' ').trim();
 const SMALL_W = new Set(['ο', 'η', 'το', 'οι', 'τα', 'τον', 'την', 'του', 'τησ', 'των', 'ενασ', 'μια', 'μια', 'ενα', 'εγω', 'εσυ', 'εμεισ', 'εσεισ']);
 const near = (a, b) => { if (a === b) return true; if (Math.abs(a.length - b.length) > 1 || a.length < 4) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; };
@@ -1333,8 +1335,9 @@ class LookupModal extends Modal {
     if (!hits.length && !close.length) L.createDiv({ cls: 'gq-hint', text: 'Not in the 1,500.' });
     close.forEach((c, i) => this.plugin.closeSet(L, c, i === 0, w => { this.plugin.logLookup(q, w); this.close(); this.plugin.openGraph(w.path); }));
     if (close.length && !hits.length) return;   // a Greek sentence: the close words are the answer
+    if (/[*_…]/.test(q)) { if (!hits.length) L.empty(), L.createDiv({ cls: 'gq-hint', text: 'No word in the 1,500 has those letters.' }); return; }
     this.bonus = L.createDiv('gq-bonus');
-    if (hits.length) {
+    if (hits.length && hits[0].score >= 50) {
       this.bonus.createDiv({ cls: 'gq-hit-sub', text: 'Want a different word?' });
       const tb = this.bonus.createEl('button', { text: `Translate "${q}"` });
       tb.onclick = () => this.translate(true);
@@ -1350,22 +1353,7 @@ class LookupModal extends Modal {
     const tr = await this.plugin.translate(q);
     if (q !== this.input.value.trim() || box !== this.bonus) return;   // the student kept typing
     box.empty(); this.tr = tr;
-    if (!tr) {
-      box.createDiv({ cls: 'gq-hit-sub', text: 'Could not translate right now (are you online?). Press Enter to save it to Words I looked up. The Greek is added the next time you open Obsidian online.' });
-      if (save) this.plugin.logLookup(q, null, null);
-      return;
-    }
-    const t = box.createDiv('gq-hit-text');
-    const gr = tr.greek;
-    t.createDiv({ cls: 'gq-hit-main', text: tr.fromGreek ? `${q}  ·  ${tr.text}` : `${tr.text}  ·  ${q}` });
-    if (tr.say) t.createDiv({ cls: 'gq-hit-sub', text: 'say it: ' + tr.say });
-    for (const a of tr.alts.slice(0, 3)) t.createDiv({ cls: 'gq-hit-sub', text: `${a.pos}: ${a.terms.slice(0, 4).join(', ')}` });
-    const inList = this.plugin.findWords(gr).find(w => fold(w.word) === fold(gr));
-    t.createDiv({ cls: 'gq-hit-sub', text: inList ? (this.plugin.isKids ? 'It is one of your words.' : `It is #${inList.rank} of the 1,500.`) : 'Bonus word, saved to Words I looked up.' });
-    const btns = box.createDiv('gq-btns');
-    const h = btns.createEl('button', { text: 'Hear it' }); h.onclick = () => say(gr);
-    if (inList) { const g = btns.createEl('button', { text: 'Word web' }); g.onclick = () => { this.plugin.logLookup(q, inList); this.close(); this.plugin.openGraph(inList.path); }; }
-    if (save) this.plugin.logLookup(q, inList || null, inList ? null : tr);
+    this.plugin.bonusShow(box, q, tr, save, w => { this.close(); this.plugin.openGraph(w.path); });
   }
   fill(row, w, q) {
     const t = row.createDiv('gq-hit-text');
@@ -2158,7 +2146,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const w = { path: f.path, word: f.basename, english: String(fm.english || ''), pron: fm.pronunciation || '', rank: +fm.rank, lessons: fm.lessons || [], kid: fm.kid_lessons || [], forms: [], cognates: String(fm.cognates || '') };
         // Verb forms from the conjugation table (bold cells), so "θέλουμε" finds θέλω.
         try { const txt = await this.app.vault.cachedRead(f); const m = txt.split('## Conjugation')[1]; if (m) for (const b of m.split('\n## ')[0].matchAll(/\*\*([^*]+)\*\*/g)) b[1].split(/\s+/).forEach(x => { if (isGreek(x) && x !== 'θα') w.forms.push(x); }); } catch (e) {}
-        w.k = fold(w.word); w.e = fold(w.english.replace(/[()"]/g, ' ')); w.c = w.cognates.toLowerCase().split(/,\s*/).map(x => x.replace(/-$/, '')).filter(Boolean); w.fk = [...new Set(w.forms.map(fold))];
+        w.k = fold(w.word); w.e = fold(w.english.replace(/[()"]/g, ' ')); w.c = w.cognates.toLowerCase().split(/,\s*/).map(x => x.replace(/-$/, '')).filter(Boolean); w.fk = [...new Set(w.forms.map(fold))]; w.s = sndG(w.word); w.fs = [...new Set(w.forms.map(sndG))];
         out.push(w);
       }
       out.sort((a, b) => a.rank - b.rank);
@@ -2232,18 +2220,36 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (tn && this.words) { const set = new Set(this.ltTrackWords(tn)); return this.words.filter(w => set.has(w.word)); }
     if (!this.words) return [];
     const k = fold(q), res = [], reds = new Set(this.colors().red);
+    // Letters with gaps: * or _ stands for missing letters anywhere (κα*ψυ, _μενω). Letters with no gaps can also match in order (πρμν finds περιμένω).
+    const GAP = /[*_…]/, gr = isGreek(q), esc = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    if (gr && GAP.test(q)) {
+      const rx = new RegExp(k.split(/[*_…]+/).map(x => esc(x.replace(/\s+/g, ''))).join('.*')), rs = new RegExp(sndG(q.replace(/[*_…]+/g, '9')).replace(/\s+/g, '').split('9').map(esc).join('.*'));
+      for (const w of this.words) { const f = rx.test(w.k) || w.fk.some(x => rx.test(x)) ? 60 : rs.test(w.s) ? 40 : 0; if (f) res.push({ ...w, score: f - w.k.length / 100 - w.rank / 100000 + (reds.has(w.word) ? 5 : 0), form: '' }); }
+      return res.sort((a, b) => b.score - a.score).slice(0, 12);
+    }
     for (let w of this.words) {
       let score = 0, form = '';
       if (isGreek(q)) {
         if (w.k === k) score = 100; else if (w.fk.includes(k)) { score = 90; form = w.forms.find(x => fold(x) === k); } else if (k.length >= 2 && w.k.startsWith(k)) score = 50; else if (k.length >= 3 && w.fk.some(x => x.startsWith(k))) score = 30;
+        // Spelled the way it sounds, or a piece of the word (contains).
+        if (!score) { const sk = sndG(q);
+          if (sk.length >= 3 && (w.s === sk || w.fs.includes(sk))) { score = 85; form = w.s === sk ? '' : w.forms.find(x => sndG(x) === sk); w = { ...w, spelled: true }; }
+          else if (k.length >= 3 && w.k.includes(k)) score = 35;
+          else if (sk.length >= 3 && w.s.startsWith(sk)) score = 45;
+          else if (sk.length >= 3 && (w.s.includes(sk) || w.fs.some(x => x.includes(sk)))) score = 25; }
       } else {
         const words = w.e.split(/[^a-z']+/).filter(Boolean);
         const bare = w.e.replace(/^(i|to|the|a|an) /, '');
-        if (w.e === k || bare === k) score = 100; else if (words.includes(k)) score = 80; else if (k.length >= 3 && words.some(x => x.startsWith(k))) score = 40; else if (k.includes(' ') && w.e.includes(k)) score = 60;
+        if (w.e === k || bare === k) score = 100; else if (words.includes(k)) score = 80; else if (k.length >= 3 && words.some(x => x.startsWith(k))) score = 40; else if (k.includes(' ') && w.e.includes(k)) score = 60; else if (k.length >= 4 && w.e.includes(k)) score = 20;
         if (score < 70 && w.c.some(c => c === k || (k.length >= 4 && c.startsWith(k)))) { score = 70; form = ''; w = { ...w, via: w.c.find(c => c === k || c.startsWith(k)) }; }
       }
       if (score && reds.has(w.word)) score += 5;   // red words (don't have it yet) come up first
       if (score) res.push({ ...w, score: score - w.rank / 10000, form });
+    }
+    if (!res.length && gr && k.replace(/\s/g, '').length >= 3 && !/\s/.test(k)) {
+      const rx = new RegExp([...k].map(esc).join('.*'));
+      for (const w of this.words) if (rx.test(w.k)) res.push({ ...w, score: 10 - w.k.length / 100 - w.rank / 100000, form: '', inOrder: true });
+      return res.sort((a, b) => b.score - a.score).slice(0, 8);
     }
     return res.sort((a, b) => b.score - a.score).slice(0, 8);
   }
@@ -2254,13 +2260,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const fromGreek = isGreek(q), sl = fromGreek ? 'el' : 'en', tl = fromGreek ? 'en' : 'el';
     let out = null;
     try {
-      const r = await requestUrl({ url: `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&dt=bd&dt=rm&q=${encodeURIComponent(q)}`, throw: false });
+      const r = await requestUrl({ url: `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&dt=bd&dt=rm&dt=qc&q=${encodeURIComponent(q)}`, throw: false });
       const d = r.status === 200 ? r.json : null;
       if (d && d[0]) {
         const text = d[0].filter(x => x && x[0]).map(x => x[0]).join('').trim();
         const rm = d[0].find(x => x && (x[2] || x[3])) || [];
         const alts = (d[1] || []).map(x => ({ pos: x[0], terms: x[1] || [] })).filter(a => a.terms.length);
         if (text) out = { q, text, fromGreek, greek: fromGreek ? q : text, say: (fromGreek ? rm[3] : rm[2]) || '', alts };
+        // A misspelling (κατάψηξη): translate the spelling the translator suggests (κατάψυξη) and show it, like a near miss.
+        const fix = d[7] && d[7][1] && String(d[7][1]).trim();
+        if (out && fix && fix !== q && !this.trFixing) { this.trFixing = true; try { const f = await this.translate(fix); if (f) out = { ...f, q, fixed: fix }; } finally { this.trFixing = false; } }
       }
     } catch (e) {}
     if (!out) {
@@ -2273,10 +2282,30 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (out) this.trCache.set(q, out);
     return out;
   }
+  // A translation for a word that is not in the 1,500, drawn into box. Used by Look up and by the Words search.
+  bonusShow(box, q, tr, save, onWeb) {
+    if (!tr) {
+      box.createDiv({ cls: 'gq-hit-sub', text: 'Could not translate right now (are you online?). It is saved to Words I looked up, and the Greek is added the next time you are online.' });
+      if (save) this.logLookup(q, null, null);
+      return;
+    }
+    const t = box.createDiv('gq-hit-text'), gr = tr.greek;
+    if (tr.fixed) t.createDiv({ cls: 'gq-hit-sub gq-fixed', text: `Closest spelling: ${tr.fixed}` });
+    t.createDiv({ cls: 'gq-hit-main', text: tr.fromGreek ? `${gr}  ·  ${tr.text}` : `${tr.text}  ·  ${tr.fixed || q}` });
+    if (tr.say) t.createDiv({ cls: 'gq-hit-sub', text: 'say it: ' + tr.say });
+    for (const a of tr.alts.slice(0, 3)) t.createDiv({ cls: 'gq-hit-sub', text: `${a.pos}: ${a.terms.slice(0, 4).join(', ')}` });
+    const inList = this.findWords(gr).find(w => fold(w.word) === fold(gr));
+    t.createDiv({ cls: 'gq-hit-sub', text: inList ? (this.isKids ? 'It is one of your words.' : `It is #${inList.rank} of the 1,500.`) : 'Bonus word. It goes in Words I looked up.' });
+    const btns = box.createDiv('gq-btns');
+    const h = btns.createEl('button', { text: 'Hear it' }); h.onclick = () => say(gr);
+    if (inList) { const g = btns.createEl('button', { text: 'Word web' }); g.onclick = () => { this.logLookup(q, inList); onWeb(inList); }; }
+    if (save) this.logLookup(q, inList || null, inList ? null : tr);
+    return inList;
+  }
   bonusLine(q, tr) {
     if (!tr) return `- ${q} → bonus word: `;
     const say = tr.say ? ` · say it: ${tr.say}` : '';
-    return tr.fromGreek ? `- ${q} → bonus word: ${q} · ${tr.text}${say}` : `- ${q} → bonus word: ${tr.text}${say}`;
+    return tr.fromGreek ? `- ${q} → bonus word: ${tr.greek} · ${tr.text}${say}` : `- ${q} → bonus word: ${tr.text}${say}`;
   }
   async logLookup(q, w, tr) {
     // Every look-up is saved in My Work, so it can come back as review (and the teacher can see what students reach for).
@@ -5521,8 +5550,23 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (st.show !== 'all') rows = rows.filter(w => (of(w) || 'none') === st.show);
       const pages = Math.max(1, Math.ceil(rows.length / BL)); if (st.block >= pages) st.block = 0;
       const page = rows.slice(st.block * BL, st.block * BL + BL);
-      if (!page.length && close.length) { /* a Greek sentence: the close words are the answer */ } else if (!page.length) { const h = list.createDiv({ cls: 'gq-hint', text: st.q ? 'Not in the list. ' : 'No words here yet.' }); if (st.q) { const b = h.createEl('button', { text: 'Look up any word', cls: 'gq-mini' }); b.onclick = () => new LookupModal(this.app, this).open(); } }
-      if (!page.length && close.length) return;
+      if (!page.length && close.length) { /* a Greek sentence: the close words are the answer */ } else if (!page.length && !st.q) list.createDiv({ cls: 'gq-hint', text: 'No words here yet.' });
+      else if (!page.length && /[*_…]/.test(st.q)) list.createDiv({ cls: 'gq-hint', text: 'No word in the 1,500 has those letters. * stands for any missing letters.' });
+      // Not in the 1,500 (or only a loose match): translate right here, under the search. Saved to Words I looked up when the student moves on.
+      if (st.q && !this.ltTrackQ(st.q) && !/[*_…]/.test(st.q) && !close.length && rows.length) { const tb2 = list.createDiv('gq-row gq-words-bonus').createEl('button', { text: `Not the one? Translate ${st.q}`, cls: 'gq-mini' }); tb2.onclick = () => { st.forceTr = st.q; draw(); }; }
+      if (st.q && !this.ltTrackQ(st.q) && !/[*_…]/.test(st.q) && !(close.length && !rows.length) && (!rows.length || st.forceTr === st.q)) {
+        const bx = list.createDiv('gq-bonus gq-words-bonus'), qq = st.q;
+        bx.createDiv({ cls: 'gq-hit-sub', text: rows.length ? `Translating ${qq}...` : `Not in the 1,500. Translating ${qq}...` });
+        clearTimeout(this.wvTrT); this.wvTr = null;
+        this.wvTrT = setTimeout(async () => {
+          const tr = await this.translate(qq); if (st.q !== qq || !bx.isConnected) return;
+          bx.empty(); if (rows.length) bx.createDiv({ cls: 'gq-hit-sub', text: 'Outside the 1,500:' });
+          const inList = this.bonusShow(bx, qq, tr, false, w => this.openGraph(w.path));
+          this.wvTr = { q: qq, tr, inList };
+          if (rows.length && page.length) bx.createDiv({ cls: 'gq-hit-sub', text: 'In the 1,500:' });
+        }, 500);
+      }
+      if (!page.length && (close.length || st.q)) return;
       if (st.cover && page.length) list.createDiv({ cls: 'gq-hint', text: 'Say the English out loud, then tap to check. Had it or Not yet counts like any recall.' });
       const tb = list.createEl('table', { cls: 'gq-sheet' });
       const hr = tb.createEl('thead').createEl('tr'); for (const h of ['#', 'Greek', 'English', 'Color']) hr.createEl('th', { text: h });
@@ -5547,6 +5591,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
     };
     let tm = 0; q.oninput = () => { clearTimeout(tm); tm = setTimeout(() => { st.q = q.value.trim(); st.block = 0; draw(); }, 200); };
+    // The translation on screen when the student presses Enter or leaves the box is the one they meant, so it is saved (half-typed words are not).
+    const keep = () => { const v = this.wvTr; if (!v || v.saved || v.q !== q.value.trim()) return; v.saved = true; this.logLookup(v.q, v.inList || null, v.tr && !v.inList ? v.tr : null); };
+    q.addEventListener('blur', keep); q.addEventListener('keydown', e => { if (e.key === 'Enter') keep(); });
     draw();
     box.createDiv({ cls: 'gq-hint gq-words-foot', text: 'Red: don\'t have it. Yellow: kind of. Green: have it. A color you move up that still holds two days later earns φόρα.' });
   }

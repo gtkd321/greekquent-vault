@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Words that mean the same thing both count (2026-11-20o)
+> Some of the 1,500 share one English meaning: ότι and πως both mean "that," and αμάξι and αυτοκίνητο both mean "car." When a quiz asks you to say the Greek, either one counts. If you already know the other word, it shows after your answer, for example "also πως."
+
 > [!tip]- Go deeper after a quiz (2026-11-20n)
 > After Quiz me, Go deeper runs one longer round: your 10 words plus up to 20 more from all three colors, mixed. It asks you to make the Greek, by saying it or building it from its letters. A word you miss comes back a few questions later, up to three tries. It stops at 30 words or 15 minutes, because coming back on another day helps more than another round now. Close spelling still counts. Also fixed: on some phones the first word a quiz played by itself was silent until Hear it again. Now the voice wakes on your first tap.
 

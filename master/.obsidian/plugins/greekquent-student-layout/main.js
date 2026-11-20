@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20n';
+const VAULT_RELEASE = '2026-11-20o';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -4793,7 +4793,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // onWin (optional): what the screen does once the phone hears it right, e.g. fill in the story puzzle.
   // other (optional): the lines around yours. Saying those instead of your line gets a hint, not a plain Try again.
   sayIt(parent, target, key, label, onWin, other) {
-    const w = parent.createSpan('gq-sayit'), wd = /^w:/.test(key || '');
+    // target can be a list of words with the same meaning (ότι, πως): any of them counts.
+    const many = Array.isArray(target); if (many) target = target.join(', ');
+    const w = parent.createSpan('gq-sayit'), wd = many || /^w:/.test(key || '');
     const b = w.createEl('button', { text: label || 'Say it · +2', cls: 'gq-mini gq-sayit-b', attr: { 'aria-label': 'Say it out loud for 2 bonus φόρα' } });
     const fb = w.createSpan({ cls: 'gq-hint gq-sayit-fb' });
     const miss = alts => other && heardIt(other.gr, alts) ? ` That is ${other.who || 'their'} line. Now say yours${other.en ? ': ' + other.en : ''}` : null;
@@ -5243,6 +5245,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   // Quiz me (Words list): up to 10 words of one color. See it and pick the meaning, hear it and pick the Greek, say it.
   // The first answer to each word counts: right moves it up a color, a miss moves it down one. Same colors as everywhere else.
+  // Same-meaning words: the 1,500 have 41 pairs with the same English (ότι and πως are both "that"). From the English alone
+  // either is right, so Say it accepts both. The other one is shown after the answer only if the student has already met it
+  // (it has a color): learning two new same-meaning words at once slows both (Tinkham 1993, Waring 1997, Nation 2000),
+  // while linking to a word you know helps.
+  sameMeaning(w, all) { return all.filter(o => o.word !== w.word && o.english === w.english); }
+  alsoNote(f, w, all) { const k = this.sameMeaning(w, all).filter(o => this.colorOf(o.word)); if (!k.length) return; f.appendText(' · also '); k.forEach((o, i) => { if (i) f.appendText(', '); f.createSpan({ text: o.word, attr: { lang: 'el' } }); }); }
   quizMe(pool, all, color, done) {
     const mix = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
     const qs = mix(pool).slice(0, 10), UP = { red: 'yellow', yellow: 'green', green: 'green' }, DOWN = { red: 'red', yellow: 'red', green: 'yellow' };
@@ -5253,11 +5261,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const steps = qs.map((w, i) => ({ label: 'Quiz', build: (el, api) => {
       const kind = kinds[i % kinds.length]; el.addClass('gq-quiz');
       const fb = () => el.querySelector('.gq-quiz-fb') || el.createDiv({ cls: 'gq-quiz-fb' });
-      const after = ok => { const f = fb(); f.empty(); f.addClass(ok ? 'is-ok' : 'is-miss'); f.appendText(ok ? 'Right. ' : 'Not yet. '); f.createSpan({ text: w.word, attr: { lang: 'el' } }); f.appendText(' · ' + w.english); if (!ok && canHear) say(w.word); setTimeout(() => { if (el.isConnected) api.next(); }, ok ? 900 : 1800); };
+      const after = ok => { const f = fb(); f.empty(); f.addClass(ok ? 'is-ok' : 'is-miss'); f.appendText(ok ? 'Right. ' : 'Not yet. '); f.createSpan({ text: w.word, attr: { lang: 'el' } }); f.appendText(' · ' + w.english); this.alsoNote(f, w, all); if (!ok && canHear) say(w.word); setTimeout(() => { if (el.isConnected) api.next(); }, ok ? 900 : 1800); };
       if (kind === 'say') {
         el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek' }); el.createDiv({ cls: 'gq-quiz-q', text: w.english });
         const r = el.createDiv('gq-row gq-quiz-say');
-        this.sayIt(r, w.word, w.word, 'Say it', () => { mark(w, true); after(true); });
+        const same = this.sameMeaning(w, all); this.sayIt(r, same.length ? [w.word, ...same.map(o => o.word)] : w.word, w.word, 'Say it', () => { mark(w, true); after(true); });
         const n = r.createEl('button', { text: 'Not yet', cls: 'gq-mini' }); n.onclick = () => { if (res.has(w.word)) return; mark(w, false); after(false); };
         return;
       }
@@ -5309,7 +5317,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (!done0.has(w.word) && !counted.has(w.word)) { counted.add(w.word); const c = of(w); if (c) { const nx = (ok ? UP : DOWN)[c]; if (nx !== c) { this.setColor(w.word, nx); moved++; } } }
       // A miss comes back four questions on, up to three tries. Then it waits for another day.
       if (!ok && n < 3) { const at = Math.min(steps.length - 1, steps.indexOf(step) + 5); steps.splice(at, 0, make(w, n)); }
-      const f = el.createDiv({ cls: 'gq-quiz-fb ' + (ok ? 'is-ok' : 'is-miss') }); f.appendText(ok ? 'Right. ' : (n < 3 ? 'Not yet. It comes back soon. ' : 'Not yet. ')); f.createSpan({ text: w.word, attr: { lang: 'el' } }); f.appendText(' · ' + w.english + (note || ''));
+      const f = el.createDiv({ cls: 'gq-quiz-fb ' + (ok ? 'is-ok' : 'is-miss') }); f.appendText(ok ? 'Right. ' : (n < 3 ? 'Not yet. It comes back soon. ' : 'Not yet. ')); f.createSpan({ text: w.word, attr: { lang: 'el' } }); f.appendText(' · ' + w.english); this.alsoNote(f, w, all); if (note) f.appendText('.' + note);
       if (canHear) say(w.word);
       setTimeout(() => { if (el.isConnected) api.next(); }, ok && !note ? 1100 : 2200);
     };
@@ -5325,7 +5333,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (kind === 'say') {
           el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek' }); el.createDiv({ cls: 'gq-quiz-q', text: w.english });
           const r = el.createDiv('gq-row gq-quiz-say');
-          this.sayIt(r, w.word, w.word, 'Say it', () => finish(w, true, s, api, el));
+          const same = this.sameMeaning(w, all); this.sayIt(r, same.length ? [w.word, ...same.map(o => o.word)] : w.word, w.word, 'Say it', () => finish(w, true, s, api, el));
           const nb = r.createEl('button', { text: 'Not yet', cls: 'gq-mini' }); nb.onclick = () => finish(w, false, s, api, el);
           return;
         }

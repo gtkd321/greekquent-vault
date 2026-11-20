@@ -19,11 +19,11 @@ For grown-ups. Two minutes, once. Back to [[Today]].
 >
 > Weeks with no class keep last week's game.
 
-> [!tip]- 3. The buttons
+> [!tip]- 3. The tabs (Today, Words, Class)
 > They sit along the bottom of the screen.
 > - **Today** (house): this week's game.
-> - **Look up** (magnifying glass): any word in English or Greek.
-> - **More** (three dots): Ask the class, Send homework, What's new, Put it on my home screen.
+> - **Words** (list): the words, with a search box at the top for any word in English or Greek.
+> - **Class** (two people): this week's lesson, homework and Ask the class. **Settings and help** is at the bottom.
 >
 > Under the cards on Today: **Play Γιαγιά** (a word game with this week's words), **All lessons**, and **Look up a word**.
 

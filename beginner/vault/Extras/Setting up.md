@@ -5,12 +5,12 @@ Two minutes, once. Back to [[Today]].
 > [!tip]- 1. Turn on the Greekquent tools
 > The first time you open the vault, Obsidian asks whether you trust it. Tap **Trust author and enable plugins**. If you missed it: Settings, Community plugins, **Turn on community plugins**.
 
-> [!tip]- 2. The four tool buttons (Today, Look up, Ask, More)
+> [!tip]- 2. The four tool buttons (Today, Words, Class, More)
 > These are small icons, not the colored buttons on word notes. On a computer they sit in the thin strip of icons along the far left edge of the window. On a phone, tap the menu button (three lines) at the bottom right of the screen, when you are not typing in a note.
-> - **Today** (house): the Story puzzle, one sentence at a time from part 1 at your own pace (read the English, then build it in Greek from word tiles; touch a tile to hear it), spaced review, this week's class, and words to review. Doing Fluent in a Year? Tap **Show its words** at the bottom once and its five words appear, one at a time. Kids use their own vault, **Greekquent Kids**.
-> - **Look up** (magnifying glass): any word in English or Greek. Words outside the 1,500 are translated right in the box. Tick Guess first to try before you see the answer.
-> - **Ask** (two people): a question about the note you are on, ready to share in the class GroupMe. You can also ask on video from there.
-> - **More** (three dots): More on this page, Word web, Ask the class, Send homework, What's new, Update vault.
+> - **Today** (house): today's story (Scene, Words, Build, Say it), then review. Doing Fluent in a Year? Pick it when the app first asks how far you want to go, or turn on **Fluent in a Year on Today** in Options. Its card then comes first on Today, titled **Fluent in a Year**, with the day's five words one at a time.
+> - **Words** (list): all the words, most frequent first. Search for any word in English or Greek at the top, or open the Word web.
+> - **Class** (two people): this week's lesson, homework and Ask the class. **Settings and help** is at the bottom.
+> - **More** (three dots): More on this page, Look up a word, Word web, Ask the class, Send homework, What's new, Options, Update vault.
 
 > [!tip]- Less on the page, more in the side panel
 > Lessons and word notes show the main things first. The extras (word pairs, words that go together, review prompts, word links) sit in the side panel: tap **More on this page** near the top of a lesson or on a word's button row. On a phone it slides in from the right. Every other article lives in the **Extras** folder.

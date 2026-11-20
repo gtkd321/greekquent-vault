@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Setting up matches the app again (2026-11-20j)
+> Setting up described four buttons, including a Look up button that is no longer there. It now shows the three tabs: Today, Words (with search at the top) and Class (with Settings and help at the bottom).
+
 > [!tip]- Close enough counts (2026-11-20i)
 > When Say it hears a word that is close but spelled a little differently (κε for και), it turns green, you move on, and it shows the right spelling underneath.
 

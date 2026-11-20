@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!tip]- Say it hears single words better (2026-11-20h)
+> Say it on a word card now counts any one form of a word listed with commas (say ένας, μία or ένα), reads a phone's digits as words (1 counts for ένα), and accepts how phones often write short words (κι or κε for και, σαι for σε).
+
+> [!tip]- New words first, and the steps take you back (2026-11-20g)
+> If Fluent in a Year is on, its card now comes first on Today, before the story, with Word web and Build a sentence for the day's words. If there's no verb that day, Build a sentence brings one in, like θέλω or μου αρέσει. In the story, tap a green step to look back, and tap the step you're on to return.
+
 > [!tip]- Play with today's words (2026-11-20f)
 > In today's story, the Build step now ends with Play with, one of today's new words, and two buttons: Word web, to see what it goes with, and Build a sentence, to combine it into your own sentences.
 

@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20f';
+const VAULT_RELEASE = '2026-11-20h';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -354,9 +354,17 @@ const foldG = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u03
 const SMALL_W = new Set(['ο', 'η', 'το', 'οι', 'τα', 'τον', 'την', 'του', 'τησ', 'των', 'ενασ', 'μια', 'μια', 'ενα', 'εγω', 'εσυ', 'εμεισ', 'εσεισ']);
 const near = (a, b) => { if (a === b) return true; if (Math.abs(a.length - b.length) > 1 || a.length < 4) return false; let i = 0, j = 0, e = 0; while (i < a.length && j < b.length) { if (a[i] === b[j]) { i++; j++; continue; } if (++e > 1) return false; if (a.length > b.length) i++; else if (b.length > a.length) j++; else { i++; j++; } } return e + (a.length - i) + (b.length - j) <= 1; };
 // True when what was heard holds the target: every word of one or two words, three of four in a longer line. Small words like ο and το are left out.
-const heardIt = (target, alts) => {
+// Phones write numbers as digits (ένα comes back as 1), so digits are read as their Greek words first.
+const DIGW = { 1: 'ενα ενασ μια', 2: 'δυο', 3: 'τρια τρεισ', 4: 'τεσσερα τεσσερισ', 5: 'πεντε', 6: 'εξι', 7: 'επτα εφτα', 8: 'οκτω οχτω', 9: 'εννεα εννια', 10: 'δεκα' };
+const digG = a => String(a || '').replace(/\d+/g, d => ' ' + (DIGW[+d] || '') + ' ');
+// Short words are matched by sound too: a phone may write κι or κε for και, σαι for σε.
+const ALIASW = { και: ['κι'] };
+const sameW = (w, h) => w === h || near(w, h) || (w.length <= 4 && phonG(w) === phonG(h)) || (ALIASW[w] || []).includes(h);
+// word: a word card's label, where commas and slashes list forms (ένας, μία, ένα): saying any one of them counts.
+const heardIt = (target, alts, word) => {
+  if (word) { const forms = String(target).split(/\s*[,/]\s*/).filter(Boolean); if (forms.length > 1) return forms.some(f => heardIt(f, alts)); }
   let tw = foldG(target).split(' ').filter(Boolean); const content = tw.filter(w => !SMALL_W.has(w)); if (content.length) tw = content;
-  return (alts || []).some(a => { const hw = foldG(a).split(' ').filter(Boolean); const n = tw.filter(w => hw.some(h => near(w, h))).length; return tw.length <= 2 ? n === tw.length : n / tw.length >= 0.75; });
+  return (alts || []).some(a => { const hw = foldG(digG(a)).split(' ').filter(Boolean); const n = tw.filter(w => hw.some(h => sameW(w, h))).length; return tw.length <= 2 ? n === tw.length : n / tw.length >= 0.75; });
 };
 // Listening always ends: a hard stop after 7 seconds even when the phone never reports back (some phones and home-screen apps hang there).
 // A hang is reported as 'hang', and the caller switches that device to the keyboard microphone.
@@ -1727,15 +1735,25 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     return this.pairs;
   }
   openPair(word, pre) { new PairModal(this.app, this, word, pre).open(); }
-  // In the Build step: today's new words as a way in to Word web and Build a sentence. A verb goes first, since it builds the most.
-  wordPlay(el, nw) {
-    const ws = (nw || []).map(w => w.word).filter(w => this.app.vault.getAbstractFileByPath('Words/' + w + '.md')); if (!ws.length) return;
-    const pick = (this.pairs && ws.find(w => this.pairs.v[w])) || ws[0];
-    const r = el.createDiv('gq-row gq-cv-play'); r.createSpan({ cls: 'gq-hint', text: 'Play with ' });
-    r.createSpan({ cls: 'gq-cv-playw', text: pick, attr: { lang: 'el' } });
+  // Today's new words as a way in to Word web and Build a sentence (the Build step and the Fluent in a Year card).
+  // A verb builds the most, so it goes first. No verb today: a word that pairs with a verb brings that verb in
+  // (σπίτι opens πάω with σπίτι picked). Little words like και open their own ready-made chunks.
+  async wordPlay(el, nw) {
+    const r = el.createDiv('gq-row gq-cv-play');
+    const ws = (nw || []).map(w => w.word).filter(w => w && this.app.vault.getAbstractFileByPath('Words/' + w + '.md'));
+    if (!ws.length) { r.remove(); return; }
+    const d = await this.pairData();
+    // Everyday verbs first (want, like, have, go…), then the rest most common first.
+    const EASY = ['θέλω', 'μου αρέσει', 'έχω', 'πάω', 'είμαι', 'κάνω', 'μπορώ', 'τρώω', 'πίνω', 'ξέρω', 'βλέπω', 'λέω', 'αγαπάω', 'ψάχνω', 'περιμένω'];
+    const vr = this.verbRank || (this.verbRank = new Map(Object.keys(d.v).map((v, k) => [v, EASY.includes(v) ? EASY.indexOf(v) : 100 + k])));
+    const verb = ws.find(w => d.v[w]);
+    let fed = null;
+    if (!verb) for (const w of ws) for (const l of ((d.x[w] && d.x[w].l) || [])) if (d.v[l[0]] && (!fed || vr.get(l[0]) < vr.get(fed[1][0]))) fed = [w, l];
+    const pick = verb || (fed ? fed[0] : ws[0]);
+    r.createSpan({ cls: 'gq-hint', text: 'Play with ' }); r.createSpan({ cls: 'gq-cv-playw', text: pick, attr: { lang: 'el' } });
     r.createEl('button', { text: 'Word web', cls: 'gq-mini' }).onclick = () => this.openGraph('Words/' + pick + '.md');
-    r.createEl('button', { text: 'Build a sentence', cls: 'gq-mini' }).onclick = () => this.openPair(pick);
-    if (!this.pairs) this.pairData().then(() => { const v = ws.find(w => this.pairs.v[w]); if (v && v !== pick && r.isConnected) { r.remove(); this.wordPlay(el, nw); } });
+    const [fv, fk, fi] = fed ? fed[1] : [];
+    r.createEl('button', { text: fed ? `Build a sentence with ${fv}` : 'Build a sentence', cls: 'gq-mini', attr: { lang: fed ? 'el' : 'en' } }).onclick = () => fed ? this.openPair(fv, [fk, fi]) : this.openPair(pick);
   }
   // A leaf in the main pane. Buttons in the side panel must never open things inside the side panel.
   mainLeaf(newTab) {
@@ -3444,6 +3462,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
           const cls = 'gq-daystep' + (k < stepNow ? ' is-done' : '') + (k === stepNow ? ' is-now' : '') + (k === look ? ' is-look' : '');
           // Finished steps open again to look back; nothing you did is undone.
           if (k < stepNow && !(k === 1 && !nw.length)) { const b = strip.createEl('button', { cls, text: t, attr: { 'aria-label': 'Look again: ' + t, 'aria-pressed': String(k === look) } }); b.onclick = () => { look = k === look ? null : k; paint(); }; }
+          // While looking back, the current step is the way home.
+          else if (k === stepNow && look !== null) { const b = strip.createEl('button', { cls: cls + ' is-home', text: t, attr: { 'aria-label': 'Back to ' + t } }); b.onclick = () => { look = null; paint(); }; }
           else strip.createSpan({ cls, text: t });
         });
         if (look !== null) {
@@ -3459,7 +3479,6 @@ module.exports = class GreekquentStudentLayout extends Plugin {
             for (const x of turns) { const r = lv.createDiv('gq-cv-done'); if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' }); const gl = this.lineEl(r, x[1], words); gl.addClass('gq-say'); gl.onclick = () => say(x[1]); r.createDiv({ cls: 'gq-hint', text: x[2] }); if (look === 3) this.sayIt(r.createDiv('gq-cv-lsay'), x[1], 'day:' + n + ':re'); }
           }
           if (look === 2) this.wordPlay(lv, nw);
-          const bk = lv.createDiv('gq-row').createEl('button', { text: stepNow > 3 ? 'Done looking ›' : `Back to ${NAMES[stepNow]} ›`, cls: 'gq-mini' }); bk.onclick = () => { look = null; paint(); };
           return;
         }
       }
@@ -4277,7 +4296,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
           let list = [], label = '';
           if (fdd >= 0 && fdow === 0) { list = Object.values(days).flatMap(d => d.words); label = `${own ? 'Review day' : 'Sunday review'}: this week's ${list.length} words`; }
           else { const d = days[DAYS[fdd < 0 ? 1 : fdow]]; if (d) { list = d.words; label = `Today's words · ${own ? d.label.replace(/^\w+ · /, '') : d.label}`; } }
-          if (list.length) { card.createDiv({ cls: 'gq-tsub', text: label }); this.wordStep(card, list, ymd(now) + ':' + list.length); this.todayPlay = list; }
+          if (list.length) { card.createDiv({ cls: 'gq-tsub', text: label }); this.wordStep(card, list, ymd(now) + ':' + list.length); this.todayPlay = list; this.wordPlay(card, list); }
           else card.createDiv({ cls: 'gq-hint', text: 'No new words today.' });
           const r = card.createDiv('gq-row');
           const wl = r.createEl('button', { text: 'This week\'s page', cls: 'gq-mini' }); wl.onclick = () => this.openNote(wk.file.path);
@@ -4527,7 +4546,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // the puzzle, say it together, then the song, the game, the swap and the moves.
     // The separate review word list is not on the path; spaced review is the day's review step.
     if (!kids) { const rv = list.filter(c => c.hasClass('gq-review')); rv.forEach(c => c.remove()); list = list.filter(c => !rv.includes(c)); }
-    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : ['gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
+    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : (this.colors().fiay ? ['gq-report', 'gq-abc', 'gq-fiay', 'gq-story', 'gq-comeback', 'gq-class'] : ['gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class']);
     const rk = c => { const k = rank.findIndex(x => c.hasClass(x)); return k < 0 ? rank.length : k; };
     list = list.map((c, k) => [c, k]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map(x => x[0]);
     if (mo) list.push(mo);
@@ -4736,7 +4755,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // onWin (optional): what the screen does once the phone hears it right, e.g. fill in the story puzzle.
   // other (optional): the lines around yours. Saying those instead of your line gets a hint, not a plain Try again.
   sayIt(parent, target, key, label, onWin, other) {
-    const w = parent.createSpan('gq-sayit');
+    const w = parent.createSpan('gq-sayit'), wd = /^w:/.test(key || '');
     const b = w.createEl('button', { text: label || 'Say it · +2', cls: 'gq-mini gq-sayit-b', attr: { 'aria-label': 'Say it out loud for 2 bonus φόρα' } });
     const fb = w.createSpan({ cls: 'gq-hint gq-sayit-fb' });
     const miss = alts => other && heardIt(other.gr, alts) ? ` That is ${other.who || 'their'} line. Now say yours${other.en ? ': ' + other.en : ''}` : null;
@@ -4744,7 +4763,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const typed = () => {
       b.remove(); fb.setText('');
       const i = w.createEl('input', { cls: 'gq-sayit-in', attr: { type: 'text', lang: 'el', placeholder: 'Tap the mic on the keyboard and say it', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' } });
-      const chk = () => { if (!i.value.trim()) return; if (heardIt(target, [i.value])) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} } else fb.setText(miss([i.value]) || ' Not quite. Try again.'); };
+      const chk = () => { if (!i.value.trim()) return; if (heardIt(target, [i.value], wd)) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} } else fb.setText(miss([i.value]) || ' Not quite. Try again.'); };
       i.onchange = chk; i.onkeydown = e => { if (e.key === 'Enter') chk(); };
       w.appendChild(fb); fb.setText(' Switch the keyboard to Greek first (the globe key), so its mic writes Greek.');
       // The app's own microphone was switched off on this phone after a failure: one tap tries it again.
@@ -4762,7 +4781,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       b.addClass('is-live'); b.setText('Listening…'); fb.setText('Say it now.');
       try {
         const alts = await listenGreek(); b.removeClass('is-live');
-        if (heardIt(target, alts)) win();
+        if (heardIt(target, alts, wd)) win();
         else if (!alts.length && ++fails >= 2) toKb(false);
         else { b.setText(label || 'Say it · +2'); fb.setText(miss(alts) || (alts.length ? ` Heard "${alts[0]}". Try again.` : ' Nothing heard. Try again, a little louder.')); }
       } catch (e) {

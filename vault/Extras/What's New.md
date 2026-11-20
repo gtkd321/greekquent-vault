@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- A new icon (2026-11-20d)
+> Greekquent has a new icon: a little olive tree whose olives are four of the most common Greek words, ο, και, το and η. If it's on your home screen, the new icon may take a day or two to show, or you can remove it and add it again.
+
 > [!tip]- A calmer Class tab (2026-11-20c)
 > Class is now one card for this week (Lesson page, Classroom Greek, Rally), one for homework and questions, and Settings and help folded shut. Classroom Greek opens as tap-to-hear cards. There's no class mode switch anymore: opening Class keeps the screen awake until you close the app.
 

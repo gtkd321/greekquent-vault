@@ -915,3 +915,8 @@ body.gq-nonav .gq-corner[data-mode="friend"] { bottom: auto; }
 .gq-vcheck-list li.is-bad { color: #d73027; }
 .gq-vcheck .gq-row { flex-wrap: wrap; gap: 6px; }
 .gq-helpcard .gq-row { flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.gq-helphead { all: unset; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 44px; cursor: pointer; }
+.gq-helphead:focus-visible { outline: 2px solid var(--interactive-accent); outline-offset: 4px; border-radius: 6px; }
+.gq-helpchev { font-size: 1.4em; color: var(--text-muted); transition: transform .2s; }
+.gq-helpcard.gq-open .gq-helpchev { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) { .gq-helpchev { transition: none; } }

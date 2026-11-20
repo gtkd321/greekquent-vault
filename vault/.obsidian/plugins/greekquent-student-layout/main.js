@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20b';
+const VAULT_RELEASE = '2026-11-20c';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -4117,8 +4117,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       { t: 'Phonetics', d: 'Shows how to say each Greek word in Latin letters.', on: () => this.phOn(), set: v => this.setPh(v) },
       { t: 'Calm mode', d: 'Stops the moving parts.', on: () => this.calmOn(), set: v => this.setCalm(v) },
       { t: 'Focus sound', d: 'A soft hiss (pink noise). It helps some people and bothers others.', on: () => !!this.noise, set: v => { if (!!this.noise !== v) this.toggleNoise(); } },
-      !this.isKids && { t: 'Fluent in a Year on Today', d: 'Adds the day\'s Fluent in a Year words to Today.', on: () => !!this.colors().fiay, set: v => this.setFiay(v) },
-      { t: 'Class mode', d: 'For live class: opens Class and keeps the screen awake for 2 hours.', on: () => this.classOn(), set: v => this.setClass(v) }
+      !this.isKids && { t: 'Fluent in a Year on Today', d: 'Adds the day\'s Fluent in a Year words to Today.', on: () => !!this.colors().fiay, set: v => this.setFiay(v) }
     ].filter(Boolean);
     this.pop('Options', [{ label: '', build: el => {
       const list = el.createDiv('gq-opts');
@@ -5039,16 +5038,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     ws.revealLeaf(leaf); ws.setActiveLeaf && ws.setActiveLeaf(leaf, { focus: true });
   }
   async openWords() { await this.tabReveal('words'); await this.openTab(WORDSV); }
-  // ---------- Class mode: Classroom Greek and this week's script one tap away during class ----------
-  // On for 2 hours (one class), on this device. The screen stays awake, the app opens on Class,
-  // and a small bar on every page jumps between the phrases and the script.
-  classOn() { return +this.lsGet('classmode', 0) > Date.now(); }
-  async setClass(on) {
-    this.lsSet('classmode', on ? Date.now() + 2 * 3600e3 : 0);
-    this.classWake(on); this.classBar();
-    if (on) { this.tourHit('class'); await this.openClass(); new Notice('Class mode on for 2 hours. The screen stays awake.'); }
-    else { new Notice('Class mode off.'); this.paintClass(); }
-  }
+  // ---------- Class mode, behind the scenes: the first visit to Class keeps the screen awake ----------
+  // No switch and nothing to turn off: it lasts until the app is closed, on this device only.
+  classOn() { return !!this.classAuto; }
   async classWake(on) {
     try {
       if (on && navigator.wakeLock && document.visibilityState === 'visible') { if (!this.wakeL) { this.wakeL = await navigator.wakeLock.request('screen'); this.wakeL.addEventListener('release', () => { this.wakeL = null; }); } }
@@ -5056,23 +5048,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     } catch (e) {}
   }
   classInit() {
-    // A screen lock lapses when the app goes to the background; take it again on return, and end class mode when time is up.
-    this.registerDomEvent(document, 'visibilitychange', () => { if (document.visibilityState === 'visible') { this.classWake(this.classOn()); this.classBar(); } });
-    this.registerInterval(window.setInterval(() => { if (!this.classOn() && document.querySelector('.gq-classbar')) { this.classWake(false); this.classBar(); this.paintClass(); } }, 60e3));
-    if (this.classOn()) { this.classWake(true); this.classBar(); setTimeout(() => this.openClass(), 600); }
+    // The old 2-hour switch is retired; clear it so nothing lingers. A screen lock lapses in the background; take it again on return.
+    if (this.lsGet('classmode', 0)) this.lsSet('classmode', 0);
+    this.registerDomEvent(document, 'visibilitychange', () => { if (document.visibilityState === 'visible') this.classWake(this.classOn()); });
   }
   paintClass() { const v = this.app.workspace.getLeavesOfType(CLASSV)[0]; if (v && v.view && v.view.contentEl) this.renderClass(v.view.contentEl); }
-  classBar() {
-    let bar = document.querySelector('.gq-classbar');
-    if (!this.classOn()) { if (bar) bar.remove(); return; }
-    if (bar) return;
-    bar = document.body.createDiv({ cls: 'gq-classbar', attr: { role: 'toolbar', 'aria-label': 'Class mode' } });
-    const b = (t, fn, cls) => { const x = bar.createEl('button', { text: t, cls: cls || '' }); x.onclick = fn; return x; };
-    b('Phrases', () => this.popPhrases());
-    b('Script', () => this.openScript());
-    b('Class', () => this.openClass());
-    b('×', () => this.setClass(false), 'gq-classbar-x').setAttr('aria-label', 'End class mode');
-  }
   // This week's lesson: the script students follow in class. No class this week: the next one.
   async classLesson() {
     if (this.isKids) { const info = await this.kidsInfo(), wk = info ? this.kidWeek(info) : null; return wk ? { n: wk.lesson, f: this.kidFile(wk.lesson), prev: wk.lesson > 1 ? this.kidFile(wk.lesson - 1) : null } : null; }
@@ -5106,28 +5086,6 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         r.onclick = () => say(p.g.replace(/«…»/g, ''));
       }
     } })));
-  }
-  // The dashboard at the top of Class.
-  async classDash(box) {
-    const c = box.createDiv('gq-tcard gq-classdash'), h = c.createDiv('gq-thead');
-    if (!this.classOn()) {
-      h.createEl('strong', { text: 'In class?' });
-      c.createDiv({ cls: 'gq-hint', text: 'Class mode puts Classroom Greek and this week\'s script one tap away, and keeps the screen awake. It turns off by itself after 2 hours.' });
-      const b = c.createDiv('gq-row').createEl('button', { text: 'Start class mode', cls: 'mod-cta' }); b.onclick = () => this.setClass(true);
-      return;
-    }
-    const L = await this.classLesson();
-    h.createEl('strong', { text: 'Class mode' }); h.createSpan({ cls: 'gq-hint', text: L ? `  · Lesson ${L.n}` : '' });
-    const g = c.createDiv('gq-classgrid');
-    const tile = (t, sub, fn, cta) => { const b = g.createEl('button', { cls: 'gq-classtile' + (cta ? ' mod-cta' : '') }); b.createDiv({ cls: 'gq-classtile-t', text: t }); if (sub) b.createDiv({ cls: 'gq-classtile-s', text: sub }); b.onclick = fn; return b; };
-    tile('Script', L && L.f ? L.f.basename.replace(/-(student|teacher)$/, '').replace(/^[LIK]\d+\s*/, '') : 'This week', () => this.openScript(), true);
-    tile('Classroom Greek', 'Tap to hear', () => this.popPhrases(), true);
-    if (L && L.f && !this.isKids) { const pairs = this.rallyPairs(await this.app.vault.cachedRead(L.f)); if (pairs.length) tile('Rally', `${pairs.length} pairs`, () => this.popRally(L.n, pairs)); }
-    if (L && L.prev) tile('Last week', L.prev.basename.replace(/-(student|teacher)$/, '').replace(/^[LIK]\d+\s*/, ''), () => this.openNote(L.prev.path));
-    const r = c.createDiv('gq-row');
-    if (this.app.vault.getAbstractFileByPath(EXTRAS + '11 Classroom Greek.md')) { const p = r.createEl('button', { text: 'Classroom Greek page', cls: 'gq-mini' }); p.onclick = () => this.openNote(EXTRAS + '11 Classroom Greek.md'); }
-    const lu = r.createEl('button', { text: 'Look up a word', cls: 'gq-mini' }); lu.onclick = () => new LookupModal(this.app, this).open();
-    const end = r.createEl('button', { text: 'End class mode', cls: 'gq-mini' }); end.onclick = () => this.setClass(false);
   }
   async openClass() { await this.tabReveal('class'); await this.openTab(CLASSV); }
   // ---------- Words: find a word, then the list like a spreadsheet you color in ----------
@@ -5233,44 +5191,45 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.pop(`Quiz · ${{ red: 'Red', yellow: 'Yellow', green: 'Green' }[color]}`, steps, () => setTimeout(done, 400));
   }
   // ---------- Class: the latest lesson, practice and the teacher ----------
+  // Class, calm: one card for this week, one for homework and questions, and Settings and help folded shut.
   async renderClass(el) {
     el.empty(); el.addClass('gq-classv'); const box = el.createDiv('gq-today gq-class-in');
+    if (!this.classAuto) { this.classAuto = true; this.classWake(true); }
     box.createEl('h2', { text: 'Class' });
-    await this.classDash(box);
-    if (this.isKids) {
-      const info = await this.kidsInfo(), wk = info ? this.kidWeek(info) : null, f = wk ? this.kidFile(wk.lesson) : null;
-      const c = box.createDiv('gq-tcard'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: wk ? `This week · Lesson ${wk.lesson}` : 'This week' });
-      const r = c.createDiv('gq-row'); if (f) { const b = r.createEl('button', { text: 'Lesson page', cls: 'mod-cta' }); b.onclick = () => this.openNote(f.path); }
-    } else {
-      const now = new Date(); now.setHours(0, 0, 0, 0);
-      const dd = Math.floor((now - new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2])) / 864e5), week = dd < 0 ? 1 : Math.floor(dd / 7) + 1;
-      const wk = await this.weekNote(week);
-      if (wk) await this.classCard(box, wk, week); else box.createDiv({ cls: 'gq-tcard gq-hint', text: 'The year is finished.' });
+    const L = await this.classLesson(), pt = this.together();
+    const c = box.createDiv('gq-tcard gq-class'), h = c.createDiv('gq-thead');
+    if (!L) h.createEl('strong', { text: this.isKids ? 'This week' : 'The year is finished.' });
+    else {
+      h.createEl('strong', { text: (L.now === false ? 'Next class' : 'This week') + ` · Lesson ${L.n}` });
+      if (L.f) c.createDiv({ cls: 'gq-hint', text: L.f.basename.replace(/-(student|teacher)$/, '').replace(/^[LIK]\d+\s*/, '') });
     }
-    const c = box.createDiv('gq-tcard'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Homework and questions' });
     const r = c.createDiv('gq-row');
-    const h = r.createEl('button', { text: 'Send homework' }); h.onclick = () => this.sendHomework();
-    const t = r.createEl('button', { text: 'Ask the class' }); t.onclick = () => this.ask(null);
-    c.createDiv({ cls: 'gq-hint', text: 'Questions go to the class group, by text or video, so everyone learns from the answer. Spotted a mistake? Ask there too. To ask about one word or lesson, open it and tap Ask.' });
-    const pt = this.together(); if (this.isKids && !pt.when) { this.helpCard(box); return; }
-    const p = box.createDiv('gq-tcard'); p.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Practice together' });
-    p.createDiv({ cls: 'gq-hint', text: pt.when ? `Weekly drop-in · ${pt.when}` : 'Practicing next to someone makes it easier to start. Ask the class for a drop-in time.' });
-    const pr = p.createDiv('gq-row');
-    if (pt.link) { const j = pr.createEl('button', { text: 'Join', cls: 'mod-cta' }); j.onclick = () => window.open(pt.link, '_blank'); }
-    if (this.app.vault.getAbstractFileByPath(EXTRAS + 'Practice together.md')) { const m = pr.createEl('button', { text: 'How it works', cls: 'gq-mini' }); m.onclick = () => this.openNote(EXTRAS + 'Practice together.md'); }
+    if (L && L.f) { const b = r.createEl('button', { text: 'Lesson page', cls: 'mod-cta' }); b.onclick = () => this.openNote(L.f.path); }
+    const cg = r.createEl('button', { text: 'Classroom Greek' }); cg.onclick = () => this.popPhrases();
+    if (L && L.f && !this.isKids) { const pairs = this.rallyPairs(await this.app.vault.cachedRead(L.f)); if (pairs.length) { const ra = r.createEl('button', { text: 'Rally' }); ra.onclick = () => this.popRally(L.n, pairs); } }
+    if (pt.when) { const t = c.createDiv('gq-row gq-together'); t.createSpan({ cls: 'gq-hint', text: `Practice together · ${pt.when}` }); if (pt.link) { const j = t.createEl('button', { text: 'Join', cls: 'gq-mini' }); j.onclick = () => window.open(pt.link, '_blank'); } }
+    const q = box.createDiv('gq-tcard'); q.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Homework and questions' });
+    const qr = q.createDiv('gq-row');
+    const hw = qr.createEl('button', { text: 'Send homework' }); hw.onclick = () => this.sendHomework();
+    const t = qr.createEl('button', { text: 'Ask the class' }); t.onclick = () => this.ask(null);
+    q.createDiv({ cls: 'gq-hint', text: 'Questions go to the class group, so everyone learns from the answer.' });
     this.helpCard(box);
   }
-  // Settings and help: everything the old ⋯ menu held, at the bottom of Class. Settings first, then help, then your work.
+  // Settings and help: folded shut until tapped. Settings first, then help, then your work.
   helpCard(box) {
-    const c = box.createDiv('gq-tcard gq-helpcard'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Settings and help' });
-    const row = (items) => { const r = c.createDiv('gq-row'); for (const [t, fn, cta] of items) { const b = r.createEl('button', { text: t, cls: cta ? 'mod-cta' : 'gq-mini' }); b.onclick = fn; } };
+    const c = box.createDiv('gq-tcard gq-helpcard');
+    const head = c.createEl('button', { cls: 'gq-helphead', attr: { 'aria-expanded': 'false' } });
+    head.createEl('strong', { text: 'Settings and help' }); const ch = head.createSpan({ cls: 'gq-helpchev', text: '›' });
+    const body = c.createDiv('gq-helpbody'); body.hidden = true;
+    head.onclick = () => { body.hidden = !body.hidden; head.setAttr('aria-expanded', String(!body.hidden)); c.toggleClass('gq-open', !body.hidden); };
+    const row = (items) => { const r = body.createDiv('gq-row'); for (const [t, fn, cta] of items) { const b = r.createEl('button', { text: t, cls: cta ? 'mod-cta' : 'gq-mini' }); b.onclick = fn; } };
     row([['Options', () => this.optionsPop(), true], ['Sound help', () => this.voiceHelp()]]);
     const help = [[this.tourLeft() ? 'Take the tour' : 'Take the tour again', () => this.tourStart()], ['Setting up', () => this.openNote(SETUP)], ["What's new", () => this.openNote(WHATS_NEW)]];
     if (this.reviewOn()) help.push(['App review', () => this.reviewStart()]);
     row(help);
     const G = window.GQW, mine = G && G.helpExtras ? G.helpExtras() : [['Update vault', () => this.updateVault(false)]];
     if (this.isTeacher && !G) mine.push(['Teacher update key', () => this.keyModal()]);
-    if (mine.length) { c.createDiv({ cls: 'gq-hint', text: G ? 'Your work saves itself on this phone. Save a copy to move it to another phone.' : 'Updates download only the files that changed.' }); row(mine); }
+    if (mine.length) { body.createDiv({ cls: 'gq-hint', text: G ? 'Your work saves itself on this phone. Save a copy to move it to another phone.' : 'Updates download only the files that changed.' }); row(mine); }
   }
   // ---------- Pop-out card: one big card in front of the page, for a few focused moments ----------
   // Used for today's line, comebacks, the Sunday read-through and the kid lines. Everything else stays in the list.

@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- A calmer Class tab (2026-11-20c)
+> Class is now one card for this week (Lesson page, Classroom Greek, Rally), one for homework and questions, and Settings and help folded shut. Classroom Greek opens as tap-to-hear cards. There's no class mode switch anymore: opening Class keeps the screen awake until you close the app.
+
 > [!tip]- Everything in three tabs (2026-11-20b)
 > The ⋯ button is gone. Options, Sound help, the tour, Setting up, What's new, and Save a copy or Restore my work are now at the bottom of Class, under Settings and help. Class is always in the bottom bar.
 

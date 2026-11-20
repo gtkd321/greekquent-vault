@@ -11,7 +11,7 @@ Two minutes, once. Back to [[Today]].
 
 > [!tip]- 2. The three tabs (Today, Words, Class)
 > They sit along the bottom of the screen (on a computer too).
-> - **Today** (house): today's story (Scene, Words, Build, Say it), then review. Doing Fluent in a Year? Pick it when the app first asks how far you want to go, or turn on **Fluent in a Year on Today** in Options. Its card then comes first on Today, titled **Fluent in a Year**, with the day's five words one at a time.
+> - **Today** (house): today's story (Scene, Words, Build, Say it), then review. Doing Fluent in a Year? It is a pace for the same story: one day each day, so the 1,500 words take a year. Pick it when the app first asks how far you want to go, or turn on **Fluent in a Year pace** in Options. The story card then says whether you are on pace or a few days behind.
 > - **Words** (list): all the words, most frequent first. Search for any word in English or Greek at the top, or open the Word web.
 > - **Class** (two people): this week's lesson, homework and Ask the class. **Settings and help** is at the bottom: Options, the tour, What's new, and saving a copy of your work.
 

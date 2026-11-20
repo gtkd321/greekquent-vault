@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Fluent in a Year is now a pace (2026-11-20l)
+> Fluent in a Year no longer adds a second card with its own words. It is a pace for the same story: one day each day, so the 1,500 words take a year. The story card shows a quiet line, such as Fluent in a Year · on pace, or 2 days behind. Change lets you pick your week. Turn it on or off in Options.
+
 > [!tip]- Another word to play with, and Back works in windows (2026-11-20k)
 > After you play with one of today's words (Word web or Build a sentence), the row offers the next one: Now play with … When you have played with all of them, it starts again. In the web app, the back arrow and the phone's back button now close a window like Build a sentence first, then go back a page.
 

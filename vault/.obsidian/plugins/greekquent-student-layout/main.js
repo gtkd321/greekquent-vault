@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20k';
+const VAULT_RELEASE = '2026-11-20l';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3365,6 +3365,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     head.createEl('strong', { text: `Day ${idx + 1}` });
     head.createSpan({ cls: 'gq-hint', text: `  · Week ${b.week}${wt ? ': ' + wt : ''}` });
     this.storyEl = card; this.storyInfo = { due: !finished && at < cal, part: idx + 1 };
+    // Fluent in a Year is a pace, not more words: the same story, one day a day. A quiet line says where you are against it.
+    if (col.fiay && !finished) {
+      const due = days.filter(k => k <= cal).length, gap = due - doneN, pl = card.createDiv('gq-hint gq-pace');
+      pl.appendText('Fluent in a Year · ' + (gap === 1 ? 'on pace' : gap > 1 ? `${gap - 1} day${gap > 2 ? 's' : ''} behind` : gap === 0 ? 'done for today' : `${-gap} day${gap < -1 ? 's' : ''} ahead`) + ' · ');
+      const ch = pl.createEl('a', { text: 'Change', href: '#' }); ch.onclick = e => { e.preventDefault(); const p = this.fyPace || {}; this.fyPicker(pl, p.fw || 1, p.own); };
+    }
     // How long a part really takes this student: from the first tap to the last sentence.
     card.addEventListener('pointerdown', () => { if (!this.tStory) this.tStory = Date.now(); }, true);
     // The week as a short path: one dot a day, today's is the big one.
@@ -3712,7 +3718,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   async setFiay(on) {
     const f = await this.progressFile();
-    await this.app.fileManager.processFrontMatter(f, fm => { if (on) fm.fiay = true; else delete fm.fiay; });
+    // Turning the pace on starts it where the student is in the story, so nobody starts out behind.
+    let from = null;
+    if (on && !this.colors().fiay_from) {
+      const beats = await this.beatIndex(), at = this.colors().story_at || 0, d = Object.keys(beats).map(Number).filter(k => k <= at).length;
+      const now = new Date(); now.setHours(0, 0, 0, 0); const t = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (Math.floor(d / 6) * 7 + d % 6));
+      from = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`;
+    }
+    await this.app.fileManager.processFrontMatter(f, fm => { if (on) { fm.fiay = true; if (from) fm.fiay_from = from; } else delete fm.fiay; });
     setTimeout(() => this.refreshToday(), 300);
   }
   // Watch the line as a short cartoon, or play it as a text adventure. Opens inside the vault, offline.
@@ -4195,7 +4208,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       { t: 'Phonetics', d: 'Shows how to say each Greek word in Latin letters.', on: () => this.phOn(), set: v => this.setPh(v) },
       { t: 'Calm mode', d: 'Stops the moving parts.', on: () => this.calmOn(), set: v => this.setCalm(v) },
       { t: 'Focus sound', d: 'A soft hiss (pink noise). It helps some people and bothers others.', on: () => !!this.noise, set: v => { if (!!this.noise !== v) this.toggleNoise(); } },
-      !this.isKids && { t: 'Fluent in a Year on Today', d: 'Adds the day\'s Fluent in a Year words to Today.', on: () => !!this.colors().fiay, set: v => this.setFiay(v) }
+      !this.isKids && { t: 'Fluent in a Year pace', d: 'The story one day a day, to finish the 1,500 words in a year. Today shows if you are behind.', on: () => !!this.colors().fiay, set: v => this.setFiay(v) }
     ].filter(Boolean);
     this.pop('Options', [{ label: '', build: el => {
       const list = el.createDiv('gq-opts');
@@ -4306,27 +4319,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const beats = await this.beatIndex(), dayNow = days[DAYS[fdd < 0 ? 1 : (fdow || 6)]];
         const cal = fdd < 0 ? 1 : (dayNow && dayNow.n) || Math.max(0, ...Object.keys(beats).map(Number).filter(k => beats[k].week < fw));
         this.todayBeat = null; this.storyEl = null; this.storyInfo = null; this.cbList = null;
+        this.fyPace = { fw, own };
         if (cal) await this.storyCard(box, beats, cal, fdd >= 0 && fdow === 0, col);
         // Spaced review brings back earlier story lines and red, yellow and old green words.
         await this.comebackCard(box, beats, col, cal);
         // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
         this.abcEl = null; if (!this.abcAllDone() && !this.abcOff()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
         if (!this.tabOn('class')) await this.classCard(box, wkCal, week);
-        // Fluent in a Year is optional: its words show here only for students who turn it on.
-        if (col.fiay) {
-          const card = box.createDiv('gq-tcard gq-fiay'), head = card.createDiv('gq-thead');
-          const title = (wk.file.basename.replace(/^FY\d+\s*/, '') || '').replace(/ no class this week$/, '');
-          head.createEl('strong', { text: `Fluent in a Year · week ${fw}` }); head.createSpan({ cls: 'gq-hint', text: '  · ' + title.replace(/\bWhats\b/g, "What's") + (fdd < 0 ? ' · starts Monday, Oct 26' : '') });
-          let list = [], label = '';
-          if (fdd >= 0 && fdow === 0) { list = Object.values(days).flatMap(d => d.words); label = `${own ? 'Review day' : 'Sunday review'}: this week's ${list.length} words`; }
-          else { const d = days[DAYS[fdd < 0 ? 1 : fdow]]; if (d) { list = d.words; label = `Today's words · ${own ? d.label.replace(/^\w+ · /, '') : d.label}`; } }
-          if (list.length) { card.createDiv({ cls: 'gq-tsub', text: label }); this.wordStep(card, list, ymd(now) + ':' + list.length); this.todayPlay = list; this.wordPlay(card, list); }
-          else card.createDiv({ cls: 'gq-hint', text: 'No new words today.' });
-          const r = card.createDiv('gq-row');
-          const wl = r.createEl('button', { text: 'This week\'s page', cls: 'gq-mini' }); wl.onclick = () => this.openNote(wk.file.path);
-          const ch = r.createEl('button', { text: own ? 'Your week' : 'Start at day one?', cls: 'gq-mini' }); ch.onclick = () => this.fyPicker(card, fw, own);
-          const off = r.createEl('a', { text: 'Hide on Today', href: '#', cls: 'gq-hint' }); off.onclick = e => { e.preventDefault(); this.setFiay(false); };
-        }
       } else box.createDiv({ cls: 'gq-tcard gq-hint', text: 'The year is finished. Keep reviewing your red and yellow words below.' });
       // Review: red words, game misses and look-ups from the last two weeks, in the 1,500.
       const seen = new Set(), rev = [];
@@ -4570,7 +4569,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // the puzzle, say it together, then the song, the game, the swap and the moves.
     // The separate review word list is not on the path; spaced review is the day's review step.
     if (!kids) { const rv = list.filter(c => c.hasClass('gq-review')); rv.forEach(c => c.remove()); list = list.filter(c => !rv.includes(c)); }
-    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : (this.colors().fiay ? ['gq-report', 'gq-abc', 'gq-fiay', 'gq-story', 'gq-comeback', 'gq-class'] : ['gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class']);
+    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : ['gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
     const rk = c => { const k = rank.findIndex(x => c.hasClass(x)); return k < 0 ? rank.length : k; };
     list = list.map((c, k) => [c, k]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map(x => x[0]);
     if (mo) list.push(mo);
@@ -4748,7 +4747,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         el.createDiv({ cls: 'gq-pop-big', text: 'Θα τα πούμε.', attr: { lang: 'el' } });
         el.createDiv({ cls: 'gq-tsub', text: 'Your setup' });
         const ul = el.createEl('ul', { cls: 'gq-setup-sum' });
-        ul.createEl('li', { text: ans.pace === 'fiay' ? 'Fluent in a Year: today is day one. A short story part and the day\'s words each day.' : 'Casual: one short story part a day, at your own pace.' });
+        ul.createEl('li', { text: ans.pace === 'fiay' ? 'Fluent in a Year: today is day one. One story day each day, and Today shows if you fall behind.' : 'Casual: one short story part a day, at your own pace.' });
         ul.createEl('li', { text: ans.abc ? 'You read the alphabet: plain Greek letters, no letter practice.' : 'Learning the alphabet: letter practice, and the sound of each word under it.' });
         el.createDiv({ cls: 'gq-hint', text: 'Change it later in Options, under the three dots.' });
         const r = el.createDiv('gq-row'); const go = r.createEl('button', { text: 'Start', cls: 'mod-cta' });

@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20d';
+const VAULT_RELEASE = '2026-11-20e';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3421,13 +3421,36 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const stopT = e => { if (e.target && e.target.closest && e.target.closest('.gq-tile, .gq-cv-ans, .gq-cv-bank, button')) e.stopPropagation(); };
     for (const ev of ['touchstart', 'touchend', 'pointerdown', 'pointermove', 'pointerup']) wrap.addEventListener(ev, stopT, { passive: true });
     wrap.addEventListener('touchmove', e => { e.stopPropagation(); if (e.target && e.target.closest && e.target.closest('.gq-tile, .gq-cv-ans, .gq-cv-bank')) e.preventDefault(); }, { passive: false });
+    let look = null;   // a finished step opened again to look back at; null = where you are
     const paint = () => {
       wrap.empty(); seed = n * 97 + 13 + i * 7;
       const nw = (words || []).filter(w => w.en);
       if (S) {
         const stepNow = !sceneSeen ? 0 : !wordsSeen && nw.length ? 1 : i < order().length ? 2 : !said ? 3 : 4;
         const strip = wrap.createDiv({ cls: 'gq-daysteps', attr: { 'aria-label': 'Today\'s steps' } });
-        ['Scene', 'Words', 'Build', 'Say it'].forEach((t, k) => strip.createSpan({ cls: 'gq-daystep' + (k < stepNow ? ' is-done' : '') + (k === stepNow ? ' is-now' : ''), text: t }));
+        const NAMES = ['Scene', 'Words', 'Build', 'Say it'];
+        if (look !== null && (look >= stepNow || (look === 1 && !nw.length))) look = null;
+        NAMES.forEach((t, k) => {
+          const cls = 'gq-daystep' + (k < stepNow ? ' is-done' : '') + (k === stepNow ? ' is-now' : '') + (k === look ? ' is-look' : '');
+          // Finished steps open again to look back; nothing you did is undone.
+          if (k < stepNow && !(k === 1 && !nw.length)) { const b = strip.createEl('button', { cls, text: t, attr: { 'aria-label': 'Look again: ' + t, 'aria-pressed': String(k === look) } }); b.onclick = () => { look = k === look ? null : k; paint(); }; }
+          else strip.createSpan({ cls, text: t });
+        });
+        if (look !== null) {
+          const lv = wrap.createDiv('gq-cv-look');
+          if (look === 0) {
+            lv.createDiv({ cls: 'gq-cv-scenetext', text: 'Today\'s scene, again. Just listen.' });
+            lv.createDiv('gq-row').createEl('button', { text: 'Watch today\'s scene', cls: 'mod-cta' }).onclick = () => this.openApp('story', '#d=' + n + '&today');
+          } else if (look === 1) {
+            lv.createDiv({ cls: 'gq-hint', text: `The ${nw.length === 1 ? 'new word' : nw.length + ' new words'}. Touch each to hear it.` });
+            for (const w of nw) { const row = lv.createDiv('gq-cv-wrow'); const g = row.createSpan({ cls: 'gq-cv-wgr gq-say', text: w.label || w.word, attr: { lang: 'el', role: 'button' } }); g.onclick = () => say(w.label || w.word); row.createSpan({ cls: 'gq-cv-wen', text: w.en }); const sb = row.createSpan('gq-cv-wsay'); this.sayIt(sb, w.label || w.word, 'w:' + w.word, 'Say it'); }
+          } else {
+            lv.createDiv({ cls: 'gq-hint', text: look === 2 ? 'The lines you built. Touch one to hear it.' : 'Say each line out loud. Touch a line to hear it first.' });
+            for (const x of turns) { const r = lv.createDiv('gq-cv-done'); if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' }); const gl = this.lineEl(r, x[1], words); gl.addClass('gq-say'); gl.onclick = () => say(x[1]); r.createDiv({ cls: 'gq-hint', text: x[2] }); if (look === 3) this.sayIt(r.createDiv('gq-cv-lsay'), x[1], 'day:' + n + ':re'); }
+          }
+          const bk = lv.createDiv('gq-row').createEl('button', { text: stepNow > 3 ? 'Done looking ›' : `Back to ${NAMES[stepNow]} ›`, cls: 'gq-mini' }); bk.onclick = () => { look = null; paint(); };
+          return;
+        }
       }
       if (!sceneSeen) {
         const sc = wrap.createDiv('gq-cv-scene');

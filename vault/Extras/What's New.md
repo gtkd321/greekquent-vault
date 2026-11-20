@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Look back at a step (2026-11-20e)
+> In today's story, tap a finished step (Scene, Words, Build or Say it) to look at it again: watch the scene, hear the words, or reread the lines. Tap Back to return to where you were. Looking back doesn't undo anything.
+
 > [!tip]- A new icon (2026-11-20d)
 > Greekquent has a new icon: a little olive tree whose olives are four of the most common Greek words, ο, και, το and η. If it's on your home screen, the new icon may take a day or two to show, or you can remove it and add it again.
 

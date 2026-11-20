@@ -920,3 +920,10 @@ body.gq-nonav .gq-corner[data-mode="friend"] { bottom: auto; }
 .gq-helpchev { font-size: 1.4em; color: var(--text-muted); transition: transform .2s; }
 .gq-helpcard.gq-open .gq-helpchev { transform: rotate(90deg); }
 @media (prefers-reduced-motion: reduce) { .gq-helpchev { transition: none; } }
+button.gq-daystep { all: unset; box-sizing: border-box; flex: 1 1 0; min-width: 0; min-height: 32px; text-align: center; padding: 2px 0 4px; font-size: var(--font-ui-smaller); line-height: 1.4; color: #1a9850; border-bottom: 3px solid #1a9850; cursor: pointer; }
+button.gq-daystep:hover { background: var(--background-modifier-hover); }
+button.gq-daystep:focus-visible { outline: 2px solid var(--interactive-accent); outline-offset: 2px; border-radius: 4px; }
+button.gq-daystep.is-look { color: var(--text-normal); font-weight: 600; border-bottom-color: #1a9850; background: var(--background-modifier-hover); }
+.gq-cv-look { animation: gq-fadein .2s ease; }
+@media (prefers-reduced-motion: reduce) { .gq-cv-look { animation: none; } }
+@keyframes gq-fadein { from { opacity: 0; } to { opacity: 1; } }

@@ -45,6 +45,11 @@ Two ways the course reaches outside the classroom: the Teach Yourself audio for 
 > | [[L25 Christ is risen and the pharmacy-student|L25 Christ is risen and the pharmacy]] | 05.04 Conversation 1 · 05.06 Conversation 2 (replay Unit 5 and shadow it) |
 > | [[L26 Capstone and celebration-student|L26 Capstone and celebration]] | Student's choice: replay a favourite conversation from Units 1-10 and perform it |
 
+> [!note]- Intermediate: Complete Greek (optional, if you have the book)
+> **Complete Greek** by Aristarhos Matsukas (Teach Yourself, 2019) is the next book after Beginners' Greek: 12 units, A1 to about B1/B2. The book is sold separately; its audio is free in the same Teach Yourself Library app ([Complete Greek audio](https://library.teachyourself.com/id004325540/Complete-Greek-free-resources)).
+> - Each intermediate lesson has a Complete Greek box naming the unit with the same theme.
+> - Lesson 16 points to revision tests 1 and 2, and lesson 26 to revision test 3. The answer key is on page 220.
+> - No book? Skip the box, or just play the audio.
 
 > [!tip]- News minute: Greek in the news (5 minutes, optional)
 > Once a week, at the start of the warm-up:

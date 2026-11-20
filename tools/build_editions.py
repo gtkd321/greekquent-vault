@@ -2,7 +2,7 @@
 """Build the two student editions from master/ (the one copy you edit).
 Usage: build_editions.py <master folder> <intermediate out> <beginner out>
 Intermediate: Beginner and Intermediate scripts, with a switch between them. Published at the repo root (vault/, manifest.json).
-Beginner: Beginner scripts only. Published in beginner/ (beginner/vault/, beginner/manifest.json).
+Beginner: the one student app (web). Same pages as Intermediate; each lesson has a More button for its longer scene. Published in beginner/.
 Neither has kid material; the Greekquent Kids vault is built from master/ by build_kids.py."""
 import sys, os, re, shutil, json
 src, out_i, out_b = sys.argv[1:4]
@@ -42,21 +42,19 @@ def no_kid(rel, t):
     return t
 def callout_out(t, title_start):
     return re.sub(r'\n> \[![a-z]+\]-? ?' + re.escape(title_start) + r'[^\n]*(\n>[^\n]*)*\n?', '\n', t)
-def no_int(rel, t):
+def one_app(rel, t):
+    # One student app: every lesson page has a More button for its longer scene (the plugin draws it), so the
+    # "Want more?" line goes, and the lesson list shows the longer scene as a column, not a separate track.
     t = no_kid(rel, t)
-    t = re.sub(r'\n- Intermediate: [^\n]*', '', t)
     t = re.sub(r'\nWant more\? \[\[I\d\d [^\]]*\|Intermediate scene\]\]\n', '\n', t)
     t = re.sub(r'\[\[I\d\d [^\]]*\|Intermediate scene\]\] · ', '', t)
     if rel == 'Scripts/01 Lesson Scripts.md':
-        t = drop_col(drop_col(t, 'Intermediate'), 'Beginner')
-        t = t.replace(' **Intermediate** is a longer scene on the same theme.', '')
-    if rel == 'Extras/Handouts/00 Which file is which-student.md':
-        t = re.sub(r'\n> - \*\*Intermediate:\*\*[^\n]*', '', t)
-        t = callout_out(t, 'Complete Greek')
-    if rel == 'Extras/05 Listening and News.md': t = callout_out(t, 'Intermediate: Complete Greek')
+        t = drop_col(t, 'Beginner')
+        t = t.replace('| Intermediate |', '| Longer scene |', 1)
+        t = t.replace(' **Intermediate** is a longer scene on the same theme.', ' **Longer scene** is the same lesson with more Greek; the More button on each lesson opens it.')
     return t
-copy(out_i); edit(out_i, no_kid)
-copy(out_b); shutil.rmtree(os.path.join(out_b, 'Scripts', 'Intermediate')); edit(out_b, no_int)
+copy(out_i); edit(out_i, one_app)
+copy(out_b); edit(out_b, one_app)
 json.dump({'edition': 'beginner'}, open(os.path.join(out_b, '.obsidian', 'greekquent-edition.json'), 'w'))
 for o in (out_i, out_b):
     left = []
@@ -64,7 +62,7 @@ for o in (out_i, out_b):
         for f in fs:
             if f.endswith('.md'):
                 t = open(os.path.join(d, f), encoding='utf-8').read()
-                if re.search(r'\[\[K\d\d ', t) or (o == out_b and re.search(r'\[\[I\d\d ', t)): left.append(os.path.relpath(os.path.join(d, f), o))
+                if re.search(r'\[\[K\d\d ', t): left.append(os.path.relpath(os.path.join(d, f), o))
     print(o, 'left-over links:', left[:5], len(left))
 # Beginner's What's New leaves out the Beginner/Intermediate switch line.
 wn = os.path.join(out_b, 'Extras', "What's New.md")

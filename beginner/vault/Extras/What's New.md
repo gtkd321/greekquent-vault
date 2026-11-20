@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- 2026-11-19zz · One app, with a More button
+> Greekquent is one app now. There is no Beginner or Intermediate switch. Every lesson opens at its usual length, and the blue More: longer scene button at the top opens the same lesson with more Greek (the Complete Greek dialogues are there too). Shorter scene brings you back. The old Intermediate web address sends you to this app and brings your work along on the same phone and browser. The lesson's side panel button is now called Extras.
+
 > [!tip]- 2026-11-19zy · Sound help and Android fixes
 > Sound is more reliable on Android. If the voice gets stuck after the app was in the background, it now tries once more on its own. The app picks a Greek voice that lives on the phone first, so it works offline and starts faster. Links opened inside GroupMe, Facebook or Gmail can't speak, and the app now says so and shows how to open the page in Chrome. Options, then Sound help, has a sound check: it shows whether this phone has a Greek voice, tests the voice and a beep, and copies the details to paste in Ask the class.
 

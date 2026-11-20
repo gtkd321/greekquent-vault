@@ -168,7 +168,6 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I17 Summer plans a month in Greece-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[σήμερα]] (today) · [[έχω]] (I have) · [[δουλειά|η δουλειά]] (work, job) · [[αύριο]] (tomorrow) · [[θα]] (will (future particle)) · [[ώρα|η ώρα]] (hour, time) · [[θέλω]] (I want) · [[να]] (to (verb particle)) · [[βλέπω]] (I see) · [[ένας, μία, ένα]] (a, one) · [[ταινία|η ταινία]] (film, movie) · [[δουλεύω]] (I work) · [[πάω]] (I go) · [[σε]] (in, at, to) · [[θάλασσα|η θάλασσα]] (sea) · [[ο, η, το]] (the) · [[φίλος|ο φίλος]] (friend) · [[μου]] (me, my) · [[κάνω]] (I do, I make) · [[βόλτα|η βόλτα]] (walk, stroll) · [[τι]] (what) · [[Σάββατο|το Σάββατο]] (Saturday) · [[Κυριακή|η Κυριακή]] (Sunday) · [[ναι]] (yes) · [[όχι]] (no) · [[δεν]] (not) · [[πάμε]] (let's go) · [[τρώω]] (I eat) · [[μαζί]] (together) · [[Σαββατοκύριακο|το Σαββατοκύριακο]] (weekend) · [[εσύ]] (you (singular)) · [[χωριό|το χωριό]] (village) · [[γιαγιά|η γιαγιά]] (grandmother) · [[ωραία]] (nice(ly), great) · [[είμαι]] (I am) · [[εδώ]] (here) · [[Δευτέρα|η Δευτέρα]] (Monday) · [[εντάξει]] (okay) · [[με]] (with) · [[αλλά]] (but) · [[παιδί|το παιδί]] (child) · [[και]] (and) · [[μετά]] (after) · [[έρχομαι]] (I come) · [[μπορώ]] (I can) · [[άλλος]] (other) · [[τέλεια]] (perfect(ly)) · [[ψάρι|το ψάρι]] (fish) · [[πολύ]] (very, a lot) · [[καλός]] (good) · [[επίσης]] (also)

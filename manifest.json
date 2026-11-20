@@ -1,5 +1,5 @@
 {
-"release": "2026-11-19zy",
+"release": "2026-11-19zz",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -42,11 +42,11 @@
 "size": 95503
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "2c77b9d87e4aff2baf62aec44e1dfcbe8028e78988d276db160f1027539a9620",
-"size": 555215
+"sha256": "c8a42dac418da560b870a2fdbe36e2abfc7877ca95b183900d51e8cb6dcdeb4d",
+"size": 556070
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "dcd6baf9f30ec7963d31fa8ad26c5b385ba9f789784d37299447d82a74876b0d",
+"sha256": "225671a895368d6809e865e80af4618c18011128e534c713040cc911f31e70c7",
 "size": 375
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -150,8 +150,8 @@
 "size": 2494
 },
 "Extras/What's New.md": {
-"sha256": "f62d6ce805e57372520ad0fadbe362490b78032ffec7415a6de1d2323303249a",
-"size": 50545
+"sha256": "8d6f308fbaca4d3e5cb4edbac8346263276c10f4f6046a95e5583ee9eb7fb264",
+"size": 51045
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "7d127efb81465587f9a1780242472f902f585d1b5c9ebee0a954bcc778574f08",
@@ -402,112 +402,112 @@
 "size": 9543
 },
 "Scripts/01 Lesson Scripts.md": {
-"sha256": "bf8c75680343c21a22c4268b4d0648aad06452cf0db9c944c07c45e16c6f408a",
-"size": 6883
+"sha256": "a6dd87d5dd47dbedb92bf895b6903c47a9d08053e71c01d70588fc764025250b",
+"size": 5680
 },
 "Scripts/Beginner/L01 What's in your bag-student.md": {
-"sha256": "03fa1c4aee64116ba2ecf98d9285a14318e5a1ede4b73a7c382c20c6592f1cce",
-"size": 9566
+"sha256": "851abe90e7938cdc248d76f0eca8accc8d8dbafbe6c53c300908965de1ddb95b",
+"size": 9475
 },
 "Scripts/Beginner/L02 Guest at a Greek home-student.md": {
-"sha256": "4856a09962093681c55cccd7fc2e1290a4078508dc4621948e0941bb4ef4ebd9",
-"size": 10506
+"sha256": "dd2c8a949d4f89c4a629242f75434c4963de95bcddf17fbde74df439b97ba761",
+"size": 10410
 },
 "Scripts/Beginner/L03 Making plans-student.md": {
-"sha256": "93c5821aa9e7ea9f67386968d94c6b241b08956031cd750e40b8ffa84d5068e2",
-"size": 10808
+"sha256": "fb86113f9dfdab56f7963b5d69c2866a9d15d3654b45adc33b72c4c6c45a0fec",
+"size": 10730
 },
 "Scripts/Beginner/L04 Postcards and the cafe-student.md": {
-"sha256": "4f061fb8c069b7a2e8b8513070067defe1315f710a389fc55f79aff4ac07534d",
-"size": 11355
+"sha256": "6faf44998a4cb4ab78dca3f115df57b84449993599123385fe0b814d67c07937",
+"size": 11274
 },
 "Scripts/Beginner/L05 Lost items and the shop-student.md": {
-"sha256": "c43dd89015bbd98b27eceb2455d63621ad102ddf6d77ed11acaf3286ab366837",
-"size": 13339
+"sha256": "e8dd10b002a720eaaab5ecf884720b232ac073fe2dfbc4eb2df5b9480b6b1cf2",
+"size": 13242
 },
 "Scripts/Beginner/L06 Coffee plans at the kafeneio-student.md": {
-"sha256": "ec808fbcd4fa956e57065a7444d382690095b8c9f8992afeb4d00aa08e1df16f",
-"size": 11226
+"sha256": "7d759a0cf27bbce69dae3c00388ac9f3483f6ffebf2b783a78874c853bc6bbf5",
+"size": 11129
 },
 "Scripts/Beginner/L07 Introductions and Christmas-student.md": {
-"sha256": "5ba8237feeb942f68e0d14fdba471748a91fc55521c5ff55f9dee32519c694ef",
-"size": 12000
+"sha256": "5b800469e2d1aad14bb286b5684350dd1a1ceb7758e5669f67e67e588ef6c25b",
+"size": 11903
 },
 "Scripts/Beginner/L08 Vasilopita - who has the coin-student.md": {
-"sha256": "5920aecf040b62cf1ed00ae091f0c50e152a101288238b8b65ce3748632401f1",
-"size": 10718
+"sha256": "e378472a3ae8f686407cbbba832f07ae687008c7c2a08b3fc2007a1d604b6fd7",
+"size": 10621
 },
 "Scripts/Beginner/L09 My family-student.md": {
-"sha256": "ddde38b9e0f1815c3648d4cc0b410fee6cb95295475d9cf436d9029e1cfe75f7",
-"size": 12580
+"sha256": "82fd1f7eaf0ffda710fc5288a26b5b10f3b70987ca8eace6bf708557a2b6ec15",
+"size": 12498
 },
 "Scripts/Beginner/L10 My day-student.md": {
-"sha256": "bae0dfeebd1228dc5833758e4a76a00b061a9a5fce83d1a36e007d20103af069",
-"size": 11929
+"sha256": "68457116ff9d7fe510013cb606ec2c71daba28905624f8c473f7dfe3e6cf2aeb",
+"size": 11848
 },
 "Scripts/Beginner/L11 Going places-student.md": {
-"sha256": "826eaae5ee17bd96bebe57ba3650d41e55c00ac2a14f335247fdb106970062d5",
-"size": 11850
+"sha256": "0ff47180a816ade939724a95ea54ca1dc62eaf0c4387f48170f20c24860c70f0",
+"size": 11764
 },
 "Scripts/Beginner/L12 Laiki street market-student.md": {
-"sha256": "1a81be36e8b87abd8a656220ff90fbe58a1f2d57733cd3703a3704ee6b684d95",
-"size": 12218
+"sha256": "c9f3cb4b2d76717e84552e073a8cd2134ac00a86cfd7c1335c931b1966905010",
+"size": 12125
 },
 "Scripts/Beginner/L13 At the taverna-student.md": {
-"sha256": "42cbd9c8c175285c79ddb00ee08c53ffbac6927a790fd5110c2996e22a0a3220",
-"size": 12220
+"sha256": "7312bbc04838bb4a9f132c14f7b2e937394ae7b4005368d5e62d5d6cbcd31c26",
+"size": 12139
 },
 "Scripts/Beginner/L14 Time and days-student.md": {
-"sha256": "b6e352fe2b65c0ec2e7182b1234867c7bd533259b89562d992e280ff4f717099",
-"size": 11635
+"sha256": "3e226f196af033c5adf25a1d344df0a59f188938c42a63108b5f4ed08cf65e36",
+"size": 11549
 },
 "Scripts/Beginner/L15 Do you speak Greek-student.md": {
-"sha256": "ff234213fed5504d1c4361af4d31ab001f2aab9b29fdda9c0ab0edbd90a61063",
-"size": 13053
+"sha256": "5b3c3d1d505cb78f3146a78469e2408a93a6b2b55fd0d5b064eccadcf89b7b74",
+"size": 12978
 },
 "Scripts/Beginner/L16 Mid-year review-student.md": {
-"sha256": "c55c9c534b9b6e8a3269cf713745107fd7afe6c31e0f3a4472601ef1accd69b4",
-"size": 12900
+"sha256": "671c6200efc94f83bfbd11ec4e824d54ad9711fa89a589b810b6e93f0a164a94",
+"size": 12814
 },
 "Scripts/Beginner/L17 Weekend plans-student.md": {
-"sha256": "5c3698dd4fca169c377fbf72afcca476ebe281488259d0fe9b7928dcdf9b1b68",
-"size": 12773
+"sha256": "acaa27a0d749eca0fb8015c25a24c1e1792f4111503fb3b2e2007f31be2d40c9",
+"size": 12696
 },
 "Scripts/Beginner/L18 Clean Monday kites and weather-student.md": {
-"sha256": "e5a558a6e7fba7b8c7dc8d0b7c36681c12a7379939473ac4d8b3f3bf8c675d33",
-"size": 11625
+"sha256": "857290fec25e4146de529941512ded002fddcb9e5e2a080690786af4e4328325",
+"size": 11541
 },
 "Scripts/Beginner/L19 March 25th and directions-student.md": {
-"sha256": "0c0c2267e89ab3899d3a16ed2468b831093fac48bfb93ee33d939202e042f8a9",
-"size": 12401
+"sha256": "31d62f9e4c833ad2591fc68553c72bd303fb6b236bc41e4b47809e9e3f3919c0",
+"size": 12309
 },
 "Scripts/Beginner/L20 My house-student.md": {
-"sha256": "9d1d25e6cfb8ae277539f0c9d3a85ee46f7e02c0c37cda7b5e7b4dfeba299b76",
-"size": 13207
+"sha256": "34d7a73b90cdc1b99b95931fe2d4c655b7ee53cc8fd319d98e77f561edb94517",
+"size": 13122
 },
 "Scripts/Beginner/L21 Likes and hobbies-student.md": {
-"sha256": "7a8e8a2f72e55a054c5fdc7e4adec82effabcf9225f879599ed5401ea96876f6",
-"size": 12466
+"sha256": "9e79d887504a7ab91410528b41481f1a47fe54f03d344d1bef5e7ed3b0d7aa7a",
+"size": 12403
 },
 "Scripts/Beginner/L22 Yesterday I wanted-student.md": {
-"sha256": "86ac15190d1a86805ec30faacc07c40e7ea42ed6ddac4f5741b9b14eb4888f41",
-"size": 13326
+"sha256": "94e7fdeaa21bc22b795b5fdc13ef776fbca6b0c735cc6b2d008624a99dc27ed7",
+"size": 13262
 },
 "Scripts/Beginner/L23 Last weekend-student.md": {
-"sha256": "4a8a2fd577e6fc56d2386a1864382fa2bc5349dc866a2ab3b16789e97bfeaf23",
-"size": 12521
+"sha256": "e6e1edd18a7db00abb0bda8c9ed0fd3ae05c231e28819fb3f2624f7e03d03e46",
+"size": 12444
 },
 "Scripts/Beginner/L24 Holy Week-student.md": {
-"sha256": "00a0e43f2141f584bf78b027eaff932e123de1df88463ea1d6d1fe4d7f88de5b",
-"size": 11623
+"sha256": "7dd83dd926b4a42bdbf462a68d6192bc4f74ad4347e7e4dd59447760f0504cf1",
+"size": 11556
 },
 "Scripts/Beginner/L25 Christ is risen and the pharmacy-student.md": {
-"sha256": "4633ac757ed07c594928de2bca5de9b4f2642c8a31b0e6742c86b94452b65ffe",
-"size": 12325
+"sha256": "4d542bdc81efa37ab340b78acffc1809fe8c299377b15202b3a4932dbc967435",
+"size": 12245
 },
 "Scripts/Beginner/L26 Capstone and celebration-student.md": {
-"sha256": "cd9f585fd1653a3777f3c640b1b6518a0a9f06ce8d50265afee45af7e033ddd1",
-"size": 13134
+"sha256": "e9cb0655db277b639169d4e5b18a59696a08f45a13d3d363434219f43d0f6bd6",
+"size": 13065
 },
 "Scripts/Intermediate/I01 Getting to know someone at a community event-student.md": {
 "sha256": "07de0706d97ce112dcffbd88c06a245c1ed284f90813837ac3adede2a0eed361",

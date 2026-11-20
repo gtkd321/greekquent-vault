@@ -181,7 +181,6 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I22 Childhood summers-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[έχω]] (I have) · [[θέλω]] (I want) · [[μπορώ]] (I can) · [[βλέπω]] (I see) · [[είμαι]] (I am) · [[σήμερα]] (today) · [[ώρα|η ώρα]] (hour, time) · [[χθες]] (yesterday) · [[δεν]] (not) · [[αλλά]] (but) · [[να]] (to (verb particle)) · [[πάω]] (I go) · [[σε]] (in, at, to) · [[θάλασσα|η θάλασσα]] (sea) · [[πού]] (where) · [[σπίτι|το σπίτι]] (house, home) · [[Ελλάδα|η Ελλάδα]] (Greece) · [[εσύ]] (you (singular)) · [[πολύς]] (much, many) · [[δουλειά|η δουλειά]] (work, job) · [[εγώ]] (I) · [[και]] (and) · [[ο, η, το]] (the) · [[βράδυ|το βράδυ]] (evening) · [[ένας, μία, ένα]] (a, one) · [[ταινία|η ταινία]] (film, movie) · [[γεια]] (hi, bye) · [[σου]] (you, your) · [[πολύ]] (very, a lot) · [[κουρασμένος]] (tired) · [[τηλεόραση|η τηλεόραση]] (television) · [[ναι]] (yes) · [[αυτοκίνητο|το αυτοκίνητο]] (car) · [[έτσι]] (so, like this) · [[τώρα]] (now) · [[πάμε]] (let's go) · [[μαζί]] (together) · [[Σάββατο|το Σάββατο]] (Saturday) · [[ευχαριστώ]] (thank you) · [[όταν]] (when) · [[παιδί|το παιδί]] (child)

@@ -176,7 +176,6 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I15 Talking about learning Greek-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[μιλάω]] (I speak, I talk) · [[αγγλικός]] (English) · [[λίγος]] (little, few) · [[ελληνικά|τα ελληνικά]] (Greek (language)) · [[ναι]] (yes) · [[δεν]] (not) · [[καταλαβαίνω]] (I understand) · [[πιο]] (more) · [[σιγά]] (slowly, quietly) · [[παρακαλώ]] (please; you're welcome) · [[μπορώ]] (I can) · [[να]] (to (verb particle)) · [[ο, η, το]] (the) · [[λέω]] (I say, I tell) · [[ξανά]] (again) · [[τι]] (what) · [[σημαίνει]] (it means) · [[πώς]] (how) · [[σε]] (in, at, to) · [[ξέρω]] (I know) · [[καλημέρα]] (good morning) · [[θέλω]] (I want) · [[μαθαίνω]] (I learn) · [[γιατί]] (why, because) · [[οικογένεια|η οικογένεια]] (family) · [[μου]] (me, my) · [[είμαι]] (I am) · [[από]] (from, by) · [[Ελλάδα|η Ελλάδα]] (Greece) · [[συγγνώμη]] (sorry, excuse me) · [[εσείς]] (you (plural/formal)) · [[πού]] (where) · [[και]] (and) · [[πόσο]] (how much) · [[καιρός|ο καιρός]] (weather, time) · [[Αμερική|η Αμερική]] (America) · [[λίγο]] (a little) · [[μπράβο]] (well done) · [[ωραία]] (nice(ly), great) · [[τρία]] (three) · [[μήνας|ο μήνας]] (month) · [[πολύ]] (very, a lot) · [[καλά]] (well, fine) · [[φούρνος|ο φούρνος]] (bakery, oven) · [[ευχαριστώ]] (thank you) · [[εκεί]] (there)

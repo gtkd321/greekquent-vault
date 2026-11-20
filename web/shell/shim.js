@@ -502,8 +502,27 @@ G.restore = () => {
   i.click();
 };
 
+// ---------- One app: bring work over from the Intermediate web app ----------
+// The Intermediate web app is folded into this one (same address family, same phone, same browser storage).
+// Once, its notes, colors and settings are copied in. A note already here is kept unless the Intermediate copy is longer,
+// the same rule as Restore my work. Nothing is deleted from either side. (Names are split so the build does not rename them.)
+G.mergeOld = () => {
+  const ME = 'gq' + 'w:', OLD = 'gq' + 'i:';
+  if (OV !== ME + 'f:' || ls.getItem(ME + 'merged-' + 'gqi')) return 0;
+  let n = 0;
+  try {
+    const of = OLD + 'f:';
+    for (let i = 0; i < ls.length; i++) { const k = ls.key(i); if (!k || !k.startsWith(of)) continue; const p = k.slice(of.length), t = ls.getItem(k), mine = ls.getItem(OV + p); if (typeof t !== 'string') continue; if (mine === null || (mine !== t && t.length > mine.length)) { ls.setItem(OV + p, t); n++; } }
+    let od = []; try { od = JSON.parse(ls.getItem(OLD + 'dirs') || '[]'); } catch (e) {} for (const x of od) addDir(x);
+    const dd = ls.getItem(OLD + 'data'), md = ls.getItem(DATAK); if (dd && (!md || dd.length > md.length)) ls.setItem(DATAK, dd);
+    ls.setItem(ME + 'merged-' + 'gqi', new Date().toISOString());
+  } catch (e) {}
+  return n;
+};
+
 // ---------- Start ----------
 G.start = async function (bundle, pluginSrc) {
+  const moved = G.mergeOld(); if (moved) setTimeout(() => { try { new Notice(`Brought over ${moved} note${moved === 1 ? '' : 's'} from Greekquent Intermediate. Everything is in this one app now.`); } catch (e) {} }, 4000);
   for (const [p, t] of Object.entries(bundle.notes)) BASE[p] = t;
   STATIC = new Set(bundle.static || []);
   G.version = bundle.version;

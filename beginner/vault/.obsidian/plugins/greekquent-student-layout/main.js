@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-19zy';
+const VAULT_RELEASE = '2026-11-19zz';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -5479,7 +5479,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     });
   }
   // ---------- Beginner / Intermediate scripts (Intermediate edition only) ----------
-  showSwitch() { return !this.isTeacher && !this.isKids && this.edition !== 'beginner' && !!this.app.vault.getAbstractFileByPath('Scripts/Intermediate'); }
+  // One app now: no Beginner / Intermediate switch. Each lesson has a More button for its longer scene (lessonTop).
+  showSwitch() { return false; }
+  // The same lesson at the other length: L05 <-> I05.
+  otherScene(p) {
+    const m = String(p || '').match(/^Scripts\/(Beginner|Intermediate)\/([LI])(\d\d) /); if (!m) return null;
+    const want = (m[2] === 'L' ? 'I' : 'L') + m[3] + ' ', dir = m[2] === 'L' ? 'Scripts/Intermediate/' : 'Scripts/Beginner/';
+    const g = this.app.vault.getMarkdownFiles().find(x => x.path.startsWith(dir) && x.basename.startsWith(want) && /-student$/.test(x.basename));
+    return g ? { f: g, longer: m[2] === 'L' } : null;
+  }
   scriptSwitch(parent) {
     const sw = parent.createDiv({ cls: 'gq-sw', attr: { role: 'radiogroup', 'aria-label': 'Which scripts' } });
     for (const [k, label] of [['beginner', 'Beginner'], ['intermediate', 'Intermediate']]) {
@@ -5562,7 +5570,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const sw = this.showSwitch(); if (!sw && !lesson) return;
     const row = createDiv('gq-ltop'); h1.after(row);
     if (sw) this.scriptSwitch(row);
-    if (lesson) { const b = row.createEl('button', { text: 'More on this lesson ›', cls: 'gq-mini' }); b.onclick = () => this.showMore(); this.lessonJump(row, p); }
+    if (lesson) {
+      const o = this.isTeacher ? null : this.otherScene(p);
+      if (o) { const lb = row.createEl('button', { text: o.longer ? 'More: longer scene ›' : '‹ Shorter scene', cls: o.longer ? 'gq-mini mod-cta' : 'gq-mini' }); lb.onclick = async () => { const leaf = this.mainLeaf(false); await leaf.openFile(o.f, { state: { mode: 'preview' } }); }; }
+      const b = row.createEl('button', { text: 'Extras ›', cls: 'gq-mini' }); b.onclick = () => this.showMore(); this.lessonJump(row, p);
+    }
   }
   // Lesson tables with three or more columns stack into one card per row on a phone (CSS does the stacking).
   stackTables(el, ctx) {

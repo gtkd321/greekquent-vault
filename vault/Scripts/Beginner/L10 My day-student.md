@@ -173,7 +173,6 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I10 A normal day weekdays and weekends-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[ο, η, το]] (the) · [[πρωί|το πρωί]] (morning) · [[δουλεύω]] (I work) · [[είμαι]] (I am) · [[σε]] (in, at, to) · [[σπίτι|το σπίτι]] (house, home) · [[βράδυ|το βράδυ]] (evening) · [[βλέπω]] (I see) · [[τηλεόραση|η τηλεόραση]] (television) · [[τι]] (what) · [[κάνω]] (I do, I make) · [[θέλω]] (I want) · [[να]] (to (verb particle)) · [[αλλά]] (but) · [[δεν]] (not) · [[μπορώ]] (I can) · [[πάντα]] (always) · [[από]] (from, by) · [[εσύ]] (you (singular)) · [[ναι]] (yes) · [[όχι]] (no) · [[μετά]] (after) · [[και]] (and) · [[γιατί]] (why, because) · [[έχω]] (I have) · [[δουλειά|η δουλειά]] (work, job) · [[δύο]] (two) · [[παιδί|το παιδί]] (child) · [[πίνω]] (I drink) · [[καφές|ο καφές]] (coffee) · [[ένας, μία, ένα]] (a, one) · [[διάλειμμα|το διάλειμμα]] (break, pause) · [[εγώ]] (I) · [[διαβάζω]] (I read, I study) · [[μαζί]] (together) · [[τέλεια]] (perfect(ly))

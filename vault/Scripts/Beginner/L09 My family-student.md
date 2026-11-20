@@ -167,7 +167,6 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I09 The extended family who lives where-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[αυτός]] (he, this) · [[είμαι]] (I am) · [[ο, η, το]] (the) · [[μητέρα|η μητέρα]] (mother) · [[μου]] (me, my) · [[πατέρας|ο πατέρας]] (father) · [[γιαγιά|η γιαγιά]] (grandmother) · [[παππούς|ο παππούς]] (grandfather) · [[αδερφός|ο αδερφός]] (brother) · [[αδερφή|η αδερφή]] (sister) · [[ένας, μία, ένα]] (a, one) · [[φωτογραφία|η φωτογραφία]] (photograph) · [[έχω]] (I have) · [[ή]] (or) · [[παιδί|το παιδί]] (child) · [[δύο]] (two) · [[θέλω]] (I want) · [[βλέπω]] (I see) · [[μπορώ]] (I can) · [[εμείς]] (we) · [[βιβλίο|το βιβλίο]] (book) · [[εσείς]] (you (plural/formal)) · [[αυτοί]] (they) · [[νερό|το νερό]] (water) · [[εγώ]] (I) · [[ναι]] (yes) · [[όχι]] (no) · [[δεν]] (not) · [[τι]] (what) · [[γλυκός]] (sweet) · [[οικογένεια|η οικογένεια]] (family) · [[ωραία]] (nice(ly), great) · [[ποιος]] (who, which) · [[και]] (and) · [[αλλά]] (but) · [[σου]] (you, your) · [[τρία]] (three) · [[σε]] (in, at, to) · [[Ελλάδα|η Ελλάδα]] (Greece)

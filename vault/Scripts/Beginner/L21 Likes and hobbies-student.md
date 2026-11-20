@@ -156,7 +156,6 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I21 Hobbies in depth-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[μου αρέσει]] (I like it) · [[ο, η, το]] (the) · [[καφές|ο καφές]] (coffee) · [[θάλασσα|η θάλασσα]] (sea) · [[μου]] (me, my) · [[ελιά|η ελιά]] (olive, olive tree) · [[δεν]] (not) · [[κρύο|το κρύο]] (cold) · [[σου]] (you, your) · [[μουσική|η μουσική]] (music) · [[ναι]] (yes) · [[όχι]] (no) · [[του]] (him, his) · [[της]] (her, hers) · [[σε]] (in, at, to) · [[να]] (to (verb particle)) · [[τρέχω]] (I run) · [[μαγειρεύω]] (I cook) · [[διαβάζω]] (I read, I study) · [[θέλω]] (I want) · [[πέντε]] (five) · [[χιλιόμετρο|το χιλιόμετρο]] (kilometer) · [[μπορώ]] (I can) · [[πάω]] (I go) · [[πολύ]] (very, a lot) · [[ελληνικά|τα ελληνικά]] (Greek (language)) · [[εσύ]] (you (singular)) · [[κάθε]] (every) · [[μέρα|η μέρα]] (day) · [[μπράβο]] (well done) · [[τι]] (what) · [[κάνω]] (I do, I make) · [[ελληνικός]] (Greek (adj.)) · [[τραγούδι|το τραγούδι]] (song) · [[αλλά]] (but) · [[καταλαβαίνω]] (I understand) · [[λόγος|ο λόγος]] (reason, speech) · [[εγώ]] (I) · [[ταινία|η ταινία]] (film, movie) · [[τρώω]] (I eat) · [[τώρα]] (now) · [[έλα]] (come (on)) · [[Σάββατο|το Σάββατο]] (Saturday) · [[θα]] (will (future particle))

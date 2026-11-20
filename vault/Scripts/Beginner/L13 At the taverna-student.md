@@ -177,7 +177,6 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I13 A taverna with a vegetarian friend-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[τρώω]] (I eat) · [[ψωμί|το ψωμί]] (bread) · [[πίνω]] (I drink) · [[νερό|το νερό]] (water) · [[τι]] (what) · [[ο, η, το]] (the) · [[πρωί|το πρωί]] (morning) · [[καφές|ο καφές]] (coffee) · [[σαλάτα|η σαλάτα]] (salad) · [[ψάρι|το ψάρι]] (fish) · [[κρέας|το κρέας]] (meat) · [[πατάτα|η πατάτα]] (potato) · [[κρασί|το κρασί]] (wine) · [[μπίρα|η μπίρα]] (beer) · [[ναι]] (yes) · [[όχι]] (no) · [[δεν]] (not) · [[θέλω]] (I want) · [[θα]] (will (future particle)) · [[ένας, μία, ένα]] (a, one) · [[καλή όρεξη]] (enjoy your meal) · [[πολύ]] (very, a lot) · [[λογαριασμός|ο λογαριασμός]] (bill, account) · [[παρακαλώ]] (please; you're welcome) · [[καλησπέρα]] (good evening) · [[έχω]] (I have) · [[σήμερα]] (today) · [[και]] (and) · [[άτομο|το άτομο]] (person, individual) · [[δύο]] (two) · [[έρχομαι]] (I come) · [[ποτήρι|το ποτήρι]] (glass) · [[εγώ]] (I) · [[να]] (to (verb particle)) · [[ωραία]] (nice(ly), great) · [[είμαι]] (I am) · [[αμέσως]] (immediately)

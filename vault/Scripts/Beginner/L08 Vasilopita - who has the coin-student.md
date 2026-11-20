@@ -158,7 +158,6 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I08 New Year's call who found the coin and resolutions-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[ένας, μία, ένα]] (a, one) · [[δύο]] (two) · [[τρία]] (three) · [[τέσσερα]] (four) · [[πέντε]] (five) · [[έξι]] (six) · [[εννιά]] (nine) · [[δέκα]] (ten) · [[ποιος]] (who, which) · [[έχω]] (I have) · [[ο, η, το]] (the) · [[κλειδί|το κλειδί]] (key) · [[εγώ]] (I) · [[κινητό|το κινητό]] (mobile phone) · [[μου]] (me, my) · [[κομμάτι|το κομμάτι]] (piece) · [[για]] (for, about) · [[σπίτι|το σπίτι]] (house, home) · [[καλός]] (good) · [[χρονιά|η χρονιά]] (year) · [[θέλω]] (I want) · [[ναι]] (yes) · [[ευχαριστώ]] (thank you) · [[δεν]] (not) · [[εσύ]] (you (singular)) · [[μπράβο]] (well done) · [[γιαγιά|η γιαγιά]] (grandmother) · [[και]] (and)

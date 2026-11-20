@@ -156,7 +156,6 @@ Make the gesture every time you say the phrase. It helps the phrase stick.
 >
 > **Anki (free):** say the answer out loud before you flip the card, and press Again until each card is right once that day.
 
-Want more? [[I18 The forecast and Clean Monday customs-student|Intermediate scene]]
 
 > [!abstract]- Word links
 > [[κάνω]] (I do, I make) · [[κρύο|το κρύο]] (cold) · [[ζέστη|η ζέστη]] (heat) · [[βρέχει]] (it is raining) · [[έχω]] (I have) · [[ήλιος|ο ήλιος]] (sun) · [[αέρας|ο αέρας]] (air, wind) · [[τι]] (what) · [[καιρός|ο καιρός]] (weather, time) · [[σήμερα]] (today) · [[ο, η, το]] (the) · [[βλέπω]] (I see) · [[είμαι]] (I am) · [[ψηλά]] (high, up) · [[θέλω]] (I want) · [[ελιά|η ελιά]] (olive, olive tree) · [[μπορώ]] (I can) · [[να]] (to (verb particle)) · [[μου]] (me, my) · [[ναι]] (yes) · [[σου]] (you, your) · [[καλός]] (good) · [[λίγο]] (a little) · [[αλλά]] (but) · [[τέλεια]] (perfect(ly)) · [[πάμε]] (let's go) · [[για]] (for, about) · [[πολύ]] (very, a lot) · [[μέρα|η μέρα]] (day) · [[ένας, μία, ένα]] (a, one) · [[μεγάλος]] (big, old (age)) · [[σε]] (in, at, to) · [[και]] (and) · [[δεν]] (not) · [[πειράζει]] (it matters, it bothers) · [[σπίτι|το σπίτι]] (house, home) · [[τώρα]] (now)

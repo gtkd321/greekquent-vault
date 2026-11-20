@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20m';
+const VAULT_RELEASE = '2026-11-20n';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -112,6 +112,14 @@ const say = w => {
   const u = new SpeechSynthesisUtterance(ttsFix(w)); u.lang = 'el-GR'; const v = greekVoice(); if (v) try { u.voice = v; } catch (e) {}
   speakU(u);
 };
+// Phones (iPhone most of all, some Android too) keep the voice locked until a tap speaks once. A word the app plays by itself,
+// like the first Listen question in a quiz, was then silent until Hear it again. The first tap anywhere speaks a silent blank,
+// which unlocks the voice for the rest of the visit. Nothing is heard.
+(() => { try {
+  if (typeof document === 'undefined' || !window.speechSynthesis || typeof SpeechSynthesisUtterance === 'undefined') return;
+  const wake = () => { ['touchend', 'click', 'keydown'].forEach(t => document.removeEventListener(t, wake, true)); try { const ss = window.speechSynthesis; if (ss.speaking || ss.pending) return; const u = new SpeechSynthesisUtterance(' '); u.volume = 0; u.lang = 'el-GR'; ss.speak(u); ss.getVoices(); } catch (e) {} };
+  ['touchend', 'click', 'keydown'].forEach(t => document.addEventListener(t, wake, true));
+} catch (e) {} })();
 // The same voice rules inside the games (Γιαγιά, Story Lines, buzzer, cousins): runs in the game's frame.
 // Greek voice off means quiet; no Greek voice tells the vault (it shows how to add one); a stuck Android voice gets one retry.
 function gqFrameVoice() {
@@ -5270,11 +5278,101 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const up = color === 'green' ? 0 : right, down = color === 'red' ? 0 : tried - right;
       const t = []; if (up) t.push(`${up} moved up to ${name[UP[color]]}`); if (down) t.push(`${down} moved down to ${name[DOWN[color]]}`);
       el.createDiv({ cls: 'gq-hint', text: t.length ? t.join('. ') + '.' : (tried ? 'Your colors stay the same.' : 'Go back to answer, or close.') });
-      const r = el.createDiv('gq-row'); const a = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); a.onclick = () => api.close();
+      const r = el.createDiv('gq-row'); const a = r.createEl('button', { text: 'Done', cls: tried ? '' : 'mod-cta' }); a.onclick = () => api.close();
+      // Go deeper: one more round that brings these words back with more of your colors, and asks you to make the Greek.
+      if (tried) { const d = r.createEl('button', { text: 'Go deeper', cls: 'mod-cta' }); d.onclick = () => { api.close(); setTimeout(() => this.quizDeep(qs, all, done), 450); }; }
     } });
     this.tourHit && this.tourHit('quiz');
     this.pop(`Quiz · ${{ red: 'Red', yellow: 'Yellow', green: 'Green' }[color]}`, steps, () => setTimeout(done, 400));
+  }  // Go deeper (after Quiz me). What the research on word learning points to, kept to one round:
+  // keep testing words you already got (Karpicke & Roediger 2008), one bigger mixed stack (Kornell 2009),
+  // a missed word comes back a few questions later until you get it (Rawson & Dunlosky), and making the Greek
+  // (say it, build it) over picking it (Teng & Xu 2025). Extra rounds in one sitting give less each time,
+  // so it stops at 30 words or 15 minutes and lets the days do the rest.
+  // Colors: the words from the first 10 already moved today, so here they are practice only. A new word's first answer counts.
+  quizDeep(seen, all, done) {
+    const mix = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const UP = { red: 'yellow', yellow: 'green', green: 'green' }, DOWN = { red: 'red', yellow: 'red', green: 'yellow' };
+    const done0 = new Set(seen.map(w => w.word)), of = w => this.colorOf(w.word);
+    const more = ['red', 'yellow', 'green'].flatMap(k => mix(all.filter(w => of(w) === k && !done0.has(w.word))));
+    const words = mix(seen.concat(more.slice(0, Math.max(0, 30 - seen.length))));
+    const canHear = !gqQuiet() && !noSpeech(), t0 = Date.now(), LIMIT = 15 * 60 * 1000;
+    const buildable = w => { const f = foldG(w.word); return /^[α-ω]{3,10}$/.test(f) ? f : null; };
+    const four = (w, key) => { const s = new Set([w[key]]), out = [w]; for (const o of mix(all)) { if (out.length >= 4) break; if (o[key] && !s.has(o[key])) { s.add(o[key]); out.push(o); } } return mix(out); };
+    const got = new Set(), counted = new Set(), tries = new Map(); let right1 = 0, moved = 0, prod = 0;
+    const steps = [];
+    const finish = (w, ok, step, api, el, note) => {
+      if (step.answered) return; step.answered = true;
+      const n = (tries.get(w.word) || 0) + 1; tries.set(w.word, n);
+      if (n === 1 && ok) right1++;
+      if (ok) { got.add(w.word); this.moAdd('recall', w.word); } else this.moAdd('try', w.word);
+      if (!done0.has(w.word) && !counted.has(w.word)) { counted.add(w.word); const c = of(w); if (c) { const nx = (ok ? UP : DOWN)[c]; if (nx !== c) { this.setColor(w.word, nx); moved++; } } }
+      // A miss comes back four questions on, up to three tries. Then it waits for another day.
+      if (!ok && n < 3) { const at = Math.min(steps.length - 1, steps.indexOf(step) + 5); steps.splice(at, 0, make(w, n)); }
+      const f = el.createDiv({ cls: 'gq-quiz-fb ' + (ok ? 'is-ok' : 'is-miss') }); f.appendText(ok ? 'Right. ' : (n < 3 ? 'Not yet. It comes back soon. ' : 'Not yet. ')); f.createSpan({ text: w.word, attr: { lang: 'el' } }); f.appendText(' · ' + w.english + (note || ''));
+      if (canHear) say(w.word);
+      setTimeout(() => { if (el.isConnected) api.next(); }, ok && !note ? 1100 : 2200);
+    };
+    // Each word starts with making the Greek. A second try steps back to picking, a third goes back to making it.
+    const make = (w, n) => {
+      const s = { label: 'Deeper' };
+      s.build = (el, api) => {
+        el.addClass('gq-quiz');
+        if (Date.now() - t0 > LIMIT && !s.answered) { el.createDiv({ cls: 'gq-hint', text: 'That is fifteen good minutes.' }); const b = el.createEl('button', { text: 'See how it went', cls: 'mod-cta' }); b.onclick = () => { steps.splice(steps.indexOf(s) + 1, steps.length - 2 - steps.indexOf(s)); api.next(); }; return; }
+        if (s.answered) { el.createDiv({ cls: 'gq-quiz-q', text: w.word, attr: { lang: 'el' } }); el.createDiv({ cls: 'gq-hint', text: w.english }); return; }
+        const f = buildable(w);
+        const kind = s.kind = s.kind || (n === 1 ? (canHear && (prod % 2) ? 'listen' : 'meaning') : (f && (prod++ % 2 || !canHear) ? 'build' : 'say'));
+        if (kind === 'say') {
+          el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek' }); el.createDiv({ cls: 'gq-quiz-q', text: w.english });
+          const r = el.createDiv('gq-row gq-quiz-say');
+          this.sayIt(r, w.word, w.word, 'Say it', () => finish(w, true, s, api, el));
+          const nb = r.createEl('button', { text: 'Not yet', cls: 'gq-mini' }); nb.onclick = () => finish(w, false, s, api, el);
+          return;
+        }
+        if (kind === 'build') {
+          // Build it: the letters of the word, mixed up. Tap them in order. Off by one letter, or two side by side swapped, still counts.
+          el.createDiv({ cls: 'gq-hint', text: 'Build it in Greek' }); el.createDiv({ cls: 'gq-quiz-q', text: w.english });
+          const out = el.createDiv({ cls: 'gq-quiz-built', attr: { lang: 'el', 'aria-live': 'polite' } }), tiles = el.createDiv({ cls: 'gq-quiz-tiles', attr: { lang: 'el' } });
+          let letters = mix([...f]); if (letters.join('') === f && f.length > 1) letters = letters.reverse();
+          const typed = [];
+          const draw = () => { out.setText(typed.map(x => x.ch).join('') || '\u00a0'); };
+          const check = () => {
+            const g = typed.map(x => x.ch).join(''); let ok = g === f, swap = false;
+            if (!ok) for (let i = 0; i < f.length - 1; i++) if (g === f.slice(0, i) + f[i + 1] + f[i] + f.slice(i + 2)) swap = true;
+            const close = !ok && (swap || near(g, f));
+            tiles.querySelectorAll('button').forEach(b => b.disabled = true); und.disabled = true;
+            finish(w, ok || close, s, api, el, close ? ` Close enough. It\u2019s spelled ${w.word}.` : '');
+          };
+          letters.forEach(ch => { const b = tiles.createEl('button', { text: ch, cls: 'gq-quiz-tile' }); b.onclick = () => { typed.push({ ch, b }); b.disabled = true; draw(); if (typed.length === f.length) check(); }; });
+          const rr = el.createDiv('gq-row gq-quiz-say');
+          const und = rr.createEl('button', { text: 'Undo', cls: 'gq-mini' }); und.onclick = () => { const x = typed.pop(); if (x) { x.b.disabled = false; draw(); } };
+          const nb = rr.createEl('button', { text: 'Not yet', cls: 'gq-mini' }); nb.onclick = () => { tiles.querySelectorAll('button').forEach(b => b.disabled = true); und.disabled = true; finish(w, false, s, api, el); };
+          draw(); return;
+        }
+        const listen = kind === 'listen', key = listen ? 'word' : 'english';
+        el.createDiv({ cls: 'gq-hint', text: listen ? 'Listen, then pick the Greek' : 'Pick the meaning' });
+        if (listen) { const h = el.createEl('button', { text: 'Hear it again', cls: 'gq-mini gq-quiz-hear' }); h.onclick = () => say(w.word); setTimeout(() => say(w.word), 250); }
+        else { const q = el.createDiv({ cls: 'gq-quiz-q', text: w.word, attr: { lang: 'el' } }); q.onclick = () => canHear && say(w.word); }
+        const box = el.createDiv('gq-quiz-opts');
+        for (const o of four(w, key)) {
+          const b = box.createEl('button', { text: o[key], cls: 'gq-quiz-opt', attr: listen ? { lang: 'el' } : {} });
+          b.onclick = () => { if (s.answered) return; const ok = o.word === w.word; b.addClass(ok ? 'is-ok' : 'is-miss'); if (!ok) box.querySelectorAll('button').forEach(x => { if (x.textContent === w[key]) x.addClass('is-ok'); }); finish(w, ok, s, api, el); };
+        }
+      };
+      return s;
+    };
+    for (const w of words) steps.push(make(w, 0));
+    steps.push({ label: 'Done', build: (el, api) => {
+      el.addClass('gq-quiz'); const tried = tries.size;
+      el.createDiv({ cls: 'gq-quiz-q', text: tried ? `${got.size} of ${tried}` : 'No answers yet' });
+      const t = []; if (tried) t.push(`${right1} right the first time`); const left = tried - got.size; if (left) t.push(`${left} still to come back`); if (moved) t.push(`${moved} changed color`);
+      el.createDiv({ cls: 'gq-hint', text: t.length ? t.join('. ') + '.' : 'Go back to answer, or close.' });
+      if (tried) el.createDiv({ cls: 'gq-hint', text: 'Stop here. These come back on another day, and that is when they stick.' });
+      const r = el.createDiv('gq-row'); const a = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); a.onclick = () => api.close();
+    } });
+    this.pop('Quiz · Deeper', steps, () => setTimeout(done, 400));
   }
+
   // ---------- Class: the latest lesson, practice and the teacher ----------
   // Class, calm: one card for this week, one for homework and questions, and Settings and help folded shut.
   async renderClass(el) {

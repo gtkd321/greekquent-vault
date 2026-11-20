@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Go deeper after a quiz (2026-11-20n)
+> After Quiz me, Go deeper runs one longer round: your 10 words plus up to 20 more from all three colors, mixed. It asks you to make the Greek, by saying it or building it from its letters. A word you miss comes back a few questions later, up to three tries. It stops at 30 words or 15 minutes, because coming back on another day helps more than another round now. Close spelling still counts. Also fixed: on some phones the first word a quiz played by itself was silent until Hear it again. Now the voice wakes on your first tap.
+
 > [!tip]- A crossword (2026-11-20m)
 > New in Games: Σταυρόλεξο, a small crossword made from the words you have met in the story. The clues play with meaning, like a newspaper crossword, so "Yesterday's tomorrow" (6) is σήμερα. Greek letter keys are on the screen. Hint shows the plain meaning, and Show a letter fills a square. The Games page also lost a line about Obsidian that didn't belong in the web app.
 

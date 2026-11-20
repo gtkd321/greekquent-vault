@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20e';
+const VAULT_RELEASE = '2026-11-20f';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1727,6 +1727,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     return this.pairs;
   }
   openPair(word, pre) { new PairModal(this.app, this, word, pre).open(); }
+  // In the Build step: today's new words as a way in to Word web and Build a sentence. A verb goes first, since it builds the most.
+  wordPlay(el, nw) {
+    const ws = (nw || []).map(w => w.word).filter(w => this.app.vault.getAbstractFileByPath('Words/' + w + '.md')); if (!ws.length) return;
+    const pick = (this.pairs && ws.find(w => this.pairs.v[w])) || ws[0];
+    const r = el.createDiv('gq-row gq-cv-play'); r.createSpan({ cls: 'gq-hint', text: 'Play with ' });
+    r.createSpan({ cls: 'gq-cv-playw', text: pick, attr: { lang: 'el' } });
+    r.createEl('button', { text: 'Word web', cls: 'gq-mini' }).onclick = () => this.openGraph('Words/' + pick + '.md');
+    r.createEl('button', { text: 'Build a sentence', cls: 'gq-mini' }).onclick = () => this.openPair(pick);
+    if (!this.pairs) this.pairData().then(() => { const v = ws.find(w => this.pairs.v[w]); if (v && v !== pick && r.isConnected) { r.remove(); this.wordPlay(el, nw); } });
+  }
   // A leaf in the main pane. Buttons in the side panel must never open things inside the side panel.
   mainLeaf(newTab) {
     const ws = this.app.workspace;
@@ -3448,6 +3458,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
             lv.createDiv({ cls: 'gq-hint', text: look === 2 ? 'The lines you built. Touch one to hear it.' : 'Say each line out loud. Touch a line to hear it first.' });
             for (const x of turns) { const r = lv.createDiv('gq-cv-done'); if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' }); const gl = this.lineEl(r, x[1], words); gl.addClass('gq-say'); gl.onclick = () => say(x[1]); r.createDiv({ cls: 'gq-hint', text: x[2] }); if (look === 3) this.sayIt(r.createDiv('gq-cv-lsay'), x[1], 'day:' + n + ':re'); }
           }
+          if (look === 2) this.wordPlay(lv, nw);
           const bk = lv.createDiv('gq-row').createEl('button', { text: stepNow > 3 ? 'Done looking ›' : `Back to ${NAMES[stepNow]} ›`, cls: 'gq-mini' }); bk.onclick = () => { look = null; paint(); };
           return;
         }
@@ -3558,6 +3569,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       };
       this.sayIt(row, x[1], 'said:π:' + n + ':' + ti, 'Say the line · +2', autofill);
       const fb = cur.createDiv('gq-hint gq-cv-fb');
+      if (S) this.wordPlay(wrap, nw);
       const en = this.lineEl(cur, x[1], words); en.addClass('gq-cv-en'); en.addClass('gq-say'); en.onclick = () => say(x[1]); en.style.display = 'none';
       show.onclick = () => { showed = true; en.style.display = ''; show.remove(); };
       chk.onclick = () => {

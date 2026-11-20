@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Play with today's words (2026-11-20f)
+> In today's story, the Build step now ends with Play with, one of today's new words, and two buttons: Word web, to see what it goes with, and Build a sentence, to combine it into your own sentences.
+
 > [!tip]- Look back at a step (2026-11-20e)
 > In today's story, tap a finished step (Scene, Words, Build or Say it) to look at it again: watch the scene, hear the words, or reread the lines. Tap Back to return to where you were. Looking back doesn't undo anything.
 

@@ -111,7 +111,8 @@ function frame() {
     document.title = (t && t !== 'Today' ? t + ' · ' : '') + 'Greekquent Beginner';
     if (G.navSync) G.navSync();
   };
-  window.addEventListener('popstate', () => { G.app.workspace.back(); });
+  // The phone's back button: a window's own history step closes just that window; closing a window with × takes its step back quietly.
+  window.addEventListener('popstate', async () => { if (G.skipPop) { G.skipPop--; return; } G.popping = true; try { await G.app.workspace.back(); } finally { G.popping = false; } });
   // Bottom bar: Today, Words, Class. More sits at the top right. Words and Class appear once they are unlocked;
   // with only Today there is no bar at all.
   const nav = $('#gq-nav');

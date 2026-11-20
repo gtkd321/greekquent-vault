@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Another word to play with, and Back works in windows (2026-11-20k)
+> After you play with one of today's words (Word web or Build a sentence), the row offers the next one: Now play with … When you have played with all of them, it starts again. In the web app, the back arrow and the phone's back button now close a window like Build a sentence first, then go back a page.
+
 > [!tip]- Setting up matches the app again (2026-11-20j)
 > Setting up described four buttons, including a Look up button that is no longer there. It now shows the three tabs: Today, Words (with search at the top) and Class (with Settings and help at the bottom).
 

@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20j';
+const VAULT_RELEASE = '2026-11-20k';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1757,14 +1757,27 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Everyday verbs first (want, like, have, go…), then the rest most common first.
     const EASY = ['θέλω', 'μου αρέσει', 'έχω', 'πάω', 'είμαι', 'κάνω', 'μπορώ', 'τρώω', 'πίνω', 'ξέρω', 'βλέπω', 'λέω', 'αγαπάω', 'ψάχνω', 'περιμένω'];
     const vr = this.verbRank || (this.verbRank = new Map(Object.keys(d.v).map((v, k) => [v, EASY.includes(v) ? EASY.indexOf(v) : 100 + k])));
-    const verb = ws.find(w => d.v[w]);
-    let fed = null;
-    if (!verb) for (const w of ws) for (const l of ((d.x[w] && d.x[w].l) || [])) if (d.v[l[0]] && (!fed || vr.get(l[0]) < vr.get(fed[1][0]))) fed = [w, l];
-    const pick = verb || (fed ? fed[0] : ws[0]);
-    r.createSpan({ cls: 'gq-hint', text: 'Play with ' }); r.createSpan({ cls: 'gq-cv-playw', text: pick, attr: { lang: 'el' } });
-    r.createEl('button', { text: 'Word web', cls: 'gq-mini' }).onclick = () => this.openGraph('Words/' + pick + '.md');
-    const [fv, fk, fi] = fed ? fed[1] : [];
-    r.createEl('button', { text: fed ? `Build a sentence with ${fv}` : 'Build a sentence', cls: 'gq-mini', attr: { lang: fed ? 'el' : 'en' } }).onclick = () => fed ? this.openPair(fv, [fk, fi]) : this.openPair(pick);
+    // Each word gets its way in: a verb opens itself; another word brings a verb, today's verb if it fits, else the easiest.
+    const dayV = ws.filter(w => d.v[w]);
+    const plan = ws.map(w => {
+      if (d.v[w]) return { w, rank: -2 };
+      let fed = null; for (const l of ((d.x[w] && d.x[w].l) || [])) { if (!d.v[l[0]]) continue; const rk = dayV.includes(l[0]) ? -1 : vr.get(l[0]); if (!fed || rk < fed.rk) fed = { l, rk }; }
+      return { w, fed: fed && fed.l, rank: fed ? fed.rk : 9999 };
+    }).sort((x, y) => x.rank - y.rank);
+    // After the first one, the next word is offered: played words are remembered for today's set, on this phone only.
+    const key = ws.join('|'); if (!this.playDone || this.playDone.key !== key) this.playDone = { key, set: new Set() };
+    const done = this.playDone.set;
+    const paint = () => {
+      r.empty();
+      const left = plan.filter(p => !done.has(p.w)), p = left[0] || plan[0], more = done.size > 0;
+      r.createSpan({ cls: 'gq-hint', text: !left.length ? 'Played with all of them. Again with ' : more ? 'Now play with ' : 'Play with ' }); r.createSpan({ cls: 'gq-cv-playw', text: p.w, attr: { lang: 'el' } });
+      const played = () => { done.add(p.w); setTimeout(paint, 300); };
+      r.createEl('button', { text: 'Word web', cls: 'gq-mini' }).onclick = () => { played(); this.openGraph('Words/' + p.w + '.md'); };
+      const [fv, fk, fi] = p.fed || [];
+      r.createEl('button', { text: p.fed ? `Build a sentence with ${fv}` : 'Build a sentence', cls: 'gq-mini', attr: { lang: p.fed ? 'el' : 'en' } }).onclick = () => { played(); p.fed ? this.openPair(fv, [fk, fi]) : this.openPair(p.w); };
+      if (!left.length) done.clear();
+    };
+    paint();
   }
   // A leaf in the main pane. Buttons in the side panel must never open things inside the side panel.
   mainLeaf(newTab) {

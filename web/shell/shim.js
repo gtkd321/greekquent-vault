@@ -395,6 +395,9 @@ class Workspace extends Events {
   fileOpened(f) { this.lastFile = f; this.trigger('file-open', f); this.trigger('active-leaf-change', this.main); }
   pushHist(leaf, vs) { this.stack.push(vs); if (this.stack.length > 60) this.stack.shift(); try { history.pushState({ gq: this.stack.length }, ''); } catch (e) {} this.paintHead(); }
   async back() {
+    // Back closes what is on top first: a window (Build a sentence, Options…), then a pop-out card, then the side panel.
+    const m = G.modals && G.modals[G.modals.length - 1]; if (m) { m.close(); return true; }
+    const pop = document.querySelector('.gq-pop'); if (pop) { const x = pop.querySelector('.gq-pop-x'); if (x) x.click(); else pop.remove(); return true; }
     if (this.sheetOpen) { this.closeSheet(); return true; }
     const vs = this.stack.pop(); if (!vs) return false;
     this.main._nohist = true; await this.main.setViewState(vs); return true;
@@ -408,8 +411,8 @@ class Workspace extends Events {
 // ---------- Modal, Menu, Notice ----------
 class Modal extends Component {
   constructor(app) { super(); this.app = app; this.containerEl = createDiv('modal-container mod-dim'); this.containerEl.createDiv('modal-bg').onclick = () => this.close(); this.modalEl = this.containerEl.createDiv('modal'); const x = this.modalEl.createDiv({ cls: 'modal-close-button', attr: { role: 'button', 'aria-label': 'Close' } }); x.textContent = '×'; x.onclick = () => this.close(); this.titleEl = this.modalEl.createDiv('modal-title'); this.contentEl = this.modalEl.createDiv('modal-content'); this.scope = { register() {} }; this.shouldRestoreSelection = false; }
-  open() { document.body.appendChild(this.containerEl); this._esc = e => { if (e.key === 'Escape') this.close(); }; document.addEventListener('keydown', this._esc); G.modals.push(this); try { const r = this.onOpen(); if (r && r.catch) r.catch(e => console.error(e)); } catch (e) { console.error(e); } }
-  close() { if (!this.containerEl.isConnected) return; document.removeEventListener('keydown', this._esc); G.modals = G.modals.filter(m => m !== this); try { this.onClose(); } catch (e) {} this.containerEl.remove(); }
+  open() { document.body.appendChild(this.containerEl); this._esc = e => { if (e.key === 'Escape') this.close(); }; document.addEventListener('keydown', this._esc); G.modals.push(this); try { history.pushState({ gqm: 1 }, ''); this._hist = true; } catch (e) {} try { const r = this.onOpen(); if (r && r.catch) r.catch(e => console.error(e)); } catch (e) { console.error(e); } }
+  close() { if (!this.containerEl.isConnected) return; document.removeEventListener('keydown', this._esc); G.modals = G.modals.filter(m => m !== this); if (this._hist && !G.popping) { this._hist = false; G.skipPop = (G.skipPop || 0) + 1; try { history.back(); } catch (e) { G.skipPop--; } } try { this.onClose(); } catch (e) {} this.containerEl.remove(); }
   setTitle(t) { this.titleEl.setText(t); return this; }
   setContent(c) { this.contentEl.empty(); if (typeof c === 'string') this.contentEl.setText(c); else this.contentEl.appendChild(c); return this; }
   onOpen() {} onClose() {}

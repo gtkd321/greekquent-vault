@@ -944,3 +944,10 @@ button.gq-daystep.is-home { color: var(--text-normal); font-weight: 600; border-
 .gq-quiz-tile:disabled { opacity: .3; }
 /* Word web Family button: on when the web shows the word's family */
 .gq-ww .gq-web-bar button.gq-ww-famb.is-on { background: var(--interactive-accent); color: var(--text-on-accent); }
+
+/* Read what you've heard: the new letters as big tap-to-hear tiles. */
+.gq-lt-letters { display: grid; width: 100%; align-self: stretch; grid-template-columns: repeat(4, 1fr) !important; gap: 8px; margin: 10px 0; }
+.gq-lt-letter { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 10px 6px; height: auto; min-height: 96px; white-space: normal; text-align: center; line-height: 1.25; }
+.gq-lt-l { font-size: 30px; font-weight: 600; line-height: 1.1; }
+.gq-lt-sub { margin-top: 12px; }
+.gq-lt-pron { font-style: normal; }

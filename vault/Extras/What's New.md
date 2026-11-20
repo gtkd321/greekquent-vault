@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- New to Greek? Start by ear (2026-11-20q)
+> The first setup question is now "Where are you starting?" If you pick New to Greek, Today starts with Language Transfer, a free audio course: listen to a track or two a day and tap "I listened." After track 30, six short sessions teach the letters with words you have already heard: hear it, read it, then build it. Then the story starts, with a line on the story card for your next track. Already know some Greek? Turn on Language Transfer in Options to keep the track line next to your story.
+
 > [!tip]- Clearer English, and word families (2026-11-20p)
 > A few words shared one English meaning without being the same, so they now say how they differ: πότε is "when? (asking)" and όταν is "when, whenever"; νομίζω is "I think (that)" and σκέφτομαι is "I think about." In the Word web, many words now have a Family button. It shows the words built on the same root, like μένω, περιμένω and παραμένω. Hold one to see how it is built: περι- (around) + μένω. Tap it again for Goes with.
 

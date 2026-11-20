@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20p';
+const VAULT_RELEASE = '2026-11-20q';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -410,6 +410,16 @@ const listenGreek = () => new Promise((res, rej) => {
 // [lower, upper, sound, like, word, English, syllable to say]
 const LETTERS = [["α", "Α", "a", "father", "άλογο", "horse", ""], ["ε", "Ε", "e", "egg", "ελέφαντας", "elephant", ""], ["ο", "Ο", "o", "octopus", "ομπρέλα", "umbrella", ""], ["μ", "Μ", "m", "moon", "μήλο", "apple", "μα"], ["π", "Π", "p", "pig", "πάπια", "duck", "πα"], ["τ", "Τ", "t", "top", "τυρί", "cheese", "τα"], ["ι", "Ι", "ee", "see", "ιππότης", "knight", ""], ["κ", "Κ", "k", "kite", "κότα", "hen", "κα"], ["λ", "Λ", "l", "lion", "λεμόνι", "lemon", "λα"], ["ν", "Ν", "n", "nose", "νερό", "water", "να"], ["σ", "Σ", "s", "sun", "σκύλος", "dog", "σα"], ["ρ", "Ρ", "r", "a quick tap of the tongue", "ρολόι", "clock", "ρα"], ["β", "Β", "v", "van", "βάρκα", "boat", "βα"], ["γ", "Γ", "gh", "a soft, breathy g", "γάτα", "cat", "γα"], ["δ", "Δ", "th", "this", "δέντρο", "tree", "δα"], ["φ", "Φ", "f", "fish", "φίδι", "snake", "φα"], ["χ", "Χ", "h", "a scratchy h, like clearing your throat", "χαρτί", "paper", "χα"], ["υ", "Υ", "ee", "see", "ύπνος", "sleep", ""], ["η", "Η", "ee", "see", "ήλιος", "sun", ""], ["ζ", "Ζ", "z", "zoo", "ζάχαρη", "sugar", "ζα"], ["θ", "Θ", "th", "thin", "θάλασσα", "sea", "θα"], ["ξ", "Ξ", "ks", "box", "ξύλο", "wood", "ξα"], ["ψ", "Ψ", "ps", "tops", "ψάρι", "fish", "ψα"], ["ω", "Ω", "o", "octopus", "ώρα", "time, hour", ""]].map(([l, u, s, h, w, en, syl]) => ({ l, u, s, h: h.includes(' ') ? h : 'like ' + h, w, en, syl, say: syl ? syl + ', ' + w : w }));
 const LETTER_SETS = [0, 1, 2, 3].map(i => LETTERS.slice(i * 6, i * 6 + 6)), LETTER_SETS_K = LETTER_SETS;
+// ---------- Ears first: Language Transfer, then reading what you've heard ----------
+// New-to-Greek students start with the free Language Transfer audio course (Complete Greek, 120 tracks), no reading.
+// After track 30, six short sessions teach the letters through words they already know by ear: hear it, read it, build it.
+// The sessions: each set of letters lets them read the most words heard in tracks 1 to 30 (matched against the transcripts).
+const LT_BRIDGE = [[["η", "α", "ν", "θ", "μ", "αι", "ε", "σ"], ["να", "θα", "σε", "με", "ναι", "αν", "μας", "μάθημα"]], [["ρ", "ω", "π", "ο", "κ"], ["και", "από", "κάνω", "ακόμα", "πώς", "ώρα", "μέρα", "σήμερα"]], [["λ", "τ", "ι", "φ"], ["τι", "αλλά", "θέλω", "τώρα", "καλά", "κάτι", "καλός", "φίλος"]], [["γ", "ει", "δ", "χ"], ["είμαι", "εγώ", "δεν", "για", "έχω", "όχι", "εδώ", "εμείς"]], [["υ", "β", "ου", "ψ"], ["μου", "που", "εσύ", "σου", "υπάρχω", "πού", "βλέπω", "απόψε"]], [["ευ", "ξ", "αυ", "ντ", "ζ", "μπ"], ["αυτός", "μπορώ", "ξέρω", "ευχαριστώ", "άντρας", "αρχίζω", "αύριο", "δουλεύω"]]];
+const LT_URL = 'https://www.languagetransfer.org/greek', LT_EARS = 30, LT_MAX = 120;
+// Letter pairs the single-letter list doesn't have: what they sound like.
+const LT_PAIR = { αι: ['e', 'like egg'], ει: ['ee', 'like see'], ου: ['oo', 'like food'], ευ: ['ev or ef', 'like ever, or left'], αυ: ['av or af', 'like have, or after'], ντ: ['d', 'like door'], μπ: ['b', 'like boat'] };
+// Where Language Transfer explains what a Beginner lesson uses: lesson → [first track, last track, what].
+const LT_TIES = { 3: [5, 11, 'να'], 5: [8, 20, 'είμαι'], 13: [23, 24, 'θα'], 17: [23, 24, 'θα'], 9: [33, 44, 'plurals'], 12: [33, 44, 'plurals'], 14: [60, 65, 'the past'], 22: [60, 65, 'the past'], 23: [60, 65, 'the past'], 21: [51, 61, 'μου αρέσει'], 19: [97, 99, 'commands'], 25: [106, 111, '-ομαι verbs'] };
 // Adults get the same letters and sets with a word from the 1,500 for each one.
 const ADULT_W = { α: ['αγάπη', 'love'], ε: ['ελληνικά', 'Greek'], ο: ['όχι', 'no'], μ: ['μητέρα', 'mother'], π: ['παιδί', 'child'], τ: ['τώρα', 'now'], ι: ['ιδέα', 'idea'], κ: ['καφές', 'coffee'], λ: ['λεφτά', 'money'], ν: ['νερό', 'water'], σ: ['σπίτι', 'house'], ρ: ['ρούχα', 'clothes'], β: ['βιβλίο', 'book'], γ: ['γάλα', 'milk'], δ: ['δρόμος', 'street'], φ: ['φίλος', 'friend'], χ: ['χέρι', 'hand'], υ: ['ύπνος', 'sleep'], η: ['ήλιος', 'sun'], ζ: ['ζωή', 'life'], θ: ['θάλασσα', 'sea'], ξ: ['ξέρω', 'I know'], ψ: ['ψωμί', 'bread'], ω: ['ώρα', 'hour, time'] };
 const ADULT_SETS = LETTER_SETS.map(s => s.map(x => { const [w, en] = ADULT_W[x.l] || [x.w, x.en]; return { ...x, w, en, say: x.syl ? x.syl + ', ' + w : w }; }));
@@ -2552,7 +2562,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, world: typeof fm.world === 'string' && WORLDS[fm.world] ? fm.world : 'dance', fiay: fm.fiay === true || fm.fiay === 'on', fiay_from: /^\d{4}-\d{2}-\d{2}$/.test(String(fm.fiay_from || '')) ? String(fm.fiay_from) : '', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '' };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, world: typeof fm.world === 'string' && WORLDS[fm.world] ? fm.world : 'dance', fiay: fm.fiay === true || fm.fiay === 'on', fiay_from: /^\d{4}-\d{2}-\d{2}$/.test(String(fm.fiay_from || '')) ? String(fm.fiay_from) : '', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '', lt: fm.lt === true, lt_track: Math.min(LT_MAX, Math.max(0, parseInt(fm.lt_track, 10) || 0)), lt_read: fm.lt_read === undefined || fm.lt_read === null || fm.lt_read === '' ? null : Math.max(0, parseInt(fm.lt_read, 10) || 0), lt_day: String(fm.lt_day || ''), lt_go: fm.lt_go === true };
   }
   cards() { const f = this.app.vault.getAbstractFileByPath(PROGRESS); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return this.cardsNow || (Array.isArray(fm.cards) ? fm.cards.map(String) : []); }
   async setCard(word, on) {
@@ -3414,6 +3424,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       pl.appendText('Fluent in a Year · ' + (gap === 1 ? 'on pace' : gap > 1 ? `${gap - 1} day${gap > 2 ? 's' : ''} behind` : gap === 0 ? 'done for today' : `${-gap} day${gap < -1 ? 's' : ''} ahead`) + ' · ');
       const ch = pl.createEl('a', { text: 'Change', href: '#' }); ch.onclick = e => { e.preventDefault(); const p = this.fyPace || {}; this.fyPicker(pl, p.fw || 1, p.own); };
     }
+    // Language Transfer alongside: one quiet line with the next track, and the tracks that explain this lesson's grammar.
+    if (col.lt && !this.isKids) this.ltLine(card, col, b.lesson);
     // How long a part really takes this student: from the first tap to the last sentence.
     card.addEventListener('pointerdown', () => { if (!this.tStory) this.tStory = Date.now(); }, true);
     // The week as a short path: one dot a day, today's is the big one.
@@ -4251,11 +4263,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       { t: 'Phonetics', d: 'Shows how to say each Greek word in Latin letters.', on: () => this.phOn(), set: v => this.setPh(v) },
       { t: 'Calm mode', d: 'Stops the moving parts.', on: () => this.calmOn(), set: v => this.setCalm(v) },
       { t: 'Focus sound', d: 'A soft hiss (pink noise). It helps some people and bothers others.', on: () => !!this.noise, set: v => { if (!!this.noise !== v) this.toggleNoise(); } },
+      !this.isKids && { t: 'Language Transfer', d: 'The free audio course alongside the story. Today keeps your track and says which tracks go with the lesson.', on: () => this.colors().lt, set: v => this.ltSet({ lt: !!v }) },
       !this.isKids && { t: 'Fluent in a Year pace', d: 'The story one day a day, to finish the 1,500 words in a year. Today shows if you are behind.', on: () => !!this.colors().fiay, set: v => this.setFiay(v) }
     ].filter(Boolean);
     this.pop('Options', [{ label: '', build: el => {
       const list = el.createDiv('gq-opts');
-      if (!this.isKids && !this.app.vault.getAbstractFileByPath('Teacher')) setTimeout(() => { const a = el.createEl('a', { text: 'Setup again: pace and alphabet', href: '#', cls: 'gq-hint gq-setup-again' }); a.onclick = e => { e.preventDefault(); this.setupAgain(); }; }, 0);
+      if (!this.isKids && !this.app.vault.getAbstractFileByPath('Teacher')) setTimeout(() => { const a = el.createEl('a', { text: 'Setup again: start and pace', href: '#', cls: 'gq-hint gq-setup-again' }); a.onclick = e => { e.preventDefault(); this.setupAgain(); }; }, 0);
       for (const o of O) {
         const row = list.createDiv('gq-opt'), tx = row.createDiv('gq-opt-tx');
         tx.createDiv({ cls: 'gq-opt-t', text: o.t }); tx.createDiv({ cls: 'gq-hint', text: o.d });
@@ -4363,11 +4376,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const cal = fdd < 0 ? 1 : (dayNow && dayNow.n) || Math.max(0, ...Object.keys(beats).map(Number).filter(k => beats[k].week < fw));
         this.todayBeat = null; this.storyEl = null; this.storyInfo = null; this.cbList = null;
         this.fyPace = { fw, own };
+        // Ears first (new to Greek): Language Transfer, then the six reading sessions. Nothing to read on Today until then.
+        const ears = this.ltStage(col); this.abcEl = null;
+        if (ears === 'ears' || ears === 'read') this.ltCard(box, col, ears);
+        else {
         if (cal) await this.storyCard(box, beats, cal, fdd >= 0 && fdow === 0, col);
         // Spaced review brings back earlier story lines and red, yellow and old green words.
         await this.comebackCard(box, beats, col, cal);
         // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
-        this.abcEl = null; if (!this.abcAllDone() && !this.abcOff()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
+        if (!this.abcAllDone() && !this.abcOff()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
+        }
         if (!this.tabOn('class')) await this.classCard(box, wkCal, week);
       } else box.createDiv({ cls: 'gq-tcard gq-hint', text: 'The year is finished. Keep reviewing your red and yellow words below.' });
       // Review: red words, game misses and look-ups from the last two weeks, in the 1,500.
@@ -4383,7 +4401,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (rev.length > 8) rc.createDiv({ cls: 'gq-hint', text: `${rev.length - 8} more in the side panel.` });
       }
       this.reviewPlay = rev.slice(0, 40); this.todayWeek = wk; try { const ln = wk && wk.fm && wk.fm.lesson; this.walkW = ln ? words.filter(w => (w.lessons || []).includes(ln)).slice(0, 24) : []; } catch (e) { this.walkW = []; }
-      await this.nextCard(box, { rev, fresh: moFresh });
+      { const st = this.ltStage(col); if (st !== 'ears' && st !== 'read') await this.nextCard(box, { rev, fresh: moFresh }); }
       this.stackOn = false; this.reportCard(box, true);
       this.cardStack(box, false);
       const foot = (box.querySelector('.gq-kdone') || box).createDiv('gq-hint gq-tfoot');
@@ -4612,7 +4630,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // the puzzle, say it together, then the song, the game, the swap and the moves.
     // The separate review word list is not on the path; spaced review is the day's review step.
     if (!kids) { const rv = list.filter(c => c.hasClass('gq-review')); rv.forEach(c => c.remove()); list = list.filter(c => !rv.includes(c)); }
-    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : ['gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
+    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : ['gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
     const rk = c => { const k = rank.findIndex(x => c.hasClass(x)); return k < 0 ? rank.length : k; };
     list = list.map((c, k) => [c, k]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map(x => x[0]);
     if (mo) list.push(mo);
@@ -4770,6 +4788,159 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   abcOff() { return this.abcKnown() || !!this.lsGet('abcoff', 0); }
   // Said at setup that they read the alphabet: letter practice is gone, with no way back in except Setup again.
   abcKnown() { return this.progFm().knows_abc === true; }
+  // ---------- Ears first: Language Transfer, then Read what you've heard ----------
+  // ears: tracks 1 to 30, nothing to read. read: the six sessions (one a day). with: the audio alongside the story. '' = off.
+  ltStage(col) {
+    col = col || this.colors(); if (this.isKids || !col.lt) return '';
+    if (col.lt_read !== null && col.lt_read < LT_BRIDGE.length) return col.lt_track < LT_EARS && !col.lt_go ? 'ears' : 'read';
+    return col.lt_track < LT_MAX ? 'with' : '';
+  }
+  async ltSet(patch) {
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { for (const [k, v] of Object.entries(patch)) { if (v === undefined) delete fm[k]; else fm[k] = v; } if (patch.lt && fm.lt_track === undefined) fm.lt_track = 0; });
+    setTimeout(() => this.refreshToday(), 300);
+  }
+  ltOpen() { window.open(LT_URL, '_blank'); this.moAdd && this.moAdd('did', 'lt', 1); }
+  // A row for the track: Open, I listened, and a slider to set the track (for students who already started the course).
+  ltTrackRow(c, col, cta) {
+    const r = c.createDiv('gq-row'), nx = Math.min(LT_MAX, col.lt_track + 1);
+    const o = r.createEl('button', { text: 'Open Language Transfer', cls: cta ? '' : 'gq-mini' }); o.onclick = () => this.ltOpen();
+    const y = r.createEl('button', { text: `I listened to track ${nx}`, cls: cta ? 'mod-cta' : 'gq-mini' }); y.onclick = () => { y.disabled = true; this.moAdd && this.moAdd('did', 'lt-' + nx, 1); this.ltSet({ lt_track: nx }); };
+    const ch = c.createDiv('gq-hint').createEl('a', { text: 'Already further along?', href: '#' });
+    ch.onclick = e => { e.preventDefault(); ch.parentElement.remove(); this.ltPicker(c, col); };
+  }
+  // Set the track by hand: for students who started the course before the app, or skipped ahead.
+  ltPicker(c, col) {
+    const old = c.querySelector('.gq-lt-pick'); if (old) { old.remove(); return; }
+    const box = c.createDiv('gq-fy-pick gq-lt-pick'), lab = box.createDiv('gq-tsub'), sl = box.createEl('input', { attr: { type: 'range', min: '0', max: String(LT_MAX), step: '1', 'aria-label': 'Tracks done' } });
+    sl.value = String(col.lt_track); const show = () => lab.setText(+sl.value ? `Done through track ${sl.value}` : 'Not started'); sl.oninput = show; show();
+    const s = box.createDiv('gq-row').createEl('button', { text: 'Save', cls: 'mod-cta' }); s.onclick = () => this.ltSet({ lt_track: +sl.value });
+  }
+  ltCard(box, col, stage) {
+    const c = box.createDiv('gq-tcard gq-lt'), h = c.createDiv('gq-thead');
+    if (stage === 'ears') {
+      h.createEl('strong', { text: 'Listen first' }); h.createSpan({ cls: 'gq-hint', text: `  · Language Transfer · track ${col.lt_track + 1}` });
+      c.createDiv({ text: 'Listen, pause when asked, and say your answer out loud before you hear it. No reading yet: your ears go first.' });
+      const left = LT_EARS - col.lt_track;
+      c.createDiv({ cls: 'gq-hint', text: `${left} track${left === 1 ? '' : 's'} to go before reading. One or two a day.` });
+      this.ltTrackRow(c, col, true);
+      const sk = c.createDiv('gq-hint').createEl('a', { text: 'Start reading now', href: '#' }); sk.onclick = e => { e.preventDefault(); this.ltSet({ lt_go: true }); };
+      return;
+    }
+    // Reading: one session a day, about 10 minutes. The track row stays, quieter.
+    const k = col.lt_read, set = LT_BRIDGE[k], today = ymd(new Date()), did = col.lt_day === today;
+    h.createEl('strong', { text: 'Read what you\u2019ve heard' }); h.createSpan({ cls: 'gq-hint', text: `  · session ${Math.min(k + (did ? 0 : 1), LT_BRIDGE.length)} of ${LT_BRIDGE.length}` });
+    if (did) { c.createDiv({ text: 'Done for today. The next letters open tomorrow.' }); }
+    else {
+      const ln = c.createDiv(); ln.appendText('New letters: '); ln.createSpan({ text: set[0].join(' '), attr: { lang: 'el' } });
+      c.createDiv({ cls: 'gq-hint', text: `${set[1].length} words from the early tracks. Hear each one, read it, then build it. About 8 minutes.` });
+      const g = c.createDiv('gq-row').createEl('button', { text: 'Start', cls: 'mod-cta' }); g.onclick = () => this.ltSession(k);
+    }
+    c.createDiv({ cls: 'gq-hint gq-lt-sub', text: `Keep listening: Language Transfer track ${Math.min(LT_MAX, col.lt_track + 1)}` });
+    this.ltTrackRow(c, col, false);
+  }
+  // The quiet line on the story card, for students using Language Transfer alongside.
+  ltLine(card, col, lesson) {
+    if (col.lt_track >= LT_MAX) return;
+    const d = card.createDiv('gq-hint gq-pace gq-lt-line'), nx = col.lt_track + 1, tie = LT_TIES[+lesson];
+    d.appendText(`Language Transfer · next: track ${nx}`);
+    if (tie) { d.appendText(' · this lesson\u2019s '); d.createSpan({ text: tie[2], attr: tie[2].match(/[α-ω]/) ? { lang: 'el' } : {} }); d.appendText(`: tracks ${tie[0]} to ${tie[1]}`); }
+    d.appendText(' · ');
+    const y = d.createEl('a', { text: 'Listened', href: '#' }); y.onclick = e => { e.preventDefault(); this.moAdd && this.moAdd('did', 'lt-' + nx, 1); this.ltSet({ lt_track: nx }); };
+    d.appendText(' · '); const o = d.createEl('a', { text: 'Open', href: '#' }); o.onclick = e => { e.preventDefault(); this.ltOpen(); };
+    d.appendText(' · '); const ch = d.createEl('a', { text: 'Change', href: '#' }); ch.onclick = e => { e.preventDefault(); this.ltPicker(card, col); };
+  }
+  // One session: the new letters (tap to hear), then each word: hear it and pick the meaning, read it aloud, build it.
+  // A word that was still black turns yellow (kind of: known by ear, just read for the first time). Colors never go down here.
+  async ltSession(k) {
+    const set = LT_BRIDGE[k]; if (!set) return;
+    const all = await this.wordIndex(), by = new Map(all.map(w => [w.word, w]));
+    const ws = set[1].map(x => by.get(x)).filter(Boolean); if (!ws.length) return;
+    const canHear = !gqQuiet() && !noSpeech();
+    const mix = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const ex = l => { const w = [...ws].find(x => foldG(x.word).includes(l)); return w ? w.word : ''; };
+    const steps = [{ label: 'Letters', build: (el, api) => {
+      el.addClass('gq-quiz'); el.createDiv({ cls: 'gq-hint', text: 'New letters. Tap one to hear it in a word you know.' });
+      const g = el.createDiv('gq-lt-letters');
+      for (const l of set[0]) {
+        const L = LETTERS.find(x => x.l === l), p = LT_PAIR[l], w = ex(l), b = g.createEl('button', { cls: 'gq-lt-letter' });
+        b.createDiv({ cls: 'gq-lt-l', text: l, attr: { lang: 'el' } });
+        b.createDiv({ cls: 'gq-hint', text: L ? `${L.s}, ${L.h}` : p ? `${p[0]}, ${p[1]}` : '' });
+        if (w) b.createDiv({ cls: 'gq-hint', text: w, attr: { lang: 'el' } });
+        b.onclick = () => { if (w) say(w); };
+      }
+      el.createDiv({ cls: 'gq-hint', text: 'The accent mark shows the beat you already hear: μένω.' });
+      const r = el.createDiv('gq-row'); const go = r.createEl('button', { text: 'Start the words', cls: 'mod-cta' }); go.onclick = () => api.next();
+    } }];
+    const got = new Set();
+    const color = async w => { if (got.has(w.word)) return; got.add(w.word); this.moAdd('recall', w.word); if (!this.colorOf(w.word)) await this.setColor(w.word, 'yellow'); };
+    ws.forEach((w, i) => {
+      const stage = { n: 0 };
+      steps.push({ label: `Word ${i + 1}`, build: (el, api) => {
+        el.addClass('gq-quiz');
+        const fbx = el.createDiv({ cls: 'gq-quiz-fb' });
+        const step = () => { [...el.children].forEach(x => { if (x !== fbx) x.remove(); }); fbx.empty(); fbx.className = 'gq-quiz-fb'; el.prepend(fbx); (stage.n === 0 ? hear : stage.n === 1 ? read : build)(); };
+        const nextStep = () => { stage.n++; if (stage.n > 2) { color(w); api.next(); } else step(); };
+        // 1. Hear it, letters hidden. Pick the meaning.
+        const hear = () => {
+          el.createDiv({ cls: 'gq-hint', text: canHear ? 'Listen. What does it mean?' : 'Say it to yourself. What does it mean?' });
+          if (canHear) { const h = el.createEl('button', { text: 'Hear it again', cls: 'gq-mini gq-quiz-hear' }); h.onclick = () => say(w.word); setTimeout(() => say(w.word), 250); }
+          else el.createDiv({ cls: 'gq-quiz-q', text: w.pron || w.word });
+          const opts = mix([w, ...mix(ws.filter(o => o !== w && o.english !== w.english)).slice(0, 2)]), box = el.createDiv('gq-quiz-opts');
+          for (const o of opts) { const b = box.createEl('button', { text: o.english, cls: 'gq-quiz-opt' }); b.onclick = () => {
+            const ok = o === w; b.addClass(ok ? 'is-ok' : 'is-miss'); box.querySelectorAll('button').forEach(x => { x.disabled = true; if (x.textContent === w.english) x.addClass('is-ok'); });
+            fbx.setText(ok ? 'Right.' : `It means ${w.english}.`); fbx.addClass(ok ? 'is-ok' : 'is-miss'); setTimeout(() => { if (el.isConnected) nextStep(); }, ok ? 800 : 1700); }; }
+        };
+        // 2. See it, with the sound under it, and read it aloud.
+        const read = () => {
+          el.createDiv({ cls: 'gq-hint', text: 'Now read it out loud' });
+          const q = el.createDiv({ cls: 'gq-quiz-q', text: w.word, attr: { lang: 'el' } }); q.onclick = () => canHear && say(w.word);
+          if (w.pron) el.createDiv({ cls: 'gq-hint gq-lt-pron', text: 'say it: ' + w.pron });
+          el.createDiv({ cls: 'gq-hint', text: w.english });
+          const r = el.createDiv('gq-row gq-quiz-say');
+          this.sayIt(r, w.word, 'lt:' + w.word, 'Say it', () => setTimeout(() => { if (el.isConnected) nextStep(); }, 900));
+          const n = r.createEl('button', { text: 'Next', cls: 'gq-mini' }); n.onclick = () => nextStep();
+        };
+        // 3. Build it from its letters. One off, or two swapped, still counts and shows the spelling.
+        const build = () => {
+          const f = foldG(w.word).replace(/\s/g, '');
+          el.createDiv({ cls: 'gq-hint', text: 'Build it' }); el.createDiv({ cls: 'gq-hint', text: w.english });
+          if (canHear) { const h = el.createEl('button', { text: 'Hear it', cls: 'gq-mini gq-quiz-hear' }); h.onclick = () => say(w.word); }
+          const out = el.createDiv({ cls: 'gq-quiz-built', attr: { lang: 'el', 'aria-live': 'polite' } }), tiles = el.createDiv({ cls: 'gq-quiz-tiles', attr: { lang: 'el' } });
+          let letters = mix([...f]); if (letters.join('') === f && f.length > 1) letters = letters.reverse();
+          const typed = [], draw = () => out.setText(typed.map(x => x.ch).join('') || '\u00a0');
+          const check = () => {
+            const g = typed.map(x => x.ch).join(''); let ok = g === f, swap = false;
+            if (!ok) for (let j = 0; j < f.length - 1; j++) if (g === f.slice(0, j) + f[j + 1] + f[j] + f.slice(j + 2)) swap = true;
+            const close = !ok && (swap || near(g, f));
+            tiles.querySelectorAll('button').forEach(b => b.disabled = true); und.disabled = true;
+            fbx.empty(); fbx.addClass(ok || close ? 'is-ok' : 'is-miss'); fbx.appendText(ok ? 'Right. ' : close ? 'Close enough. It\u2019s spelled ' : 'It\u2019s spelled '); fbx.createSpan({ text: w.word, attr: { lang: 'el' } });
+            if (canHear) say(w.word); setTimeout(() => { if (el.isConnected) nextStep(); }, ok ? 900 : 1900);
+          };
+          letters.forEach(ch => { const b = tiles.createEl('button', { text: ch, cls: 'gq-quiz-tile' }); b.onclick = () => { typed.push({ ch, b }); b.disabled = true; draw(); if (typed.length === f.length) check(); }; });
+          const rr = el.createDiv('gq-row gq-quiz-say'), und = rr.createEl('button', { text: 'Undo', cls: 'gq-mini' }); und.onclick = () => { const x = typed.pop(); if (x) { x.b.disabled = false; draw(); } };
+          draw();
+        };
+        step();
+      } });
+    });
+    const last = k + 1 >= LT_BRIDGE.length;
+    steps.push({ label: 'Done', build: (el, api) => {
+      el.addClass('gq-quiz');
+      el.createDiv({ cls: 'gq-quiz-q', text: last ? 'You read Greek now.' : `${ws.length} words read` });
+      el.createDiv({ cls: 'gq-hint', text: last ? 'Today has the story now, with the words you can read. Keep listening alongside: the story card shows your next track.' : 'Words you only knew by ear, now on the page. They are yellow in Words. Next letters tomorrow.' });
+      const r = el.createDiv('gq-row'); const a = r.createEl('button', { text: 'Done', cls: 'mod-cta' }); a.onclick = () => api.close();
+      this.ltFinish(k);
+    } });
+    this.pop('Read what you\u2019ve heard', steps, () => setTimeout(() => this.refreshToday(), 400));
+  }
+  // A session is done when its last screen shows. The last one starts the story, Fluent in a Year (if picked) and the tour.
+  async ltFinish(k) {
+    if (this.ltDone === k) return; this.ltDone = k;
+    const f = await this.progressFile(); let fy = false;
+    await this.app.fileManager.processFrontMatter(f, fm => { const was = parseInt(fm.lt_read, 10) || 0; if (k + 1 > was) fm.lt_read = k + 1; fm.lt_day = ymd(new Date()); if (k + 1 >= LT_BRIDGE.length && fm.lt_fiay) { fy = true; delete fm.lt_fiay; } });
+    if (k + 1 >= LT_BRIDGE.length) { this.lsSet('abcoff', 1); if (fy) await this.setFiay(true); setTimeout(() => { if (!this.tourOpen() && this.tourLeft()) this.tourStart(); }, 1500); }
+  }
   // ---------- First launch: two questions build the beginner setup (pace, then the alphabet) ----------
   needSetup() {
     if (this.isKids || this.setupShown || this.app.vault.getAbstractFileByPath('Teacher')) return false;
@@ -4779,7 +4950,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     return !(parseInt(fm.story_at, 10) > 0) && !(Array.isArray(fm.tour_done) && fm.tour_done.length) && (fm.tour_at === undefined || fm.tour_at === null);
   }
   setupPop() {
-    this.setupShown = true; const ans = { pace: 'casual', abc: false }; let saved = false;
+    this.setupShown = true; const ans = { start: 'some', pace: 'casual', abc: false }; let saved = false;
     const save = async () => { if (saved) return; saved = true; await this.setupSave(ans); };
     this.pop('Welcome', [{ label: '', build: (el, api) => {
       const q = (title, sub, opts, pick) => { el.empty();
@@ -4790,26 +4961,34 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         el.createDiv({ cls: 'gq-pop-big', text: 'Θα τα πούμε.', attr: { lang: 'el' } });
         el.createDiv({ cls: 'gq-tsub', text: 'Your setup' });
         const ul = el.createEl('ul', { cls: 'gq-setup-sum' });
-        ul.createEl('li', { text: ans.pace === 'fiay' ? 'Fluent in a Year: today is day one. One story day each day, and Today shows if you fall behind.' : 'Casual: one short story part a day, at your own pace.' });
-        ul.createEl('li', { text: ans.abc ? 'You read the alphabet: plain Greek letters, no letter practice.' : 'Learning the alphabet: letter practice, and the sound of each word under it.' });
+        const nw = ans.start === 'new';
+        if (nw) ul.createEl('li', { text: 'Ears first: Language Transfer, a free audio course, one or two tracks a day. After track 30 you learn the letters with words you already know.' });
+        ul.createEl('li', { text: ans.pace === 'fiay' ? (nw ? 'Fluent in a Year: day one is the day you start reading, so you never start behind.' : 'Fluent in a Year: today is day one. One story day each day, and Today shows if you fall behind.') : 'Casual: one short story part a day, at your own pace.' });
+        if (!nw) ul.createEl('li', { text: ans.abc ? 'You read the alphabet: plain Greek letters, no letter practice.' : 'Learning the alphabet: letter practice, and the sound of each word under it.' });
         el.createDiv({ cls: 'gq-hint', text: 'Change it later in Options, under the three dots.' });
         const r = el.createDiv('gq-row'); const go = r.createEl('button', { text: 'Start', cls: 'mod-cta' });
-        go.onclick = async () => { await save(); api.close(); setTimeout(() => { if (!this.tourOpen()) this.tourStart(); }, 500); }; };
-      q('How far do you want to go?', 'You can change this later.', [
-        ['Casual', 'A little each day, at your own pace.', 'casual'],
-        ['Fluent in a Year', 'About 20 minutes a day, every day, for a year.', 'fiay']
-      ], v => { ans.pace = v;
-        q('Can you read the Greek alphabet?', 'α β γ δ ε…', [
-          ['Not yet', 'The app teaches the letters and shows how each word sounds.', false],
-          ['Yes, I can read it', 'Just the Greek, no letter practice.', true]
-        ], v2 => { ans.abc = v2; done(); }); });
+        go.onclick = async () => { await save(); api.close(); if (ans.start !== 'new') setTimeout(() => { if (!this.tourOpen()) this.tourStart(); }, 500); }; };
+      // Where they start, then how far. New to Greek starts by ear (Language Transfer); nobody is asked about letters twice.
+      q('Where are you starting?', '', [
+        ['New to Greek', 'Start by ear with a free audio course. Reading comes after, with words you already know.', 'new'],
+        ['I know some Greek', 'Not the letters yet. The app teaches them as you go.', 'some'],
+        ['I can read Greek', 'Just the Greek, no letter practice.', 'read']
+      ], v0 => { ans.start = v0; ans.abc = v0 === 'read';
+        q('How far do you want to go?', 'You can change this later.', [
+          ['Casual', 'A little each day, at your own pace.', 'casual'],
+          ['Fluent in a Year', 'About 20 minutes a day, every day, for a year.', 'fiay']
+        ], v => { ans.pace = v; done(); }); });
     } }], () => { save(); });
   }
   async setupSave(ans) {
     const fiay = ans.pace === 'fiay', now = new Date(), day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     this.phNow = !ans.abc; this.applyPh(); if (!ans.abc) this.lsSet('abcoff', 0);
     const f = await this.progressFile();
-    await this.app.fileManager.processFrontMatter(f, fm => { fm.setup_done = true; fm.pace = ans.pace; fm.knows_abc = !!ans.abc; fm.phonetics = !ans.abc; if (fiay) { fm.fiay = true; fm.fiay_from = day; } else { delete fm.fiay; delete fm.fiay_from; } });
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.setup_done = true; fm.pace = ans.pace; fm.knows_abc = !!ans.abc; fm.phonetics = !ans.abc;
+      // New to Greek: ears first. Fluent in a Year waits for the first reading day (lt_fiay), so the pace doesn't start out behind.
+      if (ans.start === 'new') { fm.lt = true; if (!(parseInt(fm.lt_track, 10) > 0)) fm.lt_track = 0; if (fm.lt_read === undefined) fm.lt_read = 0; }
+      if (fiay && ans.start === 'new' && !(parseInt(fm.lt_read, 10) >= LT_BRIDGE.length)) { fm.lt_fiay = true; delete fm.fiay; delete fm.fiay_from; }
+      else if (fiay) { fm.fiay = true; fm.fiay_from = day; delete fm.lt_fiay; } else { delete fm.fiay; delete fm.fiay_from; delete fm.lt_fiay; } });
     this.stackPick = null; setTimeout(() => this.refreshToday(), 300);
   }
   async setupAgain() {

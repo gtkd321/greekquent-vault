@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Close words and Language Transfer tracks (2026-11-20s)
+> If Language Transfer is on in Options, each close word in Words search shows its track: "Heard in Language Transfer, track 32" once you have passed it, or "Language Transfer track 106" if it is still ahead. You can also search for a track, like track 33, to see the words first heard there and their close words.
+
 > [!tip]- Close words: find the word you mean (2026-11-20r)
 > Search in Words now shows close words: Greek words that mean nearly the same thing, and how each one differs. Type a word (think), what you mean (thinking about my trip) or paste your own Greek sentence. νομίζω is your opinion, σκέφτομαι is the act of thinking. When one fits what you typed best, it says Best fit. Tap a word to hear it.
 

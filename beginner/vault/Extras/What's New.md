@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Close enough counts (2026-11-20i)
+> When Say it hears a word that is close but spelled a little differently (κε for και), it turns green, you move on, and it shows the right spelling underneath.
+
 > [!tip]- Say it hears single words better (2026-11-20h)
 > Say it on a word card now counts any one form of a word listed with commas (say ένας, μία or ένα), reads a phone's digits as words (1 counts for ένα), and accepts how phones often write short words (κι or κε for και, σαι for σε).
 

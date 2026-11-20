@@ -562,6 +562,7 @@ button.gq-abc-tile.is-no { animation: gq-shake .4s; border-color: #e53935; }
 .gq-sayit { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 button.gq-sayit-b.is-live { background: #e53935; color: #fff; border-color: #e53935; animation: gq-pulse-b 1s infinite; }
 button.gq-sayit-b.is-ok, button.gq-sayit-b.is-ok:disabled { background: #43a047; color: #fff; border-color: #43a047; opacity: 1; }
+.gq-sayit-fb.gq-sayit-spell { color: var(--text-normal); font-weight: 500; }
 @keyframes gq-pulse-b { 50% { opacity: .7; } }
 .gq-sayit-in { min-width: 220px; font-size: 16px; }
 @media (prefers-reduced-motion: reduce) { .gq-abc-card.is-no, button.gq-abc-tile.is-no, button.gq-sayit-b.is-live { animation: none; } }
@@ -686,6 +687,12 @@ body.gq-ph-off rt.gq-prt { display: none; }
 /* Story puzzle: new words first, and the meaning of the last touched tile. */
 .gq-cv-words { display: flex; flex-direction: column; gap: 8px; }
 .gq-cv-wrow { display: flex; align-items: baseline; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--background-modifier-border); }
+/* A word row is a grid, so Say it's note gets its own full-width line under the word instead of running off the edge. */
+.gq-cv-wrow { display: grid; grid-template-columns: minmax(7em, auto) 1fr auto; column-gap: 12px; row-gap: 4px; }
+.gq-cv-wrow .gq-cv-wsay, .gq-cv-wrow .gq-sayit { display: contents; }
+.gq-cv-wrow .gq-sayit > :not(button) { grid-column: 1 / -1; }
+.gq-cv-wrow .gq-sayit-fb:empty { display: none; }
+.gq-cv-wrow button.gq-sayit-b { white-space: nowrap; }
 .gq-cv-wgr { font-size: 1.25em; font-weight: 600; min-width: 7em; cursor: pointer; }
 .gq-cv-wen { color: var(--text-muted); }
 .gq-cv-gloss { min-height: 2.4em; margin: 6px 0 2px; font-size: 1.05em; }

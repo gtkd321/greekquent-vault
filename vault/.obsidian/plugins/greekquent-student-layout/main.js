@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
-const VAULT_RELEASE = '2026-11-20h';
+const VAULT_RELEASE = '2026-11-20i';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -361,11 +361,22 @@ const digG = a => String(a || '').replace(/\d+/g, d => ' ' + (DIGW[+d] || '') + 
 const ALIASW = { και: ['κι'] };
 const sameW = (w, h) => w === h || near(w, h) || (w.length <= 4 && phonG(w) === phonG(h)) || (ALIASW[w] || []).includes(h);
 // word: a word card's label, where commas and slashes list forms (ένας, μία, ένα): saying any one of them counts.
-const heardIt = (target, alts, word) => {
-  if (word) { const forms = String(target).split(/\s*[,/]\s*/).filter(Boolean); if (forms.length > 1) return forms.some(f => heardIt(f, alts)); }
+// Returns null for a miss, or the close-but-not-exact pairs [[heard, right], …] for a pass (an empty list when it was exact).
+const heardHow = (target, alts, word) => {
+  if (word) { const forms = String(target).split(/\s*[,/]\s*/).filter(Boolean); if (forms.length > 1) { let best = null; for (const f of forms) { const r = heardHow(f, alts); if (r && (!best || r.length < best.length)) best = r; } return best; } }
+  const orig = String(target).split(/\s+/).filter(Boolean), keyOf = {}; for (const o of orig) { const k = foldG(o); if (k && !keyOf[k]) keyOf[k] = o.replace(/[^\p{L}]/gu, ''); }
   let tw = foldG(target).split(' ').filter(Boolean); const content = tw.filter(w => !SMALL_W.has(w)); if (content.length) tw = content;
-  return (alts || []).some(a => { const hw = foldG(digG(a)).split(' ').filter(Boolean); const n = tw.filter(w => hw.some(h => sameW(w, h))).length; return tw.length <= 2 ? n === tw.length : n / tw.length >= 0.75; });
+  let best = null;
+  for (const a of alts || []) {
+    const hw = foldG(digG(a)).split(' ').filter(Boolean), raw = String(a || '').split(/\s+/).filter(Boolean), offs = [];
+    let n = 0; for (const w of tw) { if (hw.includes(w)) { n++; continue; } const h = hw.find(h => sameW(w, h)); if (h) { n++; const r = raw.find(x => foldG(digG(x)).split(' ').includes(h)) || h; offs.push([r, keyOf[w] || w]); } }
+    if (tw.length <= 2 ? n === tw.length : n / tw.length >= 0.75) { if (!best || offs.length < best.length) best = offs; if (!offs.length) break; }
+  }
+  return best;
 };
+const heardIt = (target, alts, word) => !!heardHow(target, alts, word);
+// The close-enough note: it still counts, and the student sees how the word is spelled.
+const spellNote = offs => offs && offs.length ? ' Close enough. It\u2019s spelled ' + offs.map(([h, r]) => r + (h && foldG(h) !== foldG(r) && !/\d/.test(h) ? ' (heard ' + h + ')' : '')).join(', ') + '.' : '';
 // Listening always ends: a hard stop after 7 seconds even when the phone never reports back (some phones and home-screen apps hang there).
 // A hang is reported as 'hang', and the caller switches that device to the keyboard microphone.
 const listenGreek = () => new Promise((res, rej) => {
@@ -4759,11 +4770,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const b = w.createEl('button', { text: label || 'Say it · +2', cls: 'gq-mini gq-sayit-b', attr: { 'aria-label': 'Say it out loud for 2 bonus φόρα' } });
     const fb = w.createSpan({ cls: 'gq-hint gq-sayit-fb' });
     const miss = alts => other && heardIt(other.gr, alts) ? ` That is ${other.who || 'their'} line. Now say yours${other.en ? ': ' + other.en : ''}` : null;
-    const win = () => { b.setText('Heard it · +2'); b.addClass('is-ok'); b.disabled = true; fb.setText(''); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} };
+    const win = note => { b.setText('Heard it · +2'); b.addClass('is-ok'); b.disabled = true; fb.setText(note || ''); if (note) fb.addClass('gq-sayit-spell'); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} };
     const typed = () => {
       b.remove(); fb.setText('');
       const i = w.createEl('input', { cls: 'gq-sayit-in', attr: { type: 'text', lang: 'el', placeholder: 'Tap the mic on the keyboard and say it', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' } });
-      const chk = () => { if (!i.value.trim()) return; if (heardIt(target, [i.value], wd)) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} } else fb.setText(miss([i.value]) || ' Not quite. Try again.'); };
+      const chk = () => { if (!i.value.trim()) return; const how = heardHow(target, [i.value], wd); if (how) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); fb.setText(spellNote(how)); if (how.length) fb.addClass('gq-sayit-spell'); w.appendChild(fb); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} } else fb.setText(miss([i.value]) || ' Not quite. Try again.'); };
       i.onchange = chk; i.onkeydown = e => { if (e.key === 'Enter') chk(); };
       w.appendChild(fb); fb.setText(' Switch the keyboard to Greek first (the globe key), so its mic writes Greek.');
       // The app's own microphone was switched off on this phone after a failure: one tap tries it again.
@@ -4781,7 +4792,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       b.addClass('is-live'); b.setText('Listening…'); fb.setText('Say it now.');
       try {
         const alts = await listenGreek(); b.removeClass('is-live');
-        if (heardIt(target, alts, wd)) win();
+        const how = heardHow(target, alts, wd);
+        if (how) win(spellNote(how));
         else if (!alts.length && ++fails >= 2) toKb(false);
         else { b.setText(label || 'Say it · +2'); fb.setText(miss(alts) || (alts.length ? ` Heard "${alts[0]}". Try again.` : ' Nothing heard. Try again, a little louder.')); }
       } catch (e) {

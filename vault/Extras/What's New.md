@@ -270,7 +270,7 @@ Back to [[Today]].
 > [!info]- November 19: send a card to your teacher
 > - **Send to teacher:** on a word note with a card photo, tap Send to teacher. Say what you tried (optional) and whether your teacher may show it to the class without your name. 2 φόρα, once a day.
 > - **Card ideas:** a new page with tricks for paper cards that stick. Your teacher adds the best ideas from classmates' cards.
-> - **Copyright:** Greekquent is © 2026 Daniel Ilias Houlis. See Terms at the bottom of More. Your My Work stays yours.
+> - **Copyright:** Greekquent is © 2026 Daniel Houlis. See Terms at the bottom of More. Your My Work stays yours.
 
 > [!info]- November 18, midnight: one world at a time, and say it to solve it
 > - **Dances live in the Dance world only.** Village, Olive grove and Pet grow with green words and nothing else, so there's one kind of progress on the card. Pick Dance if you'd rather learn dances step by step. Any dances you already collected are kept, and they show again when you switch to Dance. Dance starts at step 0 the first time you pick it.

@@ -14,7 +14,7 @@ os.makedirs(out)
 shutil.copytree(os.path.join(SRC, 'files'), os.path.join(out, 'files'))
 
 FOOT = ('<footer>Questions? Ask the class in the app: Class, then Ask the class.<br>'
-        '© 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.</footer>')
+        '© 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.</footer>')
 CSS = open(os.path.join(SRC, 'print.css'), encoding='utf-8').read()
 
 def page(title, body, cls=''):

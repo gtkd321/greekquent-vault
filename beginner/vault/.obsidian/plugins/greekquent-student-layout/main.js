@@ -7,7 +7,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Left toolbar: Today, Look up, Ask, More. Everything else lives in More and in the command palette.
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
-// © 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
+// © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
 const VAULT_RELEASE = '2026-11-20u';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
@@ -38,7 +38,7 @@ const INDEX = 'Extras/00 Greekquent Index.md';
 const GAMES = 'Extras/09 Games.md';
 const EXTRAS = 'Extras/';
 const CARD_IDEAS = EXTRAS + '14 Card ideas.md', COPYRIGHT_NOTE = EXTRAS + 'Copyright.md';
-const COPYRIGHT = '© 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.';
+const COPYRIGHT = '© 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.';
 // Editions of the student vault. Beginner has this file ({"edition": "beginner"}) and updates from the beginner/ folder of the same repo.
 // No file = the Intermediate edition (Beginner and Intermediate scripts, with a switch between them).
 const EDITION_MARK = '.obsidian/greekquent-edition.json';

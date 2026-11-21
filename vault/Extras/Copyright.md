@@ -5,7 +5,7 @@ tags: [greek-student]
 
 Back to [[Today]].
 
-© 2026 Daniel Ilias Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Ilias Houlis.
+© 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
 
 The course content, word lists, scenarios, stories, recordings and app design may not be copied, sold or redistributed without written permission. Students may use the app for their own learning.
 

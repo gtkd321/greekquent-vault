@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-20u';
+const VAULT_RELEASE = '2026-11-23a';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -230,6 +230,11 @@ const LT_SC = 'https://soundcloud.com/languagetransfer/', LT_SC_ODD = { 47: 'com
 const ltTrackUrl = n => n >= 1 && n <= 120 ? LT_SC + (LT_SC_ODD[n] || `complete-greek-track-${String(n).padStart(2, '0')}-language-transfer-the-thinking-method`) : LT_URL;
 // The book reading each lesson assigns: [Beginners' Greek unit, Complete Greek unit and page]. Unit and page numbers only.
 const BOOK_UNITS = {"L01":["Unit 1",""],"L02":["Unit 6",""],"L03":["Unit 3",""],"L04":["Unit 3","Unit 3, p. 32"],"L05":["Unit 7",""],"L06":["Unit 6",""],"L07":["Unit 1",""],"L08":["Unit 5",""],"L09":["Unit 5",""],"L10":["Unit 8",""],"L11":["Unit 2","Unit 6, p. 88"],"L12":["Unit 10","Unit 8, p. 118"],"L13":["Unit 10","Unit 4, p. 46"],"L14":["Unit 8",""],"L15":["Unit 2",""],"L17":["Unit 9","Unit 7, p. 104"],"L18":["Unit 7",""],"L19":["Unit 2","Unit 5, p. 70"],"L20":["Unit 4",""],"L21":["Unit 9",""],"L22":["Unit 3",""],"L23":["Unit 9",""],"L24":["Unit 6",""],"L25":["Unit 5","Unit 10, p. 160"],"I01":["","Unit 1, p. 2"],"I02":["","Unit 3, p. 32"],"I03":["","Unit 9, p. 144"],"I04":["","Unit 3, p. 32"],"I05":["","Unit 7, p. 104"],"I06":["","Unit 2, p. 18"],"I07":["","Unit 10, p. 160"],"I08":["","Unit 9, p. 144"],"I09":["","Unit 1, p. 2"],"I10":["","Unit 6, p. 88"],"I11":["","Unit 6, p. 88"],"I12":["","Unit 8, p. 118"],"I13":["","Unit 4, p. 46"],"I14":["","Unit 9, p. 144"],"I15":["","Unit 2, p. 18"],"I17":["","Unit 7, p. 104"],"I18":["","Unit 11, p. 178"],"I19":["","Unit 5, p. 70"],"I20":["","Unit 7, p. 104"],"I21":["","Unit 10, p. 160"],"I22":["","Unit 12"],"I23":["","Unit 12"],"I24":["","Unit 12"],"I25":["","Unit 10, p. 160"]};
+// Free audio for the two books (Teach Yourself library pages).
+const BOOK_AUDIO = { beg: 'https://library.teachyourself.com/id007706138/Beginners-Greek-Audio', comp: 'https://library.teachyourself.com/id004325540/Complete-Greek-free-resources' };
+// The week between classes: Language Transfer right after class, then the book reading for the next class. Class days come from the student (setup, or Options).
+const DAY_LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const CLASS_DEFAULT = [3];
 // Light English stemming so "thinking", "wished" and "years" find think, wish and year.
 const enStem = t => t.split(' ').map(x => x.length > 4 ? x.replace(/(ing|ed|es|s)$/, '') : x).join(' ');
 // Close words (Look up): words in the 1,500 that mean nearly the same thing, and how each one differs. [set, [[word, how it differs, English cues;...]]]. Hand-written.
@@ -2669,7 +2674,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const f = this.app.vault.getAbstractFileByPath(PROGRESS);
     const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
     const list = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
-    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, world: typeof fm.world === 'string' && WORLDS[fm.world] ? fm.world : 'dance', fiay: fm.fiay === true || fm.fiay === 'on', fiay_from: /^\d{4}-\d{2}-\d{2}$/.test(String(fm.fiay_from || '')) ? String(fm.fiay_from) : '', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '', lt: fm.lt === true, lt_track: Math.min(LT_MAX, Math.max(0, parseInt(fm.lt_track, 10) || 0)), lt_read: fm.lt_read === undefined || fm.lt_read === null || fm.lt_read === '' ? null : Math.max(0, parseInt(fm.lt_read, 10) || 0), lt_day: String(fm.lt_day || ''), lt_go: fm.lt_go === true };
+    return { red: list('red'), yellow: list('yellow'), green: list('green'), setup_seen: !!fm.setup_seen, world: typeof fm.world === 'string' && WORLDS[fm.world] ? fm.world : 'dance', fiay: fm.fiay === true || fm.fiay === 'on', fiay_from: /^\d{4}-\d{2}-\d{2}$/.test(String(fm.fiay_from || '')) ? String(fm.fiay_from) : '', scripts: this.scriptsNow || (fm.scripts === 'intermediate' ? 'intermediate' : 'beginner'), last_beat: Math.max(0, parseInt(fm.last_beat, 10) || 0), story_at: fm.story_at === undefined || fm.story_at === null || fm.story_at === '' ? null : Math.max(0, parseInt(fm.story_at, 10) || 0), track: String(fm.track || ''), tabs: '', lt: true, lt_track: Math.min(LT_MAX, Math.max(0, parseInt(fm.lt_track, 10) || 0)), lt_read: fm.lt_read === undefined || fm.lt_read === null || fm.lt_read === '' ? null : Math.max(0, parseInt(fm.lt_read, 10) || 0), lt_day: String(fm.lt_day || ''), lt_go: fm.lt_go === true };
   }
   cards() { const f = this.app.vault.getAbstractFileByPath(PROGRESS); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return this.cardsNow || (Array.isArray(fm.cards) ? fm.cards.map(String) : []); }
   async setCard(word, on) {
@@ -2771,7 +2776,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     let f = this.app.vault.getAbstractFileByPath(MO_FILE);
     if (!f) {
       if (!this.app.vault.getAbstractFileByPath(MY_WORK.slice(0, -1))) await this.app.vault.createFolder(MY_WORK.slice(0, -1));
-      f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠάρε φόρα. This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- Spaced review, today\'s line and the rally: Had it counts like a word. Not yet: 1 for trying.\n- A finished read-through, rally swap, song or kid card: 2. Homework sent: 3. A question to the class: 2. Once a day each.\n- Guess first in Look up: 1. A new word in the Word web: 1, up to 5 a day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
+      f = await this.app.vault.create(MO_FILE, '---\ndays: {}\n---\n# My momentum\n\nΠάρε φόρα. This note keeps your φόρα (momentum). The app fills it in, so there is nothing to type here.\n\n- Getting a word right again on a later day: 3. The first time: 1. The same word twice in one day: 0.\n- A color you moved up that is still right two days later: 5. A word you mark for the first time: 1.\n- Your own sentence in My pairs: 3. A built one: 1. A story puzzle line: 1, or 3 on a later day.\n- Spaced review, today\'s line and the rally: Had it counts like a word. Not yet: 1 for trying.\n- Language Transfer: 1 a track. The book before class: 2 a day. A finished read-through, rally swap, song or kid card: 2. Homework sent: 3. A question to the class: 2. Once a day each.\n- Guess first in Look up: 1. A new word in the Word web: 1, up to 5 a day.\n- At most 40 a day. Each day off, your φόρα fades by a seventh, so it comes back fast.\n');
     }
     const today = ymd(new Date()), gap = d => { const [a, b, c] = String(d).split('-').map(Number); const n = new Date(); n.setHours(12, 0, 0, 0); return Math.round((n - new Date(a, b - 1, c, 12)) / 864e5); };
     let gained = 0, big = null; const danced = [], dancedK = []; const wNow = this.worldKey(), dw = wNow === 'dance', gw = wNow === 'gallery'; const carved = [];
@@ -3551,7 +3556,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const ch = pl.createEl('a', { text: 'Change', href: '#' }); ch.onclick = e => { e.preventDefault(); const p = this.fyPace || {}; this.fyPicker(pl, p.fw || 1, p.own); };
     }
     // Language Transfer alongside: one quiet line with the next track, and the tracks that explain this lesson's grammar.
-    if (col.lt && !this.isKids) this.ltLine(card, col, b.lesson);
+    if (col.lt && !this.isKids && !(this.cyc && (this.cyc.kind === 'lt' || this.cyc.kind === 'both'))) this.ltLine(card, col, b.lesson);
     // How long a part really takes this student: from the first tap to the last sentence.
     card.addEventListener('pointerdown', () => { if (!this.tStory) this.tStory = Date.now(); }, true);
     // The week as a short path: one dot a day, today's is the big one.
@@ -4328,6 +4333,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (this.abcEl && !this.doneToday('abc')) { if (abcNew) steps.unshift(abcGo); else steps.push(abcGo); }
     if (this.cbList && this.cbList.length && !this.doneToday('cb')) steps.push({ label: 'Spaced review', min: 1, key: 'cb', go: () => this.popComebacks(this.cbList.slice(0, 1)) });
     if (rev.length && this.revEl && !this.doneToday('rev')) { const n = Math.min(8, rev.length); steps.push({ label: `${n} review word${n === 1 ? '' : 's'}`, key: 'rev', el: this.revEl, min: Math.max(1, Math.round(n * 12 / 60)), go: () => { this.markDone('rev'); this.focusCard(this.revEl); } }); }
+    if (this.cyc && this.cycEl && !this.doneToday('cyc')) steps.unshift({ label: this.cyc.label, min: this.cyc.min, el: this.cycEl, key: 'cyc', go: () => this.focusCard(this.cycEl) });
     const head = c.createDiv('gq-thead'), line = c.createDiv('gq-next-line'), r = c.createDiv('gq-row'), s = steps[0];
     this.nextOpen = (s && s.el) || null; this.nextSteps = steps;
     if (s && away >= 2) { head.createEl('strong', { text: 'Welcome back' }); line.setText('Just one line today?'); }
@@ -4341,7 +4347,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const wh = this.whereGet();
     if (wh) { const d = c.createDiv('gq-hint gq-next-back'); d.appendText('Back to where you were: '); const a = d.createEl('a', { text: wh.label, href: '#' }); a.onclick = e => { e.preventDefault(); this.whereGo(wh); }; }
     if (!ctx.fresh || this.planNowGet() || this.tourIs('plan')) this.planRow(c);
-    const first = box.querySelector(':scope > .gq-tcard'); if (first) box.insertBefore(c, first); else box.appendChild(c);
+    const first = box.querySelector(':scope > .gq-tcard:not(.gq-class-ask)'); if (first) box.insertBefore(c, first); else box.appendChild(c);
   }
   // Two different kinds of thing, a new pair each day, so it never feels like the same list.
   choiceTwo(rev) {
@@ -4389,12 +4395,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       { t: 'Phonetics', d: 'Shows how to say each Greek word in Latin letters.', on: () => this.phOn(), set: v => this.setPh(v) },
       { t: 'Calm mode', d: 'Stops the moving parts.', on: () => this.calmOn(), set: v => this.setCalm(v) },
       { t: 'Focus sound', d: 'A soft hiss (pink noise). It helps some people and bothers others.', on: () => !!this.noise, set: v => { if (!!this.noise !== v) this.toggleNoise(); } },
-      !this.isKids && { t: 'Language Transfer', d: 'The free audio course alongside the story. Today keeps your track and says which tracks go with the lesson.', on: () => this.colors().lt, set: v => this.ltSet({ lt: !!v }) },
       !this.isKids && { t: 'Fluent in a Year pace', d: 'The story one day a day, to finish the 1,500 words in a year. Today shows if you are behind.', on: () => !!this.colors().fiay, set: v => this.setFiay(v) }
     ].filter(Boolean);
     this.pop('Options', [{ label: '', build: el => {
       const list = el.createDiv('gq-opts');
       if (!this.isKids && !this.app.vault.getAbstractFileByPath('Teacher')) setTimeout(() => { const a = el.createEl('a', { text: 'Setup again: start and pace', href: '#', cls: 'gq-hint gq-setup-again' }); a.onclick = e => { e.preventDefault(); this.setupAgain(); }; }, 0);
+      if (!this.isKids && !this.app.vault.getAbstractFileByPath('Teacher')) { const row = list.createDiv('gq-opt'), tx = row.createDiv('gq-opt-tx');
+        tx.createDiv({ cls: 'gq-opt-t', text: 'Class days and book' }); tx.createDiv({ cls: 'gq-hint', text: this.classDaysText() + ' · ' + { beg: 'Beginners\u2019 Greek', comp: 'Complete Greek', both: 'both books', none: 'no book' }[this.classBooks()] + '. Today plans your week around them: Language Transfer after class, the book before the next one.' });
+        const ch = row.createEl('button', { text: 'Change', cls: 'gq-mini' }); ch.onclick = () => { const p = document.querySelector('.gq-pop'); if (p) p.remove(); this.classDaysPop(); }; }
       for (const o of O) {
         const row = list.createDiv('gq-opt'), tx = row.createDiv('gq-opt-tx');
         tx.createDiv({ cls: 'gq-opt-t', text: o.t }); tx.createDiv({ cls: 'gq-hint', text: o.d });
@@ -4490,6 +4498,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (this.showSwitch()) this.scriptSwitch(box);
       const moFresh = !Object.keys(this.moData().days || {}).length;
       this.paperCard(box, dd);
+      // The week between classes, first on Today. Students who haven't said their class days are asked once.
+      this.cyc = null; this.cycEl = null;
+      if (!this.isKids && !this.app.vault.getAbstractFileByPath('Teacher')) {
+        const st0 = this.ltStage(col);
+        if (st0 !== 'ears' && st0 !== 'read') { this.cyc = await this.cycleInfo(now); if (this.cyc) this.cycleCard(box, col, this.cyc); }
+        if (this.classDays() === null && !this.needSetup()) this.classDaysCard(box);
+      }
       if (!col.setup_seen && !this.tourLeft()) {
         const s = box.createDiv('gq-tcard gq-tnew'); s.createSpan({ text: 'New here? ' });
         const a = s.createEl('a', { text: 'Read Setting up', href: '#' }); a.onclick = e => { e.preventDefault(); this.setupSeen(); this.openNote(SETUP); };
@@ -4756,7 +4771,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // the puzzle, say it together, then the song, the game, the swap and the moves.
     // The separate review word list is not on the path; spaced review is the day's review step.
     if (!kids) { const rv = list.filter(c => c.hasClass('gq-review')); rv.forEach(c => c.remove()); list = list.filter(c => !rv.includes(c)); }
-    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : ['gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
+    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : ['gq-class-ask', 'gq-cycle', 'gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
     const rk = c => { const k = rank.findIndex(x => c.hasClass(x)); return k < 0 ? rank.length : k; };
     list = list.map((c, k) => [c, k]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map(x => x[0]);
     if (mo) list.push(mo);
@@ -4774,7 +4789,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (nxc) { nxc.addClass('is-slim'); delete nxc.dataset.tour; if (!nxc.querySelector('.gq-tour-line, .gq-next-back, .gq-week-line')) nxc.hide(); }
     wrap.dataset.tour = kids ? 'stack' : 'next'; this.stackOn = true; this.stackNx = st;
     const anchor = nxc || box.querySelector(':scope > .gq-knew') || box.querySelector(':scope > h2'); if (anchor) anchor.after(wrap); else box.prepend(wrap);
-    const name = c => c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'This week\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
+    const name = c => c.hasClass('gq-class-ask') ? 'Class days' : c.hasClass('gq-cycle') ? (c.dataset.name || 'This week') : c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'This week\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
     // Where you are today is kept, so leaving and coming back lands on the same step. A new day starts at the top.
     const today = ymd(new Date()), at = this.lsGet('dayat', null);
     let i = this.stackPick ? list.findIndex(c => name(c) === this.stackPick) : -1;
@@ -4914,6 +4929,103 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   abcOff() { return this.abcKnown() || !!this.lsGet('abcoff', 0); }
   // Said at setup that they read the alphabet: letter practice is gone, with no way back in except Setup again.
   abcKnown() { return this.progFm().knows_abc === true; }
+  // ---------- Class days and the week between classes ----------
+  // class_days: [3] (Wednesday), [1, 3] (Monday and Wednesday), 'none' (not in a class). null = not asked yet.
+  classDays() { const v = this.progFm().class_days; if (v === 'none') return []; if (!Array.isArray(v)) return null; const d = [...new Set(v.map(Number).filter(x => x >= 0 && x <= 6))].sort(); return d.length ? d : null; }
+  classDaysText() { const d = this.classDays(); return d === null ? 'Not set yet' : d.length ? 'Class on ' + d.map(x => DAY_LONG[x]).join(' and ') : 'Not in a class'; }
+  classBooks() { const v = this.progFm().class_books; return ['beg', 'comp', 'both', 'none'].includes(v) ? v : 'both'; }
+  async setClassDays(d, books) {
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.class_days = d.length ? d : 'none'; if (books) fm.class_books = books; });
+    new Notice(d.length ? `Class days: ${d.map(x => DAY_LONG[x]).join(' and ')}. Today plans your week around them.` : 'Not in a class. Today still plans your week.');
+    setTimeout(() => this.refreshToday(), 300);
+  }
+  // Pick the days: tap one or two, then Save. Not in a class is its own button.
+  classDaysPick(el, done) {
+    const cur = this.classDays() || [], on = new Set(cur);
+    el.createDiv({ cls: 'gq-pop-big', text: 'Which days do you have class?' });
+    el.createDiv({ cls: 'gq-hint', text: 'Tap every day you meet, one or more. Today plans your week around them: Language Transfer right after class, then the book reading before the next one.' });
+    const ch = el.createDiv('gq-chips gq-class-days'), bs = [];
+    const save = el.createDiv('gq-row').createEl('button', { text: 'Save', cls: 'mod-cta' });
+    const paint = () => { bs.forEach(([d, b]) => { b.toggleClass('mod-cta', on.has(d)); b.setAttr('aria-pressed', String(on.has(d))); }); save.disabled = !on.size; };
+    for (const d of [1, 2, 3, 4, 5, 6, 0]) { const b = ch.createEl('button', { text: DAY_LONG[d].slice(0, 3), cls: 'gq-mini', attr: { 'aria-label': DAY_LONG[d] } }); b.onclick = () => { on.has(d) ? on.delete(d) : on.add(d); paint(); }; bs.push([d, b]); }
+    const books = d => { el.empty();
+      el.createDiv({ cls: 'gq-pop-big', text: 'Which book do you read?' }); el.createDiv({ cls: 'gq-hint', text: 'For the reading before class. You can change this later in Options.' });
+      const col = el.createDiv('gq-setup-opts'), cur = this.classBooks();
+      for (const [t, sub, v] of [['Beginners\u2019 Greek', 'Teach Yourself Beginners\u2019 Greek', 'beg'], ['Complete Greek', 'Teach Yourself Complete Greek', 'comp'], ['Both', 'Beginners\u2019 Greek first, Complete Greek for more', 'both'], ['No book', 'Skip the reading; Language Transfer all week', 'none']]) {
+        const b = col.createEl('button', { cls: 'gq-setup-opt' + (v === cur ? ' is-on' : '') }); b.createDiv({ cls: 'gq-setup-t', text: t }); b.createDiv({ cls: 'gq-hint', text: sub }); b.onclick = () => done(d, v); } };
+    paint(); save.onclick = () => books([...on].sort());
+    const no = el.createDiv('gq-hint').createEl('a', { text: 'I\u2019m not in a class', href: '#' }); no.onclick = e => { e.preventDefault(); books([]); };
+  }
+  classDaysPop() { this.pop('Class days', [{ label: '', build: (el, api) => this.classDaysPick(el, async (d, b) => { api.close(); await this.setClassDays(d, b); }) }]); }
+  // Asked once, on Today, for students who set up before class days existed.
+  classDaysCard(box) {
+    const c = createDiv('gq-tcard gq-class-ask'); this.classDaysPick(c, (d, b) => this.setClassDays(d, b)); box.prepend(c);
+  }
+  // Where today falls between the last class and the next one: class day, Language Transfer days, then book days.
+  // Days are counted on the class calendar; a week with no lesson has no class. Not in a class: the week runs as if class were on Wednesday.
+  async cycleInfo(now) {
+    const days = this.classDays(), cd = days && days.length ? days : CLASS_DEFAULT, start = new Date(COURSE_START[0], COURSE_START[1], COURSE_START[2]);
+    const wk = {}, lessonOn = async d => { const dd = Math.floor((d - start) / 864e5); if (dd < 0) return 0; const w = Math.floor(dd / 7) + 1; if (!(w in wk)) { const n = await this.weekNote(w); wk[w] = n ? Number(n.fm.lesson) || 0 : 0; } return wk[w]; };
+    const at = k => new Date(now.getFullYear(), now.getMonth(), now.getDate() + k);
+    let next = null, prev = null;
+    for (let k = 0; k < 42 && !next; k++) { const d = at(k); if (cd.includes(d.getDay())) { const n = await lessonOn(d); if (n) next = { k, d, n }; } }
+    for (let k = 1; k < 42 && !prev; k++) { const d = at(-k); if (cd.includes(d.getDay())) { const n = await lessonOn(d); if (n) prev = { k, d, n }; } }
+    if (!next && !prev) return null;
+    const inClass = !!(days && days.length);
+    if (next && next.k === 0 && inClass) return { kind: 'class', next, prev, label: `Rally before class, Lesson ${next.n}`, min: 3, days };
+    const units = n => { const k = String(n).padStart(2, '0'), L = BOOK_UNITS['L' + k] || ['', ''], I = BOOK_UNITS['I' + k] || ['', '']; return { beg: L[0], comp: L[1] || I[1] }; };
+    let kind;
+    if (!next) kind = 'lt';
+    else if (!prev) kind = 'book';
+    else { const gap = prev.k + next.k - 1, pos = prev.k; kind = gap <= 1 ? 'both' : pos <= Math.ceil(gap / 3) ? 'lt' : 'book'; }
+    const bk = this.classBooks(), u0 = next ? units(next.n) : { beg: '', comp: '' };
+    const u = bk === 'none' ? { beg: '', comp: '' } : bk === 'beg' ? { beg: u0.beg, comp: '' } : bk === 'comp' ? { beg: '', comp: u0.comp } : u0;
+    if (!u.beg && !u.comp) kind = 'lt';
+    const label = kind === 'lt' ? 'Language Transfer, one or two tracks' : kind === 'book' ? `Book reading for Lesson ${next.n}` : 'Language Transfer, then the book';
+    return { kind, next, prev, units: u, hasBook: !!(u.beg || u.comp), label, min: kind === 'both' ? 25 : 15, days, inClass };
+  }
+  cycleCard(box, col, cy) {
+    const c = createDiv('gq-tcard gq-cycle'); this.cycEl = c; c.dataset.name = cy.kind === 'class' ? 'Before class' : cy.kind === 'book' ? 'The book' : 'Language Transfer'; const h = c.createDiv('gq-thead'), done = this.doneToday('cyc');
+    const when = cy.next ? (cy.next.k === 1 ? 'tomorrow' : DAY_LONG[cy.next.d.getDay()]) : '';
+    const fin = () => { this.markDone('cyc'); };
+    if (cy.kind === 'class') {
+      h.createEl('strong', { text: `Class today · Lesson ${cy.next.n}` });
+      c.createDiv({ text: done ? 'Warmed up. See you in class.' : 'Warm up before class: hear the rally questions and answer out loud.' });
+      const f = this.lessonPage(cy.next.n), r = c.createDiv('gq-row');
+      (async () => { const pairs = f ? this.rallyPairs(await this.app.vault.cachedRead(f)) : [];
+        if (pairs.length) { const b = r.createEl('button', { text: `Practice the rally (${pairs.length})`, cls: done ? 'gq-mini' : 'mod-cta' }); b.onclick = () => { fin(); this.popRally(cy.next.n, pairs); }; r.prepend(b); } })();
+      if (f) { const lb = r.createEl('button', { text: 'Lesson page', cls: 'gq-mini' }); lb.onclick = () => { fin(); this.openNote(f.path); }; }
+    }
+    if (cy.kind === 'lt' || cy.kind === 'both') {
+      const sec = cy.kind === 'both' ? c.createDiv('gq-cycle-sec') : c, hh = cy.kind === 'both' ? sec.createDiv('gq-tsub') : h;
+      hh.createEl('strong', { text: cy.prev && cy.inClass ? 'After class · Language Transfer' : 'Language Transfer' });
+      if (col.lt_track < LT_MAX) {
+        hh.createSpan({ cls: 'gq-hint', text: `  · track ${col.lt_track + 1}` });
+        sec.createDiv({ text: 'One or two tracks. Pause when asked and say your answer out loud before you hear it.' });
+        const tie = cy.prev && LT_TIES[cy.prev.n];
+        if (tie) { const t = sec.createDiv('gq-hint'); t.appendText(`Lesson ${cy.prev.n}\u2019s `); t.createSpan({ text: tie[2], attr: /[α-ω]/.test(tie[2]) ? { lang: 'el' } : {} }); t.appendText(`: tracks ${tie[0]} to ${tie[1]}` + (col.lt_track >= tie[1] ? ' (done)' : col.lt_track + 1 < tie[0] ? ' (coming up)' : '')); }
+        this.ltTrackRow(sec, col, !done && cy.kind === 'lt', fin);
+      } else sec.createDiv({ cls: 'gq-hint', text: 'You finished all 120 tracks. Replay one from a word card any time.' });
+      if (cy.kind === 'lt' && cy.next && cy.hasBook) c.createDiv({ cls: 'gq-hint', text: cy.inClass ? `Then the book reading for Lesson ${cy.next.n}, before class ${when}.` : `Then the book reading for Lesson ${cy.next.n}.` });
+    }
+    if (cy.kind === 'book' || cy.kind === 'both') {
+      const sec = cy.kind === 'both' ? c.createDiv('gq-cycle-sec') : c, hh = cy.kind === 'both' ? sec.createDiv('gq-tsub') : h;
+      hh.createEl('strong', { text: 'Before class · the book' }); hh.createSpan({ cls: 'gq-hint', text: `  · Lesson ${cy.next.n}` + (cy.inClass ? `, class ${when}` : '') });
+      const u = cy.units, ul = sec.createDiv('gq-cycle-books');
+      if (u.beg) { const li = ul.createDiv(); li.createEl('strong', { text: 'Beginners\u2019 Greek' }); li.appendText(` · ${u.beg} · `); const a = li.createEl('a', { text: 'audio', href: BOOK_AUDIO.beg }); a.onclick = e => { e.preventDefault(); window.open(BOOK_AUDIO.beg, '_blank'); }; }
+      if (u.comp) { const li = ul.createDiv(); li.createEl('strong', { text: 'Complete Greek' }); li.appendText(` · ${u.comp} · `); const a = li.createEl('a', { text: 'audio', href: BOOK_AUDIO.comp }); a.onclick = e => { e.preventDefault(); window.open(BOOK_AUDIO.comp, '_blank'); }; }
+      sec.createDiv({ cls: 'gq-hint', text: (u.beg && u.comp ? 'Beginners\u2019 Greek first; Complete Greek if you want more. ' : '') + 'A little each day until class. The lesson page lists the sections.' });
+      const r = sec.createDiv('gq-row'), did = this.doneToday('cycbook');
+      const y = r.createEl('button', { text: did ? 'Read today' : 'I read today', cls: did ? 'gq-mini' : 'mod-cta' }); y.disabled = did;
+      y.onclick = () => { y.disabled = true; y.setText('Read today'); this.moAdd('did', 'book:' + cy.next.n, 2); const d0 = this.lsGet('done', {}); d0.cycbook = ymd(new Date()); this.lsSet('done', d0); fin(); setTimeout(() => this.refreshToday(), 600); };
+      const f = this.lessonPage(cy.next.n); if (f) { const lb = r.createEl('button', { text: 'What to read', cls: 'gq-mini' }); lb.onclick = () => this.openNote(f.path); }
+    }
+    if (done && cy.kind !== 'class') { const d = createDiv({ cls: 'gq-hint gq-cycle-done', text: 'Done for today. More is welcome.' }); c.insertBefore(d, h.nextSibling); }
+    const ch = c.createDiv('gq-hint gq-cycle-days'); ch.appendText(this.classDaysText() + ' · ');
+    const a = ch.createEl('a', { text: 'Change', href: '#' }); a.onclick = e => { e.preventDefault(); this.classDaysPop(); };
+    box.prepend(c);
+  }
   // ---------- Ears first: Language Transfer, then Read what you've heard ----------
   // ears: tracks 1 to 30, nothing to read. read: the six sessions (one a day). with: the audio alongside the story. '' = off.
   ltStage(col) {
@@ -4928,10 +5040,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   ltOpen(n) { window.open(n ? ltTrackUrl(n) : LT_URL, '_blank'); this.moAdd && this.moAdd('did', 'lt', 1); }
   // A row for the track: Open, I listened, and a slider to set the track (for students who already started the course).
-  ltTrackRow(c, col, cta) {
+  ltTrackRow(c, col, cta, after) {
     const r = c.createDiv('gq-row'), nx = Math.min(LT_MAX, col.lt_track + 1);
     const o = r.createEl('button', { text: 'Open Language Transfer', cls: cta ? '' : 'gq-mini' }); o.onclick = () => this.ltOpen(nx);
-    const y = r.createEl('button', { text: `I listened to track ${nx}`, cls: cta ? 'mod-cta' : 'gq-mini' }); y.onclick = () => { y.disabled = true; this.moAdd && this.moAdd('did', 'lt-' + nx, 1); this.ltSet({ lt_track: nx }); };
+    const y = r.createEl('button', { text: `I listened to track ${nx}`, cls: cta ? 'mod-cta' : 'gq-mini' }); y.onclick = () => { y.disabled = true; this.moAdd && this.moAdd('did', 'lt-' + nx, 1); if (after) after(); this.ltSet({ lt_track: nx }); };
     const ch = c.createDiv('gq-hint').createEl('a', { text: 'Already further along?', href: '#' });
     ch.onclick = e => { e.preventDefault(); ch.parentElement.remove(); this.ltPicker(c, col); };
   }
@@ -5090,8 +5202,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const nw = ans.start === 'new';
         if (nw) ul.createEl('li', { text: 'Ears first: Language Transfer, a free audio course, one or two tracks a day. After track 30 you learn the letters with words you already know.' });
         ul.createEl('li', { text: ans.pace === 'fiay' ? (nw ? 'Fluent in a Year: day one is the day you start reading, so you never start behind.' : 'Fluent in a Year: today is day one. One story day each day, and Today shows if you fall behind.') : 'Casual: one short story part a day, at your own pace.' });
+        if (ans.days) ul.createEl('li', { text: ans.days.length ? `Class on ${ans.days.map(d => DAY_LONG[d]).join(' and ')}: Language Transfer right after class, then the book reading before the next one.` : 'No class: Language Transfer early in the week, then the book reading.' });
         if (!nw) ul.createEl('li', { text: ans.abc ? 'You read the alphabet: plain Greek letters, no letter practice.' : 'Learning the alphabet: letter practice, and the sound of each word under it.' });
-        el.createDiv({ cls: 'gq-hint', text: 'Change it later in Options, under the three dots.' });
+        el.createDiv({ cls: 'gq-hint', text: 'Change it later in Class, under Settings and help, then Options.' });
         const r = el.createDiv('gq-row'); const go = r.createEl('button', { text: 'Start', cls: 'mod-cta' });
         go.onclick = async () => { await save(); api.close(); if (ans.start !== 'new') setTimeout(() => { if (!this.tourOpen()) this.tourStart(); }, 500); }; };
       // Where they start, then how far. New to Greek starts by ear (Language Transfer); nobody is asked about letters twice.
@@ -5103,14 +5216,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         q('How far do you want to go?', 'You can change this later.', [
           ['Casual', 'A little each day, at your own pace.', 'casual'],
           ['Fluent in a Year', 'About 20 minutes a day, every day, for a year.', 'fiay']
-        ], v => { ans.pace = v; done(); }); });
+        ], v => { ans.pace = v; el.empty(); this.classDaysPick(el, (d, b) => { ans.days = d; ans.books = b; done(); }); }); });
     } }], () => { save(); });
   }
   async setupSave(ans) {
     const fiay = ans.pace === 'fiay', now = new Date(), day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
     this.phNow = !ans.abc; this.applyPh(); if (!ans.abc) this.lsSet('abcoff', 0);
     const f = await this.progressFile();
-    await this.app.fileManager.processFrontMatter(f, fm => { fm.setup_done = true; fm.pace = ans.pace; fm.knows_abc = !!ans.abc; fm.phonetics = !ans.abc;
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.setup_done = true; fm.pace = ans.pace; if (ans.days) fm.class_days = ans.days.length ? ans.days : 'none'; if (ans.books) fm.class_books = ans.books; fm.knows_abc = !!ans.abc; fm.phonetics = !ans.abc;
       // New to Greek: ears first. Fluent in a Year waits for the first reading day (lt_fiay), so the pace doesn't start out behind.
       if (ans.start === 'new') { fm.lt = true; if (!(parseInt(fm.lt_track, 10) > 0)) fm.lt_track = 0; if (fm.lt_read === undefined) fm.lt_read = 0; }
       if (fiay && ans.start === 'new' && !(parseInt(fm.lt_read, 10) >= LT_BRIDGE.length)) { fm.lt_fiay = true; delete fm.fiay; delete fm.fiay_from; }

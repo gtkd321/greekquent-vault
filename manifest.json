@@ -1,5 +1,5 @@
 {
-"release": "2026-11-20u",
+"release": "2026-11-23a",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -26,16 +26,16 @@
 "size": 28555
 },
 ".obsidian/plugins/greekquent-student-layout/apps/fridge.html": {
-"sha256": "2a8e88915cf2aa0d1cc3f10fce3f387e075a3638eaaf7c28444b5bb08890a062",
-"size": 37977
+"sha256": "bbd8d0a1279e2ffe4bb6b78bf095f60eb360a4bf619b67f180c381da71fce062",
+"size": 37965
 },
 ".obsidian/plugins/greekquent-student-layout/apps/giagia.html": {
 "sha256": "af6f4befad73c8da343dc7c66d7de84365377dd81cfc59509bc93c1bf8835e68",
 "size": 146759
 },
 ".obsidian/plugins/greekquent-student-layout/apps/hello.html": {
-"sha256": "97e26ad1b810feee1686d19a412a4ab5d7871d6526e8056d1e636cfedfd2370c",
-"size": 29471
+"sha256": "78cb523fcba56bc70c2fa3e3bb4f1ecdd2a74d10427fb5d4763c40e98c5700a5",
+"size": 29459
 },
 ".obsidian/plugins/greekquent-student-layout/apps/storylines.html": {
 "sha256": "42ffa2101f55bb285a4919b51afd080485b17d21d71837582253a32e82648e22",
@@ -46,11 +46,11 @@
 "size": 95503
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "aa9ff72edb1cd8f3b9466e80ad45dc46614e0a2aed81fe950f237b7089dc83aa",
-"size": 649484
+"sha256": "5d5d305046bd6e6a7f0ab7ed91d3c4e1c5d0c129432f0b9e71166311ed2fb241",
+"size": 662654
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "2d9a7c4c174218649fb06ca00c2f3eda04e7a1236c9a0f85d9831c306d369d1b",
+"sha256": "ad18fa1073a198c085d016af06d02bc765d7eb20177e3661fae8d5445bc02580",
 "size": 374
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -58,8 +58,8 @@
 "size": 272119
 },
 ".obsidian/plugins/greekquent-student-layout/styles.css": {
-"sha256": "abbc43892ac22d9733899083de413bfd6b82c89a5946b170253254ccf9d15a2b",
-"size": 80304
+"sha256": "98d8b5a2127d35a9b3fe3f061925009b093dbadf0458849bebf68972ea2d4801",
+"size": 80737
 },
 ".obsidian/plugins/greekquent-student-layout/verbs.json": {
 "sha256": "00e00b6ade1bfc6dc9bdc85b7daef690e8a4a0e3cbb2b57ae0c9e0596c27767d",
@@ -138,8 +138,8 @@
 "size": 2973
 },
 "Extras/Copyright.md": {
-"sha256": "4c89dc8afd438c7ff09b696f47157538eabe4c16f9dc6d3c7751447b1df183ea",
-"size": 627
+"sha256": "cc805ee4d00f4ef7a6405d784c9f7804d973562d6aa1da46428aba6404442987",
+"size": 615
 },
 "Extras/Practice together.md": {
 "sha256": "1bc15979419f5eb6f5388fdea1d0c3fec84b7bbdb756c6760e9403cc29f8cb6f",
@@ -154,8 +154,8 @@
 "size": 2430
 },
 "Extras/What's New.md": {
-"sha256": "d9f1d3bf3f87a510672320199a1784ee1072b6e2de123d2632bc81df0f2d02ca",
-"size": 59033
+"sha256": "9b3fd474e1ddbe8078c11ed1032b8fa8e16d0b8c1fece9f2896e2889383eb42f",
+"size": 59690
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "b2a5eff8014aad49700f518504d68027fd2179c16a4797b42e8070cfa55f779d",

@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Your class days plan your week (2026-11-23a)
+> Today now asks which days you have class. Tap every day you meet (Monday and Wednesday, just Thursday, any mix), then pick your book: Beginners' Greek, Complete Greek, both, or none. Today plans the days in between. Right after class: Language Transfer, one or two tracks a day. Then, leading up to the next class: that lesson's reading in your book, with a link to the free audio. On class day: a quick rally warm-up. Language Transfer is now on for everyone. Tap "I listened" for 1 φόρα a track and "I read today" for 2. Change your days or book any time in Options (Class, then Settings and help).
+
 > [!tip]- Search finds any part of a word (2026-11-20u)
 > Words search now finds letters anywhere in a word: μένω also brings up περιμένω and παραμένω. Spell it how it sounds and it still finds the word (σκεψι finds σκέψη). Missing letters? Type * for the gap, like *ξη or _μεν_. Not in the 1,500? The translation shows right there under the search, and if you misspelled it, it shows the closest spelling (κατάψηξη becomes κατάψυξη, freezing).
 

@@ -1,5 +1,5 @@
 {
-"release": "2026-11-23a",
+"release": "2026-11-23b",
 "files": {
 ".obsidian/app.json": {
 "sha256": "f99c0a40bb98a4cf0f067ab50a14dc1cbfe91f78ee44047941cf16595c885443",
@@ -46,11 +46,11 @@
 "size": 95503
 },
 ".obsidian/plugins/greekquent-student-layout/main.js": {
-"sha256": "5d5d305046bd6e6a7f0ab7ed91d3c4e1c5d0c129432f0b9e71166311ed2fb241",
-"size": 662654
+"sha256": "366679be542bfb1e723eed4e154949d53c1c596891b2984a600c46eae8cd0ccf",
+"size": 665056
 },
 ".obsidian/plugins/greekquent-student-layout/manifest.json": {
-"sha256": "ad18fa1073a198c085d016af06d02bc765d7eb20177e3661fae8d5445bc02580",
+"sha256": "feab87c7d10d63b9cf4f048539567d1729d0e5fae2bfdc582164ee9b3ca25260",
 "size": 374
 },
 ".obsidian/plugins/greekquent-student-layout/pairs.json": {
@@ -58,8 +58,8 @@
 "size": 272119
 },
 ".obsidian/plugins/greekquent-student-layout/styles.css": {
-"sha256": "98d8b5a2127d35a9b3fe3f061925009b093dbadf0458849bebf68972ea2d4801",
-"size": 80737
+"sha256": "da21cac2ae0713f3667f61a84157eccf0a63dff130c3006037845de5226dc129",
+"size": 81151
 },
 ".obsidian/plugins/greekquent-student-layout/verbs.json": {
 "sha256": "00e00b6ade1bfc6dc9bdc85b7daef690e8a4a0e3cbb2b57ae0c9e0596c27767d",
@@ -154,8 +154,8 @@
 "size": 2430
 },
 "Extras/What's New.md": {
-"sha256": "9b3fd474e1ddbe8078c11ed1032b8fa8e16d0b8c1fece9f2896e2889383eb42f",
-"size": 59690
+"sha256": "ef04a0a91f6488549b9444606f980ef17ac0ec90ddbbcb992a53614a9b53451e",
+"size": 60163
 },
 "Extras/Word lists/Words 0001-0150.md": {
 "sha256": "b2a5eff8014aad49700f518504d68027fd2179c16a4797b42e8070cfa55f779d",
@@ -426,8 +426,8 @@
 "size": 11787
 },
 "Scripts/Beginner/L05 Lost items and the shop-student.md": {
-"sha256": "efcdd324a3acb804c2132dc7e59c8aeb9e0243926b23ebac0f0be096423ba795",
-"size": 13368
+"sha256": "de6fa957eb4ba27813ff855f69143e2da9f7983ce99cc7f06d831c72340bb8de",
+"size": 13358
 },
 "Scripts/Beginner/L06 Coffee plans at the kafeneio-student.md": {
 "sha256": "fc6b9bac406bdee1d3d600aea2435266681d51b4d58a5dfc963794cdaeec8708",

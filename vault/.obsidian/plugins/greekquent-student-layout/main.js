@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-23a';
+const VAULT_RELEASE = '2026-11-23b';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1313,7 +1313,7 @@ class LookupModal extends Modal {
     this.input.oninput = () => this.render();
     this.input.onkeydown = e => {
       if (e.key !== 'Enter') return;
-      const b = this.list.querySelector('.gq-hit button'); if (b) { b.click(); return; }
+      const b = this.list.querySelector('.gq-hit-text.gq-open'); if (b) { b.click(); return; }
       clearTimeout(this.timer); this.translate(true);
     };
     this.plugin.wordIndex().then(() => this.render());
@@ -1338,7 +1338,7 @@ class LookupModal extends Modal {
     }
     const close = this.plugin.isKids ? [] : this.plugin.closeWords(q);
     if (!hits.length && !close.length) L.createDiv({ cls: 'gq-hint', text: 'Not in the 1,500.' });
-    close.forEach((c, i) => this.plugin.closeSet(L, c, i === 0, w => { this.plugin.logLookup(q, w); this.close(); this.plugin.openGraph(w.path); }));
+    close.forEach((c, i) => this.plugin.closeSet(L, c, i === 0, w => { this.plugin.logLookup(q, w); this.close(); this.plugin.openGraph(w.path); }, w => { this.plugin.logLookup(q, w); this.close(); this.plugin.openCard(w); }));
     if (close.length && !hits.length) return;   // a Greek sentence: the close words are the answer
     if (/[*_…]/.test(q)) { if (!hits.length) L.empty(), L.createDiv({ cls: 'gq-hint', text: 'No word in the 1,500 has those letters.' }); return; }
     this.bonus = L.createDiv('gq-bonus');
@@ -1358,15 +1358,17 @@ class LookupModal extends Modal {
     const tr = await this.plugin.translate(q);
     if (q !== this.input.value.trim() || box !== this.bonus) return;   // the student kept typing
     box.empty(); this.tr = tr;
-    this.plugin.bonusShow(box, q, tr, save, w => { this.close(); this.plugin.openGraph(w.path); });
+    this.plugin.bonusShow(box, q, tr, save, w => { this.close(); this.plugin.openCard(w); });
   }
   fill(row, w, q) {
     const t = row.createDiv('gq-hit-text');
     const m = t.createDiv({ cls: 'gq-hit-main' }); const c = this.plugin.colorOf(w.word); m.createSpan({ cls: 'gq-dot gq-' + (c || 'new'), attr: { 'aria-label': c ? c + ' word' : 'new word' } }); m.appendText(`${w.word}  ·  ${w.english}`);
     t.createDiv({ cls: 'gq-hit-sub', text: [w.pron ? 'say it: ' + w.pron : '', this.plugin.isKids ? '' : '#' + w.rank + ' of 1,500', w.form ? 'form: ' + w.form : ''].filter(Boolean).join('  ·  ') });
     if (w.cognates) t.createDiv({ cls: 'gq-hit-sub', text: `English cognates: ${w.cognates}${w.via ? '  (you typed a cousin: ' + w.via + ')' : ''}` });
-    const g = row.createEl('button', { text: 'Word web' });
-    g.onclick = () => { if (q) this.plugin.logLookup(q, w); this.close(); this.plugin.openGraph(w.path); };
+    // A tap anywhere on the word opens its card. Word web is the smaller, second choice.
+    t.addClass('gq-open'); t.onclick = () => { if (q) this.plugin.logLookup(q, w); this.close(); this.plugin.openCard(w); };
+    const g = row.createEl('button', { text: 'Word web', cls: 'gq-mini' });
+    g.onclick = e => { e.stopPropagation(); if (q) this.plugin.logLookup(q, w); this.close(); this.plugin.openGraph(w.path); };
   }
   onClose() {
     clearTimeout(this.timer);
@@ -2160,7 +2162,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     return this.indexing;
   }
   // One set of close words: each word, its English, and how it differs. Tap a word to hear it.
-  closeSet(L, c, open, onWeb) {
+  closeSet(L, c, open, onWeb, onCard) {
+    onCard = onCard || (w => this.openCard(w));
     const d = L.createEl('details', { cls: 'gq-close' }); if (open) d.open = true;
     d.createEl('summary', { text: `Close words: ${c.label}${c.from ? ' · for ' + c.from : ''}` });
     const pc = this.colors(), lt = pc.lt || c.track ? pc : null;
@@ -2172,8 +2175,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       mn.appendText(`${w.word}  ·  ${w.english}`); if (m.best) mn.createSpan({ cls: 'gq-close-best', text: 'Best fit' });
       t.createDiv({ cls: 'gq-hit-sub', text: m.note });
       if (lt && LT_FIRST[w.word]) { const n = LT_FIRST[w.word]; t.createDiv({ cls: 'gq-hit-sub gq-close-lt', text: n <= lt.lt_track ? `Heard in Language Transfer, track ${n}` : `Language Transfer track ${n}` }); }
-      t.onclick = () => say(w.word);
-      const g = row.createEl('button', { text: 'Word web', cls: 'gq-mini' }); g.onclick = () => onWeb(w);
+      t.addClass('gq-open'); t.onclick = () => onCard(w);
+      const g = row.createEl('button', { text: 'Word web', cls: 'gq-mini' }); g.onclick = e => { e.stopPropagation(); onWeb(w); };
     }
   }
   // Close words for what the student typed: an English word or description ("think about my trip"), a Greek word, or a Greek sentence.
@@ -2303,7 +2306,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     t.createDiv({ cls: 'gq-hit-sub', text: inList ? (this.isKids ? 'It is one of your words.' : `It is #${inList.rank} of the 1,500.`) : 'Bonus word. It goes in Words I looked up.' });
     const btns = box.createDiv('gq-btns');
     const h = btns.createEl('button', { text: 'Hear it' }); h.onclick = () => say(gr);
-    if (inList) { const g = btns.createEl('button', { text: 'Word web' }); g.onclick = () => { this.logLookup(q, inList); onWeb(inList); }; }
+    if (inList) { const g = btns.createEl('button', { text: 'Word card' }); g.onclick = () => { this.logLookup(q, inList); onWeb(inList); }; }
     if (save) this.logLookup(q, inList || null, inList ? null : tr);
     return inList;
   }
@@ -2654,6 +2657,18 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.addItem(i => i.setTitle('Update vault').setIcon('refresh-cw').onClick(() => this.updateVault(false)));
     if (this.isTeacher) m.addItem(i => i.setTitle('Teacher update key').setIcon('key').onClick(() => this.keyModal()));
     if (evt && evt.clientX !== undefined) m.showAtMouseEvent(evt); else m.showAtPosition({ x: 60, y: 200 });
+  }
+  // A word's card is its note. Every tap on a word in search lands here (Word web is always its own button).
+  async openCard(w) { if (!w) return; say(w.word); return this.openNote(w.path); }
+  // Starred words: favorites, kept in My progress next to the colors, so updates never erase them.
+  stars() { if (this.starsNow) return this.starsNow; const fm = this.progFm(); return Array.isArray(fm.stars) ? fm.stars.map(String) : []; }
+  starred(word) { return this.stars().includes(word); }
+  async setStar(word, on) {
+    const f = await this.progressFile(); let list = [];
+    await this.app.fileManager.processFrontMatter(f, fm => { list = Array.isArray(fm.stars) ? fm.stars.map(String).filter(w => w !== word) : []; if (on) list.push(word); fm.stars = list; });
+    this.starsNow = list; clearTimeout(this.starsT); this.starsT = setTimeout(() => { this.starsNow = null; }, 3000);
+    this.paintBars();
+    new Notice(on ? `Starred ${word}. Find it under ★ Starred on Words.` : `${word} is no longer starred.`);
   }
   async openNote(path) {
     let f = this.app.vault.getAbstractFileByPath(path);
@@ -3328,6 +3343,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const p = el.querySelector('p'); if (!p || !/say it:/.test(p.textContent) || el.querySelector('.gq-wordbar')) return;
     const word = ctx.sourcePath.slice(6).replace(/\.md$/, '');
     const bar = createDiv('gq-wordbar'); p.after(bar);
+    const star = bar.createEl('button', { cls: 'gq-star', attr: { 'aria-label': 'Star this word (favorite)' } }); star.onclick = () => this.setStar(word, !this.starred(word));
     const hear = bar.createEl('button', { text: 'Hear it', attr: { 'aria-label': 'Say the word' } }); hear.onclick = () => say(word);
     const web = bar.createEl('button', { text: 'Word web', attr: { 'aria-label': 'See the words that go with it' } }); web.onclick = () => this.openGraph(ctx.sourcePath);
     const mo = bar.createEl('button', { text: 'More ›', attr: { 'aria-label': 'More on this word: pairs, games, scripts' } }); mo.onclick = () => this.showMore();
@@ -3336,7 +3352,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const grp = bar.createDiv({ cls: 'gq-colors', attr: { role: 'group', 'aria-label': 'How well do you know it?' } });
     const btns = COLORS.map(([k, label]) => { const b = grp.createEl('button', { text: label, cls: 'gq-c gq-' + k }); b.onclick = () => this.setColor(word, this.colorOf(word) === k ? '' : k); return [k, b]; });
     const photo = createDiv('gq-card-row'); bar.after(photo);
-    const rec = { word, btns, el: bar, card, photo }; this.bars.add(rec); this.paintBar(rec);
+    const rec = { word, btns, el: bar, card, photo, star }; this.bars.add(rec); this.paintBar(rec);
     // Hear it taught: the Language Transfer track where this word first comes up. One quiet line.
     const tn = !this.isKids && LT_FIRST[word];
     if (tn) { const l = createDiv('gq-hint gq-lt-card'); photo.after(l); l.appendText('Hear it taught: '); const a = l.createEl('a', { text: `Language Transfer, track ${tn}`, href: ltTrackUrl(tn) });
@@ -3359,6 +3375,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   paintBar(rec) {
     const c = this.colorOf(rec.word); for (const [k, b] of rec.btns) { b.toggleClass('is-on', c === k); b.setAttr('aria-pressed', String(c === k)); }
+    if (rec.star) { const s = this.starred(rec.word); rec.star.setText(s ? '★ Starred' : '☆ Star'); rec.star.toggleClass('is-on', s); rec.star.setAttr('aria-pressed', String(s)); }
     if (!rec.card) return; const on = this.cards().includes(rec.word); rec.card.toggleClass('is-on', on); rec.card.setAttr('aria-pressed', String(on));
     this.paintPhoto(rec, on);
   }
@@ -5649,6 +5666,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     };
     const chip = (k, label) => { const b = filt.createEl('button', { text: label, cls: 'gq-mini' + (st.show === k ? ' is-on' : '') }); b.onclick = () => { st.show = k; st.block = 0; this.renderWords(el); }; };
     chip('all', 'All'); chip('none', 'No color'); chip('red', 'Red'); chip('yellow', 'Yellow'); chip('green', 'Green');
+    if (this.stars().length || st.show === 'star') chip('star', '★ Starred');
     const cv = filt.createEl('label', { cls: 'gq-cover' }); const cb = cv.createEl('input', { type: 'checkbox' }); cb.checked = st.cover; cv.appendText(' Cover English');
     cb.onchange = () => { st.cover = cb.checked; draw(); };
     const ORDER = ['red', 'yellow', 'green'];
@@ -5656,14 +5674,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       count(); list.empty(); more.empty(); qz.empty();
       const c = this.colors(), of = w => this.colorOf(w.word);
       // Quiz me: one button for the color you picked. Up to 10 of its words, in a pop.
+      const stars = new Set(this.stars());
       if (c[st.show] && c[st.show].length) { const pool = words.filter(w => of(w) === st.show), n = Math.min(10, pool.length); const b = qz.createEl('button', { text: `Quiz me on these (${n})`, cls: 'mod-cta' }); b.onclick = () => this.quizMe(pool, words, st.show, () => this.renderWords(el)); }
       let rows = st.q ? this.findWords(st.q) : words;
       const close = st.q && !this.isKids ? this.closeWords(st.q) : [];
       close.forEach((cs, i) => this.closeSet(list, cs, i === 0, w => this.openGraph(w.path)));
-      if (st.show !== 'all') rows = rows.filter(w => (of(w) || 'none') === st.show);
+      if (st.show === 'star') rows = rows.filter(w => stars.has(w.word));
+      else if (st.show !== 'all') rows = rows.filter(w => (of(w) || 'none') === st.show);
       const pages = Math.max(1, Math.ceil(rows.length / BL)); if (st.block >= pages) st.block = 0;
       const page = rows.slice(st.block * BL, st.block * BL + BL);
-      if (!page.length && close.length) { /* a Greek sentence: the close words are the answer */ } else if (!page.length && !st.q) list.createDiv({ cls: 'gq-hint', text: 'No words here yet.' });
+      if (!page.length && close.length) { /* a Greek sentence: the close words are the answer */ } else if (!page.length && !st.q) list.createDiv({ cls: 'gq-hint', text: st.show === 'star' ? 'No starred words yet. Open a word card and tap ☆ Star.' : 'No words here yet.' });
       else if (!page.length && /[*_…]/.test(st.q)) list.createDiv({ cls: 'gq-hint', text: 'No word in the 1,500 has those letters. * stands for any missing letters.' });
       // Not in the 1,500 (or only a loose match): translate right here, under the search. Saved to Words I looked up when the student moves on.
       if (st.q && !this.ltTrackQ(st.q) && !/[*_…]/.test(st.q) && !close.length && rows.length) { const tb2 = list.createDiv('gq-row gq-words-bonus').createEl('button', { text: `Not the one? Translate ${st.q}`, cls: 'gq-mini' }); tb2.onclick = () => { st.forceTr = st.q; draw(); }; }
@@ -5685,9 +5705,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const hr = tb.createEl('thead').createEl('tr'); for (const h of ['#', 'Greek', 'English', 'Color']) hr.createEl('th', { text: h });
       const body = tb.createEl('tbody');
       for (const w of page) {
-        const tr = body.createEl('tr'), k = of(w);
+        const tr = body.createEl('tr', { cls: 'gq-sheet-row' }), k = of(w);
+        // A tap anywhere on the row opens the word card (the color button and Tap to check keep their own jobs).
+        tr.onclick = e => { if (e.target.closest('button, .gq-sheet-c, .gq-sheet-had')) return; e.preventDefault(); this.openCard(w); };
         tr.createEl('td', { cls: 'gq-sheet-n', text: this.isKids ? '' : String(w.rank) });
-        const g = tr.createEl('td', { cls: 'gq-sheet-gr', attr: { lang: 'el' } }); const a = g.createEl('a', { text: w.word, href: '#' }); a.onclick = e => { e.preventDefault(); say(w.word); this.openNote(w.path); };
+        const g = tr.createEl('td', { cls: 'gq-sheet-gr', attr: { lang: 'el' } }); if (stars.has(w.word)) g.createSpan({ cls: 'gq-star-mark', text: '★ ', attr: { 'aria-label': 'starred' } }); g.createEl('a', { text: w.word, href: '#' });
         const en = tr.createEl('td', { cls: 'gq-sheet-en' });
         if (st.cover) {
           const r = en.createEl('button', { text: 'Tap to check', cls: 'gq-mini gq-sheet-peek' });

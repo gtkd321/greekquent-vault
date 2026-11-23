@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- Tap a word, get its card. Star your favorites (2026-11-23b)
+> In Words search and Look up, a tap anywhere on a word now opens its word card: the Greek, the English or the number. Close words open the card too. Word web is still there as its own button. On any word card, tap ☆ Star to keep it as a favorite. Your starred words show a ★ in the list, and a ★ Starred button on Words shows just those. Stars are saved in My Work, so updates never erase them.
+
 > [!tip]- Your class days plan your week (2026-11-23a)
 > Today now asks which days you have class. Tap every day you meet (Monday and Wednesday, just Thursday, any mix), then pick your book: Beginners' Greek, Complete Greek, both, or none. Today plans the days in between. Right after class: Language Transfer, one or two tracks a day. Then, leading up to the next class: that lesson's reading in your book, with a link to the free audio. On class day: a quick rally warm-up. Language Transfer is now on for everyone. Tap "I listened" for 1 φόρα a track and "I read today" for 2. Change your days or book any time in Options (Class, then Settings and help).
 

@@ -38,7 +38,7 @@ tags: [greek-student]
 
 Class starts with this, all in Greek. The teacher asks, you answer, then you swap and ask. Practice your side before class: on Today, tap **Practice my side**. Stuck? Use [[11 Classroom Greek]].
 
-- Teacher: **Γεια σας! Τι κάνεις;** — Hi, everyone. How are you?
+- Teacher: **Γεια σου! Τι κάνεις;** — Hi! How are you?
 - You: **Καλά, ευχαριστώ. Εσύ;** — Good, thanks. And you?
 - Teacher: **Πού είναι το κινητό σου;** — Where is your phone?
 - You: **Εδώ είναι!** or **Δεν ξέρω.** — Here it is! / I don't know.

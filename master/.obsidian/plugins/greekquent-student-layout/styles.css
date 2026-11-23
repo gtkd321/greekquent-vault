@@ -970,3 +970,10 @@ button.gq-daystep.is-home { color: var(--text-normal); font-weight: 600; border-
 .gq-class-days { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
 .gq-class-days button { min-width: 52px; min-height: 40px; }
 .gq-setup-opt.is-on { border-color: var(--interactive-accent); }
+
+/* Search results: a tap anywhere on a word opens its card */
+.gq-sheet-row { cursor: pointer; } .gq-sheet-row:active { background: var(--background-modifier-hover); }
+.gq-hit-text.gq-open { cursor: pointer; flex: 1 1 auto; } .gq-hit-text.gq-open:active { opacity: .7; }
+/* Starred words */
+.gq-wordbar .gq-star.is-on { color: #b38b00; border-color: #e6b400; font-weight: 600; }
+.gq-star-mark { color: #b38b00; }

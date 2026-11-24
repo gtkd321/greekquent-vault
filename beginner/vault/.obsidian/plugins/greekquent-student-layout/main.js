@@ -1714,6 +1714,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.addCommand({ id: 'open-today', name: 'Open Today', callback: () => this.openToday() });
     this.addCommand({ id: 'send-homework', name: 'Send homework', callback: () => this.sendHomework() });
     this.addCommand({ id: 'update-vault', name: 'Update vault', callback: () => this.updateVault(false) });
+    this.addCommand({ id: 'resources', name: 'Resources: verb tables and more', callback: () => this.resourcesPop() });
     this.addCommand({ id: 'look-up-word', name: 'Look up a word', callback: () => new LookupModal(this.app, this).open() });
     this.addCommand({ id: 'ask-group', name: 'Ask the class', callback: () => this.ask() });
     this.addCommand({ id: 'ask-video', name: 'Ask on video about this note', callback: () => this.askVideo() });
@@ -2640,11 +2641,29 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.showAtPosition({ x: r.left, y: r.top });
   }
   // ---------- More menu (left toolbar) ----------
+  // Resources: verb tables and the other reference pages, one tap away from any screen (not only from a word card).
+  resourcesPop() {
+    const go = path => { const o = document.querySelector('.gq-pop'); if (o) o.remove(); this.openNote(path); };
+    const has = p => !!this.app.vault.getAbstractFileByPath(p);
+    const ex = this.app.vault.getMarkdownFiles().filter(x => this.isKids ? x.path.split('/').length === 1 && x.path !== TODAY : x.path.startsWith(EXTRAS) && x.path.split('/').length === 2).sort((a, b) => a.basename.localeCompare(b.basename));
+    this.pop('Resources', [{ label: '', build: el => {
+      const top = el.createDiv('gq-row gq-res-top');
+      const b = (t, fn) => { const x = top.createEl('button', { text: t }); x.onclick = fn; };
+      if (has(EXTRAS + '02 Verb Tables.md')) b('Verb tables', () => go(EXTRAS + '02 Verb Tables.md'));
+      if (has(EXTRAS + '11 Classroom Greek.md')) b('Classroom Greek', () => go(EXTRAS + '11 Classroom Greek.md'));
+      b('Look up a word', () => { const o = document.querySelector('.gq-pop'); if (o) o.remove(); new LookupModal(this.app, this).open(); });
+      if (!ex.length) return;
+      el.createDiv({ cls: 'gq-tsub', text: 'Everything else' });
+      const ul = el.createEl('ul', { cls: 'gq-tlist gq-res-list' });
+      for (const x of ex.filter(x => ![EXTRAS + '02 Verb Tables.md', EXTRAS + '11 Classroom Greek.md'].includes(x.path))) { const a = ul.createEl('li').createEl('a', { text: x.basename.replace(/^\d\d /, '').replace(/-student$/, ''), href: '#' }); a.onclick = e => { e.preventDefault(); go(x.path); }; }
+    } }]);
+  }
   moreMenu(evt) {
     const m = new Menu();
     if (document.body.classList.contains('gq-nonav')) m.addItem(i => i.setTitle('Today').setIcon('house').onClick(() => this.openToday()));
     m.addItem(i => i.setTitle('More on this page').setIcon('panel-right').onClick(() => this.showMore()));
     m.addItem(i => i.setTitle('Look up a word').setIcon('search').onClick(() => new LookupModal(this.app, this).open()));
+    m.addItem(i => i.setTitle('Resources: verb tables and more').setIcon('book-open').onClick(() => this.resourcesPop()));
     m.addItem(i => i.setTitle('Word web').setIcon('git-fork').onClick(() => this.openGraph()));
     m.addItem(i => i.setTitle('Ask the class').setIcon('message-circle').onClick(() => this.ask()));
     m.addItem(i => i.setTitle('Send homework').setIcon('send').onClick(() => this.sendHomework()));

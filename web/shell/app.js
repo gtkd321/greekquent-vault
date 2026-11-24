@@ -8,6 +8,7 @@ const ICONS = {
   search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M16.5 14.6c2.6.2 4.4 1.9 5 5.1"/>',
   list: '<path d="M9 6h11"/><path d="M9 12h11"/><path d="M9 18h11"/><circle cx="4.5" cy="6" r="1.3"/><circle cx="4.5" cy="12" r="1.3"/><circle cx="4.5" cy="18" r="1.3"/>',
+  book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M8 7h8"/>',
   'more-horizontal': '<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>'
 };
 const icon = n => `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n] || ''}</svg>`;
@@ -124,6 +125,10 @@ function frame() {
     b.innerHTML = icon(r.icon) + (more ? '' : `<span>${r.title === 'Look up a word' ? 'Look up' : r.title}</span>`);
     b.onclick = e => r.cb(e); r.btn = b;
   }
+  // Resources (verb tables and other reference pages) stay at the top right on every screen.
+  const rs = head.createEl('button', { cls: 'gq-headmore gq-headres', attr: { 'aria-label': 'Resources: verb tables and more' } });
+  rs.innerHTML = icon('book') + '<span>Resources</span>';
+  rs.onclick = () => G.plugin && G.plugin.resourcesPop && G.plugin.resourcesPop();
   G.navSync = () => {
     let n = 0;
     for (const r of G.ribbon) { if (!r.btn || r.title === 'More') continue; const off = r.el.classList.contains('gq-hide'); r.btn.hidden = off; if (r.el.dataset.tour) r.btn.dataset.tour = r.el.dataset.tour; if (!off) n++; }

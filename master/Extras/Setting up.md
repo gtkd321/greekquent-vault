@@ -10,13 +10,13 @@ Two minutes, once. Back to [[Today]].
 > - **Today** (house): today's story (Scene, Words, Build, Say it), then review. Doing Fluent in a Year? It is a pace for the same story: one day each day, so the 1,500 words take a year. Pick it when the app first asks how far you want to go, or turn on **Fluent in a Year pace** in Options. The story card then says whether you are on pace or a few days behind.
 > - **Words** (list): all the words, most frequent first. Search for any word in English or Greek at the top, or open the Word web.
 > - **Class** (two people): this week's lesson, homework and Ask the class. **Settings and help** is at the bottom.
-> - **More** (three dots): More on this page, Look up a word, Word web, Ask the class, Send homework, What's new, Options, Update vault.
+> - **More** (three dots): Side panel, Look up a word, Resources (verb tables and more), Word web, Ask the class, Send homework, What's new, Options, Setting up, the tour, Update vault.
 
 > [!tip]- Less on the page, more in the side panel
-> Lessons and word notes show the main things first. The extras (word pairs, words that go together, review prompts, word links) sit in the side panel: tap **More on this page** near the top of a lesson or on a word's button row. On a phone it slides in from the right. Every other article lives in the **Extras** folder.
+> Lessons and word notes show the main things first. The extras (word pairs, words that go together, review prompts, word links) sit in the side panel: tap **More ›** on a word's button row or near the top of a lesson. On Today, tap **More**, then **Side panel**. On a phone it slides in from the right. Every other article is under **Extras** at the bottom of the side panel, and in the **Extras** folder.
 
 > [!tip]- 3. Color your words
-> Every word note has a row of buttons just under the meaning, lined up with the text: **Hear it**, **More**, and three colors: **Don't have it** (red), **Kind of** (yellow), **Have it** (green). Tap one after you try to say the word from memory. Tap it again to clear it. Red words come back on the Today page.
+> Every word note has a row of buttons just under the meaning, lined up with the text: **☆ Star**, **Hear it**, **Word web**, **More ›**, **On paper**, and three colors: **Don't have it** (red), **Kind of** (yellow), **Have it** (green). Tap one after you try to say the word from memory. Tap it again to clear it. Red words come back on the Today page.
 
 > [!tip]- 4. Your own notes
 > Type in the **My Work** folder: Homework, My Notes, and anything you add. Updates never change My Work. Other notes open read-only so they can't change by accident.

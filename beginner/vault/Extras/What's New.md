@@ -2,6 +2,15 @@
 
 Back to [[Today]].
 
+> [!tip]- Word web: chunks for σύμφωνα με and more (2026-11-24a)
+> σύμφωνα με is one entry in the 1,500 because σύμφωνα almost never comes without με. Its web now has chunks when you hold a word: σύμφωνα με την αστυνομία, σύμφωνα με τα στοιχεία, and more. δικός μου, παρόλο που and με συγχωρείτε got chunks too. When two words have no chunk written yet, holding one now shows a short example line that uses both, if there is one.
+
+> [!tip]- Clearer help pages and one More button (2026-11-24a)
+> The button that opens the side panel now says **More ›** on lessons too, the same as on word cards. In the ⋯ menu it is called **Side panel**. Setting up and the other help pages now match the buttons you see.
+
+> [!tip]- Kids: hello song and Now you are the teacher (2026-11-24a)
+> The hello song plays from the very first tap now. In Now you are the teacher, every line says who says it, You or Grown-up, and the grown-up's turn to answer (and get one wrong on purpose) is a step in the list.
+
 > [!tip]- Tap a word, get its card. Star favorites. Resources everywhere (2026-11-23b)
 > In Words search and Look up, a tap anywhere on a word now opens its word card: the Greek, the English or the number. Close words open the card too. Word web is still there as its own button. On any word card, tap ☆ Star to keep it as a favorite. Your starred words show a ★ in the list, and a ★ Starred button on Words shows just those. Stars are saved in My Work, so updates never erase them. Verb tables and the other reference pages are now one tap away from any screen: in the app, tap Resources at the top right. In Obsidian, it is in the ⋯ menu.
 

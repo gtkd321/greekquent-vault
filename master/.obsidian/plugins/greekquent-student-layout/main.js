@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-23b';
+const VAULT_RELEASE = '2026-11-24a';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -570,7 +570,8 @@ class WordWebView extends ItemView {
         if (hit) { x.phrase = hit.ph; x.en = x.en || hit.en; } } }
     const cm = txt.match(/## Often appears with\n([\s\S]*?)(?:\n## |$)/);
     if (cm) for (const x of cm[1].matchAll(/\[\[([^\]|#]+)/g)) { const q = res(x[1]); if (q && !co.includes(q)) co.push(q); }
-    const w = { p, t, r: +fm.rank || 9999, e: String(fm.english || ''), say: fm.pronunciation || '', pl: String(fm.plural || ''), who: wwWho(txt), already: /noun-pl/.test(tags), pair, co };
+    const ex = ((txt.match(/^> ([^\[\n].*)$/m) || [])[1] || '').replace(/\*\*/g, '').trim();
+    const w = { p, t, r: +fm.rank || 9999, e: String(fm.english || ''), say: fm.pronunciation || '', pl: String(fm.plural || ''), who: wwWho(txt), already: /noun-pl/.test(tags), pair, co, ex };
     this.data.set(p, w); return w;
   }
   async partners(c) {
@@ -590,7 +591,10 @@ class WordWebView extends ItemView {
     const name = c.replace(/^Words\//, '').replace(/\.md$/, ''), stem = fold(name).slice(0, Math.max(3, name.length - 2));
     for (const x of out) {
       x.w = await this.info(x.k);
-      if (!x.phrase && x.w) { const back = x.w.pair.find(p => p.k === c); if (back) { x.phrase = back.phrase; x.en = back.en; } }
+      if (!x.phrase && x.w) { const back = x.w.pair.find(p => p.k === c) || w.pair.find(p => p.k === x.k); if (back) { x.phrase = back.phrase; x.en = back.en; } }
+      // No pairing written for these two? A short example line from either note that holds the other word exactly (σύμφωνα με → "Σύμφωνα με αυτόν, ναι." on με's web).
+      if (!x.phrase && x.w) { const xn = x.k.replace(/^Words\//, '').replace(/\.md$/, ''), toks = l => ' ' + l.split(/[\s,.;:!?·«»—]+/).map(wwFold).join(' ') + ' ', holds = (l, n) => toks(l).includes(' ' + wwFold(n).split(/\s+/).join(' ') + ' ');
+        const ex = [[x.w.ex, name], [w.ex, xn]].find(([l, n]) => l && l.split(/\s+/).length <= 8 && holds(l, n)); if (ex) x.phrase = ex[0]; }
       // να + the form learners already know: μπορώ να δω becomes μπορώ να βλέπω (the one-time form is kept for the chip).
       if (x.phrase) { const e = this.plugin.easyVerbs(x.phrase); if (e !== x.phrase) { x.once = x.phrase; x.phrase = e; } }
       // Either way round: εσύ's web shows εσύ χαίρεσαι, and πιστεύω's web shows εσύ πιστεύεις on the εσύ link.
@@ -718,12 +722,12 @@ class WordWebView extends ItemView {
       // The word first, then the phrase, so what you hear starts with what you see.
       const lab = this.label(m.k), same = wwFold(x.phrase) === wwFold(lab) || wwFold(x.phrase) === wwFold(lab.replace(/^(ο|η|το|οι|τα) /, ''));
       // Say the word on its own only when the phrase doesn't already contain it (εγώ → "Εγώ θέλω να πάω", not "εγώ. Εγώ θέλω…").
-      const bareF = wwFold(lab.replace(/^(ο|η|το|οι|τα) /, '')), inside = x.phrase.split(/[\s,.;!·?«»]+/).some(t => wwFold(t) === bareF);
+      const bareF = wwFold(lab.replace(/^(ο|η|το|οι|τα) /, '')), inside = x.phrase.split(/[\s,.;!·?«»]+/).some(t => wwFold(t) === bareF) || (/\s/.test(bareF) && wwFold(x.phrase).includes(bareF));
       // A changed form inside (μεγάλος → μεγάλο σπίτι) also plays just the phrase; otherwise the word leads into it (θέλω + να πάω).
       // A person's form of the verb (λέω → εσύ λες) is the verb already, so the phrase plays on its own.
       const wv = x.who && wwFold(x.who.verb) === wwFold(lab), changed = !inside && (!!wwForm(lab, x.phrase) || wv || (w.t === 'v' && hasVerb(lab, x.phrase)));
       if (same) d.remove(); say(same || inside || changed ? x.phrase : lab + ' ' + x.phrase);
-      const form = !same && (wv && wwFold(x.who.pf) !== wwFold(lab) ? `With ${x.who.pn}, ${lab} becomes ${x.who.pf}.` : (wwForm(lab, x.phrase) || (this.center && wwForm(this.label(this.center.k), x.phrase)))); if (form) this.chip.createDiv({ cls: 'gq-hint', text: form });
+      const form = !same && !(inside && /\s/.test(bareF)) && (wv && wwFold(x.who.pf) !== wwFold(lab) ? `With ${x.who.pn}, ${lab} becomes ${x.who.pf}.` : (wwForm(lab, x.phrase) || (this.center && !wwFold(x.phrase).includes(wwFold(this.label(this.center.k).replace(/^(ο|η|το|οι|τα) /, ''))) && wwForm(this.label(this.center.k), x.phrase)))); if (form) this.chip.createDiv({ cls: 'gq-hint', text: form });
       if (x.also) { const o = this.chip.createDiv({ cls: 'gq-hint' }); o.appendText('also: '); o.createSpan({ text: x.also.phrase, attr: { lang: 'el' } }); if (x.also.en) o.appendText('  (' + x.also.en + ')'); }
       if (x.once) { const o = this.chip.createDiv({ cls: 'gq-hint' }); o.appendText('for one time: '); o.createSpan({ text: x.once, attr: { lang: 'el' } }); }
     }
@@ -817,7 +821,7 @@ class ClassView extends ItemView {
 class MoreView extends ItemView {
   constructor(leaf, plugin) { super(leaf); this.plugin = plugin; }
   getViewType() { return MORE; }
-  getDisplayText() { return 'More on this page'; }
+  getDisplayText() { return 'Side panel'; }
   getIcon() { return 'panel-right'; }
   async onOpen() {
     // Links in the panel open in the main pane, never inside the panel.
@@ -1726,7 +1730,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerMarkdownPostProcessor((el, ctx) => this.sideHide(el, ctx));
     this.registerMarkdownPostProcessor((el, ctx) => this.lessonTop(el, ctx));
     this.registerMarkdownPostProcessor((el, ctx) => this.stackTables(el, ctx));
-    this.addCommand({ id: 'more-on-page', name: 'More on this page', callback: () => this.showMore() });
+    this.addCommand({ id: 'more-on-page', name: 'Side panel', callback: () => this.showMore() });
     this.addCommand({ id: 'add-to-card', name: 'Add a chunk or sentence to this word', callback: () => { const f = this.app.workspace.getActiveFile(); if (!f || !f.path.startsWith('Words/')) { new Notice('Open a word note first.'); return; } new CardModal(this.app, this, f.basename).open(); } });
     this.registerObsidianProtocolHandler('greekquent', p => p.open ? this.openApp(p.open, p.hash || '') : this.fromGame(p));
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path === TODAY) this.refreshToday(); }));
@@ -2424,7 +2428,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const draw = () => {
         list.empty(); const t = fold(s.value);
         const hits = all.filter(q => !t || fold([q.word, q.english, q.question_text, q.name, q.lesson ? 'lesson ' + q.lesson : ''].join(' ')).includes(t));
-        if (!all.length) { list.createDiv({ cls: 'gq-hint', text: 'No video questions yet. Be the first: open a word, tap Ask, then Ask on video instead.' }); return; }
+        if (!all.length) { list.createDiv({ cls: 'gq-hint', text: 'No video questions yet. Be the first: tap Class, then Ask the class, then Ask on video instead.' }); return; }
         if (!hits.length) { list.createDiv({ cls: 'gq-hint', text: 'No questions match. Try the Greek word without accents, or the English meaning.' }); return; }
         list.createDiv({ cls: 'gq-hint', text: `${hits.length} of ${all.length} questions, newest first` });
         hits.forEach(q => this.questionCard(list, q));
@@ -2661,7 +2665,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   moreMenu(evt) {
     const m = new Menu();
     if (document.body.classList.contains('gq-nonav')) m.addItem(i => i.setTitle('Today').setIcon('house').onClick(() => this.openToday()));
-    m.addItem(i => i.setTitle('More on this page').setIcon('panel-right').onClick(() => this.showMore()));
+    if (!this.isKids) m.addItem(i => i.setTitle('Side panel').setIcon('panel-right').onClick(() => this.showMore()));
     m.addItem(i => i.setTitle('Look up a word').setIcon('search').onClick(() => new LookupModal(this.app, this).open()));
     m.addItem(i => i.setTitle('Resources: verb tables and more').setIcon('book-open').onClick(() => this.resourcesPop()));
     m.addItem(i => i.setTitle('Word web').setIcon('git-fork').onClick(() => this.openGraph()));
@@ -4639,6 +4643,22 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       b.setText('Again'); b.disabled = false;
     };
   }
+  // One audio player for the tune, kept for the whole visit. A new one per tap lost the first notes: phones start its clock late,
+  // and iPhone needs a sound in the tap to switch to playback. So: unlock in the tap, then wait until the clock really runs.
+  async songCtx() {
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+    try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+    if (!this.songAC || this.songAC.state === 'closed') {
+      this.songAC = new AC();
+      try { const a = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA='); a.volume = 0; a.play().catch(() => {}); } catch (e) {}
+    }
+    const ctx = this.songAC;
+    try { const b = ctx.createBuffer(1, 1, 22050), src = ctx.createBufferSource(); src.buffer = b; src.connect(ctx.destination); src.start(0); } catch (e) {}
+    try { if (ctx.state !== 'running') await ctx.resume(); } catch (e) {}
+    const t = ctx.currentTime, until = Date.now() + 1500;
+    while (ctx.currentTime <= t && Date.now() < until) await new Promise(r => setTimeout(r, 30));
+    return ctx;
+  }
   helloSong(box) {
     const c = box.createDiv('gq-tcard gq-kid gq-song'), h = c.createDiv('gq-thead');
     h.createEl('strong', { text: 'Hello song' }); h.createSpan({ cls: 'gq-hint', text: '  · sing it together to start, and do the moves' });
@@ -4656,12 +4676,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const stop = () => { if (this.songStop) { this.songStop(); this.songStop = null; } };
     const run = async bpm => {
       stop();
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) { new Notice('This device cannot play the tune. Sing it with Hear the words.'); return; }
-      const ctx = new AC();
-      // Phones start the audio clock only after resume; schedule from the real clock once it runs.
-      try { if (ctx.state !== 'running') await ctx.resume(); } catch (e) {}
-      const beat = 60 / bpm, t0 = ctx.currentTime + 0.2, events = [];
+      const ctx = await this.songCtx();
+      if (!ctx) { new Notice('This device cannot play the tune. Sing it with Hear the words.'); return; }
+      const beat = 60 / bpm, t0 = ctx.currentTime + 0.35, events = [];
       const out = ctx.createGain(); out.gain.value = 0.9; out.connect(ctx.destination);
       const hz = m => 440 * Math.pow(2, (m - 69) / 12);
       const tone = (m, at, dur, type, vol) => {
@@ -4690,11 +4707,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
           rows[ev.li].syl[ev.idx].classList.add('is-on');
         }
         if (now < end + 0.1) raf = requestAnimationFrame(frame);
-        else { clear(); play.setText('Sing it again'); this.songStop = null; this.moAdd('did', 'song', 2); try { ctx.close(); } catch (e) {} }
+        else { clear(); play.setText('Sing it again'); this.songStop = null; this.moAdd('did', 'song', 2); }
       };
       raf = requestAnimationFrame(frame);
       play.setText('Stop');
-      this.songStop = () => { cancelAnimationFrame(raf); clear(); play.setText('Sing the hello song'); try { ctx.close(); } catch (e) {} };
+      this.songStop = () => { cancelAnimationFrame(raf); clear(); play.setText('Sing the hello song'); try { out.disconnect(); } catch (e) {} };
     };
     play.onclick = () => { if (this.songStop) stop(); else run(112); };
     slow.onclick = () => run(84);
@@ -4749,9 +4766,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const sw = this.kidLines(this.kidSection(txt, 'You are the teacher'));
     if (sw.length) {
       const c = box.createDiv('gq-tcard gq-kid gq-kteach'); c.dataset.tour = 'teacher'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Now you are the teacher' });
-      c.createDiv({ cls: 'gq-hint', text: 'Swap. The kid asks the questions. The grown-up gets one wrong on purpose. Catch it.' });
-      const ol = c.createEl('ol', { cls: 'gq-storylist gq-plain' });
-      for (const l of sw) { const li = ol.createEl('li'); li.createSpan({ text: l.gr, attr: { lang: 'el' } }); if (l.en) li.createDiv({ cls: 'gq-hint', text: l.en }); }
+      c.createDiv({ cls: 'gq-hint', text: 'Swap. You ask the questions. The grown-up gets one wrong on purpose. Catch it.' });
+      const ol = c.createEl('ol', { cls: 'gq-storylist gq-plain gq-kteach-list' });
+      // Every line says who says it, and the grown-up's turn without Greek ("answers, and sometimes gets it wrong") stays in as a step.
+      for (const m of this.kidSection(txt, 'You are the teacher').matchAll(/^- ([^:*]+):\s*(.+)$/gm)) {
+        const who = m[1].replace(/\s*\(teacher\)/i, '').trim(), b = /\*\*(.+?)\*\*\s*(?:—\s*(.+))?$/.exec(m[2]);
+        const li = ol.createEl('li', { cls: /grown/i.test(who) ? 'is-grown' : 'is-kid' }); li.createSpan({ cls: 'gq-kt-who', text: who + ': ' });
+        if (b) { li.createSpan({ text: b[1], attr: { lang: 'el' } }); if (b[2]) li.createDiv({ cls: 'gq-hint', text: b[2] }); }
+        else li.createSpan({ cls: 'gq-hint', text: m[2].trim() });
+      }
       this.didBtn(c, 'teacher:' + wk.lesson);
     }
     // 4. This week's words, nouns first, with the colors
@@ -6288,7 +6311,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (lesson) {
       const o = this.isTeacher ? null : this.otherScene(p);
       if (o) { const lb = row.createEl('button', { text: o.longer ? 'More: longer scene ›' : '‹ Shorter scene', cls: o.longer ? 'gq-mini mod-cta' : 'gq-mini' }); lb.onclick = async () => { const leaf = this.mainLeaf(false); await leaf.openFile(o.f, { state: { mode: 'preview' } }); }; }
-      const b = row.createEl('button', { text: 'Extras ›', cls: 'gq-mini' }); b.onclick = () => this.showMore(); this.lessonJump(row, p);
+      const b = row.createEl('button', { text: 'More ›', cls: 'gq-mini' }); b.onclick = () => this.showMore(); this.lessonJump(row, p);
     }
   }
   // Lesson tables with three or more columns stack into one card per row on a phone (CSS does the stacking).
@@ -6338,7 +6361,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const c = createDiv('gq-more'), f = this.app.workspace.getActiveFile();
     this.moreFile = f ? f.path : '';
     const head = c.createDiv('gq-more-head');
-    head.createEl('strong', { text: f ? (f.path === TODAY ? 'Today' : f.basename.replace(/-student$/, '')) : 'More on this page' });
+    head.createEl('strong', { text: f ? (f.path === TODAY ? 'Today' : f.basename.replace(/-student$/, '')) : 'Side panel' });
     const tools = c.createDiv('gq-row gq-more-tools');
     const btn = (t, fn) => { const b = tools.createEl('button', { text: t, cls: 'gq-mini' }); b.onclick = fn; };
     if (!f) c.createDiv({ cls: 'gq-hint', text: 'Open a note to see more about it here.' });

@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-24b';
+const VAULT_RELEASE = '2026-11-24c';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -5276,7 +5276,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const col = el.createDiv('gq-setup-opts');
         for (const [t, d, v] of opts) { const b = col.createEl('button', { cls: 'gq-setup-opt' }); b.createDiv({ cls: 'gq-setup-t', text: t }); b.createDiv({ cls: 'gq-hint', text: d }); b.onclick = () => pick(v); } };
       const done = () => { el.empty();
-        el.createDiv({ cls: 'gq-pop-big', text: 'Θα τα πούμε.', attr: { lang: 'el' } });
+        el.createDiv({ cls: 'gq-pop-big', text: 'Πάμε.', attr: { lang: 'el' } }); el.createDiv({ cls: 'gq-hint', text: 'Let\'s go.' });
         el.createDiv({ cls: 'gq-tsub', text: 'Your setup' });
         const ul = el.createEl('ul', { cls: 'gq-setup-sum' });
         const nw = ans.start === 'new';

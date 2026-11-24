@@ -36,10 +36,10 @@ The kite, in bright colors, with a tail of tissue paper.
 Do the move every time you say it.
 
 - **Τι καιρό κάνει;**: Look up at the sky, palm up.
-- **Κάνει κρύο.**: Hug yourself and shiver.
-- **Κάνει ζέστη.**: Fan your face.
-- **Βρέχει.**: Wiggle your fingers downward like rain.
-- **Έχει αέρα.**: Sway like a tree and blow.
+- **Κάνει κρύο!**: Hug yourself and shiver.
+- **Κάνει ζέστη!**: Fan your face.
+- **Βρέχει!**: Wiggle your fingers down like rain.
+- **Έχει ήλιο!**: Arms make a big sun over your head.
 - **Βλέπω τον χαρταετό!**: Shade your eyes and tug a kite string.
 
 ---

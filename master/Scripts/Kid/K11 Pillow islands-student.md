@@ -36,11 +36,12 @@ The kid draws each island's sign with a picture (waves, a church dome, a swing).
 
 Do the move every time you say it.
 
-- **Θέλω να πάω στη θάλασσα.**: Walk your fingers forward, then make waves.
-- **Μπορούμε να πάμε;**: Circle a hand to include the group, then wave "come on".
-- **Πάμε στην εκκλησία.**: Wave "come on", then make the sign of the cross.
-- **στο χωριό**: Mime shooing chickens, or picking olives.
-- **στη δουλειά**: Mime carrying a briefcase.
+- **Πού πας;**: Palms up, eyebrows up.
+- **στη θάλασσα**: Swim with your arms.
+- **στο πάρκο**: Pump your legs like on a swing.
+- **στο σπίτι**: Hands make a roof over your head.
+- **Πάμε!**: Wave come on, and jump onto the pillow.
+- **στο σχολείο**: Put on a pretend backpack.
 
 ---
 ← [[K10 My day charades-student|K10 My day charades]] · [[K12 Toy market-student|K12 Toy market]] →

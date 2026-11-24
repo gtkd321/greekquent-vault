@@ -14,7 +14,7 @@ tags: [greek-student, kid]
 - Grown-up: **Ένα κομμάτι για τον μπαμπά, ένα για τη μαμά…** — One piece for Dad, one for Mom…
 - Grown-up: **Ποιος έχει το φλουρί;** — Who has the coin?
 - You: **Εγώ! Εγώ έχω το φλουρί!** — Me! I have the coin!
-- Ss: **Καλή χρονιά!** — Happy New Year!
+- Everyone: **Καλή χρονιά!** — Happy New Year!
 
 ## You are the teacher
 
@@ -35,10 +35,12 @@ The kid decorates the paper cake with the new year's number and gold coin sticke
 
 Do the move every time you say it.
 
-- **Ποιος έχει το φλουρί;**: Hold up an imaginary coin and look around the room.
-- **Εγώ έχω!**: Jump up, coin held high.
+- **Ένα, δύο, τρία… δέκα!**: Count on your fingers, all ten.
 - **ένα κομμάτι**: Slice the air like a knife cutting cake.
-- **Καλή χρονιά!**: Raise a glass for a toast.
+- **για τον μπαμπά**: Hand a pretend piece to Dad.
+- **Ποιος έχει το φλουρί;**: Look under your piece, eyebrows up.
+- **Εγώ έχω**: Jump up, coin held high.
+- **Καλή χρονιά!**: Throw both arms up: hooray.
 
 ---
 ← [[K07 Who am I masks-student|K07 Who am I masks]] · [[K09 Toy families-student|K09 Toy families]] →

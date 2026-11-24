@@ -36,14 +36,12 @@ The telescope itself: stripes, stars, his name in Greek letters he knows so far.
 
 Do the move every time you say it.
 
-- **Βλέπω τη θάλασσα.**: Shade your eyes with one hand, then make waves with the other.
-- **Τι βλέπεις;**: Point to your eyes, then to the partner, palms up.
-- **Τι κάνεις; – Καλά.**: Palm-up hand toward the partner, then thumbs up for "Καλά".
-- **Τι θέλετε;**: Waiter pose: pretend to hold a notepad and pen.
-- **Ένα νερό, παρακαλώ.**: Hold up one finger, then mime a glass.
-- **Τίποτα άλλο;**: Tap the imaginary notepad with the pen, eyebrows up.
-- **Όχι, τίποτα.**: Greek "no": head tilt up, then both hands sweep flat and apart.
-- **Μπορείς τώρα;**: Point at the floor twice, quickly ("now").
+- **Τι βλέπεις;**: Lift the telescope to your eye.
+- **Βλέπω**: Point through the telescope.
+- **τη γάτα**: Claws up: meow.
+- **τη θάλασσα**: Make waves with one hand.
+- **ένα σπίτι**: Hands make a roof over your head.
+- **τον ήλιο**: Arms make a big circle over your head.
 
 ---
 ← [[K03 Μπορείς challenge-student|K03 Μπορείς challenge]] · [[K05 Where is Spider-Man-student|K05 Where is Spider-Man]] →

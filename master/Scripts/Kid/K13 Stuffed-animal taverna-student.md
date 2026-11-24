@@ -37,11 +37,12 @@ Make a menu with drawings of each dish, and play-dough food to go with it.
 
 Do the move every time you say it.
 
-- **Θα ήθελα…**: Hand on chest, then a polite palm-up "may I".
-- **Έχετε ψάρι σήμερα;**: Swim one flat hand like a fish.
-- **Τον λογαριασμό, παρακαλώ.**: Mime signing in the air toward the waiter.
-- **Πολύ νόστιμο!**: Kiss your fingertips, then pat your stomach.
-- **Καλή όρεξη!**: Both hands sweep over the table, offering the food.
+- **Τι θέλετε;**: Hold up the notepad and pencil.
+- **Θα ήθελα**: Hand on your chest, polite smile.
+- **σαλάτα**: Toss a pretend salad with two hands.
+- **Τι πίνετε;**: Tip a pretend glass.
+- **ψάρι**: Swim one flat hand like a fish.
+- **Τον λογαριασμό**: Write in the air.
 
 ---
 ← [[K12 Toy market-student|K12 Toy market]] · [[K14 Τι ώρα είναι κύριε Λύκε-student|K14 Τι ώρα είναι κύριε Λύκε]] →

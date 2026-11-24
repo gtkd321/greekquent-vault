@@ -35,11 +35,12 @@ The shoebox house, painted and colored, with a room for every color.
 
 Do the move every time you say it.
 
-- **Έχω ένα μικρό σπίτι.**: Make a small roof with your hands.
-- **ένα μεγάλο δωμάτιο**: Spread your arms wide.
-- **Η κουζίνα είναι μικρή.**: Stir a pot inside a tiny box drawn with your hands.
-- **Βλέπω ένα κόκκινο…**: Point at something red in the room.
-- **καινούργιο ή παλιό;**: Shiny sparkle hands, then bend over like an old person.
+- **μικρό**: Pinch your fingers close: tiny.
+- **μεγάλο**: Arms out wide: big.
+- **Η κουζίνα**: Stir a pretend pot.
+- **Βρες κάτι κόκκινο!**: Hand over your eyes, then run and look.
+- **κόκκινο αυτοκίνητο**: Drive the red car through the air.
+- **κόκκινη μπάλα**: Bounce the red ball.
 
 ---
 ← [[K19 Robot directions-student|K19 Robot directions]] · [[K21 Thumbs up thumbs down-student|K21 Thumbs up thumbs down]] →

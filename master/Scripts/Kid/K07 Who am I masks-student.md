@@ -15,7 +15,7 @@ tags: [greek-student, kid]
 - Grown-up: **Είσαι από την Αμερική;** — Are you from America?
 - You: **Ναι, είμαι από την Αμερική.** — Yes, I'm from America.
 - You: **Είμαι η γιαγιά! Είμαι από την Ελλάδα.** — I'm Grandma! I'm from Greece.
-- Ss: **Καλά Χριστούγεννα!** — Merry Christmas!
+- Everyone: **Καλά Χριστούγεννα!** — Merry Christmas!
 
 ## You are the teacher
 
@@ -36,11 +36,12 @@ The mask, plus a little name tag in Greek letters.
 
 Do the move every time you say it.
 
-- **Είμαι ο/η… από…**: Hand on chest, then point to the place on the map.
-- **Από πού είσαι;**: Point at the partner, then sweep the hand over the map.
-- **Είμαι από την Αμερική.**: Hand on chest, then point west.
-- **Έχω μια οικογένεια εδώ.**: Arms in a hug-circle, then point down ("here").
-- **Καλά Χριστούγεννα!**: Mime ringing the κάλαντα triangle.
+- **Ποιος είσαι;**: Peek around the mask, palms up.
+- **Είμαι**: Hand flat on your chest.
+- **ο Spider-Man**: Shoot a web from your wrist.
+- **η γιαγιά**: Bend over a pretend cane.
+- **από την**: Point far away, across the sea.
+- **Καλά Χριστούγεννα!**: Arms up like a tree, and twinkle your fingers like lights.
 
 ---
 ← [[K06 Traffic-light verb dice-student|K06 Traffic-light verb dice]] · [[K08 Find the coin-student|K08 Find the coin]] →

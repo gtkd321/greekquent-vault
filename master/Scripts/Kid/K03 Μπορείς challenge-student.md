@@ -36,14 +36,12 @@ A sticker chart with a strong-arm picture at the top. One sticker per Μπορώ
 
 Do the move every time you say it.
 
-- **Μπορώ;**: Reach toward an object and pause, eyebrows up.
-- **Ναι, βέβαια.**: Big open-handed "go ahead" sweep.
-- **Μπορείς;**: Point at the partner and tap your wrist.
-- **Θέλω, αλλά δεν μπορώ.**: Reach out eagerly, then pull back and shake your head.
-- **Μπορείς σήμερα το βράδυ;**: Point down at the floor ("today"), then lay your head on your hands ("evening").
-- **Λυπάμαι, δεν μπορώ.**: Hand on chest with a sad face, then a small head shake.
-- **Αύριο το πρωί μπορώ.**: Roll a hand forward ("tomorrow"), then stretch both arms up as if waking.
-- **Έχεις ώρα;**: Tap your wrist.
+- **Μπορείς;**: Point at the other person, eyebrows up.
+- **Ναι, μπορώ!**: Strong arms, fists up.
+- **Μπορεί!**: Point at him and clap.
+- **Θέλω, αλλά δεν μπορώ!**: Reach out with both hands, then let them flop down.
+- **Μπορώ;**: Hand up, like at school.
+- **Ναι, βέβαια.**: Thumbs up.
 
 ---
 ← [[K02 Teddy's tea party-student|K02 Teddy's tea party]] · [[K04 Telescope spy-student|K04 Telescope spy]] →

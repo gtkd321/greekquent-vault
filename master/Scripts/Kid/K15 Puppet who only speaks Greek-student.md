@@ -38,12 +38,12 @@ Making the puppet: a sock, buttons, yarn hair.
 
 Do the move every time you say it.
 
-- **Μιλάτε αγγλικά;**: Open and close your hand by your mouth like a talking puppet, eyebrows up.
-- **Πιο σιγά, παρακαλώ.**: Press both palms down slowly.
-- **Δεν καταλαβαίνω.**: Scratch your head, frowning.
-- **Μπορείτε να το πείτε ξανά;**: Circle a finger backward ("again").
-- **Θέλω να μάθω ελληνικά.**: Mime opening a book, then point at the Greek flag.
-- **Μιλάω λίγα ελληνικά.**: Talking-puppet hand, then pinch fingers for "a little".
+- **Γεια!**: Wave the puppet.
+- **Μιλάς**: Open and close your hand by your mouth, like a puppet talking.
+- **Πιο σιγά**: Press both palms down slowly.
+- **Ξανά**: Roll one finger backward in a circle.
+- **Δεν καταλαβαίνω!**: Scratch your head.
+- **Δεν ξέρω**: Shrug, palms up.
 
 ---
 ← [[K14 Τι ώρα είναι κύριε Λύκε-student|K14 Τι ώρα είναι κύριε Λύκε]] · [[K16 Treasure hunt review-student|K16 Treasure hunt review]] →

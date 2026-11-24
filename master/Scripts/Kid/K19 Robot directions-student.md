@@ -36,13 +36,12 @@ Make the Greek flag together for the 25th of March: blue and white stripes, with
 
 Do the move every time you say it.
 
-- **Πού είναι…;**: Palms up, turning your head side to side.
-- **Μπορείτε να μου πείτε πού είναι…;**: Polite hand on chest, then palms up, looking around.
-- **Πηγαίνετε ευθεία.**: Chop a flat hand straight forward.
-- **δεξιά / αριστερά**: Point right, then left, with the whole arm.
-- **Είναι κοντά;**: Hold thumb and finger close together, eyebrows up.
-- **Είναι μακριά.**: Throw an arm far out toward the horizon.
-- **Δεν βλέπω την πλατεία.**: Shade your eyes, look around, then shrug.
+- **Πού είναι η σημαία;**: Robot arms, head turning stiffly.
+- **Ευθεία!**: Both arms point straight ahead.
+- **Δεξιά!**: Swing your right arm out.
+- **Αριστερά!**: Swing your left arm out.
+- **Σταμάτα!**: Hand up flat, and freeze.
+- **Είναι κοντά!**: Bring your hands close together.
 
 ---
 ← [[K18 Weather moves and a kite-student|K18 Weather moves and a kite]] · [[K20 Shoebox house and color hunt-student|K20 Shoebox house and color hunt]] →

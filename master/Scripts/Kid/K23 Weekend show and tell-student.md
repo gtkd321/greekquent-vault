@@ -36,11 +36,12 @@ The weekend drawing, which can go on the fridge or in the vault as a photo.
 
 Do the move every time you say it.
 
-- **Τι έκανες το Σαββατοκύριακο;**: Thumb over the shoulder, palms up.
-- **Πήγα στη θάλασσα.**: Step back onto the "past" line, then make waves.
-- **Είδα τη Μαρία.**: Point to your eyes, then a fingers-together wave at "Maria".
-- **Έφαγα ψάρι.**: Swim a fish hand into your mouth, then pat your stomach.
-- **Ήπια έναν καφέ.**: Tiny cup, sip, and set it down ("done").
+- **Τι έκανες**: Point back over your shoulder, palms up.
+- **Πήγα**: Walk two fingers across the table.
+- **έναν σκύλο**: Pant like a puppy, hands up like paws.
+- **Έφαγα πίτσα**: Pick up a big slice and bite.
+- **Ήπια γάλα**: Gulp from a pretend glass, then wipe your milk mustache.
+- **Τι είπε η μαμά;**: Hand by your ear, listening.
 
 ---
 ← [[K22 Spider-Man's bad day-student|K22 Spider-Man's bad day]] · [[K24 Red eggs and candles-student|K24 Red eggs and candles]] →

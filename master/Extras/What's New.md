@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!tip]- A calmer opening screen (2026-11-24c)
+> The web app now opens with the olive tree and **Πάμε.** (Let's go.) instead of Θα τα πούμε, which means "see you later" and now only shows when you finish. The name is in the same clean type as the rest of the app.
+
+> [!tip]- Kids: new moves for every lesson (2026-11-24c)
+> The moves on each lesson now go with that lesson's own lines: a car you drive through the air in the mystery bag, wolf claws in Τι ώρα είναι κύριε Λύκε, swimming for στη θάλασσα. A few lines were made more kid-sized too: no coffee, no kilos, no "can you on Tuesday".
+
 > [!tip]- No εγώ in front of I verbs (2026-11-24b)
 > Greek verb endings already say who, so word notes now teach θέλω, έχω, βλέπω on their own: the Who line reads "θέλω (I) · εσύ θέλεις · …". You will still hear εγώ when someone wants to stress it: Κι εγώ (me too), or "Who has the coin?" "Εγώ!"
 

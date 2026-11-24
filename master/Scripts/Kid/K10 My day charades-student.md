@@ -36,11 +36,13 @@ A paper-plate clock with the sun on one side and the moon on the other. The kid 
 
 Do the move every time you say it.
 
-- **Θέλω να κάνω…, αλλά δεν μπορώ.**: Reach out eagerly, then pull back and shake your head.
-- **Τι κάνεις το πρωί;**: Stretch as if waking, palms up.
-- **Μετά δουλεύω.**: Hand hops forward, then mime typing.
-- **Μπορώ να…**: Flex an arm ("I can"), then point ahead.
-- **στο σπίτι**: Make a roof over your head with both hands.
+- **Τι κάνεις;**: Palms up, head tilted.
+- **Θέλω να φάω!**: Fingers to your mouth: munch.
+- **Θέλω να παίξω**: Throw a pretend ball.
+- **αλλά δεν μπορώ**: Let your arms flop.
+- **Γιατί;**: Both palms up, shoulders up.
+- **πρωί**: Stretch your arms up and yawn awake.
+- **βράδυ**: Hands together under your cheek: sleepy.
 
 ---
 ← [[K09 Toy families-student|K09 Toy families]] · [[K11 Pillow islands-student|K11 Pillow islands]] →

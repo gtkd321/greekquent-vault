@@ -13,8 +13,8 @@ tags: [greek-student, kid]
 - Grown-up: **Καλημέρα! Έχετε ντομάτες;** — Good morning! Do you have tomatoes?
 - You: **Ναι, έχουμε!** — Yes, we do!
 - Grown-up: **Πόσο κάνουν;** — How much are they?
-- You: **Δύο ευρώ το κιλό.** — Two euros a kilo.
-- Grown-up: **Θέλω ένα κιλό, παρακαλώ.** — I'd like one kilo, please.
+- You: **Δύο ευρώ!** — Two euros!
+- Grown-up: **Δύο ντομάτες, παρακαλώ.** — Two tomatoes, please.
 - You: **Ορίστε!** — Here you go!
 
 ## You are the teacher
@@ -36,10 +36,12 @@ Price tags with drawings of the food. The kid can write the numbers in Greek wor
 
 Do the move every time you say it.
 
-- **Πόσο κάνουν;**: Rub thumb and fingers together over the whole pile.
-- **Έχετε ελιές;**: Pinch a small olive and pop it into your mouth.
-- **Θέλω ένα κιλό.**: Weigh a heavy bag in one hand.
-- **Ένα κιλό ντομάτες, παρακαλώ.**: Weigh the bag, then cup a round tomato.
+- **Καλημέρα!**: Big wave and a smile.
+- **ντομάτες**: Cup a round tomato in your hand.
+- **Πόσο κάνουν;**: Rub your thumb and fingers together.
+- **Δύο ευρώ!**: Put two coins on the table, one at a time.
+- **παρακαλώ**: Hands together: please.
+- **Ορίστε!**: Hand it over with both hands.
 
 ---
 ← [[K11 Pillow islands-student|K11 Pillow islands]] · [[K13 Stuffed-animal taverna-student|K13 Stuffed-animal taverna]] →

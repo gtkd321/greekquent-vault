@@ -67,11 +67,15 @@ a.internal-link:hover { text-decoration: underline; }
 #gq-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; height: calc(var(--nav-h) + var(--gq-nav-pad)); padding-bottom: var(--gq-nav-pad); display: flex; justify-content: center; background: var(--background-primary); border-top: 1px solid var(--background-modifier-border); }
 .gq-navbtn { flex: 1; max-width: 140px; border: 0; background: transparent; border-radius: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: var(--text-muted); padding: 4px 0; }
 .gq-navbtn:hover { background: var(--background-modifier-hover); color: var(--text-normal); }
-#gq-boot { position: fixed; inset: 0; z-index: 100; display: grid; place-content: center; text-align: center; gap: 10px; background: var(--background-primary); }
-.gq-boot-mark { font: 700 32px/1 Georgia, "Times New Roman", serif; color: var(--interactive-accent); }
-#gq-boot-msg { color: var(--text-muted); max-width: 300px; padding: 0 16px; }
+/* Opening screen: the olive tree icon, the name in the app's own type, and "Πάμε." (Let's go). Θα τα πούμε is for goodbyes. */
+#gq-boot { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 6px; background: var(--background-primary); animation: gq-boot-in .45s ease-out both; }
+.gq-boot-icon { width: 88px; height: 88px; border-radius: 22px; box-shadow: 0 6px 24px rgba(60, 45, 20, .12); margin-bottom: 14px; }
+.gq-boot-mark { font: 600 26px/1.1 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif; letter-spacing: -0.01em; color: var(--text-normal); }
+#gq-boot-msg { font-size: 16px; color: var(--text-muted); max-width: 300px; padding: 0 16px; }
+@keyframes gq-boot-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { #gq-boot { animation: none; } }
 
-/* Side sheet for "More on this page" */
+/* Side sheet: the side panel */
 #gq-sheet-bg { position: fixed; inset: 0; z-index: 30; background: rgba(0, 0, 0, .3); opacity: 0; pointer-events: none; transition: opacity .2s; }
 #gq-sheet { position: fixed; top: 0; bottom: 0; right: 0; z-index: 31; width: min(420px, 92vw); background: var(--background-primary); border-left: 1px solid var(--background-modifier-border); transform: translateX(100%); transition: transform .22s ease-out; display: flex; flex-direction: column; padding-top: env(safe-area-inset-top); }
 #gq-sheet.is-open { transform: none; }

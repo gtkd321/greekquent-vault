@@ -38,11 +38,13 @@ A handprint family tree: each person is a colored handprint with their Greek tit
 
 Do the move every time you say it.
 
-- **Έχουμε δύο παιδιά.**: Circle hand between yourself and a partner ("we"), then show two short heights.
-- **Έχετε παιδιά;**: Sweep a hand across the group, then show a child's height.
-- **η γιαγιά μου**: Bend over a pretend cane, hand on your chest.
-- **ο παππούς μου**: Twirl a pretend moustache, or play with κομπολόι worry beads.
-- **Θέλουν…**: Point at two other people, then reach out eagerly.
+- **Αυτή είναι η μητέρα**: Hold up the mommy toy.
+- **Αυτός είναι ο πατέρας**: Hold up the daddy toy.
+- **δύο παιδιά**: Two fingers up, then pat two small heads.
+- **Έχετε γάτα;**: Sweep a hand over the whole toy family, then claws: meow.
+- **έχουμε**: Circle a hand around you and your grown-up: we.
+- **Θέλουν**: Point at the toys, then reach out: gimme.
+- **Μπορούμε;**: Hands together, with a please-please face.
 
 ---
 ← [[K08 Find the coin-student|K08 Find the coin]] · [[K10 My day charades-student|K10 My day charades]] →

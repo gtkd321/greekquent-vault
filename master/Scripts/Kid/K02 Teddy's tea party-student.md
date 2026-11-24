@@ -38,13 +38,12 @@ The kid draws a little picture menu (water, milk, tea, a sweet) for the toy caf�
 
 Do the move every time you say it.
 
-- **Θέλεις λίγο νερό;**: Offer an imaginary glass with both hands.
-- **Ναι, θέλω λίγο…, ευχαριστώ.**: Pinch thumb and finger close together for "a little", then hand to heart.
-- **Όχι, ευχαριστώ.**: Greek "no": tilt the head up with a small click of the tongue, then hand to heart.
-- **Θέλεις ένα γλυκό;**: Offer an imaginary spoon of spoon-sweet.
-- **Έχεις ψωμί;**: Mime tearing a piece of bread, eyebrows up.
-- **Ο Νίκος θέλει τσάι.**: Point at "Nikos", then mime holding a hot cup and blowing on it.
-- **…αλλά…**: One hand out, then the other hand out on the other side.
+- **Θέλεις νερό;**: Pour from a pretend teapot, eyebrows up.
+- **θέλω**: Reach out with both hands and open and close them: gimme.
+- **λίγο**: Thumb and finger almost touching.
+- **ευχαριστώ**: Hand on your heart.
+- **το αρκουδάκι**: Give the teddy a big hug.
+- **αλλά…**: Freeze with one finger up: wait.
 
 ---
 ← [[K01 Mystery bag-student|K01 Mystery bag]] · [[K03 Μπορείς challenge-student|K03 Μπορείς challenge]] →

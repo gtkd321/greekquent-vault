@@ -35,11 +35,12 @@ The three-panel comic.
 
 Do the move every time you say it.
 
-- **Χθες ήθελα να πάω, αλλά δεν μπορούσα.**: Thumb over the shoulder ("yesterday"), reach out, then pull back.
-- **Είχα πολλή δουλειά.**: Thumb over the shoulder, then mime a tall stack of papers.
-- **Δεν μπορούσα.**: Thumb over the shoulder, then a head shake.
-- **Ήμουν στο σπίτι.**: Thumb over the shoulder, then a roof over your head.
-- **Πέρσι ήμουν στην Ελλάδα.**: Throw your thumb far back over the shoulder, then point east.
+- **Χθες**: Point back over your shoulder.
+- **ήθελε να φάει**: Rub your tummy.
+- **δεν είχε ψωμί**: Open empty hands, sad face.
+- **δεν μπορούσα**: Let your arms flop.
+- **στο πάρκο**: Pump your legs like on a swing.
+- **Έβλεπα τηλεόραση**: Sit back and click a pretend remote.
 
 ---
 ← [[K21 Thumbs up thumbs down-student|K21 Thumbs up thumbs down]] · [[K23 Weekend show and tell-student|K23 Weekend show and tell]] →

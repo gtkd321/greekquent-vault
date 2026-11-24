@@ -35,11 +35,12 @@ The fortune teller, colored on the outside with drawings of each plan inside.
 
 Do the move every time you say it.
 
-- **Τι θα κάνεις το Σαββατοκύριακο;**: Roll a hand forward, then stretch out relaxed.
-- **Θα έχω ώρα.**: Roll the hand forward, then tap the wrist and smile.
-- **Θα δω μια ταινία.**: Roll the hand forward, then mime eating popcorn.
-- **Θα πάμε βόλτα.**: Link arms with a partner and stroll a few steps.
-- **Θα πάω…**: Step forward onto the "tomorrow" line on the floor.
+- **Τι θα κάνεις**: Roll one hand forward, eyebrows up.
+- **Σαββατοκύριακο**: Stretch out, hands behind your head.
+- **στο πάρκο**: Pump your legs like on a swing.
+- **μια ταινία**: Munch pretend popcorn.
+- **με τους φίλους**: Link arms with your grown-up.
+- **Θα έχεις ώρα;**: Tap your wrist.
 
 ---
 ← [[K16 Treasure hunt review-student|K16 Treasure hunt review]] · [[K18 Weather moves and a kite-student|K18 Weather moves and a kite]] →

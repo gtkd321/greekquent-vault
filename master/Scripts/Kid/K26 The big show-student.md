@@ -14,7 +14,7 @@ tags: [greek-student, kid]
 - You: **Θέλετε νερό;** — Would you like water?
 - You: **Πού είναι ο Spider-Man;** — Where is Spider-Man?
 - You: **Θα πάω στη θάλασσα!** — I'll go to the sea!
-- Ss: **Μπράβο!** — Bravo!
+- Everyone: **Μπράβο!** — Bravo!
 
 ## You are the teacher
 
@@ -35,12 +35,12 @@ A certificate, colored and signed: Μπράβο!
 
 Do the move every time you say it.
 
-- **Θα ήθελα…, παρακαλώ.**: Hand on chest, then a polite palm-up gesture.
-- **Θέλω, αλλά δεν μπορώ.**: Reach out eagerly, then pull back and shake your head.
-- **Πόσο κάνουν…;**: Rub thumb and fingers over the whole pile.
-- **Φέτος έμαθα…**: Point down at the floor ("this year"), then tap your temple.
-- **Το καλοκαίρι θα πάω…**: Fan your face, then roll a hand forward.
-- **Καλό καλοκαίρι!**: Push imaginary sunglasses up, then wave with the fingers together.
+- **Γεια σας!**: Big wave to the whole room.
+- **Με λένε**: Hand flat on your chest.
+- **Θέλετε νερό;**: Pour from a pretend teapot.
+- **Πού είναι**: Palms up, look left and right.
+- **στη θάλασσα**: Swim with your arms.
+- **Μπράβο!**: Everyone claps.
 
 ---
 ← [[K25 Teddy goes to the doctor-student|K25 Teddy goes to the doctor]]

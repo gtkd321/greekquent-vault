@@ -35,12 +35,12 @@ Clue cards drawn by the teacher (or older kids), each with a picture from that l
 
 Do the move every time you say it.
 
-- **Η οικογένειά μου είναι από…**: Hug-circle with your arms, then point to the map.
-- **Την Κυριακή πάω στην εκκλησία.**: Sign of the cross, then walk your fingers.
-- **Τι τρως;**: Fingers to the mouth, palms up.
-- **Μιλάς ελληνικά;**: Talking-puppet hand toward the partner.
-- **Θέλω να μάθω να μαγειρεύω.**: Open a book, then stir a pot.
-- **σαν εσένα**: Point at yourself, then the partner, and put two index fingers side by side.
+- **ένα κλειδί**: Turn a pretend key: click.
+- **Θέλεις νερό;**: Pour from a pretend teapot.
+- **Θέλω, αλλά δεν μπορώ!**: Reach out, then let your arms flop.
+- **κάτω από**: Point down under the table.
+- **στη θάλασσα**: Swim with your arms.
+- **Εδώ είναι!**: Point down hard at the spot and smile.
 
 ---
 ← [[K15 Puppet who only speaks Greek-student|K15 Puppet who only speaks Greek]] · [[K17 Fortune teller-student|K17 Fortune teller]] →

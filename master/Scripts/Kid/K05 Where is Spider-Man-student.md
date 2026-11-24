@@ -52,20 +52,14 @@ The kid draws a simple map of the room and sticks a small Spider-Man sticker whe
 
 Do the move every time you say it.
 
-- **Δεν έχω…**: Turn out empty pockets or open empty hands.
-- **Πού είναι το κινητό μου;**: Pat your pockets, looking around.
-- **Δεν βλέπω…**: Hand over your eyes, head turning.
+- **Πού είναι**: Palms up, look left and right.
+- **πάνω**: Hold one flat hand up high.
+- **κάτω από**: Point down under the table.
+- **μέσα στο κουτί**: Cup your hands into a little box.
+- **πίσω από**: Hide one hand behind your back.
+- **Δεν ξέρω**: Shrug, palms up.
 - **Εδώ είναι!**: Point down hard at the spot and smile.
-- **Γιατί δεν μπορείς;**: Both palms up, head tilted to the side.
-- **Έχω δουλειά.**: Mime typing fast.
-- **Μπορώ να δω;**: Point at your eye, then at the object, eyebrows up.
-- **Πόσο κάνει;**: Rub thumb and fingers together.
-- **Δύο ευρώ.**: Tap two fingers on the counter, one coin at a time.
-- **Δεν ξέρω.**: Shrug with palms up.
-- **Έχεις…;**: Hold out an open hand, palm up.
-- **Έχω…**: Hug the toy to your chest.
-- **Ορίστε.**: Hand the toy over with both hands.
-- **Ευχαριστώ!**: Hand on your heart.
+- **Ορίστε**: Hand it over with both hands.
 
 ---
 ← [[K04 Telescope spy-student|K04 Telescope spy]] · [[K06 Traffic-light verb dice-student|K06 Traffic-light verb dice]] →

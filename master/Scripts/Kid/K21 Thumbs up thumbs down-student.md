@@ -35,12 +35,12 @@ A like / don't-like collage: two halves of a page, with pictures cut out or draw
 
 Do the move every time you say it.
 
-- **Μου αρέσει…**: Hand on heart and a big smile.
-- **Μου αρέσουν…**: Hand on heart, then point to several things.
-- **Μου αρέσει να μαγειρεύω.**: Hand on heart, then stir a pot.
-- **Σου αρέσει η μουσική;**: Point at the partner, then air-guitar or sway.
-- **Θέλω να τρέξω.**: Pump your arms as if running.
-- **Πάω στο γυμναστήριο.**: Lift an imaginary dumbbell.
+- **Σου αρέσει;**: Point at the other person, eyebrows up.
+- **Μου αρέσει!**: Thumbs up, big smile.
+- **Δεν μου αρέσει!**: Thumbs down, yuck face.
+- **τα αυτοκίνητα**: Drive a car through the air.
+- **να τρέχω**: Run in place.
+- **η μουσική**: Dance in your seat.
 
 ---
 ← [[K20 Shoebox house and color hunt-student|K20 Shoebox house and color hunt]] · [[K22 Spider-Man's bad day-student|K22 Spider-Man's bad day]] →

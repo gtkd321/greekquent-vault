@@ -14,7 +14,7 @@ tags: [greek-student, kid]
 - Grown-up: **Θέλεις κόκκινο αυγό;** — Do you want a red egg?
 - You: **Ναι, θέλω!** — Yes, I do!
 - You: **Έχω μια λαμπάδα.** — I have a candle.
-- Ss: **Καλή Ανάσταση!** — Happy Resurrection! (said in Holy Week)
+- Everyone: **Καλή Ανάσταση!** — Happy Resurrection! (said in Holy Week)
 
 ## You are the teacher
 
@@ -34,10 +34,11 @@ The red eggs and the decorated candle.
 
 Do the move every time you say it.
 
-- **Καλή Ανάσταση!**: Hold up an imaginary lit candle.
-- **Καλό Πάσχα!**: Crack an imaginary red egg against a partner's.
-- **Έχω μια λαμπάδα.**: Hold a tall candle and cup the flame.
-- **Θέλεις κόκκινο αυγό;**: Offer a cupped red egg.
+- **κόκκινο αυγό!**: Hold the egg up in your fist.
+- **Θέλεις**: Hold it out, eyebrows up.
+- **Ναι, θέλω!**: Nod and reach out with both hands.
+- **μια λαμπάδα**: Hold a pretend candle straight up, carefully.
+- **Καλή Ανάσταση!**: Cup your hand around the candle flame.
 
 ---
 ← [[K23 Weekend show and tell-student|K23 Weekend show and tell]] · [[K25 Teddy goes to the doctor-student|K25 Teddy goes to the doctor]] →

@@ -38,14 +38,12 @@ Each object gets a picture card the kid draws and colors. The cards become his f
 
 Do the move every time you say it.
 
-- **Γεια σας**: Big wave to the whole room, fingers together and slightly bent.
-- **Γεια σου**: Small wave to one person, fingers together.
-- **Πώς σε λένε;**: Palm-up hand toward the partner, eyebrows up.
-- **Με λένε…**: Hand flat on your own chest.
-- **Έχω ένα…**: Hold the object up close to your body.
-- **Έχεις ένα…;**: Point at the partner's bag, eyebrows up.
-- **Ναι, έχω.**: Small Greek nod, head tipping down and to the side, and pat the object.
-- **Τι έχεις;**: Both palms up, shoulders slightly raised.
+- **Τι έχω;**: Shake the bag next to your ear, eyebrows up.
+- **αυτοκίνητο**: Drive a tiny car through the air: vroom.
+- **μπάλα**: Bounce a pretend ball.
+- **κλειδί**: Turn a pretend key in a door: click.
+- **Όχι**: The Greek no: tip your head back, eyebrows up.
+- **Ναι, έχω**: The Greek nod, head down and to the side. Then pull it out and hold it up high.
 
 ---
 [[K02 Teddy's tea party-student|K02 Teddy's tea party]] →

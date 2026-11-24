@@ -983,3 +983,7 @@ button.gq-daystep.is-home { color: var(--text-normal); font-weight: 600; border-
 .gq-res-list li { margin: 6px 0; }
 .gq-kteach-list .gq-kt-who { font-weight: 600; color: var(--text-muted); }
 .gq-kteach-list li.is-grown .gq-kt-who { color: var(--text-accent); }
+/* Kids: four cards. A part folded into a card sits under a thin line, with a smaller heading. */
+.gq-kcard .gq-ksub { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--background-modifier-border); }
+.gq-kcard .gq-ksub > .gq-thead strong { font-size: .95em; }
+.gq-knewtag { margin-left: 6px; font-size: .75em; padding: 1px 6px; border-radius: 8px; background: var(--background-modifier-hover); color: var(--text-muted); }

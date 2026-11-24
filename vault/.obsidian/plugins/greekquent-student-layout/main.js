@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-24a';
+const VAULT_RELEASE = '2026-11-24b';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -365,9 +365,10 @@ const wwMany = (lab, w) => {
   const we = (w.who && w.who.εμείς) || wwWe(lab); if (!we) return null;
   return { gr: 'εμείς ' + we, en: wwWeEn(w.e) };
 };
-// A verb note's Who line ([[εγώ]] πάω · [[εσύ]] πας · …) as { εγώ: 'πάω', εσύ: 'πας', … }.
+// A verb note's Who line (πάω (I) · [[εσύ]] πας · …) as { εγώ: 'πάω', εσύ: 'πας', … }. The I form has no εγώ: the ending already says who.
 const wwWho = txt => { const o = {}, l = (txt.match(/^- \*\*Who:\*\*\s*(.*)$/m) || [])[1]; if (!l) return o;
-  for (const part of l.split(/\s+·\s+/)) { const m = part.match(/^\[\[([^\]|#]+)(?:\|[^\]]+)?\]\]\s*(.+)$/); if (m) o[m[1].trim()] = m[2].trim(); } return o; };
+  for (const part of l.split(/\s+·\s+/)) { const m = part.match(/^\[\[([^\]|#]+)(?:\|[^\]]+)?\]\]\s*(.+)$/); if (m) o[m[1].trim()] = m[2].trim();
+    else { const i = part.match(/^(.+?)\s*\(I\)$/); if (i) o['εγώ'] = i[1].trim(); } } return o; };
 // On a pronoun's web, a verb link is that person's form: εσύ → εσύ χαίρεσαι, not χαίρομαι για σένα.
 const WW_WHO = { εγώ: 'εγώ', εσύ: 'εσύ', αυτός: 'αυτός', αυτή: 'αυτός', αυτό: 'αυτός', εμείς: 'εμείς', εσείς: 'εσείς', αυτοί: 'αυτοί', αυτές: 'αυτοί', αυτά: 'αυτοί' };
 const WW_WHO_EN = { εγώ: 'I', εσύ: 'you', αυτός: 'he', αυτή: 'she', αυτό: 'it', εμείς: 'we', εσείς: 'you all', αυτοί: 'they', αυτές: 'they', αυτά: 'they' };
@@ -4778,11 +4779,19 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       this.didBtn(c, 'teacher:' + wk.lesson);
     }
     // 4. This week's words, nouns first, with the colors
-    const words = (await this.wordIndex()).filter(w => (w.kid || []).includes(wk.lesson));
+    // Today's words: up to 3 a day. This week's new words first, spread over the week (3 on Monday, the next 3 on Tuesday…),
+    // then words still red or yellow (this week's or earlier), then this week's words not yet green.
+    const idx = await this.wordIndex(), wkAll = idx.filter(w => (w.kid || []).includes(wk.lesson));
+    const isNew = w => Math.min(...w.kid.map(Number)) === wk.lesson, day = wk.dow === 0 ? 7 : wk.dow;
+    const fresh = wkAll.filter(isNew).slice((day - 1) * 3, day * 3), words = [...fresh];
+    const add = l => { for (const w of l) if (words.length < 3 && !words.includes(w)) words.push(w); };
+    const met = idx.filter(w => (w.kid || []).some(n => +n <= wk.lesson));
+    add(met.filter(w => this.colorOf(w.word) === 'red')); add(met.filter(w => this.colorOf(w.word) === 'yellow'));
+    add(wkAll.filter(w => !isNew(w) || wkAll.filter(isNew).indexOf(w) < (day - 1) * 3).filter(w => this.colorOf(w.word) !== 'green'));
     // Walk mode plays this week's lines and words.
     this.walkK = [...sw.filter(l => l.gr), ...words.map(w => ({ gr: w.word, en: w.english || '' }))];
     if (words.length) {
-      const c = box.createDiv('gq-tcard gq-kid gq-kwordsc'); c.dataset.tour = 'words'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: `This week's words (${words.length})` });
+      const c = box.createDiv('gq-tcard gq-kid gq-kwordsc'); c.dataset.tour = 'words'; c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: "Today's words" });
       c.createDiv({ cls: 'gq-hint', text: 'Hear it, say it, then pick a color: red is not yet, yellow is kind of, green is got it.' });
       const ul = c.createEl('ul', { cls: 'gq-kidwords' });
       words.forEach((w, i) => {
@@ -4794,9 +4803,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         let cur = this.colorOf(w.word);
         const paint = () => { for (const [k, b] of btns) b.toggleClass('is-on', cur === k); };
         for (const [k, b] of btns) b.onclick = () => { cur = cur === k ? '' : k; paint(); this.setColor(w.word, cur); };
-        paint(); if (i >= 6) li.style.display = 'none';
+        paint(); if (fresh.includes(w)) top.createSpan({ cls: 'gq-knewtag', text: 'new' });
       });
-      if (words.length > 6) { const r = c.createDiv('gq-row'), m = r.createEl('button', { text: `Show all ${words.length}`, cls: 'gq-mini' }); m.onclick = () => { for (const li of ul.children) li.style.display = ''; r.remove(); }; }
     }
     // 5. Moves
     const mv = [...this.kidSection(txt, 'Do the moves').matchAll(/^- \*\*(.+?)\*\*:\s*(.+)$/gm)];
@@ -4829,14 +4837,27 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // today's story (scene, words, build, say it), spaced review, Fluent in a Year. Kids: letters, listen first, the week's words,
     // the puzzle, say it together, then the song, the game, the swap and the moves.
     // The separate review word list is not on the path; spaced review is the day's review step.
+    // Kids: four cards. Hello (song, letters while they last) · Listen and say (listen first, say it together, the moves) ·
+    // Today's words (with the story puzzle) · Play (the game, then you are the teacher). Dessert waits on the All done card.
+    let dessert = null;
+    if (kids) {
+      dessert = list.find(c => c.hasClass('gq-dessert')); if (dessert) list = list.filter(c => c !== dessert);
+      const groups = [['Hello', 'gq-song', 'gq-abc'], ['Listen and say', 'gq-kscene', 'gq-ksay', 'gq-kmoves'], ["Today's words", 'gq-kwordsc', 'gq-story'], ['Play', 'gq-kgame', 'gq-kteach']];
+      for (const [nm, ...cls] of groups) {
+        const parts = cls.map(k => list.find(c => c.hasClass(k))).filter(Boolean); if (!parts.length) continue;
+        const head = parts[0]; head.dataset.kname = nm;
+        for (const p of parts.slice(1)) { p.removeClass('gq-tcard'); p.addClass('gq-ksub'); head.appendChild(p); list = list.filter(c => c !== p); }
+      }
+    }
     if (!kids) { const rv = list.filter(c => c.hasClass('gq-review')); rv.forEach(c => c.remove()); list = list.filter(c => !rv.includes(c)); }
-    const rank = kids ? ['gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-story', 'gq-ksay', 'gq-song', 'gq-kgame', 'gq-kteach', 'gq-kmoves'] : ['gq-class-ask', 'gq-cycle', 'gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
+    const rank = kids ? ['gq-song', 'gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-kgame'] : ['gq-class-ask', 'gq-cycle', 'gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
     const rk = c => { const k = rank.findIndex(x => c.hasClass(x)); return k < 0 ? rank.length : k; };
     list = list.map((c, k) => [c, k]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map(x => x[0]);
     if (mo) list.push(mo);
     const done = createDiv('gq-tcard gq-kid gq-kdone');
     done.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: kids ? 'All done for today' : 'Done for today' });
     done.createDiv({ cls: 'gq-kbye', text: 'Θα τα πούμε.', attr: { lang: 'el' } }); done.createDiv({ cls: 'gq-hint', text: kids ? 'See you next time. Or play one more:' : 'See you next time. Or one more:' });
+    if (dessert) { dessert.removeClass('gq-tcard'); dessert.addClass('gq-ksub'); done.appendChild(dessert); }
     if (tools) { tools.removeClass('gq-tcard'); done.appendChild(tools); }
     if (!kids) { const r = done.createDiv('gq-row'), d = r.createEl('button', { text: 'Roll the die', cls: 'mod-cta gq-die-btn' }); d.onclick = () => this.rollDie(); }
     const again = done.createDiv('gq-row').createEl('a', { text: 'Back to the start', href: '#', cls: 'gq-hint' });
@@ -4848,7 +4869,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (nxc) { nxc.addClass('is-slim'); delete nxc.dataset.tour; if (!nxc.querySelector('.gq-tour-line, .gq-next-back, .gq-week-line')) nxc.hide(); }
     wrap.dataset.tour = kids ? 'stack' : 'next'; this.stackOn = true; this.stackNx = st;
     const anchor = nxc || box.querySelector(':scope > .gq-knew') || box.querySelector(':scope > h2'); if (anchor) anchor.after(wrap); else box.prepend(wrap);
-    const name = c => c.hasClass('gq-class-ask') ? 'Class days' : c.hasClass('gq-cycle') ? (c.dataset.name || 'This week') : c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'This week\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
+    const name = c => c.dataset.kname ? c.dataset.kname : c.hasClass('gq-class-ask') ? 'Class days' : c.hasClass('gq-cycle') ? (c.dataset.name || 'This week') : c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'Today\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
     // Where you are today is kept, so leaving and coming back lands on the same step. A new day starts at the top.
     const today = ymd(new Date()), at = this.lsGet('dayat', null);
     let i = this.stackPick ? list.findIndex(c => name(c) === this.stackPick) : -1;

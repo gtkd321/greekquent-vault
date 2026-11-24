@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip]- No εγώ in front of I verbs (2026-11-24b)
+> Greek verb endings already say who, so word notes now teach θέλω, έχω, βλέπω on their own: the Who line reads "θέλω (I) · εσύ θέλεις · …". You will still hear εγώ when someone wants to stress it: Κι εγώ (me too), or "Who has the coin?" "Εγώ!"
+
 > [!tip]- Word web: chunks for σύμφωνα με and more (2026-11-24a)
 > σύμφωνα με is one entry in the 1,500 because σύμφωνα almost never comes without με. Its web now has chunks when you hold a word: σύμφωνα με την αστυνομία, σύμφωνα με τα στοιχεία, and more. δικός μου, παρόλο που and με συγχωρείτε got chunks too. When two words have no chunk written yet, holding one now shows a short example line that uses both, if there is one.
 

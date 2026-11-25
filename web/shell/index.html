@@ -11,8 +11,14 @@
 if(s&&s<820&&matchMedia('(pointer: coarse)').matches&&w>s*1.3){d.style.zoom=(w/s).toFixed(3);d.classList.add('gq-desk');}else d.classList.remove('gq-desk');}
 fit();addEventListener('resize',fit);addEventListener('orientationchange',function(){setTimeout(fit,300);});})();
 </script>
-<meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#1c1b19" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#efe9da" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#161713" media="(prefers-color-scheme: dark)">
+<script>
+/* The phone's own look: iPhone and iPad get Apple's glass bars, Android gets Google's Material bars. Everything else is shared,
+   so a class with both kinds of phone sees the same cards, words and buttons. Light or dark follows the phone's setting. */
+(function(){var u=navigator.userAgent||'',d=document.documentElement;
+d.setAttribute('data-os',/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navigator.maxTouchPoints>1)?'ios':/Android/.test(u)?'android':'other');})();
+</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Greekquent">

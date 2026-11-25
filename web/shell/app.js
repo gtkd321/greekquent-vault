@@ -127,7 +127,7 @@ function frame() {
   }
   // Resources (verb tables and other reference pages) stay at the top right on every screen.
   const rs = head.createEl('button', { cls: 'gq-headmore gq-headres', attr: { 'aria-label': 'Resources: verb tables and more' } });
-  rs.innerHTML = icon('book') + '<span>Resources</span>';
+  rs.innerHTML = icon('book');
   rs.onclick = () => G.plugin && G.plugin.resourcesPop && G.plugin.resourcesPop();
   G.navSync = () => {
     let n = 0;

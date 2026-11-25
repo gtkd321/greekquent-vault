@@ -2,6 +2,15 @@
 
 Back to [[Today]].
 
+> [!tip]- New: a calmer, cleaner look
+> - Big cards, fewer words. Each card has one main button. The other choices sit behind **···** in the card's top corner.
+> - Dots under each card show where you are in today. Swipe, tap a dot, or tap **›**.
+> - Light or dark follows your phone's setting. iPhones get Apple's glass bars, Android phones get Google's Material bars. Both see the same cards.
+> - **Done for today** is now just the goodbye and one button, **One more**, which rolls the die for you.
+> - Language Transfer tracks played in the app now mark themselves listened when they finish.
+> - Words opens on **Mine** (your colored and starred words) once you have some. **All** is one tap away.
+> - The weekly focus now picks itself (listening, speaking, reading, verbs, in turn). To pick your own, open **···** on the Done card.
+
 > [!tip]- New: updates arrive by themselves in the browser
 > - Opening Greekquent in a browser tab now always starts on the newest version, whether or not you added it to your home screen.
 > - A tab you leave open updates when you come back to it, or after a few quiet minutes. Never while you're typing, and your work stays.

@@ -1048,3 +1048,147 @@ button.gq-daystep.is-home { color: var(--text-normal); font-weight: 600; border-
 .gq-open-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--background-modifier-border); }
 .gq-open-dot.is-on { background: var(--interactive-accent); }
 .gq-open-skip { margin-top: 6px; }
+
+/* ---------- Calm glass (2026-11-25f) ----------
+   One set of tokens, three looks: the shared look, iPhone (Apple's glass bars) and Android (Google's Material 3 bars).
+   Light or dark follows the phone. Fonts are the phone's own (system-ui), so when Apple or Google change their type,
+   the app changes with them. Colors keep their meaning: red, yellow, green, black are for words only. */
+body {
+  --gq-bg: #f1ece0; --gq-bg2: #e6e6cf; --gq-blob1: rgba(170, 190, 120, .38); --gq-blob2: rgba(235, 200, 140, .40);
+  --gq-card: #fffdf9; --gq-card-glass: rgba(255, 253, 249, .62); --gq-line: rgba(60, 50, 20, .08);
+  --gq-shadow: 0 1px 2px rgba(60, 50, 20, .05), 0 14px 34px rgba(60, 50, 20, .10);
+  --gq-acc: #3f5f2c; --gq-acc-h: #34502a; --gq-on-acc: #fff; --gq-eyebrow: #4b6a34; --gq-soft: #ece8dc; --gq-ind: #dde5c6;
+  --gq-bar: rgba(246, 242, 232, .72); --gq-bar-solid: #efe9da;
+  --gq-serif: "Noto Serif", Georgia, "Times New Roman", serif;
+  --gq-r-card: 28px;
+}
+body.theme-dark { --gq-dark: 1; }
+body.theme-dark, .gq-darkvars {
+  --gq-bg: #161713; --gq-bg2: #1b1d16; --gq-blob1: rgba(110, 140, 70, .20); --gq-blob2: rgba(150, 110, 60, .16);
+  --gq-card: #23241e; --gq-card-glass: rgba(40, 41, 34, .62); --gq-line: rgba(255, 255, 255, .07);
+  --gq-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset, 0 12px 30px rgba(0, 0, 0, .35);
+  --gq-acc: #a8c88a; --gq-acc-h: #b9d59d; --gq-on-acc: #15200c; --gq-eyebrow: #a8c88a; --gq-soft: #2e2f28; --gq-ind: #3a4a2c;
+  --gq-bar: rgba(26, 27, 22, .72); --gq-bar-solid: #1d1e19;
+}
+@media (prefers-color-scheme: dark) {
+  body.gq-web {
+    --gq-bg: #161713; --gq-bg2: #1b1d16; --gq-blob1: rgba(110, 140, 70, .20); --gq-blob2: rgba(150, 110, 60, .16);
+    --gq-card: #23241e; --gq-card-glass: rgba(40, 41, 34, .62); --gq-line: rgba(255, 255, 255, .07);
+    --gq-shadow: 0 1px 0 rgba(255, 255, 255, .03) inset, 0 12px 30px rgba(0, 0, 0, .35);
+    --gq-acc: #a8c88a; --gq-acc-h: #b9d59d; --gq-on-acc: #15200c; --gq-eyebrow: #a8c88a; --gq-soft: #2e2f28; --gq-ind: #3a4a2c;
+    --gq-bar: rgba(26, 27, 22, .72); --gq-bar-solid: #1d1e19;
+    --background-primary: #1b1c18; --background-secondary: #23241e;
+  }
+}
+/* The phone's own type */
+html[data-os="ios"] body.gq-web { --font-text: -apple-system, system-ui, "Helvetica Neue", sans-serif; }
+html[data-os="android"] body.gq-web { --font-text: Roboto, system-ui, "Noto Sans", sans-serif; --gq-r-card: 28px; }
+body.gq-web { --interactive-accent: var(--gq-acc); --interactive-accent-hover: var(--gq-acc-h); --text-on-accent: var(--gq-on-acc); --text-accent: var(--gq-acc); accent-color: var(--gq-acc); }
+
+/* The room: a warm wash with two soft blobs, behind everything */
+body.gq-web { background: linear-gradient(170deg, var(--gq-bg) 0%, var(--gq-bg2) 100%) fixed; }
+body.gq-web::before { content: ''; position: fixed; inset: -10%; z-index: -1; pointer-events: none;
+  background: radial-gradient(40% 32% at 12% 18%, var(--gq-blob1), transparent 70%), radial-gradient(42% 34% at 92% 82%, var(--gq-blob2), transparent 70%); }
+body.gq-web #gq-main, body.gq-web #gq-main .view-content, body.gq-web #gq-main .workspace-leaf-content { background: transparent; }
+
+/* Bars: frosted on iPhone and elsewhere, solid tonal on Android (Material 3 keeps bars opaque) */
+body.gq-web #gq-head, body.gq-web #gq-nav { background: var(--gq-bar-solid); border-color: var(--gq-line); }
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  html:not([data-os="android"]) body.gq-web #gq-head, html:not([data-os="android"]) body.gq-web #gq-nav {
+    background: var(--gq-bar); -webkit-backdrop-filter: blur(22px) saturate(1.7); backdrop-filter: blur(22px) saturate(1.7); }
+}
+body.gq-web #gq-head { border-bottom: 1px solid var(--gq-line); }
+body.gq-web #gq-nav { border-top: 1px solid var(--gq-line); }
+body.gq-web #gq-title { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+body.gq-web .gq-headres { margin-left: auto; border: 0; background: transparent; min-width: 40px; color: var(--text-muted); }
+body.gq-web .gq-navbtn[aria-current="page"] { color: var(--gq-acc); background: transparent; font-weight: 600; }
+/* Android: the Material pill behind the current tab's icon */
+html[data-os="android"] body.gq-web .gq-navbtn svg { padding: 4px 20px; border-radius: 16px; box-sizing: content-box; transition: background .2s; }
+html[data-os="android"] body.gq-web .gq-navbtn[aria-current="page"] svg { background: var(--gq-ind); }
+html[data-os="android"] body.gq-web .gq-navbtn[aria-current="page"] { color: var(--text-normal); }
+
+/* Cards: big, solid, soft-shadowed, no borders */
+body.gq-web .gq-tcard { background: var(--gq-card); border: 0; border-radius: var(--gq-r-card); box-shadow: var(--gq-shadow); padding: 20px 20px 16px; }
+.gq-kstack > .gq-kcard { background: var(--gq-card, var(--background-primary)); border-radius: var(--gq-r-card, 24px); }
+.gq-kstack > .gq-kcard.is-top { box-shadow: var(--gq-shadow, 0 2px 10px rgba(40, 30, 20, .08)); }
+body.gq-web .gq-kstack > .gq-kcard { min-height: calc(100dvh - var(--head-h) - var(--nav-h) - env(safe-area-inset-top) - var(--gq-nav-pad) - 64px); display: none; flex-direction: column; }
+body.gq-web .gq-kstack > .gq-kcard.is-top { display: flex; }
+body.gq-web .gq-kstack > .gq-kcard > .gq-another { margin-top: auto; }
+/* The card's name: a small eyebrow, not a heading */
+.gq-kcard > .gq-thead, .gq-kcard .gq-tsub { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: var(--gq-eyebrow, var(--text-muted)); margin: 2px 0 12px; }
+.gq-kcard > .gq-thead strong, .gq-kcard .gq-tsub strong, .gq-kcard > .gq-thead .gq-hint, .gq-kcard .gq-tsub .gq-hint { font-size: inherit; font-weight: inherit; color: inherit; letter-spacing: inherit; }
+.gq-kcard.has-more > .gq-thead { padding-right: 44px; }
+/* ···: second choices, out of sight */
+.gq-tcard.has-more { position: relative; }
+.gq-cmore { position: absolute; top: 10px; right: 10px; z-index: 4; min-width: 40px; min-height: 36px; padding: 0 8px; border: 0 !important; background: transparent !important; box-shadow: none !important; color: var(--text-muted); font-size: 18px; letter-spacing: 1px; line-height: 1; border-radius: 18px; }
+.gq-cmore:hover { background: var(--gq-soft, var(--background-modifier-hover)) !important; }
+/* The big line, its sound, its meaning */
+.gq-hero { font-family: var(--font-text); font-size: 34px; line-height: 1.15; font-weight: 700; letter-spacing: -.015em; text-align: center; margin: 18px 0 6px; }
+.gq-hero-sub { text-align: center; color: var(--text-muted); font-size: 15px; }
+.gq-hero-alt { text-align: center; margin-top: 2px; }
+.gq-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 14px 0 18px; }
+.gq-chip { font-size: 13px; padding: 5px 12px; border-radius: 999px; background: var(--gq-soft, var(--background-secondary)); color: var(--text-muted); }
+/* Buttons: one pill per card, a quiet second choice under it */
+.gq-kcard button.mod-cta, .gq-pop-die button.mod-cta, .gq-open-card button.mod-cta { border-radius: 999px; min-height: 50px; padding: 0 26px; font-weight: 600; font-size: 16px; border: 0; box-shadow: 0 6px 16px color-mix(in srgb, var(--gq-acc, #3f5f2c) 28%, transparent); background: var(--gq-acc, var(--interactive-accent)); color: var(--gq-on-acc, #fff); }
+.gq-kcard button.mod-cta:hover { background: var(--gq-acc-h, var(--interactive-accent-hover)); }
+.gq-pillrow { display: flex; flex-direction: column; align-items: stretch; gap: 6px; margin: 8px 0 0; }
+.gq-pillrow > button { width: 100%; }
+button.gq-ghost { background: transparent !important; border: 0 !important; box-shadow: none !important; color: var(--gq-acc, var(--text-accent)); font-weight: 600; min-height: 44px; border-radius: 999px; }
+button.gq-pill-w { border-radius: 999px; min-height: 50px; font-weight: 600; font-size: 16px; color: var(--gq-acc, var(--text-normal)); background: var(--gq-card, var(--background-primary)); border: 1px solid var(--gq-line, var(--background-modifier-border)); box-shadow: 0 4px 14px rgba(60, 50, 20, .08); }
+/* Android: Material buttons are flatter */
+html[data-os="android"] .gq-kcard button.mod-cta { box-shadow: none; min-height: 48px; }
+/* Today's story: the scene step is one line and one button */
+.gq-kcard .gq-cv-scene { text-align: center; padding: 26px 0 6px; }
+.gq-kcard .gq-cv-scenetext { font-family: var(--gq-serif); font-size: 26px; margin-bottom: 18px; }
+.gq-kcard .gq-cv-scene .gq-row { display: flex; flex-direction: column; align-items: stretch; }
+.gq-dpath { justify-content: center; }
+/* Done for today: the goodbye, big; then its sound, one line, one button. On glass. */
+.gq-kdone.gq-adone { text-align: center; }
+.gq-kdone.gq-adone .gq-kbye { font-family: var(--gq-serif); font-weight: 400; font-size: 44px; line-height: 1.1; margin: 22% 0 6px; }
+.gq-kbye-ph { color: var(--text-muted); font-size: 15px; }
+.gq-kbye-en { font-size: 17px; margin: 6px 0 20px; }
+.gq-kdone.gq-adone .gq-vote { margin: 4px 0 14px; }
+.gq-kdone.gq-adone .gq-vote .gq-row { justify-content: center; }
+.gq-kdone.gq-adone .gq-ttools { display: none; }
+.gq-kdone.gq-adone > .gq-pillrow { margin-top: auto; }
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  body.gq-web .gq-kstack > .gq-kdone.gq-adone { background: var(--gq-card-glass); -webkit-backdrop-filter: blur(24px) saturate(1.5); backdrop-filter: blur(24px) saturate(1.5); border: 1px solid var(--gq-line); }
+}
+/* The dots under each card; the arrow at the right goes on */
+.gq-another { position: relative; display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 16px; padding-top: 6px; border-top: 0; }
+.gq-another > a { position: absolute; right: -6px; top: 50%; transform: translateY(-50%); min-height: 44px; min-width: 44px; line-height: 40px; padding: 0; font-size: 30px; font-weight: 400; text-align: center; color: var(--gq-acc, var(--text-accent)); }
+.gq-another > a.is-hidden, .gq-another-n:empty { display: none; }
+.gq-sdots { display: flex; gap: 2px; }
+.gq-sdot { min-height: 28px !important; min-width: 18px; padding: 0 !important; border: 0 !important; background: transparent !important; box-shadow: none !important; display: grid; place-items: center; }
+.gq-sdot::after { content: ''; width: 7px; height: 7px; border-radius: 4px; background: color-mix(in srgb, var(--text-normal) 22%, transparent); transition: width .2s, background .2s; }
+.gq-sdot.is-on::after { width: 20px; background: var(--gq-acc, var(--interactive-accent)); }
+/* Roll the die: the die, what it picked, one pill */
+.gq-pop-die .gq-pop-card { text-align: center; border-radius: 32px; max-width: 380px; padding: 18px 24px 22px; }
+.gq-pop-die .gq-pop-title:empty::after { content: ''; }
+.gq-pop-die .gq-pop-nav { display: none; }
+.gq-pop-die .gq-pop-body { min-height: 0; }
+.gq-pop-die .gq-die { width: 104px; height: 104px; padding: 16px; gap: 6px; border: 0; border-radius: 26px; background: var(--gq-card, var(--background-primary)); box-shadow: 0 10px 26px rgba(40, 30, 10, .16), inset 0 -3px 0 rgba(0, 0, 0, .06); margin: 6px auto 16px; transition: transform .08s; }
+.gq-pop-die .gq-pip.is-on { background: var(--gq-acc, var(--text-normal)); }
+.gq-pop-die .gq-die-t { font-family: var(--gq-serif); font-size: 30px; font-weight: 400; line-height: 1.2; }
+.gq-pop-die .gq-die-b { font-size: 15px; margin-top: 2px; }
+.gq-pop-die .gq-die-luck { color: var(--gq-acc, var(--color-green)); font-size: 14px; }
+.gq-pop-die .gq-pillrow { margin-top: 14px; }
+/* Menus (the ··· choices): a sheet with big rows */
+.gq-w-menu { border-radius: 22px 22px 0 0 !important; background: var(--gq-card, var(--background-primary)) !important; box-shadow: 0 20px 50px rgba(0, 0, 0, .25) !important; border: 0 !important; overflow: hidden; }
+.gq-w-menu .menu-item { min-height: 48px; border: 0; border-radius: 0; background: transparent; text-align: left; padding: 0 20px; }
+.gq-w-menu .menu-item + .menu-item { border-top: 1px solid var(--gq-line, var(--background-modifier-border)); }
+.gq-w-menu .gq-w-menuclose { color: var(--text-muted); text-align: center; }
+@media (prefers-reduced-motion: reduce) { .gq-sdot::after { transition: none; } }
+/* Pills everywhere a button is a choice (not on tiles, letters, tabs or dots) */
+body.gq-web :is(.gq-tcard, .gq-pop-card, .gq-words-head, .gq-words-filt, .gq-quiz-go, .gq-words-more) button:not(.gq-abc-tile):not(.gq-sdot):not(.gq-cmore):not(.gq-open-opt):not(.gq-watch-play):not(.gq-htile):not(.gq-btile):not(.gq-pop-x):not(.gq-pop-arrow):not(.gq-say) { border-radius: 999px; }
+body.gq-web .gq-seg { border-radius: 999px; overflow: hidden; }
+body.gq-web .gq-seg button { border-radius: 0 !important; }
+body.gq-web button.mod-cta { background: var(--gq-acc); color: var(--gq-on-acc); border-color: transparent; }
+body.gq-web .gq-mini.is-on { background: var(--gq-acc); color: var(--gq-on-acc); border-color: transparent; }
+body.gq-web .gq-tcard button:not(.mod-cta):not(.gq-ghost):not(.gq-cmore):not(.gq-sdot):not(.gq-pill-w):not(.gq-abc-tile):not(.gq-htile):not(.gq-btile):not(.gq-open-opt):not(.gq-watch-play):not(.gq-say):not(.gq-pop-x):not(.gq-helphead):not(.gq-opt):not(.gq-fold-h) { background: var(--gq-soft); border-color: transparent; }
+body.gq-web .gq-tcard button.gq-mini.is-on { background: var(--gq-acc); color: var(--gq-on-acc); }
+/* Full-width rows stay rows */
+body.gq-web .gq-tcard button:is(.gq-helphead, .gq-opt, .gq-opt-row, .gq-fold-h) { background: transparent !important; border-radius: 14px !important; }
+.gq-kcard > .gq-thead { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gq-kcard .gq-ksub.has-more { position: relative; }
+.gq-kcard .gq-ksub.has-more > .gq-cmore { top: 6px; right: -6px; }

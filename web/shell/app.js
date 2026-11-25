@@ -170,14 +170,19 @@ async function boot() {
   try {
     const vr = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null);
     const net = vr && vr.version, have = localStorage.getItem('gqw:ready') || localStorage.getItem('gqw:lastver');
-    // A newer version that isn't on the phone yet: start with the one that is, and fetch the new one quietly.
-    let v = net && have && net !== have && navigator.serviceWorker && navigator.serviceWorker.controller ? have : (net || have);
-    if (!v) throw new Error('offline before the first visit');
+    // Every open starts on the newest release. If it is slow to arrive (over 8 seconds) or the phone is offline,
+    // the copy already on this device opens instead and the new one switches in at the next break.
+    if (!net && !have) throw new Error('offline before the first visit');
     const get = v => Promise.all([
       fetch(NOTES_URL(v)).then(r => { if (!r.ok) throw new Error('notes ' + r.status); return r.json(); }),
       fetch(PLUG_URL(v)).then(r => { if (!r.ok) throw new Error('plugin ' + r.status); return r.text(); })
     ]);
-    let got; try { got = await get(v); } catch (e) { if (!net || v === net) throw e; v = net; got = await get(v); }
+    let v = net || have, got = null;
+    if (net && have && net !== have) {
+      got = await Promise.race([get(net), new Promise((_, no) => setTimeout(() => no(new Error('slow')), 8000))]).catch(() => null);
+      if (!got) v = have;
+    }
+    if (!got) { try { got = await get(v); } catch (e) { if (!net || v === net) throw e; v = net; got = await get(v); } }
     const [bundle, src] = got; loaded = v;
     try { localStorage.setItem('gqw:lastver', v); localStorage.setItem('gqw:ready', v); } catch (e) {}
     if (net && net !== v) setTimeout(() => prefetch(net), 4000); else setTimeout(tidyCache, 8000);
@@ -190,14 +195,14 @@ async function boot() {
     $('#gq-boot').remove();
     app.workspace.ready();
     const up = sessionStorage.getItem('gqw-updated'); if (up) { sessionStorage.removeItem('gqw-updated'); setTimeout(() => new Notice('Updated to ' + up + '. Your work is all here.'), 1500); }
-    // Never reload under someone mid-activity. A new version is fetched quietly and switched in at a natural break:
-    // the next launch, or coming back after 10+ minutes away.
-    let away = 0;
-    setInterval(() => checkUpdate(false, true), 30 * 60 * 1000);
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') { away = Date.now(); return; }
-      checkUpdate(false, Date.now() - away < 10 * 60 * 1000);
-    });
+    // A new release reaches an open tab or home-screen app without anyone tapping anything:
+    // coming back to the tab, or a tab left open and untouched for 3 minutes (checked every 5), reloads onto it.
+    // Never while someone is typing. Work and progress are saved on the device, so a reload loses nothing.
+    let touched = Date.now();
+    const typing = () => { const a = document.activeElement; return !!(a && (/^(INPUT|TEXTAREA)$/.test(a.tagName) || a.isContentEditable) && (a.value || a.textContent)); };
+    ['pointerdown', 'keydown'].forEach(t => document.addEventListener(t, () => { touched = Date.now(); }, true));
+    setInterval(() => { if (document.visibilityState === 'visible') checkUpdate(false, typing() || Date.now() - touched < 3 * 60 * 1000); }, 5 * 60 * 1000);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') checkUpdate(false, typing()); });
   } catch (e) {
     console.error(e);
     status.textContent = 'Greekquent could not start (' + (e && e.message || e) + '). Check the internet connection and open the link again.';

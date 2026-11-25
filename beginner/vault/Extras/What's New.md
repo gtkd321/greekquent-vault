@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip]- New: updates arrive by themselves in the browser
+> - Opening Greekquent in a browser tab now always starts on the newest version, whether or not you added it to your home screen.
+> - A tab you leave open updates when you come back to it, or after a few quiet minutes. Never while you're typing, and your work stays.
+
 > [!tip]- New: a softer start
 > - The first time you open the app, you jump straight in: hear six short bits of Greek and guess what they mean. That's how the app works out where you start. No questions, no tour.
 > - Class days are no longer asked. The first time you tap **Lesson page**, **Rally** or **Classroom Greek** on the Class tab, that day becomes your class day, and Today plans your homework around it. You can change it in Options.

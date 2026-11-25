@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip] 2026-11-25h: Quiz and build, up front
+> Words opens on Mine with two buttons on top: Quiz my words (red and yellow first) and Build a sentence. Both are also under ··· on the Done card, and the builder card now comes right after the story on Today.
+
 > [!tip] 2026-11-25g: One more opens the story
 > When the die lands on Story puzzle, Go now brings the story card up.
 > Games and the story cartoon open where you are, not at lesson 1. Each game's picker still goes back to any earlier set.

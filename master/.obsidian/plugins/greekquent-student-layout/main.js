@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-25g';
+const VAULT_RELEASE = '2026-11-25h';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -4888,7 +4888,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
     }
     if (!kids) { const rv = list.filter(c => c.hasClass('gq-review')); rv.forEach(c => c.remove()); list = list.filter(c => !rv.includes(c)); }
-    const rank = kids ? ['gq-song', 'gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-kgame'] : ['gq-hear', 'gq-class-ask', 'gq-focus', 'gq-cycle', 'gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class', 'gq-watch', 'gq-build'];
+    const rank = kids ? ['gq-song', 'gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-kgame'] : ['gq-hear', 'gq-class-ask', 'gq-focus', 'gq-cycle', 'gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-build', 'gq-comeback', 'gq-fiay', 'gq-class', 'gq-watch'];
     const rk = c => { const k = rank.findIndex(x => c.hasClass(x)); return k < 0 ? rank.length : k; };
     list = list.map((c, k) => [c, k]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map(x => x[0]);
     if (mo) list.push(mo);
@@ -4903,6 +4903,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!kids) {
       // One more is the die: it picks one of six things, so there is nothing to choose.
       const d = done.createDiv('gq-row gq-pillrow').createEl('button', { text: 'One more', cls: 'gq-die-btn gq-pill-w' }); d.onclick = () => this.rollDie();
+      if (this.colors().red.length + this.colors().yellow.length + this.colors().green.length) this.addMore(done, ['Quiz my words', () => this.popQuizMine()]);
+      this.addMore(done, ['Build with your words', () => this.popBuild()]);
       this.addMore(done, ['Back to the start', () => again.onclick({ preventDefault() {} })]);
       this.addMore(done, ['This week\u2019s focus: ' + this.focusName(), () => this.focusPop()]);
       again = {};
@@ -6192,6 +6194,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const c = this.colors(), of = w => this.colorOf(w.word);
       // Quiz me: one button for the color you picked. Up to 10 of its words, in a pop.
       const stars = new Set(this.stars());
+      // Mine (the default) leads with the two things to do with your colors: a quiz (red and yellow first) and the sentence builder.
+      if (st.show === 'mine' && c.red.length + c.yellow.length + c.green.length) {
+        const pool = this.quizPool(words), b = qz.createEl('button', { text: `Quiz my words (${pool.length})`, cls: 'mod-cta gq-pill' }); b.onclick = () => this.quizMe(pool, words, null, () => this.renderWords(el));
+        const bb = qz.createEl('button', { text: 'Build a sentence', cls: 'gq-ghost' }); bb.onclick = () => this.popBuild();
+      }
       if (c[st.show] && c[st.show].length) { const pool = words.filter(w => of(w) === st.show), n = Math.min(10, pool.length); const b = qz.createEl('button', { text: `Quiz me on these (${n})`, cls: 'mod-cta' }); b.onclick = () => this.quizMe(pool, words, st.show, () => this.renderWords(el)); }
       let rows = st.q ? this.findWords(st.q) : words;
       const close = st.q && !this.isKids ? this.closeWords(st.q) : [];
@@ -6258,13 +6265,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // while linking to a word you know helps.
   sameMeaning(w, all) { return all.filter(o => o.word !== w.word && o.english === w.english); }
   alsoNote(f, w, all) { const k = this.sameMeaning(w, all).filter(o => this.colorOf(o.word)); if (!k.length) return; f.appendText(' · also '); k.forEach((o, i) => { if (i) f.appendText(', '); f.createSpan({ text: o.word, attr: { lang: 'el' } }); }); }
+  // Ten colored words for a quiz: red first, then yellow, then green.
+  quizPool(words) { const by = { red: [], yellow: [], green: [] }; for (const w of words) { const k = this.colorOf(w.word); if (by[k]) by[k].push(w); } const mix = a => a.sort(() => Math.random() - 0.5); return [...mix(by.red), ...mix(by.yellow), ...mix(by.green)].slice(0, 10); }
+  async popQuizMine() { const words = await this.wordIndex(); const pool = this.quizPool(words); if (!pool.length) { this.openWords(); return; } this.quizMe(pool, words, null, () => {}); }
   quizMe(pool, all, color, done) {
     const mix = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
     const qs = mix(pool).slice(0, 10), UP = { red: 'yellow', yellow: 'green', green: 'green' }, DOWN = { red: 'red', yellow: 'red', green: 'yellow' };
     const canHear = !gqQuiet() && !noSpeech(), res = new Map();
     const kinds = canHear ? ['meaning', 'listen', 'say'] : ['meaning', 'say'];
     const four = (w, key) => { const seen = new Set([w[key]]), out = [w]; for (const o of mix(all)) { if (out.length >= 4) break; if (o[key] && !seen.has(o[key])) { seen.add(o[key]); out.push(o); } } return mix(out); };
-    const mark = async (w, ok) => { if (res.has(w.word)) return; res.set(w.word, ok); this.moAdd(ok ? 'recall' : 'try', w.word); const nx = (ok ? UP : DOWN)[color]; if (nx !== color) await this.setColor(w.word, nx); };
+    const mark = async (w, ok) => { if (res.has(w.word)) return; res.set(w.word, ok); this.moAdd(ok ? 'recall' : 'try', w.word); const cur = this.colorOf(w.word) || color || 'red', nx = (ok ? UP : DOWN)[cur]; if (nx !== cur) await this.setColor(w.word, nx); };
     const steps = qs.map((w, i) => ({ label: 'Quiz', build: (el, api) => {
       const kind = kinds[i % kinds.length]; el.addClass('gq-quiz');
       const fb = () => el.querySelector('.gq-quiz-fb') || el.createDiv({ cls: 'gq-quiz-fb' });
@@ -6298,7 +6308,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (tried) { const d = r.createEl('button', { text: 'Go deeper', cls: 'mod-cta' }); d.onclick = () => { api.close(); setTimeout(() => this.quizDeep(qs, all, done), 450); }; }
     } });
     this.tourHit && this.tourHit('quiz');
-    this.pop(`Quiz · ${{ red: 'Red', yellow: 'Yellow', green: 'Green' }[color]}`, steps, () => setTimeout(done, 400));
+    this.pop(color ? `Quiz · ${{ red: 'Red', yellow: 'Yellow', green: 'Green' }[color]}` : 'Quiz · My words', steps, () => setTimeout(done, 400));
   }  // Go deeper (after Quiz me). What the research on word learning points to, kept to one round:
   // keep testing words you already got (Karpicke & Roediger 2008), one bigger mixed stack (Kornell 2009),
   // a missed word comes back a few questions later until you get it (Rawson & Dunlosky), and making the Greek

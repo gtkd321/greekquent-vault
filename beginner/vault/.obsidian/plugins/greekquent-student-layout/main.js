@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-24c';
+const VAULT_RELEASE = '2026-11-25a';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -37,6 +37,9 @@ const SETUP = 'Extras/Setting up.md';
 const INDEX = 'Extras/00 Greekquent Index.md';
 const GAMES = 'Extras/09 Games.md';
 const EXTRAS = 'Extras/';
+const WATCH = 'Extras/Watch list.md';   // the free videos for the Watch this card: a table the teacher can add rows to
+const FOCI = [['listen', 'Understanding people'], ['speak', 'Speaking without freezing'], ['read', 'Reading Greek'], ['trip', 'Greek for a trip'], ['verbs', 'Verbs'], ['mix', 'Mix it up']];
+const WLEV = ['ears', 'a1', 'a2'];
 const CARD_IDEAS = EXTRAS + '14 Card ideas.md', COPYRIGHT_NOTE = EXTRAS + 'Copyright.md';
 const COPYRIGHT = '© 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.';
 // Editions of the student vault. Beginner has this file ({"edition": "beginner"}) and updates from the beginner/ folder of the same repo.
@@ -4057,7 +4060,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const t = el.createDiv({ cls: 'gq-pop-big gq-die-t' }), b = el.createDiv({ cls: 'gq-hint gq-die-b' }), luck = el.createDiv('gq-die-luck'), r = el.createDiv('gq-row');
       const roll = () => {
         r.empty(); t.setText(''); b.setText(''); luck.setText(''); let k = 0, last = this.lastRoll;
-        let n = Math.floor(Math.random() * 6); if (n === last) n = (n + 1 + Math.floor(Math.random() * 5)) % 6; this.lastRoll = n;
+        // The week's focus counts twice: listening leans to Repeat after me, speaking to the one-minute talk, reading to the story, verbs to the word web.
+        const fav = { listen: 1, speak: 2, read: 5, trip: 1, verbs: 4 }[this.focusNow()], pool = [0, 1, 2, 3, 4, 5].concat(fav === undefined ? [] : [fav]).filter(x => x !== last);
+        let n = pool[Math.floor(Math.random() * pool.length)]; this.lastRoll = n;
         const calm = this.calmOn(), ticks = calm ? 1 : 12;
         const step = () => {
           if (k < ticks - 1) { face(Math.floor(Math.random() * 6)); die.addClass('is-rolling'); k++; setTimeout(step, 40 + k * k * 1.2); return; }
@@ -4584,6 +4589,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
       this.reviewPlay = rev.slice(0, 40); this.todayWeek = wk; try { const ln = wk && wk.fm && wk.fm.lesson; this.walkW = ln ? words.filter(w => (w.lessons || []).includes(ln)).slice(0, 24) : []; } catch (e) { this.walkW = []; }
       { const st = this.ltStage(col); if (st !== 'ears' && st !== 'read') await this.nextCard(box, { rev, fresh: moFresh }); }
+      await this.weekFocusCards(box, col, wk);
       this.stackOn = false; this.reportCard(box, true);
       this.cardStack(box, false);
       const foot = (box.querySelector('.gq-kdone') || box).createDiv('gq-hint gq-tfoot');
@@ -4850,7 +4856,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
     }
     if (!kids) { const rv = list.filter(c => c.hasClass('gq-review')); rv.forEach(c => c.remove()); list = list.filter(c => !rv.includes(c)); }
-    const rank = kids ? ['gq-song', 'gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-kgame'] : ['gq-class-ask', 'gq-cycle', 'gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class'];
+    const rank = kids ? ['gq-song', 'gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-kgame'] : ['gq-class-ask', 'gq-focus', 'gq-cycle', 'gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class', 'gq-watch'];
     const rk = c => { const k = rank.findIndex(x => c.hasClass(x)); return k < 0 ? rank.length : k; };
     list = list.map((c, k) => [c, k]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map(x => x[0]);
     if (mo) list.push(mo);
@@ -4860,6 +4866,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (dessert) { dessert.removeClass('gq-tcard'); dessert.addClass('gq-ksub'); done.appendChild(dessert); }
     if (tools) { tools.removeClass('gq-tcard'); done.appendChild(tools); }
     if (!kids) { const r = done.createDiv('gq-row'), d = r.createEl('button', { text: 'Roll the die', cls: 'mod-cta gq-die-btn' }); d.onclick = () => this.rollDie(); }
+    if (!kids && !list.some(c => c.hasClass('gq-watch') || c.hasClass('gq-focus'))) this.focusLine(done);
     const again = done.createDiv('gq-row').createEl('a', { text: 'Back to the start', href: '#', cls: 'gq-hint' });
     list.push(done);
     const wrap = createDiv('gq-kwrap'), st = wrap.createDiv({ cls: 'gq-kstack', attr: { 'aria-roledescription': 'card stack' } });
@@ -4869,7 +4876,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (nxc) { nxc.addClass('is-slim'); delete nxc.dataset.tour; if (!nxc.querySelector('.gq-tour-line, .gq-next-back, .gq-week-line')) nxc.hide(); }
     wrap.dataset.tour = kids ? 'stack' : 'next'; this.stackOn = true; this.stackNx = st;
     const anchor = nxc || box.querySelector(':scope > .gq-knew') || box.querySelector(':scope > h2'); if (anchor) anchor.after(wrap); else box.prepend(wrap);
-    const name = c => c.dataset.kname ? c.dataset.kname : c.hasClass('gq-class-ask') ? 'Class days' : c.hasClass('gq-cycle') ? (c.dataset.name || 'This week') : c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'Today\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
+    const name = c => c.dataset.kname ? c.dataset.kname : c.hasClass('gq-class-ask') ? 'Class days' : c.hasClass('gq-focus') ? 'This week' : c.hasClass('gq-watch') ? 'Watch this' : c.hasClass('gq-cycle') ? (c.dataset.name || 'This week') : c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'Today\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
     // Where you are today is kept, so leaving and coming back lands on the same step. A new day starts at the top.
     const today = ymd(new Date()), at = this.lsGet('dayat', null);
     let i = this.stackPick ? list.findIndex(c => name(c) === this.stackPick) : -1;
@@ -5010,6 +5017,92 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // Said at setup that they read the alphabet: letter practice is gone, with no way back in except Setup again.
   abcKnown() { return this.progFm().knows_abc === true; }
   // ---------- Class days and the week between classes ----------
+  // ---------- The week's focus and the Watch this card ----------
+  // One question about once a week: the day after class, or every 7 days. Skipping keeps Mix it up.
+  focusNow() { const v = this.progFm().focus; return FOCI.some(f => f[0] === v) ? v : 'mix'; }
+  focusName() { return FOCI.find(f => f[0] === this.focusNow())[1]; }
+  focusDue() {
+    if (this.app.vault.getAbstractFileByPath('Teacher') || this.needSetup() || this.classDays() === null) return false;
+    const at = this.progFm().focus_at; if (!at) return true;
+    const t0 = new Date(String(at) + 'T00:00:00'), now = new Date(); now.setHours(0, 0, 0, 0);
+    const gap = Math.round((now - t0) / 864e5); if (!(gap >= 0)) return true;
+    if (gap >= 7) return true;
+    const cd = this.classDays(); return cd.length > 0 && gap >= 3 && cd.includes((now.getDay() + 6) % 7);
+  }
+  async setFocus(v) {
+    const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.focus = v; fm.focus_at = ymd(new Date()); });
+    setTimeout(() => this.refreshToday(), 300);
+  }
+  focusPick(el, done) {
+    el.createDiv({ cls: 'gq-pop-big', text: 'What do you want to work on this week?' });
+    el.createDiv({ cls: 'gq-hint', text: 'One tap. Today and the die lean toward it.' });
+    const col = el.createDiv('gq-setup-opts gq-focus-opts'), cur = this.progFm().focus_at ? this.focusNow() : '';
+    for (const [v, t] of FOCI) { const b = col.createEl('button', { cls: 'gq-setup-opt' + (v === cur ? ' is-on' : ''), text: t }); b.onclick = () => done(v); }
+  }
+  focusPop() { this.pop('This week', [{ label: '', build: (el, api) => this.focusPick(el, v => { api.close(); this.setFocus(v); }) }]); }
+  // "This week: Verbs · Change", always inside a card.
+  focusLine(el) {
+    const d = el.createDiv('gq-hint gq-focus-line'); d.createSpan({ text: 'This week: ' + this.focusName() + ' · ' });
+    const a = d.createEl('a', { text: 'Change', href: '#' }); a.onclick = e => { e.preventDefault(); this.focusPop(); };
+  }
+  // About three days a week, never two in a row: three of six weekdays per week, picked by the week's number.
+  watchDay(d) {
+    const n = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 864e5), w = Math.floor(n / 7), k = n % 7;
+    const T = [[1, 3, 5], [1, 3, 6], [1, 4, 6], [2, 4, 6]], h = ((w * 2654435761) >>> 0) % T.length;
+    return T[h].includes(k);
+  }
+  async watchList() {
+    const f = this.app.vault.getAbstractFileByPath(WATCH); if (!f) return [];
+    const out = [];
+    for (const ln of (await this.app.vault.cachedRead(f)).split('\n')) {
+      if (!ln.startsWith('|')) continue; const c = ln.split('|').slice(1, -1).map(x => x.trim());
+      const m = (c[0] || '').match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/); if (!m) continue;
+      const t = c[0].match(/\[([^\]]+)\]/);
+      out.push({ id: m[1], title: t ? t[1] : 'A Greek video', ch: c[1] || '', min: +c[2] || 0, lvl: Math.max(0, WLEV.indexOf((c[3] || 'a1').toLowerCase())), tags: (c[4] || '').toLowerCase().split(/[,\s]+/).filter(Boolean), les: ((c[5] || '').match(/\d+/g) || []).map(Number) });
+    }
+    return out;
+  }
+  async watchPick(col, wk) {
+    const all = await this.watchList(), seen = new Set(this.lsGet('watched', [])), st = this.ltStage(col);
+    const L = wk && wk.fm ? Number(wk.fm.lesson) || 0 : 0, off = Math.max(-1, Math.min(1, Number(this.progFm().watch_lvl) || 0));
+    const ears = st === 'ears' || st === 'read', want = ears ? 0 : Math.max(0, Math.min(2, (L > 12 ? 2 : 1) + off)), fo = this.focusNow(), day = ymd(new Date());
+    const hsh = x => { let h = 0; for (const ch of day + x) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; };
+    const sc = v => (v.lvl === want ? 3 : 0) + (v.tags.includes(fo) ? 3 : 0) + (v.les.includes(L) ? 2 : v.les.some(x => Math.abs(x - L) <= 2) ? 1 : 0);
+    const ok = all.filter(v => !seen.has(v.id) && (ears ? v.lvl === 0 : Math.abs(v.lvl - want) <= 1));
+    ok.sort((a, b) => sc(b) - sc(a) || hsh(a.id) - hsh(b.id));
+    return ok[0] ? { v: ok[0], ears } : null;
+  }
+  async weekFocusCards(box, col, wk) {
+    if (this.isKids) return;
+    if (this.focusDue()) { const c = box.createDiv('gq-tcard gq-focus'); this.focusPick(c, v => { c.querySelectorAll('button').forEach(b => b.disabled = true); this.setFocus(v); });
+      const sk = c.createDiv('gq-hint').createEl('a', { text: 'Skip: mix it up', href: '#' }); sk.onclick = e => { e.preventDefault(); this.setFocus('mix'); }; return; }
+    if (!navigator.onLine || this.doneToday('watch') || !this.watchDay(new Date())) return;
+    const p = await this.watchPick(col, wk); if (p) this.watchCard(box, p.v, p.ears);
+  }
+  watchCard(box, v, ears) {
+    const c = box.createDiv('gq-tcard gq-watch'), h = c.createDiv('gq-thead');
+    h.createEl('strong', { text: 'Watch this' }); if (v.min) h.createSpan({ cls: 'gq-hint', text: `  · ${v.min} min` });
+    c.createDiv({ cls: 'gq-watch-t', text: v.title }); if (v.ch) c.createDiv({ cls: 'gq-hint', text: v.ch + ' · free on YouTube' });
+    if (ears) c.createDiv({ cls: 'gq-hint', text: 'Just listen. You don\u2019t need to understand it all.' });
+    const fr = c.createDiv('gq-watch-fr'), th = fr.createEl('button', { cls: 'gq-watch-play', attr: { 'aria-label': 'Play ' + v.title } });
+    th.createEl('img', { attr: { src: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`, alt: '', loading: 'lazy' } }); th.createDiv('gq-watch-btn');
+    const rate = c.createDiv('gq-watch-rate'); rate.hide();
+    th.onclick = () => { fr.empty(); fr.createEl('iframe', { attr: { src: `https://www.youtube-nocookie.com/embed/${v.id}?rel=0&playsinline=1&autoplay=1`, title: v.title, allow: 'autoplay; encrypted-media; picture-in-picture; fullscreen', allowfullscreen: '', referrerpolicy: 'strict-origin-when-cross-origin' } }); this.moAdd && this.moAdd('did', 'watch', 1); this.tWatch = Date.now(); rate.show(); };
+    rate.createDiv({ cls: 'gq-hint', text: 'When you\u2019re done: how was it?' });
+    const r = rate.createDiv('gq-row');
+    for (const [t, d] of [['Too easy', 1], ['Just right', 0], ['Too hard', -1]]) {
+      const b = r.createEl('button', { text: t, cls: d ? '' : 'mod-cta' });
+      b.onclick = async () => {
+        this.lsSet('watched', [...new Set([...this.lsGet('watched', []), v.id])].slice(-300));
+        if (this.tWatch) { this.timeRec('watch', (Date.now() - this.tWatch) / 1000); this.tWatch = 0; }
+        if (d) { const f = await this.progressFile(), cur = Number(this.progFm().watch_lvl) || 0; await this.app.fileManager.processFrontMatter(f, fm => { fm.watch_lvl = Math.max(-1, Math.min(1, cur + d)); }); }
+        rate.empty(); rate.createDiv({ cls: 'gq-hint', text: d ? 'Thanks. The next one will fit better.' : 'Good. More like that next time.' });
+        this.markDone('watch');
+      };
+    }
+    this.focusLine(c);
+  }
   // class_days: [3] (Wednesday), [1, 3] (Monday and Wednesday), 'none' (not in a class). null = not asked yet.
   classDays() { const v = this.progFm().class_days; if (v === 'none') return []; if (!Array.isArray(v)) return null; const d = [...new Set(v.map(Number).filter(x => x >= 0 && x <= 6))].sort(); return d.length ? d : null; }
   classDaysText() { const d = this.classDays(); return d === null ? 'Not set yet' : d.length ? 'Class on ' + d.map(x => DAY_LONG[x]).join(' and ') : 'Not in a class'; }
@@ -5062,11 +5155,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const bk = this.classBooks(), u0 = next ? units(next.n) : { beg: '', comp: '' };
     const u = bk === 'none' ? { beg: '', comp: '' } : bk === 'beg' ? { beg: u0.beg, comp: '' } : bk === 'comp' ? { beg: '', comp: u0.comp } : u0;
     if (!u.beg && !u.comp) kind = 'lt';
-    const label = kind === 'lt' ? 'Language Transfer, one or two tracks' : kind === 'book' ? `Book reading for Lesson ${next.n}` : 'Language Transfer, then the book';
+    const label = kind === 'lt' ? 'Language Transfer, one or two tracks' : kind === 'book' ? `The book: ${u.beg ? 'Beginners\u2019 Greek ' + u.beg : 'Complete Greek ' + u.comp}` : 'Language Transfer, then the book';
     return { kind, next, prev, units: u, hasBook: !!(u.beg || u.comp), label, min: kind === 'both' ? 25 : 15, days, inClass };
   }
   cycleCard(box, col, cy) {
-    const c = createDiv('gq-tcard gq-cycle'); this.cycEl = c; c.dataset.name = cy.kind === 'class' ? 'Before class' : cy.kind === 'book' ? 'The book' : 'Language Transfer'; const h = c.createDiv('gq-thead'), done = this.doneToday('cyc');
+    const c = createDiv('gq-tcard gq-cycle'); this.cycEl = c; c.dataset.name = cy.kind === 'class' ? 'Before class' : cy.kind === 'book' ? 'Read the book' : 'Language Transfer'; const h = c.createDiv('gq-thead'), done = this.doneToday('cyc');
     const when = cy.next ? (cy.next.k === 1 ? 'tomorrow' : DAY_LONG[cy.next.d.getDay()]) : '';
     const fin = () => { this.markDone('cyc'); };
     if (cy.kind === 'class') {
@@ -5087,19 +5180,20 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (tie) { const t = sec.createDiv('gq-hint'); t.appendText(`Lesson ${cy.prev.n}\u2019s `); t.createSpan({ text: tie[2], attr: /[α-ω]/.test(tie[2]) ? { lang: 'el' } : {} }); t.appendText(`: tracks ${tie[0]} to ${tie[1]}` + (col.lt_track >= tie[1] ? ' (done)' : col.lt_track + 1 < tie[0] ? ' (coming up)' : '')); }
         this.ltTrackRow(sec, col, !done && cy.kind === 'lt', fin);
       } else sec.createDiv({ cls: 'gq-hint', text: 'You finished all 120 tracks. Replay one from a word card any time.' });
-      if (cy.kind === 'lt' && cy.next && cy.hasBook) c.createDiv({ cls: 'gq-hint', text: cy.inClass ? `Then the book reading for Lesson ${cy.next.n}, before class ${when}.` : `Then the book reading for Lesson ${cy.next.n}.` });
+      if (cy.kind === 'lt' && cy.next && cy.hasBook) c.createDiv({ cls: 'gq-hint', text: cy.inClass ? `Then the book reading, before class ${when}.` : 'Then the book reading.' });
     }
     if (cy.kind === 'book' || cy.kind === 'both') {
       const sec = cy.kind === 'both' ? c.createDiv('gq-cycle-sec') : c, hh = cy.kind === 'both' ? sec.createDiv('gq-tsub') : h;
-      hh.createEl('strong', { text: 'Before class · the book' }); hh.createSpan({ cls: 'gq-hint', text: `  · Lesson ${cy.next.n}` + (cy.inClass ? `, class ${when}` : '') });
+      // The book itself, not the lesson script: the unit to read and the exact tracks to play, right on the card.
+      hh.createEl('strong', { text: 'Read the book' }); hh.createSpan({ cls: 'gq-hint', text: cy.inClass ? `  · before class ${when}` : '  · before the next lesson' });
       const u = cy.units, ul = sec.createDiv('gq-cycle-books');
-      if (u.beg) { const li = ul.createDiv(); li.createEl('strong', { text: 'Beginners\u2019 Greek' }); li.appendText(` · ${u.beg} · `); const a = li.createEl('a', { text: 'audio', href: BOOK_AUDIO.beg }); a.onclick = e => { e.preventDefault(); window.open(BOOK_AUDIO.beg, '_blank'); }; }
+      if (u.beg) { const li = ul.createDiv(); li.createEl('strong', { text: 'Beginners\u2019 Greek' }); li.appendText(` · ${u.beg} · `); const tr = li.createSpan(); const a = li.createEl('a', { text: 'audio', href: BOOK_AUDIO.beg }); a.onclick = e => { e.preventDefault(); window.open(BOOK_AUDIO.beg, '_blank'); };
+        const lf = this.lessonPage(cy.next.n); if (lf) (async () => { const m = (await this.app.vault.cachedRead(lf)).match(/choose \*\*(.+?)\*\*/); const t = m && (m[1].match(/(\d\d\.\d\d(?:\u2013\d\d\.\d\d)?(?: \([^)]*\))?)/) || [])[1]; if (t) tr.setText('tracks ' + t + ' · '); })(); }
       if (u.comp) { const li = ul.createDiv(); li.createEl('strong', { text: 'Complete Greek' }); li.appendText(` · ${u.comp} · `); const a = li.createEl('a', { text: 'audio', href: BOOK_AUDIO.comp }); a.onclick = e => { e.preventDefault(); window.open(BOOK_AUDIO.comp, '_blank'); }; }
-      sec.createDiv({ cls: 'gq-hint', text: (u.beg && u.comp ? 'Beginners\u2019 Greek first; Complete Greek if you want more. ' : '') + 'A little each day until class. The lesson page lists the sections.' });
+      sec.createDiv({ cls: 'gq-hint', text: (u.beg && u.comp ? 'Beginners\u2019 Greek first; Complete Greek if you want more. ' : '') + 'Read the unit in your book, then play each track twice: once reading along, once with the book closed. A little each day.' });
       const r = sec.createDiv('gq-row'), did = this.doneToday('cycbook');
       const y = r.createEl('button', { text: did ? 'Read today' : 'I read today', cls: did ? 'gq-mini' : 'mod-cta' }); y.disabled = did;
       y.onclick = () => { y.disabled = true; y.setText('Read today'); this.moAdd('did', 'book:' + cy.next.n, 2); const d0 = this.lsGet('done', {}); d0.cycbook = ymd(new Date()); this.lsSet('done', d0); fin(); setTimeout(() => this.refreshToday(), 600); };
-      const f = this.lessonPage(cy.next.n); if (f) { const lb = r.createEl('button', { text: 'What to read', cls: 'gq-mini' }); lb.onclick = () => this.openNote(f.path); }
     }
     if (done && cy.kind !== 'class') { const d = createDiv({ cls: 'gq-hint gq-cycle-done', text: 'Done for today. More is welcome.' }); c.insertBefore(d, h.nextSibling); }
     const ch = c.createDiv('gq-hint gq-cycle-days'); ch.appendText(this.classDaysText() + ' · ');

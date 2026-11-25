@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!tip]- Clearer book card (2026-11-25a)
+> The before-class card is now called **Read the book**. It names the unit in your book and the exact audio tracks to play, right on the card, so you don't need to open the lesson page to find them.
+
+> [!tip]- This week's focus and Watch this (2026-11-25a)
+> About once a week, Today asks one question: what do you want to work on this week? Understanding people, speaking, reading, a trip, verbs, or mix it up. On about three days a week a **Watch this** card comes last on Today with a short free Greek video that fits your focus and your lesson. After it, tap Too easy, Just right or Too hard and the next one adjusts. The die leans toward your focus too. The videos are in [[Watch list]].
+
 > [!tip]- A calmer opening screen (2026-11-24c)
 > The web app now opens with the olive tree and **Πάμε.** (Let's go.) instead of Θα τα πούμε, which means "see you later" and now only shows when you finish. The name is in the same clean type as the rest of the app.
 

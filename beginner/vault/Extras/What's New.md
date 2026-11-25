@@ -2,6 +2,12 @@
 
 Back to [[Today]].
 
+> [!tip]- New: your week, and one quick vote
+> - The app now counts which Today cards you open, and on how many days. It doesn't save what you type. The counts stay on your phone.
+> - **Send homework** adds one line with those counts, so your teacher can see what's working. You can delete that line before you send.
+> - Once a week, the Done card asks **What helped most this week?** One tap, or skip.
+> - On class day, the Class tab shows **Your week, for class** so you can talk about it.
+
 > [!tip]- New: build sentences, and play Language Transfer right in the app
 > - **Play track** now plays Language Transfer inside Greekquent, so you don't have to leave. If your screen goes dark on a walk, the Language Transfer app keeps playing with the screen locked.
 > - **New to Greek:** your first days start with **Build what you heard**. Hear a short piece, tap the sounds in order. Three quick rounds.

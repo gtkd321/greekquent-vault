@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-25b';
+const VAULT_RELEASE = '2026-11-25c';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1762,6 +1762,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerMarkdownCodeBlockProcessor('greekquent-questions', (src, el) => this.questionsIndex(el));
     // Classroom Greek and other phrase lists: one line per phrase, "Greek | English | gesture", each with a Hear button.
     this.registerMarkdownCodeBlockProcessor('greekquent-say', (src, el) => this.sayList(el, src));
+    this.registerMarkdownCodeBlockProcessor('greekquent-heatmap', (src, el) => this.heatMap(el));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) { this.words = null; this.chunkP = null; } if (f.path.startsWith('Fluent in a Year/')) this.beats = null; }));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === CARDS || f.path === PAIRS_NOTE) this.refreshCards(); }));
     // Word cards opened from the graph fade in (about a fifth of a second) instead of flashing in.
@@ -2485,7 +2486,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const md = this.moData().days, mo = this.moScore(md), w7 = new Date(); w7.setDate(w7.getDate() - 7);
     this.moAdd('did', 'homework', 3); this.moFlush();
     const nums = this.statsLine();
-    window.open(smsLink(`Greekquent homework (${f.basename}):\n${body}\n\nΦόρα ${mo} (${mo - this.moScore(md, w7) >= 0 ? '+' : ''}${mo - this.moScore(md, w7)} this week)${nums ? '\nNumbers: ' + nums : ''}`));
+    const use = this.useLine();
+    window.open(smsLink(`Greekquent homework (${f.basename}):\n${body}\n\nΦόρα ${mo} (${mo - this.moScore(md, w7) >= 0 ? '+' : ''}${mo - this.moScore(md, w7)} this week)${nums ? '\nNumbers: ' + nums : ''}${use ? '\n' + use : ''}`));
   }
   async sha(buf) { const h = await crypto.subtle.digest('SHA-256', buf); return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join(''); }
   // Fallback for devices where the key box is awkward: a note "My Work/Teacher key.md" holding the key is moved into settings and deleted.
@@ -4882,6 +4884,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     wrap.dataset.tour = kids ? 'stack' : 'next'; this.stackOn = true; this.stackNx = st;
     const anchor = nxc || box.querySelector(':scope > .gq-knew') || box.querySelector(':scope > h2'); if (anchor) anchor.after(wrap); else box.prepend(wrap);
     const name = c => c.dataset.kname ? c.dataset.kname : c.hasClass('gq-class-ask') ? 'Class days' : c.hasClass('gq-focus') ? 'This week' : c.hasClass('gq-watch') ? 'Watch this' : c.hasClass('gq-build') ? 'Build with your words' : c.hasClass('gq-hear') ? 'Build what you heard' : c.hasClass('gq-cycle') ? (c.dataset.name || 'This week') : c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'Today\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
+    if (!kids) {
+      const tn = c => c !== done && !c.hasClass('gq-class-ask') && !c.hasClass('gq-focus') && !c.hasClass('gq-mo');
+      this.useLog(list.filter(tn).map(name));
+      st.addEventListener('click', e => { if (e.target.closest('.gq-another')) return; const c = e.target.closest('.gq-kcard'); if (c && tn(c)) this.useTap(name(c)); }, true);
+      this.voteAsk(done);
+    }
     // Where you are today is kept, so leaving and coming back lands on the same step. A new day starts at the top.
     const today = ymd(new Date()), at = this.lsGet('dayat', null);
     let i = this.stackPick ? list.findIndex(c => name(c) === this.stackPick) : -1;
@@ -5160,6 +5168,94 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   }
   focusPop() { this.pop('This week', [{ label: '', build: (el, api) => this.focusPick(el, v => { api.close(); this.setFocus(v); }) }]); }
   // "This week: Verbs · Change", always inside a card.
+  // ---------- How the app gets used: counts only, kept on this device, sent with homework. ----------
+  // Each day: the Today cards a student saw (1) and the ones they tapped into (2). Nothing typed, no times. Not in Kids.
+  useName(n) { return String(n).split(' · ')[0].replace(/[\/·]/g, '-').trim(); }
+  useLog(names) {
+    if (this.isKids) return; const d = ymd(new Date()), u = this.lsGet('use', {}), t = u[d] || (u[d] = {}), old = ymd(new Date(Date.now() - 21 * 864e5));
+    for (const n of names.map(x => this.useName(x))) if (!t[n]) t[n] = 1;
+    for (const k of Object.keys(u)) if (k < old) delete u[k]; this.lsSet('use', u);
+  }
+  useTap(n) { if (this.isKids) return; const d = ymd(new Date()), u = this.lsGet('use', {}), t = u[d] || (u[d] = {}), k = this.useName(n); if (t[k] === 2) return; t[k] = 2; this.lsSet('use', u); }
+  useWeek() {
+    const u = this.lsGet('use', {}), from = ymd(new Date(Date.now() - 6 * 864e5)), m = {};
+    for (const [d, t] of Object.entries(u)) if (d >= from) for (const [n, v] of Object.entries(t)) { const r = m[n] || (m[n] = { n, used: 0, shown: 0 }); r.shown++; if (v === 2) r.used++; }
+    return Object.values(m).sort((a, b) => b.used - a.used || b.shown - a.shown);
+  }
+  useDays() { const from = ymd(new Date(Date.now() - 6 * 864e5)); return Object.keys(this.lsGet('use', {})).filter(d => d >= from).length; }
+  weekId(d0) { const d = d0 ? new Date(d0) : new Date(); d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); return ymd(d); }
+  myVote() { const v = this.lsGet('vote', null); return v && v.wk === this.weekId() && v.pick ? v.pick : ''; }
+  useLine() {
+    if (this.isKids) return ''; const w = this.useWeek(); if (!w.length) return '';
+    const v = this.myVote(); return 'App this week: ' + w.map(r => `${r.n} ${r.used}/${r.shown}`).join(' · ') + (v ? ' · Helped most: ' + v : '');
+  }
+  // Once a week on the Done card, after a few days of use: one tap, only cards this student actually used.
+  voteAsk(done) {
+    if (this.isKids) return; const wk = this.weekId(), v = this.lsGet('vote', null); if (v && v.wk === wk) return;
+    const opts = this.useWeek().filter(r => r.used > 0).slice(0, 4); if (opts.length < 2 || this.useDays() < 3) return;
+    const c = createDiv('gq-vote'); c.createDiv({ cls: 'gq-vote-q', text: 'What helped most this week?' });
+    const r = c.createDiv('gq-row');
+    for (const o of opts) { const b = r.createEl('button', { text: o.n, cls: 'gq-mini' }); b.onclick = () => { this.lsSet('vote', { wk, pick: o.n }); c.empty(); c.createDiv({ cls: 'gq-hint', text: 'Thanks. It goes with your next homework.' }); }; }
+    const sk = c.createDiv('gq-hint').createEl('a', { text: 'Skip', href: '#' }); sk.onclick = e => { e.preventDefault(); this.lsSet('vote', { wk, pick: '' }); c.remove(); };
+    const kb = done.querySelector('.gq-kbye'); if (kb) kb.after(c); else done.appendChild(c);
+  }
+  // Class day: the student's own week, so the class talk starts from facts rather than memory.
+  myWeekCard(box) {
+    if (this.isKids) return; const cd = this.classDays(); if (!cd || !cd.includes(new Date().getDay())) return;
+    const w = this.useWeek(), used = w.filter(r => r.used > 0).slice(0, 3), skip = w.filter(r => r.used === 0 && r.shown >= 2).slice(0, 2), v = this.myVote();
+    if (!used.length) return;
+    const c = box.createDiv('gq-tcard gq-myweek'); c.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Your week, for class' });
+    const ul = c.createEl('ul', { cls: 'gq-myweek-list' }), dd = n => n === 1 ? '1 day' : n + ' days';
+    ul.createEl('li', { text: 'Used most: ' + used.map(r => `${r.n} (${dd(r.used)})`).join(', ') });
+    if (skip.length) ul.createEl('li', { text: 'Skipped: ' + skip.map(r => r.n).join(', ') });
+    if (v) ul.createEl('li', { text: 'Helped most: ' + v });
+    c.createDiv({ cls: 'gq-hint', text: 'What worked, and what got in the way? Bring it to class. These counts also go with Send homework.' });
+  }
+  // Teacher: paste each student's homework text; their "App this week" line becomes one row of the heat map.
+  heatParse(t) {
+    const m = String(t || '').match(/App this week: ([^\n]+)/); if (!m) return null;
+    const rows = [], out = { rows, vote: '' };
+    for (const part of m[1].split(' · ')) { const v = part.match(/^Helped most: (.+)$/); if (v) { out.vote = v[1].trim(); continue; } const r = part.trim().match(/^(.+) (\d+)\/(\d+)$/); if (r) rows.push({ n: r[1], used: +r[2], shown: +r[3] }); }
+    return rows.length ? out : null;
+  }
+  async heatMap(el) {
+    el.empty(); const box = el.createDiv('gq-heat'), d0 = (await this.loadData()) || {}, all = d0.heat || [];
+    const f = box.createDiv('gq-heat-add'); f.createEl('strong', { text: 'Add a student' });
+    const nm = f.createEl('input', { type: 'text', attr: { placeholder: 'Student name', autocomplete: 'off' } });
+    const ta = f.createEl('textarea', { attr: { rows: '3', placeholder: 'Paste their whole homework text' } });
+    const add = f.createDiv('gq-row').createEl('button', { text: 'Add', cls: 'mod-cta' }), msg = f.createDiv('gq-hint');
+    add.onclick = async () => {
+      const s = nm.value.trim(), p = this.heatParse(ta.value);
+      if (!s) { msg.setText('Type the student\u2019s name first.'); return; }
+      if (!p) { msg.setText('No "App this week" line in that text. It comes with homework sent from vault 2026-11-25c on.'); return; }
+      const d = (await this.loadData()) || {}, wk = this.weekId(); d.heat = (d.heat || []).filter(x => !(x.s === s && x.wk === wk)); d.heat.push({ s, wk, d: ymd(new Date()), ...p }); d.heat = d.heat.slice(-500);
+      await this.saveData(d); this.heatWk = wk; this.heatMap(el);
+    };
+    const wks = [...new Set(all.map(x => x.wk))].sort().reverse(); if (!wks.length) { box.createDiv({ cls: 'gq-hint', text: 'No students added yet. Paste a homework text above.' }); return; }
+    const wk = wks.includes(this.heatWk) ? this.heatWk : wks[0];
+    if (wks.length > 1) { const sel = box.createEl('select', { cls: 'dropdown' }); for (const w of wks) sel.createEl('option', { text: 'Week of ' + w, value: w }); sel.value = wk; sel.onchange = () => { this.heatWk = sel.value; this.heatMap(el); }; }
+    const rows = all.filter(x => x.wk === wk).sort((a, b) => a.s.localeCompare(b.s)), tot = {};
+    for (const x of rows) for (const r of x.rows) tot[r.n] = (tot[r.n] || 0) + r.used;
+    const cols = Object.keys(tot).sort((a, b) => tot[b] - tot[a]);
+    const sc = box.createDiv('gq-heat-scroll'), tb = sc.createEl('table', { cls: 'gq-heat-t' }), hr = tb.createEl('thead').createEl('tr');
+    hr.createEl('th', { text: 'Student' }); for (const c of cols) hr.createEl('th', { text: c }); hr.createEl('th');
+    const body = tb.createEl('tbody');
+    for (const x of rows) {
+      const tr = body.createEl('tr'); tr.createEl('th', { text: x.s, attr: { scope: 'row' } });
+      for (const c of cols) {
+        const r = x.rows.find(y => y.n === c), td = tr.createEl('td');
+        if (!r) { td.setText('\u2013'); td.addClass('is-none'); continue; }
+        td.setText(`${r.used}/${r.shown}` + (x.vote === c ? ' \u2605' : '')); td.style.background = `rgba(49,95,158,${(0.06 + 0.84 * Math.min(r.used, 7) / 7).toFixed(2)})`;
+        if (r.used >= 4) td.addClass('is-dark'); td.setAttr('title', `${x.s}: ${c}, used ${r.used} of the ${r.shown} days it was on Today` + (x.vote === c ? '; helped most' : ''));
+      }
+      const rm = tr.createEl('td').createEl('a', { text: '\u00d7', href: '#', attr: { 'aria-label': 'Remove ' + x.s } });
+      rm.onclick = async e => { e.preventDefault(); const d = (await this.loadData()) || {}; d.heat = (d.heat || []).filter(y => !(y.s === x.s && y.wk === x.wk)); await this.saveData(d); this.heatMap(el); };
+    }
+    const ft = tb.createEl('tfoot'), fv = ft.createEl('tr'), fs = ft.createEl('tr');
+    fv.createEl('th', { text: '\u2605 Helped most' }); fs.createEl('th', { text: 'Skipped by' });
+    for (const c of cols) { const v = rows.filter(x => x.vote === c).length, k = rows.filter(x => x.rows.some(r => r.n === c && r.used === 0)).length; fv.createEl('td', { text: v ? String(v) : '' }); fs.createEl('td', { text: k ? String(k) : '' }); }
+    fv.createEl('td'); fs.createEl('td');
+  }
   focusLine(el) {
     const d = el.createDiv('gq-hint gq-focus-line'); d.createSpan({ text: 'This week: ' + this.focusName() + ' · ' });
     const a = d.createEl('a', { text: 'Change', href: '#' }); a.onclick = e => { e.preventDefault(); this.focusPop(); };
@@ -6177,6 +6273,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const cg = r.createEl('button', { text: 'Classroom Greek' }); cg.onclick = () => this.popPhrases();
     if (L && L.f && !this.isKids) { const pairs = this.rallyPairs(await this.app.vault.cachedRead(L.f)); if (pairs.length) { const ra = r.createEl('button', { text: 'Rally' }); ra.onclick = () => this.popRally(L.n, pairs); } }
     if (pt.when) { const t = c.createDiv('gq-row gq-together'); t.createSpan({ cls: 'gq-hint', text: `Practice together · ${pt.when}` }); if (pt.link) { const j = t.createEl('button', { text: 'Join', cls: 'gq-mini' }); j.onclick = () => window.open(pt.link, '_blank'); } }
+    this.myWeekCard(box);
     const q = box.createDiv('gq-tcard'); q.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Homework and questions' });
     const qr = q.createDiv('gq-row');
     const hw = qr.createEl('button', { text: 'Send homework' }); hw.onclick = () => this.sendHomework();

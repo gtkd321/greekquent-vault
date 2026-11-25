@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-25h';
+const VAULT_RELEASE = '2026-11-25i';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -4418,11 +4418,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     else { head.createEl('strong', { text: 'Done for today' }); line.setText('Θα τα πούμε. One more? Pick one.'); line.setAttr('lang', 'el'); }
     if (s) { const b = r.createEl('button', { text: away >= 2 ? 'One line' : 'Start', cls: 'mod-cta' }); b.onclick = () => { this.tourHit('next'); s.go(); }; }
     else for (const [t, fn] of this.choiceTwo(rev)) { const b = r.createEl('button', { text: t }); b.onclick = () => { this.tourHit('next'); fn(); }; }
-    // A good week shows; nothing resets and a missed day never counts against anyone.
-    { const m = new Date(); m.setDate(m.getDate() - ((m.getDay() + 6) % 7)); const mon = ymd(m), wk = Object.keys(days || {}).filter(d => d >= mon && d <= today && +days[d] > 0).length;
-      if (wk && !this.isKids) c.createDiv({ cls: 'gq-hint gq-week-line', text: wk >= 5 ? `This week: ${wk} days. That is the habit.` : `This week: ${wk} of 5 days` }); }
-    const wh = this.whereGet();
-    if (wh) { const d = c.createDiv('gq-hint gq-next-back'); d.appendText('Back to where you were: '); const a = d.createEl('a', { text: wh.label, href: '#' }); a.onclick = e => { e.preventDefault(); this.whereGo(wh); }; }
+    // The week count lives on the Done card now, and Today itself reopens where the student left off, so nothing sits above the cards.
     if (!ctx.fresh || this.planNowGet() || this.tourIs('plan')) this.planRow(c);
     const first = box.querySelector(':scope > .gq-tcard:not(.gq-class-ask)'); if (first) box.insertBefore(c, first); else box.appendChild(c);
   }
@@ -4896,7 +4892,14 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     done.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: kids ? 'All done for today' : 'Done for today' });
     done.createDiv({ cls: 'gq-kbye', text: 'Θα τα πούμε.', attr: { lang: 'el' } });
     if (kids) done.createDiv({ cls: 'gq-hint', text: 'See you next time. Or play one more:' });
-    else { done.addClass('gq-adone'); done.createDiv({ cls: 'gq-kbye-en', text: this.seeYou() }); }
+    else { done.addClass('gq-adone'); done.createDiv({ cls: 'gq-kbye-en', text: this.seeYou() });
+      // A good week shows here, as a reward at the end; nothing resets and a missed day never counts against anyone.
+      // Counted again each time the Done card comes up, so today's work is in it.
+      const wl = done.createDiv('gq-hint gq-week-line');
+      done.gqWeek = () => { const { days } = this.moData(), td = ymd(new Date()), m = new Date(); m.setDate(m.getDate() - ((m.getDay() + 6) % 7));
+        const mon = ymd(m), wk = Object.keys(days || {}).filter(d => d >= mon && d <= td && +days[d] > 0).length;
+        wl.setText(!wk ? '' : wk >= 5 ? `${wk} days this week. That is the habit.` : `${wk} of 5 days this week`); wl.style.display = wk ? "" : "none"; };
+      done.gqWeek(); }
     if (dessert) { dessert.removeClass('gq-tcard'); dessert.addClass('gq-ksub'); done.appendChild(dessert); }
     if (tools) { tools.removeClass('gq-tcard'); done.appendChild(tools); }
     let again;
@@ -4932,7 +4935,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const steps = list.length - 1;
     const more = createDiv({ cls: 'gq-hint gq-another' }); const ma = more.createEl('a', { href: '#' }); const cnt = more.createSpan({ cls: 'gq-another-n' });
     const paint = () => {
-      list.forEach((c, k) => c.toggleClass('is-top', k === i));
+      list.forEach((c, k) => c.toggleClass('is-top', k === i)); if (list[i].gqWeek) list[i].gqWeek();
       // One dot per card, the Next arrow at the right. Swiping works too.
       list[i].appendChild(more); ma.setText(list[i] === done ? '' : '\u203a'); cnt.setText(''); more.toggleClass('is-last', list[i] === done);
       let dots = more.querySelector('.gq-sdots'); if (dots) dots.remove(); dots = createDiv({ cls: 'gq-sdots', attr: { role: 'tablist', 'aria-label': 'Today' } }); more.prepend(dots);

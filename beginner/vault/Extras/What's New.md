@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip] 2026-11-25i: Nothing above the cards
+> Your week now shows on the Done card, as "2 of 5 days this week." The Back to where you were line is gone: Today, the games and the story already open where you left off.
+
 > [!tip] 2026-11-25h: Quiz and build, up front
 > Words opens on Mine with two buttons on top: Quiz my words (red and yellow first) and Build a sentence. Both are also under ··· on the Done card, and the builder card now comes right after the story on Today.
 

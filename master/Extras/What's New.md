@@ -2,6 +2,10 @@
 
 Back to [[Today]].
 
+> [!tip] 2026-11-25g: One more opens the story
+> When the die lands on Story puzzle, Go now brings the story card up.
+> Games and the story cartoon open where you are, not at lesson 1. Each game's picker still goes back to any earlier set.
+
 > [!tip]- New: a calmer, cleaner look
 > - Big cards, fewer words. Each card has one main button. The other choices sit behind **···** in the card's top corner.
 > - Dots under each card show where you are in today. Swipe, tap a dot, or tap **›**.

@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-25f';
+const VAULT_RELEASE = '2026-11-25g';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -1867,9 +1867,27 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const names = { giagia: 'the Γιαγιά game', buzzer: 'the buzzer game', cousins: 'the cousins game', hello: 'Τι λέμε;', story: 'the story cartoon', storylines: 'Story Lines', crossword: 'the crossword' };
     // The crossword uses the words the student has met: story days so far plus any colored word.
     if (which === 'crossword' && !hash) hash = '#w=' + encodeURIComponent((await this.metWords()).join(','));
+    // Games and the story cartoon open where the student is, never back at lesson 1. Each game's own picker still goes back to any earlier set.
+    if (!hash && ['giagia', 'buzzer', 'cousins'].includes(which)) { const w = await this.gameWords(); if (w.length) hash = '#w=' + encodeURIComponent(w.join(',')); }
+    if (!hash && which === 'story') hash = '#d=' + (await this.storyDayNow());
     if (names[which]) this.whereSet({ kind: 'app', app: which, hash: hash || '', label: names[which] });
     await leaf.setViewState({ type: APPV, active: true, state: { app: which, hash: hash || '' } });
     ws.revealLeaf(leaf);
+  }
+  // The words a game starts with: words to work on first, then the newest story words, then the rest; at least 12, at most 40.
+  async gameWords() {
+    const col = this.colors(), beats = await this.beatIndex(), at = Math.max(col.story_at || 0, 1), out = new Set([...col.red, ...col.yellow]);
+    const days = Object.values(beats).sort((x, y) => y.n - x.n);
+    for (const b of days) if (b.n <= at + 1) for (const w of b.words || []) out.add(w.word);
+    for (const w of col.green) out.add(w);
+    // A brand-new student has met only a few words: fill up with the next story days, the words coming up anyway.
+    for (const b of days.slice().reverse()) { if (out.size >= 12) break; if (b.n > at + 1) for (const w of b.words || []) out.add(w.word); }
+    return [...out].slice(0, 40);
+  }
+  // The story day to watch now: the first part not finished yet.
+  async storyDayNow() {
+    const beats = await this.beatIndex(), at = this.colors().story_at || 0, ns = Object.values(beats).map(b => b.n).filter(n => n <= SCENE_DAYS).sort((x, y) => x - y);
+    return ns.find(n => n > at) || ns[ns.length - 1] || 1;
   }
   async metWords() {
     const col = this.colors(), beats = await this.beatIndex(), at = Math.max(col.story_at || 0, 1), out = new Set([...col.red, ...col.yellow, ...col.green]);
@@ -4274,7 +4292,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (!quiet) { this.keepOpen = [...c.classList].find(t => t.startsWith('gq-') && !['gq-tcard', 'gq-kid', 'gq-fold', 'gq-chosen'].includes(t)) || null; c.scrollIntoView({ behavior: this.calmOn() ? 'auto' : 'smooth', block: 'start' }); }
   }
   focusCard(el) {
-    if (!el) return; if (el.hasClass('gq-fold')) this.unfold(el); el.scrollIntoView({ behavior: this.calmOn() ? 'auto' : 'smooth', block: 'start' });
+    if (!el) return; if (el.hasClass('gq-fold')) this.unfold(el);
+    // Today shows one card at a time: bring the card to the top of the stack first, or the jump lands on a hidden card.
+    const kc = this.stackOn && this.kidStackGo && el.closest ? el.closest('.gq-kcard') : null; if (kc) this.kidStackGo(kc); el.scrollIntoView({ behavior: this.calmOn() ? 'auto' : 'smooth', block: 'start' });
     el.removeClass('gq-pulse'); void el.offsetWidth; el.addClass('gq-pulse'); setTimeout(() => el.removeClass('gq-pulse'), 1800);
   }
   // The phone's ringer switch can't be read from an app, so the Greek voice has its own switch, kept on this device.
@@ -4928,7 +4948,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       cur.style.transition = 'transform .22s ease-in, opacity .22s ease-in'; cur.style.transform = `translateX(${(dir || -1) * 115}%) rotate(${(dir || -1) * 9}deg)`; cur.style.opacity = '0';
       setTimeout(land, 220);
     };
-    this.kidStackGo = c => { const k = list.indexOf(c); if (k >= 0) { i = k; paint(); } };
+    this.kidStackGo = c => { const k = list.indexOf(c); if (k >= 0 && k !== i) { i = k; paint(); keep(); } };
     // A step that finishes moves on by itself (the story's Done, a finished review).
     this.dayNext = from => { if (!from || list[i] === from || list[i].contains(from)) go(i + 1, -1); };
     ma.onclick = e => { e.preventDefault(); go(i + 1, -1); };

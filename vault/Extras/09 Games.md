@@ -2,6 +2,13 @@
 
 Links: [[Today]] · [[00 Greekquent Index]] · [[07 Fluent in a Year]]
 
+> [!summary]- Build with your words (your own sentences)
+> [Open Build with your words](obsidian://greekquent?open=build)
+> - Ready-made pieces from your word cards: **θέλω κάτι**, **λίγο νερό**, **στο σπίτι**. Each one is already correct Greek.
+> - Pieces with your red and yellow words come first, with a small color dot. At most one piece has a new word.
+> - Join two or three with και, αλλά, γιατί or μετά, hear it, and save it to My pairs. There is no wrong answer, and building never changes a color.
+> - On Today it is the last card on days without a video, once you have a few colored words.
+
 > [!summary]- Greekquent Buzzer (fastest fingers)
 > [Open the Greekquent Buzzer](obsidian://greekquent?open=buzzer) (works offline)
 > - Lay the phone flat between two students sitting face to face. The screen is split, so each student reads their own half the right way up.

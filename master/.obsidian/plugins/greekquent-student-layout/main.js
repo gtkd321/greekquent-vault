@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-25a';
+const VAULT_RELEASE = '2026-11-25b';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -40,6 +40,11 @@ const EXTRAS = 'Extras/';
 const WATCH = 'Extras/Watch list.md';   // the free videos for the Watch this card: a table the teacher can add rows to
 const FOCI = [['listen', 'Understanding people'], ['speak', 'Speaking without freezing'], ['read', 'Reading Greek'], ['trip', 'Greek for a trip'], ['verbs', 'Verbs'], ['mix', 'Mix it up']];
 const WLEV = ['ears', 'a1', 'a2'];
+// Language Transfer's own app: downloads ahead and keeps playing with the screen locked.
+const LT_APP = /android/i.test((typeof navigator !== 'undefined' && navigator.userAgent) || '') ? 'https://play.google.com/store/apps/details?id=org.languagetransfer' : 'https://apps.apple.com/us/app/language-transfer/id1519599004';
+const ltPlayer = n => 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(ltTrackUrl(n)) + '&auto_play=true&visual=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&hide_related=true&color=%23315f9e';
+// Glue for the color builder: whole little words that join two ready-made pieces.
+const GLUE = [['και', 'and'], ['αλλά', 'but'], ['γιατί', 'because'], ['μετά', 'then']];
 const CARD_IDEAS = EXTRAS + '14 Card ideas.md', COPYRIGHT_NOTE = EXTRAS + 'Copyright.md';
 const COPYRIGHT = '© 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.';
 // Editions of the student vault. Beginner has this file ({"edition": "beginner"}) and updates from the beginner/ folder of the same repo.
@@ -309,7 +314,7 @@ function gqPh(word) {
 // Each Greek word on screen gets its sound spelling underneath, as a ruby. The rt is empty and shows the spelling through CSS,
 // so the page text (and everything that reads it) stays plain Greek. Only Greek marked lang="el" and rendered notes are touched;
 // editors, inputs and pictures never are.
-const PH_SKIP = 'button:not(.gq-tile), input, textarea, select, script, style, svg, code, pre, .cm-editor, [contenteditable="true"], .gq-noph, .gq-abc, ruby.gq-pr, .gq-tour-tip';
+const PH_SKIP = 'button:not(.gq-tile):not(.gq-htile):not(.gq-btile), input, textarea, select, script, style, svg, code, pre, .cm-editor, [contenteditable="true"], .gq-noph, .gq-abc, ruby.gq-pr, .gq-tour-tip';
 const PH_SCOPE = '[lang="el"], .markdown-rendered, .markdown-preview-view';
 const PH_RE = /[\u0370-\u03ff\u1f00-\u1fff]+(?:['’][\u0370-\u03ff\u1f00-\u1fff]*)?/g;
 const PH_HAS = /[\u0370-\u03ff\u1f00-\u1fff]/;
@@ -1736,7 +1741,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerMarkdownPostProcessor((el, ctx) => this.stackTables(el, ctx));
     this.addCommand({ id: 'more-on-page', name: 'Side panel', callback: () => this.showMore() });
     this.addCommand({ id: 'add-to-card', name: 'Add a chunk or sentence to this word', callback: () => { const f = this.app.workspace.getActiveFile(); if (!f || !f.path.startsWith('Words/')) { new Notice('Open a word note first.'); return; } new CardModal(this.app, this, f.basename).open(); } });
-    this.registerObsidianProtocolHandler('greekquent', p => p.open ? this.openApp(p.open, p.hash || '') : this.fromGame(p));
+    this.registerObsidianProtocolHandler('greekquent', p => p.open === 'build' ? this.popBuild() : p.open ? this.openApp(p.open, p.hash || '') : this.fromGame(p));
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path === TODAY) this.refreshToday(); }));
     // Where you left off: the last lesson or article (and its section), game, or Word web word. Today offers it back in one tap.
     this.registerEvent(this.app.workspace.on('file-open', f => { if (f && (this.isStudentScript(f.path) || (f.path.startsWith(EXTRAS) && f.path.split('/').length === 2 && !/What's New|Index/.test(f.path)))) this.whereSet({ kind: 'page', path: f.path, label: f.basename.replace(/^\d\d /, '').replace(/-student$/, '') }); }));
@@ -1757,7 +1762,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.registerMarkdownCodeBlockProcessor('greekquent-questions', (src, el) => this.questionsIndex(el));
     // Classroom Greek and other phrase lists: one line per phrase, "Greek | English | gesture", each with a Hear button.
     this.registerMarkdownCodeBlockProcessor('greekquent-say', (src, el) => this.sayList(el, src));
-    this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) this.words = null; if (f.path.startsWith('Fluent in a Year/')) this.beats = null; }));
+    this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path.startsWith('Words/')) { this.words = null; this.chunkP = null; } if (f.path.startsWith('Fluent in a Year/')) this.beats = null; }));
     this.registerEvent(this.app.metadataCache.on('changed', f => { if (f.path === CARDS || f.path === PAIRS_NOTE) this.refreshCards(); }));
     // Word cards opened from the graph fade in (about a fifth of a second) instead of flashing in.
     this.registerDomEvent(document, 'pointerdown', e => { if (e.target.closest && e.target.closest('.workspace-leaf-content[data-type="localgraph"], .workspace-leaf-content[data-type="graph"]')) this.graphTouch = Date.now(); }, true);
@@ -4856,7 +4861,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
     }
     if (!kids) { const rv = list.filter(c => c.hasClass('gq-review')); rv.forEach(c => c.remove()); list = list.filter(c => !rv.includes(c)); }
-    const rank = kids ? ['gq-song', 'gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-kgame'] : ['gq-class-ask', 'gq-focus', 'gq-cycle', 'gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class', 'gq-watch'];
+    const rank = kids ? ['gq-song', 'gq-abc', 'gq-kscene', 'gq-kwordsc', 'gq-kgame'] : ['gq-hear', 'gq-class-ask', 'gq-focus', 'gq-cycle', 'gq-lt', 'gq-report', 'gq-abc', 'gq-story', 'gq-comeback', 'gq-fiay', 'gq-class', 'gq-watch', 'gq-build'];
     const rk = c => { const k = rank.findIndex(x => c.hasClass(x)); return k < 0 ? rank.length : k; };
     list = list.map((c, k) => [c, k]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map(x => x[0]);
     if (mo) list.push(mo);
@@ -4866,7 +4871,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (dessert) { dessert.removeClass('gq-tcard'); dessert.addClass('gq-ksub'); done.appendChild(dessert); }
     if (tools) { tools.removeClass('gq-tcard'); done.appendChild(tools); }
     if (!kids) { const r = done.createDiv('gq-row'), d = r.createEl('button', { text: 'Roll the die', cls: 'mod-cta gq-die-btn' }); d.onclick = () => this.rollDie(); }
-    if (!kids && !list.some(c => c.hasClass('gq-watch') || c.hasClass('gq-focus'))) this.focusLine(done);
+    if (!kids && !list.some(c => c.hasClass('gq-watch') || c.hasClass('gq-focus') || c.hasClass('gq-build'))) this.focusLine(done);
     const again = done.createDiv('gq-row').createEl('a', { text: 'Back to the start', href: '#', cls: 'gq-hint' });
     list.push(done);
     const wrap = createDiv('gq-kwrap'), st = wrap.createDiv({ cls: 'gq-kstack', attr: { 'aria-roledescription': 'card stack' } });
@@ -4876,7 +4881,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (nxc) { nxc.addClass('is-slim'); delete nxc.dataset.tour; if (!nxc.querySelector('.gq-tour-line, .gq-next-back, .gq-week-line')) nxc.hide(); }
     wrap.dataset.tour = kids ? 'stack' : 'next'; this.stackOn = true; this.stackNx = st;
     const anchor = nxc || box.querySelector(':scope > .gq-knew') || box.querySelector(':scope > h2'); if (anchor) anchor.after(wrap); else box.prepend(wrap);
-    const name = c => c.dataset.kname ? c.dataset.kname : c.hasClass('gq-class-ask') ? 'Class days' : c.hasClass('gq-focus') ? 'This week' : c.hasClass('gq-watch') ? 'Watch this' : c.hasClass('gq-cycle') ? (c.dataset.name || 'This week') : c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'Today\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
+    const name = c => c.dataset.kname ? c.dataset.kname : c.hasClass('gq-class-ask') ? 'Class days' : c.hasClass('gq-focus') ? 'This week' : c.hasClass('gq-watch') ? 'Watch this' : c.hasClass('gq-build') ? 'Build with your words' : c.hasClass('gq-hear') ? 'Build what you heard' : c.hasClass('gq-cycle') ? (c.dataset.name || 'This week') : c.hasClass('gq-abc') ? (kids ? 'Letters' : 'Alphabet') : c.hasClass('gq-report') ? 'Your numbers' : c.hasClass('gq-story') ? (kids ? 'Story puzzle' : 'Today\'s story') : c.hasClass('gq-comeback') ? 'Review' : c.hasClass('gq-kscene') ? 'Listen first' : c.hasClass('gq-ksay') ? 'Say it together' : c.hasClass('gq-kwordsc') ? 'Today\'s words' : c.hasClass('gq-kgame') ? 'The game' : c.hasClass('gq-kteach') ? 'You are the teacher' : c.hasClass('gq-kmoves') ? 'The moves' : c.hasClass('gq-fiay') ? 'Fluent in a Year' : c.hasClass('gq-mo') ? 'Πάρε φόρα' : c.hasClass('gq-song') ? 'Hello song' : c.hasClass('gq-kdone') ? 'All done' : (((c.querySelector('.gq-thead strong') || {}).textContent || 'Next').split(':')[0]);
     // Where you are today is kept, so leaving and coming back lands on the same step. A new day starts at the top.
     const today = ymd(new Date()), at = this.lsGet('dayat', null);
     let i = this.stackPick ? list.findIndex(c => name(c) === this.stackPick) : -1;
@@ -5017,6 +5022,119 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // Said at setup that they read the alphabet: letter practice is gone, with no way back in except Setup again.
   abcKnown() { return this.progFm().knows_abc === true; }
   // ---------- Class days and the week between classes ----------
+  // ---------- Ready-made pieces: the chunks in each word note's Pair it with (Little words, Use it with, Describe it) ----------
+  // Each piece is already correct Greek with its English, so building with them never teaches a wrong ending.
+  async chunkBank() {
+    if (this.chunkP) return this.chunkP;
+    return this.chunkP = (async () => {
+      const out = [], seen = new Set(), CATS = new Set(['Little words', 'Use it with', 'Describe it']);
+      for (const f of this.app.vault.getMarkdownFiles()) {
+        if (!f.path.startsWith('Words/')) continue;
+        const pm = (await this.app.vault.cachedRead(f)).match(/## Pair it with\n([\s\S]*?)(?:\n## |$)/); if (!pm) continue;
+        for (const line of pm[1].split('\n')) {
+          const c = line.match(/^- \*\*(.+?):\*\*\s*(.*)/); if (!c || !CATS.has(c[1])) continue;
+          for (const part of splitDots(c[2])) {
+            const en = ((part.match(/\(([^)]*)\)\s*$/) || [])[1] || '').trim(); if (!en) continue;
+            const ws = [f.basename]; for (const m of part.matchAll(/\[\[([^\]|#]+)/g)) ws.push(m[1].trim());
+            const gr = part.replace(/\[\[([^\]|#]+)\|([^\]]+)\]\]/g, '$2').replace(/\[\[([^\]|#]+)\]\]/g, '$1').replace(/\s*\([^)]*\)\s*$/, '').replace(/\s+/g, ' ').trim();
+            if (!gr || /[a-z]/i.test(gr) || /[()\[\]…]/.test(gr)) continue;
+            const k = fold(gr); if (seen.has(k)) continue; seen.add(k);
+            const n = gr.split(' ').length; if (n > 6) continue;
+            out.push({ gr, en, n, words: [...new Set(ws)].filter(w => !w.includes(',')) });
+          }
+        }
+      }
+      return out;
+    })();
+  }
+  // A piece's color: red if it holds a red word, then yellow, then green; 'new' if any word is not in your colors yet.
+  chunkColor(ch, col) { const rk = w => col.red.includes(w) ? 0 : col.yellow.includes(w) ? 1 : col.green.includes(w) ? 2 : 3; const r = ch.words.map(rk); return r.includes(3) ? 'new' : ['red', 'yellow', 'green'][Math.min(...r)]; }
+  async glossMap() {
+    if (this.glossM) return this.glossM;
+    const m = new Map(); for (const w of await this.wordIndex()) { const en = String(w.english || '').split(/[;,]/)[0].trim(); if (!en) continue; for (const k of w.word.split(/,\s*/).map(fold)) if (k && !m.has(k)) m.set(k, en); }
+    return this.glossM = m;
+  }
+  // ---------- First days, New to Greek: Build what you heard. Hear a short piece, put its sounds in order. ----------
+  // Only pieces made of words from the first Language Transfer tracks; each tile says itself. Meanings show only for dictionary forms, so θέλεις never reads as "I want".
+  hearDue(col) { const h = this.lsGet('hear', []); return this.ltStage(col) === 'ears' && !this.doneToday('hear') && h.length < 3; }
+  async hearCard(box, col) {
+    const top = Math.max(8, (col.lt_track || 0) + 4), early = new Set(Object.keys(LT_FIRST).filter(w => LT_FIRST[w] <= top));
+    const bank = (await this.chunkBank()).filter(c => c.n >= 2 && c.n <= 4 && c.words.every(w => early.has(w)));
+    if (bank.length < 2) return;
+    const day = this.lsGet('hear', []).length, hsh = x => { let h = 7 + day * 131; for (const ch of x) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; };
+    const rounds = bank.slice().sort((a, b) => a.n - b.n || hsh(a.gr) - hsh(b.gr)).filter((c, i, a) => a.findIndex(x => x.words[0] === c.words[0]) === i).slice(0, 12).sort((a, b) => hsh(a.gr) - hsh(b.gr)).slice(0, 3).sort((a, b) => a.n - b.n);
+    const gm = await this.glossMap();
+    const c = box.createDiv('gq-tcard gq-hear'), h = c.createDiv('gq-thead');
+    h.createEl('strong', { text: 'Build what you heard' }); h.createSpan({ cls: 'gq-hint', text: '  · 2 min' });
+    c.createDiv({ cls: 'gq-hint', text: 'Hear a short piece of Greek. Tap the sounds in the same order. Each tile says itself.' });
+    const area = c.createDiv('gq-hear-area');
+    const fin = () => { area.empty(); area.createDiv({ cls: 'gq-pop-big', text: 'Μπράβο.' }); area.createDiv({ cls: 'gq-hint', text: 'That\u2019s today\u2019s puzzle. Next: Language Transfer.' });
+      const d = this.lsGet('hear', []), t = ymd(new Date()); if (!d.includes(t)) this.lsSet('hear', [...d, t]); this.moAdd && this.moAdd('did', 'hear', 1); this.markDone('hear'); };
+    const play = i => {
+      area.empty(); if (i >= rounds.length) return fin();
+      const x = rounds[i], toks = x.gr.split(' ');
+      area.createDiv({ cls: 'gq-hint', text: `${i + 1} of ${rounds.length}` });
+      const pr = area.createDiv('gq-hear-en'); pr.setText(x.en);
+      const hr = area.createDiv('gq-row'), hb = hr.createEl('button', { text: 'Hear it', cls: 'mod-cta' }); hb.onclick = () => say(x.gr);
+      const ans = area.createDiv({ cls: 'gq-cv-ans gq-hear-ans', attr: { 'aria-label': 'Your order', lang: 'el' } });
+      const tray = area.createDiv({ cls: 'gq-hear-tray', attr: { lang: 'el' } }), msg = area.createDiv({ cls: 'gq-hint', attr: { 'aria-live': 'polite' } });
+      let order = toks.map((t, k) => ({ t, k })); for (let k = 1; k < 8 && order.every((o, j) => o.k === j); k++) order = order.map(o => ({ o, r: hsh(o.t + k) })).sort((a, b) => a.r - b.r).map(z => z.o);
+      const placed = [];
+      for (const o of order) {
+        const b = tray.createEl('button', { cls: 'gq-htile', attr: { 'data-k': String(o.k) } }); b.createDiv({ cls: 'gq-htile-gr', text: o.t, attr: { lang: 'el' } });
+        const g = gm.get(fold(o.t.replace(/[;,.!?]/g, ''))); if (g) b.createDiv({ cls: 'gq-htile-en', text: g });
+        b.onclick = () => {
+          say(o.t.replace(/[;,.!?]/g, ''));
+          if (b.parentElement === ans) { ans.removeChild(b); tray.appendChild(b); placed.splice(placed.indexOf(o), 1); return; }
+          ans.appendChild(b); placed.push(o);
+          if (placed.length === toks.length) {
+            if (placed.map(p => p.t).join(' ') === x.gr) { msg.setText('Yes: ' + x.gr); ans.addClass('is-right'); setTimeout(() => say(x.gr), 250); const n = area.createDiv('gq-row').createEl('button', { text: i + 1 < rounds.length ? 'Next' : 'Done', cls: 'mod-cta' }); n.onclick = () => play(i + 1); tray.querySelectorAll('button').forEach(z => z.disabled = true); }
+            else { msg.setText('Not quite. Hear it again.'); ans.addClass('is-wrong'); setTimeout(() => { ans.removeClass('is-wrong'); [...ans.children].forEach(z => tray.appendChild(z)); placed.length = 0; msg.setText(''); }, 900); }
+          }
+        };
+      }
+    };
+    play(0);
+  }
+  // ---------- Build with your words: your own sentence from ready-made pieces, picked by your colors ----------
+  // Red and yellow pieces first, at most one piece with a new (black) word, little words to join them. No checking:
+  // every piece is already right, so the sentence is yours. Building never changes a color. Saves to My pairs.
+  async buildPieces(col, seed) {
+    const bank = await this.chunkBank(), mine = new Set([...col.red, ...col.yellow, ...col.green]);
+    const rk = { red: 0, yellow: 1, green: 2, new: 3 }, hsh = x => { let h = seed >>> 0; for (const ch of x) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; };
+    const ok = bank.filter(c => c.words.some(w => mine.has(w))).map(c => ({ ...c, col: this.chunkColor(c, col) }));
+    const byC = k => ok.filter(c => c.col === k).sort((a, b) => hsh(a.gr) - hsh(b.gr));
+    const pick = [...byC('red').slice(0, 3), ...byC('yellow').slice(0, 3)]; for (const c of byC('green')) if (pick.length < 7) pick.push(c);
+    for (const c of [...byC('red').slice(3), ...byC('yellow').slice(3)]) if (pick.length < 7) pick.push(c);
+    const nw = byC('new')[0]; if (nw) pick.push(nw);
+    return pick.sort((a, b) => rk[a.col] - rk[b.col]);
+  }
+  async buildReady(col) { const mine = col.red.length + col.yellow.length + col.green.length; if (mine < 6) return false; return (await this.buildPieces(col, 1)).filter(c => c.col !== 'new').length >= 5; }
+  async buildUI(el, done) {
+    const col = this.colors(); let seed = Math.floor(Date.now() / 864e5);
+    el.createDiv({ cls: 'gq-hint', text: 'Put two or three pieces together into your own sentence. Red and yellow words come first. There is no wrong answer.' });
+    const ans = el.createDiv({ cls: 'gq-cv-ans gq-build-ans', attr: { 'aria-label': 'Your sentence', lang: 'el' } }), en = el.createDiv('gq-hint gq-build-en');
+    const tray = el.createDiv({ cls: 'gq-build-tray', attr: { lang: 'el' } }), glue = el.createDiv({ cls: 'gq-build-glue', attr: { lang: 'el' } });
+    const r = el.createDiv('gq-row'), hear = r.createEl('button', { text: 'Hear it' }), save = r.createEl('button', { text: 'Save to My pairs', cls: 'mod-cta' }), more = el.createDiv('gq-hint').createEl('a', { text: 'Other pieces', href: '#' });
+    const out = el.createDiv('gq-build-out'); let parts = [];
+    const text = () => { let g = parts.map(p => p.gr).join(' ').replace(/\s+([,.;!?])/g, '$1'); if (!g) return ['', '']; g = cap1(g); if (!/[.;!?]$/.test(g)) g += '.'; let e = parts.map(p => p.en).join(' '); e = cap1(e); if (!/[.?!]$/.test(e)) e += '.'; return [g, e]; };
+    const paint = () => { ans.empty(); parts.forEach((p, i) => { const b = ans.createEl('button', { cls: 'gq-btile', text: p.gr, attr: { lang: 'el' } }); b.onclick = () => { parts.splice(i, 1); paint(); }; }); const [g, e] = text(); en.setText(g ? e : 'Tap pieces below.'); save.disabled = parts.filter(p => !p.glue).length < 1; };
+    const tile = (parent, p) => { const b = parent.createEl('button', { cls: 'gq-btile' }); if (!p.glue) b.createSpan({ cls: 'gq-dot gq-' + p.col, attr: { 'aria-label': p.col === 'new' ? 'new word' : p.col } }); b.createSpan({ cls: 'gq-btile-gr', text: p.gr, attr: { lang: 'el' } }); b.createDiv({ cls: 'gq-btile-en', text: p.en }); b.onclick = () => { say(p.gr); if (parts.length < 8) { parts.push(p); paint(); } }; };
+    const fill = async () => { tray.empty(); for (const p of await this.buildPieces(col, seed)) tile(tray, p); };
+    for (const [g, e] of GLUE) tile(glue, { gr: g, en: e, glue: true, words: [] });
+    hear.onclick = () => { const [g] = text(); if (g) say(g); };
+    more.onclick = e => { e.preventDefault(); seed += 7; fill(); };
+    save.onclick = async () => { const [g, e] = text(); if (!g) return; await this.savePair(g, e, parts.flatMap(p => p.words), false); parts = []; paint(); out.empty();
+      const s = out.createDiv('gq-hint'); s.appendText('Saved. '); const a = s.createEl('a', { text: 'Send today\u2019s to your teacher', href: '#' }); a.onclick = async ev => { ev.preventDefault(); await this.openNote(PAIRS_NOTE); setTimeout(() => this.sendHomework(), 400); };
+      if (done) done(); };
+    paint(); await fill();
+  }
+  async buildCard(box) {
+    const c = box.createDiv('gq-tcard gq-build'), h = c.createDiv('gq-thead'); h.createEl('strong', { text: 'Build with your words' }); h.createSpan({ cls: 'gq-hint', text: '  · 3 min' });
+    await this.buildUI(c, () => this.markDone('build'));
+    this.focusLine(c);
+  }
+  popBuild() { this.pop('Build with your words', [{ label: '', build: el => this.buildUI(el, null) }]); }
   // ---------- The week's focus and the Watch this card ----------
   // One question about once a week: the day after class, or every 7 days. Skipping keeps Mix it up.
   focusNow() { const v = this.progFm().focus; return FOCI.some(f => f[0] === v) ? v : 'mix'; }
@@ -5073,12 +5191,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     ok.sort((a, b) => sc(b) - sc(a) || hsh(a.id) - hsh(b.id));
     return ok[0] ? { v: ok[0], ears } : null;
   }
+  focusAsk(box) { const c = box.createDiv('gq-tcard gq-focus'); this.focusPick(c, v => { c.querySelectorAll('button').forEach(b => b.disabled = true); this.setFocus(v); });
+    const sk = c.createDiv('gq-hint').createEl('a', { text: 'Skip: mix it up', href: '#' }); sk.onclick = e => { e.preventDefault(); this.setFocus('mix'); }; }
   async weekFocusCards(box, col, wk) {
     if (this.isKids) return;
-    if (this.focusDue()) { const c = box.createDiv('gq-tcard gq-focus'); this.focusPick(c, v => { c.querySelectorAll('button').forEach(b => b.disabled = true); this.setFocus(v); });
-      const sk = c.createDiv('gq-hint').createEl('a', { text: 'Skip: mix it up', href: '#' }); sk.onclick = e => { e.preventDefault(); this.setFocus('mix'); }; return; }
-    if (!navigator.onLine || this.doneToday('watch') || !this.watchDay(new Date())) return;
-    const p = await this.watchPick(col, wk); if (p) this.watchCard(box, p.v, p.ears);
+    if (this.hearDue(col)) { await this.hearCard(box, col); if (this.focusDue()) return this.focusAsk(box); return; }
+    if (this.focusDue()) return this.focusAsk(box);
+    // The last card shares one spot: a video on watch days, building with your words on the others.
+    if (navigator.onLine && !this.doneToday('watch') && this.watchDay(new Date())) { const p = await this.watchPick(col, wk); if (p) { this.watchCard(box, p.v, p.ears); return; } }
+    const st = this.ltStage(col); if (st !== 'ears' && st !== 'read' && !this.doneToday('build') && await this.buildReady(col)) await this.buildCard(box);
   }
   watchCard(box, v, ears) {
     const c = box.createDiv('gq-tcard gq-watch'), h = c.createDiv('gq-thead');
@@ -5213,10 +5334,21 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     setTimeout(() => this.refreshToday(), 300);
   }
   ltOpen(n) { window.open(n ? ltTrackUrl(n) : LT_URL, '_blank'); this.moAdd && this.moAdd('did', 'lt', 1); }
+  ltPlay(c, n, before) {
+    if (!navigator.onLine) { this.ltOpen(n); return; }
+    let w = c.querySelector('.gq-lt-play'); if (w) w.remove();
+    w = createDiv('gq-lt-play'); if (before) before.before(w); else c.appendChild(w);
+    w.createEl('iframe', { attr: { src: ltPlayer(n), title: `Language Transfer, track ${n}`, allow: 'autoplay; encrypted-media', scrolling: 'no', frameborder: 'no', loading: 'lazy' } });
+    const h = w.createDiv('gq-hint'); h.appendText('Screen going dark on a walk? ');
+    const a = h.createEl('a', { text: 'The Language Transfer app', href: LT_APP }); a.onclick = e => { e.preventDefault(); window.open(LT_APP, '_blank'); };
+    h.appendText(' keeps playing with the screen locked.');
+    this.moAdd && this.moAdd('did', 'lt', 1);
+  }
   // A row for the track: Open, I listened, and a slider to set the track (for students who already started the course).
   ltTrackRow(c, col, cta, after) {
     const r = c.createDiv('gq-row'), nx = Math.min(LT_MAX, col.lt_track + 1);
-    const o = r.createEl('button', { text: 'Open Language Transfer', cls: cta ? '' : 'gq-mini' }); o.onclick = () => this.ltOpen(nx);
+    // Plays right here with Language Transfer's own SoundCloud player (their audio, their play counts; nothing is copied).
+    const o = r.createEl('button', { text: `Play track ${nx}`, cls: cta ? '' : 'gq-mini' }); o.onclick = () => this.ltPlay(c, nx, r);
     const y = r.createEl('button', { text: `I listened to track ${nx}`, cls: cta ? 'mod-cta' : 'gq-mini' }); y.onclick = () => { y.disabled = true; this.moAdd && this.moAdd('did', 'lt-' + nx, 1); if (after) after(); this.ltSet({ lt_track: nx }); };
     const ch = c.createDiv('gq-hint').createEl('a', { text: 'Already further along?', href: '#' });
     ch.onclick = e => { e.preventDefault(); ch.parentElement.remove(); this.ltPicker(c, col); };
@@ -5259,7 +5391,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (tie) { d.appendText(' · this lesson\u2019s '); d.createSpan({ text: tie[2], attr: tie[2].match(/[α-ω]/) ? { lang: 'el' } : {} }); d.appendText(`: tracks ${tie[0]} to ${tie[1]}`); }
     d.appendText(' · ');
     const y = d.createEl('a', { text: 'Listened', href: '#' }); y.onclick = e => { e.preventDefault(); this.moAdd && this.moAdd('did', 'lt-' + nx, 1); this.ltSet({ lt_track: nx }); };
-    d.appendText(' · '); const o = d.createEl('a', { text: 'Open', href: '#' }); o.onclick = e => { e.preventDefault(); this.ltOpen(nx); };
+    d.appendText(' · '); const o = d.createEl('a', { text: 'Play', href: '#' }); o.onclick = e => { e.preventDefault(); this.ltPlay(card, nx, null); };
     d.appendText(' · '); const ch = d.createEl('a', { text: 'Change', href: '#' }); ch.onclick = e => { e.preventDefault(); this.ltPicker(card, col); };
   }
   // One session: the new letters (tap to hear), then each word: hear it and pick the meaning, read it aloud, build it.

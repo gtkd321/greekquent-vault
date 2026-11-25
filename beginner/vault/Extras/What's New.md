@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!tip]- New: build sentences, and play Language Transfer right in the app
+> - **Play track** now plays Language Transfer inside Greekquent, so you don't have to leave. If your screen goes dark on a walk, the Language Transfer app keeps playing with the screen locked.
+> - **New to Greek:** your first days start with **Build what you heard**. Hear a short piece, tap the sounds in order. Three quick rounds.
+> - **Build with your words:** on days without a video, the last card on Today lets you join ready-made pieces into your own sentence. Your red and yellow words come first. It saves to My pairs and never changes a color. It's also in Games.
+
 > [!tip]- Clearer book card (2026-11-25a)
 > The before-class card is now called **Read the book**. It names the unit in your book and the exact audio tracks to play, right on the card, so you don't need to open the lesson page to find them.
 

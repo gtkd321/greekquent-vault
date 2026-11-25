@@ -1033,3 +1033,18 @@ button.gq-daystep.is-home { color: var(--text-normal); font-weight: 600; border-
 .gq-heat-t td.is-dark { color: #fff; }
 .gq-heat-t td.is-none { color: var(--text-faint); }
 .gq-heat-t a { text-decoration: none; color: var(--text-muted); }
+
+/* First open: six one-tap guesses */
+.gq-open-card { text-align: center; padding: 22px 16px 14px; }
+.gq-open-area { min-height: 330px; display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 14px; }
+.gq-open-gr { font-size: 30px; line-height: 1.5; font-weight: 600; }
+.gq-open-gr ruby { margin: 0 4px; }
+.gq-open-gr rt { font-size: 13px; font-weight: 400; color: var(--text-muted); }
+.gq-open-opts { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 340px; }
+.gq-open-opt { min-height: 48px; height: auto; font-size: 16px; white-space: normal; border-radius: 12px; }
+.gq-open-opt.is-right { border: 2px solid #1a9850; color: #1a9850; background: rgba(26,152,80,.08); }
+.gq-open-opt.is-wrong { opacity: .5; text-decoration: line-through; }
+.gq-open-dots { display: flex; gap: 6px; justify-content: center; margin: 12px 0 4px; }
+.gq-open-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--background-modifier-border); }
+.gq-open-dot.is-on { background: var(--interactive-accent); }
+.gq-open-skip { margin-top: 6px; }

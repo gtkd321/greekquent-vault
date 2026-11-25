@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-25c';
+const VAULT_RELEASE = '2026-11-25d';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3120,7 +3120,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     el.toggleClass('is-hidden', !!document.querySelector('.gq-tour'));
     if (!this.friendOn()) {
       if (el.hasClass('is-inline')) { el.removeClass('is-inline'); document.body.appendChild(el); el.dataset.mode = ''; }
-      if (el.dataset.mode !== 'tour') { el.empty(); el.dataset.mode = 'tour'; const b = el.createEl('button', { cls: 'gq-corner-tour', text: 'Tour', attr: { 'aria-label': 'Take the tour' } }); b.onclick = () => this.tourStart(); }
+      if (el.dataset.mode !== 'none') { el.empty(); el.dataset.mode = 'none'; }
       return;
     }
     const last = this.cornerLast, firstTime = !this.lsGet('planted', 0);
@@ -4533,7 +4533,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     m.onClose = () => { alive = false; run = false; gen++; pay(); try { speechSynthesis.cancel(); if (lock) lock.release(); } catch (e) {} };
     m.open();
   }
-  async renderToday(el) { await this.renderToday0(el); if (el.isConnected) { this.cornerSync(); if (this.needSetup()) this.setupPop(); } }
+  async renderToday(el) { if (this.needSetup()) { this.opening(el); return; } await this.renderToday0(el); if (el.isConnected) this.cornerSync(); }
   async renderToday0(el) {
     // Each render builds off-screen and swaps in at the end; only the newest render for a container wins.
     const tok = el.gqTok = (el.gqTok || 0) + 1;
@@ -4555,8 +4555,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       this.cyc = null; this.cycEl = null;
       if (!this.isKids && !this.app.vault.getAbstractFileByPath('Teacher')) {
         const st0 = this.ltStage(col);
-        if (st0 !== 'ears' && st0 !== 'read') { this.cyc = await this.cycleInfo(now); if (this.cyc) this.cycleCard(box, col, this.cyc); }
-        if (this.classDays() === null && !this.needSetup()) this.classDaysCard(box);
+        // The homework cycle starts once class days are known: picked in Options, or learned from the first class (classSeen).
+        if (st0 !== 'ears' && st0 !== 'read' && this.classDays() !== null) { this.cyc = await this.cycleInfo(now); if (this.cyc) this.cycleCard(box, col, this.cyc); }
       }
       if (!col.setup_seen && !this.tourLeft()) {
         const s = box.createDiv('gq-tcard gq-tnew'); s.createSpan({ text: 'New here? ' });
@@ -4929,7 +4929,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (this.abcOff() && !this.abcKnown()) { const lp = foot.createEl('a', { text: 'Letter practice', href: '#' }); lp.onclick = e => { e.preventDefault(); this.setAbcOff(false); }; foot.appendText(' · '); }
     const gu = foot.createEl('a', { text: 'For grown-ups', href: '#' }); gu.onclick = e => { e.preventDefault(); this.openNote(SETUP); };
     // Slides parked here too: the kids Today is a plain list of cards.
-    if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.tabsSync(); this.cornerSync(); this.kidLesson = wk.lesson; if (col.setup_seen) { if (this.tourState().at === undefined) this.tourState().at = 0; this.tourShow(); } }
+    if (tok === el.gqTok) { el.empty(); el.appendChild(box); this.tabsSync(); this.cornerSync(); this.kidLesson = wk.lesson;  }
   }
   moHasDays() { const f = this.app.vault.getAbstractFileByPath(MO_FILE); const fm = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {}; return !!((this.moMem && Object.keys(this.moMem.days || {}).length) || (fm.days && typeof fm.days === 'object' && Object.keys(fm.days).length)); }
   async kidFull() { this.kidFullNow = true; const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.kid_full = true; }); this.refreshToday(); }
@@ -5149,7 +5149,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   focusName() { return FOCI.find(f => f[0] === this.focusNow())[1]; }
   focusDue() {
     if (this.app.vault.getAbstractFileByPath('Teacher') || this.needSetup() || this.classDays() === null) return false;
-    const at = this.progFm().focus_at; if (!at) return true;
+    // The first ask waits: never on the first day, never on a class day. One question on a calm day.
+    const pf = this.progFm(), at = pf.focus_at; if (!at) { const t = ymd(new Date()); return !(pf.setup_day && String(pf.setup_day) >= t) && !this.classDays().includes(new Date().getDay()); }
     const t0 = new Date(String(at) + 'T00:00:00'), now = new Date(); now.setHours(0, 0, 0, 0);
     const gap = Math.round((now - t0) / 864e5); if (!(gap >= 0)) return true;
     if (gap >= 7) return true;
@@ -5324,9 +5325,23 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   classDays() { const v = this.progFm().class_days; if (v === 'none') return []; if (!Array.isArray(v)) return null; const d = [...new Set(v.map(Number).filter(x => x >= 0 && x <= 6))].sort(); return d.length ? d : null; }
   classDaysText() { const d = this.classDays(); return d === null ? 'Not set yet' : d.length ? 'Class on ' + d.map(x => DAY_LONG[x]).join(' and ') : 'Not in a class'; }
   classBooks() { const v = this.progFm().class_books; return ['beg', 'comp', 'both', 'none'].includes(v) ? v : 'both'; }
+  // Nobody is asked for class days. Tapping Lesson page, Rally or Classroom Greek on the Class tab marks today as a class day;
+  // the first one sets the day, a second weekday seen twice adds it (two classes a week). Days picked by hand in Options win.
+  async classSeen() {
+    if (this.isKids || this.isTeacher) return;
+    const now = new Date(), wd = now.getDay(), t = ymd(now), seen = this.lsGet('classseen', []);
+    if (!seen.some(x => x.d === t)) { seen.push({ d: t, wd }); this.lsSet('classseen', seen.slice(-20)); }
+    const cur = this.classDays(); if (cur !== null && !this.progFm().class_auto) return;
+    const cnt = {}; for (const x of seen) cnt[x.wd] = (cnt[x.wd] || 0) + 1;
+    const days = cur && cur.length ? [...cur] : [];
+    if (!days.length) days.push(wd); else if (!days.includes(wd) && cnt[wd] >= 2 && days.length < 2) days.push(wd); else return;
+    days.sort(); const f = await this.progressFile();
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.class_days = days; fm.class_auto = true; if (!fm.class_books) fm.class_books = 'beg'; });
+    new Notice(`Class on ${days.map(x => DAY_LONG[x]).join(' and ')}. Today now plans your homework around it. Change it in Options.`, 6000);
+  }
   async setClassDays(d, books) {
     const f = await this.progressFile();
-    await this.app.fileManager.processFrontMatter(f, fm => { fm.class_days = d.length ? d : 'none'; if (books) fm.class_books = books; });
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.class_days = d.length ? d : 'none'; if (books) fm.class_books = books; delete fm.class_auto; });
     new Notice(d.length ? `Class days: ${d.map(x => DAY_LONG[x]).join(' and ')}. Today plans your week around them.` : 'Not in a class. Today still plans your week.');
     setTimeout(() => this.refreshToday(), 300);
   }
@@ -5579,7 +5594,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (this.ltDone === k) return; this.ltDone = k;
     const f = await this.progressFile(); let fy = false;
     await this.app.fileManager.processFrontMatter(f, fm => { const was = parseInt(fm.lt_read, 10) || 0; if (k + 1 > was) fm.lt_read = k + 1; fm.lt_day = ymd(new Date()); if (k + 1 >= LT_BRIDGE.length && fm.lt_fiay) { fy = true; delete fm.lt_fiay; } });
-    if (k + 1 >= LT_BRIDGE.length) { this.lsSet('abcoff', 1); if (fy) await this.setFiay(true); setTimeout(() => { if (!this.tourOpen() && this.tourLeft()) this.tourStart(); }, 1500); }
+    if (k + 1 >= LT_BRIDGE.length) { this.lsSet('abcoff', 1); if (fy) await this.setFiay(true); }
   }
   // ---------- First launch: two questions build the beginner setup (pace, then the alphabet) ----------
   needSetup() {
@@ -5588,6 +5603,52 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (fm.setup_done) return false;
     // Students already under way are not asked.
     return !(parseInt(fm.story_at, 10) > 0) && !(Array.isArray(fm.tour_done) && fm.tour_done.length) && (fm.tour_at === undefined || fm.tour_at === null);
+  }
+  // ---------- First open: a soft start. Six one-tap guesses, no questions, no tour. ----------
+  // The first two sound like English, so anyone gets them. Then two everyday words by ear, then two lines to read
+  // with no sound and no phonetics. How they do picks the start: by ear (new), letters as they go (some), or plain Greek (read).
+  // Casual pace; class days are asked on a later day, one card. Everything is in Options afterwards.
+  opening(el) {
+    const R = [
+      { gr: 'ταξί', ok: 'taxi', no: ['coffee', 'music'], ear: 1 },
+      { gr: 'καφές', ok: 'coffee', no: ['tea', 'water'], ear: 1 },
+      { gr: 'νερό', ok: 'water', no: ['bread', 'wine'], ear: 1, k: 'ear' },
+      { gr: 'ευχαριστώ', ok: 'thank you', no: ['good morning', 'goodbye'], ear: 1, k: 'ear' },
+      { gr: 'Πού είναι το σπίτι;', ok: 'Where is the house?', no: ['I have a house.', 'The house is big.'], k: 'read' },
+      { gr: 'Δεν ξέρω τι θέλει.', ok: 'I don\u2019t know what he wants.', no: ['I know what he wants.', 'He doesn\u2019t want to know.'], k: 'read' }
+    ], sc = { ear: 0, read: 0 };
+    el.empty(); const box = el.createDiv('gq-today gq-open'), c = box.createDiv('gq-tcard gq-open-card');
+    c.createDiv({ cls: 'gq-pop-big', text: 'Πάμε.', attr: { lang: 'el' } });
+    const sub = c.createDiv({ cls: 'gq-hint', text: 'Hear it, then guess what it means. No wrong answers yet.' });
+    const area = c.createDiv('gq-open-area'), dots = c.createDiv({ cls: 'gq-open-dots', attr: { 'aria-hidden': 'true' } });
+    R.forEach(() => dots.createSpan('gq-open-dot'));
+    const finish = async () => {
+      const start = sc.read === 2 ? 'read' : (sc.ear === 2 || (sc.ear && sc.read)) ? 'some' : 'new';
+      area.empty(); sub.setText(''); area.createDiv({ cls: 'gq-pop-big', text: 'Μπράβο.', attr: { lang: 'el' } });
+      area.createDiv({ cls: 'gq-hint', text: start === 'new' ? 'You start by ear. Next: a short listening lesson.' : start === 'some' ? 'You know some already. Next: today\u2019s story.' : 'You read Greek. Next: today\u2019s story.' });
+      try { const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.setup_day = ymd(new Date()); fm.start_check = `ear ${sc.ear}/2, read ${sc.read}/2`; }); } catch (e) {}
+      setTimeout(() => this.setupSave({ start, pace: 'casual', abc: start === 'read' }), 1400);
+    };
+    const round = i => {
+      area.empty(); [...dots.children].forEach((d, k) => d.toggleClass('is-on', k <= i)); if (i >= R.length) return finish();
+      const x = R[i], g = area.createDiv({ cls: 'gq-open-gr gq-noph', attr: { lang: 'el' } });
+      if (x.ear) { for (const w of x.gr.split(' ')) { const r = g.createEl('ruby'); r.appendText(w); r.createEl('rt', { text: gqPh(w.replace(/[;,.!?]/g, '')) || '' }); } }
+      else { g.setText(x.gr); if (i === 4) sub.setText('Now just read it. Guess if you need to.'); }
+      if (x.ear) { const hb = area.createDiv('gq-row').createEl('button', { text: 'Hear it', cls: 'mod-cta' }); hb.onclick = () => say(x.gr); if (i > 0) setTimeout(() => say(x.gr), 250); }
+      const opts = [x.ok, ...x.no]; const h = [...x.gr].reduce((a, ch) => a + ch.charCodeAt(0), i); const order = opts.map((t, k) => ({ t, r: (h * (k + 3)) % 7 })).sort((a, b) => a.r - b.r).map(o => o.t);
+      const col = area.createDiv('gq-open-opts'); let done = false;
+      const pick = (t, b) => {
+        if (done) return; done = true; const right = t === x.ok; if (right && x.k) sc[x.k]++;
+        col.querySelectorAll('button').forEach(z => { z.disabled = true; if (z.textContent === x.ok) z.addClass('is-right'); });
+        if (b && !right) b.addClass('is-wrong');
+        say(x.gr); setTimeout(() => round(i + 1), right ? 900 : 1600);
+      };
+      for (const t of order) { const b = col.createEl('button', { cls: 'gq-open-opt', text: t }); b.onclick = () => pick(t, b); }
+      const ns = area.createDiv('gq-hint gq-open-ns').createEl('a', { text: 'Not sure', href: '#' }); ns.onclick = e => { e.preventDefault(); pick('', null); };
+    };
+    round(0);
+    const sk = c.createDiv('gq-hint gq-open-skip').createEl('a', { text: 'Skip', href: '#' });
+    sk.onclick = e => { e.preventDefault(); this.setupSave({ start: 'some', pace: 'casual', abc: false }); };
   }
   setupPop() {
     this.setupShown = true; const ans = { start: 'some', pace: 'casual', abc: false }; let saved = false;
@@ -5608,7 +5669,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         if (!nw) ul.createEl('li', { text: ans.abc ? 'You read the alphabet: plain Greek letters, no letter practice.' : 'Learning the alphabet: letter practice, and the sound of each word under it.' });
         el.createDiv({ cls: 'gq-hint', text: 'Change it later in Class, under Settings and help, then Options.' });
         const r = el.createDiv('gq-row'); const go = r.createEl('button', { text: 'Start', cls: 'mod-cta' });
-        go.onclick = async () => { await save(); api.close(); if (ans.start !== 'new') setTimeout(() => { if (!this.tourOpen()) this.tourStart(); }, 500); }; };
+        go.onclick = async () => { await save(); api.close(); }; };
       // Where they start, then how far. New to Greek starts by ear (Language Transfer); nobody is asked about letters twice.
       q('Where are you starting?', '', [
         ['New to Greek', 'Start by ear with a free audio course. Reading comes after, with words you already know.', 'new'],
@@ -5825,7 +5886,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (n || had) this.tourSave();
     return n;
   }
-  async tourStart(n) {
+  async tourStart(n) { this.tourLive = true;
     const t = this.tourState(), steps = this.tourSteps();
     this.lsSet('tourlater', 0); this.tourMin = false;
     if (t.at === undefined) t.at = 0;
@@ -5865,7 +5926,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   tourShow0() {
     document.querySelectorAll('.gq-tour-on').forEach(x => x.removeClass('gq-tour-on'));
     const old = document.querySelector('.gq-tour'); if (old) old.remove();
-    const t = this.tourState(); if (!this.tourOpen()) return;
+    // The tour only shows after Take the tour is tapped in this session; it never opens by itself.
+    const t = this.tourState(); if (!this.tourOpen() || !this.tourLive) return;
     const steps = this.tourSteps(); if (t.at >= steps.length) { t.at = 99; this.tourSave(); return; }
     if (this.tourCatchUp()) { const cur = steps[t.at]; if (cur && cur.ev && t.done.includes(cur.k)) { const nx = steps.findIndex((x, i) => i > t.at && !(x.ev && t.done.includes(x.k))); t.at = nx < 0 ? 99 : nx; this.tourSave(); if (nx < 0) { this.tourBye(); return; } } }
     const st = steps[t.at];
@@ -6269,9 +6331,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       if (L.f) c.createDiv({ cls: 'gq-hint', text: L.f.basename.replace(/-(student|teacher)$/, '').replace(/^[LIK]\d+\s*/, '') });
     }
     const r = c.createDiv('gq-row');
-    if (L && L.f) { const b = r.createEl('button', { text: 'Lesson page', cls: 'mod-cta' }); b.onclick = () => this.openNote(L.f.path); }
-    const cg = r.createEl('button', { text: 'Classroom Greek' }); cg.onclick = () => this.popPhrases();
-    if (L && L.f && !this.isKids) { const pairs = this.rallyPairs(await this.app.vault.cachedRead(L.f)); if (pairs.length) { const ra = r.createEl('button', { text: 'Rally' }); ra.onclick = () => this.popRally(L.n, pairs); } }
+    if (L && L.f) { const b = r.createEl('button', { text: 'Lesson page', cls: 'mod-cta' }); b.onclick = () => { this.classSeen(); this.openNote(L.f.path); }; }
+    const cg = r.createEl('button', { text: 'Classroom Greek' }); cg.onclick = () => { this.classSeen(); this.popPhrases(); };
+    if (L && L.f && !this.isKids) { const pairs = this.rallyPairs(await this.app.vault.cachedRead(L.f)); if (pairs.length) { const ra = r.createEl('button', { text: 'Rally' }); ra.onclick = () => this.classSeen() && this.popRally(L.n, pairs); } }
     if (pt.when) { const t = c.createDiv('gq-row gq-together'); t.createSpan({ cls: 'gq-hint', text: `Practice together · ${pt.when}` }); if (pt.link) { const j = t.createEl('button', { text: 'Join', cls: 'gq-mini' }); j.onclick = () => window.open(pt.link, '_blank'); } }
     this.myWeekCard(box);
     const q = box.createDiv('gq-tcard'); q.createDiv({ cls: 'gq-thead' }).createEl('strong', { text: 'Homework and questions' });

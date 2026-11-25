@@ -2,6 +2,11 @@
 
 Back to [[Today]].
 
+> [!tip]- New: a softer start
+> - The first time you open the app, you jump straight in: hear six short bits of Greek and guess what they mean. That's how the app works out where you start. No questions, no tour.
+> - Class days are no longer asked. The first time you tap **Lesson page**, **Rally** or **Classroom Greek** on the Class tab, that day becomes your class day, and Today plans your homework around it. You can change it in Options.
+> - The tour never opens by itself. It's still under Class, **Settings and help**, **Take the tour**.
+
 > [!tip]- New: your week, and one quick vote
 > - The app now counts which Today cards you open, and on how many days. It doesn't save what you type. The counts stay on your phone.
 > - **Send homework** adds one line with those counts, so your teacher can see what's working. You can delete that line before you send.

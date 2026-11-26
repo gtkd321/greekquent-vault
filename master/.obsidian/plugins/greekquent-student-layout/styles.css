@@ -1192,3 +1192,16 @@ body.gq-web .gq-tcard button:is(.gq-helphead, .gq-opt, .gq-opt-row, .gq-fold-h) 
 .gq-kcard > .gq-thead { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gq-kcard .gq-ksub.has-more { position: relative; }
 .gq-kcard .gq-ksub.has-more > .gq-cmore { top: 6px; right: -6px; }
+
+/* Recall: the step inside today's story card where the schedule brings words back (2026-11-25j). */
+.gq-cv-recall { display: flex; flex-direction: column; gap: 10px; animation: gq-fadein .2s ease; }
+.gq-cv-rcount { text-align: center; }
+.gq-cv-rq { display: flex; flex-direction: column; gap: 12px; }
+.gq-cv-rq .gq-cbctx, .gq-cv-rq .gq-cbyou, .gq-cv-rq .gq-cbgr { text-align: center; }
+.gq-cv-rq .gq-row { justify-content: center; }
+.gq-quiz-note { margin-top: -6px; text-align: center; }
+@media (prefers-reduced-motion: reduce) { .gq-cv-recall { animation: none; } }
+/* A picked answer keeps its green or red in the web app, where pill buttons otherwise repaint it. */
+body button.gq-quiz-opt.is-ok { background: #2e7d32 !important; color: #fff !important; border-color: transparent !important; }
+body button.gq-quiz-opt.is-miss { background: #c62828 !important; color: #fff !important; border-color: transparent !important; }
+.gq-words-more .gq-kept { flex-basis: 100%; text-align: center; padding: 10px 0 2px; }

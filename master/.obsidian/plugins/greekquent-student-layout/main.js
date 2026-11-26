@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-25i';
+const VAULT_RELEASE = '2026-11-25j';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -28,6 +28,7 @@ const VIDEO_MAX_S = 45;
 const VIDEO_MAX_MB = 48;   // GroupMe takes videos up to about 50 MB
 const NAME_KEY = 'greekquent-first-name';
 const LOOKUPS = MY_WORK + 'Words I looked up.md';
+const KEPT = MY_WORK + 'My colors as I marked them.md';   // the student's own color marks, copied once when colors became earned (2026-11-25j)
 const PROGRESS = MY_WORK + 'My progress.md';      // word colors (red, yellow, green) live in this note's properties
 const MISSES = MY_WORK + 'Game misses.md';
 const CARDS = MY_WORK + 'My word cards.md';   // chunks and sentences students add to word notes
@@ -1777,7 +1778,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       setTimeout(() => el.removeClass('gq-fade'), 400);
     }));
     // My Work notes open ready to type in.
-    this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path.startsWith(MY_WORK)) setTimeout(() => this.editMode(f), 50); }));
+    this.registerEvent(this.app.workspace.on('file-open', f => { if (f && f.path.startsWith(MY_WORK) && f.path !== KEPT) setTimeout(() => this.editMode(f), 50); }));
     this.hideLinkedView();
     this.addCommand({ id: 'open-word-graph', name: 'Open word web', callback: () => this.openGraph() });
     this.registerEvent(this.app.workspace.on('file-menu', (menu, file) => {
@@ -3326,6 +3327,59 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     });
     // The metadata cache catches up a moment later; repaint after it does.
     setTimeout(() => { this.paintBars(); this.refreshToday(); }, 300);
+    // Said once: a green you tap is your call, and the app checks it two days later.
+    if (color === 'green' && !this.lsGet('gtip', 0)) { this.lsSet('gtip', 1); new Notice('Green. It comes back in 2 days to check.', 5000); }
+  }
+  // The colors a student marked by hand are theirs. Once, when colors became earned, they are copied into a note of their own
+  // in My Work (which no update touches), so that list can always be read, whatever the words do afterwards. Nothing is changed in the colors themselves.
+  async keepColors(words) {
+    if (this.keptTried) return; this.keptTried = true;
+    const f = this.app.vault.getAbstractFileByPath(PROGRESS); if (!f) return;
+    let c = null, kept = false;
+    await this.app.fileManager.processFrontMatter(f, fm => { kept = !!fm.colors_kept; const L = k => Array.isArray(fm[k]) ? fm[k].map(String) : []; c = { green: L('green'), yellow: L('yellow'), red: L('red') }; });
+    if (kept || !c) return;
+    const t = ymd(new Date());
+    if (c.green.length + c.yellow.length + c.red.length) {
+      const by = new Map((words || []).map(w => [w.word, w.english]));
+      const sec = (title, list) => `## ${title} (${list.length})\n\n` + (list.length ? list.map(w => `- ${w}${by.get(w) ? ' — ' + by.get(w) : ''}`).join('\n') : '- none yet') + '\n';
+      const body = `# My colors, as I marked them\n\nSaved on ${t}. These are the colors you gave your words yourself. This list is yours: the app never changes this note.\n\nYour colors are all still on your words. From now on a word also moves up when you remember it on a later day, and you can still tap a color on any word.\n\n`
+        + sec('Green · have it', c.green) + '\n' + sec('Yellow · kind of', c.yellow) + '\n' + sec("Red · don't have it", c.red);
+      try { if (!(await this.app.vault.adapter.exists(KEPT))) await this.app.vault.create(KEPT, body); } catch (e) { this.keptTried = false; return; }
+    }
+    await this.app.fileManager.processFrontMatter(f, fm => { fm.colors_kept = t; });
+  }
+  // Colors are earned. A right answer moves a word up one step (new or red to yellow, yellow to green), but only on a later day
+  // than its last change, so green always means it was remembered across days. A miss moves it down one step at once.
+  // Tapping a color (setColor) still works as the student's own call; a tapped green is checked two days later (dueWords).
+  async earn(word, ok, fb, quiet) {
+    const f = await this.progressFile(), t = ymd(new Date()), RK = { '': 0, red: 1, yellow: 2, green: 3 }, D = /^\d{4}-\d{2}-\d{2}$/;
+    const out = { word, ok, from: '', to: '', note: '' };
+    await this.app.fileManager.processFrontMatter(f, fm => {
+      const L = k => Array.isArray(fm[k]) ? fm[k].map(String) : [];
+      const real = ['green', 'yellow', 'red'].find(k => L(k).includes(word)) || '', cur = real || fb || '';
+      const on = fm.color_on && typeof fm.color_on === 'object' ? fm.color_on : {}, rv = fm.word_review && typeof fm.word_review === 'object' ? fm.word_review : {};
+      const [n0, last] = String(rv[word] || '0|').split('|'), n = parseInt(n0, 10) || 0;
+      const from = D.test(last || '') ? last : D.test(String(on[word] || '')) ? String(on[word]) : '';
+      const later = from !== t, gap = from ? Math.round((new Date(t + 'T12:00:00') - new Date(from + 'T12:00:00')) / 864e5) : 0;
+      let to = cur;
+      if (!ok) to = cur === 'green' ? 'yellow' : 'red';
+      else if (!cur) to = 'yellow';
+      else if (cur !== 'green' && later) to = cur === 'red' ? 'yellow' : 'green';
+      if (to !== cur) {
+        for (const [k] of COLORS) fm[k] = L(k).filter(w => w !== word);
+        fm[to].push(word); on[word] = t; delete rv[word];
+        if (to === 'green') rv[word] = '1|' + t;   // an earned green: its next check is a month on
+      } else if (real && !ok) rv[word] = '0|' + t;
+      else if (real === 'green' && later) rv[word] = (n + 1) + '|' + t;
+      fm.color_on = on; fm.word_review = rv;
+      if (real && gap >= 7) this.checkPush(fm, 'r7', ok ? 1 : 0);
+      out.from = cur; out.to = to;
+      out.note = !ok ? (to === cur ? 'It comes back tomorrow.' : cur ? `Back to ${to}.` : 'Red for now.')
+        : to !== cur ? (to === 'green' ? 'Green, earned.' : 'Now yellow.') : cur !== 'green' ? 'It moves up on another day.' : '';
+    });
+    if (ok && out.to !== out.from) this.moAdd('up', word); else if (!ok && out.from && out.to !== out.from) this.moAdd('down', word);
+    setTimeout(() => { this.paintBars(); if (!quiet) this.refreshToday(); }, 300);
+    return out;
   }
   async setupSeen() { const f = await this.progressFile(); await this.app.fileManager.processFrontMatter(f, fm => { fm.setup_seen = true; }); setTimeout(() => this.refreshToday(), 300); }
   // ---------- My word cards: chunks and sentences added to word notes ----------
@@ -3651,7 +3705,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     this.convoGloss = this.storyGloss(beats); this.loadVerbs();
     // The day in four steps: the scene, the words, build it, say it. The last day of a week also plays the whole week.
     const wwords = [...new Set(wdays.flatMap(k => (beats[k].words || []).map(w => w.word)).filter(Boolean))];
-    this.cvSteps = { n, day: idx + 1, weekEnd: n === wdays[wdays.length - 1], wwords };
+    this.recallOn = !finished;
+    this.cvSteps = { n, day: idx + 1, weekEnd: n === wdays[wdays.length - 1], wwords, recall: finished ? null : this.recallPlan(n, beats, col, T, await this.wordIndex()) };
     this.convoGame(card, turns, n, b.words, at >= n, pool, () => { if (this.tStory) { this.timeRec('story', (Date.now() - this.tStory) / 1000); this.tStory = 0; } this.markDone('story'); return this.setStory(Math.max(n, this.colors().story_at || 0)); }, next, finished);
     this.cardMore(card, () => [this.sceneSkip && ['Skip the scene', this.sceneSkip]]);
     this.addMore(card, [doneN ? 'Start somewhere else' : 'Start further in the story', e => this.startMenu(e, beats)]);
@@ -3673,6 +3728,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // Today's story as a day (grown-ups): the scene first (listen only), then the words (hear each, say each), then build it,
     // then say the whole part out loud. The part counts as done after the last step, so leaving halfway comes back to the same step.
     const S = this.cvSteps && this.cvSteps.n === n ? this.cvSteps : null; this.cvSteps = null;
+    // Recall sits between the words and the build on days when the schedule brings something back.
+    const RC = S && S.recall && S.recall.items.length ? S.recall : null;
     const has = k => { try { return !!(store && store.getItem(k)); } catch (e) { return false; } };
     const put = k => { try { if (store) store.setItem(k, '1'); } catch (e) {} };
     const skey = key + '-s', ykey = key + '-say';
@@ -3744,31 +3801,36 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       wrap.empty(); seed = n * 97 + 13 + i * 7;
       const nw = (words || []).filter(w => w.en);
       if (S) {
-        const stepNow = !sceneSeen ? 0 : !wordsSeen && nw.length ? 1 : i < order().length ? 2 : !said ? 3 : 4;
+        const IDS = RC ? ['scene', 'words', 'recall', 'build', 'say'] : ['scene', 'words', 'build', 'say'];
+        const nowId = !sceneSeen ? 'scene' : !wordsSeen && nw.length ? 'words' : RC && !RC.done ? 'recall' : i < order().length ? 'build' : !said ? 'say' : '';
+        const stepNow = nowId ? IDS.indexOf(nowId) : IDS.length;
         const strip = wrap.createDiv({ cls: 'gq-daysteps', attr: { 'aria-label': 'Today\'s steps' } });
-        const NAMES = ['Scene', 'Words', 'Build', 'Say it'];
-        if (look !== null && (look >= stepNow || (look === 1 && !nw.length))) look = null;
+        const NAMES = IDS.map(k => ({ scene: 'Scene', words: 'Words', recall: 'Recall', build: 'Build', say: 'Say it' })[k]);
+        if (look !== null && (IDS.indexOf(look) < 0 || IDS.indexOf(look) >= stepNow || (look === 'words' && !nw.length))) look = null;
         NAMES.forEach((t, k) => {
-          const cls = 'gq-daystep' + (k < stepNow ? ' is-done' : '') + (k === stepNow ? ' is-now' : '') + (k === look ? ' is-look' : '');
+          const cls = 'gq-daystep' + (k < stepNow ? ' is-done' : '') + (k === stepNow ? ' is-now' : '') + (IDS[k] === look ? ' is-look' : '');
           // Finished steps open again to look back; nothing you did is undone.
-          if (k < stepNow && !(k === 1 && !nw.length)) { const b = strip.createEl('button', { cls, text: t, attr: { 'aria-label': 'Look again: ' + t, 'aria-pressed': String(k === look) } }); b.onclick = () => { look = k === look ? null : k; paint(); }; }
+          if (k < stepNow && !(IDS[k] === 'words' && !nw.length)) { const b = strip.createEl('button', { cls, text: t, attr: { 'aria-label': 'Look again: ' + t, 'aria-pressed': String(IDS[k] === look) } }); b.onclick = () => { look = IDS[k] === look ? null : IDS[k]; paint(); }; }
           // While looking back, the current step is the way home.
           else if (k === stepNow && look !== null) { const b = strip.createEl('button', { cls: cls + ' is-home', text: t, attr: { 'aria-label': 'Back to ' + t } }); b.onclick = () => { look = null; paint(); }; }
           else strip.createSpan({ cls, text: t });
         });
         if (look !== null) {
           const lv = wrap.createDiv('gq-cv-look');
-          if (look === 0) {
+          if (look === 'scene') {
             lv.createDiv({ cls: 'gq-cv-scenetext', text: 'Today\'s scene, again. Just listen.' });
             lv.createDiv('gq-row').createEl('button', { text: 'Watch today\'s scene', cls: 'mod-cta' }).onclick = () => this.openApp('story', '#d=' + n + '&today');
-          } else if (look === 1) {
+          } else if (look === 'recall') {
+            lv.createDiv({ cls: 'gq-hint', text: 'What came back today. Touch one to hear it.' });
+            for (const it of RC.items) { const row = lv.createDiv('gq-cv-wrow'), gr = it.line ? it.gr : it.word; const g = row.createSpan({ cls: 'gq-cv-wgr gq-say', text: gr, attr: { lang: 'el', role: 'button' } }); g.onclick = () => say(gr); row.createSpan({ cls: 'gq-cv-wen', text: it.line ? it.en : it.english }); if (!it.line) row.createSpan({ cls: 'gq-dot gq-' + (this.colorOf(it.word) || 'new') }); }
+          } else if (look === 'words') {
             lv.createDiv({ cls: 'gq-hint', text: `The ${nw.length === 1 ? 'new word' : nw.length + ' new words'}. Touch each to hear it.` });
             for (const w of nw) { const row = lv.createDiv('gq-cv-wrow'); const g = row.createSpan({ cls: 'gq-cv-wgr gq-say', text: w.label || w.word, attr: { lang: 'el', role: 'button' } }); g.onclick = () => say(w.label || w.word); row.createSpan({ cls: 'gq-cv-wen', text: w.en }); const sb = row.createSpan('gq-cv-wsay'); this.sayIt(sb, w.label || w.word, 'w:' + w.word, 'Say it'); }
           } else {
-            lv.createDiv({ cls: 'gq-hint', text: look === 2 ? 'The lines you built. Touch one to hear it.' : 'Say each line out loud. Touch a line to hear it first.' });
-            for (const x of turns) { const r = lv.createDiv('gq-cv-done'); if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' }); const gl = this.lineEl(r, x[1], words); gl.addClass('gq-say'); gl.onclick = () => say(x[1]); r.createDiv({ cls: 'gq-hint', text: x[2] }); if (look === 3) this.sayIt(r.createDiv('gq-cv-lsay'), x[1], 'day:' + n + ':re'); }
+            lv.createDiv({ cls: 'gq-hint', text: look === 'build' ? 'The lines you built. Touch one to hear it.' : 'Say each line out loud. Touch a line to hear it first.' });
+            for (const x of turns) { const r = lv.createDiv('gq-cv-done'); if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' }); const gl = this.lineEl(r, x[1], words); gl.addClass('gq-say'); gl.onclick = () => say(x[1]); r.createDiv({ cls: 'gq-hint', text: x[2] }); if (look === 'say') this.sayIt(r.createDiv('gq-cv-lsay'), x[1], 'day:' + n + ':re'); }
           }
-          if (look === 2) this.wordPlay(lv, nw);
+          if (look === 'build') this.wordPlay(lv, nw);
           return;
         }
       }
@@ -3784,10 +3846,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const intro = wrap.createDiv('gq-cv-words');
         intro.createDiv({ cls: 'gq-hint', text: S ? `The ${nw.length === 1 ? 'new word' : nw.length + ' new words'}. Touch each to hear it, then say it.` : `First, the ${nw.length === 1 ? 'new word' : nw.length + ' new words'} in this part. Touch each one to hear it.` });
         for (const w of nw) { const row = intro.createDiv('gq-cv-wrow'); const g = row.createSpan({ cls: 'gq-cv-wgr gq-say', text: w.label || w.word, attr: { lang: 'el', role: 'button' } }); g.onclick = () => say(w.label || w.word); row.createSpan({ cls: 'gq-cv-wen', text: w.en }); if (S) { const sb = row.createSpan('gq-cv-wsay'); this.sayIt(sb, w.label || w.word, 'w:' + w.word, 'Say it'); } }
-        const go = intro.createDiv('gq-row').createEl('button', { text: S ? 'Build it ›' : 'Start the puzzle', cls: 'mod-cta' });
+        const go = intro.createDiv('gq-row').createEl('button', { text: S ? (RC && !RC.done ? 'Next ›' : 'Build it ›') : 'Start the puzzle', cls: 'mod-cta' });
         go.onclick = () => { wordsSeen = true; try { if (store) store.setItem(wkey, '1'); } catch (e) {} paint(); };
         return;
       }
+      if (RC && !RC.done) { this.recallStep(wrap, RC, () => paint()); return; }
       for (let k = 0; k < Math.min(i, turns.length); k++) {
         const x = turns[k], r = wrap.createDiv('gq-cv-done');
         if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' });
@@ -4180,23 +4243,130 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       };
     } }]);
   }
-  // ---------- Spaced review for words: red and yellow words come back 1, 3 and 7 days after their color, then weekly. Green words come back once after 30 days. ----------
-  wordsDue() {
+  // ---------- The schedule: which words come back today. Red: the next day. Yellow: two days on. A green you tapped: two days on,
+  // then a month on. A green you earned: a month on. The student never picks; the list is in order (red, yellow, green; longest wait first).
+  dueWords(max) {
     const fm = this.progFm(), on = fm.color_on && typeof fm.color_on === 'object' ? fm.color_on : {}, rv = fm.word_review && typeof fm.word_review === 'object' ? fm.word_review : {};
     const today = new Date(ymd(new Date()) + 'T12:00:00'), age = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || '')) ? Math.round((today - new Date(d + 'T12:00:00')) / 864e5) : 999;
-    const GAP = [1, 2, 4, 7], c = this.colors(), out = [];
+    const c = this.colors(), out = [];
     for (const [col, list] of [['red', c.red], ['yellow', c.yellow], ['green', c.green]]) for (const w of list) {
       const [n0, last] = String(rv[w] || '0|').split('|'), n = parseInt(n0, 10) || 0, since = age(last || on[w]);
-      const due = col === 'green' ? n === 0 && since >= 30 : since >= GAP[Math.min(n, GAP.length - 1)];
+      const due = col === 'green' ? (n === 0 ? since >= 2 : n === 1 && since >= 30) : since >= (col === 'red' ? 1 : 2);
       if (due) out.push({ w, col, since });
     }
     const R = { red: 0, yellow: 1, green: 2 };
     out.sort((a, b) => R[a.col] - R[b.col] || b.since - a.since);
-    return out.slice(0, 5).map(x => {
+    if (!max || out.length <= max) return out;
+    // A full list still leaves its last place for the green that has waited longest.
+    const top = out.slice(0, max), g = out.find(x => x.col === 'green');
+    if (g && !top.includes(g)) top[max - 1] = g;
+    return top;
+  }
+  wordsDue() {
+    return this.dueWords(5).map(x => {
       const f = this.app.metadataCache.getFirstLinkpathDest(x.w, '') || this.app.vault.getAbstractFileByPath('Words/' + x.w + '.md');
       const wf = f ? ((this.app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
       return wf.english ? { ctx: [], who: '', gr: x.w, en: String(wf.english), word: x.w, col: x.col } : null;
     }).filter(Boolean);
+  }
+  // Today's Recall: what the schedule brings back, fixed once for the day so leaving and coming back never adds more.
+  // Up to twelve words (red and yellow first, then the story's newest words that have no color yet, then greens to check) and one earlier line.
+  recallPlan(n, beats, col, T, all) {
+    const t = ymd(new Date()), by = new Map(all.map(w => [w.word, w])), sv = this.lsGet('recall', null);
+    const lineOf = k => k && beats[k] ? Object.assign(this.comebackTurns(beats[k], T), { line: true, k, gap: (col.story_at || 0) - k + 1 }) : null;
+    const build = (ws, k, at, done) => { const items = ws.map(w => by.get(w)).filter(Boolean), ln = lineOf(k); if (ln) items.push(ln); return items.length ? { d: t, n, items, lineK: ln ? k : 0, at: Math.min(at, items.length), done: !!done, all } : null; };
+    // One Recall a day: a finished one stays with the part it was done in; an unfinished one follows the student to another part.
+    if (sv && sv.d === t) return sv.n !== n && sv.done ? null : build(Array.isArray(sv.w) ? sv.w : [], sv.line, +sv.at || 0, sv.done);
+    const MAX = 12, due = this.dueWords(0), ry = due.filter(x => x.col !== 'green'), gr = due.filter(x => x.col === 'green');
+    const room = MAX - (gr.length ? 1 : 0), pick = ry.slice(0, room).map(x => x.w), last = col.story_at || 0;
+    const days = Object.keys(beats).map(Number).filter(k => k <= last).sort((a, b) => b - a).slice(0, 6);
+    for (const k of days) for (const w of beats[k].words || []) { if (pick.length >= room) break; if (w.en && by.has(w.word) && !this.colorOf(w.word) && !pick.includes(w.word)) pick.push(w.word); }
+    let ng = 0; for (const x of gr) { if (pick.length >= MAX || ng >= 4) break; pick.push(x.w); ng++; }   // green checks: four a day at most
+    const cands = [last, last - 2, last - 6].filter(k => k >= 1 && beats[k]), lk = cands.length ? cands[Math.floor(Date.now() / 864e5) % cands.length] : 0;
+    const R = build(pick, lk, 0, false);
+    if (R) this.lsSet('recall', { d: t, n, w: R.items.filter(x => !x.line).map(x => x.word), line: R.lineK, at: 0, done: false });
+    return R;
+  }
+  // The Recall step inside today's story card: one question at a time, checked by the app, and each answer moves the word's color by the earned rule.
+  recallStep(wrap, R, onDone) {
+    const box = wrap.createDiv('gq-cv-recall'), canHear = !gqQuiet() && !noSpeech();
+    const save = () => this.lsSet('recall', { d: R.d, n: R.n, w: R.items.filter(x => !x.line).map(x => x.word), line: R.lineK, at: R.at, done: R.done });
+    const show = () => {
+      box.empty();
+      if (R.at >= R.items.length) { R.done = true; save(); onDone(); return; }
+      const it = R.items[R.at]; box.createDiv({ cls: 'gq-hint gq-cv-rcount', text: `Back today · ${R.at + 1} of ${R.items.length}` });
+      const q = box.createDiv('gq-cv-rq');
+      if (it.line) {
+        q.createDiv({ cls: 'gq-hint', text: it.ctx.length ? 'A line from earlier. Read theirs, then say yours in Greek.' : 'A line from earlier. Say it in Greek.' });
+        this.cbPrompt(q, it, false);
+        const g = q.createDiv({ cls: 'gq-line gq-cbgr', text: it.gr, attr: { lang: 'el' } }); g.style.display = 'none';
+        const row = q.createDiv('gq-row'), sr = q.createDiv('gq-row'), key = 'cb:' + it.gr.slice(0, 80);
+        const fin = ok => { g.style.display = ''; row.empty(); R.at++; save(); if (ok && it.gap >= 7) this.checkLog('r7', 1); this.hearBtn(row, it.gr, 'Hear it'); const nx = row.createEl('button', { text: 'Next ›', cls: 'mod-cta' }); nx.onclick = show; };
+        if (it.ctx.length) this.hearBtn(row, it.ctx.map(x => x.g).join(' '), 'Hear their line');
+        const sh = row.createEl('button', { text: 'Show it', cls: 'gq-mini' }); sh.onclick = () => { sr.remove(); if (canHear) say(it.gr); fin(false); };
+        this.sayIt(sr, it.gr, 'said:' + key, 'Say it · +2', () => { this.moAdd('recall', key); fin(true); }, this.cbOther(it));
+        return;
+      }
+      // Words with no color or red are recognized (meaning, or by ear). Yellow and green are made: built from their letters.
+      // A green the student marked by hand is first checked the gentle way (recognized); its later check is built.
+      const c = this.colorOf(it.word), rv0 = this.progFm().word_review, n0 = parseInt(String((rv0 && rv0[it.word]) || '0'), 10) || 0;
+      const kind = c === 'yellow' || (c === 'green' && n0 > 0) ? 'build' : (R.at % 2 ? 'listen' : 'meaning');
+      this.askWord(q, it, R.all, kind, async (ok, note) => {
+        this.moAdd(ok ? 'recall' : 'try', it.word); R.at++; save();
+        const r = await this.earn(it.word, ok, '', true);
+        const f = q.createDiv({ cls: 'gq-quiz-fb ' + (ok ? 'is-ok' : 'is-miss') }); f.appendText(ok ? 'Right. ' : 'Not yet. '); f.createSpan({ text: it.word, attr: { lang: 'el' } }); f.appendText(' · ' + it.english + (note ? '.' + note : ''));
+        if (r.note) q.createDiv({ cls: 'gq-hint gq-quiz-note', text: r.note });
+        if (canHear && (!ok || kind === 'build')) say(it.word);
+        setTimeout(() => { if (box.isConnected) show(); }, ok && !note ? 1500 : 2400);
+      });
+    };
+    show();
+  }
+  // One word, checked by the app. kind: meaning (pick the English), listen (hear it, pick the Greek), say, or build (its letters, mixed up).
+  // cb(ok, note) runs once; locked() true means the word was already answered and taps do nothing.
+  askWord(el, w, all, kind, cb, locked) {
+    const mix = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    const canHear = !gqQuiet() && !noSpeech(); let fin = false;
+    const shut = () => fin || !!(locked && locked()), end = (ok, note) => { if (shut()) return; fin = true; cb(ok, note || ''); };
+    const fw = foldG(w.word), f = /^[α-ω]{3,10}$/.test(fw) ? fw : null;
+    if (kind === 'build' && !f) kind = canHear ? 'listen' : 'meaning';
+    if (kind === 'listen' && !canHear) kind = 'meaning';
+    const four = (x, key) => { const seen = new Set([x[key]]), out = [x]; for (const o of mix(all)) { if (out.length >= 4) break; if (o[key] && !seen.has(o[key])) { seen.add(o[key]); out.push(o); } } return mix(out); };
+    el.addClass('gq-quiz');
+    if (kind === 'say') {
+      el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek' }); el.createDiv({ cls: 'gq-quiz-q', text: w.english });
+      const r = el.createDiv('gq-row gq-quiz-say');
+      const same = this.sameMeaning(w, all); this.sayIt(r, same.length ? [w.word, ...same.map(o => o.word)] : w.word, w.word, 'Say it', () => end(true));
+      const n = r.createEl('button', { text: 'Not yet', cls: 'gq-mini' }); n.onclick = () => end(false);
+      return;
+    }
+    if (kind === 'build') {
+      // The letters of the word, mixed up. Tap them in order. Off by one letter, or two side by side swapped, still counts.
+      el.createDiv({ cls: 'gq-hint', text: 'Build it in Greek' }); el.createDiv({ cls: 'gq-quiz-q', text: w.english });
+      const out = el.createDiv({ cls: 'gq-quiz-built', attr: { lang: 'el', 'aria-live': 'polite' } }), tiles = el.createDiv({ cls: 'gq-quiz-tiles', attr: { lang: 'el' } });
+      let letters = mix([...f]); if (letters.join('') === f && f.length > 1) letters = letters.reverse();
+      const typed = [], draw = () => { out.setText(typed.map(x => x.ch).join('') || '\u00a0'); };
+      const lock = () => { tiles.querySelectorAll('button').forEach(b => b.disabled = true); und.disabled = true; nb.disabled = true; };
+      const check = () => {
+        const g = typed.map(x => x.ch).join(''); let ok = g === f, swap = false;
+        if (!ok) for (let i = 0; i < f.length - 1; i++) if (g === f.slice(0, i) + f[i + 1] + f[i] + f.slice(i + 2)) swap = true;
+        const close = !ok && (swap || near(g, f)); lock(); end(ok || close, close ? ` Close enough. It\u2019s spelled ${w.word}.` : '');
+      };
+      letters.forEach(ch => { const b = tiles.createEl('button', { text: ch, cls: 'gq-quiz-tile' }); b.onclick = () => { if (shut()) return; typed.push({ ch, b }); b.disabled = true; draw(); if (typed.length === f.length) check(); }; });
+      const rr = el.createDiv('gq-row gq-quiz-say');
+      const und = rr.createEl('button', { text: 'Undo', cls: 'gq-mini' }); und.onclick = () => { const x = typed.pop(); if (x) { x.b.disabled = false; draw(); } };
+      const nb = rr.createEl('button', { text: 'Not yet', cls: 'gq-mini' }); nb.onclick = () => { if (shut()) return; lock(); end(false); };
+      draw(); return;
+    }
+    const listen = kind === 'listen', key = listen ? 'word' : 'english';
+    el.createDiv({ cls: 'gq-hint', text: listen ? 'Listen, then pick the Greek' : 'Pick the meaning' });
+    if (listen) { const h = el.createEl('button', { text: 'Hear it again', cls: 'gq-mini gq-quiz-hear' }); h.onclick = () => say(w.word); setTimeout(() => say(w.word), 250); }
+    else { const q = el.createDiv({ cls: 'gq-quiz-q', text: w.word, attr: { lang: 'el' } }); q.onclick = () => canHear && say(w.word); }
+    const box = el.createDiv('gq-quiz-opts');
+    for (const o of four(w, key)) {
+      const b = box.createEl('button', { text: o[key], cls: 'gq-quiz-opt', attr: listen ? { lang: 'el' } : {} });
+      b.onclick = () => { if (shut()) return; const ok = o.word === w.word; b.addClass(ok ? 'is-ok' : 'is-miss'); if (!ok) box.querySelectorAll('button').forEach(x => { if (x.textContent === w[key]) x.addClass('is-ok'); }); end(ok); };
+    }
   }
   async wordReviewed(w, ok) {
     const f = await this.progressFile(), t = ymd(new Date());
@@ -4560,6 +4730,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const kids = await this.kidsInfo(); if (kids) return this.renderKidsToday(el, tok, kids);
     {
       const words = await this.wordIndex(); const byWord = new Map(words.map(w => [w.word, w]));
+      await this.keepColors(words);
       const col = this.colors(); this.todayPlay = []; this.reviewPlay = []; this.revEl = null;
       const box = createDiv('gq-today');
       const now = new Date(); now.setHours(0, 0, 0, 0);
@@ -4588,15 +4759,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const days = await this.weekDays(wk.file);
         const beats = await this.beatIndex(), dayNow = days[DAYS[fdd < 0 ? 1 : (fdow || 6)]];
         const cal = fdd < 0 ? 1 : (dayNow && dayNow.n) || Math.max(0, ...Object.keys(beats).map(Number).filter(k => beats[k].week < fw));
-        this.todayBeat = null; this.storyEl = null; this.storyInfo = null; this.cbList = null;
+        this.todayBeat = null; this.storyEl = null; this.storyInfo = null; this.cbList = null; this.recallOn = false;
         this.fyPace = { fw, own };
         // Ears first (new to Greek): Language Transfer, then the six reading sessions. Nothing to read on Today until then.
         const ears = this.ltStage(col); this.abcEl = null;
         if (ears === 'ears' || ears === 'read') this.ltCard(box, col, ears);
         else {
         if (cal) await this.storyCard(box, beats, cal, fdd >= 0 && fdow === 0, col);
-        // Spaced review brings back earlier story lines and red, yellow and old green words.
-        await this.comebackCard(box, beats, col, cal);
+        // What comes back is the Recall step inside the story card. Once the story is finished, it is a card of its own.
+        if (!this.recallOn) await this.comebackCard(box, beats, col, cal);
         // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
         if (!this.abcAllDone() && !this.abcOff()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
         }
@@ -6252,13 +6423,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         more.createSpan({ cls: 'gq-hint', text: `${st.block * BL + 1}–${Math.min(rows.length, st.block * BL + BL)} of ${rows.length}` });
         const n = more.createEl('button', { text: '›', cls: 'gq-mini', attr: { 'aria-label': 'Next 100' } }); n.disabled = st.block >= pages - 1; n.onclick = () => { st.block++; draw(); list.scrollIntoView({ block: 'start' }); };
       }
+      // The colors the student marked by hand before colors were earned: their own list, one tap away.
+      if (st.show === 'mine' && !st.q && this.app.vault.getAbstractFileByPath(KEPT)) { const ka = more.createEl('a', { text: 'My colors, as I marked them', href: '#', cls: 'gq-hint gq-kept' }); ka.onclick = e => { e.preventDefault(); this.openNote(KEPT); }; }
     };
     let tm = 0; q.oninput = () => { clearTimeout(tm); tm = setTimeout(() => { st.q = q.value.trim(); st.block = 0; draw(); }, 200); };
     // The translation on screen when the student presses Enter or leaves the box is the one they meant, so it is saved (half-typed words are not).
     const keep = () => { const v = this.wvTr; if (!v || v.saved || v.q !== q.value.trim()) return; v.saved = true; this.logLookup(v.q, v.inList || null, v.tr && !v.inList ? v.tr : null); };
     q.addEventListener('blur', keep); q.addEventListener('keydown', e => { if (e.key === 'Enter') keep(); });
     draw();
-    box.createDiv({ cls: 'gq-hint gq-words-foot', text: 'Red: don\'t have it. Yellow: kind of. Green: have it. A color you move up that still holds two days later earns φόρα.' });
+    box.createDiv({ cls: 'gq-hint gq-words-foot', text: 'Red: don\'t have it. Yellow: kind of. Green: have it. A word moves up one step when you remember it on a later day, and down one when you miss it. You can still tap a color yourself.' });
   }
   // Quiz me (Words list): up to 10 words of one color. See it and pick the meaning, hear it and pick the Greek, say it.
   // The first answer to each word counts: right moves it up a color, a miss moves it down one. Same colors as everywhere else.
@@ -6268,44 +6441,26 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // while linking to a word you know helps.
   sameMeaning(w, all) { return all.filter(o => o.word !== w.word && o.english === w.english); }
   alsoNote(f, w, all) { const k = this.sameMeaning(w, all).filter(o => this.colorOf(o.word)); if (!k.length) return; f.appendText(' · also '); k.forEach((o, i) => { if (i) f.appendText(', '); f.createSpan({ text: o.word, attr: { lang: 'el' } }); }); }
-  // Ten colored words for a quiz: red first, then yellow, then green.
-  quizPool(words) { const by = { red: [], yellow: [], green: [] }; for (const w of words) { const k = this.colorOf(w.word); if (by[k]) by[k].push(w); } const mix = a => a.sort(() => Math.random() - 0.5); return [...mix(by.red), ...mix(by.yellow), ...mix(by.green)].slice(0, 10); }
+  // Ten colored words for a quiz: what the schedule says is due first, then red, yellow and green.
+  quizPool(words) { const due = this.dueWords(0).map(x => x.w), isDue = new Set(due), m = new Map(words.map(w => [w.word, w])); const by = { red: [], yellow: [], green: [] }; for (const w of words) { const k = this.colorOf(w.word); if (by[k] && !isDue.has(w.word)) by[k].push(w); } const mix = a => a.sort(() => Math.random() - 0.5); return [...due.map(w => m.get(w)).filter(Boolean), ...mix(by.red), ...mix(by.yellow), ...mix(by.green)].slice(0, 10); }
   async popQuizMine() { const words = await this.wordIndex(); const pool = this.quizPool(words); if (!pool.length) { this.openWords(); return; } this.quizMe(pool, words, null, () => {}); }
   quizMe(pool, all, color, done) {
     const mix = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-    const qs = mix(pool).slice(0, 10), UP = { red: 'yellow', yellow: 'green', green: 'green' }, DOWN = { red: 'red', yellow: 'red', green: 'yellow' };
-    const canHear = !gqQuiet() && !noSpeech(), res = new Map();
+    const qs = mix(pool).slice(0, 10), RK = { '': 0, red: 1, yellow: 2, green: 3 };
+    const canHear = !gqQuiet() && !noSpeech(), res = new Map(), moves = [];
     const kinds = canHear ? ['meaning', 'listen', 'say'] : ['meaning', 'say'];
-    const four = (w, key) => { const seen = new Set([w[key]]), out = [w]; for (const o of mix(all)) { if (out.length >= 4) break; if (o[key] && !seen.has(o[key])) { seen.add(o[key]); out.push(o); } } return mix(out); };
-    const mark = async (w, ok) => { if (res.has(w.word)) return; res.set(w.word, ok); this.moAdd(ok ? 'recall' : 'try', w.word); const cur = this.colorOf(w.word) || color || 'red', nx = (ok ? UP : DOWN)[cur]; if (nx !== cur) await this.setColor(w.word, nx); };
+    // Colors follow the earned rule: up one step on a later day than the last change, down one on a miss.
+    const mark = async (w, ok) => { res.set(w.word, ok); this.moAdd(ok ? 'recall' : 'try', w.word); const r = await this.earn(w.word, ok, color || 'red'); moves.push(r); return r; };
     const steps = qs.map((w, i) => ({ label: 'Quiz', build: (el, api) => {
-      const kind = kinds[i % kinds.length]; el.addClass('gq-quiz');
-      const fb = () => el.querySelector('.gq-quiz-fb') || el.createDiv({ cls: 'gq-quiz-fb' });
-      const after = ok => { const f = fb(); f.empty(); f.addClass(ok ? 'is-ok' : 'is-miss'); f.appendText(ok ? 'Right. ' : 'Not yet. '); f.createSpan({ text: w.word, attr: { lang: 'el' } }); f.appendText(' · ' + w.english); this.alsoNote(f, w, all); if (!ok && canHear) say(w.word); setTimeout(() => { if (el.isConnected) api.next(); }, ok ? 900 : 1800); };
-      if (kind === 'say') {
-        el.createDiv({ cls: 'gq-hint', text: 'Say it in Greek' }); el.createDiv({ cls: 'gq-quiz-q', text: w.english });
-        const r = el.createDiv('gq-row gq-quiz-say');
-        const same = this.sameMeaning(w, all); this.sayIt(r, same.length ? [w.word, ...same.map(o => o.word)] : w.word, w.word, 'Say it', () => { mark(w, true); after(true); });
-        const n = r.createEl('button', { text: 'Not yet', cls: 'gq-mini' }); n.onclick = () => { if (res.has(w.word)) return; mark(w, false); after(false); };
-        return;
-      }
-      const listen = kind === 'listen', key = listen ? 'word' : 'english';
-      el.createDiv({ cls: 'gq-hint', text: listen ? 'Listen, then pick the Greek' : 'Pick the meaning' });
-      if (listen) { const h = el.createEl('button', { text: 'Hear it again', cls: 'gq-mini gq-quiz-hear' }); h.onclick = () => say(w.word); setTimeout(() => say(w.word), 250); }
-      else { const q = el.createDiv({ cls: 'gq-quiz-q', text: w.word, attr: { lang: 'el' } }); q.onclick = () => canHear && say(w.word); }
-      const box = el.createDiv('gq-quiz-opts');
-      for (const o of four(w, key)) {
-        const b = box.createEl('button', { text: o[key], cls: 'gq-quiz-opt', attr: listen ? { lang: 'el' } : {} });
-        b.onclick = () => { if (res.has(w.word)) return; const ok = o.word === w.word; b.addClass(ok ? 'is-ok' : 'is-miss'); if (!ok) box.querySelectorAll('button').forEach(x => { if (x.textContent === w[key]) x.addClass('is-ok'); }); mark(w, ok); after(ok); };
-      }
+      const after = (ok, r) => { const f = el.querySelector('.gq-quiz-fb') || el.createDiv({ cls: 'gq-quiz-fb' }); f.empty(); f.addClass(ok ? 'is-ok' : 'is-miss'); f.appendText(ok ? 'Right. ' : 'Not yet. '); f.createSpan({ text: w.word, attr: { lang: 'el' } }); f.appendText(' · ' + w.english); this.alsoNote(f, w, all); if (r && r.note) el.createDiv({ cls: 'gq-hint gq-quiz-note', text: r.note }); if (!ok && canHear) say(w.word); setTimeout(() => { if (el.isConnected) api.next(); }, ok ? (r && r.note ? 1500 : 900) : 2000); };
+      this.askWord(el, w, all, kinds[i % kinds.length], ok => { mark(w, ok).then(r => after(ok, r)); }, () => res.has(w.word));
     } }));
     steps.push({ label: 'Done', build: (el, api) => {
       el.addClass('gq-quiz'); const right = [...res.values()].filter(Boolean).length, tried = res.size;
       el.createDiv({ cls: 'gq-quiz-q', text: tried ? `${right} of ${tried}` : 'No answers yet' });
-      const name = { red: 'Red', yellow: 'Yellow', green: 'Green' };
-      const up = color === 'green' ? 0 : right, down = color === 'red' ? 0 : tried - right;
-      const t = []; if (up) t.push(`${up} moved up to ${name[UP[color]]}`); if (down) t.push(`${down} moved down to ${name[DOWN[color]]}`);
-      el.createDiv({ cls: 'gq-hint', text: t.length ? t.join('. ') + '.' : (tried ? 'Your colors stay the same.' : 'Go back to answer, or close.') });
+      const ups = moves.filter(r => RK[r.to] > RK[r.from]), g = ups.filter(r => r.to === 'green').length, y = ups.length - g, dn = moves.filter(r => RK[r.to] < RK[r.from]).length;
+      const t = []; if (g) t.push(`${g} earned green`); if (y) t.push(`${y} now yellow`); if (dn) t.push(`${dn} moved down`);
+      el.createDiv({ cls: 'gq-hint', text: t.length ? t.join('. ') + '.' : (tried ? 'Your colors stay the same today. A word moves up one step a day.' : 'Go back to answer, or close.') });
       const r = el.createDiv('gq-row'); const a = r.createEl('button', { text: 'Done', cls: tried ? '' : 'mod-cta' }); a.onclick = () => api.close();
       // Go deeper: one more round that brings these words back with more of your colors, and asks you to make the Greek.
       if (tried) { const d = r.createEl('button', { text: 'Go deeper', cls: 'mod-cta' }); d.onclick = () => { api.close(); setTimeout(() => this.quizDeep(qs, all, done), 450); }; }
@@ -6334,7 +6489,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const n = (tries.get(w.word) || 0) + 1; tries.set(w.word, n);
       if (n === 1 && ok) right1++;
       if (ok) { got.add(w.word); this.moAdd('recall', w.word); } else this.moAdd('try', w.word);
-      if (!done0.has(w.word) && !counted.has(w.word)) { counted.add(w.word); const c = of(w); if (c) { const nx = (ok ? UP : DOWN)[c]; if (nx !== c) { this.setColor(w.word, nx); moved++; } } }
+      if (!done0.has(w.word) && !counted.has(w.word)) { counted.add(w.word); if (of(w)) this.earn(w.word, ok).then(r => { if (r.to !== r.from) moved++; }); }
       // A miss comes back four questions on, up to three tries. Then it waits for another day.
       if (!ok && n < 3) { const at = Math.min(steps.length - 1, steps.indexOf(step) + 5); steps.splice(at, 0, make(w, n)); }
       const f = el.createDiv({ cls: 'gq-quiz-fb ' + (ok ? 'is-ok' : 'is-miss') }); f.appendText(ok ? 'Right. ' : (n < 3 ? 'Not yet. It comes back soon. ' : 'Not yet. ')); f.createSpan({ text: w.word, attr: { lang: 'el' } }); f.appendText(' · ' + w.english); this.alsoNote(f, w, all); if (note) f.appendText('.' + note);
@@ -6928,7 +7083,8 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const cc = sec('My colors');
     const bar = cc.createDiv('gq-tbar');
     for (const k of ['green', 'yellow', 'red', 'new']) { const seg = bar.createDiv('gq-seg gq-' + k); seg.style.flexGrow = String(n[k]); }
-    cc.createDiv({ cls: 'gq-hint', text: `Have it ${n.green} · Kind of ${n.yellow} · Don't have it ${n.red} · Not marked ${n.new}. Mark words with the color buttons on each word note.` });
+    cc.createDiv({ cls: 'gq-hint', text: `Have it ${n.green} · Kind of ${n.yellow} · Don't have it ${n.red} · Not marked ${n.new}. A word moves up when you remember it on a later day. You can still tap a color on any word.` });
+    if (this.app.vault.getAbstractFileByPath(KEPT)) { const kr = cc.createDiv('gq-hint'); const ka = kr.createEl('a', { text: 'My colors, as I marked them', href: '#' }); ka.onclick = e => { e.preventDefault(); this.openNote(KEPT); }; }
     let rel = VAULT_RELEASE; try { rel = JSON.parse(await this.app.vault.adapter.read(INSTALLED)).release || rel; } catch (e) {}
     const foot = box.createDiv('gq-hint gq-more-foot');
     const wn = foot.createEl('a', { text: "What's new", href: '#' }); wn.onclick = e => { e.preventDefault(); this.openNote(WHATS_NEW); };

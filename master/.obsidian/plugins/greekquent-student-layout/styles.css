@@ -1201,6 +1201,16 @@ body.gq-web .gq-tcard button:is(.gq-helphead, .gq-opt, .gq-opt-row, .gq-fold-h) 
 .gq-cv-rq .gq-row { justify-content: center; }
 .gq-quiz-note { margin-top: -6px; text-align: center; }
 @media (prefers-reduced-motion: reduce) { .gq-cv-recall { animation: none; } }
+/* Say it, one line at a time: the English cue to say, and on the pattern round the verb with each person (one, then many). */
+.gq-cv-drill .gq-cv-cue { font-size: 1.15em; font-weight: 600; margin-top: 0.4em; }
+.gq-cv-drill .gq-pout { text-align: center; margin: 4px 0 0; padding: 8px 12px; }
+.gq-cv-forms { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+.gq-cv-form { border: 1px solid var(--background-modifier-border); border-radius: 10px; margin: 0; padding: 5px 10px; cursor: pointer; min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.gq-cv-forms.is-wide { grid-template-columns: 1fr; gap: 4px; }
+.gq-cv-forms.is-wide .gq-cv-form { min-height: 40px; padding: 3px 12px; }
+.gq-cv-formg { font-weight: 600; line-height: 1.25; min-width: 0; }
+.gq-cv-forme { color: var(--text-muted); font-size: 0.82em; text-align: right; flex: none; }
+
 /* A picked answer keeps its green or red in the web app, where pill buttons otherwise repaint it. */
 body button.gq-quiz-opt.is-ok { background: #2e7d32 !important; color: #fff !important; border-color: transparent !important; }
 body button.gq-quiz-opt.is-miss { background: #c62828 !important; color: #fff !important; border-color: transparent !important; }

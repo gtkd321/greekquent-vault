@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-27a';
+const VAULT_RELEASE = '2026-11-27b';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -401,14 +401,17 @@ const ALIASW = { και: ['κι'] };
 const sameW = (w, h) => w === h || near(w, h) || (w.length <= 4 && phonG(w) === phonG(h)) || (ALIASW[w] || []).includes(h);
 // word: a word card's label, where commas and slashes list forms (ένας, μία, ένα): saying any one of them counts.
 // Returns null for a miss, or the close-but-not-exact pairs [[heard, right], …] for a pass (an empty list when it was exact).
-const heardHow = (target, alts, word) => {
-  if (word) { const forms = String(target).split(/\s*[,/]\s*/).filter(Boolean); if (forms.length > 1) { let best = null; for (const f of forms) { const r = heardHow(f, alts); if (r && (!best || r.length < best.length)) best = r; } return best; } }
+// strict (the drill): words that must be heard as they are, by spelling or by sound, never as a near miss. A verb ending says who,
+// so θέλω does not pass for θέλεις. δε counts for δεν.
+const heardHow = (target, alts, word, strict) => {
+  if (word) { const forms = String(target).split(/\s*[,/]\s*/).filter(Boolean); if (forms.length > 1) { let best = null; for (const f of forms) { const r = heardHow(f, alts, false, strict); if (r && (!best || r.length < best.length)) best = r; } return best; } }
   const orig = String(target).split(/\s+/).filter(Boolean), keyOf = {}; for (const o of orig) { const k = foldG(o); if (k && !keyOf[k]) keyOf[k] = o.replace(/[^\p{L}]/gu, ''); }
   let tw = foldG(target).split(' ').filter(Boolean); const content = tw.filter(w => !SMALL_W.has(w)); if (content.length) tw = content;
   let best = null;
   for (const a of alts || []) {
-    const hw = foldG(digG(a)).split(' ').filter(Boolean), raw = String(a || '').split(/\s+/).filter(Boolean), offs = [];
-    let n = 0; for (const w of tw) { if (hw.includes(w)) { n++; continue; } const h = hw.find(h => sameW(w, h)); if (h) { n++; const r = raw.find(x => foldG(digG(x)).split(' ').includes(h)) || h; offs.push([r, keyOf[w] || w]); } }
+    const hw = foldG(digG(a)).split(' ').filter(Boolean).map(h => h === 'δε' && tw.includes('δεν') ? 'δεν' : h), raw = String(a || '').split(/\s+/).filter(Boolean), offs = [];
+    if (strict && !strict.every(x => hw.includes(x) || hw.some(h => phonG(h) === phonG(x)))) continue;
+    let n = 0; for (const w of tw) { if (hw.includes(w)) { n++; continue; } const h = hw.find(h => sameW(w, h) || (strict && phonG(w) === phonG(h))); if (h) { n++; const r = raw.find(x => foldG(digG(x)).split(' ').includes(h)) || h; offs.push([r, keyOf[w] || w]); } }
     if (tw.length <= 2 ? n === tw.length : n / tw.length >= 0.75) { if (!best || offs.length < best.length) best = offs; if (!offs.length) break; }
   }
   return best;
@@ -1583,6 +1586,35 @@ function enVerb(pred, p, neg) {
 }
 const DEGREE = ['πολύ', 'πάρα πολύ', 'λίγο', 'πραγματικά', 'πάντα', 'ακόμα', 'σίγουρα', 'μάλλον', 'ειλικρινά', 'σοβαρά', 'επιτέλους'];
 const cap1 = t => t ? t[0].toUpperCase() + t.slice(1) : t;
+// The verbs the Say it drill works with: the everyday ones, so the same small set keeps coming back as the story adds words to say
+// with them (a slow snowball). A verb joins once the story has taught it. The rest of the 1,500 are met in the scenes, not drilled.
+const DRILL_VERBS = new Set('είμαι έχω θέλω κάνω μπορώ ξέρω λέω βλέπω νομίζω χρειάζομαι πάω προσπαθώ μιλάω βοηθάω φεύγω περιμένω έρχομαι παίρνω καταλαβαίνω δίνω ακούω βρίσκω αρχίζω μένω φέρνω δουλεύω αγαπάω θυμάμαι ψάχνω διαβάζω πίνω παίζω τρώω μαθαίνω πληρώνω γράφω τελειώνω αγοράζω φτιάχνω'.split(' ').concat(['μου αρέσει']));
+// The English cue for a verb that needs a small word in English, and the few pairs whose English would mislead in a cue.
+const DRILL_EN = { περιμένω: 'wait for' }, DRILL_NO = new Set(['φτιάχνω το αυτοκίνητο', 'βλέπω ένα όνειρο']);
+// One sentence from a verb's table (who, what, how, not): the Greek and its rough English. Build a sentence and the Say it drill both use it.
+// fem: a describing word takes the feminine for I and you (a woman speaking); the drill accepts either.
+function pairLine(v, st, fem) {
+  const who = v.imp ? WHO.slice(0, 7) : WHO;
+  const [gw, ew, p] = who[st.who], it = st.w ? v.w[st.w - 1] : null, a = st.h ? v.h[st.h - 1] : null;
+  const pron = st.who < 7;   // pronouns are usually dropped in Greek; people stay
+  // Describing words agree with who: κουρασμένος, κουρασμένη, κουρασμένοι, κουρασμένα.
+  const agree = g => { const st0 = g.slice(0, -2), vow = /[ιεί]$/.test(st0), w0 = who[st.who][0];
+    if (w0 === 'αυτή' || w0 === 'η μαμά μου' || (fem && st.who < 2)) return st0 + (vow ? 'α' : 'η');
+    if (w0 === 'τα παιδιά') return st0 + 'α';
+    if (p >= 3) return st0 + 'οι';
+    return g; };
+  const obj = it ? (it[3] ? 'να ' + it[3][p] : (it[4] ? agree(it[0]) : it[0])) : '';
+  // Words like πολύ go right after the verb when a να or ότι part follows: Θέλω πολύ να πάω.
+  const early = a && it && (it[3] || /^(ότι|πως|αν|τι|γιατί|που) /.test(it[0])) && DEGREE.includes(a[0]);
+  // She likes it: της αρέσει, την νοιάζει (the table lists the form for he).
+  let vf = v.f[p]; if (v.imp && who[st.who][0] === 'αυτή') vf = vf.replace(/^του /, 'της ').replace(/^τον /, 'την ');
+  const gr = cap1([pron ? '' : gw, st.neg ? 'δεν' : '', vf].concat(early ? [a[0], obj] : [obj, a ? a[0] : '']).filter(Boolean).join(' ')) + '.';
+  let pred = it && it[1].startsWith('!') ? it[1].slice(1) : (v.en + (it ? ' ' + it[1] : ''));
+  if (/^can to /.test(pred)) pred = pred.replace(' to ', ' ');
+  const really = early && a[0] === 'πολύ';
+  const en = cap1(`${ew} ${really ? 'really ' : ''}${enVerb(pred, p, st.neg)}${a && !really ? ' ' + a[1] : ''}`) + '.';
+  return { gr, en, pron, gw, it, a, p, vf };
+}
 class PairModal extends Modal {
   constructor(app, plugin, word, pre) { super(app); this.plugin = plugin; this.word = word; this.pre = pre || null; }
   async onOpen() {
@@ -1615,22 +1647,7 @@ class PairModal extends Modal {
     this.chips(c, 'How, when, where', ['(nothing)'].concat(v.h.map(x => x[0])), st.h, i => { st.h = i; if (i && v.h[i - 1][3]) st.neg = true; this.render(); });
     const nr = c.createDiv('gq-prow'); const lab = nr.createEl('label'); const cb = lab.createEl('input', { type: 'checkbox' }); cb.checked = st.neg; lab.appendText(' Not (δεν)');
     cb.onchange = () => { st.neg = cb.checked; this.render(); };
-    const [gw, ew, p] = who[st.who], it = st.w ? v.w[st.w - 1] : null, a = st.h ? v.h[st.h - 1] : null;
-    const pron = st.who < 7;   // pronouns are usually dropped in Greek; people stay
-    // Describing words agree with who: κουρασμένος, κουρασμένη, κουρασμένοι, κουρασμένα.
-    const agree = g => { const st0 = g.slice(0, -2), vow = /[ιεί]$/.test(st0), w0 = who[st.who][0];
-      if (w0 === 'αυτή' || w0 === 'η μαμά μου') return st0 + (vow ? 'α' : 'η');
-      if (w0 === 'τα παιδιά') return st0 + 'α';
-      if (p >= 3) return st0 + 'οι';
-      return g; };
-    const obj = it ? (it[3] ? 'να ' + it[3][p] : (it[4] ? agree(it[0]) : it[0])) : '';
-    // Words like πολύ go right after the verb when a να or ότι part follows: Θέλω πολύ να πάω.
-    const early = a && it && (it[3] || /^(ότι|πως|αν|τι|γιατί|που) /.test(it[0])) && DEGREE.includes(a[0]);
-    const gr = cap1([pron ? '' : gw, st.neg ? 'δεν' : '', v.f[p]].concat(early ? [a[0], obj] : [obj, a ? a[0] : '']).filter(Boolean).join(' ')) + '.';
-    let pred = it && it[1].startsWith('!') ? it[1].slice(1) : (v.en + (it ? ' ' + it[1] : ''));
-    if (/^can to /.test(pred)) pred = pred.replace(' to ', ' ');
-    const really = early && a[0] === 'πολύ';
-    const en = cap1(`${ew} ${really ? 'really ' : ''}${enVerb(pred, p, st.neg)}${a && !really ? ' ' + a[1] : ''}`) + '.';
+    const { gr, en, pron, gw, it, a } = pairLine(v, st);
     const out = c.createDiv('gq-pout'); out.createDiv({ cls: 'gq-pgr', text: gr }); out.createDiv({ cls: 'gq-pen', text: en + '  (word by word, roughly)' });
     if (pron) out.createDiv({ cls: 'gq-hint', text: `Greek usually leaves out ${gw}: the verb ending already says who.` });
     const row = c.createDiv('gq-row');
@@ -3706,7 +3723,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // The day in four steps: the scene, the words, build it, say it. The last day of a week also plays the whole week.
     const wwords = [...new Set(wdays.flatMap(k => (beats[k].words || []).map(w => w.word)).filter(Boolean))];
     this.recallOn = !finished;
-    this.cvSteps = { n, day: idx + 1, weekEnd: n === wdays[wdays.length - 1], wwords, recall: finished ? null : await this.recallPlan(n, beats, col, T, await this.wordIndex()), extra: finished ? null : this.dayX };
+    this.cvSteps = { n, day: idx + 1, weekEnd: n === wdays[wdays.length - 1], wwords, recall: finished ? null : await this.recallPlan(n, beats, col, T, await this.wordIndex()), drill: finished || this.isKids ? null : await this.drillPlan(n, beats).catch(() => null), extra: finished ? null : this.dayX };
     this.convoGame(card, turns, n, b.words, at >= n, pool, () => { if (this.tStory) { this.timeRec('story', (Date.now() - this.tStory) / 1000); this.tStory = 0; } this.markDone('story'); return this.setStory(Math.max(n, this.colors().story_at || 0)); }, next, finished);
     this.cardMore(card, () => [this.sceneSkip && ['Skip the scene', this.sceneSkip], ...(this.dayMore ? this.dayMore() : [])]);
     this.addMore(card, [doneN ? 'Start somewhere else' : 'Start further in the story', e => this.startMenu(e, beats)]);
@@ -3864,6 +3881,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
             lv.createDiv({ cls: 'gq-hint', text: look === 'build' ? 'The lines you built. Touch one to hear it.' : 'Say each line out loud. Touch a line to hear it first.' });
             for (const x of turns) { const r = lv.createDiv('gq-cv-done'); if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' }); const gl = this.lineEl(r, x[1], words); gl.addClass('gq-say'); gl.onclick = () => say(x[1]); r.createDiv({ cls: 'gq-hint', text: x[2] }); if (look === 'say') this.sayIt(r.createDiv('gq-cv-lsay'), x[1], 'day:' + n + ':re'); }
           }
+          if (look === 'say' && S.drill) for (const r of S.drill.rounds) { const d = lv.createDiv('gq-cv-done'); const gl = d.createDiv({ cls: 'gq-line gq-say', text: r.gr, attr: { lang: 'el' } }); gl.onclick = () => say(r.gr); d.createDiv({ cls: 'gq-hint', text: r.en }); }
           if (look === 'build') this.wordPlay(lv, nw);
           return;
         }
@@ -3886,19 +3904,16 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         return;
       }
       if (RC && !RC.done) { this.recallStep(wrap, RC, () => paint()); return; }
+      // Say it: each line from its English, then the day's pattern drill. The last Next closes the step.
+      if (S && !said && i >= order().length) {
+        const after = X.find(x => x.pos !== 'pre' && xOpen(x));
+        this.sayStep(wrap, { turns, n, words, key: key + '-dr', drill: S.drill, doneLabel: after ? 'Next \u203a' : 'Done for today', onDone: async () => { said = true; put(ykey); try { await onDone(); } catch (e) {} paint(); } });
+        return;
+      }
       for (let k = 0; k < Math.min(i, turns.length); k++) {
         const x = turns[k], r = wrap.createDiv('gq-cv-done');
         if (x[0]) r.createSpan({ cls: 'gq-cbwho', text: x[0] + ': ' });
         const gl = this.lineEl(r, x[1], words); gl.addClass('gq-say'); gl.onclick = () => say(x[1]); r.createDiv({ cls: 'gq-hint', text: x[2] });
-        if (S && !said && i >= order().length) { const sb = r.createDiv('gq-cv-lsay'); this.sayIt(sb, x[1], 'day:' + n + ':' + k); }
-      }
-      if (S && !said && i >= order().length) {
-        const sy = wrap.createDiv('gq-cv-sayall');
-        const after = X.find(x => x.pos !== 'pre' && xOpen(x));
-        sy.createDiv({ cls: 'gq-hint', text: (after ? 'Say' : 'Last step: say') + ' the whole part out loud, line by line. Touch a line to hear it first.' });
-        const dn = sy.createDiv('gq-row').createEl('button', { text: after ? 'Next \u203a' : 'Done for today', cls: 'mod-cta' });
-        dn.onclick = async () => { said = true; put(ykey); try { await onDone(); } catch (e) {} paint(); };
-        return;
       }
       if (S && i >= order().length) {
         const dd = wrap.createDiv('gq-cv-dayend');
@@ -4401,6 +4416,97 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const ln = R.items.find(x => x.line); if (ln) this.lsSet('fitused', [ln.gr, ...this.lsGet('fitused', []).filter(g => g !== ln.gr)].slice(0, 10));
     }
     return R;
+  }
+  // The Say it drill (after the Foreign Service Institute's pattern drills): one verb, its pattern said once, then one thing changes
+  // each round: who, who again, not, then what. Today's verb first; else a verb already met that takes one of today's words;
+  // else an earlier verb comes back (the snowball). Words not met yet stay out of the cues where the verb's table allows.
+  async drillPlan(n, beats) {
+    const pd = await this.pairData(); if (!pd || !pd.v || !beats[n]) return null;
+    const days = Object.keys(beats).map(Number).filter(k => k <= n).sort((a, b) => a - b);
+    const today = (beats[n].words || []).map(w => w.word), met = new Set(days.flatMap(k => (beats[k].words || []).map(w => w.word)));
+    const links = w => ((pd.x[w] || {}).l || []).filter(l => l[1] === 'w' && pd.v[l[0]] && pd.v[l[0]].w[l[2]]);
+    // Each cue has to read right with any person and with not, so words about me or you (τη μαμά μου, σε σένα), κάτι, and
+    // "a teacher" after a verb with describing words (είμαι κουρασμένος), which does not follow we and they, stay out. So does λίγο, which reads oddly with not.
+    const objs = (w, v) => { const cop = v.w.some(x => x[4]); return v.w.map((x, i) => i).filter(i => { const x = v.w[i]; return !/\b(my|me|you|your|our|us|i|we)\b/i.test(x[1]) && !/^(που|κάτι|λίγο)( |$)/.test(x[0]) && !(cop && !x[4] && /^an? /.test(x[1])) && !DRILL_NO.has(w + ' ' + x[0]); }); };
+    const use = w => DRILL_VERBS.has(w) && pd.v[w] && met.has(w), cand = [];
+    for (const w of today) if (use(w)) { const l = today.flatMap(links).find(l => l[0] === w); cand.push([w, l ? l[2] : -1]); }
+    for (const w of today) for (const l of links(w)) if (use(l[0])) cand.push([l[0], l[2]]);
+    const mv = [...met].filter(use); for (let k = 0; k < mv.length; k++) cand.push([mv[(n + k) % mv.length], -1]);
+    let verb = '', v = null, idx = [], pre = -1;
+    for (const [w, p] of cand) { const ix = objs(w, pd.v[w]); if (!ix.length) continue; verb = w; v = pd.v[w]; idx = ix; pre = p; break; }
+    if (!verb) return null;
+    // What to say with it: today's word when it fits; else words already met, a different one each day; else the verb's own first words.
+    // The change of what is to a plain word, never to a second verb (να δω after να πάω), whose forms would not have been shown.
+    const metO = idx.filter(i => met.has(v.w[i][2])), pool = metO.length ? metO : idx;
+    const o1 = idx.includes(pre) ? pre : pool[n % pool.length], rest = metO.filter(i => i !== o1 && !v.w[i][3]), o2 = rest.length ? rest[n % rest.length] : undefined;
+    if (DRILL_EN[verb]) v = Object.assign({}, v, { en: DRILL_EN[verb] });
+    const second = n % 2 ? 4 : v.imp || n % 4 ? 2 : 3;   // we on odd days; he or she on even ones
+    const plan = [[0, false, o1, 'model'], [1, false, o1, 'who'], [second, false, o1, 'who'], [second, true, o1, 'not'], o2 !== undefined ? [second, true, o2, 'what'] : [6, true, o1, 'who']];
+    const rounds = plan.map(([who, neg, w, cue]) => {
+      const st = { who, w: w + 1, h: 0, neg }, L = pairLine(v, st), it = v.w[w], alts = [L.gr];
+      if (it[4] && !it[3] && who < 2) { const f = pairLine(v, st, true).gr; if (f !== L.gr) alts.push(f); }
+      const strict = [...foldG(L.vf).split(' '), ...(it[3] ? foldG(it[3][L.p]).split(' ') : []), ...(neg ? ['δεν'] : [])].filter(Boolean);
+      return { gr: L.gr, en: L.en, alts, strict, cue };
+    });
+    // The six forms for the pattern view; with a second verb (μπορώ να πάω) both change, so both are shown.
+    const nf = v.w[o1][3];
+    return { verb, forms: v.f.map((f, k) => nf && nf[k] ? f + ' να ' + nf[k] : f), rounds };
+  }
+  // The Say it step: every line of today's scene is said from its English (their line first, when there is one), then the drill.
+  // One at a time, like Recall. Show it is always there, so nobody is stuck; a drill round that had to be shown comes back once at the end.
+  // o: { turns, n, words, key, drill, doneLabel, onDone }. Where it stands is kept under o.key, so leaving halfway comes back to the same line.
+  sayStep(wrap, o) {
+    const box = wrap.createDiv('gq-cv-recall gq-cv-drill'), canHear = !gqQuiet() && !noSpeech(), D = o.drill ? o.drill.rounds : [];
+    let store = null; try { store = window.localStorage; } catch (e) {}
+    let at = 0, again = [], tapped = false;
+    try { const v = JSON.parse((store && store.getItem(o.key)) || 'null'); if (v && typeof v === 'object') { at = +v.at || 0; again = Array.isArray(v.again) ? v.again.filter(k => Number.isInteger(k) && k > 0 && k < D.length).slice(0, 2) : []; } } catch (e) {}
+    const save = () => { try { if (store) store.setItem(o.key, JSON.stringify({ at, again })); } catch (e) {} };
+    const items = () => [...o.turns.map((x, k) => ({ k })), ...D.map((r, k) => ({ d: k })), ...again.map(k => ({ d: k, once: true }))];
+    const CUE = { who: 'Change who', not: 'Make it not', what: 'Change what' };
+    const show = () => {
+      box.empty(); const L = items();
+      if (at >= L.length) { o.onDone(); return; }
+      const it = L[at], isLine = it.k !== undefined, r = isLine ? null : D[it.d], model = r && r.cue === 'model';
+      box.createDiv({ cls: 'gq-hint gq-cv-rcount', text: `${isLine ? 'From the scene' : model ? 'The pattern' : it.once ? 'Once more' : CUE[r.cue]}${it.once ? '' : ` · ${at + 1} of ${L.length - again.length}`}` });
+      const q = box.createDiv('gq-cv-rq'), row = q.createDiv('gq-row'), sr = q.createDiv('gq-row');
+      const nextB = () => { const last = at >= items().length, nx = row.createEl('button', { text: last ? o.doneLabel : 'Next \u203a', cls: 'mod-cta' }); nx.onclick = () => { tapped = true; show(); }; };
+      if (isLine) {
+        const x = o.turns[it.k], pv = it.k > 0 ? o.turns[it.k - 1] : null;
+        const c = { ctx: pv ? [{ who: pv[0], g: pv[1], e: pv[2] }] : [], who: x[0], gr: x[1], en: x[2] };
+        const top = createDiv(); q.prepend(top);
+        top.createDiv({ cls: 'gq-hint', text: pv ? 'Hear theirs, then say yours in Greek.' : 'Say it in Greek.' });
+        this.cbPrompt(top, c, false);
+        const g = this.lineEl(top, x[1], o.words); g.addClass('gq-cbgr'); g.addClass('gq-say'); g.onclick = () => say(x[1]); g.style.display = 'none';
+        let over = false; const fin = ok => { if (over) return; over = true; g.style.display = ''; row.empty(); at++; save(); this.hearBtn(row, x[1], 'Hear it'); nextB(); };
+        if (pv) { this.hearBtn(row, pv[1], 'Hear their line'); if (tapped && canHear) say(pv[1]); }
+        const sh = row.createEl('button', { text: 'Show it', cls: 'gq-mini' }); sh.onclick = () => { sr.remove(); if (canHear) say(x[1]); fin(false); };
+        this.sayIt(sr, x[1], 'day:' + o.n + ':' + it.k, 'Say it · +2', () => fin(true), this.cbOther(c));
+        return;
+      }
+      const top = createDiv(); q.prepend(top);
+      const key = 'dr:' + o.n + ':' + it.d + (it.once ? ':2' : ''), tgt = r.alts.length > 1 ? r.alts : r.gr;
+      if (model) {
+        // The pattern, in full view: the sentence, then the verb with each person, so the endings are seen before they are asked for.
+        top.createDiv({ cls: 'gq-hint', text: 'Hear it, then say it.' });
+        const out = top.createDiv('gq-pout'), g = out.createDiv({ cls: 'gq-pgr gq-say', text: r.gr, attr: { lang: 'el' } }); g.onclick = () => say(r.gr); out.createDiv({ cls: 'gq-pen', text: r.en });
+        // Two columns, one person then many; with a second verb the forms are long, so one column in the usual order.
+        const wide = o.drill.forms.some(f => / να /.test(f)), fg = top.createDiv({ cls: 'gq-cv-forms' + (wide ? ' is-wide' : ''), attr: { 'aria-label': 'The verb with each person' } });
+        const PN = ['I', 'you', 'he, she', 'we', 'you all', 'they'];
+        (wide ? [0, 1, 2, 3, 4, 5] : [0, 3, 1, 4, 2, 5]).forEach(k => { const en = PN[k]; const f = o.drill.forms[k]; if (!f) return; const c = fg.createDiv({ cls: 'gq-cv-form gq-say', attr: { role: 'button' } }); c.createDiv({ cls: 'gq-cv-formg', text: f, attr: { lang: 'el' } }); c.createDiv({ cls: 'gq-cv-forme', text: en }); c.onclick = () => say(f); });
+        if (tapped && canHear) say(r.gr);
+        this.hearBtn(row, r.gr, 'Hear it');
+        const nx = row.createEl('button', { text: at + 1 >= L.length ? o.doneLabel : 'Next \u203a', cls: 'mod-cta' }); nx.onclick = () => { tapped = true; at++; save(); show(); };
+        this.sayIt(sr, tgt, key, 'Say it · +2', null, null, { strict: r.strict });
+        return;
+      }
+      top.createDiv({ cls: 'gq-hint', text: 'One thing changes. Say it in Greek.' });
+      top.createDiv({ cls: 'gq-cbyou gq-cv-cue', text: r.en });
+      const g = top.createDiv({ cls: 'gq-line gq-cbgr gq-say', text: r.gr, attr: { lang: 'el' } }); g.onclick = () => say(r.gr); g.style.display = 'none';
+      let over = false; const fin = ok => { if (over) return; over = true; g.style.display = ''; row.empty(); if (!ok && !it.once && again.length < 2 && !again.includes(it.d)) again.push(it.d); at++; save(); this.hearBtn(row, r.gr, 'Hear it'); nextB(); };
+      const sh = row.createEl('button', { text: 'Show it', cls: 'gq-mini' }); sh.onclick = () => { sr.remove(); if (canHear) say(r.gr); fin(false); };
+      this.sayIt(sr, tgt, key, 'Say it · +2', () => { if (canHear) say(r.gr); fin(true); }, null, { strict: r.strict });
+    };
+    show();
   }
   // The Recall step inside today's story card: one question at a time, checked by the app, and each answer moves the word's color by the earned rule.
   recallStep(wrap, R, onDone) {
@@ -6096,9 +6202,24 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // A "Say it" button: listen, then +2 φόρα when the phone hears the target. key keeps it to once a day.
   // onWin (optional): what the screen does once the phone hears it right, e.g. fill in the story puzzle.
   // other (optional): the lines around yours. Saying those instead of your line gets a hint, not a plain Try again.
-  sayIt(parent, target, key, label, onWin, other) {
+  // opt.strict (the drill): words that must be heard exactly. A line that passes but for those gets a nudge, not the answer.
+  sayIt(parent, target, key, label, onWin, other, opt) {
     // target can be a list of words with the same meaning (ότι, πως): any of them counts.
     const many = Array.isArray(target); if (many) target = target.join(', ');
+    const strict = opt && opt.strict && opt.strict.length ? opt.strict : null;
+    // A try at this line that misses only the part being drilled: the not, or the verb ending (the same verb, another person).
+    const almost = alts => {
+      if (!strict) return null;
+      const rest = foldG(many ? target.split(',')[0] : target).split(' ').filter(x => x && !strict.includes(x) && !SMALL_W.has(x)), verbs = strict.filter(x => x !== 'δεν');
+      for (const a of alts || []) {
+        const hw = foldG(digG(a)).split(' ').filter(Boolean), has = x => hw.some(h => h === x || phonG(h) === phonG(x));
+        const stem = verbs.some(x => hw.some(h => h.slice(0, 2) === x.slice(0, 2))), mine = stem || rest.some(x => hw.some(h => sameW(x, h)));
+        if (!mine) continue;
+        if (strict.includes('δεν') && !hw.includes('δεν') && !hw.includes('δε')) return ' Almost. This one is \u201cnot\u201d.';
+        if (!verbs.every(has)) return ' Almost. The verb ending says who.';
+      }
+      return null;
+    };
     const w = parent.createSpan('gq-sayit'), wd = many || /^w:/.test(key || '');
     const b = w.createEl('button', { text: label || 'Say it · +2', cls: 'gq-mini gq-sayit-b', attr: { 'aria-label': 'Say it out loud for 2 bonus φόρα' } });
     const fb = w.createSpan({ cls: 'gq-hint gq-sayit-fb' });
@@ -6107,11 +6228,11 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const typed = () => {
       b.remove(); fb.setText('');
       const i = w.createEl('input', { cls: 'gq-sayit-in', attr: { type: 'text', lang: 'el', placeholder: 'Tap the mic on the keyboard and say it', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' } });
-      const chk = () => { if (!i.value.trim()) return; const how = heardHow(target, [i.value], wd); if (how) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); fb.setText(spellNote(how)); if (how.length) fb.addClass('gq-sayit-spell'); w.appendChild(fb); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} } else fb.setText(miss([i.value]) || ' Not quite. Try again.'); };
+      const chk = () => { if (i.disabled || !i.value.trim()) return; const how = heardHow(target, [i.value], wd, strict); if (how) { i.disabled = true; w.createSpan({ cls: 'gq-hint', text: ' Heard it · +2' }); fb.setText(spellNote(how)); if (how.length) fb.addClass('gq-sayit-spell'); w.appendChild(fb); this.moAdd('said', key); if (onWin) try { onWin(); } catch (e) {} } else fb.setText(miss([i.value]) || almost([i.value]) || ' Not quite. Try again.'); };
       i.onchange = chk; i.onkeydown = e => { if (e.key === 'Enter') chk(); };
       w.appendChild(fb); fb.setText(' Switch the keyboard to Greek first (the globe key), so its mic writes Greek.');
       // The app's own microphone was switched off on this phone after a failure: one tap tries it again.
-      if (SRec() && this.lsGet('sroff', 0)) { const a = w.createEl('a', { text: ' Try the app mic again', href: '#', cls: 'gq-hint' }); a.onclick = e => { e.preventDefault(); this.lsSet('sroff', 0); const p = w.parentElement; w.remove(); if (p) this.sayIt(p, target, key, label, onWin, other); }; }
+      if (SRec() && this.lsGet('sroff', 0)) { const a = w.createEl('a', { text: ' Try the app mic again', href: '#', cls: 'gq-hint' }); a.onclick = e => { e.preventDefault(); this.lsSet('sroff', 0); const p = w.parentElement; w.remove(); if (p) this.sayIt(p, many ? target.split(', ') : target, key, label, onWin, other, opt); }; }
       i.focus();
     };
     if (!SRec() || this.lsGet('sroff', 0)) { b.onclick = typed; return w; }
@@ -6125,10 +6246,10 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       b.addClass('is-live'); b.setText('Listening…'); fb.setText('Say it now.');
       try {
         const alts = await listenGreek(); b.removeClass('is-live');
-        const how = heardHow(target, alts, wd);
+        const how = heardHow(target, alts, wd, strict);
         if (how) win(spellNote(how));
         else if (!alts.length && ++fails >= 2) toKb(false);
-        else { b.setText(label || 'Say it · +2'); fb.setText(miss(alts) || (alts.length ? ` Heard "${alts[0]}". Try again.` : ' Nothing heard. Try again, a little louder.')); }
+        else { b.setText(label || 'Say it · +2'); fb.setText(miss(alts) || almost(alts) || (alts.length ? ` Heard "${alts[0]}". Try again.` : ' Nothing heard. Try again, a little louder.')); }
       } catch (e) {
         b.removeClass('is-live'); b.setText(label || 'Say it · +2');
         if (e === 'no-speech' || e === 'aborted' || e === 'late') { if (++fails >= 2) toKb(false); else fb.setText(' Nothing heard. Try again.'); }

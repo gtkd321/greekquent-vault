@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip] 2026-11-27b: Say it, one line at a time
+> The **Say it** step now gives you one line at a time from its English: you hear their line, then say yours. After the scene comes a short pattern with one everyday verb. You see it with each person, then change one thing at a time: who, then not, then what. If the verb ending is off, the app says so and lets you try again. **Show it** is always there. Nothing you did has changed.
+
 > [!tip] 2026-11-27a: Opens faster on a weak signal
 > When your connection is slow, the app now opens from the copy on your phone after about three seconds instead of waiting, and picks up any update quietly. Nothing you did has changed.
 

@@ -27,6 +27,9 @@ d.setAttribute('data-os',/iPhone|iPad|iPod/.test(u)||(/Macintosh/.test(u)&&navig
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-180.png">
+<!-- The words and the app start downloading with the page, not after it. -->
+<link rel="preload" as="fetch" crossorigin="anonymous" href="notes.json?v=__V__">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="vault/.obsidian/plugins/greekquent-student-layout/main.js?v=__V__">
 <link rel="stylesheet" href="app.css?v=__V__">
 <link rel="stylesheet" href="vault/.obsidian/plugins/greekquent-student-layout/styles.css?v=__V__">
 </head>

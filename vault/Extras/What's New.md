@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip] 2026-11-27a: Opens faster on a weak signal
+> When your connection is slow, the app now opens from the copy on your phone after about three seconds instead of waiting, and picks up any update quietly. Nothing you did has changed.
+
 > [!tip] 2026-11-25l: One card for the day
 > Letters, the listening or book step and the video are now steps inside the day's story, so Today is one card to work through. Each one has **Skip for today**, and a skipped step still opens from the strip of steps at the top. Nothing you did has changed.
 

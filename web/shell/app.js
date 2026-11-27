@@ -168,21 +168,28 @@ function proto(href) {
 async function boot() {
   const status = $('#gq-boot-msg');
   try {
-    const vr = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null);
-    const net = vr && vr.version, have = localStorage.getItem('gqw:ready') || localStorage.getItem('gqw:lastver');
-    // Every open starts on the newest release. If it is slow to arrive (over 8 seconds) or the phone is offline,
-    // the copy already on this device opens instead and the new one switches in at the next break.
-    if (!net && !have) throw new Error('offline before the first visit');
+    const have = localStorage.getItem('gqw:ready') || localStorage.getItem('gqw:lastver');
     const get = v => Promise.all([
       fetch(NOTES_URL(v)).then(r => { if (!r.ok) throw new Error('notes ' + r.status); return r.json(); }),
       fetch(PLUG_URL(v)).then(r => { if (!r.ok) throw new Error('plugin ' + r.status); return r.text(); })
     ]);
+    // The copy already on this device starts loading at once, while the check for a newer release is on its way.
+    // On a weak signal that check gets 3 seconds; after that the copy on the device opens, and a newer release
+    // is fetched quietly for the next break. Opening never hangs on the network once the app has been used.
+    const mine = have ? get(have) : null; if (mine) mine.catch(() => {});
+    const ask = fetch('version.json?t=' + Date.now(), { cache: 'no-store' }).then(r => r.json()).catch(() => null);
+    const vr = await (have ? Promise.race([ask, new Promise(r => setTimeout(r, 3000, null))]) : ask);
+    const net = vr && vr.version;
+    if (!net) ask.then(x => { if (x && x.version && loaded && x.version !== loaded) prefetch(x.version); });
+    // Every open starts on the newest release. If it is slow to arrive (over 8 seconds) or the phone is offline,
+    // the copy already on this device opens instead and the new one switches in at the next break.
+    if (!net && !have) throw new Error('offline before the first visit');
     let v = net || have, got = null;
     if (net && have && net !== have) {
       got = await Promise.race([get(net), new Promise((_, no) => setTimeout(() => no(new Error('slow')), 8000))]).catch(() => null);
       if (!got) v = have;
     }
-    if (!got) { try { got = await get(v); } catch (e) { if (!net || v === net) throw e; v = net; got = await get(v); } }
+    if (!got) { try { got = await (mine && v === have ? mine : get(v)); } catch (e) { if (!net || v === net) throw e; v = net; got = await get(v); } }
     const [bundle, src] = got; loaded = v;
     try { localStorage.setItem('gqw:lastver', v); localStorage.setItem('gqw:ready', v); } catch (e) {}
     if (net && net !== v) setTimeout(() => prefetch(net), 4000); else setTimeout(tidyCache, 8000);

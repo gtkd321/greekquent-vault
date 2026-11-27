@@ -1,9 +1,10 @@
-// Greekquent web app: works offline after the first visit. Network first for version.json, cache first for
+// Greekquent web app: works offline after the first visit. Network first (with a short wait) for the page and version.json, cache first for
 // everything else (file names carry the version, so a new release is fetched fresh). Only this app's cache is used.
 const CACHE = 'greekquent-beginner-v1';
 // Other editions live in folders under this one and run their own worker. Leave their requests alone.
 const SKIP = [];
 const BASE = new URL('./', self.location).pathname;
+let slowAt = 0;
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then(c => c.addAll(['./', 'index.html', 'app.css', 'shim.js', 'app.js', 'lib/js-yaml.min.js', 'lib/marked.umd.js', 'icon.svg', 'manifest.webmanifest']).catch(() => {}))); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('greekquent-beginner-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', e => {
@@ -12,8 +13,15 @@ self.addEventListener('fetch', e => {
   if (SKIP.some(d => u.pathname.startsWith(BASE + d))) return;
   const isVer = u.pathname.endsWith('/version.json') || u.pathname.endsWith('/') || u.pathname.endsWith('/index.html');
   if (isVer) {
-    e.respondWith(fetch(e.request).then(r => { const c = r.clone(); const key = u.pathname.endsWith('version.json') ? 'version.json' : e.request; caches.open(CACHE).then(x => x.put(key, c)); return r; })
-      .catch(() => caches.match(u.pathname.endsWith('version.json') ? 'version.json' : e.request, { ignoreSearch: true }).then(r => r || caches.match('index.html'))));
+    // Newest from the network. On a weak signal the copy on the phone answers after 2.5 seconds, so opening never hangs;
+    // the fresh one still lands in the cache for next time.
+    const key = u.pathname.endsWith('version.json') ? 'version.json' : e.request;
+    const kept = () => caches.match(key, { ignoreSearch: true }).then(r => r || caches.match('index.html'));
+    const net = fetch(e.request).then(r => { if (r.ok) { const c = r.clone(); return caches.open(CACHE).then(x => x.put(key, c)).catch(() => {}).then(() => r); } return r; });
+    e.waitUntil(net.catch(() => {}));
+    // Once the page has waited, the version check that follows does not wait a second time.
+    const wait = Date.now() - slowAt < 15000 ? 0 : 2500;
+    e.respondWith(Promise.race([net, new Promise(ok => setTimeout(ok, wait, null))]).then(r => r || kept().then(c => { if (c && wait) slowAt = Date.now(); return c || net; })).catch(() => kept()));
     return;
   }
   e.respondWith(caches.match(e.request).then(hit => hit || fetch(e.request).then(r => { if (r.ok) { const c = r.clone(); caches.open(CACHE).then(x => x.put(e.request, c)); } return r; })

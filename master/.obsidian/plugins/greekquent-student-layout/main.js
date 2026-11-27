@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-25k';
+const VAULT_RELEASE = '2026-11-25l';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3706,9 +3706,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // The day in four steps: the scene, the words, build it, say it. The last day of a week also plays the whole week.
     const wwords = [...new Set(wdays.flatMap(k => (beats[k].words || []).map(w => w.word)).filter(Boolean))];
     this.recallOn = !finished;
-    this.cvSteps = { n, day: idx + 1, weekEnd: n === wdays[wdays.length - 1], wwords, recall: finished ? null : await this.recallPlan(n, beats, col, T, await this.wordIndex()) };
+    this.cvSteps = { n, day: idx + 1, weekEnd: n === wdays[wdays.length - 1], wwords, recall: finished ? null : await this.recallPlan(n, beats, col, T, await this.wordIndex()), extra: finished ? null : this.dayX };
     this.convoGame(card, turns, n, b.words, at >= n, pool, () => { if (this.tStory) { this.timeRec('story', (Date.now() - this.tStory) / 1000); this.tStory = 0; } this.markDone('story'); return this.setStory(Math.max(n, this.colors().story_at || 0)); }, next, finished);
-    this.cardMore(card, () => [this.sceneSkip && ['Skip the scene', this.sceneSkip]]);
+    this.cardMore(card, () => [this.sceneSkip && ['Skip the scene', this.sceneSkip], ...(this.dayMore ? this.dayMore() : [])]);
     this.addMore(card, [doneN ? 'Start somewhere else' : 'Start further in the story', e => this.startMenu(e, beats)]);
     return b;
   }
@@ -3730,6 +3730,15 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const S = this.cvSteps && this.cvSteps.n === n ? this.cvSteps : null; this.cvSteps = null;
     // Recall sits between the words and the build on days when the schedule brings something back.
     const RC = S && S.recall && S.recall.items.length ? S.recall : null;
+    // Extra steps on days they apply: the listening, book or class step and letters before the scene, the video after Say it.
+    // Each is the same piece that used to be a card of its own, so what it stores has not changed.
+    const X = S && Array.isArray(S.extra) ? S.extra : [], xOf = id => X.find(x => x.id === id);
+    for (const x of X) { x.el.removeClass('gq-tcard'); x.el.addClass('gq-daysub'); x.done = () => this.doneToday(x.id); }
+    const dayKey = ymd(new Date());
+    const skipped = id => { const v = this.lsGet('dayskip', null); return !!(v && v.d === dayKey && Array.isArray(v.ids) && v.ids.includes(id)); };
+    const skip = id => { const v = this.lsGet('dayskip', null), ids = v && v.d === dayKey && Array.isArray(v.ids) ? v.ids : []; if (!ids.includes(id)) ids.push(id); this.lsSet('dayskip', { d: dayKey, ids }); };
+    const xOpen = x => !x.done() && !skipped(x.id);
+    let curX = null, shownX = null, footBtn = null;
     const has = k => { try { return !!(store && store.getItem(k)); } catch (e) { return false; } };
     const put = k => { try { if (store) store.setItem(k, '1'); } catch (e) {} };
     const skey = key + '-s', ykey = key + '-say';
@@ -3797,24 +3806,49 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     for (const ev of ['touchstart', 'touchend', 'pointerdown', 'pointermove', 'pointerup']) wrap.addEventListener(ev, stopT, { passive: true });
     wrap.addEventListener('touchmove', e => { e.stopPropagation(); if (e.target && e.target.closest && e.target.closest('.gq-tile, .gq-cv-ans, .gq-cv-bank')) e.preventDefault(); }, { passive: false });
     let look = null;   // a finished step opened again to look back at; null = where you are
+    // An extra step, shown where the story would be. While it is the current step, one quiet button moves on:
+    // Skip for today before it is done, Continue after. Nothing is lost by skipping; the step opens again from the strip.
+    // Coming from a long step (Say it, the letters), a shorter one would open with its top off the screen.
+    const toTop = () => { if (wrap.isConnected) try { if (card.getBoundingClientRect().top < 0) card.scrollIntoView({ block: 'start', behavior: 'auto' }); } catch (e) {} };
+    const mountX = (x, looking) => {
+      wrap.createDiv('gq-daybody').appendChild(x.el); shownX = x;
+      toTop();
+      if (looking) return;
+      footBtn = wrap.createDiv('gq-dayfoot').createEl('button', { cls: 'gq-ghost gq-daygo', text: x.done() ? 'Continue \u203a' : 'Skip for today \u203a' });
+      footBtn.onclick = () => { if (!x.done()) skip(x.id); paint(); toTop(); };
+    };
+    if (X.length) {
+      this.dayStepHas = k => !!xOf(k);
+      this.dayMore = () => { const el = shownX && wrap.isConnected ? shownX.el : null; return el ? [...(el.gqMoreFn ? el.gqMoreFn() : []), ...(el.gqMoreX || [])].filter(Boolean) : []; };
+      this.dayStepDone = k => { const x = xOf(k); if (!x || x !== curX || look !== null) return; if (footBtn) footBtn.setText('Continue \u203a'); if (x.auto) setTimeout(() => { if (wrap.isConnected && curX === x && look === null) paint(); }, x.auto); };
+    }
     const paint = () => {
-      wrap.empty(); seed = n * 97 + 13 + i * 7;
+      wrap.empty(); seed = n * 97 + 13 + i * 7; curX = null; shownX = null; footBtn = null;
       const nw = (words || []).filter(w => w.en);
       if (S) {
-        const IDS = RC ? ['scene', 'words', 'recall', 'build', 'say'] : ['scene', 'words', 'build', 'say'];
-        const nowId = !sceneSeen ? 'scene' : !wordsSeen && nw.length ? 'words' : RC && !RC.done ? 'recall' : i < order().length ? 'build' : !said ? 'say' : '';
+        const CORE = RC ? ['scene', 'words', 'recall', 'build', 'say'] : ['scene', 'words', 'build', 'say'];
+        const pre = X.filter(x => x.pos === 'pre'), post = X.filter(x => x.pos !== 'pre');
+        const IDS = [...pre.map(x => x.id), ...CORE, ...post.map(x => x.id)];
+        const coreNow = !sceneSeen ? 'scene' : !wordsSeen && nw.length ? 'words' : RC && !RC.done ? 'recall' : i < order().length ? 'build' : !said ? 'say' : '';
+        // A step before the scene waits only until the scene is started; one after Say it waits only once the story is done.
+        const xNow = (!sceneSeen && pre.find(xOpen)) || (!coreNow && post.find(xOpen)) || null;
+        const nowId = xNow ? xNow.id : coreNow; curX = xNow;
         const stepNow = nowId ? IDS.indexOf(nowId) : IDS.length;
-        const strip = wrap.createDiv({ cls: 'gq-daysteps', attr: { 'aria-label': 'Today\'s steps' } });
-        const NAMES = IDS.map(k => ({ scene: 'Scene', words: 'Words', recall: 'Recall', build: 'Build', say: 'Say it' })[k]);
-        if (look !== null && (IDS.indexOf(look) < 0 || IDS.indexOf(look) >= stepNow || (look === 'words' && !nw.length))) look = null;
+        const strip = wrap.createDiv({ cls: 'gq-daysteps' + (IDS.length > 5 ? ' is-tight' : ''), attr: { 'aria-label': 'Today\'s steps' } });
+        const NM = { scene: 'Scene', words: 'Words', recall: 'Recall', build: 'Build', say: 'Say it' }, NAMES = IDS.map(k => NM[k] || xOf(k).name);
+        // done: finished. skip: passed without doing it (still opens). now: where you are.
+        const stOf = k => { const x = xOf(IDS[k]); if (k === stepNow) return 'now'; if (x) return x.done() ? 'done' : (k < stepNow || skipped(x.id)) ? 'skip' : ''; return k < stepNow ? 'done' : ''; };
+        const canLook = k => { const st = stOf(k); return (st === 'done' || st === 'skip') && !(IDS[k] === 'words' && !nw.length); };
+        if (look !== null && (IDS.indexOf(look) < 0 || !canLook(IDS.indexOf(look)))) look = null;
         NAMES.forEach((t, k) => {
-          const cls = 'gq-daystep' + (k < stepNow ? ' is-done' : '') + (k === stepNow ? ' is-now' : '') + (IDS[k] === look ? ' is-look' : '');
-          // Finished steps open again to look back; nothing you did is undone.
-          if (k < stepNow && !(IDS[k] === 'words' && !nw.length)) { const b = strip.createEl('button', { cls, text: t, attr: { 'aria-label': 'Look again: ' + t, 'aria-pressed': String(IDS[k] === look) } }); b.onclick = () => { look = IDS[k] === look ? null : IDS[k]; paint(); }; }
+          const st = stOf(k), cls = 'gq-daystep' + (st === 'done' ? ' is-done' : '') + (st === 'skip' ? ' is-skip' : '') + (st === 'now' ? ' is-now' : '') + (IDS[k] === look ? ' is-look' : '');
+          // Finished steps open again to look back; nothing you did is undone. A skipped step opens the same way, to do it after all.
+          if (canLook(k)) { const b = strip.createEl('button', { cls, text: t, attr: { 'aria-label': (st === 'skip' ? 'Open: ' : 'Look again: ') + t, 'aria-pressed': String(IDS[k] === look) } }); b.onclick = () => { look = IDS[k] === look ? null : IDS[k]; paint(); }; }
           // While looking back, the current step is the way home.
           else if (k === stepNow && look !== null) { const b = strip.createEl('button', { cls: cls + ' is-home', text: t, attr: { 'aria-label': 'Back to ' + t } }); b.onclick = () => { look = null; paint(); }; }
-          else strip.createSpan({ cls, text: t });
+          else strip.createSpan({ cls, text: t, attr: { 'aria-label': t } });
         });
+        if (look !== null && xOf(look)) { mountX(xOf(look), true); return; }
         if (look !== null) {
           const lv = wrap.createDiv('gq-cv-look');
           if (look === 'scene') {
@@ -3834,6 +3868,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
           return;
         }
       }
+      if (curX) { mountX(curX, false); return; }
       if (!sceneSeen) {
         const sc = wrap.createDiv('gq-cv-scene');
         sc.createDiv({ cls: 'gq-cv-scenetext', text: 'Just listen.' });
@@ -3859,8 +3894,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       }
       if (S && !said && i >= order().length) {
         const sy = wrap.createDiv('gq-cv-sayall');
-        sy.createDiv({ cls: 'gq-hint', text: 'Last step: say the whole part out loud, line by line. Touch a line to hear it first.' });
-        const dn = sy.createDiv('gq-row').createEl('button', { text: 'Done for today', cls: 'mod-cta' });
+        const after = X.find(x => x.pos !== 'pre' && xOpen(x));
+        sy.createDiv({ cls: 'gq-hint', text: (after ? 'Say' : 'Last step: say') + ' the whole part out loud, line by line. Touch a line to hear it first.' });
+        const dn = sy.createDiv('gq-row').createEl('button', { text: after ? 'Next \u203a' : 'Done for today', cls: 'mod-cta' });
         dn.onclick = async () => { said = true; put(ykey); try { await onDone(); } catch (e) {} paint(); };
         return;
       }
@@ -4488,7 +4524,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   est(kind, def) { const a = (this.lsGet('mins', {})[kind] || []).slice().sort((x, y) => x - y); return a.length < 2 ? def : Math.max(1, Math.round(a[Math.floor(a.length / 2)] / 60)); }
   timeRec(kind, secs) { if (!(secs > 15 && secs < 900)) return; const L = this.lsGet('mins', {}); L[kind] = [...(L[kind] || []), Math.round(secs)].slice(-7); this.lsSet('mins', L); this.addPractice(secs); }
   doneToday(k) { return this.lsGet('done', {})[k] === ymd(new Date()); }
-  markDone(k) { const d = this.lsGet('done', {}); d[k] = ymd(new Date()); this.lsSet('done', d); this.nextUp(k); }
+  markDone(k) { const d = this.lsGet('done', {}); d[k] = ymd(new Date()); this.lsSet('done', d);
+    // A step inside the story day moves the day on by itself; the arrow to the next card only pulses for a finished card.
+    if (this.dayStepHas && this.dayStepHas(k)) { try { this.dayStepDone(k); } catch (e) {} } else this.nextUp(k); }
+  // One card for the day (a trial): letters, the listening or book step and the video sit inside the story day as steps.
+  // Off (Options) puts each back on its own card; nothing a student did is stored differently either way.
+  oneCard() { return !this.isKids && this.lsGet('onecard', 1) !== 0; }
   // Finishing the open card's step puts one button at its foot: the next step, or done for today.
   nextUp(k) {
     if (this.stackOn && this.stackNx && this.stackNx.isConnected) { const b = this.stackNx; b.addClass('gq-pulse'); setTimeout(() => b.removeClass('gq-pulse'), 2400); return; }
@@ -4717,6 +4758,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       { t: 'Phonetics', d: 'Shows how to say each Greek word in Latin letters.', on: () => this.phOn(), set: v => this.setPh(v) },
       { t: 'Calm mode', d: 'Stops the moving parts.', on: () => this.calmOn(), set: v => this.setCalm(v) },
       { t: 'Focus sound', d: 'A soft hiss (pink noise). It helps some people and bothers others.', on: () => !!this.noise, set: v => { if (!!this.noise !== v) this.toggleNoise(); } },
+      !this.isKids && !this.app.vault.getAbstractFileByPath('Teacher') && { t: 'One card for the day', d: 'Letters, listening, the book and the video are steps inside the story day. Off gives each its own card again.', on: () => this.oneCard(), set: v => { this.lsSet('onecard', v ? 1 : 0); this.refreshToday(); } },
       !this.isKids && { t: 'Fluent in a Year pace', d: 'The story one day a day, to finish the 1,500 words in a year. Today shows if you are behind.', on: () => !!this.colors().fiay, set: v => this.setFiay(v) }
     ].filter(Boolean);
     this.pop('Options', [{ label: '', build: el => {
@@ -4822,11 +4864,13 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       const moFresh = !Object.keys(this.moData().days || {}).length;
       this.paperCard(box, dd);
       // The week between classes, first on Today. Students who haven't said their class days are asked once.
-      this.cyc = null; this.cycEl = null;
+      this.cyc = null; this.cycEl = null; this.dayX = null; this.dayStepDone = null; this.dayStepHas = null; this.dayMore = null;
+      // One card for the day: these are built the same way as before, into a holder, and the story day takes them in as steps.
+      const hold = this.oneCard() ? createDiv() : null;
       if (!this.isKids && !this.app.vault.getAbstractFileByPath('Teacher')) {
         const st0 = this.ltStage(col);
         // The homework cycle starts once class days are known: picked in Options, or learned from the first class (classSeen).
-        if (st0 !== 'ears' && st0 !== 'read' && this.classDays() !== null) { this.cyc = await this.cycleInfo(now); if (this.cyc) this.cycleCard(box, col, this.cyc); }
+        if (st0 !== 'ears' && st0 !== 'read' && this.classDays() !== null) { this.cyc = await this.cycleInfo(now); if (this.cyc) this.cycleCard(hold || box, col, this.cyc); }
       }
       if (!col.setup_seen && !this.tourLeft()) {
         const s = box.createDiv('gq-tcard gq-tnew'); s.createSpan({ text: 'New here? ' });
@@ -4844,14 +4888,25 @@ module.exports = class GreekquentStudentLayout extends Plugin {
         const ears = this.ltStage(col); this.abcEl = null;
         if (ears === 'ears' || ears === 'read') this.ltCard(box, col, ears);
         else {
+        // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
+        const abcDue = !this.abcAllDone() && !this.abcOff();
+        if (hold && cal) {
+          const X = [];
+          if (this.cycEl) X.push({ id: 'cyc', name: { class: 'Class', book: 'Book', both: 'Prep' }[this.cyc.kind] || 'Listen', pos: 'pre', el: this.cycEl, auto: this.cyc.kind === 'class' ? 700 : 0 });
+          if (abcDue) { this.lettersCard(hold); this.abcEl = hold.lastElementChild; X.push({ id: 'abc', name: 'Letters', pos: 'pre', el: this.abcEl, auto: 0 }); }
+          const wv = await this.watchStep(hold, col, wk); // The video closes the day. If today's story is already done (the card shows tomorrow's day early), it comes first instead of hiding behind it.
+          if (wv) X.push({ id: 'watch', name: 'Watch', pos: this.doneToday('story') ? 'pre' : 'post', el: wv, auto: 1600 });
+          this.dayX = X;
+        }
         if (cal) await this.storyCard(box, beats, cal, fdd >= 0 && fdow === 0, col);
         // What comes back is the Recall step inside the story card. Once the story is finished, it is a card of its own.
         if (!this.recallOn) await this.comebackCard(box, beats, col, cal);
-        // The alphabet runs alongside the first weeks: sounds and names, a set at a time, until all are done.
-        if (!this.abcAllDone() && !this.abcOff()) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
+        if (abcDue && !this.abcEl) { this.lettersCard(box); this.abcEl = box.lastElementChild; }
         }
         if (!this.tabOn('class')) await this.classCard(box, wkCal, week);
       } else box.createDiv({ cls: 'gq-tcard gq-hint', text: 'The year is finished. Keep reviewing your red and yellow words below.' });
+      // Anything the story day did not take in (no story today, or the story is finished) goes back to being its own card.
+      if (hold) for (const c of [...hold.children]) if (c.hasClass('gq-tcard') && !c.gqStepOnly) box.appendChild(c);
       // Review: red words, game misses and look-ups from the last two weeks, in the 1,500.
       const seen = new Set(), rev = [];
       const add = w => { const x = byWord.get(w); if (x && !seen.has(w) && !col.green.includes(w)) { seen.add(w); rev.push({ word: w, en: x.english }); } };
@@ -5616,8 +5671,17 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     if (this.focusDue()) this.focusAuto();
     if (this.hearDue(col)) { await this.hearCard(box, col); return; }
     // The last card shares one spot: a video on watch days, building with your words on the others.
-    if (navigator.onLine && !this.doneToday('watch') && this.watchDay(new Date())) { const p = await this.watchPick(col, wk); if (p) { this.watchCard(box, p.v, p.ears); return; } }
+    if (this.dayX && this.dayX.some(x => x.id === 'watch')) { if (!this.doneToday('watch')) return; }
+    else if (navigator.onLine && !this.doneToday('watch') && this.watchDay(new Date())) { const p = await this.watchPick(col, wk); if (p) { this.watchCard(box, p.v, p.ears); return; } }
     const st = this.ltStage(col); if (st !== 'ears' && st !== 'read' && !this.doneToday('build') && await this.buildReady(col)) await this.buildCard(box);
+  }
+  // The video as the day's last step. Once watched it stays on the strip for the day as a quiet line.
+  async watchStep(hold, col, wk) {
+    if (!this.watchDay(new Date())) return null;
+    if (this.doneToday('watch')) { const c = hold.createDiv('gq-tcard gq-watch'); c.gqStepOnly = true; c.createDiv('gq-thead').createEl('strong', { text: 'Watch this' }); c.createDiv({ cls: 'gq-hint', text: 'Watched today.' }); return c; }
+    if (!navigator.onLine) return null;
+    const p = await this.watchPick(col, wk); if (!p) return null;
+    this.watchCard(hold, p.v, p.ears); return hold.lastElementChild;
   }
   watchCard(box, v, ears) {
     const c = box.createDiv('gq-tcard gq-watch'), h = c.createDiv('gq-thead');

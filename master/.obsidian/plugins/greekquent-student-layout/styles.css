@@ -1205,3 +1205,27 @@ body.gq-web .gq-tcard button:is(.gq-helphead, .gq-opt, .gq-opt-row, .gq-fold-h) 
 body button.gq-quiz-opt.is-ok { background: #2e7d32 !important; color: #fff !important; border-color: transparent !important; }
 body button.gq-quiz-opt.is-miss { background: #c62828 !important; color: #fff !important; border-color: transparent !important; }
 .gq-words-more .gq-kept { flex-basis: 100%; text-align: center; padding: 10px 0 2px; }
+/* One card for the day: the listening, book, class, letters and video steps sit inside the story day */
+.gq-daysub { margin: 0; padding: 0; border: 0; background: none; box-shadow: none; position: static; }
+.gq-daysub > .gq-cmore { display: none; }
+.gq-daysub > .gq-thead { padding-right: 0; margin-bottom: 4px; }
+.gq-daybody { animation: gq-fadein .2s ease; }
+.gq-dayfoot { display: flex; justify-content: flex-end; margin-top: 6px; }
+button.gq-daygo { font-weight: 500; color: var(--text-muted); padding: 0 6px; }
+.gq-daystep.is-skip, button.gq-daystep.is-skip { color: var(--text-faint); border-bottom-color: var(--background-modifier-border); }
+button.gq-daystep.is-skip.is-look { color: var(--text-normal); }
+/* More than five steps: only the step you are on is spelled out; the others are a check or a bar, and open on a touch. */
+.gq-daysteps.is-tight { gap: 5px; }
+.gq-daysteps.is-tight .gq-daystep:not(.is-now):not(.is-look) { flex: 0 1 34px; font-size: 0; min-height: 32px; }
+.gq-daysteps.is-tight .gq-daystep.is-done:not(.is-look)::before { content: '✓'; font-size: var(--font-ui-smaller); line-height: 1.4; }
+.gq-daysteps.is-tight .gq-daystep.is-now, .gq-daysteps.is-tight .gq-daystep.is-look { flex: 1 0 auto; white-space: nowrap; padding-left: 4px; padding-right: 4px; }
+@media (prefers-reduced-motion: reduce) { .gq-daybody { animation: none; } }
+/* The strip reads as one line: finished steps are flat like the rest (a check and a green bar), not separate round buttons. */
+.gq-daysteps .gq-daystep { font-size: 13px; white-space: nowrap; }
+.gq-daysteps button.gq-daystep { background: transparent !important; border-radius: 0 !important; border-bottom-color: #1a9850 !important; box-shadow: none !important; }
+.gq-daysteps button.gq-daystep.is-skip { border-bottom-color: var(--background-modifier-border) !important; }
+.gq-daysteps button.gq-daystep.is-home { border-bottom-color: var(--interactive-accent) !important; }
+.gq-daysteps button.gq-daystep.is-look { background: var(--background-modifier-hover) !important; border-radius: 8px 8px 0 0 !important; }
+.gq-daysteps.is-tight .gq-daystep:not(.is-now):not(.is-look) { font-size: 0; }
+.gq-daysteps.is-tight .gq-daystep.is-done:not(.is-look)::before { font-size: 13px; }
+.gq-daysteps.is-tight button.gq-daystep.is-skip:not(.is-look)::before { content: '–'; font-size: 13px; line-height: 1.4; }

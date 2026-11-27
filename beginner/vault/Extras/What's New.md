@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip] 2026-11-25l: One card for the day
+> Letters, the listening or book step and the video are now steps inside the day's story, so Today is one card to work through. Each one has **Skip for today**, and a skipped step still opens from the strip of steps at the top. Nothing you did has changed.
+
 > [!tip] 2026-11-25k: Lines that fit you
 > The earlier line in Recall and the lines in Repeat after me are now picked for you: mostly words you already have, with one or two still to learn. Build with your words now starts from today's scene.
 

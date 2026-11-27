@@ -8,7 +8,7 @@ const HIDE_RIBBON = ['graph:Open graph view', 'command-palette:Open command pale
 // Feedback goes to the teacher by text message. Change the number here if it ever changes.
 const FEEDBACK_SMS = '+18033990665';
 // © 2026 Daniel Houlis. All rights reserved. Greekquent™ and Frequent™ are trademarks of Daniel Houlis.
-const VAULT_RELEASE = '2026-11-25j';
+const VAULT_RELEASE = '2026-11-25k';
 // Weekly updates come from the teacher's GitHub repository (public, read-only for students).
 const UPDATE_BASE = 'https://raw.githubusercontent.com/gtkd321/greekquent-vault/main/';
 const MY_WORK = 'My Work/';
@@ -3706,7 +3706,7 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     // The day in four steps: the scene, the words, build it, say it. The last day of a week also plays the whole week.
     const wwords = [...new Set(wdays.flatMap(k => (beats[k].words || []).map(w => w.word)).filter(Boolean))];
     this.recallOn = !finished;
-    this.cvSteps = { n, day: idx + 1, weekEnd: n === wdays[wdays.length - 1], wwords, recall: finished ? null : this.recallPlan(n, beats, col, T, await this.wordIndex()) };
+    this.cvSteps = { n, day: idx + 1, weekEnd: n === wdays[wdays.length - 1], wwords, recall: finished ? null : await this.recallPlan(n, beats, col, T, await this.wordIndex()) };
     this.convoGame(card, turns, n, b.words, at >= n, pool, () => { if (this.tStory) { this.timeRec('story', (Date.now() - this.tStory) / 1000); this.tStory = 0; } this.markDone('story'); return this.setStory(Math.max(n, this.colors().story_at || 0)); }, next, finished);
     this.cardMore(card, () => [this.sceneSkip && ['Skip the scene', this.sceneSkip]]);
     this.addMore(card, [doneN ? 'Start somewhere else' : 'Start further in the story', e => this.startMenu(e, beats)]);
@@ -4135,7 +4135,9 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   // ---------- Roll the die: one of six things, picked for the student. Now and then a lucky roll adds φόρα. ----------
   dieFaces() {
     return [
-      { t: 'Spaced review', b: 'Earlier lines and your red and yellow words.', go: () => this.cbList && this.cbList.length ? this.popComebacks(this.cbList) : this.popRepeat() },
+      this.cbList && this.cbList.length ? { t: 'Spaced review', b: 'Earlier lines and your red and yellow words.', go: () => this.popComebacks(this.cbList) }
+        : (c => c.red.length + c.yellow.length + c.green.length)(this.colors()) ? { t: 'Quiz my words', b: 'Ten of your words. The ones that are due come first.', go: () => this.popQuizMine() }
+        : { t: 'Spaced review', b: 'Earlier lines and your red and yellow words.', go: () => this.popRepeat() },
       { t: 'Repeat after me', b: 'Hear a line, say it back. They get longer.', go: () => this.popRepeat() },
       { t: 'One-minute talk', b: 'Talk for one minute. The phone counts your words.', go: () => this.popTalk() },
       { t: 'Γιαγιά', b: 'A quick game with your words.', go: () => this.openApp('giagia', '') },
@@ -4173,9 +4175,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
   async repeatLines() {
     const beats = await this.beatIndex(), col = this.colors(), far = Math.max(12, (+col.last_beat || 0) + 3);
     const pool = []; for (const b of Object.values(beats)) if (b.gr && b.n <= far && !/[—–]/.test(b.gr)) { const parts = b.gr.match(/[^.!;·]+[.!;·]?/g) || [b.gr]; for (const g of new Set([b.gr, ...parts.map(x => x.trim())])) { const n = this.syl(g); if (n >= 4 && n <= 24) pool.push({ gr: g, en: b.en, s: n }); } }
+    // Among lines of about the right length, the one that fits this student's words best comes first.
+    const lem = await this.lemmaFn(), due = new Set(this.dueWords(0).map(x => x.w)); for (const x of pool) x.fit = this.fitScore(this.fitOf(x.gr, lem, col, due));
     const used = new Set(), out = [];
     for (const want of [5, 8, 11, 14, 17, 20]) {
-      const best = pool.filter(x => ![...used].some(u => u.includes(x.gr) || x.gr.includes(u))).sort((a, b) => Math.abs(a.s - want) - Math.abs(b.s - want))[0];
+      const near2 = x => Math.abs(x.s - want) <= 2 ? 0 : 1;
+      const best = pool.filter(x => ![...used].some(u => u.includes(x.gr) || x.gr.includes(u))).sort((a, b) => near2(a) - near2(b) || (near2(a) ? 0 : b.fit - a.fit) || Math.abs(a.s - want) - Math.abs(b.s - want))[0];
       if (best && (!out.length || best.s >= out[out.length - 1].s)) { used.add(best.gr); out.push(best); }
     }
     return out;
@@ -4269,11 +4274,82 @@ module.exports = class GreekquentStudentLayout extends Plugin {
       return wf.english ? { ctx: [], who: '', gr: x.w, en: String(wf.english), word: x.w, col: x.col } : null;
     }).filter(Boolean);
   }
+  // ---------- Fit: lines chosen for this student. A line fits when almost every word in it is already theirs (green or yellow)
+  // and one, or two in a long line, is still to be learned; lines that hold a red, yellow or due word are worth the most. ----------
+  // Which of the 1,500 a word in a line belongs to (accents ignored): the word itself, a verb form, or a near ending. Small words give ''.
+  async lemmaFn() {
+    if (this.lemF) return this.lemF;
+    const all = await this.wordIndex(); await this.loadVerbs();
+    const low = t => String(t || '').toLowerCase().replace(/[^\p{L}]/gu, '').replace(/ς/g, 'σ'), acc = (r, n) => { const i = r.search(/[άέήίόύώΐΰ]/); return i >= 0 && i < n ? i : -1; };
+    const SMALL = new Set('ο η το οι τα τον την τη των τουσ τισ του τησ να θα δεν μην σε σ στο στη στην στον στα στουσ στισ κι ενα ενασ μια εναν ωχ αχ ε α χμ μμ'.split(' '));
+    const NAMES = new Set('μαρ ελεν νικ γιωργ κωστ σοφ δημητρ ανδρε ελλ'.split(' '));
+    const EXTRA = { παρε: 'παίρνω', παρτε: 'παίρνω', παρετε: 'παίρνω', ελα: 'έρχομαι', ελατε: 'έρχομαι', πολλα: 'πολύ', πολλοι: 'πολύ', πολλεσ: 'πολύ', πολλη: 'πολύ', ολα: 'όλος', ολοι: 'όλος', ολη: 'όλος', ολεσ: 'όλος', ολο: 'όλος', δικο: 'δικός', δικη: 'δικός', δικα: 'δικός', νεα: 'νέος', νεο: 'νέος', ελιεσ: 'ελιά', ποια: 'ποιος', ποιον: 'ποιος', ιδια: 'ίδιος', ιδιο: 'ίδιος', αυτον: 'αυτός', αυτην: 'αυτός' };
+    const NEND = /(ουσ|ων|εσ|οσ|ασ|ησ|ου|οι|εισ|α|ο|η|ε|ι)$/, VEND = /(ομαστε|ονται|ιεμαι|ιεσαι|ιεται|ουμε|ουνε|ομαι|εσαι|εται|αμαι|ασαι|αται|εστε|ουν|ετε|εισ|αμε|ατε|ανε|αει|ει|ασ|αν|αω|ω|α)$/;
+    const nstem = f => f.replace(NEND, '').replace(/ι$/, ''), isVerb = k => /(ω|μαι)$/.test(k);
+    const rawM = new Map(), foldM = new Map(), nst = new Map(), vst = new Map(), put = (m, k, v) => { if (k && !m.has(k)) m.set(k, v); };
+    const one = all.filter(w => !/[\s,]/.test(w.word));
+    for (const w of one) put(rawM, low(w.word), w.word);
+    for (const w of one) for (const f of w.forms) put(rawM, low(f), w.word);
+    for (const w of one) put(foldM, w.k, w.word);
+    for (const w of one) for (const f of w.fk) put(foldM, f, w.word);
+    for (const w of one) {
+      if (isVerb(w.k)) { const st = w.k.replace(/(ιεμαι|ομαι|αμαι|ουμαι|εμαι|αω|ω)$/, ''); if (st.length >= 2) put(vst, st, { w: w.word, a: /αω$/.test(w.k) }); continue; }
+      const st = nstem(w.k); if (st.length < 3 || st === w.k) continue;
+      if (!nst.has(st)) nst.set(st, []); nst.get(st).push({ w: w.word, a: acc(low(w.word), st.length) });
+    }
+    const memo = new Map(), vm = this.verbMap || {}, have = new Set(all.map(w => w.word));
+    return this.lemF = tok => {
+      const raw = low(tok), f = fold(raw); if (!f || SMALL.has(f)) return '';
+      if (memo.has(tok)) return memo.get(tok);
+      if (/^\p{Lu}/u.test(String(tok).replace(/^[^\p{L}]+/u, '')) && NAMES.has(nstem(f))) { memo.set(tok, ''); return ''; }
+      let out = rawM.get(raw) || (vm[raw] && have.has(vm[raw]) ? vm[raw] : '') || (vm[raw] && foldM.get(fold(vm[raw]))) || (EXTRA[f] && have.has(EXTRA[f]) ? EXTRA[f] : '') || '';
+      if (!out && /(ματα|ματοσ|ματων)$/.test(f)) { memo.set(tok, out = foldM.get(f.replace(/(ματα|ματοσ|ματων)$/, 'μα')) || '?'); return out; }
+      if (!out && !EXTRA[f]) {
+        const vs = f.replace(VEND, ''), v = vs !== f && vst.get(vs);
+        if (v && (!/α$/.test(f) || /[^ι]α$/.test(f) && v.a)) out = v.w;
+        else { const st = nstem(f); if (st.length >= 3 && st !== f) { const a = acc(raw, st.length), c = (nst.get(st) || []).find(x => x.a === a); if (c) out = c.w; } }
+      }
+      // Accents ignored only as a last resort, for a word written with none or with a second one (το τετράδιό μου).
+      if (!out && (raw.match(/[άέήίόύώΐΰ]/g) || []).length !== 1) out = foldM.get(f) || '';
+      // A word it cannot place (mostly past forms) counts as one the student may not know, so such lines are offered less.
+      memo.set(tok, out = out || '?'); return out;
+    };
+  }
+  fitOf(gr, lem, col, due) {
+    const seen = new Set(), toks = String(gr).split(/\s+/).filter(Boolean); let unk = 0, work = 0;
+    for (const t of toks) {
+      let w = lem(t); if (!w) continue; if (w === '?') w = '?' + fold(t.replace(/[^\p{L}]/gu, '')); if (seen.has(w)) continue; seen.add(w);
+      const g = col.green.includes(w), y = col.yellow.includes(w), r = col.red.includes(w);
+      if (!g && !y) unk++; work += r ? 12 : y ? 8 : due.has(w) ? 4 : 0;
+    }
+    return { unk, work: Math.min(work, 24), ok: unk <= (toks.length >= 8 ? 2 : 1), len: toks.length };
+  }
+  // A fitting line first; then the words it puts to work (red most, then yellow, then a green that is due); long lines give a little back.
+  fitScore(f) { return (f.ok ? 100 : 0) + f.work - f.unk * (f.ok ? 4 : 12) - Math.max(0, f.len - 7) * 2; }
+  // One earlier story line for Recall: the best fit from the last thirty story days. Lines from one, three and seven days back
+  // get a small lead (that spacing is when a line is about to slip), and a line used in the last few days waits its turn.
+  async fitLine(beats, col, T, last) {
+    const lem = await this.lemmaFn(), due = new Set(this.dueWords(0).map(x => x.w)), used = this.lsGet('fitused', []), out = [];
+    for (let k = last; k >= Math.max(1, last - 29); k--) {
+      const b = beats[k]; if (!b || !b.gr) continue;
+      const t = T[k] && T[k].length && T[k].map(x => x[1]).join(' — ') === b.gr ? T[k] : (/[—–]/.test(b.gr) ? null : [['', b.gr, b.en]]); if (!t) continue;
+      t.forEach((x, j) => {
+        const f = this.fitOf(x[1], lem, col, due); if (f.len < 2 || f.len > 12 || !x[2]) return;
+        out.push({ sc: this.fitScore(f) + ([0, 2, 6].includes(last - k) ? 15 : 0) - (used.includes(x[1]) ? 60 : 0) - (last - k) * 0.2, k, j });
+      });
+    }
+    if (!out.length) return null; out.sort((x, y) => y.sc - x.sc); return [out[0].k, out[0].j];
+  }
   // Today's Recall: what the schedule brings back, fixed once for the day so leaving and coming back never adds more.
   // Up to twelve words (red and yellow first, then the story's newest words that have no color yet, then greens to check) and one earlier line.
-  recallPlan(n, beats, col, T, all) {
+  async recallPlan(n, beats, col, T, all) {
     const t = ymd(new Date()), by = new Map(all.map(w => [w.word, w])), sv = this.lsGet('recall', null);
-    const lineOf = k => k && beats[k] ? Object.assign(this.comebackTurns(beats[k], T), { line: true, k, gap: (col.story_at || 0) - k + 1 }) : null;
+    // The line is kept as [story day, line in that day]. A plain day number (the first Recall release) is that day's last line.
+    const lineOf = k => {
+      if (Array.isArray(k)) { const b = beats[k[0]], tt = b && T[k[0]] && T[k[0]].map(x => x[1]).join(' — ') === b.gr ? T[k[0]] : (b ? [['', b.gr, b.en]] : null), x = tt && tt[k[1]], pv = x && k[1] > 0 ? tt[k[1] - 1] : null;
+        return x ? { line: true, k, ctx: pv ? [{ who: pv[0], g: pv[1], e: pv[2] }] : [], who: x[0], gr: x[1], en: x[2], gap: (col.story_at || 0) - k[0] + 1 } : null; }
+      return k && beats[k] ? Object.assign(this.comebackTurns(beats[k], T), { line: true, k, gap: (col.story_at || 0) - k + 1 }) : null;
+    };
     const build = (ws, k, at, done) => { const items = ws.map(w => by.get(w)).filter(Boolean), ln = lineOf(k); if (ln) items.push(ln); return items.length ? { d: t, n, items, lineK: ln ? k : 0, at: Math.min(at, items.length), done: !!done, all } : null; };
     // One Recall a day: a finished one stays with the part it was done in; an unfinished one follows the student to another part.
     if (sv && sv.d === t) return sv.n !== n && sv.done ? null : build(Array.isArray(sv.w) ? sv.w : [], sv.line, +sv.at || 0, sv.done);
@@ -4282,9 +4358,12 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     const days = Object.keys(beats).map(Number).filter(k => k <= last).sort((a, b) => b - a).slice(0, 6);
     for (const k of days) for (const w of beats[k].words || []) { if (pick.length >= room) break; if (w.en && by.has(w.word) && !this.colorOf(w.word) && !pick.includes(w.word)) pick.push(w.word); }
     let ng = 0; for (const x of gr) { if (pick.length >= MAX || ng >= 4) break; pick.push(x.w); ng++; }   // green checks: four a day at most
-    const cands = [last, last - 2, last - 6].filter(k => k >= 1 && beats[k]), lk = cands.length ? cands[Math.floor(Date.now() / 864e5) % cands.length] : 0;
-    const R = build(pick, lk, 0, false);
-    if (R) this.lsSet('recall', { d: t, n, w: R.items.filter(x => !x.line).map(x => x.word), line: R.lineK, at: 0, done: false });
+    const lk = last >= 1 ? await this.fitLine(beats, col, T, last) : null;
+    const R = build(pick, lk || 0, 0, false);
+    if (R) {
+      this.lsSet('recall', { d: t, n, w: R.items.filter(x => !x.line).map(x => x.word), line: R.lineK, at: 0, done: false });
+      const ln = R.items.find(x => x.line); if (ln) this.lsSet('fitused', [ln.gr, ...this.lsGet('fitused', []).filter(g => g !== ln.gr)].slice(0, 10));
+    }
     return R;
   }
   // The Recall step inside today's story card: one question at a time, checked by the app, and each answer moves the word's color by the earned rule.
@@ -5315,22 +5394,29 @@ module.exports = class GreekquentStudentLayout extends Plugin {
     play(0);
   }
   // ---------- Build with your words: your own sentence from ready-made pieces, picked by your colors ----------
-  // Red and yellow pieces first, at most one piece with a new (black) word, little words to join them. No checking:
+  // Red and yellow pieces first (those from today's scene lead), one or two pieces with a new (black) word, little words to join them. No checking:
   // every piece is already right, so the sentence is yours. Building never changes a color. Saves to My pairs.
   async buildPieces(col, seed) {
     const bank = await this.chunkBank(), mine = new Set([...col.red, ...col.yellow, ...col.green]);
     const rk = { red: 0, yellow: 1, green: 2, new: 3 }, hsh = x => { let h = seed >>> 0; for (const ch of x) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; };
-    const ok = bank.filter(c => c.words.some(w => mine.has(w))).map(c => ({ ...c, col: this.chunkColor(c, col) }));
-    const byC = k => ok.filter(c => c.col === k).sort((a, b) => hsh(a.gr) - hsh(b.gr));
-    const pick = [...byC('red').slice(0, 3), ...byC('yellow').slice(0, 3)]; for (const c of byC('green')) if (pick.length < 7) pick.push(c);
-    for (const c of [...byC('red').slice(3), ...byC('yellow').slice(3)]) if (pick.length < 7) pick.push(c);
-    const nw = byC('new')[0]; if (nw) pick.push(nw);
+    // One thread: pieces that hold a word from today's scene (or the two before it) lead, so the sentence grows out of the story.
+    const tb = this.todayBeat, B = this.beats || {}, scene = new Set((tb ? [tb.b, B[tb.n - 1], B[tb.n - 2]] : []).filter(Boolean).flatMap(x => (x.words || []).map(w => w.word)).filter(w => !/[\s,]/.test(w)));
+    const inScene = c => c.words.some(w => scene.has(w)) ? 0 : 1, newN = c => c.words.filter(w => !mine.has(w)).length;
+    const ok = bank.filter(c => c.words.some(w => mine.has(w) || scene.has(w))).map(c => ({ ...c, col: this.chunkColor(c, col) }));
+    const byC = k => ok.filter(c => c.col === k).sort((a, b) => inScene(a) - inScene(b) || (k === 'new' ? newN(a) - newN(b) : 0) || hsh(a.gr) - hsh(b.gr));
+    // No word sits in more than two pieces, so one word from the scene cannot fill the tray.
+    const pick = [], cnt = new Map(), add = c => { pick.push(c); for (const w of c.words) cnt.set(w, (cnt.get(w) || 0) + 1); };
+    const take = (list, n, cap) => { let k = 0; for (const c of list) { if (k >= n || pick.length >= cap) break; if (pick.includes(c) || c.words.some(w => (cnt.get(w) || 0) >= 2)) continue; add(c); k++; } };
+    take(byC('red'), 3, 99); take(byC('yellow'), 3, 99); take(byC('green'), 7, 7); take([...byC('red'), ...byC('yellow')], 7, 7);
+    for (const c of [...byC('red'), ...byC('yellow'), ...byC('green')]) if (pick.length < 7 && !pick.includes(c)) add(c);
+    // New (black) pieces: up to two when the new word is one the story has just brought in, otherwise one.
+    const nws = byC('new'), sc = nws.filter(c => c.words.every(w => mine.has(w) || scene.has(w))).slice(0, 2); for (const c of sc.length ? sc : nws.slice(0, 1)) pick.push(c);
     return pick.sort((a, b) => rk[a.col] - rk[b.col]);
   }
   async buildReady(col) { const mine = col.red.length + col.yellow.length + col.green.length; if (mine < 6) return false; return (await this.buildPieces(col, 1)).filter(c => c.col !== 'new').length >= 5; }
   async buildUI(el, done) {
     const col = this.colors(); let seed = Math.floor(Date.now() / 864e5);
-    el.createDiv({ cls: 'gq-hint', text: 'Put two or three pieces together into your own sentence. Red and yellow words come first. There is no wrong answer.' });
+    el.createDiv({ cls: 'gq-hint', text: "Put two or three pieces together into your own sentence. Today's scene and your red and yellow words come first. There is no wrong answer." });
     const ans = el.createDiv({ cls: 'gq-cv-ans gq-build-ans', attr: { 'aria-label': 'Your sentence', lang: 'el' } }), en = el.createDiv('gq-hint gq-build-en');
     const tray = el.createDiv({ cls: 'gq-build-tray', attr: { lang: 'el' } }), glue = el.createDiv({ cls: 'gq-build-glue', attr: { lang: 'el' } });
     const r = el.createDiv('gq-row'), hear = r.createEl('button', { text: 'Hear it' }), save = r.createEl('button', { text: 'Save to My pairs', cls: 'mod-cta' }), more = el.createDiv('gq-hint').createEl('a', { text: 'Other pieces', href: '#' });

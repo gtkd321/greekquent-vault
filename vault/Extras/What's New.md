@@ -2,6 +2,9 @@
 
 Back to [[Today]].
 
+> [!tip] 2026-11-25k: Lines that fit you
+> The earlier line in Recall and the lines in Repeat after me are now picked for you: mostly words you already have, with one or two still to learn. Build with your words now starts from today's scene.
+
 > [!tip] 2026-11-25j: Colors you earn, and Recall
 > Your colors are all still here, just as you marked them. A copy of your own list is saved as **My colors, as I marked them**, at the bottom of Words.
 > Today's story has a new step, **Recall**. The app brings back the words that are due and checks each one. Remember a word on a later day and it moves up one color. Miss it and it moves down one. You can still tap a color yourself. A green you tap comes back in two days to check.
